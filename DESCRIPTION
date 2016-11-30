@@ -1,0 +1,14 @@
+Package: hgchmagic
+Title: A wrapper for highcharter
+Version: 0.0.0.1
+Author: Juan Pablo Marín Díaz
+Maintainer: Juan Pablo Marín Díaz <jpmarindiaz@gmail.com>
+Description: A wrapper for highcharter
+Depends:
+    R (>= 3.0.0),
+    tools,
+    datafringe,
+    tidyverse,
+License: MIT
+LazyData: true
+RoxygenNote: 5.0.1
