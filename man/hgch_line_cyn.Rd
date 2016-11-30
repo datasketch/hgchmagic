@@ -5,7 +5,7 @@
 \title{hgch_line_cyn}
 \usage{
 hgch_line_cyn(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-  symbol = NULL)
+  symbol = NULL, ...)
 }
 \arguments{
 \item{x}{A data.frame}

@@ -43,7 +43,8 @@ hgch_multilines_ynp <- function(data,
 #' @section ftype: Ca-Ye-Nu
 #' @examples
 #' hgch_bar_cyn(sampleData("Ye-Nu-Nu",nrow = 10))
-hgch_bar_cyn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
+hgch_bar_cyn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                         symbol = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -74,7 +75,7 @@ hgch_bar_cyn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
 #' @examples
 #' hgch_line_cyn(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_line_cyn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                          symbol = NULL){
+                          symbol = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -105,7 +106,7 @@ hgch_line_cyn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
 #' @examples
 #' hgch_treemap_cn(sampleData("Ca-Nu",nrow = 10))
 hgch_treemap_cn <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            minColor = "#E63917", maxColor= "#18941E", reverse = TRUE){
+                            minColor = "#E63917", maxColor= "#18941E", reverse = TRUE, ...){
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -128,7 +129,7 @@ hgch_treemap_cn <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
 #' hgch_bar_hor_top_cn(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_hor_cn <- function(data,
                             title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            sort = "no", aggregate = "mean"){
+                            sort = "no", aggregate = "mean", ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -160,7 +161,7 @@ hgch_bar_hor_cn <- function(data,
 #' hgch_bar_hor_top_cn(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_hor_top_cn <- function(data,
                             title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            reverse = TRUE, aggregate = "mean"){
+                            reverse = TRUE, aggregate = "mean", ...){
 
   hgch_bar_hor_cn(data, title = title, xAxisTitle = xAxisTitle,
                   yAxisTitle = yAxisTitle, sort = "top", aggregate = aggregate)
@@ -177,7 +178,7 @@ hgch_bar_hor_top_cn <- function(data,
 #' @examples
 #' hgch_bar_hor_c(sampleData("Ca",nrow = 10))
 hgch_bar_hor_c <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                           sort = "no", aggregate = "count"){
+                           sort = "no", aggregate = "count", ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -208,7 +209,7 @@ hgch_bar_hor_c <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL
 #' hgch_bar_hor_top_cn(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_hor_top_c <- function(data,
                                 title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                reverse = TRUE, aggregate = "count"){
+                                reverse = TRUE, aggregate = "count", ...){
 
   hgch_bar_hor_c(data, title = title, xAxisTitle = xAxisTitle,
                   yAxisTitle = yAxisTitle, sort = "top", aggregate = aggregate)
@@ -227,7 +228,7 @@ hgch_bar_hor_top_c <- function(data,
 #' hgch_spider_cn(sampleData("Ca-Nu",nrow = 10))
 hgch_spider_cn <- function(data,
                             title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            sort = "no", aggregate = "mean"){
+                            sort = "no", aggregate = "mean", ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -264,7 +265,7 @@ hgch_spider_cn <- function(data,
 #' hgch_spider_cnn(sampleData("Ca-Nu-Nu",nrow = 10))
 hgch_spider_cnn <- function(data,
                            title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                           sort = "no", aggregate = "mean"){
+                           sort = "no", aggregate = "mean", ...){
 
   f <- fringe(data)
   nms <- getClabels(f)

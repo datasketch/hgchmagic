@@ -4,7 +4,8 @@
 \alias{hgch_bar_cyn}
 \title{hgch_bar_cyn}
 \usage{
-hgch_bar_cyn(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL)
+hgch_bar_cyn(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+  symbol = NULL, ...)
 }
 \arguments{
 \item{x}{A data.frame}

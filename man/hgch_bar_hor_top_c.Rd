@@ -5,7 +5,7 @@
 \title{hgch_bar_hor_top_c}
 \usage{
 hgch_bar_hor_top_c(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, reverse = TRUE, aggregate = "count")
+  yAxisTitle = NULL, reverse = TRUE, aggregate = "count", ...)
 }
 \arguments{
 \item{x}{A data.frame}

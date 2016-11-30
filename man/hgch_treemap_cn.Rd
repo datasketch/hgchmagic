@@ -5,7 +5,7 @@
 \title{hgch_treemap_cn}
 \usage{
 hgch_treemap_cn(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-  minColor = "#E63917", maxColor = "#18941E", reverse = TRUE)
+  minColor = "#E63917", maxColor = "#18941E", reverse = TRUE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

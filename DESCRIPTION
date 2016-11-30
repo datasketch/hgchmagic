@@ -9,6 +9,7 @@ Depends:
     tools,
     datafringe,
     tidyverse,
+    highcharter
 License: MIT
 LazyData: true
 RoxygenNote: 5.0.1
