@@ -18,12 +18,12 @@ hgch_multilines_ynp <- function(data,
   yAxisTitle <- yAxisTitle %||% ""
   title <-  title %||% f$name
   symbol <- symbol %||% "circle"
-  d <- f$d %>% gather(variable,value, -a) %>%
-    filter(!is.na(value)) %>% group_by(a,variable) %>%
-    summarise(value = mean(value)) %>% ungroup()
+  d <- f$d %>% tidyr::gather(variable,value, -a) %>%
+    dplyr::filter(!is.na(value)) %>% dplyr::group_by(a,variable) %>%
+    dplyr::summarise(value = mean(value)) %>% dplyr::ungroup()
   codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
   d <- d %>%
-    mutate(variable = fct_recode_df(d,"variable",codes))
+    dplyr::mutate(variable = fct_recode_df(d,"variable",codes))
   hchart(d, type = "line", x = a, y = value, group = variable) %>%
     hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
     hc_title(text = title) %>%
@@ -54,7 +54,7 @@ hgch_bar_cyn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
 
-  d <- f$d %>% na.omit() %>% group_by(a,b) %>% summarise(c = mean(c))
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
   hchart(d, type = "column", x = b, y = c, group = a) %>%
@@ -85,7 +85,7 @@ hgch_line_cyn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
 
-  d <- f$d %>% na.omit() %>% group_by(a,b) %>% summarise(c = mean(c))
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
   hchart(d, type = "line", x = b, y = c, group = a) %>%
@@ -113,7 +113,8 @@ hgch_treemap_cn <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
   xAxisTitle <- xAxisTitle %||% nms[1]
   yAxisTitle <- yAxisTitle %||% ""
   title <-  title %||% nms[2]
-  d <- f$d %>% na.omit() %>% group_by(a) %>% summarise(b = mean(b))
+  data <- f$d
+  d <- data %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b))
   hchart(d, "treemap", x = a, value = b, color = b) %>%
     hc_title(text = title) %>%
     hc_colorAxis(maxColor = maxColor, minColor = minColor,reversed = reverse)
@@ -140,9 +141,9 @@ hgch_bar_hor_cn <- function(data,
   d <- f$d
   d <- na.omit(d)
   if(nrow(d)==0) return()
-  d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE))
+  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b,na.rm = TRUE))
   if(sort == "top"){
-    d <- d %>% arrange(desc(b))
+    d <- d %>% dplyr::arrange(desc(b))
   }
   hchart(d, type = "bar", x = a, y = b) %>%
     hc_plotOptions(column = list(stacking = "normal")) %>%
@@ -188,9 +189,9 @@ hgch_bar_hor_c <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL
   title <-  title %||% ""
   d <- f$d
   if(nrow(d)==0) return()
-  d <- d %>% group_by(a) %>% summarise(b = n())
+  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = n())
   if(sort == "top"){
-   d <- d %>% arrange(desc(b))
+   d <- d %>% dplyr::arrange(desc(b))
   }
   hchart(d, type = "bar", x = a, y = b) %>%
     hc_plotOptions(column = list(stacking = "normal")) %>%
@@ -239,7 +240,7 @@ hgch_spider_cn <- function(data,
   d <- f$d
   d <- na.omit(d)
   if(nrow(d)==0) return()
-  d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE))
+  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b,na.rm = TRUE))
   highchart() %>%
     hc_chart(type = "line", polar = TRUE) %>%
     hc_title(text = title) %>%
@@ -276,7 +277,7 @@ hgch_spider_cnn <- function(data,
   d <- f$d
   d <- na.omit(d)
   if(nrow(d)==0) return()
-  d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE), c = mean(c, na.rm = TRUE))
+  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b,na.rm = TRUE), c = mean(c, na.rm = TRUE))
   highchart() %>%
     hc_chart(type = "line", polar = TRUE) %>%
     hc_title(text = title) %>%
@@ -306,7 +307,8 @@ hgch_scatter <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
   xAxisTitle <- xAxisTitle %||% getClabels(f)[2]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
   title <-  title %||% ""
-  d <- f$d %>% filter(!is.na(b),!is.na(c)) %>% group_by(a) %>% summarise(b = mean(b),c = mean(c))
+
+  d <- f$d %>% dplyr::filter(!is.na(b),!is.na(c)) %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b),c = mean(c))
   hchart(d, type = "bubble", x = b, y = c) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
@@ -331,7 +333,7 @@ hgch_scatter <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
   xAxisTitle <- xAxisTitle %||% getClabels(f)[2]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
   title <-  title %||% ""
-  d <- f$d %>% filter(!is.na(b),!is.na(c)) %>% group_by(a) %>% summarise(b = mean(b),c = mean(c))
+  d <- f$d %>% dplyr::filter(!is.na(b),!is.na(c)) %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b),c = mean(c))
   hchart(d, type = "bubble", x = b, y = c, color = a) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
@@ -348,8 +350,8 @@ hgch_scatter_CaCaNuNu <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle
   xAxisTitle <- xAxisTitle %||% getClabels(f)[3]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[4]
   title <-  title %||% ""
-  d <- f$d %>% filter(!is.na(c),!is.na(d)) %>% group_by(a,b) %>%
-    summarise(c = mean(c),d = mean(d))
+  d <- f$d %>% dplyr::filter(!is.na(c),!is.na(d)) %>% dplyr::group_by(a,b) %>%
+    dplyr::summarise(c = mean(c),d = mean(d))
   hchart(d, type = "bubble", x = c, y = d, group = b) %>%
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
@@ -371,8 +373,8 @@ hgch_scatter_CaCaNuNuNu <- function(f, title = NULL, xAxisTitle = NULL, yAxisTit
   xAxisTitle <- xAxisTitle %||% getClabels(f)[3]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[4]
   title <-  title %||% ""
-  d <- f$d %>% filter(!is.na(b),!is.na(c)) %>% group_by(a,b) %>%
-    summarise(c = mean(c), d = mean(d),e = mean(e))
+  d <- f$d %>% dplyr::filter(!is.na(b),!is.na(c)) %>% dplyr::group_by(a,b) %>%
+    dplyr::summarise(c = mean(c), d = mean(d),e = mean(e))
   hchart(d, type = "bubble", x = c, y = d, group = b, size = e) %>%
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%

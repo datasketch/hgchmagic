@@ -1,14 +1,14 @@
 
 #' @export
-run_gg <- function(d,ggname){
-  #ggname <- "gg_waffle."
+run_hgch <- function(d,hgchname){
+  #hgchname <- "hgch_waffle."
 
-  if(validateD(d,ggname))
-    do.call(ggname,list(d))
+  if(validateD(d,hgchname))
+    do.call(hgchname,list(d))
   else
     stop("D did not validate")
 }
 
-validateD <- function(d,ggname){
-  guessFtype(d) %in% ggFtype(ggname)
+validateD <- function(d,hgchname){
+  guessFtype(d) %in% hgchFtype(hgchname)
 }
