@@ -97,6 +97,38 @@ hgch_line_cyn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
     hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
 }
 
+#' hgch_line_cdn
+#' @name hgch_line_cdn
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca-Ye-Nu
+#' @examples
+#' hgch_line_cdn(sampleData("Ca-Da-Nu",nrow = 10))
+hgch_line_cdn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                          symbol = NULL, ...){
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% nms[2]
+  yAxisTitle <- yAxisTitle %||% nms[3]
+  title <-  title %||% ""
+  symbol <- symbol %||% "circle"
+
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
+  if(nrow(d)==0) return()
+  #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
+  hchart(d, type = "line", x = b, y = c, group = a) %>%
+    hc_plotOptions(
+      series = list(marker = list(enabled = FALSE, symbol =  symbol))
+    ) %>%
+    hc_title(text = title) %>%
+    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+}
+
+
 #' hgch_treemap_cn
 #' @name hgch_treemap_cn
 #' @param x A data.frame

@@ -22,15 +22,15 @@ data <- sampleData("Ca-Ye-Nu",nrow = 10)
 hgch_line_cyn(data)
 hgch_line_cyn(data, symbol = "square")
 
+data <- sampleData("Ca-Da-Nu", nrow = 100)
+data <- read_csv("inst/data/trends.csv")
+data$start <- as.character(as.Date(data$start))
+hgch_line_cdn(data)
+
 # Treemap
 data <- sampleData("Ca-Nu",nrow = 10)
 names(data) <- c(".rw54", "grgs")
-
-b <- data.frame(posiciones = c("goalkeeper", "defense", "midfielder", "forward"), count = c(1:4))
-hgch_treemap_cn(b)
-c <- data.frame(posiciones = c("mean_height", "mean_weight", "mean_age", "mean_cwi"),
-                count = c(177.90, 87.83, 23, 27.41))
-hgch_spider_cn(c)
+hgch_treemap_cn(data)
 
 ## Treemap 2Vars
 ## Nested Treemap
