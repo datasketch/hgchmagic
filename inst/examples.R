@@ -11,7 +11,6 @@ library(hgchmagic)
 data <- sampleData("Ca", nrow = 10)
 hgch_pie_Ca(data)
 
-
 # Multilines
 
 data <- sampleData("Ye-Nu-Nu",nrow = 11)

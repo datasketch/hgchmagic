@@ -20,7 +20,7 @@ hgch_pie_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL
   if(nrow(d)==0) return()
   d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = n())
 
-  hchart(d, type = "pie", x = a, y = b) %>%
+  hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
@@ -54,7 +54,7 @@ hgch_multilines_YeNuP <- function(data,
   codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
   d <- d %>%
     dplyr::mutate(variable = fct_recode_df(d,"variable",codes))
-  hchart(d, type = "line", x = a, y = value, group = variable) %>%
+  hchart(d, type = "line",hcaes( x = a, y = value, group = variable)) %>%
     hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
     hc_title(text = title) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
@@ -87,7 +87,7 @@ hgch_bar_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-  hchart(d, type = "column", x = b, y = c, group = a) %>%
+  hchart(d, type = "column", hcaes(x = b, y = c, group = a)) %>%
     hc_plotOptions(
       series = list(marker = list(enabled = TRUE, symbol =  symbol))
     ) %>%
@@ -130,7 +130,7 @@ hgch_line_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-  hchart(d, type = "line", x = b, y = c, group = a) %>%
+  hchart(d, type = "line", hcaes(x = b, y = c, group = a)) %>%
     hc_plotOptions(
       series = list(marker = list(enabled = TRUE, symbol =  symbol))
     ) %>%
@@ -172,7 +172,7 @@ hgch_line_CaDaNu <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NU
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-  hchart(d, type = "line", x = b, y = c, group = a) %>%
+  hchart(d, type = "line", hcaes(x = b, y = c, group = a)) %>%
     hc_plotOptions(
       series = list(marker = list(enabled = FALSE, symbol =  symbol))
     ) %>%
@@ -200,7 +200,7 @@ hgch_treemap_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle 
   title <-  title %||% nms[2]
   data <- f$d
   d <- data %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b))
-  hchart(d, "treemap", x = a, value = b, color = b) %>%
+  hchart(d, "treemap", hcaes(x = a, value = b, color = b)) %>%
     hc_title(text = title) %>%
     hc_colorAxis(maxColor = maxColor, minColor = minColor,reversed = reverse)
 }
@@ -230,7 +230,7 @@ hgch_bar_hor_CaNu <- function(data,
   if(sort == "top"){
     d <- d %>% dplyr::arrange(desc(b))
   }
-  hchart(d, type = "bar", x = a, y = b) %>%
+  hchart(d, type = "bar", hcaes(x = a, y = b)) %>%
     hc_plotOptions(column = list(stacking = "normal")) %>%
     hc_title(text = title) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
@@ -278,7 +278,7 @@ hgch_bar_hor_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
   if(sort == "top"){
    d <- d %>% dplyr::arrange(desc(b))
   }
-  hchart(d, type = "bar", x = a, y = b) %>%
+  hchart(d, type = "bar", hcaes(x = a, y = b)) %>%
     hc_plotOptions(column = list(stacking = "normal")) %>%
     hc_title(text = title) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
@@ -330,8 +330,8 @@ hgch_spider_CaNu <- function(data,
     hc_chart(type = "line", polar = TRUE) %>%
     hc_title(text = title) %>%
     hc_xAxis(title = list(text=xAxisTitle),
-             categories = d$a,tickmarkPlacement = 'on',
-             lineWidth = 0) %>%
+             categories = d$a,tickmarkPlacement = 'on',lineWidth = 0
+             ) %>%
     hc_series(
       list(
         name = nms[2],
@@ -398,7 +398,7 @@ hgch_scatter_CaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitl
   title <-  title %||% ""
 
   d <- f$d %>% dplyr::filter(!is.na(b),!is.na(c)) %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b),c = mean(c))
-  hchart(d, type = "bubble", x = b, y = c) %>%
+  hchart(d, type = "bubble", hcaes(x = b, y = c)) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
     #     hc_tooltip(pointFormat = "<br><strong>{point.a}</strong><br>x:{point.x} <br>y: {point.y}") %>%
@@ -406,11 +406,13 @@ hgch_scatter_CaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitl
                               return '<strong>'+this.point.a+'</strong><br>x: '+ this.point.x +' y: '+ this.point.y +'</b>';
 }")) %>%
     hc_plotOptions(
-      series = list(dataLabels = list(enabled = TRUE,format= '{point.a}',
-                                      style = list(textOutline="1px 1px #000000",
-                                                   fontSize = "11px",
-                                                   color = "#000")),
-                    marker = list(fillColor = "1rgba(47,11,113,0.6)",lineColor=NULL,lineWidth = 0))
+      series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'
+                                      # ,
+                                      # style = list(textOutline="1px 1px #000000",
+                                      #              fontSize = "11px",
+                                      #              color = "#000")
+                                      ),
+                    marker = list(fillColor = "rgba(47,11,113,0.6)",lineColor=NULL,lineWidth = 0))
     )
 }
 
@@ -430,7 +432,7 @@ hgch_scatter_CaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
   d <- f$d %>% dplyr::filter(!is.na(b),!is.na(c)) %>% dplyr::group_by(a) %>%
     dplyr::summarise(b = mean(b), c = mean(c),d = mean(d))
 
-  hchart(d, type = "bubble", x = b, y = c, size = d) %>%
+  hchart(d, type = "bubble", hcaes(x = b, y = c, size = d)) %>%
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
@@ -458,7 +460,7 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
   title <-  title %||% ""
   d <- f$d %>% dplyr::filter(!is.na(c),!is.na(d)) %>% dplyr::group_by(a,b) %>%
     dplyr::summarise(c = mean(c),d = mean(d))
-  hchart(d, type = "bubble", x = c, y = d, group = b) %>%
+  hchart(d, type = "bubble", hcaes(x = c, y = d, group = b)) %>%
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
@@ -485,7 +487,7 @@ hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxis
   title <-  title %||% ""
   d <- f$d %>% dplyr::filter(!is.na(b),!is.na(c)) %>% dplyr::group_by(a,b) %>%
     dplyr::summarise(c = mean(c), d = mean(d),e = mean(e))
-  hchart(d, type = "bubble", x = c, y = d, group = b, size = e) %>%
+  hchart(d, type = "bubble", hcaes(x = c, y = d, group = b, size = e)) %>%
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
