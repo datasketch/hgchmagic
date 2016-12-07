@@ -7,7 +7,7 @@
 Multilines}
 \usage{
 hgch_multilines_YeNuP(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, symbol = NULL, ...)
+  yAxisTitle = NULL, symbol = NULL, startAtZero = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

@@ -5,7 +5,7 @@
 \title{hgch_bar_CaYeNu}
 \usage{
 hgch_bar_CaYeNu(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-  symbol = NULL, ...)
+  symbol = NULL, startAtZero = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

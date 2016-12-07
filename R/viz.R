@@ -29,6 +29,98 @@ hgch_pie_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL
     hc_yAxis(title = list(text=yAxisTitle))
 }
 
+#' hgch_pie_CaNu
+#' @name hgch_pie_CaNu
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca
+#' @examples
+#' hgch_pie_CaNu(sampleData("Ca",nrow = 10))
+hgch_pie_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                        sort = "no", aggregate = "sum", ...){
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% nms[1]
+  yAxisTitle <- yAxisTitle %||% nms[2]
+  title <-  title %||% ""
+  d <- f$d
+  if(nrow(d)==0) return()
+  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = sum(b))
+
+  hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
+    hc_plotOptions(
+      series = list(dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
+    ) %>%
+    hc_title(text = title) %>%
+    hc_xAxis(title = list(text=xAxisTitle)) %>%
+    hc_yAxis(title = list(text=yAxisTitle))
+}
+
+
+#' hgch_donut_Ca
+#' @name hgch_donut_Ca
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca
+#' @examples
+#' hgch_donut_Ca(sampleData("Ca",nrow = 10))
+hgch_donut_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                        sort = "no", aggregate = "count", ...){
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% nms[1]
+  yAxisTitle <- yAxisTitle %||% nms[2]
+  title <-  title %||% ""
+  d <- f$d
+  if(nrow(d)==0) return()
+  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = n())
+
+  hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
+    hc_plotOptions(
+      series = list(innerSize= '60%',dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
+    ) %>%
+    hc_title(text = title) %>%
+    hc_xAxis(title = list(text=xAxisTitle)) %>%
+    hc_yAxis(title = list(text=yAxisTitle))
+}
+
+#' hgch_donut_CaNu
+#' @name hgch_donut_CaNu
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca
+#' @examples
+#' hgch_donut_CaNu(sampleData("Ca",nrow = 10))
+hgch_donut_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                          sort = "no", aggregate = "sum", ...){
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% nms[1]
+  yAxisTitle <- yAxisTitle %||% nms[2]
+  title <-  title %||% ""
+  d <- f$d
+  if(nrow(d)==0) return()
+  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = sum(b))
+
+  hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
+    hc_plotOptions(
+      series = list(innerSize= '60%',dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
+    ) %>%
+    hc_title(text = title) %>%
+    hc_xAxis(title = list(text=xAxisTitle)) %>%
+    hc_yAxis(title = list(text=yAxisTitle))
+}
+
+
 #' hgch_multilines_YeNuP
 #' Multilines
 #' @name hgch_multilines.
@@ -40,7 +132,7 @@ hgch_pie_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL
 #' hgch_multilines_YeNuP(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_multilines_YeNuP <- function(data,
                                 title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                symbol = NULL, ...){
+                                symbol = NULL,  startAtZero = FALSE,...){
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -54,11 +146,15 @@ hgch_multilines_YeNuP <- function(data,
   codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
   d <- d %>%
     dplyr::mutate(variable = fct_recode_df(d,"variable",codes))
-  hchart(d, type = "line",hcaes( x = a, y = value, group = variable)) %>%
+  hc <- hchart(d, type = "line",hcaes( x = a, y = value, group = variable)) %>%
     hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
     hc_title(text = title) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+    hc_yAxis(title = list(text=yAxisTitle))
+  if(startAtZero){
+    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+  }
+  hc
 }
 
 
@@ -74,7 +170,7 @@ hgch_multilines_YeNuP <- function(data,
 #' @examples
 #' hgch_bar_CaYeNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_bar_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                         symbol = NULL, ...){
+                         symbol = NULL,  startAtZero = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -87,13 +183,17 @@ hgch_bar_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-  hchart(d, type = "column", hcaes(x = b, y = c, group = a)) %>%
+  hc <- hchart(d, type = "column", hcaes(x = b, y = c, group = a)) %>%
     hc_plotOptions(
       series = list(marker = list(enabled = TRUE, symbol =  symbol))
     ) %>%
     hc_title(text = title) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+    hc_yAxis(title = list(text=yAxisTitle))
+  if(startAtZero){
+    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+  }
+  hc
 }
 
 #' hgch_bar_CaCaNu
@@ -106,6 +206,41 @@ hgch_bar_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
 #' hgch_bar_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 hgch_bar_CaCaNu <- hgch_bar_CaYeNu
 
+
+
+#' hgch_line_DaNu
+#' @name hgch_line_DaNu
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca-Ye-Nu
+#' @examples
+#' hgch_line_DaNu(sampleData("Ca-Da-Nu",nrow = 10))
+hgch_line_DaNu <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                             symbol = NULL, startAtZero = FALSE, ...){
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% nms[1]
+  yAxisTitle <- yAxisTitle %||% nms[2]
+  title <-  title %||% ""
+  symbol <- symbol %||% "circle"
+
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b))
+  if(nrow(d)==0) return()
+  hc <- hchart(d, type = "line", hcaes(x = a, y = b)) %>%
+    hc_plotOptions(
+      series = list(marker = list(enabled = FALSE, symbol =  symbol))
+    ) %>%
+    hc_title(text = title) %>%
+    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text=yAxisTitle))
+  if(startAtZero){
+    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+  }
+  hc
+}
 
 
 #' hgch_line_CaYeNu
