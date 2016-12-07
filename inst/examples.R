@@ -22,6 +22,9 @@ hgch_donut_CaNu(data)
 data <- sampleData("Da-Nu",gt0 = FALSE)
 hgch_line_DaNu(data)
 
+data <- sampleData("Ca-Nu",gt0 = FALSE)
+hgch_line_CaNu(data)
+
 data <- sampleData("Ca-Ye-Nu",nrow = 10)
 hgch_line_CaYeNu(data)
 hgch_line_CaYeNu(data, symbol = "square")
