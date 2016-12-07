@@ -4,7 +4,7 @@
 \alias{hgch_line_DaNu}
 \title{hgch_line_DaNu}
 \usage{
-hgch_line_DaNu(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_line_DaNu(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
   symbol = NULL, startAtZero = FALSE, ...)
 }
 \arguments{

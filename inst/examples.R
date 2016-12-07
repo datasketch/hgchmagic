@@ -19,11 +19,11 @@ hgch_donut_CaNu(data)
 
 # Lines
 
-data <- sampleData("Da-Nu",gt0 = FALSE)
+data <- sampleData("Da-Nu",gt0 = FALSE, asFringe = TRUE)
 hgch_line_DaNu(data)
 
-data <- sampleData("Ca-Nu",gt0 = FALSE)
-hgch_line_CaNu(data)
+d <- sampleData("Ca-Nu",gt0 = FALSE)
+hgch_line_CaNu(d)
 
 data <- sampleData("Ca-Ye-Nu",nrow = 10)
 hgch_line_CaYeNu(data)

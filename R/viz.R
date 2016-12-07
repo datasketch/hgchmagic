@@ -129,7 +129,7 @@ hgch_donut_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
 #' @section ftype: Da-Nu
 #' @examples
 #' hgch_line_DaNu(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_line_DaNu <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_line_DaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            symbol = NULL, startAtZero = FALSE, ...){
 
   f <- fringe(data)
