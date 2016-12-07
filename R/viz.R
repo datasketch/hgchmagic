@@ -217,7 +217,7 @@ hgch_line_CaCaNu <- hgch_line_CaYeNu
 #' @section ftype: Ca-Ye-Nu
 #' @examples
 #' hgch_line_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_line_CaDaNu <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_line_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL, ...){
 
   f <- fringe(data)
