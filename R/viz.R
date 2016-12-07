@@ -1,5 +1,35 @@
 
-#' hgch_multilines_ynp
+#' hgch_pie_Ca
+#' @name hgch_pie_Ca
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca
+#' @examples
+#' hgch_pie_Ca(sampleData("Ca",nrow = 10))
+hgch_pie_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                            sort = "no", aggregate = "count", ...){
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% nms[1]
+  yAxisTitle <- yAxisTitle %||% nms[2]
+  title <-  title %||% ""
+  d <- f$d
+  if(nrow(d)==0) return()
+  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = n())
+
+  hchart(d, type = "pie", x = a, y = b) %>%
+    hc_plotOptions(
+      series = list(dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
+    ) %>%
+    hc_title(text = title) %>%
+    hc_xAxis(title = list(text=xAxisTitle)) %>%
+    hc_yAxis(title = list(text=yAxisTitle))
+}
+
+#' hgch_multilines_YeNuP
 #' Multilines
 #' @name hgch_multilines.
 #' @param x A data.frame
@@ -7,8 +37,8 @@
 #' @return highcharts viz
 #' @section ftypes: Ye-Nu*
 #' @examples
-#' hgch_multilines_ynp(sampleData("Ye-Nu-Nu",nrow = 10))
-hgch_multilines_ynp <- function(data,
+#' hgch_multilines_YeNuP(sampleData("Ye-Nu-Nu",nrow = 10))
+hgch_multilines_YeNuP <- function(data,
                                 title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                 symbol = NULL, ...){
   f <- fringe(data)
@@ -35,15 +65,15 @@ hgch_multilines_ynp <- function(data,
 
 
 
-#' hgch_bar_cyn
-#' @name hgch_bar_cyn
+#' hgch_bar_CaYeNu
+#' @name hgch_bar_CaYeNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
 #' @section ftype: Ca-Ye-Nu
 #' @examples
-#' hgch_bar_cyn(sampleData("Ye-Nu-Nu",nrow = 10))
-hgch_bar_cyn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_bar_CaYeNu(sampleData("Ye-Nu-Nu",nrow = 10))
+hgch_bar_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                          symbol = NULL, ...){
 
   f <- fringe(data)
@@ -66,15 +96,15 @@ hgch_bar_cyn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
     hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
 }
 
-#' hgch_line_cyn
-#' @name hgch_line_cyn
+#' hgch_line_CaYeNu
+#' @name hgch_line_CaDaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
 #' @section ftype: Ca-Ye-Nu
 #' @examples
-#' hgch_line_cyn(sampleData("Ye-Nu-Nu",nrow = 10))
-hgch_line_cyn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_line_CaYeNu(sampleData("Ye-Nu-Nu",nrow = 10))
+hgch_line_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                           symbol = NULL, ...){
 
   f <- fringe(data)
@@ -97,15 +127,15 @@ hgch_line_cyn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
     hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
 }
 
-#' hgch_line_cdn
-#' @name hgch_line_cdn
+#' hgch_line_CaDaNu
+#' @name hgch_line_CaDaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
 #' @section ftype: Ca-Ye-Nu
 #' @examples
-#' hgch_line_cdn(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_line_cdn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_line_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
+hgch_line_CaDaNu <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                           symbol = NULL, ...){
 
   f <- fringe(data)
@@ -129,15 +159,15 @@ hgch_line_cdn <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
 }
 
 
-#' hgch_treemap_cn
-#' @name hgch_treemap_cn
+#' hgch_treemap_CaNu
+#' @name hgch_treemap_CaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
 #' @section ftype: Ca-Nu
 #' @examples
-#' hgch_treemap_cn(sampleData("Ca-Nu",nrow = 10))
-hgch_treemap_cn <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_treemap_CaNu(sampleData("Ca-Nu",nrow = 10))
+hgch_treemap_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                             minColor = "#E63917", maxColor= "#18941E", reverse = TRUE, ...){
   f <- fringe(data)
   nms <- getClabels(f)
@@ -152,15 +182,15 @@ hgch_treemap_cn <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
     hc_colorAxis(maxColor = maxColor, minColor = minColor,reversed = reverse)
 }
 
-#' hgch_bar_hor_cn
-#' @name hgch_bar_hor_cn
+#' hgch_bar_hor_CaNu
+#' @name hgch_bar_hor_CaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
 #' @section ftype: Ca-Nu
 #' @examples
-#' hgch_bar_hor_top_cn(sampleData("Ca-Nu",nrow = 10))
-hgch_bar_hor_cn <- function(data,
+#' hgch_bar_hor_CaNu(sampleData("Ca-Nu",nrow = 10))
+hgch_bar_hor_CaNu <- function(data,
                             title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                             sort = "no", aggregate = "mean", ...){
 
@@ -184,33 +214,33 @@ hgch_bar_hor_cn <- function(data,
     hc_yAxis(title = list(text=yAxisTitle))
 }
 
-#' hgch_bar_hor_top_cn
-#' @name hgch_bar_hor_top_cn
+#' hgch_bar_hor_top_CaNu
+#' @name hgch_bar_hor_top_CaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
 #' @section ftype: Ca-Nu
 #' @examples
-#' hgch_bar_hor_top_cn(sampleData("Ca-Nu",nrow = 10))
-hgch_bar_hor_top_cn <- function(data,
+#' hgch_bar_hor_top_CaNu(sampleData("Ca-Nu",nrow = 10))
+hgch_bar_hor_top_CaNu <- function(data,
                             title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                             reverse = TRUE, aggregate = "mean", ...){
 
-  hgch_bar_hor_cn(data, title = title, xAxisTitle = xAxisTitle,
+  hgch_bar_hor_CaNu(data, title = title, xAxisTitle = xAxisTitle,
                   yAxisTitle = yAxisTitle, sort = "top", aggregate = aggregate)
 
 }
 
 
-#' hgch_bar_hor_c
-#' @name hgch_bar_hor_c
+#' hgch_bar_hor_Ca
+#' @name hgch_bar_hor_Ca
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
 #' @section ftype: Ca
 #' @examples
-#' hgch_bar_hor_c(sampleData("Ca",nrow = 10))
-hgch_bar_hor_c <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_bar_hor_Ca(sampleData("Ca",nrow = 10))
+hgch_bar_hor_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            sort = "no", aggregate = "count", ...){
 
   f <- fringe(data)
@@ -232,34 +262,34 @@ hgch_bar_hor_c <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL
     hc_yAxis(title = list(text=yAxisTitle))
 }
 
-#' hgch_bar_hor_top_c
-#' @name hgch_bar_hor_top_c
+#' hgch_bar_hor_top_Ca
+#' @name hgch_bar_hor_top_Ca
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
 #' @section ftype: Ca
 #' @examples
-#' hgch_bar_hor_top_cn(sampleData("Ca-Nu",nrow = 10))
-hgch_bar_hor_top_c <- function(data,
+#' hgch_bar_hor_top_Ca(sampleData("Ca-Nu",nrow = 10))
+hgch_bar_hor_top_Ca <- function(data,
                                 title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                 reverse = TRUE, aggregate = "count", ...){
 
-  hgch_bar_hor_c(data, title = title, xAxisTitle = xAxisTitle,
+  hgch_bar_hor_Ca(data, title = title, xAxisTitle = xAxisTitle,
                   yAxisTitle = yAxisTitle, sort = "top", aggregate = aggregate)
 
 }
 
 
 
-#' hgch_spider_cn
-#' @name hgch_spider_cn
+#' hgch_spider_CaNu
+#' @name hgch_spider_CaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
 #' @section ftype: Ca-Nu
 #' @examples
-#' hgch_spider_cn(sampleData("Ca-Nu",nrow = 10))
-hgch_spider_cn <- function(data,
+#' hgch_spider_CaNu(sampleData("Ca-Nu",nrow = 10))
+hgch_spider_CaNu <- function(data,
                             title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                             sort = "no", aggregate = "mean", ...){
 
@@ -288,15 +318,15 @@ hgch_spider_cn <- function(data,
 }
 
 
-#' hgch_spider_cnn
-#' @name hgch_spider_cnn
+#' hgch_spider_CaNuNu
+#' @name hgch_spider_CaNuNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
 #' @section ftype: Ca-Nu-Nu
 #' @examples
-#' hgch_spider_cnn(sampleData("Ca-Nu-Nu",nrow = 10))
-hgch_spider_cnn <- function(data,
+#' hgch_spider_CaNuNu(sampleData("Ca-Nu-Nu",nrow = 10))
+hgch_spider_CaNuNu <- function(data,
                            title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            sort = "no", aggregate = "mean", ...){
 
@@ -331,11 +361,15 @@ hgch_spider_cnn <- function(data,
 
 
 
-#' hgch_scatter
-#' @name hgch_scatter
+#' hgch_scatter_CaNuNu
+#' @name hgch_scatter_CaNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu
-hgch_scatter <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
+hgch_scatter_CaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
   xAxisTitle <- xAxisTitle %||% getClabels(f)[2]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
   title <-  title %||% ""
@@ -353,32 +387,49 @@ hgch_scatter <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
                                       style = list(textOutline="1px 1px #000000",
                                                    fontSize = "11px",
                                                    color = "#000")),
-                    marker = list(fillColor = "2f0b71rgba(47,11,113,0.6)",lineColor=NULL,lineWidth = 0))
+                    marker = list(fillColor = "1rgba(47,11,113,0.6)",lineColor=NULL,lineWidth = 0))
     )
 }
 
-#' hgch_scatter
-#' @name hgch_scatter
+#' hgch_scatter_CaNuNuNu
+#' @name hgch_scatter_CaNuNuNu
 #' @export
-#' @section ftype: Ca-Nu-Nu
-hgch_scatter <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
+#' @section ftype: Ca-Nu-Nu-Nu
+hgch_scatter_CaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
   xAxisTitle <- xAxisTitle %||% getClabels(f)[2]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
   title <-  title %||% ""
-  d <- f$d %>% dplyr::filter(!is.na(b),!is.na(c)) %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b),c = mean(c))
-  hchart(d, type = "bubble", x = b, y = c, color = a) %>%
+
+  d <- f$d %>% dplyr::filter(!is.na(b),!is.na(c)) %>% dplyr::group_by(a) %>%
+    dplyr::summarise(b = mean(b), c = mean(c),d = mean(d))
+
+  hchart(d, type = "bubble", x = b, y = c, size = d) %>%
+    hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
+    hc_tooltip(pointFormat = "<br>
+               <strong>{point.a}</strong><br>
+               x:{point.x} <br>
+               y: {point.y} <br>
+               Tamaño: {point.size}") %>%
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))
     )
 }
 
-#' hgch_scatter
-#' @name hgch_scatter
+#' hgch_scatter_CaCaNuNu
+#' @name hgch_scatter_CaCaNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu
-hgch_scatter_CaCaNuNu <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
+hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
   xAxisTitle <- xAxisTitle %||% getClabels(f)[3]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[4]
   title <-  title %||% ""
@@ -397,11 +448,15 @@ hgch_scatter_CaCaNuNu <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle
     )
 }
 
-#' hgch_scatter
-#' @name hgch_scatter
+#' hgch_scatter_CaCaNuNuNu
+#' @name hgch_scatter_CaCaNuNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu
-hgch_scatter_CaCaNuNuNu <- function(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
+hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
   xAxisTitle <- xAxisTitle %||% getClabels(f)[3]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[4]
   title <-  title %||% ""

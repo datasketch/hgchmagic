@@ -2,11 +2,11 @@
 % Please edit documentation in R/viz.R
 \name{hgch_multilines.}
 \alias{hgch_multilines.}
-\alias{hgch_multilines_ynp}
-\title{hgch_multilines_ynp
+\alias{hgch_multilines_YeNuP}
+\title{hgch_multilines_YeNuP
 Multilines}
 \usage{
-hgch_multilines_ynp(data, title = NULL, xAxisTitle = NULL,
+hgch_multilines_YeNuP(data, title = NULL, xAxisTitle = NULL,
   yAxisTitle = NULL, symbol = NULL, ...)
 }
 \arguments{
@@ -16,13 +16,13 @@ hgch_multilines_ynp(data, title = NULL, xAxisTitle = NULL,
 highcharts viz
 }
 \description{
-hgch_multilines_ynp
+hgch_multilines_YeNuP
 Multilines
 }
 \section{ftypes}{
  Ye-Nu*
 }
 \examples{
-hgch_multilines_ynp(sampleData("Ye-Nu-Nu",nrow = 10))
+hgch_multilines_YeNuP(sampleData("Ye-Nu-Nu",nrow = 10))
 }
 
