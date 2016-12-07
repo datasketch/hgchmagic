@@ -23,6 +23,10 @@ hgch_multilines_YeNuP(data)
 data <- sampleData("Ca-Ye-Nu",nrow = 10)
 hgch_bar_CaYeNu(data)
 
+
+data <- sampleData("Ca-Ca-Nu", nrow = 100)
+hgch_bar_CaCaNu(data)
+
 # Bar hor
 
 data <- sampleData("Ca", nrow = 10)
@@ -43,6 +47,10 @@ data <- sampleData("Ca-Da-Nu", nrow = 100)
 data <- read_csv("inst/data/trends.csv")
 data$start <- as.Date(data$start)
 hgch_line_CaDaNu(data)
+
+data <- sampleData("Ca-Ca-Nu", nrow = 100)
+hgch_line_CaCaNu(data, symbol = "square")
+
 
 # Treemap
 data <- sampleData("Ca-Nu",nrow = 10)

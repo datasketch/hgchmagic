@@ -96,6 +96,18 @@ hgch_bar_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
     hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
 }
 
+#' hgch_bar_CaCaNu
+#' @name hgch_bar_CaCaNu
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca-Ca-Nu
+#' @examples
+#' hgch_bar_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
+hgch_bar_CaCaNu <- hgch_bar_CaYeNu
+
+
+
 #' hgch_line_CaYeNu
 #' @name hgch_line_CaDaNu
 #' @param x A data.frame
@@ -126,6 +138,17 @@ hgch_line_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
 }
+
+#' hgch_line_CaCaNu
+#' @name hgch_line_CaCaNu
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca-Ca-Nu
+#' @examples
+#' hgch_line_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
+hgch_line_CaCaNu <- hgch_line_CaYeNu
+
 
 #' hgch_line_CaDaNu
 #' @name hgch_line_CaDaNu

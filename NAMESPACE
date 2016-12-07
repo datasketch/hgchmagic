@@ -2,11 +2,13 @@
 
 export(hgchFtype)
 export(hgchWhich)
+export(hgch_bar_CaCaNu)
 export(hgch_bar_CaYeNu)
 export(hgch_bar_hor_Ca)
 export(hgch_bar_hor_CaNu)
 export(hgch_bar_hor_top_Ca)
 export(hgch_bar_hor_top_CaNu)
+export(hgch_line_CaCaNu)
 export(hgch_line_CaDaNu)
 export(hgch_line_CaYeNu)
 export(hgch_multilines_YeNuP)
