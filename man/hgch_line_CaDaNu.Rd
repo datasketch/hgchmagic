@@ -2,37 +2,24 @@
 % Please edit documentation in R/viz.R
 \name{hgch_line_CaDaNu}
 \alias{hgch_line_CaDaNu}
-\alias{hgch_line_CaYeNu}
-\title{hgch_line_CaYeNu}
+\title{hgch_line_CaDaNu}
 \usage{
-hgch_line_CaYeNu(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-  symbol = NULL, ...)
-
-hgch_line_CaDaNu(f, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_line_CaDaNu(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
   symbol = NULL, ...)
 }
 \arguments{
 \item{x}{A data.frame}
-
-\item{x}{A data.frame}
 }
 \value{
 highcharts viz
-
-highcharts viz
 }
 \description{
-hgch_line_CaYeNu
-
 hgch_line_CaDaNu
 }
 \section{ftype}{
  Ca-Ye-Nu
-
- Ca-Ye-Nu
 }
 \examples{
-hgch_line_CaYeNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_line_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 }
 

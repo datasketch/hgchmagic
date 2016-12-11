@@ -37,6 +37,14 @@ hgch_line_CaDaNu(data)
 data <- sampleData("Ca-Ca-Nu", nrow = 100)
 hgch_line_CaCaNu(data, symbol = "square")
 
+data <- sampleData("Ye-Nu", nrow = 20)
+hgch_line_YeNu(data, symbol = "square")
+
+
+# Two axis lines
+
+data <- sampleData("Ye-Nu-Nu",nrow = 10)
+hgch_2yline_YeNuNu(data)
 
 # Multilines
 
@@ -46,9 +54,12 @@ data <- sampleData("Ye-Nu-Nu-Nu-Nu-Nu",nrow = 11)
 hgch_multilines_YeNuP(data)
 
 # Bars
+
+data <- sampleData("Ye-Nu", nrow = 10)
+hgch_bar_YeNu(data)
+
 data <- sampleData("Ca-Ye-Nu",nrow = 10)
 hgch_bar_CaYeNu(data)
-
 
 data <- sampleData("Ca-Ca-Nu", nrow = 100)
 hgch_bar_CaCaNu(data)
