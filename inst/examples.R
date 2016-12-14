@@ -64,6 +64,13 @@ hgch_bar_CaYeNu(data)
 data <- sampleData("Ca-Ca-Nu", nrow = 100)
 hgch_bar_CaCaNu(data)
 
+data <- sampleData("Ca-Da-Nu", nrow = 100)
+hgch_bar_stack_CaDaNu(data)
+
+data <- sampleData("Ca-Ca-Nu", nrow = 100)
+hgch_bar_stack_CaCaNu(data)
+
+
 # Bar hor
 
 data <- sampleData("Ca", nrow = 10)
