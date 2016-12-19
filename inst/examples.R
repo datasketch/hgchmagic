@@ -55,6 +55,9 @@ hgch_multilines_YeNuP(data)
 
 # Bars
 
+data <- sampleData("Da-Nu", nrow = 100)
+hgch_bar_DaNu(data)
+
 data <- sampleData("Ye-Nu", nrow = 10)
 hgch_bar_YeNu(data)
 
