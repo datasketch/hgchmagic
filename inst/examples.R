@@ -106,10 +106,9 @@ hgch_area_stack_CaYeNu(data, symbol = "square")
 hgch_area_stack_100_CaYeNu(data, symbol = "square")
 
 data <- sampleData("Ca-Da-Nu", nrow = 100)
-data <- read_csv("inst/data/trends.csv")
-data$start <- as.Date(data$start)
 hgch_area_CaDaNu(data)
-
+hgch_area_stack_CaDaNu(data)
+hgch_area_stack_100_CaDaNu(data)
 
 data <- sampleData("Ye-Nu", nrow = 20)
 hgch_area_YeNu(data, symbol = "square")

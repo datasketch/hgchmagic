@@ -122,36 +122,7 @@ hgch_area_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
 hgch_area_CaYeNu <- hgch_area_CaCaNu
 
 
-#' hgch_area_CaDaNu
-#' @name hgch_area_CaDaNu
-#' @param x A data.frame
-#' @export
-#' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
-#' @examples
-#' hgch_area_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_area_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL, ...){
 
-  f <- fringe(data)
-  nms <- getClabels(f)
-
-  xAxisTitle <- xAxisTitle %||% nms[2]
-  yAxisTitle <- yAxisTitle %||% nms[3]
-  title <-  title %||% ""
-  symbol <- symbol %||% "circle"
-
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
-  if(nrow(d)==0) return()
-  #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-  hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
-    hc_plotOptions(
-      series = list(marker = list(enabled = FALSE, symbol =  symbol))
-    ) %>%
-    hc_title(text = title) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
-}
 
 
 
@@ -246,6 +217,107 @@ hgch_area_stack_100_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yA
 #' @examples
 #' hgch_area_stack_CaYeNu(sampleData("Ca-Ye-Nu",nrow = 10))
 hgch_area_stack_100_CaYeNu <- hgch_area_stack_100_CaCaNu
+
+
+
+
+
+
+#' hgch_area_CaDaNu
+#' @name hgch_area_CaDaNu
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca-Ye-Nu
+#' @examples
+#' hgch_area_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
+hgch_area_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                             symbol = NULL, ...){
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% nms[2]
+  yAxisTitle <- yAxisTitle %||% nms[3]
+  title <-  title %||% ""
+  symbol <- symbol %||% "circle"
+
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
+  if(nrow(d)==0) return()
+  #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
+  hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
+    hc_plotOptions(
+      series = list(marker = list(enabled = FALSE, symbol =  symbol))
+    ) %>%
+    hc_title(text = title) %>%
+    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+}
+
+#' hgch_area_stack_CaDaNu
+#' @name hgch_area_stack_CaDaNu
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca-Ye-Nu
+#' @examples
+#' hgch_area_stack_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
+hgch_area_stack_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                             symbol = NULL, ...){
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% nms[2]
+  yAxisTitle <- yAxisTitle %||% nms[3]
+  title <-  title %||% ""
+  symbol <- symbol %||% "circle"
+
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
+  if(nrow(d)==0) return()
+  #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
+  hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
+    hc_plotOptions(
+      series = list(marker = list(enabled = FALSE, symbol =  symbol)),
+      area = list(stacking = "normal")
+    ) %>%
+    hc_title(text = title) %>%
+    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+}
+
+
+#' hgch_area_stack_100_CaDaNu
+#' @name hgch_area_stack_100_CaDaNu
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca-Ye-Nu
+#' @examples
+#' hgch_area_stack_100_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
+hgch_area_stack_100_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                                   symbol = NULL, ...){
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% nms[2]
+  yAxisTitle <- yAxisTitle %||% nms[3]
+  title <-  title %||% ""
+  symbol <- symbol %||% "circle"
+
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
+  if(nrow(d)==0) return()
+  #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
+  hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
+    hc_plotOptions(
+      series = list(marker = list(enabled = FALSE, symbol =  symbol)),
+      area = list(stacking = "percent")
+    ) %>%
+    hc_title(text = title) %>%
+    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+}
 
 
 
