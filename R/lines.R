@@ -72,7 +72,8 @@ hgch_line_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
       series = list(marker = list(enabled = TRUE, symbol =  symbol))
     ) %>%
     hc_title(text = title) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE)
+    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text=yAxisTitle), allowDecimals = FALSE)
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
