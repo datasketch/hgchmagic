@@ -149,15 +149,15 @@ hgch_treemap_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle 
 
 
 
-#' hgch_spider_CaNu
-#' @name hgch_spider_CaNu
+#' hgch_radar_CaNu
+#' @name hgch_radar_CaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
 #' @section ftype: Ca-Nu
 #' @examples
-#' hgch_spider_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_spider_CaNu <- function(data,
+#' hgch_radar_CaNu(sampleData("Ca-Nu",nrow = 10))
+hgch_radar_CaNu <- function(data,
                             title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                             sort = "no", aggregate = "mean", ...){
 

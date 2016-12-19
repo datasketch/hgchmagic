@@ -82,6 +82,38 @@ hgch_bar_hor_CaNu(data)
 hgch_bar_hor_top_CaNu(data)
 
 
+# Area
+
+data <- sampleData("Da-Nu")
+data <- sampleData("Da-Nu",gt0 = FALSE)
+hgch_area_DaNu(data)
+
+d <- sampleData("Ca-Nu",gt0 = FALSE)
+hgch_area_CaNu(d)
+
+data <- sampleData("Ca-Ca-Nu", nrow = 100)
+hgch_area_CaCaNu(data, symbol = "square")
+hgch_area_stack_CaCaNu(data, symbol = "square")
+hgch_area_stack_100_CaCaNu(data, symbol = "square")
+
+data <- sampleData("Ca-Ye-Nu",nrow = 10)
+hgch_area_CaYeNu(data)
+hgch_area_CaYeNu(data, symbol = "square")
+
+data <- sampleData("Ca-Ye-Nu",nrow = 100, gt0 = TRUE)
+hgch_area_CaYeNu(data)
+hgch_area_stack_CaYeNu(data, symbol = "square")
+hgch_area_stack_100_CaYeNu(data, symbol = "square")
+
+data <- sampleData("Ca-Da-Nu", nrow = 100)
+data <- read_csv("inst/data/trends.csv")
+data$start <- as.Date(data$start)
+hgch_area_CaDaNu(data)
+
+
+data <- sampleData("Ye-Nu", nrow = 20)
+hgch_area_YeNu(data, symbol = "square")
+
 
 
 # Treemap
