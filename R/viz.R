@@ -124,28 +124,6 @@ hgch_donut_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
 
 
 
-#' hgch_treemap_CaNu
-#' @name hgch_treemap_CaNu
-#' @param x A data.frame
-#' @export
-#' @return highcharts viz
-#' @section ftype: Ca-Nu
-#' @examples
-#' hgch_treemap_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_treemap_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                              minColor = "#E63917", maxColor= "#18941E", reverse = TRUE, ...){
-  f <- fringe(data)
-  nms <- getClabels(f)
-
-  xAxisTitle <- xAxisTitle %||% nms[1]
-  yAxisTitle <- yAxisTitle %||% ""
-  title <-  title %||% nms[2]
-  data <- f$d
-  d <- data %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b))
-  hchart(d, "treemap", hcaes(x = a, value = b, color = b)) %>%
-    hc_title(text = title) %>%
-    hc_colorAxis(maxColor = maxColor, minColor = minColor,reversed = reverse)
-}
 
 
 

@@ -123,6 +123,8 @@ hgch_treemap_CaNu(data)
 ## Treemap 2Vars
 ## Nested Treemap
 
+data <- sampleData("Ca-Ca-Nu",nrow = 10, gt0 = TRUE)
+hgch_treemap_CaCaNu(data)
 
 
 # Spider
