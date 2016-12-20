@@ -8,7 +8,7 @@
 #' hgch_spider_CaNuNu(sampleData("Ca-Nu-Nu",nrow = 10))
 hgch_spider_CaNuNu <- function(data,
                                title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                               sort = "no", aggregate = "mean", ...){
+                               sort = "no", aggregate = "mean", theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -21,7 +21,7 @@ hgch_spider_CaNuNu <- function(data,
   if(nrow(d)==0) return()
   d <- d %>% dplyr::group_by(a) %>%
     dplyr::summarise(b = mean(b,na.rm = TRUE), c = mean(c, na.rm = TRUE))
-  highchart() %>%
+  hc <- highchart() %>%
     hc_chart(type = "line", polar = TRUE) %>%
     hc_title(text = title) %>%
     hc_xAxis(title = list(text=xAxisTitle),
@@ -38,6 +38,8 @@ hgch_spider_CaNuNu <- function(data,
         data = d$c,
         pointPlacement = 'on'
       ))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc
 }
 
 
@@ -46,7 +48,7 @@ hgch_spider_CaNuNu <- function(data,
 #' @name hgch_scatter_CaNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu
-hgch_scatter_CaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
+hgch_scatter_CaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -58,7 +60,7 @@ hgch_scatter_CaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitl
   d <- f$d %>% dplyr::filter(!is.na(a)) %>% dplyr::group_by(a) %>%
     dplyr::summarise(b = mean(b,na.rm = TRUE),c = mean(c, na.rm = TRUE))
 
-  hchart(d, type = "bubble", hcaes(x = b, y = c)) %>%
+  hc <- hchart(d, type = "bubble", hcaes(x = b, y = c)) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
     #     hc_tooltip(pointFormat = "<br><strong>{point.a}</strong><br>x:{point.x} <br>y: {point.y}") %>%
@@ -74,13 +76,15 @@ hgch_scatter_CaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitl
       ),
       marker = list(fillColor = "rgba(47,11,113,0.6)",lineColor=NULL,lineWidth = 0))
     )
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc
 }
 
 #' hgch_scatter_CaNuNuNu
 #' @name hgch_scatter_CaNuNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu-Nu
-hgch_scatter_CaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
+hgch_scatter_CaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -92,7 +96,7 @@ hgch_scatter_CaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
   d <- f$d %>% dplyr::filter(!is.na(a)) %>% dplyr::group_by(a) %>%
     dplyr::summarise(b = mean(b, na.rm = TRUE), c = mean(c, na.rm = TRUE),d = mean(d, na.rm = TRUE))
 
-  hchart(d, type = "bubble", hcaes(x = b, y = c, size = d)) %>%
+  hc <- hchart(d, type = "bubble", hcaes(x = b, y = c, size = d)) %>%
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
@@ -104,13 +108,15 @@ hgch_scatter_CaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))
     )
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc
 }
 
 #' hgch_scatter_CaCaNuNu
 #' @name hgch_scatter_CaCaNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu
-hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
+hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -120,7 +126,7 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
   title <-  title %||% ""
   d <- f$d %>% dplyr::filter(!is.na(a),!is.na(b)) %>% dplyr::group_by(a,b) %>%
     dplyr::summarise(c = mean(c, na.rm = TRUE),d = mean(d,na.rm = TRUE))
-  hchart(d, type = "bubble", hcaes(x = c, y = d, group = b)) %>%
+  hc <- hchart(d, type = "bubble", hcaes(x = c, y = d, group = b)) %>%
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
@@ -131,13 +137,15 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))
     )
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc
 }
 
 #' hgch_scatter_CaCaNuNuNu
 #' @name hgch_scatter_CaCaNuNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu
-hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL){
+hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -147,7 +155,7 @@ hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxis
   title <-  title %||% ""
   d <- f$d %>% dplyr::filter(!is.na(a),!is.na(b)) %>% dplyr::group_by(a,b) %>%
     dplyr::summarise(c = mean(c,na.rm = TRUE), d = mean(d,na.rm = TRUE),e = mean(e,na.rm = TRUE))
-  hchart(d, type = "bubble", hcaes(x = c, y = d, group = b, size = e)) %>%
+  hc <- hchart(d, type = "bubble", hcaes(x = c, y = d, group = b, size = e)) %>%
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
@@ -159,4 +167,6 @@ hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxis
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))
     )
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc
 }
