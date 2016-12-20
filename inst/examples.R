@@ -117,6 +117,14 @@ data <- sampleData("Ye-Nu", nrow = 20)
 hgch_area_YeNu(data, symbol = "square")
 
 
+# Stream
+
+data <- sampleData("Ca-Ca-Nu", nrow = 100)
+hgch_stream_CaCaNu(data)
+
+hgch_area_stack_CaCaNu(data, symbol = "square")
+hgch_area_stack_100_CaCaNu(data, symbol = "square")
+
 
 # Treemap
 data <- sampleData("Ca-Nu",nrow = 10)
