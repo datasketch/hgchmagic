@@ -55,8 +55,46 @@ hgch_multilines_YeNuP(data)
 
 # Bars
 
+# other_theme <- hc_theme(
+#   colors = rainbow(8)
+# )
+
+tmp_theme <- hc_theme(
+  colors = c('#0b356D', '#3F8909', '#ACA9A9','#CD7031','#1670D2'),
+  chart = list(
+    backgroundColor = NULL,
+    divBackgroundImage = "http://www.comunidadandina.org/Upload/2011121103437caf800.jpg"
+  ),
+  title = list(
+    style = list(
+      color = '#333333',
+      fontFamily = "Lato"
+    )
+  ),
+  subtitle = list(
+    style = list(
+      color = '#666666',
+      fontFamily = ""
+    )
+  ),
+  legend = list(
+    itemStyle = list(
+      fontFamily = '',
+      color = 'black'
+    ),
+    itemHoverStyle = list(
+      color = 'gray'
+    )
+  )
+)
+
+
+
+
+
 data <- sampleData("Ca", nrow = 50)
 hgch_bar_ver_Ca(data)
+hgch_bar_ver_Ca(data, theme = tmp_theme)
 hgch_bar_hor_Ca(data)
 hgch_bar_hor_top_Ca(data)
 hgch_bar_ver_top_Ca(data)
@@ -72,6 +110,7 @@ hgch_bar_ver_DaNu(data)
 
 data <- sampleData("Ye-Nu", nrow = 10)
 hgch_bar_ver_YeNu(data)
+hgch_bar_ver_YeNu(data, theme = tmp_theme)
 
 data <- sampleData("Ca-Ca-Nu", nrow = 100)
 hgch_bar_grouped_ver_CaCaNu(data)
@@ -81,7 +120,7 @@ data <- sampleData("Ca-Ye-Nu",nrow = 100, rep = TRUE, nlevels = 3)
 hgch_bar_grouped_ver_CaYeNu(data)
 
 data <- sampleData("Ca-Ca-Nu", nrow = 100)
-hgch_bar_stacked_ver_CaCaNu(data)
+hgch_bar_stacked_ver_CaCaNu(data, theme = tmp_theme)
 hgch_bar_stacked_hor_CaCaNu(data)
 hgch_bar_stacked_100_ver_CaCaNu(data)
 hgch_bar_stacked_100_hor_CaCaNu(data)

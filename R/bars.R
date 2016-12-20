@@ -7,7 +7,7 @@
 #' @examples
 #' hgch_bar_ver_Ca(sampleData("Ca",nrow = 10))
 hgch_bar_ver_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            sort = "no", aggregate = "count",theme = ds_theme, ...){
+                            sort = "no", aggregate = "count",theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -25,9 +25,7 @@ hgch_bar_ver_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
     hc_title(text = title) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
-  if(!is.null(theme)){
-    hc <- hc %>% hc_add_theme(theme)
-  }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   hc
 }
 
@@ -41,7 +39,7 @@ hgch_bar_ver_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
 #' hgch_bar_ver_top_Ca(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_ver_top_Ca <- function(data,
                                 title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                reverse = TRUE, aggregate = "count", theme = ds_theme, ...){
+                                reverse = TRUE, aggregate = "count", theme = NULL, ...){
 
   hgch_bar_ver_Ca(data, title = title, xAxisTitle = xAxisTitle,
                   yAxisTitle = yAxisTitle, sort = "top", aggregate = aggregate, theme = theme)
@@ -58,7 +56,7 @@ hgch_bar_ver_top_Ca <- function(data,
 #' @examples
 #' hgch_bar_hor_Ca(sampleData("Ca",nrow = 10))
 hgch_bar_hor_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            sort = "no", aggregate = "count", theme = ds_theme, ...){
+                            sort = "no", aggregate = "count", theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -77,9 +75,7 @@ hgch_bar_hor_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
     hc_title(text = title) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
-  if(!is.null(theme)){
-    hc <- hc %>% hc_add_theme(theme)
-  }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   hc
 }
 
@@ -93,7 +89,7 @@ hgch_bar_hor_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
 #' hgch_bar_hor_top_Ca(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_hor_top_Ca <- function(data,
                                 title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                reverse = TRUE, aggregate = "count", theme = ds_theme, ...){
+                                reverse = TRUE, aggregate = "count", theme = NULL, ...){
 
   hgch_bar_hor_Ca(data, title = title, xAxisTitle = xAxisTitle,
                   yAxisTitle = yAxisTitle, sort = "top", aggregate = aggregate, theme = theme)
@@ -113,7 +109,7 @@ hgch_bar_hor_top_Ca <- function(data,
 #' hgch_bar_ver_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_ver_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                               sort = "no", aggregate = NULL,
-                          startAtZero = FALSE,theme = ds_theme, ...){
+                          startAtZero = FALSE,theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -137,9 +133,7 @@ hgch_bar_ver_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle 
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  if(!is.null(theme)){
-    hc <- hc %>% hc_add_theme(theme)
-  }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   hc
 }
 
@@ -153,7 +147,7 @@ hgch_bar_ver_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle 
 #' hgch_bar_ver_top_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_ver_top_CaNu <- function(data,
                                   title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                  reverse = TRUE, aggregate = "mean", theme = ds_theme, ...){
+                                  reverse = TRUE, aggregate = "mean", theme = NULL, ...){
 
   hgch_bar_ver_CaNu(data, title = title, xAxisTitle = xAxisTitle,
                     yAxisTitle = yAxisTitle, sort = "top", aggregate = aggregate, theme = theme)
@@ -192,7 +186,7 @@ hgch_bar_ver_DaNu <- hgch_bar_ver_CaNu
 #' hgch_bar_hor_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_hor_CaNu <- function(data,
                               title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                              sort = "no", aggregate = "mean", theme = ds_theme, ...){
+                              sort = "no", aggregate = "mean", theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -212,9 +206,7 @@ hgch_bar_hor_CaNu <- function(data,
     hc_title(text = title) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
-  if(!is.null(theme)){
-    hc <- hc %>% hc_add_theme(theme)
-  }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   hc
 }
 
@@ -228,7 +220,7 @@ hgch_bar_hor_CaNu <- function(data,
 #' hgch_bar_hor_top_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_hor_top_CaNu <- function(data,
                                   title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                  reverse = TRUE, aggregate = "mean", theme = ds_theme, ...){
+                                  reverse = TRUE, aggregate = "mean", theme = NULL, ...){
 
   hgch_bar_hor_CaNu(data, title = title, xAxisTitle = xAxisTitle,
                     yAxisTitle = yAxisTitle, sort = "top", aggregate = aggregate, theme = theme)
@@ -247,7 +239,7 @@ hgch_bar_hor_top_CaNu <- function(data,
 #' @examples
 #' hgch_bar_grouped_ver_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 hgch_bar_grouped_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                        symbol = NULL,  startAtZero = FALSE,theme = ds_theme, ...){
+                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -270,9 +262,7 @@ hgch_bar_grouped_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  if(!is.null(theme)){
-    hc <- hc %>% hc_add_theme(theme)
-  }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   hc
 }
 
@@ -296,7 +286,7 @@ hgch_bar_grouped_ver_CaYeNu <- hgch_bar_grouped_ver_CaCaNu
 #' @examples
 #' hgch_bar_grouped_hor_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 hgch_bar_grouped_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                        symbol = NULL,  startAtZero = FALSE,theme = ds_theme, ...){
+                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -319,9 +309,7 @@ hgch_bar_grouped_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  if(!is.null(theme)){
-    hc <- hc %>% hc_add_theme(theme)
-  }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   hc
 }
 
@@ -336,7 +324,7 @@ hgch_bar_grouped_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
 #' @examples
 #' hgch_bar_stacked_ver_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_bar_stacked_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            symbol = NULL,  startAtZero = FALSE,theme = ds_theme, ...){
+                            symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -360,9 +348,7 @@ hgch_bar_stacked_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  if(!is.null(theme)){
-    hc <- hc %>% hc_add_theme(theme)
-  }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   hc
 }
 
@@ -375,7 +361,7 @@ hgch_bar_stacked_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
 #' @examples
 #' hgch_bar_stacked_100_ver_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_bar_stacked_100_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                        symbol = NULL,  startAtZero = FALSE,theme = ds_theme, ...){
+                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -399,9 +385,7 @@ hgch_bar_stacked_100_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NUL
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  if(!is.null(theme)){
-    hc <- hc %>% hc_add_theme(theme)
-  }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   hc
 }
 
@@ -415,7 +399,7 @@ hgch_bar_stacked_100_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NUL
 #' @examples
 #' hgch_bar_stacked_hor_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_bar_stacked_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                        symbol = NULL,  startAtZero = FALSE,theme = ds_theme, ...){
+                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -439,9 +423,7 @@ hgch_bar_stacked_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  if(!is.null(theme)){
-    hc <- hc %>% hc_add_theme(theme)
-  }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   hc
 }
 
@@ -454,7 +436,7 @@ hgch_bar_stacked_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
 #' @examples
 #' hgch_bar_stacked_100_hor_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_bar_stacked_100_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                            symbol = NULL,  startAtZero = FALSE,theme = ds_theme, ...){
+                                            symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -478,9 +460,7 @@ hgch_bar_stacked_100_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NUL
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  if(!is.null(theme)){
-    hc <- hc %>% hc_add_theme(theme)
-  }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   hc
 }
 
@@ -521,7 +501,7 @@ hgch_bar_stacked_100_ver_CaDaNu <- hgch_bar_stacked_100_ver_CaCaNu
 #' hgch_bar_grouped_ver_CaNuP(sampleData("Ca-NuP",nrow = 10))
 hgch_bar_grouped_ver_CaNuP <- function(data,
                                   title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                  symbol = NULL,  startAtZero = FALSE,theme = ds_theme, ...){
+                                  symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -543,9 +523,7 @@ hgch_bar_grouped_ver_CaNuP <- function(data,
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  if(!is.null(theme)){
-    hc <- hc %>% hc_add_theme(theme)
-  }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   hc
 }
 
@@ -560,7 +538,7 @@ hgch_bar_grouped_ver_CaNuP <- function(data,
 #' hgch_bar_grouped_hor_CaNuP(sampleData("Ca-NuP",nrow = 10))
 hgch_bar_grouped_hor_CaNuP <- function(data,
                                        title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                       symbol = NULL,  startAtZero = FALSE,theme = ds_theme, ...){
+                                       symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -582,8 +560,6 @@ hgch_bar_grouped_hor_CaNuP <- function(data,
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  if(!is.null(theme)){
-    hc <- hc %>% hc_add_theme(theme)
-  }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   hc
 }

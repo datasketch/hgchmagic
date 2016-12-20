@@ -6,7 +6,7 @@
 \usage{
 hgch_bar_ver_CaNu(data, title = NULL, xAxisTitle = NULL,
   yAxisTitle = NULL, sort = "no", aggregate = NULL, startAtZero = FALSE,
-  ...)
+  theme = NULL, ...)
 }
 \arguments{
 \item{x}{A data.frame}

@@ -5,7 +5,8 @@
 \title{hgch_bar_ver_top_Ca}
 \usage{
 hgch_bar_ver_top_Ca(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, reverse = TRUE, aggregate = "count", ...)
+  yAxisTitle = NULL, reverse = TRUE, aggregate = "count", theme = NULL,
+  ...)
 }
 \arguments{
 \item{x}{A data.frame}

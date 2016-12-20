@@ -22,31 +22,77 @@ getPalette <- function(type = "qualitative", rev = FALSE){
 }
 
 
-ds_theme <- hc_theme(
-  colors = getPalette(11),
-  chart = list(
-    backgroundColor = "#ffffff",
-    divBackgroundImage = ""
-  ),
-  title = list(
-    style = list(
-      color = '#333333',
-      fontFamily = "Lato"
+custom_theme  <- function(custom = NULL,...){
+  ds_theme <-
+    hc_theme(
+      colors = getPalette(11),
+      chart = list(
+        style = list(
+          fontFamily = "Roboto"
+        )
+      ),
+      title = list(
+        align = "left",
+        style = list(
+          fontFamily = "Roboto Condensed",
+          fontWeight = "bold"
+        )
+      ),
+      subtitle = list(
+        align = "left",
+        style = list(
+          fontFamily = "Roboto Condensed"
+        )
+      ),
+      legend = list(
+        align = "right",
+        verticalAlign = "bottom"
+      ),
+      xAxis = list(
+        gridLineWidth = 1,
+        gridLineColor = "#F3F3F3",
+        lineColor = "#F3F3F3",
+        minorGridLineColor = "#F3F3F3",
+        tickColor = "#F3F3F3",
+        tickWidth = 1
+      ),
+      yAxis = list(
+        gridLineColor = "#F3F3F3",
+        lineColor = "#F3F3F3",
+        minorGridLineColor = "#F3F3F3",
+        tickColor = "#F3F3F3",
+        tickWidth = 1
+      ),
+      plotOptions = list(
+        line = list(
+          marker = list(enabled = FALSE),
+          states = list(hover = list(lineWidthPlus = 1))
+        ),
+        spline = list(
+          marker = list(enabled = FALSE),
+          states = list(hover = list(lineWidthPlus = 1))
+        ),
+        area = list(
+          marker = list(enabled = FALSE),
+          states = list(hover = list(lineWidthPlus = 1))
+        ),
+        areaspline = list(
+          marker = list(enabled = FALSE),
+          states = list(hover = list(lineWidthPlus = 1))
+        )
+      )
     )
-  ),
-  subtitle = list(
-    style = list(
-      color = '#666666',
-      fontFamily = ""
-    )
-  ),
-  legend = list(
-    itemStyle = list(
-      fontFamily = '',
-      color = 'black'
-    ),
-    itemHoverStyle = list(
-      color = 'gray'
-    )
-  )
-)
+
+  theme <- structure(ds_theme, class = "hc_theme")
+
+  if (!is.null(custom)) {
+    # str(custom)
+    # custom <- structure(custom, class = "hc_theme")
+    # theme <- hc_theme_merge(
+    #   theme,
+    #   hc_theme(custom)
+    # )
+    theme <- custom
+  }
+  theme
+}

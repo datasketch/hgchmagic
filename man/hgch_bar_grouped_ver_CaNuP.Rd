@@ -6,7 +6,8 @@
 Multilines}
 \usage{
 hgch_bar_grouped_ver_CaNuP(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, symbol = NULL, startAtZero = FALSE, ...)
+  yAxisTitle = NULL, symbol = NULL, startAtZero = FALSE, theme = NULL,
+  ...)
 }
 \arguments{
 \item{x}{A data.frame}
