@@ -19,7 +19,8 @@ hgch_spider_CaNuNu <- function(data,
   d <- f$d
   d <- na.omit(d)
   if(nrow(d)==0) return()
-  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b,na.rm = TRUE), c = mean(c, na.rm = TRUE))
+  d <- d %>% dplyr::group_by(a) %>%
+    dplyr::summarise(b = mean(b,na.rm = TRUE), c = mean(c, na.rm = TRUE))
   highchart() %>%
     hc_chart(type = "line", polar = TRUE) %>%
     hc_title(text = title) %>%
@@ -54,7 +55,9 @@ hgch_scatter_CaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitl
   yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
   title <-  title %||% ""
 
-  d <- f$d %>% dplyr::filter(!is.na(b),!is.na(c)) %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b),c = mean(c))
+  d <- f$d %>% dplyr::filter(!is.na(a)) %>% dplyr::group_by(a) %>%
+    dplyr::summarise(b = mean(b,na.rm = TRUE),c = mean(c, na.rm = TRUE))
+
   hchart(d, type = "bubble", hcaes(x = b, y = c)) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
@@ -86,8 +89,8 @@ hgch_scatter_CaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
   yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
   title <-  title %||% ""
 
-  d <- f$d %>% dplyr::filter(!is.na(b),!is.na(c)) %>% dplyr::group_by(a) %>%
-    dplyr::summarise(b = mean(b), c = mean(c),d = mean(d))
+  d <- f$d %>% dplyr::filter(!is.na(a)) %>% dplyr::group_by(a) %>%
+    dplyr::summarise(b = mean(b, na.rm = TRUE), c = mean(c, na.rm = TRUE),d = mean(d, na.rm = TRUE))
 
   hchart(d, type = "bubble", hcaes(x = b, y = c, size = d)) %>%
     hc_chart(zoomType = "xy") %>%
@@ -115,8 +118,8 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
   xAxisTitle <- xAxisTitle %||% getClabels(f)[3]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[4]
   title <-  title %||% ""
-  d <- f$d %>% dplyr::filter(!is.na(c),!is.na(d)) %>% dplyr::group_by(a,b) %>%
-    dplyr::summarise(c = mean(c),d = mean(d))
+  d <- f$d %>% dplyr::filter(!is.na(a),!is.na(b)) %>% dplyr::group_by(a,b) %>%
+    dplyr::summarise(c = mean(c, na.rm = TRUE),d = mean(d,na.rm = TRUE))
   hchart(d, type = "bubble", hcaes(x = c, y = d, group = b)) %>%
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
@@ -142,8 +145,8 @@ hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxis
   xAxisTitle <- xAxisTitle %||% getClabels(f)[3]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[4]
   title <-  title %||% ""
-  d <- f$d %>% dplyr::filter(!is.na(b),!is.na(c)) %>% dplyr::group_by(a,b) %>%
-    dplyr::summarise(c = mean(c), d = mean(d),e = mean(e))
+  d <- f$d %>% dplyr::filter(!is.na(a),!is.na(b)) %>% dplyr::group_by(a,b) %>%
+    dplyr::summarise(c = mean(c,na.rm = TRUE), d = mean(d,na.rm = TRUE),e = mean(e,na.rm = TRUE))
   hchart(d, type = "bubble", hcaes(x = c, y = d, group = b, size = e)) %>%
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
