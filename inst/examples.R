@@ -90,12 +90,15 @@ hgch_bar_hor_top_CaNu(data)
 data <- sampleData("Da-Nu")
 data <- sampleData("Da-Nu",gt0 = FALSE)
 hgch_area_DaNu(data)
+hgch_area_DaNu(data, startAtZero = TRUE)
+
 
 d <- sampleData("Ca-Nu",gt0 = FALSE)
 hgch_area_CaNu(d)
 
 data <- sampleData("Ca-Ca-Nu", nrow = 100)
 hgch_area_CaCaNu(data, symbol = "square")
+hgch_area_CaCaNu(data, symbol = "square", startAtZero = TRUE)
 hgch_area_stack_CaCaNu(data, symbol = "square")
 hgch_area_stack_100_CaCaNu(data, symbol = "square")
 
@@ -110,6 +113,7 @@ hgch_area_stack_100_CaYeNu(data, symbol = "square")
 
 data <- sampleData("Ca-Da-Nu", nrow = 100)
 hgch_area_CaDaNu(data)
+hgch_area_CaDaNu(data, startAtZero = TRUE)
 hgch_area_stack_CaDaNu(data)
 hgch_area_stack_100_CaDaNu(data)
 

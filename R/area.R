@@ -70,7 +70,8 @@ hgch_area_YeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = N
       series = list(marker = list(enabled = TRUE, symbol =  symbol))
     ) %>%
     hc_title(text = title) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE)
+    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
@@ -104,7 +105,8 @@ hgch_area_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
       series = list(marker = list(enabled = TRUE, symbol =  symbol))
     ) %>%
     hc_title(text = title) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE)
+    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
@@ -155,7 +157,8 @@ hgch_area_stack_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisT
       area = list(stacking = "normal")
     ) %>%
     hc_title(text = title) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE)
+    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
@@ -201,7 +204,8 @@ hgch_area_stack_100_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yA
       area = list(stacking = "percent")
     ) %>%
     hc_title(text = title) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE)
+    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
@@ -232,7 +236,7 @@ hgch_area_stack_100_CaYeNu <- hgch_area_stack_100_CaCaNu
 #' @examples
 #' hgch_area_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_area_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL, ...){
+                             symbol = NULL,startAtZero = FALSE, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -245,13 +249,17 @@ hgch_area_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-  hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
+  hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
     hc_plotOptions(
       series = list(marker = list(enabled = FALSE, symbol =  symbol))
     ) %>%
     hc_title(text = title) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+    hc_yAxis(title = list(text=yAxisTitle))
+  if(startAtZero){
+    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+  }
+  hc
 }
 
 #' hgch_area_stack_CaDaNu
@@ -263,7 +271,7 @@ hgch_area_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
 #' @examples
 #' hgch_area_stack_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_area_stack_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL, ...){
+                             symbol = NULL, startAtZero = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -296,7 +304,7 @@ hgch_area_stack_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisT
 #' @examples
 #' hgch_area_stack_100_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_area_stack_100_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                   symbol = NULL, ...){
+                                   symbol = NULL, startAtZero = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -309,14 +317,18 @@ hgch_area_stack_100_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yA
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-  hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
+  hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
     hc_plotOptions(
       series = list(marker = list(enabled = FALSE, symbol =  symbol)),
       area = list(stacking = "percent")
     ) %>%
     hc_title(text = title) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+    hc_yAxis(title = list(text=yAxisTitle))
+  if(startAtZero){
+    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+  }
+  hc
 }
 
 
