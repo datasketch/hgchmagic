@@ -5,7 +5,7 @@
 \title{hgch_spider_CaNuNu}
 \usage{
 hgch_spider_CaNuNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, sort = "no", aggregate = "mean", ...)
+  yAxisTitle = NULL, sort = "no", aggregate = "mean", theme = NULL, ...)
 }
 \arguments{
 \item{x}{A data.frame}

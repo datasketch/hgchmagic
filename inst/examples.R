@@ -214,7 +214,4 @@ hgch_scatter_CaCaNuNuNu(data)
 
 
 
-
-
 # Heatmap
-
