@@ -8,7 +8,8 @@
 2 y lines}
 \usage{
 hgch_2yline_YeNuNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle1 = NULL, yAxisTitle2 = NULL, symbol = NULL, ...)
+  yAxisTitle1 = NULL, yAxisTitle2 = NULL, symbol = NULL, export = FALSE,
+  ...)
 
 hgch_multilines_YeNuP(data, title = NULL, xAxisTitle = NULL,
   yAxisTitle = NULL, symbol = NULL, startAtZero = FALSE, ...)

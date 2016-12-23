@@ -5,7 +5,7 @@
 \title{hgch_treemap_CaCaNu}
 \usage{
 hgch_treemap_CaCaNu(data, title = NULL, minColor = "#E63917",
-  maxColor = "#18941E", reverse = TRUE, ...)
+  maxColor = "#18941E", reverse = TRUE, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

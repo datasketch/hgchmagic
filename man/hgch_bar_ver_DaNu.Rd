@@ -6,7 +6,7 @@
 \usage{
 hgch_bar_ver_DaNu(data, title = NULL, xAxisTitle = NULL,
   yAxisTitle = NULL, sort = "no", aggregate = NULL, startAtZero = FALSE,
-  theme = NULL, ...)
+  theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

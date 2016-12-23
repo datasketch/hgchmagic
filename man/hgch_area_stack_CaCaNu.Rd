@@ -5,7 +5,8 @@
 \title{hgch_area_stack_CaCaNu}
 \usage{
 hgch_area_stack_CaCaNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, symbol = NULL, startAtZero = FALSE, ...)
+  yAxisTitle = NULL, symbol = NULL, startAtZero = FALSE, export = FALSE,
+  ...)
 }
 \arguments{
 \item{x}{A data.frame}

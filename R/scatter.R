@@ -8,7 +8,7 @@
 #' hgch_spider_CaNuNu(sampleData("Ca-Nu-Nu",nrow = 10))
 hgch_spider_CaNuNu <- function(data,
                                title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                               sort = "no", aggregate = "mean", theme = NULL, ...){
+                               sort = "no", aggregate = "mean", theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -39,16 +39,16 @@ hgch_spider_CaNuNu <- function(data,
         pointPlacement = 'on'
       ))
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 
 
 #' hgch_scatter_CaNuNu
 #' @name hgch_scatter_CaNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu
-hgch_scatter_CaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, ...){
+hgch_scatter_CaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -77,14 +77,14 @@ hgch_scatter_CaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitl
       marker = list(fillColor = "rgba(47,11,113,0.6)",lineColor=NULL,lineWidth = 0))
     )
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_scatter_CaNuNuNu
 #' @name hgch_scatter_CaNuNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu-Nu
-hgch_scatter_CaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, ...){
+hgch_scatter_CaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -109,14 +109,14 @@ hgch_scatter_CaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
       series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))
     )
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_scatter_CaCaNuNu
 #' @name hgch_scatter_CaCaNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu
-hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, ...){
+hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -138,14 +138,14 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
       series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))
     )
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_scatter_CaCaNuNuNu
 #' @name hgch_scatter_CaCaNuNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu
-hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, ...){
+hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -168,5 +168,6 @@ hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxis
       series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))
     )
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }

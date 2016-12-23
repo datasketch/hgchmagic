@@ -6,7 +6,7 @@
 \usage{
 hgch_bar_stacked_100_hor_CaCaNu(data, title = NULL, xAxisTitle = NULL,
   yAxisTitle = NULL, symbol = NULL, startAtZero = FALSE, theme = NULL,
-  ...)
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

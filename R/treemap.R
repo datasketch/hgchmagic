@@ -8,7 +8,7 @@
 #' @examples
 #' hgch_treemap_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_treemap_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                              minColor = "#E63917", maxColor= "#18941E", reverse = TRUE, ...){
+                              minColor = "#E63917", maxColor= "#18941E", reverse = TRUE, export = FALSE,...){
   # data <- sampleData("Ca-Nu")
   f <- fringe(data)
   nms <- getClabels(f)
@@ -33,7 +33,7 @@ hgch_treemap_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle 
 #' @examples
 #' hgch_treemap_CaCaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_treemap_CaCaNu <- function(data, title = NULL,
-                                minColor = "#E63917", maxColor= "#18941E", reverse = TRUE, ...){
+                                minColor = "#E63917", maxColor= "#18941E", reverse = TRUE, export = FALSE,...){
   f <- fringe(data)
   nms <- getClabels(f)
 

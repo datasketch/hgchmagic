@@ -8,7 +8,7 @@
 #' @examples
 #' hgch_pie_Ca(sampleData("Ca",nrow = 10))
 hgch_pie_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            sort = "no", aggregate = "count", ...){
+                            sort = "no", aggregate = "count", export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -38,7 +38,7 @@ hgch_pie_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL
 #' @examples
 #' hgch_pie_CaNu(sampleData("Ca",nrow = 10))
 hgch_pie_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                        sort = "no", aggregate = "sum", ...){
+                        sort = "no", aggregate = "sum", export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -69,7 +69,7 @@ hgch_pie_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NU
 #' @examples
 #' hgch_donut_Ca(sampleData("Ca",nrow = 10))
 hgch_donut_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                        sort = "no", aggregate = "count", ...){
+                        sort = "no", aggregate = "count", export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -99,7 +99,7 @@ hgch_donut_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NU
 #' @examples
 #' hgch_donut_CaNu(sampleData("Ca",nrow = 10))
 hgch_donut_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                          sort = "no", aggregate = "sum", ...){
+                          sort = "no", aggregate = "sum", export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -137,7 +137,7 @@ hgch_donut_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
 #' hgch_radar_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_radar_CaNu <- function(data,
                             title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            sort = "no", aggregate = "mean", ...){
+                            sort = "no", aggregate = "mean", export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)

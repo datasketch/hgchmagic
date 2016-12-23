@@ -212,6 +212,16 @@ hgch_scatter_CaCaNuNu(data)
 data <- sampleData("Ca-Ca-Nu-Nu-Nu", nrow = 20)
 hgch_scatter_CaCaNuNuNu(data)
 
+# Maps
+
+geo <- read_csv(system.file("aux/world-geo.csv",package = "hgchmagic"))
+data <- data_frame(country = sample(geo$code))
+data$valor <- runif(6)
+
+hgch_map_choro_world_GeNu(data)
+
+
+
 
 
 # Heatmap

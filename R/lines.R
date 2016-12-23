@@ -8,7 +8,7 @@
 #' @examples
 #' hgch_line_DaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_line_DaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                           symbol = NULL, startAtZero = FALSE, ...){
+                           symbol = NULL, startAtZero = FALSE, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -30,9 +30,9 @@ hgch_line_DaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = N
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 
 #' hgch_line_CaNu
 #' @name hgch_line_CaNu
@@ -54,7 +54,7 @@ hgch_line_CaNu <-hgch_line_DaNu
 #' @examples
 #' hgch_line_CaYeNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_line_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL, startAtZero = FALSE, ...){
+                             symbol = NULL, startAtZero = FALSE, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -77,9 +77,9 @@ hgch_line_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 
 #' hgch_line_YeNu
 #' @name hgch_line_YeNu
@@ -111,9 +111,9 @@ hgch_line_YeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = N
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_line_CaCaNu
 #' @name hgch_line_CaCaNu
 #' @param x A data.frame
@@ -134,7 +134,7 @@ hgch_line_CaCaNu <- hgch_line_CaYeNu
 #' @examples
 #' hgch_line_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_line_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL, ...){
+                             symbol = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -169,7 +169,7 @@ hgch_line_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
 #' hgch_2yline_YeNuNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_2yline_YeNuNu <- function(data, title = NULL, xAxisTitle = NULL,
                                yAxisTitle1 = NULL, yAxisTitle2 = NULL,
-                               symbol = NULL, ...){
+                               symbol = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -236,5 +236,6 @@ hgch_multilines_YeNuP <- function(data,
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }

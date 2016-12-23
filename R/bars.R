@@ -7,7 +7,7 @@
 #' @examples
 #' hgch_bar_ver_Ca(sampleData("Ca",nrow = 10))
 hgch_bar_ver_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            sort = "no", aggregate = "count",theme = NULL, ...){
+                            sort = "no", aggregate = "count",theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -26,6 +26,7 @@ hgch_bar_ver_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
 
@@ -39,7 +40,7 @@ hgch_bar_ver_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
 #' hgch_bar_ver_top_Ca(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_ver_top_Ca <- function(data,
                                 title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                reverse = TRUE, aggregate = "count", theme = NULL, ...){
+                                reverse = TRUE, aggregate = "count", theme = NULL, export = FALSE,...){
 
   hgch_bar_ver_Ca(data, title = title, xAxisTitle = xAxisTitle,
                   yAxisTitle = yAxisTitle, sort = "top", aggregate = aggregate, theme = theme)
@@ -56,7 +57,7 @@ hgch_bar_ver_top_Ca <- function(data,
 #' @examples
 #' hgch_bar_hor_Ca(sampleData("Ca",nrow = 10))
 hgch_bar_hor_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            sort = "no", aggregate = "count", theme = NULL, ...){
+                            sort = "no", aggregate = "count", theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -76,9 +77,9 @@ hgch_bar_hor_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_bar_hor_top_Ca
 #' @name hgch_bar_hor_top_Ca
 #' @param x A data.frame
@@ -89,7 +90,7 @@ hgch_bar_hor_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
 #' hgch_bar_hor_top_Ca(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_hor_top_Ca <- function(data,
                                 title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                reverse = TRUE, aggregate = "count", theme = NULL, ...){
+                                reverse = TRUE, aggregate = "count", theme = NULL, export = FALSE,...){
 
   hgch_bar_hor_Ca(data, title = title, xAxisTitle = xAxisTitle,
                   yAxisTitle = yAxisTitle, sort = "top", aggregate = aggregate, theme = theme)
@@ -109,7 +110,7 @@ hgch_bar_hor_top_Ca <- function(data,
 #' hgch_bar_ver_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_ver_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                               sort = "no", aggregate = NULL,
-                          startAtZero = FALSE,theme = NULL, ...){
+                          startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -134,9 +135,9 @@ hgch_bar_ver_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle 
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_bar_ver_top_CaNu
 #' @name hgch_bar_ver_top_CaNu
 #' @param x A data.frame
@@ -147,7 +148,7 @@ hgch_bar_ver_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle 
 #' hgch_bar_ver_top_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_ver_top_CaNu <- function(data,
                                   title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                  reverse = TRUE, aggregate = "mean", theme = NULL, ...){
+                                  reverse = TRUE, aggregate = "mean", theme = NULL, export = FALSE,...){
 
   hgch_bar_ver_CaNu(data, title = title, xAxisTitle = xAxisTitle,
                     yAxisTitle = yAxisTitle, sort = "top", aggregate = aggregate, theme = theme)
@@ -186,7 +187,7 @@ hgch_bar_ver_DaNu <- hgch_bar_ver_CaNu
 #' hgch_bar_hor_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_hor_CaNu <- function(data,
                               title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                              sort = "no", aggregate = "mean", theme = NULL, ...){
+                              sort = "no", aggregate = "mean", theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -207,9 +208,9 @@ hgch_bar_hor_CaNu <- function(data,
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_bar_hor_top_CaNu
 #' @name hgch_bar_hor_top_CaNu
 #' @param x A data.frame
@@ -220,7 +221,7 @@ hgch_bar_hor_CaNu <- function(data,
 #' hgch_bar_hor_top_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_hor_top_CaNu <- function(data,
                                   title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                  reverse = TRUE, aggregate = "mean", theme = NULL, ...){
+                                  reverse = TRUE, aggregate = "mean", theme = NULL, export = FALSE,...){
 
   hgch_bar_hor_CaNu(data, title = title, xAxisTitle = xAxisTitle,
                     yAxisTitle = yAxisTitle, sort = "top", aggregate = aggregate, theme = theme)
@@ -239,7 +240,7 @@ hgch_bar_hor_top_CaNu <- function(data,
 #' @examples
 #' hgch_bar_grouped_ver_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 hgch_bar_grouped_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
+                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -263,9 +264,9 @@ hgch_bar_grouped_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_bar_grouped_ver_CaYeNu
 #' @name hgch_bar_grouped_ver_CaYeNu
 #' @param x A data.frame
@@ -286,7 +287,7 @@ hgch_bar_grouped_ver_CaYeNu <- hgch_bar_grouped_ver_CaCaNu
 #' @examples
 #' hgch_bar_grouped_hor_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 hgch_bar_grouped_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
+                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -310,9 +311,9 @@ hgch_bar_grouped_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 
 
 #' hgch_bar_stacked_ver_CaCaNu
@@ -324,7 +325,7 @@ hgch_bar_grouped_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
 #' @examples
 #' hgch_bar_stacked_ver_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_bar_stacked_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
+                            symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -349,9 +350,9 @@ hgch_bar_stacked_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_bar_stacked_100_ver_CaCaNu
 #' @name hgch_bar_stacked_100_ver_CaCaNu
 #' @param x A data.frame
@@ -361,7 +362,7 @@ hgch_bar_stacked_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
 #' @examples
 #' hgch_bar_stacked_100_ver_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_bar_stacked_100_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
+                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -386,9 +387,9 @@ hgch_bar_stacked_100_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NUL
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 
 #' hgch_bar_stacked_hor_CaCaNu
 #' @name hgch_bar_stacked_hor_CaCaNu
@@ -399,7 +400,7 @@ hgch_bar_stacked_100_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NUL
 #' @examples
 #' hgch_bar_stacked_hor_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_bar_stacked_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
+                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -424,9 +425,9 @@ hgch_bar_stacked_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_bar_stacked_100_hor_CaCaNu
 #' @name hgch_bar_stacked_100_hor_CaCaNu
 #' @param x A data.frame
@@ -436,7 +437,7 @@ hgch_bar_stacked_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
 #' @examples
 #' hgch_bar_stacked_100_hor_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_bar_stacked_100_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                            symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
+                                            symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -461,9 +462,9 @@ hgch_bar_stacked_100_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NUL
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 
 #' hgch_bar_stacked_ver_CaDaNu
 #' @name hgch_bar_stacked_ver_CaDaNu
@@ -501,7 +502,7 @@ hgch_bar_stacked_100_ver_CaDaNu <- hgch_bar_stacked_100_ver_CaCaNu
 #' hgch_bar_grouped_ver_CaNuP(sampleData("Ca-NuP",nrow = 10))
 hgch_bar_grouped_ver_CaNuP <- function(data,
                                   title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                  symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
+                                  symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -524,9 +525,9 @@ hgch_bar_grouped_ver_CaNuP <- function(data,
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_bar_grouped_hor_CaNuP
 #' Multilines
 #' @name hgch_bar_grouped_hor_CaNuP
@@ -538,7 +539,7 @@ hgch_bar_grouped_ver_CaNuP <- function(data,
 #' hgch_bar_grouped_hor_CaNuP(sampleData("Ca-NuP",nrow = 10))
 hgch_bar_grouped_hor_CaNuP <- function(data,
                                        title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                       symbol = NULL,  startAtZero = FALSE,theme = NULL, ...){
+                                       symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -561,5 +562,6 @@ hgch_bar_grouped_hor_CaNuP <- function(data,
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }

@@ -5,7 +5,7 @@
 \title{hgch_donut_CaNu}
 \usage{
 hgch_donut_CaNu(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-  sort = "no", aggregate = "sum", ...)
+  sort = "no", aggregate = "sum", export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

@@ -6,7 +6,7 @@
 \usage{
 hgch_bar_ver_top_Ca(data, title = NULL, xAxisTitle = NULL,
   yAxisTitle = NULL, reverse = TRUE, aggregate = "count", theme = NULL,
-  ...)
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

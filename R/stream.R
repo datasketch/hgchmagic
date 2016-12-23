@@ -10,7 +10,7 @@
 # #' @examples
 # #' hgch_stream_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 # hgch_stream_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-#                              symbol = NULL, startAtZero = FALSE, ...){
+#                              symbol = NULL, startAtZero = FALSE, export = FALSE,...){
 #
 #   f <- fringe(data)
 #   nms <- getClabels(f)
@@ -60,7 +60,7 @@
 # #' @examples
 # #' hgch_stream_stack_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 # hgch_stream_stack_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-#                                    symbol = NULL, startAtZero = FALSE, ...){
+#                                    symbol = NULL, startAtZero = FALSE, export = FALSE,...){
 #
 #   f <- fringe(data)
 #   nms <- getClabels(f)

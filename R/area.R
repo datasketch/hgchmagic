@@ -7,7 +7,7 @@
 #' @examples
 #' hgch_area_DaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_area_DaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                           symbol = NULL, startAtZero = FALSE, ...){
+                           symbol = NULL, startAtZero = FALSE, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -29,9 +29,9 @@ hgch_area_DaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = N
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 
 #' hgch_area_CaNu
 #' @name hgch_area_CaNu
@@ -75,9 +75,9 @@ hgch_area_YeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = N
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_area_CaCaNu
 #' @name hgch_area_CaCaNu
 #' @param x A data.frame
@@ -87,7 +87,7 @@ hgch_area_YeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = N
 #' @examples
 #' hgch_area_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 hgch_area_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL, startAtZero = FALSE, ...){
+                             symbol = NULL, startAtZero = FALSE, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -110,9 +110,9 @@ hgch_area_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_area_CaYeNu
 #' @name hgch_area_CaYeNu
 #' @param x A data.frame
@@ -138,7 +138,7 @@ hgch_area_CaYeNu <- hgch_area_CaCaNu
 #' @examples
 #' hgch_area_stack_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 hgch_area_stack_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL, startAtZero = FALSE, ...){
+                             symbol = NULL, startAtZero = FALSE, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -162,9 +162,9 @@ hgch_area_stack_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisT
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_area_stack_CaYeNu
 #' @name hgch_area_stack_CaYeNu
 #' @param x A data.frame
@@ -185,7 +185,7 @@ hgch_area_stack_CaYeNu <- hgch_area_stack_CaCaNu
 #' @examples
 #' hgch_area_stack_100_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 hgch_area_stack_100_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                   symbol = NULL, startAtZero = FALSE, ...){
+                                   symbol = NULL, startAtZero = FALSE, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -209,9 +209,9 @@ hgch_area_stack_100_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yA
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_area_stack_100_CaYeNu
 #' @name hgch_area_stack_100_CaYeNu
 #' @param x A data.frame
@@ -236,7 +236,7 @@ hgch_area_stack_100_CaYeNu <- hgch_area_stack_100_CaCaNu
 #' @examples
 #' hgch_area_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_area_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL,startAtZero = FALSE, ...){
+                             symbol = NULL,startAtZero = FALSE, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -259,9 +259,9 @@ hgch_area_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 #' hgch_area_stack_CaDaNu
 #' @name hgch_area_stack_CaDaNu
 #' @param x A data.frame
@@ -328,9 +328,9 @@ hgch_area_stack_100_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yA
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 
 
 
@@ -345,7 +345,7 @@ hgch_area_stack_100_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yA
 # #' hgch_2yline_YeNuNu(sampleData("Ye-Nu-Nu",nrow = 10))
 # hgch_2yline_YeNuNu <- function(data, title = NULL, xAxisTitle = NULL,
 #                                yAxisTitle1 = NULL, yAxisTitle2 = NULL,
-#                                symbol = NULL, ...){
+#                                symbol = NULL, export = FALSE,...){
 #
 #   f <- fringe(data)
 #   nms <- getClabels(f)
