@@ -221,10 +221,12 @@ hgch_bar_hor_CaNu <- function(data,
 #' hgch_bar_hor_top_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_hor_top_CaNu <- function(data,
                                   title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                  reverse = TRUE, aggregate = "mean", theme = NULL, export = FALSE,...){
+                                  reverse = TRUE, aggregate = "mean", theme = NULL,
+                                  export = FALSE,...){
 
   hgch_bar_hor_CaNu(data, title = title, xAxisTitle = xAxisTitle,
-                    yAxisTitle = yAxisTitle, sort = "top", aggregate = aggregate, theme = theme)
+                    yAxisTitle = yAxisTitle, sort = "top", aggregate = aggregate,
+                    theme = theme, export = export)
 
 }
 

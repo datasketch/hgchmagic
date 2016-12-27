@@ -6,7 +6,8 @@
 #' @section ftype: Ca
 #' @examples
 #' hgch_map_choro_world_GeNu(sampleData("Ca",nrow = 10))
-hgch_map_choro_world_GeNu <- function(data, title = NULL, xAxisTitle = NULL,
+hgch_map_choro_world_GeNu <- function(data, title = NULL,
+                                      xAxisTitle = NULL,
                                       yAxisTitle = NULL,
                                       minColor = "#E63917",
                                       maxColor= "#18941E",
@@ -26,9 +27,10 @@ hgch_map_choro_world_GeNu <- function(data, title = NULL, xAxisTitle = NULL,
 
   hc <- highchart() %>%
     hc_title(text = title) %>%
-    hc_chart(zoomType = "xy") %>%
+    #hc_chart(zoomType = "xy") %>%
     hc_add_series_map(worldgeojson, d,value = "b", joinBy = "iso3") %>%
-    hc_colorAxis(maxColor = maxColor, minColor = minColor)
+    hc_colorAxis(maxColor = maxColor, minColor = minColor) %>%
+    hc_mapNavigation(enabled = TRUE)
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc

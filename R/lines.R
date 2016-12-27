@@ -8,7 +8,7 @@
 #' @examples
 #' hgch_line_DaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_line_DaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                           symbol = NULL, startAtZero = FALSE, export = FALSE,...){
+                           symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -30,6 +30,7 @@ hgch_line_DaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = N
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
@@ -54,7 +55,7 @@ hgch_line_CaNu <-hgch_line_DaNu
 #' @examples
 #' hgch_line_CaYeNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_line_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL, startAtZero = FALSE, export = FALSE,...){
+                             symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -68,15 +69,18 @@ hgch_line_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
   hc <- hchart(d, type = "line", hcaes(x = b, y = c, group = a)) %>%
-    hc_plotOptions(
-      series = list(marker = list(enabled = TRUE, symbol =  symbol))
-    ) %>%
     hc_title(text = title) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle), allowDecimals = FALSE)
+  if(!is.null(symbol)){
+    hc <- hc %>% hc_plotOptions(
+      series = list(marker = list(enabled = TRUE, symbol =  symbol))
+    )
+  }
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
@@ -111,6 +115,7 @@ hgch_line_YeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = N
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
@@ -134,7 +139,7 @@ hgch_line_CaCaNu <- hgch_line_CaYeNu
 #' @examples
 #' hgch_line_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_line_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL, export = FALSE,...){
+                             symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -142,18 +147,26 @@ hgch_line_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
   xAxisTitle <- xAxisTitle %||% nms[2]
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
-  symbol <- symbol %||% "circle"
 
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>%
+    dplyr::summarise(c = mean(c)) %>%
+    mutate(b = as.Date(b))
   if(nrow(d)==0) return()
-  #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-  hchart(d, type = "line", hcaes(x = b, y = c, group = a)) %>%
-    hc_plotOptions(
-      series = list(marker = list(enabled = FALSE, symbol =  symbol))
-    ) %>%
+  hc <- hchart(d, type = "line", hcaes(x = b, y = c, group = a)) %>%
     hc_title(text = title) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+    hc_yAxis(title = list(text=yAxisTitle), allowDecimals = FALSE)
+  if(!is.null(symbol)){
+    hc <- hc %>% hc_plotOptions(
+      series = list(marker = list(enabled = TRUE, symbol =  symbol))
+    )
+  }
+  if(startAtZero){
+    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+  }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  hc
 }
 
 
@@ -169,7 +182,7 @@ hgch_line_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
 #' hgch_2yline_YeNuNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_2yline_YeNuNu <- function(data, title = NULL, xAxisTitle = NULL,
                                yAxisTitle1 = NULL, yAxisTitle2 = NULL,
-                               symbol = NULL, export = FALSE,...){
+                               symbol = NULL, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -182,7 +195,7 @@ hgch_2yline_YeNuNu <- function(data, title = NULL, xAxisTitle = NULL,
   d <- f$d %>% dplyr::group_by(a) %>%
     dplyr::summarise(b = mean(b), c = mean(c))
 
-  highchart() %>%
+  hc <- highchart() %>%
     # hc_xAxis(categories = d$a) %>%
     hc_yAxis_multiples(
       list(title = list(text = yAxisTitle1),
@@ -199,7 +212,10 @@ hgch_2yline_YeNuNu <- function(data, title = NULL, xAxisTitle = NULL,
                   data = as.matrix(d[,c("a","b")])) %>%
     hc_add_series(name = yAxisTitle2, type = "line", yAxis = 1,
                   data = as.matrix(d[,c("a","c")]))
-}
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc
+  }
+
 
 
 
@@ -236,6 +252,7 @@ hgch_multilines_YeNuP <- function(data,
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }

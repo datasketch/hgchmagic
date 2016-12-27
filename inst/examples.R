@@ -21,6 +21,7 @@ hgch_donut_CaNu(data)
 
 data <- sampleData("Da-Nu",gt0 = FALSE)
 hgch_line_DaNu(data)
+hgch_line_DaNu(data, export = TRUE)
 
 d <- sampleData("Ca-Nu",gt0 = FALSE)
 hgch_line_CaNu(d)
@@ -30,6 +31,9 @@ hgch_line_CaYeNu(data)
 hgch_line_CaYeNu(data, symbol = "square")
 
 data <- sampleData("Ca-Da-Nu", nrow = 100)
+hgch_line_CaDaNu(data)
+hgch_line_CaDaNu(data, symbol = "square")
+
 data <- read_csv("inst/data/trends.csv")
 data$start <- as.Date(data$start)
 hgch_line_CaDaNu(data)
@@ -104,6 +108,7 @@ hgch_bar_ver_CaNu(data)
 hgch_bar_ver_top_CaNu(data)
 hgch_bar_hor_CaNu(data)
 hgch_bar_hor_top_CaNu(data)
+hgch_bar_hor_top_CaNu(data, export = TRUE)
 
 data <- sampleData("Da-Nu", nrow = 100)
 hgch_bar_ver_DaNu(data)
@@ -146,8 +151,10 @@ d <- sampleData("Ca-Nu",gt0 = FALSE)
 hgch_area_CaNu(d)
 
 data <- sampleData("Ca-Ca-Nu", nrow = 100)
+hgch_area_CaCaNu(data)
 hgch_area_CaCaNu(data, symbol = "square")
 hgch_area_CaCaNu(data, symbol = "square", startAtZero = TRUE)
+hgch_area_stacked_CaCaNu(data)
 hgch_area_stacked_CaCaNu(data, symbol = "square")
 hgch_area_stacked_100_CaCaNu(data, symbol = "square")
 
@@ -181,8 +188,8 @@ hgch_area_stacked_100_CaCaNu(data, symbol = "square")
 
 # Treemap
 data <- sampleData("Ca-Nu",nrow = 10)
-names(data) <- c(".rw54", "grgs")
 hgch_treemap_CaNu(data)
+hgch_treemap_CaNu(data, export = TRUE)
 
 ## Treemap 2Vars
 ## Nested Treemap

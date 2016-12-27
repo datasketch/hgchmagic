@@ -51,15 +51,15 @@
 #
 #
 #
-# #' hgch_stream_stack_CaCaNu
-# #' @name hgch_stream_stack_CaCaNu
+# #' hgch_stream_stacked_CaCaNu
+# #' @name hgch_stream_stacked_CaCaNu
 # #' @param x A data.frame
 # #' @export
 # #' @return highcharts viz
 # #' @section ftype: Ca-Ca-Nu
 # #' @examples
-# #' hgch_stream_stack_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
-# hgch_stream_stack_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+# #' hgch_stream_stacked_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
+# hgch_stream_stacked_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
 #                                    symbol = NULL, startAtZero = FALSE, export = FALSE,...){
 #
 #   f <- fringe(data)

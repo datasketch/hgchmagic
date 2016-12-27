@@ -5,7 +5,7 @@
 \title{hgch_area_CaDaNu}
 \usage{
 hgch_area_CaDaNu(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-  symbol = NULL, startAtZero = FALSE, export = FALSE, ...)
+  symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
