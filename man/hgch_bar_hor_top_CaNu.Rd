@@ -5,7 +5,8 @@
 \title{hgch_bar_hor_top_CaNu}
 \usage{
 hgch_bar_hor_top_CaNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, reverse = TRUE, aggregate = "mean", ...)
+  yAxisTitle = NULL, reverse = TRUE, aggregate = "mean", theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

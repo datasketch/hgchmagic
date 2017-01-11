@@ -5,7 +5,7 @@
 \title{hgch_line_CaDaNu}
 \usage{
 hgch_line_CaDaNu(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-  symbol = NULL, ...)
+  symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

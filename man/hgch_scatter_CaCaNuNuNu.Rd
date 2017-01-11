@@ -5,7 +5,7 @@
 \title{hgch_scatter_CaCaNuNuNu}
 \usage{
 hgch_scatter_CaCaNuNuNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL)
+  yAxisTitle = NULL, theme = NULL, export = FALSE, ...)
 }
 \description{
 hgch_scatter_CaCaNuNuNu
