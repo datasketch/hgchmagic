@@ -172,8 +172,8 @@ hgch_line_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
 
 
 #' hgch_2yline_YeNuNu
-#' 2 y lines
-#' @name hgch_multilines.
+#' 2 y line
+#' @name hgch_2yline_YeNuNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
@@ -183,7 +183,7 @@ hgch_line_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
 hgch_2yline_YeNuNu <- function(data, title = NULL, xAxisTitle = NULL,
                                yAxisTitle1 = NULL, yAxisTitle2 = NULL,
                                symbol = NULL, theme = NULL, export = FALSE,...){
-
+ data <- sampleData("Ye-Nu-Nu",nrow = 10)
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -192,8 +192,9 @@ hgch_2yline_YeNuNu <- function(data, title = NULL, xAxisTitle = NULL,
   yAxisTitle2 <- yAxisTitle2 %||% nms[3]
   title <-  title %||% ""
 
-  d <- f$d %>% dplyr::group_by(a) %>%
-    dplyr::summarise(b = mean(b), c = mean(c))
+  d <- f$d %>%
+       dplyr::group_by(a) %>%
+       dplyr::summarise(b = mean(b), c = mean(c))
 
   hc <- highchart() %>%
     # hc_xAxis(categories = d$a) %>%

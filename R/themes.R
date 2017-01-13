@@ -1,3 +1,4 @@
+
 #' @export
 getPalette <- function(type = "qualitative", rev = FALSE){
   dsGreen <- "#95C11E"
@@ -21,7 +22,7 @@ getPalette <- function(type = "qualitative", rev = FALSE){
   p
 }
 
-
+#' @export
 custom_theme  <- function(custom = NULL,...){
   ds_theme <-
     hc_theme(
