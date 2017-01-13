@@ -118,6 +118,7 @@ hgch_scatter_CaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
 #' @section ftype: Ca-Nu-Nu
 hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
+  data <- sampleData("Ca-Ca-Nu-Nu", nrow = 20)
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -126,7 +127,9 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
   title <-  title %||% ""
   d <- f$d %>% dplyr::filter(!is.na(a),!is.na(b)) %>% dplyr::group_by(a,b) %>%
     dplyr::summarise(c = mean(c, na.rm = TRUE),d = mean(d,na.rm = TRUE))
-  hc <- hchart(d, type = "bubble", hcaes(x = c, y = d, group = b)) %>%
+
+
+  hc <- hchart(d, type = "scatter", hcaes(x = c, y = d, group = b)) %>%
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
@@ -141,6 +144,7 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
+
 #' hgch_scatter_CaCaNuNuNu
 #' @name hgch_scatter_CaCaNuNuNu
 #' @export
