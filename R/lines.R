@@ -94,8 +94,8 @@ hgch_line_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
 #' @examples
 #' hgch_line_YeNu(sampleData("Ye-Nu",nrow = 10))
 hgch_line_YeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                           symbol = NULL, startAtZero = FALSE,...){
-
+                           symbol = NULL, startAtZero = FALSE, export = FALSE,...){
+  data <- sampleData("Ye-Nu", nrow = 20)
   f <- fringe(data)
   nms <- getClabels(f)
 

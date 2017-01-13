@@ -110,7 +110,7 @@ hgch_bar_hor_top_Ca <- function(data,
 #' hgch_bar_ver_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_ver_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                               sort = "no", aggregate = NULL,
-                          startAtZero = FALSE,theme = NULL, export = FALSE,...){
+                              startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -327,7 +327,7 @@ hgch_bar_grouped_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
 #' @examples
 #' hgch_bar_stacked_ver_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_bar_stacked_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
+                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -364,7 +364,7 @@ hgch_bar_stacked_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
 #' @examples
 #' hgch_bar_stacked_100_ver_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_bar_stacked_100_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
+                                            symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -503,8 +503,8 @@ hgch_bar_stacked_100_ver_CaDaNu <- hgch_bar_stacked_100_ver_CaCaNu
 #' @examples
 #' hgch_bar_grouped_ver_CaNuP(sampleData("Ca-NuP",nrow = 10))
 hgch_bar_grouped_ver_CaNuP <- function(data,
-                                  title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                  symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
+                                       title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                                       symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
   f <- fringe(data)
   nms <- getClabels(f)
 
