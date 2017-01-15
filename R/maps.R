@@ -7,12 +7,13 @@
 #' @examples
 #' hgch_map_choro_world_GeNu(sampleData("Ca",nrow = 10))
 hgch_map_choro_world_GeNu <- function(data, title = NULL,
+                                      subtitle = NULL,
                                       xAxisTitle = NULL,
                                       yAxisTitle = NULL,
                                       minColor = "#E63917",
                                       maxColor= "#18941E",
-                                      aggregate = "count",theme = NULL,
-                                      export = FALSE,...){
+                                      aggregate = "count", theme = NULL,
+                                      export = FALSE, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
