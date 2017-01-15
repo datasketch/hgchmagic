@@ -4,8 +4,9 @@
 \alias{hgch_area_CaNu}
 \title{hgch_area_CaNu}
 \usage{
-hgch_area_CaNu(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-  symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE, ...)
+hgch_area_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
+  xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
+  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

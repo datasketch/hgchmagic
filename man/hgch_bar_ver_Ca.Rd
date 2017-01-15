@@ -4,8 +4,9 @@
 \alias{hgch_bar_ver_Ca}
 \title{hgch_bar_ver_Ca}
 \usage{
-hgch_bar_ver_Ca(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-  sort = "no", aggregate = "count", theme = NULL, export = FALSE, ...)
+hgch_bar_ver_Ca(data, title = NULL, subtitle = NULL, caption = NULL,
+  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
+  aggregate = "count", theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

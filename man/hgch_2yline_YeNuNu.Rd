@@ -5,9 +5,9 @@
 \title{hgch_2yline_YeNuNu
 2 y line}
 \usage{
-hgch_2yline_YeNuNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle1 = NULL, yAxisTitle2 = NULL, symbol = NULL, theme = NULL,
-  export = FALSE, ...)
+hgch_2yline_YeNuNu(data, title = NULL, subtitle = NULL, caption = NULL,
+  xAxisTitle = NULL, yAxisTitle1 = NULL, yAxisTitle2 = NULL,
+  symbol = NULL, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

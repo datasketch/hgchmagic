@@ -4,9 +4,9 @@
 \alias{hgch_treemap_CaNu}
 \title{hgch_treemap_CaNu}
 \usage{
-hgch_treemap_CaNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, minColor = "#E63917", maxColor = "#18941E",
-  reverse = TRUE, export = FALSE, ...)
+hgch_treemap_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
+  xAxisTitle = NULL, yAxisTitle = NULL, minColor = "#E63917",
+  maxColor = "#18941E", reverse = TRUE, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

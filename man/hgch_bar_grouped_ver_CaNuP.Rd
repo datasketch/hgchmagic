@@ -5,9 +5,9 @@
 \title{hgch_bar_grouped_ver_CaNuP
 Multilines}
 \usage{
-hgch_bar_grouped_ver_CaNuP(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, symbol = NULL, startAtZero = FALSE, theme = NULL,
-  export = FALSE, ...)
+hgch_bar_grouped_ver_CaNuP(data, title = NULL, subtitle = NULL,
+  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
+  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

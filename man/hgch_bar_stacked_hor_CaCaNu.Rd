@@ -4,9 +4,9 @@
 \alias{hgch_bar_stacked_hor_CaCaNu}
 \title{hgch_bar_stacked_hor_CaCaNu}
 \usage{
-hgch_bar_stacked_hor_CaCaNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, symbol = NULL, startAtZero = FALSE, theme = NULL,
-  export = FALSE, ...)
+hgch_bar_stacked_hor_CaCaNu(data, title = NULL, subtitle = NULL,
+  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
+  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

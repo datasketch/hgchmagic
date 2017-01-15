@@ -4,8 +4,9 @@
 \alias{hgch_area_stacked_CaDaNu}
 \title{hgch_area_stacked_CaDaNu}
 \usage{
-hgch_area_stacked_CaDaNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, symbol = NULL, startAtZero = FALSE, ...)
+hgch_area_stacked_CaDaNu(data, title = NULL, subtitle = NULL,
+  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
+  startAtZero = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

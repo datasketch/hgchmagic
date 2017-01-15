@@ -4,9 +4,9 @@
 \alias{hgch_bar_ver_YeNu}
 \title{hgch_bar_ver_YeNu}
 \usage{
-hgch_bar_ver_YeNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, sort = "no", aggregate = NULL, startAtZero = FALSE,
-  theme = NULL, export = FALSE, ...)
+hgch_bar_ver_YeNu(data, title = NULL, subtitle = NULL, caption = NULL,
+  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = NULL,
+  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

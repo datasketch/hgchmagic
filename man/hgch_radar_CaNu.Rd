@@ -4,8 +4,9 @@
 \alias{hgch_radar_CaNu}
 \title{hgch_radar_CaNu}
 \usage{
-hgch_radar_CaNu(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-  sort = "no", aggregate = "mean", export = FALSE, ...)
+hgch_radar_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
+  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = "mean",
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

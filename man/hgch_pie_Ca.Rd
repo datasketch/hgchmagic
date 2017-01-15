@@ -4,8 +4,9 @@
 \alias{hgch_pie_Ca}
 \title{hgch_pie_Ca}
 \usage{
-hgch_pie_Ca(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-  sort = "no", aggregate = "count", export = FALSE, ...)
+hgch_pie_Ca(data, title = NULL, subtitle = NULL, caption = NULL,
+  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
+  aggregate = "count", export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

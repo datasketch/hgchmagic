@@ -4,8 +4,9 @@
 \alias{hgch_scatter_CaCaNuNuNu}
 \title{hgch_scatter_CaCaNuNuNu}
 \usage{
-hgch_scatter_CaCaNuNuNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, theme = NULL, export = FALSE, ...)
+hgch_scatter_CaCaNuNuNu(data, title = NULL, subtitle = NULL,
+  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL,
+  export = FALSE, ...)
 }
 \description{
 hgch_scatter_CaCaNuNuNu

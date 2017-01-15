@@ -4,8 +4,9 @@
 \alias{hgch_line_CaYeNu}
 \title{hgch_line_CaYeNu}
 \usage{
-hgch_line_CaYeNu(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-  symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE, ...)
+hgch_line_CaYeNu(data, title = NULL, subtitle = NULL, caption = NULL,
+  xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
+  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

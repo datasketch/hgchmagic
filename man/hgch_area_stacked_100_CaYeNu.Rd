@@ -4,9 +4,9 @@
 \alias{hgch_area_stacked_100_CaYeNu}
 \title{hgch_area_stacked_100_CaYeNu}
 \usage{
-hgch_area_stacked_100_CaYeNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, symbol = NULL, startAtZero = FALSE, theme = NULL,
-  export = FALSE, ...)
+hgch_area_stacked_100_CaYeNu(data, title = NULL, subtitle = NULL,
+  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
+  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

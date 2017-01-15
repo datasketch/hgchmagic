@@ -4,9 +4,9 @@
 \alias{hgch_bar_hor_CaNu}
 \title{hgch_bar_hor_CaNu}
 \usage{
-hgch_bar_hor_CaNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, sort = "no", aggregate = "mean", theme = NULL,
-  export = FALSE, ...)
+hgch_bar_hor_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
+  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = "mean",
+  theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

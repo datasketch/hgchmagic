@@ -4,8 +4,9 @@
 \alias{hgch_pie_CaNu}
 \title{hgch_pie_CaNu}
 \usage{
-hgch_pie_CaNu(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-  sort = "no", aggregate = "sum", export = FALSE, ...)
+hgch_pie_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
+  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = "sum",
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

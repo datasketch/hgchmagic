@@ -4,9 +4,9 @@
 \alias{hgch_spider_CaNuNu}
 \title{hgch_spider_CaNuNu}
 \usage{
-hgch_spider_CaNuNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, sort = "no", aggregate = "mean", theme = NULL,
-  export = FALSE, ...)
+hgch_spider_CaNuNu(data, title = NULL, subtitle = NULL, caption = NULL,
+  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = "mean",
+  theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
