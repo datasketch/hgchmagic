@@ -6,7 +6,7 @@
 #' @section ftype: Ca
 #' @examples
 #' hgch_bar_ver_Ca(sampleData("Ca",nrow = 10))
-hgch_bar_ver_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_bar_ver_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                             sort = "no", aggregate = "count",theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -23,6 +23,7 @@ hgch_bar_ver_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
   }
   hc <- hchart(d, type = "column", hcaes(x = a, y = b)) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
@@ -39,7 +40,7 @@ hgch_bar_ver_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
 #' @examples
 #' hgch_bar_ver_top_Ca(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_ver_top_Ca <- function(data,
-                                title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                                title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                 reverse = TRUE, aggregate = "count", theme = NULL, export = FALSE,...){
 
   hgch_bar_ver_Ca(data, title = title, xAxisTitle = xAxisTitle,
@@ -56,7 +57,7 @@ hgch_bar_ver_top_Ca <- function(data,
 #' @section ftype: Ca
 #' @examples
 #' hgch_bar_hor_Ca(sampleData("Ca",nrow = 10))
-hgch_bar_hor_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_bar_hor_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                             sort = "no", aggregate = "count", theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -74,6 +75,7 @@ hgch_bar_hor_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
   hc <- hchart(d, type = "bar", hcaes(x = a, y = b)) %>%
     hc_plotOptions(column = list(stacking = "normal")) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
@@ -89,7 +91,7 @@ hgch_bar_hor_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
 #' @examples
 #' hgch_bar_hor_top_Ca(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_hor_top_Ca <- function(data,
-                                title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                                title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                 reverse = TRUE, aggregate = "count", theme = NULL, export = FALSE,...){
 
   hgch_bar_hor_Ca(data, title = title, xAxisTitle = xAxisTitle,
@@ -108,7 +110,7 @@ hgch_bar_hor_top_Ca <- function(data,
 #' @section ftype: Ca-Ye-Nu
 #' @examples
 #' hgch_bar_ver_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_bar_ver_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_bar_ver_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                               sort = "no", aggregate = NULL,
                               startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
@@ -129,6 +131,7 @@ hgch_bar_ver_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle 
     #   series = list(marker = list(enabled = TRUE, symbol =  symbol))
     # ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){
@@ -147,7 +150,7 @@ hgch_bar_ver_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle 
 #' @examples
 #' hgch_bar_ver_top_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_ver_top_CaNu <- function(data,
-                                  title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                                  title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                   reverse = TRUE, aggregate = "mean", theme = NULL, export = FALSE,...){
 
   hgch_bar_ver_CaNu(data, title = title, xAxisTitle = xAxisTitle,
@@ -186,7 +189,7 @@ hgch_bar_ver_DaNu <- hgch_bar_ver_CaNu
 #' @examples
 #' hgch_bar_hor_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_hor_CaNu <- function(data,
-                              title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                              title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                               sort = "no", aggregate = "mean", theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -205,6 +208,7 @@ hgch_bar_hor_CaNu <- function(data,
   hc <- hchart(d, type = "bar", hcaes(x = a, y = b)) %>%
     hc_plotOptions(column = list(stacking = "normal")) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
@@ -220,7 +224,7 @@ hgch_bar_hor_CaNu <- function(data,
 #' @examples
 #' hgch_bar_hor_top_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_hor_top_CaNu <- function(data,
-                                  title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                                  title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                   reverse = TRUE, aggregate = "mean", theme = NULL,
                                   export = FALSE,...){
 
@@ -241,7 +245,7 @@ hgch_bar_hor_top_CaNu <- function(data,
 #' @section ftype: Ca-Ca-Nu
 #' @examples
 #' hgch_bar_grouped_ver_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
-hgch_bar_grouped_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_bar_grouped_ver_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                         symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -260,6 +264,7 @@ hgch_bar_grouped_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
       series = list(marker = list(enabled = TRUE, symbol =  symbol))
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){
@@ -288,7 +293,7 @@ hgch_bar_grouped_ver_CaYeNu <- hgch_bar_grouped_ver_CaCaNu
 #' @section ftype: Ca-Ca-Nu
 #' @examples
 #' hgch_bar_grouped_hor_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
-hgch_bar_grouped_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_bar_grouped_hor_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                         symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -307,6 +312,7 @@ hgch_bar_grouped_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
       series = list(marker = list(enabled = TRUE, symbol =  symbol))
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){
@@ -326,7 +332,7 @@ hgch_bar_grouped_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
 #' @section ftype: Ca-Ye-Nu
 #' @examples
 #' hgch_bar_stacked_ver_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
-hgch_bar_stacked_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_bar_stacked_ver_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                         symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -346,6 +352,7 @@ hgch_bar_stacked_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
       column = list(stacking = "normal")
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){
@@ -363,7 +370,7 @@ hgch_bar_stacked_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
 #' @section ftype: Ca-Ye-Nu
 #' @examples
 #' hgch_bar_stacked_100_ver_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
-hgch_bar_stacked_100_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_bar_stacked_100_ver_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                             symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -383,6 +390,7 @@ hgch_bar_stacked_100_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NUL
       column = list(stacking = "percent")
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){
@@ -401,7 +409,7 @@ hgch_bar_stacked_100_ver_CaCaNu <- function(data, title = NULL, xAxisTitle = NUL
 #' @section ftype: Ca-Ye-Nu
 #' @examples
 #' hgch_bar_stacked_hor_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
-hgch_bar_stacked_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_bar_stacked_hor_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                         symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -421,6 +429,7 @@ hgch_bar_stacked_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
       bar = list(stacking = "normal")
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){
@@ -438,7 +447,7 @@ hgch_bar_stacked_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, y
 #' @section ftype: Ca-Ye-Nu
 #' @examples
 #' hgch_bar_stacked_100_hor_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
-hgch_bar_stacked_100_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_bar_stacked_100_hor_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                             symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -458,6 +467,7 @@ hgch_bar_stacked_100_hor_CaCaNu <- function(data, title = NULL, xAxisTitle = NUL
       bar = list(stacking = "percent")
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){
@@ -503,7 +513,7 @@ hgch_bar_stacked_100_ver_CaDaNu <- hgch_bar_stacked_100_ver_CaCaNu
 #' @examples
 #' hgch_bar_grouped_ver_CaNuP(sampleData("Ca-NuP",nrow = 10))
 hgch_bar_grouped_ver_CaNuP <- function(data,
-                                       title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                                       title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
   f <- fringe(data)
   nms <- getClabels(f)
@@ -521,6 +531,7 @@ hgch_bar_grouped_ver_CaNuP <- function(data,
   hc <- hchart(d, type = "column",hcaes( x = a, y = value, group = variable)) %>%
     hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){
@@ -540,7 +551,7 @@ hgch_bar_grouped_ver_CaNuP <- function(data,
 #' @examples
 #' hgch_bar_grouped_hor_CaNuP(sampleData("Ca-NuP",nrow = 10))
 hgch_bar_grouped_hor_CaNuP <- function(data,
-                                       title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                                       title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                        symbol = NULL,  startAtZero = FALSE,theme = NULL, export = FALSE,...){
   f <- fringe(data)
   nms <- getClabels(f)
@@ -558,6 +569,7 @@ hgch_bar_grouped_hor_CaNuP <- function(data,
   hc <- hchart(d, type = "bar",hcaes( x = a, y = value, group = variable)) %>%
     hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){

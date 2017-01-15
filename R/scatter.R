@@ -7,7 +7,7 @@
 #' @examples
 #' hgch_spider_CaNuNu(sampleData("Ca-Nu-Nu",nrow = 10))
 hgch_spider_CaNuNu <- function(data,
-                               title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                               title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                sort = "no", aggregate = "mean", theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -24,6 +24,7 @@ hgch_spider_CaNuNu <- function(data,
   hc <- highchart() %>%
     hc_chart(type = "line", polar = TRUE) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle),
              categories = d$a,tickmarkPlacement = 'on',
              lineWidth = 0) %>%
@@ -48,7 +49,7 @@ hgch_spider_CaNuNu <- function(data,
 #' @name hgch_scatter_CaNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu
-hgch_scatter_CaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
+hgch_scatter_CaNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -84,7 +85,7 @@ hgch_scatter_CaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitl
 #' @name hgch_scatter_CaNuNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu-Nu
-hgch_scatter_CaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
+hgch_scatter_CaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -116,7 +117,7 @@ hgch_scatter_CaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
 #' @name hgch_scatter_CaCaNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu
-hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
+hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   data <- sampleData("Ca-Ca-Nu-Nu", nrow = 20)
   f <- fringe(data)
@@ -149,7 +150,7 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTi
 #' @name hgch_scatter_CaCaNuNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu
-hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
+hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)

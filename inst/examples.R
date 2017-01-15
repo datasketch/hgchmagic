@@ -9,8 +9,9 @@ library(hgchmagic)
 # Pie and Donut
 
 data <- sampleData("Ca", nrow = 10)
-hgch_pie_Ca(data)
+hgch_pie_Ca(data, title = "TITLE", subtitle = "Subtitle")
 hgch_donut_Ca(data)
+hgch_donut_Ca(data, title = "TITLE", subtitle = "Subtitle")
 
 data <- sampleData("Ca-Nu", nrow = 10)
 hgch_pie_CaNu(data)

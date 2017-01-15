@@ -9,7 +9,7 @@
 # #' @section ftype: Ca-Ca-Nu
 # #' @examples
 # #' hgch_stream_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
-# hgch_stream_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+# hgch_stream_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
 #                              symbol = NULL, startAtZero = FALSE, export = FALSE,...){
 #
 #   f <- fringe(data)
@@ -28,6 +28,7 @@
 #       series = list(marker = list(enabled = TRUE, symbol =  symbol))
 #     ) %>%
 #     hc_title(text = title) %>%
+#    hc_subtitle(text = subtitle) %>%
 #     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE)
 #   if(startAtZero){
 #     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
@@ -59,7 +60,7 @@
 # #' @section ftype: Ca-Ca-Nu
 # #' @examples
 # #' hgch_stream_stacked_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
-# hgch_stream_stacked_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+# hgch_stream_stacked_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
 #                                    symbol = NULL, startAtZero = FALSE, export = FALSE,...){
 #
 #   f <- fringe(data)
@@ -79,6 +80,7 @@
 #       area = list(stacking = "normal")
 #     ) %>%
 #     hc_title(text = title) %>%
+#    hc_subtitle(text = subtitle) %>%
 #     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE)
 #   if(startAtZero){
 #     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)

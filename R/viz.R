@@ -7,7 +7,7 @@
 #' @section ftype: Ca
 #' @examples
 #' hgch_pie_Ca(sampleData("Ca",nrow = 10))
-hgch_pie_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_pie_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                             sort = "no", aggregate = "count", export = FALSE,...){
 
   f <- fringe(data)
@@ -25,6 +25,7 @@ hgch_pie_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL
       series = list(dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
 }
@@ -37,7 +38,7 @@ hgch_pie_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL
 #' @section ftype: Ca
 #' @examples
 #' hgch_pie_CaNu(sampleData("Ca",nrow = 10))
-hgch_pie_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                         sort = "no", aggregate = "sum", export = FALSE,...){
 
   f <- fringe(data)
@@ -55,6 +56,7 @@ hgch_pie_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NU
       series = list(dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
 }
@@ -68,7 +70,7 @@ hgch_pie_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NU
 #' @section ftype: Ca
 #' @examples
 #' hgch_donut_Ca(sampleData("Ca",nrow = 10))
-hgch_donut_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_donut_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                         sort = "no", aggregate = "count", export = FALSE,...){
 
   f <- fringe(data)
@@ -86,6 +88,7 @@ hgch_donut_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NU
       series = list(innerSize= '60%',dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
 }
@@ -98,7 +101,7 @@ hgch_donut_Ca <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NU
 #' @section ftype: Ca
 #' @examples
 #' hgch_donut_CaNu(sampleData("Ca",nrow = 10))
-hgch_donut_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                           sort = "no", aggregate = "sum", export = FALSE,...){
 
   f <- fringe(data)
@@ -116,6 +119,7 @@ hgch_donut_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
       series = list(innerSize= '60%',dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
 }
@@ -136,7 +140,7 @@ hgch_donut_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = 
 #' @examples
 #' hgch_radar_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_radar_CaNu <- function(data,
-                            title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                            title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                             sort = "no", aggregate = "mean", export = FALSE,...){
 
   f <- fringe(data)
@@ -152,6 +156,7 @@ hgch_radar_CaNu <- function(data,
   highchart() %>%
     hc_chart(type = "line", polar = TRUE) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle),
              categories = d$a,tickmarkPlacement = 'on',lineWidth = 0
              ) %>%

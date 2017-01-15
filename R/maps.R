@@ -27,6 +27,7 @@ hgch_map_choro_world_GeNu <- function(data, title = NULL,
 
   hc <- highchart() %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     #hc_chart(zoomType = "xy") %>%
     hc_add_series_map(worldgeojson, d,value = "b", joinBy = "iso3") %>%
     hc_colorAxis(maxColor = maxColor, minColor = minColor) %>%

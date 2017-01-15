@@ -6,7 +6,7 @@
 #' @section ftype: Da-Nu
 #' @examples
 #' hgch_area_DaNu(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_area_DaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_area_DaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -23,6 +23,7 @@ hgch_area_DaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = N
       series = list(marker = list(enabled = FALSE, symbol =  symbol))
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(!is.null(symbol)){
@@ -61,7 +62,7 @@ hgch_area_CaNu <-hgch_area_DaNu
 #' @section ftype: Ca-Ye-Nu
 #' @examples
 #' hgch_area_YeNu(sampleData("Ye-Nu",nrow = 10))
-hgch_area_YeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_area_YeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            symbol = NULL, startAtZero = FALSE,...){
 
   f <- fringe(data)
@@ -78,6 +79,7 @@ hgch_area_YeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = N
       series = list(marker = list(enabled = TRUE, symbol =  symbol))
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(!is.null(symbol)){
@@ -104,7 +106,7 @@ hgch_area_YeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = N
 #' @section ftype: Ca-Ca-Nu
 #' @examples
 #' hgch_area_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
-hgch_area_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_area_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -122,6 +124,7 @@ hgch_area_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
       series = list(marker = list(enabled = TRUE, symbol =  symbol))
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(!is.null(symbol)){
@@ -164,7 +167,7 @@ hgch_area_CaYeNu <- hgch_area_CaCaNu
 #' @section ftype: Ca-Ca-Nu
 #' @examples
 #' hgch_area_stacked_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
-hgch_area_stacked_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_area_stacked_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                    symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -183,6 +186,7 @@ hgch_area_stacked_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxi
       area = list(stacking = "normal")
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(!is.null(symbol)){
@@ -220,7 +224,7 @@ hgch_area_stacked_CaYeNu <- hgch_area_stacked_CaCaNu
 #' @section ftype: Ca-Ca-Nu
 #' @examples
 #' hgch_area_stacked_100_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
-hgch_area_stacked_100_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_area_stacked_100_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                        symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -239,6 +243,7 @@ hgch_area_stacked_100_CaCaNu <- function(data, title = NULL, xAxisTitle = NULL, 
       area = list(stacking = "percent")
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(!is.null(symbol)){
@@ -280,7 +285,7 @@ hgch_area_stacked_100_CaYeNu <- hgch_area_stacked_100_CaCaNu
 #' @section ftype: Ca-Ye-Nu
 #' @examples
 #' hgch_area_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_area_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_area_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL,startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -298,6 +303,7 @@ hgch_area_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
       series = list(marker = list(enabled = FALSE, symbol =  symbol))
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(!is.null(symbol)){
@@ -324,7 +330,7 @@ hgch_area_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
 #' @section ftype: Ca-Ye-Nu
 #' @examples
 #' hgch_area_stacked_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_area_stacked_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_area_stacked_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                    symbol = NULL, startAtZero = FALSE,...){
 
   f <- fringe(data)
@@ -344,6 +350,7 @@ hgch_area_stacked_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxi
       area = list(stacking = "normal")
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(!is.null(symbol)){
@@ -372,7 +379,7 @@ hgch_area_stacked_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxi
 #' @section ftype: Ca-Ye-Nu
 #' @examples
 #' hgch_area_stacked_100_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_area_stacked_100_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_area_stacked_100_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                        symbol = NULL, startAtZero = FALSE,...){
 
   f <- fringe(data)
@@ -392,6 +399,7 @@ hgch_area_stacked_100_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, 
       area = list(stacking = "percent")
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(!is.null(symbol)){
@@ -422,7 +430,7 @@ hgch_area_stacked_100_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, 
 # #' @section ftypes: Ye-Nu-Nu
 # #' @examples
 # #' hgch_2yline_YeNuNu(sampleData("Ye-Nu-Nu",nrow = 10))
-# hgch_2yline_YeNuNu <- function(data, title = NULL, xAxisTitle = NULL,
+# hgch_2yline_YeNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL,
 #                                yAxisTitle1 = NULL, yAxisTitle2 = NULL,
 #                                symbol = NULL, theme = NULL, export = FALSE,...){
 #
@@ -450,6 +458,7 @@ hgch_area_stacked_100_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, 
 #            opposite = TRUE)
 #     ) %>%
 #     hc_title(text = title) %>%
+#    hc_subtitle(text = subtitle) %>%
 #     hc_add_series(name = yAxisTitle1, type = "area",
 #                   data = as.matrix(d[,c("a","b")])) %>%
 #     hc_add_series(name = yAxisTitle2, type = "area", yAxis = 1,
@@ -468,7 +477,7 @@ hgch_area_stacked_100_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, 
 # #' @examples
 # #' hgch_multilines_YeNuP(sampleData("Ye-Nu-Nu",nrow = 10))
 # hgch_multilines_YeNuP <- function(data,
-#                                   title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#                                   title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
 #                                   symbol = NULL,  startAtZero = FALSE,...){
 #   f <- fringe(data)
 #   nms <- getClabels(f)
@@ -486,6 +495,7 @@ hgch_area_stacked_100_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, 
 #   hc <- hchart(d, type = "area",hcaes( x = a, y = value, group = variable)) %>%
 #     hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
 #     hc_title(text = title) %>%
+#    hc_subtitle(text = subtitle) %>%
 #     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
 #     hc_yAxis(title = list(text=yAxisTitle))
 #   if(startAtZero){

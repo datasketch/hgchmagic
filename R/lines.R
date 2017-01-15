@@ -7,7 +7,7 @@
 #' @section ftype: Da-Nu
 #' @examples
 #' hgch_line_DaNu(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_line_DaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_line_DaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -25,6 +25,7 @@ hgch_line_DaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = N
       series = list(marker = list(enabled = FALSE, symbol =  symbol))
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){
@@ -54,7 +55,7 @@ hgch_line_CaNu <-hgch_line_DaNu
 #' @section ftype: Ca-Ye-Nu
 #' @examples
 #' hgch_line_CaYeNu(sampleData("Ye-Nu-Nu",nrow = 10))
-hgch_line_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_line_CaYeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -70,6 +71,7 @@ hgch_line_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
   hc <- hchart(d, type = "line", hcaes(x = b, y = c, group = a)) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle), allowDecimals = FALSE)
   if(!is.null(symbol)){
@@ -93,7 +95,7 @@ hgch_line_CaYeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
 #' @section ftype: Ca-Ye-Nu
 #' @examples
 #' hgch_line_YeNu(sampleData("Ye-Nu",nrow = 10))
-hgch_line_YeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_line_YeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            symbol = NULL, startAtZero = FALSE, export = FALSE,...){
   data <- sampleData("Ye-Nu", nrow = 20)
   f <- fringe(data)
@@ -111,6 +113,7 @@ hgch_line_YeNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = N
       series = list(marker = list(enabled = TRUE, symbol =  symbol))
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE)
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
@@ -138,7 +141,7 @@ hgch_line_CaCaNu <- hgch_line_CaYeNu
 #' @section ftype: Ca-Ye-Nu
 #' @examples
 #' hgch_line_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_line_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_line_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -154,6 +157,7 @@ hgch_line_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
   if(nrow(d)==0) return()
   hc <- hchart(d, type = "line", hcaes(x = b, y = c, group = a)) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle), allowDecimals = FALSE)
   if(!is.null(symbol)){
@@ -180,7 +184,7 @@ hgch_line_CaDaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle =
 #' @section ftypes: Ye-Nu-Nu
 #' @examples
 #' hgch_2yline_YeNuNu(sampleData("Ye-Nu-Nu",nrow = 10))
-hgch_2yline_YeNuNu <- function(data, title = NULL, xAxisTitle = NULL,
+hgch_2yline_YeNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL,
                                yAxisTitle1 = NULL, yAxisTitle2 = NULL,
                                symbol = NULL, theme = NULL, export = FALSE,...){
  data <- sampleData("Ye-Nu-Nu",nrow = 10)
@@ -209,6 +213,7 @@ hgch_2yline_YeNuNu <- function(data, title = NULL, xAxisTitle = NULL,
            opposite = TRUE)
     ) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_add_series(name = yAxisTitle1, type = "line",
                   data = as.matrix(d[,c("a","b")])) %>%
     hc_add_series(name = yAxisTitle2, type = "line", yAxis = 1,
@@ -230,7 +235,7 @@ hgch_2yline_YeNuNu <- function(data, title = NULL, xAxisTitle = NULL,
 #' @examples
 #' hgch_multilines_YeNuP(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_multilines_YeNuP <- function(data,
-                                  title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                                  title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                   symbol = NULL,  startAtZero = FALSE,...){
   f <- fringe(data)
   nms <- getClabels(f)
@@ -248,6 +253,7 @@ hgch_multilines_YeNuP <- function(data,
   hc <- hchart(d, type = "line",hcaes( x = a, y = value, group = variable)) %>%
     hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle))
   if(startAtZero){

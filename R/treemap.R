@@ -7,7 +7,7 @@
 #' @section ftype: Ca-Nu
 #' @examples
 #' hgch_treemap_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_treemap_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_treemap_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                               minColor = "#E63917", maxColor= "#18941E",
                               reverse = TRUE, export = FALSE,...){
   # data <- sampleData("Ca-Nu")
@@ -21,6 +21,7 @@ hgch_treemap_CaNu <- function(data, title = NULL, xAxisTitle = NULL, yAxisTitle 
   d <- data %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b))
   hc <- hchart(d, "treemap", hcaes(x = a, value = b, color = b)) %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_colorAxis(maxColor = maxColor, minColor = minColor,reversed = reverse)
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
@@ -52,6 +53,7 @@ hgch_treemap_CaCaNu <- function(data, title = NULL,
                          type="value", palette = viridis::viridis(6),draw = FALSE)
   hc <- hctreemap(tm, allowDrillToNode = TRUE, layoutAlgorithm = "squarified") %>%
     hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_plotOptions(
       series = list(
         levels = list(
