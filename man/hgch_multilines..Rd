@@ -21,7 +21,7 @@ hgch_multilines_YeNuP
 Multilines
 }
 \section{ftypes}{
- Ye-Nu*
+ Ye-NuP
 }
 \examples{
 hgch_multilines_YeNuP(sampleData("Ye-Nu-Nu",nrow = 10))

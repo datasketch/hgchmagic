@@ -231,7 +231,7 @@ hgch_2yline_YeNuNu <- function(data, title = NULL, subtitle = NULL, caption = NU
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftypes: Ye-Nu*
+#' @section ftypes: Ye-NuP
 #' @examples
 #' hgch_multilines_YeNuP(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_multilines_YeNuP <- function(data,

@@ -4,6 +4,8 @@ Version: 0.0.0.1
 Author: Juan Pablo Marín Díaz
 Maintainer: Juan Pablo Marín Díaz <jpmarindiaz@gmail.com>
 Description: A wrapper for highcharter
+Imports:
+    xts
 Depends:
     R (>= 3.0.0),
     tools,

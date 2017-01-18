@@ -4,9 +4,10 @@
 \alias{hgch_map_choro_world_GeNu}
 \title{hgch_map_choro_world_GeNu}
 \usage{
-hgch_map_choro_world_GeNu(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL, minColor = "#E63917", maxColor = "#18941E",
-  aggregate = "count", theme = NULL, export = FALSE, ...)
+hgch_map_choro_world_GeNu(data, title = NULL, subtitle = NULL,
+  xAxisTitle = NULL, yAxisTitle = NULL, minColor = "#E63917",
+  maxColor = "#18941E", aggregate = "count", theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
