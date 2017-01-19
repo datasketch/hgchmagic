@@ -331,7 +331,7 @@ hgch_area_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL
 #' @examples
 #' hgch_area_stacked_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_area_stacked_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                   symbol = NULL, startAtZero = FALSE,...){
+                                   symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -380,7 +380,8 @@ hgch_area_stacked_CaDaNu <- function(data, title = NULL, subtitle = NULL, captio
 #' @examples
 #' hgch_area_stacked_100_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_area_stacked_100_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                       symbol = NULL, startAtZero = FALSE,...){
+                                       symbol = NULL, startAtZero = FALSE,
+                                       theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)

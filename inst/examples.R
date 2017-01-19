@@ -141,6 +141,10 @@ hgch_bar_grouped_hor_CaNuP(data)
 
 data <- sampleData("Ca-NuP",nrow = 10)
 hgch_bar_grouped_hor_CaNuP(data)
+
+data <- sampleData("NuP")
+
+
 # Area
 
 data <- sampleData("Da-Nu")

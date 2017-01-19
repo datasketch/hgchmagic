@@ -4,12 +4,12 @@
 \alias{hgch_stock_ohlc_DaNu4}
 \title{hgch_stock_ohlc_DaNu4}
 \usage{
-hgch_stock_ohlc_DaNu4(a, type = "ohlc", title = NULL, subtitle = NULL,
+hgch_stock_ohlc_DaNu4(data, type = "ohlc", title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
   startAtZero = FALSE, ...)
 }
 \arguments{
-\item{a}{A dataframe}
+\item{data}{A dataframe}
 
 \item{type}{Factor: "candlestick", "ohlc"}
 }
