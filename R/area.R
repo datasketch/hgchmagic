@@ -339,7 +339,6 @@ hgch_area_stacked_CaDaNu <- function(data, title = NULL, subtitle = NULL, captio
   xAxisTitle <- xAxisTitle %||% nms[2]
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
-  symbol <- symbol %||% "circle"
 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
   if(nrow(d)==0) return()
@@ -389,7 +388,6 @@ hgch_area_stacked_100_CaDaNu <- function(data, title = NULL, subtitle = NULL, ca
   xAxisTitle <- xAxisTitle %||% nms[2]
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
-  symbol <- symbol %||% "circle"
 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
   if(nrow(d)==0) return()
