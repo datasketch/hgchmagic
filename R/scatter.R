@@ -1,3 +1,73 @@
+#' hgch_polarcolumn_CaNu
+#' @name hgch_polarcolumn_CaNu
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca-Nu
+#' @examples
+#' hgch_polarcolumn_CaNu(sampleData("Ca-Nu",nrow = 10))
+hgch_polarcolumn_CaNu <-function(data, title = ""){
+
+  data <- sampleData('Ca-Nu')
+  f <- fringe(data)
+  nms <- getCnames(f)
+  data <- f$d
+  data <- plyr::rename(data, c("a" = "name"))
+
+  data_graph <- data %>%
+    dplyr::group_by(name) %>%
+    tidyr::drop_na(name) %>%
+    dplyr::summarise(value = mean(b, na.rm = TRUE ))
+
+  data_graph <- data_graph %>%
+    dplyr::mutate(y = value,
+                  z = ((0:(dim(data_graph)[1]-1))*y) - median((0:(dim(data_graph)[1]-1))*y),
+                  color = getPalette()[1:(dim(data_graph)[1])])
+
+  hc <- highchart() %>%
+    hc_title(text = title) %>%
+    hc_chart(type = "column",
+             polar = TRUE) %>%
+    hc_xAxis(categories = data_graph$name) %>%
+    hc_add_series(data_graph, showInLegend = FALSE)
+  hc
+}
+
+#' hgch_spider_CaNu
+#' @name hgch_spider_CaNu
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca-Nu
+#' @examples
+#' hgch_spider_CaNu(sampleData("Ca-Nu",nrow = 10))
+hgch_spider_CaNu <-function(data, title = ""){
+
+  data <- sampleData('Ca-Nu')
+  f <- fringe(data)
+  nms <- getCnames(f)
+  data <- f$d
+  data <- plyr::rename(data, c("a" = "name"))
+
+  data_graph <- data %>%
+    dplyr::group_by(name) %>%
+    tidyr::drop_na(name) %>%
+    dplyr::summarise(value = mean(b, na.rm = TRUE ))
+
+  data_graph <- data_graph %>%
+    dplyr::mutate(y = value,
+                  z = ((0:(dim(data_graph)[1]-1))*y) - median((0:(dim(data_graph)[1]-1))*y),
+                  color = getPalette()[1:(dim(data_graph)[1])])
+
+  hc <- highchart() %>%
+    hc_title(text = title) %>%
+    hc_chart(type = "line",
+             polar = TRUE) %>%
+    hc_xAxis(categories = data_graph$name) %>%
+    hc_add_series(data_graph, showInLegend = FALSE)
+  hc
+}
+
 #' hgch_spider_CaNuNu
 #' @name hgch_spider_CaNuNu
 #' @param x A data.frame
@@ -44,6 +114,42 @@ hgch_spider_CaNuNu <- function(data,
   hc
 }
 
+
+
+#' hgch_bubble_CaNu
+#' @name hgch_bubble_CaNu
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca-Nu
+#' @examples
+#' hgch_bubble_CaNu(sampleData("Ca-Nu",nrow = 10))
+hgch_bubble_CaNu <-function(data, title = ""){
+
+  data <- sampleData('Ca-Nu')
+  f <- fringe(data)
+  nms <- getCnames(f)
+  data <- f$d
+  data <- plyr::rename(data, c("a" = "name"))
+
+  data_graph <- data %>%
+    dplyr::group_by(name) %>%
+    tidyr::drop_na(name) %>%
+    dplyr::summarise(value = mean(b, na.rm = TRUE ))
+
+  data_graph <- data_graph %>%
+    dplyr::mutate(y = value,
+                  z = sqrt(y),
+                  color = getPalette()[1:(dim(data_graph)[1])])
+
+  hc <- highchart() %>%
+    hc_title(text = title) %>%
+    hc_chart(type = "bubble",
+             polar = FALSE) %>%
+    hc_xAxis(categories = data_graph$name) %>%
+    hc_add_series(data_graph, showInLegend = FALSE)
+  hc
+}
 
 #' hgch_scatter_CaNuNu
 #' @name hgch_scatter_CaNuNu

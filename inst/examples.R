@@ -144,6 +144,7 @@ hgch_bar_grouped_hor_CaNuP(data)
 
 data <- sampleData("NuP")
 
+hgch_waterfall_CaNu(sampleData("Ca-Nu",nrow = 10), title = "hola")
 
 # Area
 
@@ -197,6 +198,10 @@ data <- sampleData("Ca-Nu",nrow = 10)
 hgch_treemap_CaNu(data)
 hgch_treemap_CaNu(data, export = TRUE)
 
+
+hgch_treemap_discrete_color_CaNu(data)
+
+
 ## Treemap 2Vars
 ## Nested Treemap
 
@@ -211,7 +216,11 @@ hgch_spider_CaNu(data)
 data <- sampleData("Ca-Nu-Nu", nrow = 10)
 hgch_spider_CaNuNu(data)
 
+hgch_polarcolumn_CaNu(sampleData("Ca-Nu",nrow = 10))
+
 # Scatter
+
+hgch_bubble_CaNu(sampleData("Ca-Nu",nrow = 10))
 
 data <- sampleData("Ca-Nu-Nu", nrow = 20)
 hgch_scatter_CaNuNu(data)
@@ -234,7 +243,11 @@ data$valor <- runif(6)
 hgch_map_choro_world_GeNu(data)
 
 
+# Pyramid
+data <- sampleData('Ca-Nu')
+hgch_pyramid_CaNu(data)
 
+hgch_funnel_CaNu(data)
 
 
 # Heatmap

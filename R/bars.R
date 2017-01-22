@@ -878,3 +878,50 @@ hgch_bar_ver_NuP <- function(data,
     hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
+
+
+#' hgch_waterfall_CaNu
+#' @name hgch_waterfall_CaNu
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca-Nu
+#' @examples
+#' hgch_waterfall_CaNu(sampleData("Ca-Nu",nrow = 10))
+hgch_waterfall_CaNu <-function(data, title = NULL,  xAxisTitle = NULL,
+                               yAxisTitle = NULL){
+
+  f <- fringe(data)
+  nms <- getCnames(f)
+  xAxisTitle <- xAxisTitle %||% nms[1]
+  yAxisTitle <- yAxisTitle %||% nms[2]
+  title <-  title %||% ""
+  data <- f$d
+  data <- plyr::rename(data, c("a" = "name"))
+
+  data_graph <- data %>%
+    dplyr::group_by(name) %>%
+    tidyr::drop_na(name) %>%
+    dplyr::summarise(value = mean(b, na.rm = TRUE ))
+
+  data_graph <- data_graph %>%
+    dplyr::mutate(x = 0:(dim(data_graph)[1]-1),
+                  y = value,
+                  z = (x*y) - median(x*y),
+                  color = getPalette()[1:(dim(data_graph)[1])])
+
+  data_graph <- data_graph %>%
+    select(y, z, value, name, color) %>%
+    arrange(value)
+
+
+  hc <- highchart() %>%
+    hc_title(text = title) %>%
+    hc_xAxis(text = list(text = xAxisTitle)) %>%
+    hc_xAxis(text = list(text = yAxisTitle)) %>%
+    hc_chart(type = "waterfall",
+             polar = FALSE) %>%
+    hc_xAxis(categories = data_graph$name) %>%
+    hc_add_series(data_graph, showInLegend = FALSE)
+  hc
+}
