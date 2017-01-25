@@ -8,7 +8,6 @@
 #' hgch_polarcolumn_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_polarcolumn_CaNu <-function(data, title = ""){
 
-  data <- sampleData('Ca-Nu')
   f <- fringe(data)
   nms <- getCnames(f)
   data <- f$d
@@ -43,7 +42,6 @@ hgch_polarcolumn_CaNu <-function(data, title = ""){
 #' hgch_spider_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_spider_CaNu <-function(data, title = ""){
 
-  data <- sampleData('Ca-Nu')
   f <- fringe(data)
   nms <- getCnames(f)
   data <- f$d
@@ -126,7 +124,6 @@ hgch_spider_CaNuNu <- function(data,
 #' hgch_bubble_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bubble_CaNu <-function(data, title = ""){
 
-  data <- sampleData('Ca-Nu')
   f <- fringe(data)
   nms <- getCnames(f)
   data <- f$d
@@ -225,7 +222,6 @@ hgch_scatter_CaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption =
 #' @section ftype: Ca-Nu-Nu
 hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
-  data <- sampleData("Ca-Ca-Nu-Nu", nrow = 20)
   f <- fringe(data)
   nms <- getClabels(f)
 
