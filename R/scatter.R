@@ -152,7 +152,7 @@ hgch_bubble_CaNu <-function(data, title = ""){
 #' @name hgch_scatter_CaNuNu
 #' @export
 #' @section ftype: Ca-Nu-Nu
-hgch_scatter_CaNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
+hgch_scatter_CaNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -161,7 +161,7 @@ hgch_scatter_CaNuNu <- function(data, title = NULL, subtitle = NULL, caption = N
   yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
   title <-  title %||% ""
 
-  d <- f$d %>% dplyr::filter(!is.na(a)) %>% dplyr::group_by(a) %>%
+    d <- f$d %>% drop_na()  %>% dplyr::group_by(a) %>%
     dplyr::summarise(b = mean(b,na.rm = TRUE),c = mean(c, na.rm = TRUE))
 
   hc <- hchart(d, type = "bubble", hcaes(x = b, y = c)) %>%
@@ -228,7 +228,7 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption =
   xAxisTitle <- xAxisTitle %||% getClabels(f)[3]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[4]
   title <-  title %||% ""
-  d <- f$d %>% dplyr::filter(!is.na(a),!is.na(b)) %>% dplyr::group_by(a,b) %>%
+  d <- f$d %>% tidyr::drop_na()%>% dplyr::group_by(a,b) %>%
     dplyr::summarise(c = mean(c, na.rm = TRUE),d = mean(d,na.rm = TRUE))
 
 
@@ -260,7 +260,7 @@ hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption
   xAxisTitle <- xAxisTitle %||% getClabels(f)[3]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[4]
   title <-  title %||% ""
-  d <- f$d %>% dplyr::filter(!is.na(a),!is.na(b)) %>% dplyr::group_by(a,b) %>%
+  d <- f$d %>% tidyr::drop_na() %>% dplyr::group_by(a,b) %>%
     dplyr::summarise(c = mean(c,na.rm = TRUE), d = mean(d,na.rm = TRUE),e = mean(e,na.rm = TRUE))
   hc <- hchart(d, type = "bubble", hcaes(x = c, y = d, group = b, size = e)) %>%
     hc_chart(zoomType = "xy") %>%
