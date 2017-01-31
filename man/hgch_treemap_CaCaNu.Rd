@@ -4,8 +4,9 @@
 \alias{hgch_treemap_CaCaNu}
 \title{hgch_treemap_CaCaNu}
 \usage{
-hgch_treemap_CaCaNu(data, title = NULL, minColor = "#E63917",
-  maxColor = "#18941E", reverse = TRUE, export = FALSE, ...)
+hgch_treemap_CaCaNu(data, title = NULL, subtitle = NULL,
+  minColor = "#E63917", maxColor = "#18941E", reverse = TRUE,
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -20,6 +21,6 @@ hgch_treemap_CaCaNu
  Ca-Nu
 }
 \examples{
-hgch_treemap_CaCaNu(sampleData("Ca-Nu",nrow = 10))
+hgch_treemap_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 }
 

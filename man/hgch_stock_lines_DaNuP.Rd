@@ -4,12 +4,12 @@
 \alias{hgch_stock_lines_DaNuP}
 \title{hgch_stock_lines_DaNuP}
 \usage{
-hgch_stock_lines_DaNuP(a, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
+hgch_stock_lines_DaNuP(data, title = NULL, subtitle = NULL,
+  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
   startAtZero = FALSE, ...)
 }
 \arguments{
-\item{a}{A dataframe}
+\item{data}{A dataframe}
 }
 \value{
 highcharts viz

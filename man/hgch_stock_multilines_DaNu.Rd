@@ -4,16 +4,16 @@
 \alias{hgch_stock_multilines_DaNu}
 \title{hgch_stock_multilines_DaNu}
 \usage{
-hgch_stock_multilines_DaNu(a, b, c = NULL, title = NULL, subtitle = NULL,
-  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  startAtZero = FALSE, ...)
+hgch_stock_multilines_DaNu(d1, d2, d3 = NULL, title = NULL,
+  subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+  symbol = NULL, startAtZero = FALSE, ...)
 }
 \arguments{
-\item{a}{A dataframe}
+\item{d1}{A dataframe}
 
-\item{b}{A dataframe}
+\item{d2}{A dataframe}
 
-\item{c}{A dataframe}
+\item{d3}{A dataframe}
 }
 \value{
 highcharts viz
