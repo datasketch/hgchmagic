@@ -199,7 +199,7 @@ hgch_treemap_CaNu(data)
 hgch_treemap_CaNu(data, export = TRUE)
 
 
-hgch_treemap_discrete_color_CaNu(data)
+hgch_treemap_discrete_color_CaNu(data, export = TRUE)
 
 
 ## Treemap 2Vars

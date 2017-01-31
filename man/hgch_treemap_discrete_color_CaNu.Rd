@@ -4,7 +4,7 @@
 \alias{hgch_treemap_discrete_color_CaNu}
 \title{hgch_treemap_discrete_color_CaNu}
 \usage{
-hgch_treemap_discrete_color_CaNu(data, title = "")
+hgch_treemap_discrete_color_CaNu(data, title = "", export = FALSE)
 }
 \arguments{
 \item{x}{A data.frame}

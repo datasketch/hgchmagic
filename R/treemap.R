@@ -35,7 +35,7 @@ hgch_treemap_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NUL
 #' @section ftype: Ca-Nu
 #' @examples
 #' hgch_treemap_discrete_color_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_treemap_discrete_color_CaNu <-function(data, title = ""){
+hgch_treemap_discrete_color_CaNu <-function(data, title = "", export = FALSE){
 
   f <- fringe(data)
   nms <- getCnames(f)
@@ -60,6 +60,8 @@ hgch_treemap_discrete_color_CaNu <-function(data, title = ""){
                  polar = FALSE) %>%
         hc_xAxis(categories = data_graph$name) %>%
         hc_add_series(data_graph, showInLegend = FALSE)
+  if (export)
+    hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
 
