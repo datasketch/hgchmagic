@@ -35,11 +35,16 @@ hgch_treemap_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NUL
 #' @section ftype: Ca-Nu
 #' @examples
 #' hgch_treemap_discrete_color_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_treemap_discrete_color_CaNu <-function(data, title = "", export = FALSE){
+hgch_treemap_discrete_color_CaNu <-function(data, title = NULL, subtitle = NULL, export = FALSE){
 
   f <- fringe(data)
   nms <- getCnames(f)
   data <- f$d
+  
+
+  xAxisTitle <- xAxisTitle %||% nms[1]
+  yAxisTitle <- yAxisTitle %||% ""
+  title <-  title %||% nms[2]
   data <- plyr::rename(data, c("a" = "name"))
 
   data_graph <- data %>%
@@ -56,6 +61,7 @@ hgch_treemap_discrete_color_CaNu <-function(data, title = "", export = FALSE){
 
   hc <- highchart() %>%
         hc_title(text = title) %>%
+        hc_subtitle(text = subtitle) %>% 
         hc_chart(type = "treemap",
                  polar = FALSE) %>%
         hc_xAxis(categories = data_graph$name) %>%

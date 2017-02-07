@@ -140,6 +140,7 @@ hgch_bar_hor_top_Ca <- function(data,
   hgch_bar_hor_Ca(
     data,
     title = title,
+    subtitle = subtitle,
     xAxisTitle = xAxisTitle,
     yAxisTitle = yAxisTitle,
     sort = "top",
@@ -180,8 +181,11 @@ hgch_bar_ver_CaNu <-
     yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
 
-    d <-
-      f$d %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b))
+    d <- f$d %>% 
+         tidyr::drop_na() %>% 
+         dplyr::group_by(a) %>% 
+         dplyr::summarise(b = mean(b))
+
     if (nrow(d) == 0)
       return()
     if (sort == "top") {
@@ -232,6 +236,7 @@ hgch_bar_ver_top_CaNu <- function(data,
   hgch_bar_ver_CaNu(
     data,
     title = title,
+    subtitle = subtitle,
     xAxisTitle = xAxisTitle,
     yAxisTitle = yAxisTitle,
     sort = "top",
@@ -287,7 +292,7 @@ hgch_bar_hor_CaNu <- function(data,
 
   xAxisTitle <- xAxisTitle %||% ""
   yAxisTitle <- yAxisTitle %||% ""
-  title <-  title %||% nms[2]
+  title <-  title %||% " "
   d <- f$d
   d <- na.omit(d)
   if (nrow(d) == 0)
@@ -330,6 +335,7 @@ hgch_bar_hor_top_CaNu <- function(data,
   hgch_bar_hor_CaNu(
     data,
     title = title,
+    subtitle = subtitle,
     xAxisTitle = xAxisTitle,
     yAxisTitle = yAxisTitle,
     sort = "top",
