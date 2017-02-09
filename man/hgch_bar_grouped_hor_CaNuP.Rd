@@ -22,7 +22,7 @@ Multilines
 \section{ftypes}{
  Ye-Nu*
 }
+
 \examples{
 hgch_bar_grouped_hor_CaNuP(sampleData("Ca-NuP",nrow = 10))
 }
-

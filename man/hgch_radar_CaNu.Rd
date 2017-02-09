@@ -20,7 +20,7 @@ hgch_radar_CaNu
 \section{ftype}{
  Ca-Nu
 }
+
 \examples{
 hgch_radar_CaNu(sampleData("Ca-Nu",nrow = 10))
 }
-

@@ -20,7 +20,7 @@ hgch_bar_stacked_100_ver_CaDaNu
 \section{ftype}{
  Ca-Ca-Nu
 }
+
 \examples{
 hgch_bar_stacked_100_ver_CaDaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 }
-

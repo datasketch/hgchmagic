@@ -20,7 +20,7 @@ hgch_bar_ver_top_Ca
 \section{ftype}{
  Ca
 }
+
 \examples{
 hgch_bar_ver_top_Ca(sampleData("Ca-Nu",nrow = 10))
 }
-

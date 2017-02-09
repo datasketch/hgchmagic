@@ -23,7 +23,7 @@ Multilines
 \section{ftypes}{
  Ye-NuP
 }
+
 \examples{
 hgch_multilines_YeNuP(sampleData("Ye-Nu-Nu",nrow = 10))
 }
-

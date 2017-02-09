@@ -20,7 +20,7 @@ hgch_pie_Ca
 \section{ftype}{
  Ca
 }
+
 \examples{
 hgch_pie_Ca(sampleData("Ca",nrow = 10))
 }
-

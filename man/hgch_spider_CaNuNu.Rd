@@ -20,7 +20,7 @@ hgch_spider_CaNuNu
 \section{ftype}{
  Ca-Nu-Nu
 }
+
 \examples{
 hgch_spider_CaNuNu(sampleData("Ca-Nu-Nu",nrow = 10))
 }
-

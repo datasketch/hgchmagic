@@ -21,7 +21,7 @@ hgch_map_choro_world_GeNu
 \section{ftype}{
  Ca
 }
+
 \examples{
 hgch_map_choro_world_GeNu(sampleData("Ca",nrow = 10))
 }
-

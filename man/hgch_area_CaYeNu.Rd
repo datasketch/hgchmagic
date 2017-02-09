@@ -20,7 +20,7 @@ hgch_area_CaYeNu
 \section{ftype}{
  Ca-Ye-Nu
 }
+
 \examples{
 hgch_area_CaYeNu(sampleData("Ye-Nu-Nu",nrow = 10))
 }
-

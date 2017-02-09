@@ -22,7 +22,7 @@ hgch_2yline_YeNuNu
 \section{ftypes}{
  Ye-Nu-Nu
 }
+
 \examples{
 hgch_2yline_YeNuNu(sampleData("Ye-Nu-Nu",nrow = 10))
 }
-

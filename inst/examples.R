@@ -243,6 +243,33 @@ data$valor <- runif(6)
 hgch_map_choro_world_GeNu(data)
 
 
+
+f <-  data.frame(
+  code = c('BRA-MGE', "ARG-DFD"),
+  vartwteuywgdbskjbskdcbskdjf = c(12,3345)
+)
+
+
+
+
+hgch_map_bubbles_latinAmerican_GeNu(f,geoinfoPath = "inst/aux/latam-geo.csv",
+                  geoCodeVar = "code",
+                  geoNameVar = "name", export = TRUE)
+
+
+
+f2 <-  data.frame(
+  code = c('ARG-DFD','BRA-MGE'),
+  xansdjsa = c(12, 457),
+  yasksas = c(3345, 56)
+)
+
+hgch_map_bubbles_latinAmerican_GeNuNu(f2,geoinfoPath = "inst/aux/latam-geo.csv",
+                                    geoCodeVar = "code",
+                                    geoNameVar = "name", export = TRUE)
+
+
+
 # Pyramid
 data <- sampleData('Ca-Nu')
 hgch_pyramid_CaNu(data)

@@ -20,7 +20,7 @@ hgch_area_CaNu
 \section{ftype}{
  Ca-Nu
 }
+
 \examples{
 hgch_area_CaNu(sampleData("Ca-Nu",nrow = 10))
 }
-

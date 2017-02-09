@@ -20,7 +20,7 @@ hgch_area_stacked_100_CaCaNu
 \section{ftype}{
  Ca-Ca-Nu
 }
+
 \examples{
 hgch_area_stacked_100_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 }
-

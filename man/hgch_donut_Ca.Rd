@@ -20,7 +20,7 @@ hgch_donut_Ca
 \section{ftype}{
  Ca
 }
+
 \examples{
 hgch_donut_Ca(sampleData("Ca",nrow = 10))
 }
-

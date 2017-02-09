@@ -19,8 +19,8 @@ test
 \section{ftypes}{
  Ca,Ca-Ca-Ca
 }
+
 \examples{
 add(1, 1)
 }
 \keyword{datasets}
-

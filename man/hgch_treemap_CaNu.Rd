@@ -20,7 +20,7 @@ hgch_treemap_CaNu
 \section{ftype}{
  Ca-Nu
 }
+
 \examples{
 hgch_treemap_CaNu(sampleData("Ca-Nu",nrow = 10))
 }
-

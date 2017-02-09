@@ -18,7 +18,7 @@ hgch_polarcolumn_CaNu
 \section{ftype}{
  Ca-Nu
 }
+
 \examples{
 hgch_polarcolumn_CaNu(sampleData("Ca-Nu",nrow = 10))
 }
-

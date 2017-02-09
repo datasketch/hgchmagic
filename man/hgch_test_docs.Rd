@@ -19,8 +19,8 @@ test
 \section{noftypes}{
  Ca,Ca-Nu
 }
+
 \examples{
 add(1, 1)
 }
 \keyword{datasets}
-

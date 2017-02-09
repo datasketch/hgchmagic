@@ -20,7 +20,7 @@ hgch_bar_stacked_100_hor_CaCaNu
 \section{ftype}{
  Ca-Ye-Nu
 }
+
 \examples{
 hgch_bar_stacked_100_hor_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
 }
-

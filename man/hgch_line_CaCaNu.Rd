@@ -20,7 +20,7 @@ hgch_line_CaCaNu
 \section{ftype}{
  Ca-Ca-Nu
 }
+
 \examples{
 hgch_line_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 }
-

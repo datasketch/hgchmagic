@@ -20,7 +20,7 @@ hgch_area_DaNu
 \section{ftype}{
  Da-Nu
 }
+
 \examples{
 hgch_area_DaNu(sampleData("Ca-Da-Nu",nrow = 10))
 }
-

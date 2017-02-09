@@ -20,7 +20,7 @@ hgch_bar_hor_Ca
 \section{ftype}{
  Ca
 }
+
 \examples{
 hgch_bar_hor_Ca(sampleData("Ca",nrow = 10))
 }
-

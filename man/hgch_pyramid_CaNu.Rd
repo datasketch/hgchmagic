@@ -18,7 +18,7 @@ hgch_pyramid_CaNu
 \section{ftype}{
  Ca-Nu
 }
+
 \examples{
 hgch_pyramid_CaNu(sampleData("Ca-Nu",nrow = 10))
 }
-

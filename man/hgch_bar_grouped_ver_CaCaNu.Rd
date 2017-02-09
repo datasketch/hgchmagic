@@ -20,7 +20,7 @@ hgch_bar_grouped_ver_CaCaNu
 \section{ftype}{
  Ca-Ca-Nu
 }
+
 \examples{
 hgch_bar_grouped_ver_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 }
-

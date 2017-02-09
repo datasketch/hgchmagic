@@ -20,7 +20,7 @@ hgch_bar_ver_YeNu
 \section{ftype}{
  Ca-Ye-Nu
 }
+
 \examples{
 hgch_bar_ver_YeNu(sampleData("Ye-Nu",nrow = 10))
 }
-

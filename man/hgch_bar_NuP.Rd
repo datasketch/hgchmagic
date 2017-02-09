@@ -22,7 +22,7 @@ Multilines
 \section{ftypes}{
  Ye-Nu*
 }
+
 \examples{
 hgch_bar_NuP(sampleData("NuP",nrow = 10))
 }
-

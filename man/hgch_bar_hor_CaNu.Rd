@@ -20,7 +20,7 @@ hgch_bar_hor_CaNu
 \section{ftype}{
  Ca-Nu
 }
+
 \examples{
 hgch_bar_hor_CaNu(sampleData("Ca-Nu",nrow = 10))
 }
-

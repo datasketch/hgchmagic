@@ -18,7 +18,7 @@ hgch_funnel_CaNu
 \section{ftype}{
  Ca-Nu
 }
+
 \examples{
 hgch_funnel_CaNu(sampleData("Ca-Nu",nrow = 10))
 }
-

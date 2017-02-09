@@ -18,7 +18,7 @@ hgch_bubble_CaNu
 \section{ftype}{
  Ca-Nu
 }
+
 \examples{
 hgch_bubble_CaNu(sampleData("Ca-Nu",nrow = 10))
 }
-
