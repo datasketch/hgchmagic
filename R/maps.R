@@ -86,11 +86,11 @@ hgch_map_bubbles_latinAmerican_GeNu <- function(data,
                                                 leg_alg = 'left',...){
 
   if(class(data)[1] == "Fringe"){
-    ni <- getClabels(f)[-1]
+    ni <- getClabels(data)[-1]
   }else{
     ni <- names(data)[-1]
   }
-  
+
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -102,7 +102,12 @@ hgch_map_bubbles_latinAmerican_GeNu <- function(data,
     geoNameVar <- geoCodeVar
   geo$name <- geo[[geoNameVar]]
   varLabel <- nms[2]
-  dgeo <- f$d %>% na.omit() %>% group_by(a) %>% dplyr::summarise(b = mean(b))
+
+  dgeo <- f$d %>%
+          tidyr::drop_na() %>%
+          group_by(a) %>%
+          dplyr::summarise(b = mean(b))
+
   d <- dgeo %>% left_join(geo[c("a","name","lat","lon")],"a")
 
   data <- d %>% filter(!is.na(b))
@@ -127,7 +132,7 @@ hc <- highchart(type = "map") %>%
                                                fill = leg_col))
        )%>%
        hc_add_series(data = data, type = "mapbubble",
-                     maxSize = 30,  showInLegend = FALSE,tooltip= list(
+                     maxSize = 30,  showInLegend = TRUE, name = data$nou[1],tooltip= list(
                      headerFormat= '',
                      pointFormat='<b>{point.name}</b>:<br>
                      {point.nou}: {point.z}'))
@@ -163,7 +168,7 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
 
 
   if(class(data)[1] == "Fringe"){
-    ni <- getClabels(f)[-1]
+    ni <- getClabels(data)[-1]
   }else{
   ni <- names(data)[-1]
   }
@@ -178,8 +183,13 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
     geoNameVar <- geoCodeVar
   geo$name <- geo[[geoNameVar]]
   varLabel <- nms[2]
-  dgeo <- f$d %>% na.omit() %>% group_by(a) %>% dplyr::summarise(b = mean(b), c = mean(c))
-  d <- f$d %>% left_join(geo[c("a","name","lat","lon")],"a")
+  d1 <- f$d %>% group_by(a) %>% dplyr::summarise(b = mean(b), c = mean(c))
+  #d2 <- f$d %>% na.omit() %>% group_by(a) %>% dplyr::summarise(b = mean(b), c = mean(c))
+
+  d <- d1 %>% left_join(geo[c("a","name","lat","lon")],"a")
+  d <- d %>% tidyr::drop_na(a)
+
+
   d$var1 <- ni[1]
   d$var2 <- ni[2]
   d$z <- d$c
@@ -203,8 +213,8 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
                                           theme = list(
                                             fill = leg_col))
     )%>%
-    hc_add_series(data = serie1, type = "mapbubble",
-                  maxSize = 30, showInLegend = FALSE, tooltip = list(
+    hc_add_series(data = serie1, type = "mapbubble", minSize = 2,
+                  maxSize = 40, showInLegend = TRUE, name = d$var1[1],tooltip = list(
                     useHTML = TRUE,
                     headerFormat = '<table>',
                     pointFormat ="<b>{point.name}</b> <br>
@@ -212,7 +222,7 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
                     footerFormat= '</table>'
                   )) %>%
     hc_add_series(data = d, type = "mapbubble", minSize = 2,
-                  maxSize = 40,showInLegend = FALSE,tooltip= list(
+                  maxSize = 40,showInLegend = TRUE, name = d$var2[1],tooltip= list(
                     useHTML = TRUE,
                     headerFormat = '<table>',
                     pointFormat ="<b>{point.name}</b> <br>
