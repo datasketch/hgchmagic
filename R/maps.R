@@ -183,7 +183,7 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
     geoNameVar <- geoCodeVar
   geo$name <- geo[[geoNameVar]]
   varLabel <- nms[2]
-  d1 <- f$d %>% group_by(a) %>% dplyr::summarise(b = mean(b), c = mean(c))
+  d1 <- f$d %>% group_by(a) %>% dplyr::summarise(b = mean(b, na.rm = TRUE), c = mean(c,na.rm = TRUE))
   #d2 <- f$d %>% na.omit() %>% group_by(a) %>% dplyr::summarise(b = mean(b), c = mean(c))
 
   d <- d1 %>% left_join(geo[c("a","name","lat","lon")],"a")

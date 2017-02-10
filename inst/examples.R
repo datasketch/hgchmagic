@@ -10,6 +10,8 @@ library(hgchmagic)
 
 data <- sampleData("Ca", nrow = 10)
 hgch_pie_Ca(data, title = "TITLE", subtitle = "Subtitle")
+
+
 hgch_donut_Ca(data)
 hgch_donut_Ca(data, title = "TITLE", subtitle = "Subtitle")
 
@@ -258,7 +260,7 @@ hgch_map_bubbles_latinAmerican_GeNu(f,geoinfoPath = "inst/aux/latam-geo.csv",
 
 
 
-data <-  data.frame(
+f2 <-  data.frame(
   code = c('ARG-DFD','BRA-MGE', NA),
   xansdjsa = c(12, 457,12),
   yasksas = c(3345, 56,NA)
@@ -267,7 +269,6 @@ data <-  data.frame(
 hgch_map_bubbles_latinAmerican_GeNuNu(f2,geoinfoPath = "inst/aux/latam-geo.csv",
                                     geoCodeVar = "code",
                                     geoNameVar = "name", export = TRUE)
-
 
 
 # Pyramid

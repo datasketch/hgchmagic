@@ -66,14 +66,41 @@ hgch_line_CaYeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
 
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
+  d <- f$d %>%
+       tidyr::drop_na() %>%
+       dplyr::group_by(a,b) %>%
+       dplyr::summarise(c = mean(c)) %>%
+       dplyr::arrange(b)
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-  hc <- hchart(d, type = "line", hcaes(x = b, y = c, group = a)) %>%
+  f <- fringe(data)
+  nms <- getClabels(f)
+  #data <- f$d
+
+  data  <- f$d %>%
+    tidyr::drop_na() %>%
+    dplyr::group_by(a,b) %>%
+    dplyr::summarise(c = mean(c)) %>%
+    dplyr::arrange(b)
+
+  list_pre <- data %>%
+    group_by(name = a) %>%
+    do(data = .$c)
+
+  list_series <- list_parse(list_pre)
+
+
+  hc <- highchart() %>%
+    hc_xAxis(categories = data$b) %>%
+    hc_add_series_list(list_series)
+
+
+  hc %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text=yAxisTitle), allowDecimals = FALSE)
+
   if(!is.null(symbol)){
     hc <- hc %>% hc_plotOptions(
       series = list(marker = list(enabled = TRUE, symbol =  symbol))
