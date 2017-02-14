@@ -11,6 +11,8 @@ Depends:
     tools,
     datafringe,
     tidyverse,
+    geojsonio,
+    jsonlite,
     highcharter (>= 0.4.0.9999)
 License: MIT
 LazyData: true

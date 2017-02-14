@@ -168,6 +168,7 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
                                                   geoCodeVar = NULL,
                                                   geoNameVar = NULL,
                                                   theme = NULL,
+                                                  comma_dic = FALSE,
                                                   export = FALSE,
                                                   leg_pos = 'bottom',
                                                   leg_col =  "#505053",
@@ -200,7 +201,7 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
   d$var1 <- ni[1]
   d$var2 <- ni[2]
   d$z <- d$c
-  serie1 <- select(d, -c, -z)
+  serie1 <- select(d, -z)
   serie1 <- plyr::rename(serie1, c('b' = 'z'))
 
   mapLam <- jsonlite::fromJSON(system.file("aux/latin-america.json",package = "hgchmagic"), simplifyVector = FALSE)
@@ -225,7 +226,8 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
                     useHTML = TRUE,
                     headerFormat = '<table>',
                     pointFormat ="<b>{point.name}</b> <br>
-                                   {point.var1}: {point.z}",
+                                   {point.var1}: {point.z} <br>
+                                   {point.var2}: {point.c}",
                     footerFormat= '</table>'
                   )) %>%
     hc_add_series(data = d, type = "mapbubble", minSize = 2,
@@ -236,6 +238,15 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
                                    {point.var1}: {point.b} <br>
                                    {point.var2}: {point.c}",
                     footerFormat= '</table>'))
+  #if(comma_dic)
+  #    hc <- hc %>%  hc_tooltip(
+  #    formatter = JS(paste0("function(){
+  #              return '<b>' + this.point.name + '</b><br/>' +
+  #               this.point.var1 + ': <b>' +Highcharts.numberFormat(this.point.b,1,'.',',') + '</b><br/>' +
+  #               this.point.var2 + ': <b>' +Highcharts.numberFormat(this.point.c,1,'.',',') +
+  #             '</b><br/>';
+  #          }"))
+  #  )
 
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
