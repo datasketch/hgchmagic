@@ -22,7 +22,12 @@ hgch_treemap_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NUL
   hc <- hchart(d, "treemap", hcaes(x = a, value = b, color = b)) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_colorAxis(maxColor = maxColor, minColor = minColor,reversed = reverse)
+    hc_colorAxis(maxColor = maxColor, minColor = minColor,reversed = reverse) %>%
+    hc_tooltip(
+      formatter = JS(paste0("function(){
+                return this.point.a + ': <b>' +Highcharts.numberFormat(this.point.b,1,'.',',')+'</b><br/>';
+            }"))
+    )
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
@@ -40,7 +45,7 @@ hgch_treemap_discrete_color_CaNu <-function(data, title = NULL, subtitle = NULL,
   f <- fringe(data)
   nms <- getCnames(f)
   data <- f$d
-  
+
 
   xAxisTitle <- xAxisTitle %||% nms[1]
   yAxisTitle <- yAxisTitle %||% ""
@@ -61,7 +66,7 @@ hgch_treemap_discrete_color_CaNu <-function(data, title = NULL, subtitle = NULL,
 
   hc <- highchart() %>%
         hc_title(text = title) %>%
-        hc_subtitle(text = subtitle) %>% 
+        hc_subtitle(text = subtitle) %>%
         hc_chart(type = "treemap",
                  polar = FALSE) %>%
         hc_xAxis(categories = data_graph$name) %>%

@@ -248,7 +248,7 @@ hgch_map_choro_world_GeNu(data)
 
 f <-  data.frame(
   code = c('BRA-MGE', "ARG-DFD"),
-  vartwteuywgdbskjbskdcbskdjf = c(12,3345)
+  vartwteuywgdbskjbskdcbskdjf = c(12743845843.7989,3345)
 )
 
 

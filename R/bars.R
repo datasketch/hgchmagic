@@ -34,17 +34,25 @@ hgch_bar_ver_Ca <-
     d <- f$d
     if (nrow(d) == 0)
       return()
-    d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = n())
+    d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = n()) %>% drop_na()
     if (sort == "top") {
       d <- d %>% dplyr::arrange(desc(b))
     }
+    d$ni <- ni
+
     hc <- hchart(d, type = "column", hcaes(x = a, y = b)) %>%
       hc_title(text = title) %>%
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle)) %>%
       hc_yAxis(title = list(text = yAxisTitle)) %>%
-      hc_tooltip( pointFormat=paste0(
-        ni,': {point.b}'))
+      hc_tooltip(
+        formatter = JS("function(){
+                return this.point.ni + ': <b>' + Highcharts.numberFormat(this.point.b,1,'.',',')+'</b><br/>';
+            }")
+      )
+    #%>%
+     # hc_tooltip( pointFormat=paste0(
+    #    ni,': {point.b}'))
     hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
@@ -226,8 +234,14 @@ hgch_bar_ver_CaNu <-
       hc_xAxis(title = list(text = xAxisTitle),
                allowDecimals = FALSE) %>%
       hc_yAxis(title = list(text = yAxisTitle)) %>%
-      hc_tooltip( pointFormat=paste0(
-        y,': {point.b}'))
+      hc_tooltip(
+        formatter = JS(paste0("function(){
+                return '<b>' + this.point.a + '</b><br/>' +
+                 '",y,"'+ ': <b>' +Highcharts.numberFormat(this.point.b,1,'.',',')+'</b><br/>';
+            }"))
+      )
+      #hc_tooltip( pointFormat=paste0(
+       # y,': {point.b}'))
     if (startAtZero) {
       hc <-
         hc %>% hc_yAxis(
@@ -336,7 +350,7 @@ hgch_bar_hor_CaNu <- function(data,
   if (nrow(d) == 0)
     return()
   d <-
-    d %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b, na.rm = TRUE))
+    d %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b, na.rm = TRUE)) %>% drop_na()
   if (sort == "top") {
     d <- d %>% dplyr::arrange(desc(b))
   }
@@ -346,8 +360,14 @@ hgch_bar_hor_CaNu <- function(data,
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = xAxisTitle)) %>%
     hc_yAxis(title = list(text = yAxisTitle))  %>%
-    hc_tooltip( pointFormat=paste0(
-      y,': {point.b}'))
+    hc_tooltip(
+      formatter = JS(paste0("function(){
+                return '<b>' + this.point.a + '</b><br/>' +
+                '",y,"'+ ': <b>' +Highcharts.numberFormat(this.point.b,1,'.',',')+'</b><br/>';
+            }"))
+    )
+    #hc_tooltip( pointFormat=paste0(
+    #  y,': {point.b}'))
   hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
   if (export)
     hc <- hc %>% hc_exporting(enabled = TRUE)
@@ -800,7 +820,13 @@ hgch_bar_grouped_ver_CaNuP <- function(data,
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = xAxisTitle),
              allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text = yAxisTitle))
+    hc_yAxis(title = list(text = yAxisTitle)) %>%
+    hc_tooltip(
+      formatter = JS(paste0("function(){
+                return '<b>' + this.point.a + '</b><br/>' +
+                this.point.variable + ': <b>' +Highcharts.numberFormat(this.point.value,1,'.',',')+'</b><br/>';
+            }"))
+    )
   if (startAtZero) {
     hc <-
       hc %>% hc_yAxis(
@@ -855,7 +881,13 @@ hgch_bar_grouped_hor_CaNuP <- function(data,
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = xAxisTitle),
              allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text = yAxisTitle))
+    hc_yAxis(title = list(text = yAxisTitle)) %>%
+    hc_tooltip(
+      formatter = JS(paste0("function(){
+                return '<b>' + this.point.a + '</b><br/>' +
+                this.point.variable + ': <b>' +Highcharts.numberFormat(this.point.value,1,'.',',')+'</b><br/>';
+            }"))
+    )
   if (startAtZero) {
     hc <-
       hc %>% hc_yAxis(

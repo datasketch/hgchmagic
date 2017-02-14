@@ -79,6 +79,7 @@ hgch_map_bubbles_latinAmerican_GeNu <- function(data,
                                                 geoinfoPath = NULL,
                                                 geoCodeVar = NULL,
                                                 geoNameVar = NULL,
+                                                comma_dec = FALSE,
                                                 theme = NULL,
                                                 export = FALSE,
                                                 leg_pos = 'bottom',
@@ -131,11 +132,17 @@ hc <- highchart(type = "map") %>%
                                              theme = list(
                                                fill = leg_col))
        )%>%
-       hc_add_series(data = data, type = "mapbubble",
+       hc_add_series(data = data, type = "mapbubble", minSize = '3%',
                      maxSize = 30,  showInLegend = TRUE, name = data$nou[1],tooltip= list(
                      headerFormat= '',
                      pointFormat='<b>{point.name}</b>:<br>
-                     {point.nou}: {point.z}'))
+                     {point.nou}: {point.z}'
+                     ))
+
+        if(comma_dec)
+        hc <- hc  %>% hc_tooltip(formatter=  JS("function(){
+                return this.point.name + ': <b>' +Highcharts.numberFormat(this.point.z,1,'.',',')+'</b><br/>';
+            }"))
 
 
        hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
@@ -170,7 +177,7 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
   if(class(data)[1] == "Fringe"){
     ni <- getClabels(data)[-1]
   }else{
-  ni <- names(data)[-1]
+    ni <- names(data)[-1]
   }
   f <- fringe(data)
   nms <- getClabels(f)
@@ -235,6 +242,3 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
   hc
 
 }
-
-
-

@@ -254,12 +254,20 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption =
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
-    hc_tooltip(pointFormat = paste0("<br>
-               <strong>{point.a}</strong><br>",
-                                    x, ":{point.x} <br>",
-                                    y, ": {point.y}")) %>%
+   # hc_tooltip(pointFormat = paste0("<br>
+   #            <strong>{point.a}</strong><br>",
+    #                                x, ":{point.x} <br>",
+    #                                y, ": {point.y}")) %>%
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))
+    ) %>%
+    hc_tooltip(
+      formatter = JS(paste0("function(){
+                return '<b>' + this.point.b + '</b><br/>' +
+                 '",x,"'+ ': <b>' +Highcharts.numberFormat(this.point.x,1,'.',',') + '</b><br/>' +
+                 '",y,"'+ ': <b>' +Highcharts.numberFormat(this.point.y,1,'.',',') +
+               '</b><br/>';
+            }"))
     )
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
@@ -271,6 +279,17 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption =
 #' @export
 #' @section ftype: Ca-Nu-Nu
 hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
+
+
+  if(class(data)[1] == "Fringe"){
+    ni <- getClabels(data)
+  }else{
+    ni <- names(data)
+  }
+
+  x <- ni[3]
+  y <- ni[4]
+  t <- ni[5]
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -284,11 +303,15 @@ hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
-    hc_tooltip(pointFormat = "<br>
-               <strong>{point.a}</strong><br>
-               x:{point.x} <br>
-               y: {point.y} <br>
-               Tamaño: {point.size}") %>%
+    hc_tooltip(
+      formatter = JS(paste0("function(){
+                return '<b>' + this.point.b + '</b><br/>' +
+                 '",x,"'+ ': <b>' +Highcharts.numberFormat(this.point.x,1,'.',',') + '</b><br/>' +
+                 '",y,"'+ ': <b>' +Highcharts.numberFormat(this.point.y,1,'.',',') + '</b><br/>' +
+                 '",t,"'+ ': <b>' +Highcharts.numberFormat(this.point.size,1,'.',',') +
+               '</b><br/>';
+            }"))
+    ) %>%
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))
     )
