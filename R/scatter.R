@@ -154,6 +154,15 @@ hgch_bubble_CaNu <-function(data, title = ""){
 #' @section ftype: Ca-Nu-Nu
 hgch_scatter_CaNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL, export = FALSE,...){
 
+  if(class(data)[1] == "Fringe"){
+    ni <- getClabels(data)
+  }else{
+    ni <- names(data)
+  }
+
+  x <- ni[2]
+  y <- ni[3]
+
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -161,16 +170,16 @@ hgch_scatter_CaNuNu <- function(data, title = NULL, subtitle = NULL, caption = N
   yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
   title <-  title %||% ""
 
-    d <- f$d %>% drop_na()  %>% dplyr::group_by(a) %>%
+  d <- f$d %>% drop_na()  %>% dplyr::group_by(a) %>%
     dplyr::summarise(b = mean(b,na.rm = TRUE),c = mean(c, na.rm = TRUE))
 
   hc <- hchart(d, type = "bubble", hcaes(x = b, y = c)) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
     #     hc_tooltip(pointFormat = "<br><strong>{point.a}</strong><br>x:{point.x} <br>y: {point.y}") %>%
-    hc_tooltip(formatter = JS("function() {
-                              return '<strong>'+this.point.a+'</strong><br>x: '+ this.point.x +' y: '+ this.point.y +'</b>';
-}")) %>%
+    hc_tooltip(formatter = JS(paste0("function() {
+                              return '<strong>'+this.point.a+'</strong><br>",x, ":'+ this.point.x +'", "<br>", y, ": '+ this.point.y +'</b>';
+}"))) %>%
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'
                                       # ,
@@ -222,6 +231,15 @@ hgch_scatter_CaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption =
 #' @section ftype: Ca-Nu-Nu
 hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
+  if(class(data)[1] == "Fringe"){
+    ni <- getClabels(data)
+  }else{
+    ni <- names(data)
+  }
+
+  x <- ni[3]
+  y <-  ni[4]
+
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -236,10 +254,10 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption =
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
-    hc_tooltip(pointFormat = "<br>
-               <strong>{point.a}</strong><br>
-               x:{point.x} <br>
-               y: {point.y}") %>%
+    hc_tooltip(pointFormat = paste0("<br>
+               <strong>{point.a}</strong><br>",
+                                    x, ":{point.x} <br>",
+                                    y, ": {point.y}")) %>%
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))
     )

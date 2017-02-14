@@ -18,6 +18,13 @@ hgch_bar_ver_Ca <-
            theme = NULL,
            export = FALSE,
            ...) {
+
+    if(class(data)[1] == "Fringe"){
+      ni <- getClabels(data)
+    }else{
+      ni <- names(data)
+    }
+
     f <- fringe(data)
     nms <- getClabels(f)
 
@@ -35,7 +42,9 @@ hgch_bar_ver_Ca <-
       hc_title(text = title) %>%
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle)) %>%
-      hc_yAxis(title = list(text = yAxisTitle))
+      hc_yAxis(title = list(text = yAxisTitle)) %>%
+      hc_tooltip( pointFormat=paste0(
+        ni,': {point.b}'))
     hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
@@ -94,6 +103,13 @@ hgch_bar_hor_Ca <-
            theme = NULL,
            export = FALSE,
            ...) {
+
+    if(class(data)[1] == "Fringe"){
+      ni <- getClabels(data)
+    }else{
+      ni <- names(data)
+    }
+
     f <- fringe(data)
     nms <- getClabels(f)
 
@@ -112,7 +128,9 @@ hgch_bar_hor_Ca <-
       hc_title(text = title) %>%
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle)) %>%
-      hc_yAxis(title = list(text = yAxisTitle))
+      hc_yAxis(title = list(text = yAxisTitle))%>%
+      hc_tooltip( pointFormat=paste0(
+        ni,': {point.b}'))
     hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
@@ -174,6 +192,14 @@ hgch_bar_ver_CaNu <-
            theme = NULL,
            export = FALSE,
            ...) {
+    if(class(data)[1] == "Fringe"){
+      ni <- getClabels(data)
+    }else{
+      ni <- names(data)
+    }
+
+    y <- ni[2]
+
     f <- fringe(data)
     nms <- getClabels(f)
 
@@ -181,10 +207,10 @@ hgch_bar_ver_CaNu <-
     yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
 
-    d <- f$d %>% 
-         tidyr::drop_na() %>% 
-         dplyr::group_by(a) %>% 
-         dplyr::summarise(b = mean(b))
+    d <- f$d %>%
+      tidyr::drop_na() %>%
+      dplyr::group_by(a) %>%
+      dplyr::summarise(b = mean(b))
 
     if (nrow(d) == 0)
       return()
@@ -199,7 +225,9 @@ hgch_bar_ver_CaNu <-
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle),
                allowDecimals = FALSE) %>%
-      hc_yAxis(title = list(text = yAxisTitle))
+      hc_yAxis(title = list(text = yAxisTitle)) %>%
+      hc_tooltip( pointFormat=paste0(
+        y,': {point.b}'))
     if (startAtZero) {
       hc <-
         hc %>% hc_yAxis(
@@ -213,6 +241,7 @@ hgch_bar_ver_CaNu <-
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
+
   }
 #' hgch_bar_ver_top_CaNu
 #' @name hgch_bar_ver_top_CaNu
@@ -287,6 +316,15 @@ hgch_bar_hor_CaNu <- function(data,
                               theme = NULL,
                               export = FALSE,
                               ...) {
+
+  if(class(data)[1] == "Fringe"){
+    ni <- getClabels(data)
+  }else{
+    ni <- names(data)
+  }
+
+  y <- ni[2]
+
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -307,7 +345,9 @@ hgch_bar_hor_CaNu <- function(data,
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = xAxisTitle)) %>%
-    hc_yAxis(title = list(text = yAxisTitle))
+    hc_yAxis(title = list(text = yAxisTitle))  %>%
+    hc_tooltip( pointFormat=paste0(
+      y,': {point.b}'))
   hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
   if (export)
     hc <- hc %>% hc_exporting(enabled = TRUE)
