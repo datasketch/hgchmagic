@@ -95,11 +95,11 @@ hgch_line_CaYeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL
     hc_add_series_list(list_series)
 
 
-  hc %>%
-    hc_title(text = title) %>%
-    hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle), allowDecimals = FALSE)
+  hc <- hc %>%
+        hc_title(text = title) %>%
+        hc_subtitle(text = subtitle) %>%
+        hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
+        hc_yAxis(title = list(text=yAxisTitle), allowDecimals = FALSE)
 
   if(!is.null(symbol)){
     hc <- hc %>% hc_plotOptions(
