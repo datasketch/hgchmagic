@@ -29,7 +29,7 @@ hgch_line_DaNu(data, export = TRUE)
 d <- sampleData("Ca-Nu",gt0 = FALSE)
 hgch_line_CaNu(d)
 
-data <- sampleData("Ca-Ye-Nu",nrow = 10)
+data <- sampleData("Ca-Ye-Nu",nrow = 40)
 hgch_line_CaYeNu(data)
 hgch_line_CaYeNu(data, symbol = "square")
 
@@ -143,6 +143,10 @@ hgch_bar_grouped_hor_CaNuP(data)
 
 data <- sampleData("Ca-NuP",nrow = 10)
 hgch_bar_grouped_hor_CaNuP(data)
+
+
+hgch_bar_grouped_ver_CaCa(sampleData("Ca-Ca",nrow = 10))
+hgch_bar_grouped_hor_CaCa(sampleData("Ca-Ca",nrow = 10))
 
 data <- sampleData("NuP")
 

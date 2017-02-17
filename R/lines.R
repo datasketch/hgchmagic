@@ -58,24 +58,17 @@ hgch_line_CaNu <-hgch_line_DaNu
 hgch_line_CaYeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
+
+  if(nrow(data)==0) return()
+  #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
   f <- fringe(data)
   nms <- getClabels(f)
+  #data <- f$d
 
   xAxisTitle <- xAxisTitle %||% nms[2]
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
-
-  d <- f$d %>%
-       tidyr::drop_na() %>%
-       dplyr::group_by(a,b) %>%
-       dplyr::summarise(c = mean(c)) %>%
-       dplyr::arrange(b)
-  if(nrow(d)==0) return()
-  #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-  f <- fringe(data)
-  nms <- getClabels(f)
-  #data <- f$d
 
   data  <- f$d %>%
     tidyr::drop_na() %>%

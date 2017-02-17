@@ -40,7 +40,7 @@ hgch_treemap_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NUL
 #' @section ftype: Ca-Nu
 #' @examples
 #' hgch_treemap_discrete_color_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_treemap_discrete_color_CaNu <-function(data, title = NULL, subtitle = NULL, export = FALSE){
+hgch_treemap_discrete_color_CaNu <-function(data, title = NULL, subtitle = NULL,  xAxisTitle = NULL, yAxisTitle = NULL, export = FALSE){
 
   f <- fringe(data)
   nms <- getCnames(f)
