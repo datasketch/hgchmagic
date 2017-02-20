@@ -17,16 +17,20 @@ hgch_treemap_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NUL
   xAxisTitle <- xAxisTitle %||% nms[1]
   yAxisTitle <- yAxisTitle %||% ""
   title <-  title %||% nms[2]
+
   data <- f$d
   d <- data %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b))
+  d$w <- map_chr(d$b, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+
+
   hc <- hchart(d, "treemap", hcaes(x = a, value = b, color = b)) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_colorAxis(maxColor = maxColor, minColor = minColor,reversed = reverse) %>%
     hc_tooltip(
-      formatter = JS(paste0("function(){
-                return this.point.a + ': <b>' +Highcharts.numberFormat(this.point.b,1,'.',',')+'</b><br/>';
-            }"))
+      pointFormat='
+                     {point.a}: {point.w}
+                  '
     )
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc

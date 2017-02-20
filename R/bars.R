@@ -220,6 +220,9 @@ hgch_bar_ver_CaNu <-
       dplyr::group_by(a) %>%
       dplyr::summarise(b = mean(b))
 
+    d$w <- map_chr(d$b, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+
+
     if (nrow(d) == 0)
       return()
     if (sort == "top") {
@@ -234,14 +237,8 @@ hgch_bar_ver_CaNu <-
       hc_xAxis(title = list(text = xAxisTitle),
                allowDecimals = FALSE) %>%
       hc_yAxis(title = list(text = yAxisTitle)) %>%
-      hc_tooltip(
-        formatter = JS(paste0("function(){
-                return '<b>' + this.point.a + '</b><br/>' +
-                 '",y,"'+ ': <b>' +Highcharts.numberFormat(this.point.b,1,'.',',')+'</b><br/>';
-            }"))
-      )
-      #hc_tooltip( pointFormat=paste0(
-       # y,': {point.b}'))
+      hc_tooltip( pointFormat=paste0('<b>{point.a}</b>:<br>',
+                     y, ': {point.w}'))
     if (startAtZero) {
       hc <-
         hc %>% hc_yAxis(
@@ -349,8 +346,13 @@ hgch_bar_hor_CaNu <- function(data,
   d <- na.omit(d)
   if (nrow(d) == 0)
     return()
-  d <-
-    d %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b, na.rm = TRUE)) %>% drop_na()
+  d <-  d %>%
+        dplyr::group_by(a) %>%
+        dplyr::summarise(b = mean(b, na.rm = TRUE)) %>%
+        drop_na()
+
+  d$w <- map_chr(d$b, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+
   if (sort == "top") {
     d <- d %>% dplyr::arrange(desc(b))
   }
@@ -361,11 +363,8 @@ hgch_bar_hor_CaNu <- function(data,
     hc_xAxis(title = list(text = xAxisTitle)) %>%
     hc_yAxis(title = list(text = yAxisTitle))  %>%
     hc_tooltip(
-      formatter = JS(paste0("function(){
-                return '<b>' + this.point.a + '</b><br/>' +
-                '",y,"'+ ': <b>' +Highcharts.numberFormat(this.point.b,1,'.',',')+'</b><br/>';
-            }"))
-    )
+      pointFormat=paste0('<b>{point.a}</b>:<br>',
+                         y, ': {point.w}'))
     #hc_tooltip( pointFormat=paste0(
     #  y,': {point.b}'))
   hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
@@ -811,8 +810,11 @@ hgch_bar_grouped_ver_CaNuP <- function(data,
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(a, variable) %>%
     dplyr::summarise(value = mean(value)) %>% dplyr::ungroup()
   codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
+
   d <- d %>%
     dplyr::mutate(variable = fct_recode_df(d, "variable", codes))
+  d$text1 <- map_chr(d$value, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+
   hc <-
     hchart(d, type = "column", hcaes(x = a, y = value, group = variable)) %>%
     hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
@@ -822,10 +824,9 @@ hgch_bar_grouped_ver_CaNuP <- function(data,
              allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text = yAxisTitle)) %>%
     hc_tooltip(
-      formatter = JS(paste0("function(){
-                return '<b>' + this.point.a + '</b><br/>' +
-                this.point.variable + ': <b>' +Highcharts.numberFormat(this.point.value,1,'.',',')+'</b><br/>';
-            }"))
+      headerFormat= '',
+      pointFormat ="<b>{point.a}</b> <br>
+                    {point.variable}: {point.text1}"
     )
   if (startAtZero) {
     hc <-
@@ -874,7 +875,10 @@ hgch_bar_grouped_hor_CaNuP <- function(data,
   codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
   d <- d %>%
     dplyr::mutate(variable = fct_recode_df(d, "variable", codes))
-  hc <-
+
+  d$text1 <- map_chr(d$value, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+
+    hc <-
     hchart(d, type = "bar", hcaes(x = a, y = value, group = variable)) %>%
     hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
     hc_title(text = title) %>%
@@ -883,10 +887,9 @@ hgch_bar_grouped_hor_CaNuP <- function(data,
              allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text = yAxisTitle)) %>%
     hc_tooltip(
-      formatter = JS(paste0("function(){
-                return '<b>' + this.point.a + '</b><br/>' +
-                this.point.variable + ': <b>' +Highcharts.numberFormat(this.point.value,1,'.',',')+'</b><br/>';
-            }"))
+      headerFormat= '',
+      pointFormat ="<b>{point.a}</b> <br>
+                    {point.variable}: {point.text1}"
     )
   if (startAtZero) {
     hc <-

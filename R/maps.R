@@ -1,3 +1,14 @@
+#'@name count_pl
+#'@export
+count_pl <- function(x) {
+  if ((x %% 1) != 0) {
+    nchar(strsplit(sub('0+$', '', as.character(x)), ".", fixed=TRUE)[[1]][[2]])
+  } else {
+    return(0)
+  }
+}
+
+
 #' hgch_map_choro_world_GeNu
 #' @name hgch_map_choro_world_GeNu
 #' @param x A data.frame
@@ -79,7 +90,6 @@ hgch_map_bubbles_latinAmerican_GeNu <- function(data,
                                                 geoinfoPath = NULL,
                                                 geoCodeVar = NULL,
                                                 geoNameVar = NULL,
-                                                comma_dec = FALSE,
                                                 theme = NULL,
                                                 export = FALSE,
                                                 leg_pos = 'bottom',
@@ -115,6 +125,8 @@ hgch_map_bubbles_latinAmerican_GeNu <- function(data,
   data <- plyr::rename(data, c('b' = 'z'))
   data$nou <- ni
 
+  data$w <- map_chr(data$z, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+
 mapLam <- jsonlite::fromJSON(system.file("aux/latin-america.json",package = "hgchmagic"), simplifyVector = FALSE)
 mapLam <- geojsonio::as.json(mapLam)
 
@@ -136,13 +148,13 @@ hc <- highchart(type = "map") %>%
                      maxSize = 30,  showInLegend = TRUE, name = data$nou[1],tooltip= list(
                      headerFormat= '',
                      pointFormat='<b>{point.name}</b>:<br>
-                     {point.nou}: {point.z}'
+                     {point.nou}: {point.w}'
                      ))
 
-        if(comma_dec)
-        hc <- hc  %>% hc_tooltip(formatter=  JS("function(){
-                return this.point.name + ': <b>' +Highcharts.numberFormat(this.point.z,1,'.',',')+'</b><br/>';
-            }"))
+       # if(comma_dec)
+      #  hc <- hc  %>% hc_tooltip(formatter=  JS(paste0("function(){
+      #          return this.point.name + ': <b>' +Highcharts.numberFormat(this.point.z,1,'.',',')+'</b><br/>';
+      #      }")))
 
 
        hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
@@ -168,7 +180,6 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
                                                   geoCodeVar = NULL,
                                                   geoNameVar = NULL,
                                                   theme = NULL,
-                                                  comma_dic = FALSE,
                                                   export = FALSE,
                                                   leg_pos = 'bottom',
                                                   leg_col =  "#505053",
@@ -197,9 +208,13 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
   d <- d1 %>% left_join(geo[c("a","name","lat","lon")],"a")
   d <- d %>% tidyr::drop_na(a)
 
+  d$text1 <- map_chr(d$b, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text2 <- map_chr(d$c, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
 
   d$var1 <- ni[1]
   d$var2 <- ni[2]
+
+
   d$z <- d$c
   serie1 <- select(d, -z)
   serie1 <- plyr::rename(serie1, c('b' = 'z'))
@@ -226,8 +241,8 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
                     useHTML = TRUE,
                     headerFormat = '<table>',
                     pointFormat ="<b>{point.name}</b> <br>
-                                   {point.var1}: {point.z} <br>
-                                   {point.var2}: {point.c}",
+                                   {point.var1}: {point.text1} <br>
+                                   {point.var2}: {point.text2}",
                     footerFormat= '</table>'
                   )) %>%
     hc_add_series(data = d, type = "mapbubble", minSize = 2,
@@ -235,18 +250,9 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
                     useHTML = TRUE,
                     headerFormat = '<table>',
                     pointFormat ="<b>{point.name}</b> <br>
-                                   {point.var1}: {point.b} <br>
-                                   {point.var2}: {point.c}",
+                                   {point.var1}: {point.text1} <br>
+                                   {point.var2}: {point.text2}",
                     footerFormat= '</table>'))
-  #if(comma_dic)
-  #    hc <- hc %>%  hc_tooltip(
-  #    formatter = JS(paste0("function(){
-  #              return '<b>' + this.point.name + '</b><br/>' +
-  #               this.point.var1 + ': <b>' +Highcharts.numberFormat(this.point.b,1,'.',',') + '</b><br/>' +
-  #               this.point.var2 + ': <b>' +Highcharts.numberFormat(this.point.c,1,'.',',') +
-  #             '</b><br/>';
-  #          }"))
-  #  )
 
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)

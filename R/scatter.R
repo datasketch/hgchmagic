@@ -173,16 +173,20 @@ hgch_scatter_CaNuNu <- function(data, title = NULL, subtitle = NULL, caption = N
   d <- f$d %>% drop_na()  %>% dplyr::group_by(a) %>%
     dplyr::summarise(b = mean(b,na.rm = TRUE),c = mean(c, na.rm = TRUE))
 
+  d$text1 <- map_chr(d$b, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text2 <- map_chr(d$c, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+
   hc <- hchart(d, type = "bubble", hcaes(x = b, y = c)) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
-    #     hc_tooltip(pointFormat = "<br><strong>{point.a}</strong><br>x:{point.x} <br>y: {point.y}") %>%
-    hc_tooltip(formatter = JS(paste0("function() {
-                              return '<strong>'+this.point.a+'</strong><br>",x, ":'+ this.point.x +'", "<br>", y, ": '+ this.point.y +'</b>';
-}"))) %>%
-    hc_plotOptions(
+       hc_tooltip(
+         headerFormat= '',
+         pointFormat = paste0("<br><strong>{point.a}</strong><br>",
+                                       x, ": {point.text1} <br>",
+                                       y, ": {point.text2}")) %>%
+      hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'
-                                      # ,
+                                       #,
                                       # style = list(textOutline="1px 1px #000000",
                                       #              fontSize = "11px",
                                       #              color = "#000")
@@ -249,25 +253,20 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption =
   d <- f$d %>% tidyr::drop_na()%>% dplyr::group_by(a,b) %>%
     dplyr::summarise(c = mean(c, na.rm = TRUE),d = mean(d,na.rm = TRUE))
 
+  d$text1 <- map_chr(d$c, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text2 <- map_chr(d$d, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+
 
   hc <- hchart(d, type = "scatter", hcaes(x = c, y = d, group = b)) %>%
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
-   # hc_tooltip(pointFormat = paste0("<br>
-   #            <strong>{point.a}</strong><br>",
-    #                                x, ":{point.x} <br>",
-    #                                y, ": {point.y}")) %>%
+    hc_tooltip(pointFormat = paste0("<br>
+               <strong>{point.a}</strong><br>",
+                                    x, ":{point.text1} <br>",
+                                    y, ": {point.text2}")) %>%
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))
-    ) %>%
-    hc_tooltip(
-      formatter = JS(paste0("function(){
-                return '<b>' + this.point.b + '</b><br/>' +
-                 '",x,"'+ ': <b>' +Highcharts.numberFormat(this.point.x,1,'.',',') + '</b><br/>' +
-                 '",y,"'+ ': <b>' +Highcharts.numberFormat(this.point.y,1,'.',',') +
-               '</b><br/>';
-            }"))
     )
   hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
@@ -299,18 +298,21 @@ hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption
   title <-  title %||% ""
   d <- f$d %>% tidyr::drop_na() %>% dplyr::group_by(a,b) %>%
     dplyr::summarise(c = mean(c,na.rm = TRUE), d = mean(d,na.rm = TRUE),e = mean(e,na.rm = TRUE))
+
+  d$text1 <- map_chr(d$c, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text2 <- map_chr(d$d, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text3 <- map_chr(d$e, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+
   hc <- hchart(d, type = "bubble", hcaes(x = c, y = d, group = b, size = e)) %>%
     hc_chart(zoomType = "xy") %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
     hc_tooltip(
-      formatter = JS(paste0("function(){
-                return '<b>' + this.point.b + '</b><br/>' +
-                 '",x,"'+ ': <b>' +Highcharts.numberFormat(this.point.x,1,'.',',') + '</b><br/>' +
-                 '",y,"'+ ': <b>' +Highcharts.numberFormat(this.point.y,1,'.',',') + '</b><br/>' +
-                 '",t,"'+ ': <b>' +Highcharts.numberFormat(this.point.size,1,'.',',') +
-               '</b><br/>';
-            }"))
+      pointFormat = paste0("<br>
+               <strong>{point.a}</strong><br>",
+                           x, ": {point.text1} <br>",
+                           y, ": {point.text2} <br>",
+                           t, ": {point.text3}")
     ) %>%
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))

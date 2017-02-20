@@ -254,32 +254,38 @@ hgch_2yline_YeNuNu <- function(data, title = NULL, subtitle = NULL, caption = NU
 #' @section ftypes: Ye-NuP
 #' @examples
 #' hgch_multilines_YeNuP(sampleData("Ye-Nu-Nu",nrow = 10))
-hgch_multilines_YeNuP <- function(data,
-                                  title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                  symbol = NULL,  startAtZero = FALSE,...){
-  f <- fringe(data)
-  nms <- getClabels(f)
+  hgch_multilines_YeNuP <- function(data,
+                                    title = NULL, subtitle = NULL, caption = NULL,
+                                    xAxisTitle = NULL, yAxisTitle = NULL,
+                                    symbol = NULL,  startAtZero = FALSE, theme = NULL, export = FALSE,...){
+    f <- fringe(data)
+    nms <- getClabels(f)
 
-  xAxisTitle <- xAxisTitle %||% nms[1]
-  yAxisTitle <- yAxisTitle %||% ""
-  title <-  title %||% f$name
-  symbol <- symbol %||% "circle"
-  d <- f$d %>% tidyr::gather(variable,value, -a) %>%
-    dplyr::filter(!is.na(value)) %>% dplyr::group_by(a,variable) %>%
-    dplyr::summarise(value = mean(value)) %>% dplyr::ungroup()
-  codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
-  d <- d %>%
-    dplyr::mutate(variable = fct_recode_df(d,"variable",codes))
-  hc <- hchart(d, type = "line",hcaes( x = a, y = value, group = variable)) %>%
-    hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
-    hc_title(text = title) %>%
-    hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle))
-  if(startAtZero){
-    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+    xAxisTitle <- xAxisTitle %||% nms[1]
+    yAxisTitle <- yAxisTitle %||% ""
+    title <-  title %||% f$name
+    symbol <- symbol %||% "circle"
+    d <- f$d %>% tidyr::gather(variable,value, -a) %>%
+      dplyr::filter(!is.na(value)) %>% dplyr::group_by(a,variable) %>%
+      dplyr::summarise(value = mean(value)) %>% dplyr::ungroup()# %>%
+    #tidyr::drop_na() %>% arrange(a)
+
+    codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
+    d <- d %>%
+      dplyr::mutate(variable = fct_recode_df(d,"variable",codes)) %>%
+      tidyr::drop_na() %>%
+      mutate(a = as.numeric(a))
+
+    hc <- hchart(d, type = "line",hcaes( x = a, y = value, group = variable)) %>%
+      hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
+      hc_title(text = title) %>%
+      hc_subtitle(text = subtitle) %>%
+      hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
+      hc_yAxis(title = list(text=yAxisTitle))
+    if(startAtZero){
+      hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
+    }
+    hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+    if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+    hc
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
-  hc
-}
