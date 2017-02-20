@@ -206,7 +206,7 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
   #d2 <- f$d %>% na.omit() %>% group_by(a) %>% dplyr::summarise(b = mean(b), c = mean(c))
 
   d <- d1 %>% left_join(geo[c("a","name","lat","lon")],"a")
-  d <- d %>% tidyr::drop_na(a)
+  d <- d %>% tidyr::drop_na()
 
   d$text1 <- map_chr(d$b, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
   d$text2 <- map_chr(d$c, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
