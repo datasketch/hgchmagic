@@ -6,7 +6,7 @@
 \usage{
 hgch_line_YeNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  startAtZero = FALSE, export = FALSE, ...)
+  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

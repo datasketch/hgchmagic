@@ -33,6 +33,10 @@ data <- sampleData("Ca-Ye-Nu",nrow = 40)
 hgch_line_CaYeNu(data)
 hgch_line_CaYeNu(data, symbol = "square")
 
+data <- sampleData("Ca-Ye-Nu",nrow = 40, asFringe = TRUE)
+hgch_line_CaYeNu(data)
+hgch_line_CaYeNu(data, symbol = "square")
+
 data <- sampleData("Ca-Da-Nu", nrow = 100)
 hgch_line_CaDaNu(data)
 hgch_line_CaDaNu(data, symbol = "square")
@@ -47,18 +51,35 @@ hgch_line_CaCaNu(data, symbol = "square")
 data <- sampleData("Ye-Nu", nrow = 20)
 hgch_line_YeNu(data, symbol = "square")
 
+data <- sampleData("Ye-Nu", nrow = 20)
+data <- sample_n(data,size = 20)
+hgch_line_YeNu(data, symbol = "square")
+
 
 # Two axis lines
 
 data <- sampleData("Ye-Nu-Nu",nrow = 10)
+data <- sample_n(data,size = 10)
 hgch_2yline_YeNuNu(data)
 
 # Multilines
 
-data <- sampleData("Ye-Nu-Nu",nrow = 11)
+data <- sampleData("Ye-Nu-Nu",nrow = 20)
 hgch_multilines_YeNuP(data)
+data <- sample_n(data,size = 20)
+hgch_multilines_YeNuP(data)
+
 data <- sampleData("Ye-Nu-Nu-Nu-Nu-Nu",nrow = 11)
 hgch_multilines_YeNuP(data)
+
+
+#slope
+
+data <- data.frame(hechos = c("secuestro", "secuestro", "delito", "delito", "ex", "ex"),
+                   year = c(2007,2015,2007,2015,2007,2015),
+                   pop = c(230, 123, 7139, 21597, 1082, 5480))
+
+hgch_slope_CaYeNu(data)
 
 # Bars
 

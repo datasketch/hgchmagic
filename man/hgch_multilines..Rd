@@ -3,25 +3,40 @@
 \name{hgch_multilines.}
 \alias{hgch_multilines.}
 \alias{hgch_multilines_YeNuP}
+\alias{hgch_multilines.}
+\alias{hgch_slope_CaYeNu}
 \title{hgch_multilines_YeNuP
 Multilines}
 \usage{
 hgch_multilines_YeNuP(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  startAtZero = FALSE, ...)
+  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
+
+hgch_slope_CaYeNu(data, title = NULL, subtitle = NULL, caption = NULL,
+  xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
+  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
+
+\item{x}{A data.frame}
 }
 \value{
+highcharts viz
+
 highcharts viz
 }
 \description{
 hgch_multilines_YeNuP
 Multilines
+
+hgch_slope_CaYeNu
+Slope
 }
 \section{ftypes}{
  Ye-NuP
+
+ Ca-Ye-Nu
 }
 
 \examples{
