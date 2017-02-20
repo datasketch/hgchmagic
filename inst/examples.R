@@ -33,6 +33,10 @@ data <- sampleData("Ca-Ye-Nu",nrow = 40)
 hgch_line_CaYeNu(data)
 hgch_line_CaYeNu(data, symbol = "square")
 
+data <- sampleData("Ca-Ye-Nu",nrow = 40, asFringe = TRUE)
+hgch_line_CaYeNu(data)
+hgch_line_CaYeNu(data, symbol = "square")
+
 data <- sampleData("Ca-Da-Nu", nrow = 100)
 hgch_line_CaDaNu(data)
 hgch_line_CaDaNu(data, symbol = "square")

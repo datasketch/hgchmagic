@@ -59,9 +59,9 @@ hgch_line_CaYeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL
                              symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
 
-  if(nrow(data)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
   f <- fringe(data)
+  if(nrow(f$data)==0) return()
   nms <- getClabels(f)
   #data <- f$d
 
