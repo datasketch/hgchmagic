@@ -274,7 +274,8 @@ hgch_multilines_YeNuP <- function(data,
   codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
   d <- d %>%
     dplyr::mutate(variable = fct_recode_df(d,"variable",codes)) %>%
-    tidyr::drop_na()
+    tidyr::drop_na() %>%
+    mutate(a = as.numeric(a))
 
   hc <- hchart(d, type = "line",hcaes( x = a, y = value, group = variable)) %>%
     hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%

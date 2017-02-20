@@ -64,9 +64,9 @@ hgch_2yline_YeNuNu(data)
 
 # Multilines
 
-data <- sampleData("Ye-Nu-Nu",nrow = 11)
+data <- sampleData("Ye-Nu-Nu",nrow = 20)
 hgch_multilines_YeNuP(data)
-data <- sample_n(data,size = 11)
+data <- sample_n(data,size = 20)
 hgch_multilines_YeNuP(data)
 
 data <- sampleData("Ye-Nu-Nu-Nu-Nu-Nu",nrow = 11)
