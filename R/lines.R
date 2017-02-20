@@ -256,7 +256,7 @@ hgch_2yline_YeNuNu <- function(data, title = NULL, subtitle = NULL, caption = NU
 #' hgch_multilines_YeNuP(sampleData("Ye-Nu-Nu",nrow = 10))
 hgch_multilines_YeNuP <- function(data,
                                   title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                  symbol = NULL,  startAtZero = FALSE,...){
+                                  symbol = NULL,  startAtZero = FALSE, theme = NULL, export = FALSE,...){
   f <- fringe(data)
   nms <- getClabels(f)
 
