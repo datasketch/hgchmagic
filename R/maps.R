@@ -1,6 +1,8 @@
 #'@name count_pl
 #'@export
 count_pl <- function(x) {
+  if(is.na(x)){return(0)}
+
   if ((x %% 1) != 0) {
     nchar(strsplit(sub('0+$', '', as.character(x)), ".", fixed=TRUE)[[1]][[2]])
   } else {
@@ -125,7 +127,7 @@ hgch_map_bubbles_latinAmerican_GeNu <- function(data,
   data <- plyr::rename(data, c('b' = 'z'))
   data$nou <- ni
 
-  data$w <- map_chr(data$z, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  data$w <- map_chr(data$z, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
 
 mapLam <- jsonlite::fromJSON(system.file("aux/latin-america.json",package = "hgchmagic"), simplifyVector = FALSE)
 mapLam <- geojsonio::as.json(mapLam)
@@ -206,10 +208,10 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
   #d2 <- f$d %>% na.omit() %>% group_by(a) %>% dplyr::summarise(b = mean(b), c = mean(c))
 
   d <- d1 %>% left_join(geo[c("a","name","lat","lon")],"a")
-  d <- d %>% tidyr::drop_na()
+  d <- d %>% tidyr::drop_na(a)
 
-  d$text1 <- map_chr(d$b, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
-  d$text2 <- map_chr(d$c, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text1 <- map_chr(d$b, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text2 <- map_chr(d$c, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
 
   d$var1 <- ni[1]
   d$var2 <- ni[2]
@@ -236,7 +238,7 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
                                           theme = list(
                                             fill = leg_col))
     )%>%
-    hc_add_series(data = serie1, type = "mapbubble", minSize = 2,
+    hc_add_series(data = serie1, type = "mapbubble",minSize = 2,
                   maxSize = 40, showInLegend = TRUE, name = d$var1[1],tooltip = list(
                     useHTML = TRUE,
                     headerFormat = '<table>',

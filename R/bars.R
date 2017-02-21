@@ -220,7 +220,7 @@ hgch_bar_ver_CaNu <-
       dplyr::group_by(a) %>%
       dplyr::summarise(b = mean(b))
 
-    d$w <- map_chr(d$b, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+    d$w <- map_chr(d$b, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
 
 
     if (nrow(d) == 0)
@@ -351,7 +351,7 @@ hgch_bar_hor_CaNu <- function(data,
         dplyr::summarise(b = mean(b, na.rm = TRUE)) %>%
         drop_na()
 
-  d$w <- map_chr(d$b, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$w <- map_chr(d$b, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
 
   if (sort == "top") {
     d <- d %>% dplyr::arrange(desc(b))

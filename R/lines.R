@@ -290,12 +290,13 @@ hgch_multilines_YeNuP <- function(data,
 
 #' hgch_slope_CaYeNu
 #' Slope
-#' @name hgch_multilines.
+#' @name hgch_slope_CaYeNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
 #' @section ftypes: Ca-Ye-Nu
 #' @examples
+#' hgch_slope_CaYeNu(sampleData('Ca-Ye-Nu'))
 hgch_slope_CaYeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                               symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 

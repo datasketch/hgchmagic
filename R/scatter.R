@@ -173,8 +173,8 @@ hgch_scatter_CaNuNu <- function(data, title = NULL, subtitle = NULL, caption = N
   d <- f$d %>% drop_na()  %>% dplyr::group_by(a) %>%
     dplyr::summarise(b = mean(b,na.rm = TRUE),c = mean(c, na.rm = TRUE))
 
-  d$text1 <- map_chr(d$b, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
-  d$text2 <- map_chr(d$c, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text1 <- map_chr(d$b, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text2 <- map_chr(d$c, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
 
   hc <- hchart(d, type = "bubble", hcaes(x = b, y = c)) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
@@ -253,8 +253,8 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption =
   d <- f$d %>% tidyr::drop_na()%>% dplyr::group_by(a,b) %>%
     dplyr::summarise(c = mean(c, na.rm = TRUE),d = mean(d,na.rm = TRUE))
 
-  d$text1 <- map_chr(d$c, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
-  d$text2 <- map_chr(d$d, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text1 <- map_chr(d$c, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text2 <- map_chr(d$d, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
 
 
   hc <- hchart(d, type = "scatter", hcaes(x = c, y = d, group = b)) %>%
@@ -299,9 +299,9 @@ hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption
   d <- f$d %>% tidyr::drop_na() %>% dplyr::group_by(a,b) %>%
     dplyr::summarise(c = mean(c,na.rm = TRUE), d = mean(d,na.rm = TRUE),e = mean(e,na.rm = TRUE))
 
-  d$text1 <- map_chr(d$c, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
-  d$text2 <- map_chr(d$d, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
-  d$text3 <- map_chr(d$e, function(x) format(x, nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text1 <- map_chr(d$c, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text2 <- map_chr(d$d, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text3 <- map_chr(d$e, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
 
   hc <- hchart(d, type = "bubble", hcaes(x = c, y = d, group = b, size = e)) %>%
     hc_chart(zoomType = "xy") %>%

@@ -287,8 +287,8 @@ hgch_map_bubbles_latinAmerican_GeNu(f,geoinfoPath = "inst/aux/latam-geo.csv",
 
 f2 <-  data.frame(
   code = c('ARG-DFD','BRA-MGE', NA),
-  xansdjsa = c(12, 457,12),
-  yasksas = c(3345, 56,NA)
+  xansdjsa = c(12, NA,12),
+  yasksas = c(3345, 56.08089,NA)
 )
 
 hgch_map_bubbles_latinAmerican_GeNuNu(f2,geoinfoPath = "inst/aux/latam-geo.csv",
