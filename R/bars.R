@@ -237,7 +237,9 @@ hgch_bar_ver_CaNu <-
       hc_xAxis(title = list(text = xAxisTitle),
                allowDecimals = FALSE) %>%
       hc_yAxis(title = list(text = yAxisTitle)) %>%
-      hc_tooltip( pointFormat=paste0('<b>{point.a}</b>:<br>',
+      hc_tooltip(
+        headerFormat= '',
+        pointFormat=paste0('<b>{point.a}</b>:<br>',
                      y, ': {point.w}'))
     if (startAtZero) {
       hc <-
@@ -363,6 +365,7 @@ hgch_bar_hor_CaNu <- function(data,
     hc_xAxis(title = list(text = xAxisTitle)) %>%
     hc_yAxis(title = list(text = yAxisTitle))  %>%
     hc_tooltip(
+      headerFormat= '',
       pointFormat=paste0('<b>{point.a}</b>:<br>',
                          y, ': {point.w}'))
     #hc_tooltip( pointFormat=paste0(
