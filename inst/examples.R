@@ -271,6 +271,10 @@ hgch_map_choro_world_GeNu(data)
 
 
 
+pobl <- data.frame(pais = c("US", "ZW", "FR", "CO"), pob = c(316129,14150, 7978979, 7979))
+hgch_map_bubbles_world_GeNu(pobl, geoinfoPath = "inst/aux/world-cod.csv", geoCodeVar='iso2', geoNameVar = "name")
+
+
 f <-  data.frame(
   code = c('BRA-MGE', "ARG-DFD"),
   vartwteuywgdbskjbskdcbskdjf = c(12743845843.7989,3345)

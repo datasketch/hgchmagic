@@ -52,6 +52,93 @@ hgch_map_choro_world_GeNu <- function(data, title = NULL,
 }
 
 
+#' hgch_map_bubbles_world_GeNu
+#' @name hgch_map_bubbles_world_GeNu
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca-Nu
+#' @examples
+#' hgch_map_bubbles_world_GeNu(sampleData("Ca",nrow = 10))
+hgch_map_bubbles_world_GeNu <- function(data,
+                                        title = NULL,
+                                        subtitle = NULL,
+                                        geoinfoPath = NULL,
+                                        geoCodeVar = NULL,
+                                        geoNameVar = NULL,
+                                        theme = NULL,
+                                        export = FALSE,
+                                        leg_pos = 'bottom',
+                                        leg_col =  "#505053",
+                                        leg_alg = 'left',...){
+
+
+  if(class(data)[1] == "Fringe"){
+    ni <- getClabels(data)[-1]
+  }else{
+    ni <- names(data)[-1]
+  }
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+
+  geoCodeVar <- geoCodeVar %||% "code"
+  geo <- read_csv(geoinfoPath)
+  geo$a <- geo[[geoCodeVar]]
+  if(is.null(geoNameVar))
+    geoNameVar <- geoCodeVar
+  geo$name <- geo[[geoNameVar]]
+  varLabel <- nms[2]
+
+  dgeo <- f$d %>%
+    tidyr::drop_na() %>%
+    group_by(a) %>%
+    dplyr::summarise(b = mean(b))
+
+  d <- dgeo %>% left_join(geo[c("a","name","lat","lon")],"a")
+
+  data <- d %>% filter(!is.na(b))
+  data <- plyr::rename(data, c('b' = 'z'))
+  data$nou <- ni
+
+  data$w <- map_chr(data$z, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+
+  data(worldgeojson, package = "highcharter")
+  mapLam <- jsonlite::fromJSON(system.file("aux/latin-america.json",package = "hgchmagic"), simplifyVector = FALSE)
+  mapLam <- geojsonio::as.json(mapLam)
+
+  highchart(type = "map") %>%
+    #hc_title(text = title) %>%
+    #hc_subtitle(text = subtitle) %>%
+    hc_chart(backgroundColor = "#CDD2D4") %>%
+    hc_add_series(mapData = worldgeojson, showInLegend = FALSE
+    ) %>%
+    hc_mapNavigation(enabled = TRUE,
+                     buttonOptions = list(align = leg_alg,
+                                          verticalAlign = leg_pos,
+                                          theme = list(
+                                            fill = leg_col))
+    )%>%
+    hc_add_series(data = data, type = "mapbubble", minSize = '3%',
+                  maxSize = 30,  showInLegend = TRUE, name = data$nou[1],tooltip= list(
+                    headerFormat= '',
+                    pointFormat='<b>{point.name}</b>:<br>
+                     {point.nou}: {point.w}'
+                  ))
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 #
