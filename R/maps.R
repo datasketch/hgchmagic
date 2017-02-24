@@ -180,10 +180,12 @@ hgch_map_bubbles_latinAmerican_GeNu <- function(data,
                                                 geoCodeVar = NULL,
                                                 geoNameVar = NULL,
                                                 theme = NULL,
+                                                col_bur = NULL,
                                                 export = FALSE,
                                                 leg_pos = 'bottom',
                                                 leg_col =  "#505053",
-                                                leg_alg = 'left',...){
+                                                leg_alg = 'left',
+                                                back_color = "#CDD2D4",...){
 
   if(class(data)[1] == "Fringe"){
     ni <- getClabels(data)[-1]
@@ -222,7 +224,7 @@ mapLam <- geojsonio::as.json(mapLam)
 hc <- highchart(type = "map") %>%
        hc_title(text = title) %>%
        hc_subtitle(text = subtitle) %>%
-       hc_chart(backgroundColor = "#CDD2D4") %>%
+       hc_chart(backgroundColor = back_color) %>%
        hc_add_series(mapData = mapLam, showInLegend = FALSE, dataLabels = list(
          enabled = TRUE, format='{point.name}'
          )
@@ -233,7 +235,7 @@ hc <- highchart(type = "map") %>%
                                              theme = list(
                                                fill = leg_col))
        )%>%
-       hc_add_series(data = data, type = "mapbubble", minSize = '3%',
+       hc_add_series(data = data, type = "mapbubble", minSize = '3%', color= col_bur,
                      maxSize = 30,  showInLegend = TRUE, name = data$nou[1],tooltip= list(
                      headerFormat= '',
                      pointFormat='<b>{point.name}</b>:<br>
@@ -269,10 +271,13 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
                                                   geoCodeVar = NULL,
                                                   geoNameVar = NULL,
                                                   theme = NULL,
+                                                  col_bone = NULL,
+                                                  col_btwo = NULL,
                                                   export = FALSE,
                                                   leg_pos = 'bottom',
                                                   leg_col =  "#505053",
-                                                  leg_alg = 'left',...){
+                                                  leg_alg = 'left',
+                                                  back_color = "#CDD2D4",...){
 
 
   if(class(data)[1] == "Fringe"){
@@ -314,7 +319,7 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
   hc <- highchart(type = "map") %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_chart(backgroundColor = "#CDD2D4") %>%
+    hc_chart(backgroundColor = back_color) %>%
     hc_add_series(mapData = mapLam, showInLegend = FALSE, dataLabels = list(
       enabled = TRUE, format='{point.name}'
     )
@@ -325,7 +330,7 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
                                           theme = list(
                                             fill = leg_col))
     )%>%
-    hc_add_series(data = serie1, type = "mapbubble",minSize = 2,
+    hc_add_series(data = serie1, type = "mapbubble",minSize = 2, color = col_bone,
                   maxSize = 40, showInLegend = TRUE, name = d$var1[1],tooltip = list(
                     useHTML = TRUE,
                     headerFormat = '<table>',
@@ -334,7 +339,7 @@ hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
                                    {point.var2}: {point.text2}",
                     footerFormat= '</table>'
                   )) %>%
-    hc_add_series(data = d, type = "mapbubble", minSize = 2,
+    hc_add_series(data = d, type = "mapbubble", minSize = 2, color = col_btwo,
                   maxSize = 40,showInLegend = TRUE, name = d$var2[1],tooltip= list(
                     useHTML = TRUE,
                     headerFormat = '<table>',

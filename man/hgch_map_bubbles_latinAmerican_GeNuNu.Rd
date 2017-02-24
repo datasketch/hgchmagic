@@ -6,8 +6,9 @@
 \usage{
 hgch_map_bubbles_latinAmerican_GeNuNu(data, title = NULL, subtitle = NULL,
   geoinfoPath = NULL, geoCodeVar = NULL, geoNameVar = NULL,
-  theme = NULL, export = FALSE, leg_pos = "bottom", leg_col = "#505053",
-  leg_alg = "left", ...)
+  theme = NULL, col_bone = NULL, col_btwo = NULL, export = FALSE,
+  leg_pos = "bottom", leg_col = "#505053", leg_alg = "left",
+  back_color = "#CDD2D4", ...)
 }
 \arguments{
 \item{x}{A data.frame}

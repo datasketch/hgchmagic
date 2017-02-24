@@ -285,7 +285,7 @@ f <-  data.frame(
 
 hgch_map_bubbles_latinAmerican_GeNu(f,geoinfoPath = "inst/aux/latam-geo.csv",
                   geoCodeVar = "code",
-                  geoNameVar = "name", export = TRUE)
+                  geoNameVar = "name", export = TRUE, col_bur = 'black')
 
 
 
@@ -297,7 +297,7 @@ f2 <-  data.frame(
 
 hgch_map_bubbles_latinAmerican_GeNuNu(f2,geoinfoPath = "inst/aux/latam-geo.csv",
                                     geoCodeVar = "code",
-                                    geoNameVar = "name", export = TRUE)
+                                    geoNameVar = "name", export = TRUE, col_bone = 'orange', col_btwo = 'red')
 
 
 # Pyramid
