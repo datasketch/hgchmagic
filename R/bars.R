@@ -196,6 +196,8 @@ hgch_bar_ver_CaNu <-
            yAxisTitle = NULL,
            sort = "no",
            aggregate = NULL,
+           back_color = 'white',
+           color_title = 'black',
            startAtZero = FALSE,
            theme = NULL,
            export = FALSE,
@@ -232,7 +234,8 @@ hgch_bar_ver_CaNu <-
       # hc_plotOptions(
       #   series = list(marker = list(enabled = TRUE, symbol =  symbol))
       # ) %>%
-      hc_title(text = title) %>%
+      hc_chart(backgroundColor = back_color) %>%
+      hc_title(text = title,style = list(color = color_title, useHTML = TRUE)) %>%
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle),
                allowDecimals = FALSE) %>%
