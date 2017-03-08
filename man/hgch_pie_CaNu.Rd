@@ -6,8 +6,8 @@
 \usage{
 hgch_pie_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, back_color = "white",
-  color_title = "black", sort = "no", aggregate = "sum", export = FALSE,
-  ...)
+  leg_op = TRUE, color_title = "black", sort = "no", aggregate = "sum",
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
