@@ -6,7 +6,7 @@
 #' @return highcharts viz
 #' @section ftype: Da-Nu
 #' @examples
-#' hgch_line_DaNu(sampleData("Ca-Da-Nu",nrow = 10))
+#' hgch_line_DaNu(sampleData("Da-Nu",nrow = 10))
 hgch_line_DaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
@@ -251,7 +251,7 @@ hgch_2yline_YeNuNu <- function(data, title = NULL, subtitle = NULL, caption = NU
 #' @return highcharts viz
 #' @section ftypes: Ye-NuP
 #' @examples
-#' hgch_multilines_YeNuP(sampleData("Ye-Nu-Nu",nrow = 10))
+#' hgch_multilines_YeNuP(sampleData("Ye-NuP",nrow = 10))
 hgch_multilines_YeNuP <- function(data,
                                   title = NULL, subtitle = NULL, caption = NULL,
                                   xAxisTitle = NULL, yAxisTitle = NULL,
