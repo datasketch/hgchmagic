@@ -6,7 +6,8 @@
 \usage{
 hgch_bar_hor_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = "mean",
-  theme = NULL, export = FALSE, ...)
+  back_color = "white", color_title = "black", theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

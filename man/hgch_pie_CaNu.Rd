@@ -5,8 +5,9 @@
 \title{hgch_pie_CaNu}
 \usage{
 hgch_pie_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = "sum",
-  export = FALSE, ...)
+  xAxisTitle = NULL, yAxisTitle = NULL, back_color = "white",
+  color_title = "black", sort = "no", aggregate = "sum", export = FALSE,
+  ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -18,9 +19,9 @@ highcharts viz
 hgch_pie_CaNu
 }
 \section{ftype}{
- Ca
+ Ca-Nu
 }
 
 \examples{
-hgch_pie_CaNu(sampleData("Ca",nrow = 10))
+hgch_pie_CaNu(sampleData("Ca-Nu",nrow = 10))
 }

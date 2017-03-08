@@ -25,5 +25,5 @@ Multilines
 }
 
 \examples{
-hgch_multilines_YeNuP(sampleData("Ye-Nu-Nu",nrow = 10))
+hgch_multilines_YeNuP(sampleData("Ye-NuP",nrow = 10))
 }

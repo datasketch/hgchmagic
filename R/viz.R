@@ -37,16 +37,11 @@ hgch_pie_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAx
 #' @return highcharts viz
 #' @section ftype: Ca-Nu
 #' @examples
-<<<<<<< HEAD
-#' hgch_pie_CaNu(sampleData("Ca",nrow = 10))
+#' hgch_pie_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
                           xAxisTitle = NULL, yAxisTitle = NULL, back_color = 'white',
                           color_title = 'black',sort = "no", aggregate = "sum", export = FALSE,...){
-=======
-#' hgch_pie_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                        sort = "no", aggregate = "sum", export = FALSE,...){
->>>>>>> 2f99157bace910db7d523fc20a1daab05ac5c8fb
+
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -108,17 +103,12 @@ hgch_donut_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
 #' @return highcharts viz
 #' @section ftype: Ca
 #' @examples
-<<<<<<< HEAD
-#' hgch_donut_CaNu(sampleData("Ca",nrow = 10))
+#' hgch_donut_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
                             xAxisTitle = NULL, yAxisTitle = NULL, back_color = 'white',
                             color_title = 'black',
                             sort = "no", aggregate = "sum", export = FALSE,...){
-=======
-#' hgch_donut_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                          sort = "no", aggregate = "sum", export = FALSE,...){
->>>>>>> 2f99157bace910db7d523fc20a1daab05ac5c8fb
+
 
   f <- fringe(data)
   nms <- getClabels(f)

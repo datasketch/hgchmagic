@@ -5,8 +5,9 @@
 \title{hgch_donut_CaNu}
 \usage{
 hgch_donut_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = "sum",
-  export = FALSE, ...)
+  xAxisTitle = NULL, yAxisTitle = NULL, back_color = "white",
+  color_title = "black", sort = "no", aggregate = "sum", export = FALSE,
+  ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -22,5 +23,5 @@ hgch_donut_CaNu
 }
 
 \examples{
-hgch_donut_CaNu(sampleData("Ca",nrow = 10))
+hgch_donut_CaNu(sampleData("Ca-Nu",nrow = 10))
 }
