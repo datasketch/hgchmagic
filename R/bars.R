@@ -326,6 +326,8 @@ hgch_bar_hor_CaNu <- function(data,
                               yAxisTitle = NULL,
                               sort = "no",
                               aggregate = "mean",
+                              back_color = 'white',
+                              color_title = 'black',
                               theme = NULL,
                               export = FALSE,
                               ...) {
@@ -360,7 +362,8 @@ hgch_bar_hor_CaNu <- function(data,
   }
   hc <- hchart(d, type = "bar", hcaes(x = a, y = b)) %>%
     hc_plotOptions(column = list(stacking = "normal")) %>%
-    hc_title(text = title) %>%
+    hc_chart(backgroundColor = back_color) %>%
+    hc_title(text = title,style = list(color = color_title, useHTML = TRUE)) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = xAxisTitle)) %>%
     hc_yAxis(title = list(text = yAxisTitle))  %>%

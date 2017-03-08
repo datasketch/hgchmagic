@@ -38,8 +38,9 @@ hgch_pie_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAx
 #' @section ftype: Ca
 #' @examples
 #' hgch_pie_CaNu(sampleData("Ca",nrow = 10))
-hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                        sort = "no", aggregate = "sum", export = FALSE,...){
+hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
+                          xAxisTitle = NULL, yAxisTitle = NULL, back_color = 'white',
+                          color_title = 'black',sort = "no", aggregate = "sum", export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -55,7 +56,8 @@ hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
-    hc_title(text = title) %>%
+    hc_chart(backgroundColor = back_color) %>%
+    hc_title(text = title,style = list(color = color_title, useHTML = TRUE)) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
@@ -101,8 +103,10 @@ hgch_donut_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
 #' @section ftype: Ca
 #' @examples
 #' hgch_donut_CaNu(sampleData("Ca",nrow = 10))
-hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                          sort = "no", aggregate = "sum", export = FALSE,...){
+hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
+                            xAxisTitle = NULL, yAxisTitle = NULL, back_color = 'white',
+                            color_title = 'black',
+                            sort = "no", aggregate = "sum", export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -118,7 +122,8 @@ hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
     hc_plotOptions(
       series = list(innerSize= '60%',dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
-    hc_title(text = title) %>%
+    hc_chart(backgroundColor = back_color) %>%
+    hc_title(text = title,style = list(color = color_title, useHTML = TRUE))%>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
