@@ -8,7 +8,7 @@
 #' @examples
 #' hgch_treemap_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_treemap_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                              minColor = "#E63917", maxColor= "#18941E",
+                              minColor = "#E63917", maxColor= "#18941E", back_color = 'white', color_title = 'black',
                               reverse = TRUE, export = FALSE,...){
   # data <- sampleData("Ca-Nu")
   f <- fringe(data)
@@ -24,7 +24,8 @@ hgch_treemap_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NUL
 
 
   hc <- hchart(d, "treemap", hcaes(x = a, value = b, color = b)) %>%
-    hc_title(text = title) %>%
+    hc_chart(backgroundColor = back_color) %>%
+    hc_title(text = title,style = list(color = color_title, useHTML = TRUE)) %>%
     hc_subtitle(text = subtitle) %>%
     hc_colorAxis(maxColor = maxColor, minColor = minColor) %>%
     hc_tooltip(

@@ -222,7 +222,7 @@ hgch_area_stacked_100_CaCaNu(data, symbol = "square")
 
 # Treemap
 data <- sampleData("Ca-Nu",nrow = 10)
-hgch_treemap_CaNu(data)
+hgch_treemap_CaNu(data, color_title = 'blue')
 hgch_treemap_CaNu(data, export = TRUE)
 
 
