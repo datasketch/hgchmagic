@@ -29,10 +29,11 @@ hgchWhich <- function(d){
 
 #' @export
 vizList <- function(){
-  db <- Rd_db("hgchmagic")
-  meta <- unname(map_chr(db, tools:::.Rd_get_name))
+  db <- tools::Rd_db("hgchmagic")
+  meta <- unname(purrr::map_chr(db, tools:::.Rd_get_name))
   meta
 }
+
 
 
 
