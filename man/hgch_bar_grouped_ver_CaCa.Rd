@@ -18,7 +18,7 @@ highcharts viz
 hgch_bar_grouped_ver_CaCa
 }
 \section{ftype}{
- Ca-Nu
+ Ca-Ca
 }
 
 \examples{

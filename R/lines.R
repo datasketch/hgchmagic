@@ -245,7 +245,7 @@ hgch_2yline_YeNuNu <- function(data, title = NULL, subtitle = NULL, caption = NU
 
 #' hgch_multilines_YeNuP
 #' Multilines
-#' @name hgch_multilines.
+#' @name hgch_multilines_YeNuP
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz

@@ -20,7 +20,7 @@ hgch_bar_NuP
 Multilines
 }
 \section{ftypes}{
- Ye-Nu*
+ NuP
 }
 
 \examples{

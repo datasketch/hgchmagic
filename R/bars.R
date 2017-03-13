@@ -857,7 +857,7 @@ hgch_bar_grouped_ver_CaNuP <- function(data,
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftypes: Ye-Nu*
+#' @section ftypes: Ca-NuP
 #' @examples
 #' hgch_bar_grouped_hor_CaNuP(sampleData("Ca-NuP",nrow = 10))
 hgch_bar_grouped_hor_CaNuP <- function(data,
@@ -923,7 +923,7 @@ hgch_bar_grouped_hor_CaNuP <- function(data,
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftypes: Ye-Nu*
+#' @section ftypes: NuP
 #' @examples
 #' hgch_bar_NuP(sampleData("NuP",nrow = 10))
 hgch_bar_ver_NuP <- function(data,
@@ -1022,7 +1022,7 @@ hgch_waterfall_CaNu <-function(data, title = NULL,  xAxisTitle = NULL,
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu
+#' @section ftype: Ca-Ca
 #' @examples
 #' hgch_bar_grouped_ver_CaCa(sampleData("Ca-Ca",nrow = 10))
 hgch_bar_grouped_ver_CaCa <-

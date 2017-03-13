@@ -20,7 +20,7 @@ hgch_bar_grouped_hor_CaNuP
 Multilines
 }
 \section{ftypes}{
- Ye-Nu*
+ Ca-NuP
 }
 
 \examples{
