@@ -1,23 +1,23 @@
 
-#' hgch_test_docs
-#' test
-#' @name hgch_test_docs
-#' @export
-#' @return The sum of \code{x} and \code{y}.
-#' @section noftypes: Ca,Ca-Nu
-#' @examples
-#' add(1, 1)
-hgch_test_docs <- NULL
-
-#' hgch_test_docs2
-#' test
-#' @name hgch_test_docs2
-#' @export
-#' @return The sum of \code{x} and \code{y}.
-#' @section ftypes: Ca,Ca-Ca-Ca
-#' @examples
-#' add(1, 1)
-hgch_test_docs2 <- NULL
+#' #' hgch_test_docs
+#' #' test
+#' #' @name hgch_test_docs
+#' #' @export
+#' #' @return The sum of \code{x} and \code{y}.
+#' #' @section noftypes: Ca,Ca-Nu
+#' #' @examples
+#' #' add(1, 1)
+#' hgch_test_docs <- NULL
+#'
+#' #' hgch_test_docs2
+#' #' test
+#' #' @name hgch_test_docs2
+#' #' @export
+#' #' @return The sum of \code{x} and \code{y}.
+#' #' @section ftypes: Ca,Ca-Ca-Ca
+#' #' @examples
+#' #' add(1, 1)
+#' hgch_test_docs2 <- NULL
 
 #' @export
 hgchWhich <- function(d){
@@ -31,7 +31,7 @@ hgchWhich <- function(d){
 vizList <- function(){
   db <- tools::Rd_db("hgchmagic")
   meta <- unname(purrr::map_chr(db, tools:::.Rd_get_name))
-  meta
+  meta <- meta[meta != "hgchWhich"]
 }
 
 #' @export
