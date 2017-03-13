@@ -36,7 +36,7 @@ vizList <- function(){
 
 #' @export
 hgchFtype <- function(hgch = NULL){
-  db <- Rd_db("ciudatos")
+  db <- tools::Rd_db("hgchmagic")
   db <- db[grepl("^hgch_.*$",names(db))]
   meta <- lapply(db, tools:::.Rd_get_section, "section")
   cleanFtypeDoc <- function(ftype){

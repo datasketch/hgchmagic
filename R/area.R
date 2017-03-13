@@ -59,11 +59,11 @@ hgch_area_CaNu <-hgch_area_DaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Ye-Nu
 #' @examples
 #' hgch_area_YeNu(sampleData("Ye-Nu",nrow = 10))
 hgch_area_YeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                           symbol = NULL, startAtZero = FALSE,...){
+                           symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -150,14 +150,8 @@ hgch_area_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL
 #' @return highcharts viz
 #' @section ftype: Ca-Ye-Nu
 #' @examples
-#' hgch_area_CaYeNu(sampleData("Ye-Nu-Nu",nrow = 10))
+#' hgch_area_CaYeNu(sampleData("Ca-Ye-Nu",nrow = 10))
 hgch_area_CaYeNu <- hgch_area_CaCaNu
-
-
-
-
-
-
 
 #' hgch_area_stacked_CaCaNu
 #' @name hgch_area_stacked_CaCaNu
@@ -272,17 +266,12 @@ hgch_area_stacked_100_CaCaNu <- function(data, title = NULL, subtitle = NULL, ca
 #' hgch_area_stacked_CaYeNu(sampleData("Ca-Ye-Nu",nrow = 10))
 hgch_area_stacked_100_CaYeNu <- hgch_area_stacked_100_CaCaNu
 
-
-
-
-
-
 #' hgch_area_CaDaNu
 #' @name hgch_area_CaDaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Ca-Da-Nu
 #' @examples
 #' hgch_area_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_area_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
@@ -327,7 +316,7 @@ hgch_area_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Ca-Da-Nu
 #' @examples
 #' hgch_area_stacked_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_area_stacked_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
@@ -375,7 +364,7 @@ hgch_area_stacked_CaDaNu <- function(data, title = NULL, subtitle = NULL, captio
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Ca-Da-Nu
 #' @examples
 #' hgch_area_stacked_100_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_area_stacked_100_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,

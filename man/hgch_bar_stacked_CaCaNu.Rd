@@ -19,9 +19,9 @@ highcharts viz
 hgch_bar_stacked_ver_CaCaNu
 }
 \section{ftype}{
- Ca-Ye-Nu
+ Ca-Ca-Nu
 }
 
 \examples{
-hgch_bar_stacked_ver_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
+hgch_bar_stacked_ver_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 }

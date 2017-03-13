@@ -18,7 +18,7 @@ highcharts viz
 hgch_treemap_CaCaNu
 }
 \section{ftype}{
- Ca-Nu
+ Ca-Ca-Nu
 }
 
 \examples{

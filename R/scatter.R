@@ -183,8 +183,12 @@ hgch_bubble_CaNu <-function(data, title = ""){
 
 #' hgch_scatter_CaNuNu
 #' @name hgch_scatter_CaNuNu
+#' @param x A data.frame
 #' @export
+#' @return highcharts viz
 #' @section ftype: Ca-Nu-Nu
+#' @examples
+#' hgch_scatter_CaNuNu(sampleData("Ca-Nu-Nu",nrow = 10))
 hgch_scatter_CaNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL, export = FALSE,...){
 
   if(class(data)[1] == "Fringe"){
@@ -230,10 +234,15 @@ hgch_scatter_CaNuNu <- function(data, title = NULL, subtitle = NULL, caption = N
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
+
 #' hgch_scatter_CaNuNuNu
 #' @name hgch_scatter_CaNuNuNu
+#' @param x A data.frame
 #' @export
+#' @return highcharts viz
 #' @section ftype: Ca-Nu-Nu-Nu
+#' @examples
+#' hgch_scatter_CaNuNuNu(sampleData("Ca-Nu-Nu-Nu",nrow = 10))
 hgch_scatter_CaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -262,10 +271,15 @@ hgch_scatter_CaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption =
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
+
 #' hgch_scatter_CaCaNuNu
 #' @name hgch_scatter_CaCaNuNu
+#' @param x A data.frame
 #' @export
-#' @section ftype: Ca-Nu-Nu
+#' @return highcharts viz
+#' @section ftype: Ca-Ca-Nu-Nu
+#' @examples
+#' hgch_scatter_CaCaNuNu(sampleData("Ca-Ca-Nu-Nu",nrow = 10))
 hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   if(class(data)[1] == "Fringe"){
@@ -308,8 +322,12 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption =
 
 #' hgch_scatter_CaCaNuNuNu
 #' @name hgch_scatter_CaCaNuNuNu
+#' @param x A data.frame
 #' @export
-#' @section ftype: Ca-Nu-Nu
+#' @return highcharts viz
+#' @section ftype: Ca-Ca-Nu-Nu-Nu
+#' @examples
+#' hgch_scatter_CaCaNuNuNu(sampleData("Ca-Ca-Nu-Nu-Nu",nrow = 10))
 hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
 

@@ -18,7 +18,7 @@ highcharts viz
 hgch_line_YeNu
 }
 \section{ftype}{
- Ca-Ye-Nu
+ Ye-Nu
 }
 
 \examples{

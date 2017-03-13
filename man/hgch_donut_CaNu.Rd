@@ -19,7 +19,7 @@ highcharts viz
 hgch_donut_CaNu
 }
 \section{ftype}{
- Ca
+ Ca-Nu
 }
 
 \examples{

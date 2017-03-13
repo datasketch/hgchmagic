@@ -22,5 +22,5 @@ hgch_line_CaYeNu
 }
 
 \examples{
-hgch_line_CaYeNu(sampleData("Ye-Nu-Nu",nrow = 10))
+hgch_line_CaYeNu(sampleData("Ca-Ye-Nu",nrow = 10))
 }

@@ -19,9 +19,9 @@ highcharts viz
 hgch_map_choro_world_GeNu
 }
 \section{ftype}{
- Ca
+ Ge-Nu
 }
 
 \examples{
-hgch_map_choro_world_GeNu(sampleData("Ca",nrow = 10))
+hgch_map_choro_world_GeNu(sampleData("Ge-Nu",nrow = 10))
 }

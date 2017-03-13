@@ -20,9 +20,9 @@ highcharts viz
 hgch_map_bubbles_latinAmerican_GeNuNu
 }
 \section{ftype}{
- Ca, Ca0Nu
+ Ge-Nu-Nu
 }
 
 \examples{
-hgch_map_bubbles_latinAmerican_GeNuNu(sampleData("Ca",nrow = 10))
+hgch_map_bubbles_latinAmerican_GeNuNu(sampleData("Ge-Nu-Nu",nrow = 10))
 }

@@ -16,9 +16,9 @@ count_pl <- function(x) {
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca
+#' @section ftype: Ge-Nu
 #' @examples
-#' hgch_map_choro_world_GeNu(sampleData("Ca",nrow = 10))
+#' hgch_map_choro_world_GeNu(sampleData("Ge-Nu",nrow = 10))
 hgch_map_choro_world_GeNu <- function(data, title = NULL,
                                       subtitle = NULL,
                                       xAxisTitle = NULL,
@@ -57,9 +57,9 @@ hgch_map_choro_world_GeNu <- function(data, title = NULL,
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu
+#' @section ftype: Ge-Nu
 #' @examples
-#' hgch_map_bubbles_world_GeNu(sampleData("Ca",nrow = 10))
+#' hgch_map_bubbles_world_GeNu(sampleData("Ge-Nu",nrow = 10))
 hgch_map_bubbles_world_GeNu <- function(data,
                                         title = NULL,
                                         subtitle = NULL,
@@ -130,17 +130,6 @@ hgch_map_bubbles_world_GeNu <- function(data,
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 #
 # data(GNI2014, package = "treemap")
 #
@@ -170,9 +159,9 @@ hgch_map_bubbles_world_GeNu <- function(data,
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca, Ca0Nu
+#' @section ftype: Ge-Nu
 #' @examples
-#' hgch_map_bubbles_latinAmerican_GeNu(sampleData("Ca",nrow = 10))
+#' hgch_map_bubbles_latinAmerican_GeNu(sampleData("Ge-Nu",nrow = 10))
 hgch_map_bubbles_latinAmerican_GeNu <- function(data,
                                                 title = NULL,
                                                 subtitle = NULL,
@@ -260,9 +249,9 @@ hc <- highchart(type = "map") %>%
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca, Ca0Nu
+#' @section ftype: Ge-Nu-Nu
 #' @examples
-#' hgch_map_bubbles_latinAmerican_GeNuNu(sampleData("Ca",nrow = 10))
+#' hgch_map_bubbles_latinAmerican_GeNuNu(sampleData("Ge-Nu-Nu",nrow = 10))
 
 hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
                                                   title = NULL,

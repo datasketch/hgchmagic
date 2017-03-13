@@ -101,7 +101,7 @@ hgch_donut_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca
+#' @section ftype: Ca-Nu
 #' @examples
 #' hgch_donut_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
@@ -130,11 +130,6 @@ hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
 }
-
-
-
-
-
 
 #' hgch_radar_Ca
 #' @name hgch_radar_Ca
@@ -210,10 +205,4 @@ hgch_radar_CaNu <- function(data,
         pointPlacement = 'on'
       ))
 }
-
-
-
-
-
-
 

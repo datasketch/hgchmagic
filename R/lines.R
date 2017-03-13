@@ -54,7 +54,7 @@ hgch_line_CaNu <-hgch_line_DaNu
 #' @return highcharts viz
 #' @section ftype: Ca-Ye-Nu
 #' @examples
-#' hgch_line_CaYeNu(sampleData("Ye-Nu-Nu",nrow = 10))
+#' hgch_line_CaYeNu(sampleData("Ca-Ye-Nu",nrow = 10))
 hgch_line_CaYeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
@@ -112,7 +112,7 @@ hgch_line_CaYeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Ye-Nu
 #' @examples
 #' hgch_line_YeNu(sampleData("Ye-Nu",nrow = 10))
 hgch_line_YeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
@@ -157,7 +157,7 @@ hgch_line_CaCaNu <- hgch_line_CaYeNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Ca-Da-Nu
 #' @examples
 #' hgch_line_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_line_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,

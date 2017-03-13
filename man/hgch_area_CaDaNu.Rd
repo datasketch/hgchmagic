@@ -18,7 +18,7 @@ highcharts viz
 hgch_area_CaDaNu
 }
 \section{ftype}{
- Ca-Ye-Nu
+ Ca-Da-Nu
 }
 
 \examples{

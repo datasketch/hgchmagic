@@ -19,7 +19,7 @@ highcharts viz
 hgch_bar_ver_CaNu
 }
 \section{ftype}{
- Ca-Ye-Nu
+ Ca-Nu
 }
 
 \examples{

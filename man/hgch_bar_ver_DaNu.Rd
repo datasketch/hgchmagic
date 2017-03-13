@@ -19,7 +19,7 @@ highcharts viz
 hgch_bar_ver_DaNu
 }
 \section{ftype}{
- Ca-Ye-Nu
+ Da-Nu
 }
 
 \examples{

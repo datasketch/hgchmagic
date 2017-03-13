@@ -6,7 +6,7 @@
 \usage{
 hgch_area_YeNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  startAtZero = FALSE, ...)
+  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -18,7 +18,7 @@ highcharts viz
 hgch_area_YeNu
 }
 \section{ftype}{
- Ca-Ye-Nu
+ Ye-Nu
 }
 
 \examples{

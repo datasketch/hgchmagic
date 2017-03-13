@@ -88,7 +88,7 @@ hgch_treemap_discrete_color_CaNu <-function(data, title = NULL, subtitle = NULL,
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu
+#' @section ftype: Ca-Ca-Nu
 #' @examples
 #' hgch_treemap_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 hgch_treemap_CaCaNu <- function(data, title = NULL,subtitle = NULL,
