@@ -34,9 +34,6 @@ vizList <- function(){
   meta
 }
 
-
-
-
 #' @export
 hgchFtype <- function(hgch = NULL){
   db <- Rd_db("ciudatos")
