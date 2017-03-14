@@ -2,7 +2,7 @@
 % Please edit documentation in R/scatter.R
 \name{hgch_scatter_CaCaNuNuNu}
 \alias{hgch_scatter_CaCaNuNuNu}
-\title{hgch_scatter_CaCaNuNuNu}
+\title{Scatter}
 \usage{
 hgch_scatter_CaCaNuNuNu(data, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL,
@@ -15,7 +15,7 @@ hgch_scatter_CaCaNuNuNu(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-hgch_scatter_CaCaNuNuNu
+Scatter
 }
 \section{ftype}{
  Ca-Ca-Nu-Nu-Nu

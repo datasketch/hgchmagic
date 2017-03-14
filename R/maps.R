@@ -11,7 +11,7 @@ count_pl <- function(x) {
 }
 
 
-#' hgch_map_choro_world_GeNu
+#' Choropleth's world map
 #' @name hgch_map_choro_world_GeNu
 #' @param x A data.frame
 #' @export
@@ -52,7 +52,7 @@ hgch_map_choro_world_GeNu <- function(data, title = NULL,
 }
 
 
-#' hgch_map_bubbles_world_GeNu
+#' Bubble world map
 #' @name hgch_map_bubbles_world_GeNu
 #' @param x A data.frame
 #' @export
@@ -154,7 +154,7 @@ hgch_map_bubbles_world_GeNu <- function(data,
 ### Latin American
 
 
-#' hgch_map_bubbles_latinAmerican_GeNu
+#' Bubble latam map
 #' @name hgch_map_bubbles_latinAmerican_GeNu
 #' @param x A data.frame
 #' @export
@@ -244,7 +244,7 @@ hc <- highchart(type = "map") %>%
 }
 
 
-#' hgch_map_bubbles_latinAmerican_GeNuNu
+#' Bubble latam map
 #' @name hgch_map_bubbles_latinAmerican_GeNuNu
 #' @param x A data.frame
 #' @export

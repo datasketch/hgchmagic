@@ -2,7 +2,7 @@
 % Please edit documentation in R/treemap.R
 \name{hgch_treemap_CaCaNu}
 \alias{hgch_treemap_CaCaNu}
-\title{hgch_treemap_CaCaNu}
+\title{Treemap density by numeric variable}
 \usage{
 hgch_treemap_CaCaNu(data, title = NULL, subtitle = NULL,
   minColor = "#E63917", maxColor = "#18941E", reverse = TRUE,
@@ -15,7 +15,7 @@ hgch_treemap_CaCaNu(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-hgch_treemap_CaCaNu
+Treemap density by numeric variable
 }
 \section{ftype}{
  Ca-Ca-Nu

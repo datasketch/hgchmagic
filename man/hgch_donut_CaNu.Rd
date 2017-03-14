@@ -2,7 +2,7 @@
 % Please edit documentation in R/viz.R
 \name{hgch_donut_CaNu}
 \alias{hgch_donut_CaNu}
-\title{hgch_donut_CaNu}
+\title{Donut}
 \usage{
 hgch_donut_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, back_color = "white",
@@ -16,7 +16,7 @@ hgch_donut_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_donut_CaNu
+Donut
 }
 \section{ftype}{
  Ca-Nu

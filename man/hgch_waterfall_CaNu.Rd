@@ -2,7 +2,7 @@
 % Please edit documentation in R/bars.R
 \name{hgch_waterfall_CaNu}
 \alias{hgch_waterfall_CaNu}
-\title{hgch_waterfall_CaNu}
+\title{Waterfall}
 \usage{
 hgch_waterfall_CaNu(data, title = NULL, xAxisTitle = NULL,
   yAxisTitle = NULL)
@@ -14,7 +14,7 @@ hgch_waterfall_CaNu(data, title = NULL, xAxisTitle = NULL,
 highcharts viz
 }
 \description{
-hgch_waterfall_CaNu
+Waterfall
 }
 \section{ftype}{
  Ca-Nu

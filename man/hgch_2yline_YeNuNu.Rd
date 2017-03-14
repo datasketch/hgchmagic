@@ -2,8 +2,7 @@
 % Please edit documentation in R/lines.R
 \name{hgch_2yline_YeNuNu}
 \alias{hgch_2yline_YeNuNu}
-\title{hgch_2yline_YeNuNu
-2 y line}
+\title{2 y line}
 \usage{
 hgch_2yline_YeNuNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle1 = NULL, yAxisTitle2 = NULL,
@@ -16,7 +15,6 @@ hgch_2yline_YeNuNu(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_2yline_YeNuNu
 2 y line
 }
 \section{ftypes}{

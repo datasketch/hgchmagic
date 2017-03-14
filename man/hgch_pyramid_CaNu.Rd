@@ -2,7 +2,7 @@
 % Please edit documentation in R/pyramid.R
 \name{hgch_pyramid_CaNu}
 \alias{hgch_pyramid_CaNu}
-\title{hgch_pyramid_CaNu}
+\title{Pyramid}
 \usage{
 hgch_pyramid_CaNu(data, title = "")
 }
@@ -13,7 +13,7 @@ hgch_pyramid_CaNu(data, title = "")
 highcharts viz
 }
 \description{
-hgch_pyramid_CaNu
+Pyramid
 }
 \section{ftype}{
  Ca-Nu

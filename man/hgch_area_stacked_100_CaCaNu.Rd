@@ -2,7 +2,7 @@
 % Please edit documentation in R/area.R
 \name{hgch_area_stacked_100_CaCaNu}
 \alias{hgch_area_stacked_100_CaCaNu}
-\title{hgch_area_stacked_100_CaCaNu}
+\title{Vertical 100% stacked area}
 \usage{
 hgch_area_stacked_100_CaCaNu(data, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
@@ -15,7 +15,7 @@ hgch_area_stacked_100_CaCaNu(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-hgch_area_stacked_100_CaCaNu
+Vertical 100% stacked area
 }
 \section{ftype}{
  Ca-Ca-Nu

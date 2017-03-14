@@ -2,7 +2,7 @@
 % Please edit documentation in R/pyramid.R
 \name{hgch_funnel_CaNu}
 \alias{hgch_funnel_CaNu}
-\title{hgch_funnel_CaNu}
+\title{Funnel}
 \usage{
 hgch_funnel_CaNu(data, title = "")
 }
@@ -13,7 +13,7 @@ hgch_funnel_CaNu(data, title = "")
 highcharts viz
 }
 \description{
-hgch_funnel_CaNu
+Funnel
 }
 \section{ftype}{
  Ca-Nu

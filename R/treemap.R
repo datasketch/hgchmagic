@@ -1,5 +1,5 @@
 
-#' hgch_treemap_CaNu
+#' Treemap density by numeric variable
 #' @name hgch_treemap_CaNu
 #' @param x A data.frame
 #' @export
@@ -38,7 +38,7 @@ hgch_treemap_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NUL
   hc
 }
 
-#' hgch_treemap_discrete_color_CaNu
+#' Treemap coloured by first variable
 #' @name hgch_treemap_discrete_color_CaNu
 #' @param x A data.frame
 #' @export
@@ -83,7 +83,7 @@ hgch_treemap_discrete_color_CaNu <-function(data, title = NULL, subtitle = NULL,
 }
 
 
-#' hgch_treemap_CaCaNu
+#' Treemap density by numeric variable
 #' @name hgch_treemap_CaCaNu
 #' @param x A data.frame
 #' @export

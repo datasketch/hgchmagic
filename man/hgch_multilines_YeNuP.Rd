@@ -2,8 +2,7 @@
 % Please edit documentation in R/lines.R
 \name{hgch_multilines_YeNuP}
 \alias{hgch_multilines_YeNuP}
-\title{hgch_multilines_YeNuP
-Multilines}
+\title{Grouped line}
 \usage{
 hgch_multilines_YeNuP(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
@@ -16,8 +15,7 @@ hgch_multilines_YeNuP(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_multilines_YeNuP
-Multilines
+Grouped line
 }
 \section{ftypes}{
  Ye-NuP

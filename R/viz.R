@@ -1,5 +1,5 @@
 
-#' hgch_pie_Ca
+#' Pie
 #' @name hgch_pie_Ca
 #' @param x A data.frame
 #' @export
@@ -30,7 +30,7 @@ hgch_pie_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAx
     hc_yAxis(title = list(text=yAxisTitle))
 }
 
-#' hgch_pie_CaNu
+#' Pie
 #' @name hgch_pie_CaNu
 #' @param x A data.frame
 #' @export
@@ -65,7 +65,7 @@ hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
 }
 
 
-#' hgch_donut_Ca
+#' Donut
 #' @name hgch_donut_Ca
 #' @param x A data.frame
 #' @export
@@ -96,7 +96,7 @@ hgch_donut_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
     hc_yAxis(title = list(text=yAxisTitle))
 }
 
-#' hgch_donut_CaNu
+#' Donut
 #' @name hgch_donut_CaNu
 #' @param x A data.frame
 #' @export
@@ -131,7 +131,7 @@ hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
     hc_yAxis(title = list(text=yAxisTitle))
 }
 
-#' hgch_radar_Ca
+#' Radar
 #' @name hgch_radar_Ca
 #' @param x A data.frame
 #' @export
@@ -169,7 +169,7 @@ hgch_radar_Ca <- function(data,
 }
 
 
-#' hgch_radar_CaNu
+#' Radar
 #' @name hgch_radar_CaNu
 #' @param x A data.frame
 #' @export

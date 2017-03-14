@@ -2,7 +2,7 @@
 % Please edit documentation in R/bars.R
 \name{hgch_bar_grouped_hor_CaCa}
 \alias{hgch_bar_grouped_hor_CaCa}
-\title{hgch_bar_grouped_hor_CaCa}
+\title{Horizontal grouped bar}
 \usage{
 hgch_bar_grouped_hor_CaCa(data, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
@@ -15,7 +15,7 @@ hgch_bar_grouped_hor_CaCa(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-hgch_bar_grouped_hor_CaCa
+Horizontal grouped bar
 }
 \section{ftype}{
  Ca-Ca

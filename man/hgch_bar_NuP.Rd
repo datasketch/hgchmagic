@@ -3,8 +3,7 @@
 \name{hgch_bar_NuP}
 \alias{hgch_bar_NuP}
 \alias{hgch_bar_ver_NuP}
-\title{hgch_bar_NuP
-Multilines}
+\title{Vertical bar}
 \usage{
 hgch_bar_ver_NuP(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, ...)
@@ -16,8 +15,7 @@ hgch_bar_ver_NuP(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_bar_NuP
-Multilines
+Vertical bar
 }
 \section{ftypes}{
  NuP

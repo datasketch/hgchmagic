@@ -2,7 +2,7 @@
 % Please edit documentation in R/treemap.R
 \name{hgch_treemap_discrete_color_CaNu}
 \alias{hgch_treemap_discrete_color_CaNu}
-\title{hgch_treemap_discrete_color_CaNu}
+\title{Treemap coloured by first variable}
 \usage{
 hgch_treemap_discrete_color_CaNu(data, title = NULL, subtitle = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, export = FALSE)
@@ -14,7 +14,7 @@ hgch_treemap_discrete_color_CaNu(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-hgch_treemap_discrete_color_CaNu
+Treemap coloured by first variable
 }
 \section{ftype}{
  Ca-Nu

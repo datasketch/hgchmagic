@@ -2,7 +2,7 @@
 % Please edit documentation in R/maps.R
 \name{hgch_map_bubbles_world_GeNu}
 \alias{hgch_map_bubbles_world_GeNu}
-\title{hgch_map_bubbles_world_GeNu}
+\title{Bubble world map}
 \usage{
 hgch_map_bubbles_world_GeNu(data, title = NULL, subtitle = NULL,
   geoinfoPath = NULL, geoCodeVar = NULL, geoNameVar = NULL,
@@ -16,7 +16,7 @@ hgch_map_bubbles_world_GeNu(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-hgch_map_bubbles_world_GeNu
+Bubble world map
 }
 \section{ftype}{
  Ge-Nu

@@ -2,7 +2,7 @@
 % Please edit documentation in R/maps.R
 \name{hgch_map_choro_world_GeNu}
 \alias{hgch_map_choro_world_GeNu}
-\title{hgch_map_choro_world_GeNu}
+\title{Choropleth's world map}
 \usage{
 hgch_map_choro_world_GeNu(data, title = NULL, subtitle = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, minColor = "#E63917",
@@ -16,7 +16,7 @@ hgch_map_choro_world_GeNu(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-hgch_map_choro_world_GeNu
+Choropleth's world map
 }
 \section{ftype}{
  Ge-Nu

@@ -1,5 +1,5 @@
 
-#' hgch_line_DaNu
+#' Line
 #' @name hgch_line_DaNu
 #' @param x A data.frame
 #' @export
@@ -36,7 +36,7 @@ hgch_line_DaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, 
   hc
 }
 
-#' hgch_line_CaNu
+#' Line
 #' @name hgch_line_CaNu
 #' @param x A data.frame
 #' @export
@@ -47,7 +47,7 @@ hgch_line_DaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, 
 hgch_line_CaNu <-hgch_line_DaNu
 
 
-#' hgch_line_CaYeNu
+#' Line
 #' @name hgch_line_CaYeNu
 #' @param x A data.frame
 #' @export
@@ -107,7 +107,7 @@ hgch_line_CaYeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL
   hc
 }
 
-#' hgch_line_YeNu
+#' Line
 #' @name hgch_line_YeNu
 #' @param x A data.frame
 #' @export
@@ -141,7 +141,7 @@ hgch_line_YeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, 
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-#' hgch_line_CaCaNu
+#' Line
 #' @name hgch_line_CaCaNu
 #' @param x A data.frame
 #' @export
@@ -152,7 +152,7 @@ hgch_line_YeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, 
 hgch_line_CaCaNu <- hgch_line_CaYeNu
 
 
-#' hgch_line_CaDaNu
+#' Line
 #' @name hgch_line_CaDaNu
 #' @param x A data.frame
 #' @export
@@ -194,7 +194,6 @@ hgch_line_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL
 
 
 
-#' hgch_2yline_YeNuNu
 #' 2 y line
 #' @name hgch_2yline_YeNuNu
 #' @param x A data.frame
@@ -243,8 +242,7 @@ hgch_2yline_YeNuNu <- function(data, title = NULL, subtitle = NULL, caption = NU
 }
 
 
-#' hgch_multilines_YeNuP
-#' Multilines
+#' Grouped line
 #' @name hgch_multilines_YeNuP
 #' @param x A data.frame
 #' @export
@@ -288,7 +286,6 @@ hgch_multilines_YeNuP <- function(data,
   hc
 }
 
-#' hgch_slope_CaYeNu
 #' Slope
 #' @name hgch_slope_CaYeNu
 #' @param x A data.frame

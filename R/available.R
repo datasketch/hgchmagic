@@ -49,6 +49,20 @@ hgchFtype <- function(hgch = NULL){
   meta
 }
 
+#' @export
+hgchNames <- function(hgch = NULL){
+  db <- tools::Rd_db("hgchmagic")
+  db <- db[grepl("^hgch_.*$",names(db))]
+  meta <- lapply(db, tools:::.Rd_get_section, "title")
+  cleanFtypeDoc <- function(ftype){
+    ftype <- as.character(ftype[[1]][[1]])
+    strsplit(gsub("\n","",ftype),",")[[1]]
+  }
+  meta <- lapply(meta,cleanFtypeDoc)
+  names(meta) <- gsub(".Rd","",names(meta))
+  if(!is.null(hgch)) return(meta[[hgch]])
+  meta
+}
 
 
 #' #' @export
