@@ -74,12 +74,16 @@ hgchFtype <- function(hgch = NULL){
 hgchNames <- function(hgch = NULL){
   db <- tools::Rd_db("hgchmagic")
   db <- db[grepl("^hgch_.*$",names(db))]
-  meta <- lapply(db, tools:::.Rd_get_section, "title")
   cleanFtypeDoc <- function(ftype){
-    ftype <- as.character(ftype[[1]][[1]])
-    strsplit(gsub("\n","",ftype),",")[[1]]
+    ftype <- as.character(ftype[[1]])
+    if(length(ftype) > 1){
+      options(warn=-1)
+      ftype <- ftype[1:which(ftype == "\n")]
+      ftype <- ftype[ftype != "\n"]
+    }
+    return(paste(gsub("\n|\\}","",ftype), collapse = ""))
   }
-  meta <- lapply(meta,cleanFtypeDoc)
+  meta <- lapply(db,cleanFtypeDoc)
   names(meta) <- gsub(".Rd","",names(meta))
   if(!is.null(hgch)) return(meta[[hgch]])
   meta
@@ -124,3 +128,8 @@ hgchNames <- function(hgch = NULL){
 #'   ftype <- as.character(ftype[[2]][[2]])
 #'   strsplit(gsub(" |\n","",ftype),",")[[1]]
 #' }
+
+
+ftype <- db[grepl("\\%", db)]
+ftype <- ftype[[1]]
+ftype <- db[[1]]
