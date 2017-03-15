@@ -128,8 +128,3 @@ hgchNames <- function(hgch = NULL){
 #'   ftype <- as.character(ftype[[2]][[2]])
 #'   strsplit(gsub(" |\n","",ftype),",")[[1]]
 #' }
-
-
-ftype <- db[grepl("\\%", db)]
-ftype <- ftype[[1]]
-ftype <- db[[1]]
