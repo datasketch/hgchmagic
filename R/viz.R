@@ -24,7 +24,10 @@ hgch_pie_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAx
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
-    hc_title(text = title) %>%
+    hc_title(text = title, style = list(color= "#333333", fontSize = "18px",
+                                        fontFamily= "Roboto Condensed",
+                                        fontWeight = "bold",
+                                        fill = "#333333", useHTML = TRUE)) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
@@ -40,7 +43,7 @@ hgch_pie_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAx
 #' hgch_pie_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
                           xAxisTitle = NULL, yAxisTitle = NULL, back_color = 'white',leg_op = TRUE,
-                          color_title = 'black',sort = "no", aggregate = "sum", export = FALSE,...){
+                          color_title = '#333333',sort = "no", aggregate = "sum", export = FALSE,...){
 
 
   f <- fringe(data)
@@ -58,7 +61,10 @@ hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
       series = list(dataLabels = list(enabled = leg_op ,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
     hc_chart(backgroundColor = back_color) %>%
-    hc_title(text = title,style = list(color = color_title, useHTML = TRUE)) %>%
+    hc_title(text = title, style = list(color = color_title, fontSize = "18px",
+                                       fontFamily= "Roboto Condensed",
+                                       fontWeight = "bold",
+                                       fill = "#333333", useHTML = TRUE)) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
@@ -90,7 +96,10 @@ hgch_donut_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
     hc_plotOptions(
       series = list(innerSize= '60%',dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
-    hc_title(text = title) %>%
+    hc_title(text = title, style = list(color = "#333333", fontSize = "18px",
+                                      fontFamily= "Roboto Condensed",
+                                      fontWeight = "bold",
+                                      fill = "#333333", useHTML = TRUE)) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
@@ -106,7 +115,7 @@ hgch_donut_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
 #' hgch_donut_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
                             xAxisTitle = NULL, yAxisTitle = NULL, back_color = 'white',
-                            color_title = 'black', leg_op = TRUE,
+                            color_title = "#333333", leg_op = TRUE,
                             sort = "no", aggregate = "sum", export = FALSE,...){
 
 
@@ -125,7 +134,10 @@ hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
       series = list(innerSize= '60%',dataLabels = list(enabled = leg_op,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
     hc_chart(backgroundColor = back_color) %>%
-    hc_title(text = title,style = list(color = color_title, useHTML = TRUE))%>%
+    hc_title(text = title,style = list(color = color_title, fontSize = "18px",
+                                       fontFamily= "Roboto Condensed",
+                                       fontWeight = "bold",
+                                       fill = "#333333", useHTML = TRUE))%>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))

@@ -6,8 +6,8 @@
 \usage{
 hgch_donut_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, back_color = "white",
-  color_title = "black", leg_op = TRUE, sort = "no", aggregate = "sum",
-  export = FALSE, ...)
+  color_title = "#333333", leg_op = TRUE, sort = "no",
+  aggregate = "sum", export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
