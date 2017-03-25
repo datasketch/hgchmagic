@@ -2,7 +2,7 @@
 % Please edit documentation in R/viz.R
 \name{hgch_radar_CaNu}
 \alias{hgch_radar_CaNu}
-\title{hgch_radar_CaNu}
+\title{Radar}
 \usage{
 hgch_radar_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = "mean",
@@ -15,7 +15,7 @@ hgch_radar_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_radar_CaNu
+Radar
 }
 \section{ftype}{
  Ca-Nu

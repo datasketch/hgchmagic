@@ -2,7 +2,7 @@
 % Please edit documentation in R/area.R
 \name{hgch_area_CaYeNu}
 \alias{hgch_area_CaYeNu}
-\title{hgch_area_CaYeNu}
+\title{Vertical area}
 \usage{
 hgch_area_CaYeNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
@@ -15,12 +15,12 @@ hgch_area_CaYeNu(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_area_CaYeNu
+Vertical area
 }
 \section{ftype}{
  Ca-Ye-Nu
 }
 
 \examples{
-hgch_area_CaYeNu(sampleData("Ye-Nu-Nu",nrow = 10))
+hgch_area_CaYeNu(sampleData("Ca-Ye-Nu",nrow = 10))
 }

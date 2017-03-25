@@ -2,7 +2,7 @@
 % Please edit documentation in R/scatter.R
 \name{hgch_bubble_CaNu}
 \alias{hgch_bubble_CaNu}
-\title{hgch_bubble_CaNu}
+\title{Bubble}
 \usage{
 hgch_bubble_CaNu(data, title = "")
 }
@@ -13,7 +13,7 @@ hgch_bubble_CaNu(data, title = "")
 highcharts viz
 }
 \description{
-hgch_bubble_CaNu
+Bubble
 }
 \section{ftype}{
  Ca-Nu

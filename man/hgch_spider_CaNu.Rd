@@ -2,7 +2,7 @@
 % Please edit documentation in R/scatter.R
 \name{hgch_spider_CaNu}
 \alias{hgch_spider_CaNu}
-\title{hgch_spider_CaNu}
+\title{Radar}
 \usage{
 hgch_spider_CaNu(data, title = "")
 }
@@ -13,7 +13,7 @@ hgch_spider_CaNu(data, title = "")
 highcharts viz
 }
 \description{
-hgch_spider_CaNu
+Radar
 }
 \section{ftype}{
  Ca-Nu

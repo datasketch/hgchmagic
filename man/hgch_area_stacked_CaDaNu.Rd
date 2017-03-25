@@ -2,7 +2,7 @@
 % Please edit documentation in R/area.R
 \name{hgch_area_stacked_CaDaNu}
 \alias{hgch_area_stacked_CaDaNu}
-\title{hgch_area_stacked_CaDaNu}
+\title{Vertical stacked area}
 \usage{
 hgch_area_stacked_CaDaNu(data, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
@@ -15,10 +15,10 @@ hgch_area_stacked_CaDaNu(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-hgch_area_stacked_CaDaNu
+Vertical stacked area
 }
 \section{ftype}{
- Ca-Ye-Nu
+ Ca-Da-Nu
 }
 
 \examples{

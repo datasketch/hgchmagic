@@ -2,7 +2,7 @@
 % Please edit documentation in R/bars.R
 \name{hgch_bar_hor_top_CaNu}
 \alias{hgch_bar_hor_top_CaNu}
-\title{hgch_bar_hor_top_CaNu}
+\title{Ordered horizontal bar}
 \usage{
 hgch_bar_hor_top_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, reverse = TRUE,
@@ -15,7 +15,7 @@ hgch_bar_hor_top_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_bar_hor_top_CaNu
+Ordered horizontal bar
 }
 \section{ftype}{
  Ca-Nu

@@ -1,4 +1,4 @@
-#' hgch_pyramid_CaNu
+#' Pyramid
 #' @name hgch_pyramid_CaNu
 #' @param x A data.frame
 #' @export
@@ -39,7 +39,7 @@ hgch_pyramid_CaNu <-function(data, title = ""){
 
 
 
-#' hgch_funnel_CaNu
+#' Funnel
 #' @name hgch_funnel_CaNu
 #' @param x A data.frame
 #' @export

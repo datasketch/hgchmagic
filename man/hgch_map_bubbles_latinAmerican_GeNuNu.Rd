@@ -2,7 +2,7 @@
 % Please edit documentation in R/maps.R
 \name{hgch_map_bubbles_latinAmerican_GeNuNu}
 \alias{hgch_map_bubbles_latinAmerican_GeNuNu}
-\title{hgch_map_bubbles_latinAmerican_GeNuNu}
+\title{Bubble latam map}
 \usage{
 hgch_map_bubbles_latinAmerican_GeNuNu(data, title = NULL, subtitle = NULL,
   geoinfoPath = NULL, geoCodeVar = NULL, geoNameVar = NULL,
@@ -17,12 +17,12 @@ hgch_map_bubbles_latinAmerican_GeNuNu(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-hgch_map_bubbles_latinAmerican_GeNuNu
+Bubble latam map
 }
 \section{ftype}{
- Ca, Ca0Nu
+ Ge-Nu-Nu
 }
 
 \examples{
-hgch_map_bubbles_latinAmerican_GeNuNu(sampleData("Ca",nrow = 10))
+hgch_map_bubbles_latinAmerican_GeNuNu(sampleData("Ge-Nu-Nu",nrow = 10))
 }

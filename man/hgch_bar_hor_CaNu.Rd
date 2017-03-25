@@ -2,7 +2,7 @@
 % Please edit documentation in R/bars.R
 \name{hgch_bar_hor_CaNu}
 \alias{hgch_bar_hor_CaNu}
-\title{hgch_bar_hor_CaNu}
+\title{Horizontal bar}
 \usage{
 hgch_bar_hor_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = "mean",
@@ -16,7 +16,7 @@ hgch_bar_hor_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_bar_hor_CaNu
+Horizontal bar
 }
 \section{ftype}{
  Ca-Nu

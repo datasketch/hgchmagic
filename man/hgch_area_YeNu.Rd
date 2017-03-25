@@ -2,11 +2,11 @@
 % Please edit documentation in R/area.R
 \name{hgch_area_YeNu}
 \alias{hgch_area_YeNu}
-\title{hgch_area_YeNu}
+\title{Vertical area}
 \usage{
 hgch_area_YeNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  startAtZero = FALSE, ...)
+  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -15,10 +15,10 @@ hgch_area_YeNu(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_area_YeNu
+Vertical area
 }
 \section{ftype}{
- Ca-Ye-Nu
+ Ye-Nu
 }
 
 \examples{

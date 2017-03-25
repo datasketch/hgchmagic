@@ -3,7 +3,7 @@
 \name{hgch_bar_stacked_CaCaNu}
 \alias{hgch_bar_stacked_CaCaNu}
 \alias{hgch_bar_stacked_ver_CaCaNu}
-\title{hgch_bar_stacked_ver_CaCaNu}
+\title{Vertical stacked bar}
 \usage{
 hgch_bar_stacked_ver_CaCaNu(data, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
@@ -16,12 +16,12 @@ hgch_bar_stacked_ver_CaCaNu(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-hgch_bar_stacked_ver_CaCaNu
+Vertical stacked bar
 }
 \section{ftype}{
- Ca-Ye-Nu
+ Ca-Ca-Nu
 }
 
 \examples{
-hgch_bar_stacked_ver_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
+hgch_bar_stacked_ver_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 }

@@ -1,4 +1,4 @@
-#' hgch_bar_ver_Ca
+#' Vertical bar
 #' @name hgch_bar_ver_Ca
 #' @param x A data.frame
 #' @export
@@ -59,7 +59,7 @@ hgch_bar_ver_Ca <-
     hc
   }
 
-#' hgch_bar_ver_top_Ca
+#' Ordered vertical bar
 #' @name hgch_bar_ver_top_Ca
 #' @param x A data.frame
 #' @export
@@ -91,7 +91,7 @@ hgch_bar_ver_top_Ca <- function(data,
 }
 
 
-#' hgch_bar_hor_Ca
+#' Horizontal bar
 #' @name hgch_bar_hor_Ca
 #' @param x A data.frame
 #' @export
@@ -144,7 +144,7 @@ hgch_bar_hor_Ca <-
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
   }
-#' hgch_bar_hor_top_Ca
+#' Ordered horizontal bar
 #' @name hgch_bar_hor_top_Ca
 #' @param x A data.frame
 #' @export
@@ -179,12 +179,12 @@ hgch_bar_hor_top_Ca <- function(data,
 
 
 
-#' hgch_bar_ver_CaNu
+#' Vertical bar
 #' @name hgch_bar_ver_CaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Ca-Nu
 #' @examples
 #' hgch_bar_ver_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_bar_ver_CaNu <-
@@ -259,7 +259,7 @@ hgch_bar_ver_CaNu <-
     hc
 
   }
-#' hgch_bar_ver_top_CaNu
+#' Ordered vertical bar
 #' @name hgch_bar_ver_top_CaNu
 #' @param x A data.frame
 #' @export
@@ -291,29 +291,29 @@ hgch_bar_ver_top_CaNu <- function(data,
 
 }
 
-#' hgch_bar_ver_YeNu
+#' Vertical bar
 #' @name hgch_bar_ver_YeNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Ye-Nu
 #' @examples
 #' hgch_bar_ver_YeNu(sampleData("Ye-Nu",nrow = 10))
 hgch_bar_ver_YeNu <- hgch_bar_ver_CaNu
 
 
-#' hgch_bar_ver_DaNu
+#' Vertical bar
 #' @name hgch_bar_ver_DaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Da-Nu
 #' @examples
 #' hgch_bar_ver_DaNu(sampleData("Da-Nu",nrow = 10))
 hgch_bar_ver_DaNu <- hgch_bar_ver_CaNu
 
 
-#' hgch_bar_hor_CaNu
+#' Horizontal bar
 #' @name hgch_bar_hor_CaNu
 #' @param x A data.frame
 #' @export
@@ -381,7 +381,7 @@ hgch_bar_hor_CaNu <- function(data,
     hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-#' hgch_bar_hor_top_CaNu
+#' Ordered horizontal bar
 #' @name hgch_bar_hor_top_CaNu
 #' @param x A data.frame
 #' @export
@@ -417,7 +417,7 @@ hgch_bar_hor_top_CaNu <- function(data,
 
 
 
-#' hgch_bar_grouped_ver_CaCaNu
+#' Vertical grouped bar
 #' @name hgch_bar_grouped_ver_CaCaNu
 #' @param x A data.frame
 #' @export
@@ -472,7 +472,7 @@ hgch_bar_grouped_ver_CaCaNu <-
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
   }
-#' hgch_bar_grouped_ver_CaYeNu
+#' Vertical grouped bar
 #' @name hgch_bar_grouped_ver_CaYeNu
 #' @param x A data.frame
 #' @export
@@ -483,7 +483,7 @@ hgch_bar_grouped_ver_CaCaNu <-
 hgch_bar_grouped_ver_CaYeNu <- hgch_bar_grouped_ver_CaCaNu
 
 
-#' hgch_bar_grouped_hor_CaCaNu
+#' Horizontal grouped bar
 #' @name hgch_bar_grouped_hor_CaCaNu
 #' @param x A data.frame
 #' @export
@@ -539,14 +539,14 @@ hgch_bar_grouped_hor_CaCaNu <-
   }
 
 
-#' hgch_bar_stacked_ver_CaCaNu
+#' Vertical stacked bar
 #' @name hgch_bar_stacked_CaCaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Ca-Ca-Nu
 #' @examples
-#' hgch_bar_stacked_ver_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
+#' hgch_bar_stacked_ver_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 hgch_bar_stacked_ver_CaCaNu <-
   function(data,
            title = NULL,
@@ -595,14 +595,14 @@ hgch_bar_stacked_ver_CaCaNu <-
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
   }
-#' hgch_bar_stacked_100_ver_CaCaNu
+#' Vertical 100% stacked bar
 #' @name hgch_bar_stacked_100_ver_CaCaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Ca-Ca-Nu
 #' @examples
-#' hgch_bar_stacked_100_ver_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
+#' hgch_bar_stacked_100_ver_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 hgch_bar_stacked_100_ver_CaCaNu <-
   function(data,
            title = NULL,
@@ -652,14 +652,14 @@ hgch_bar_stacked_100_ver_CaCaNu <-
     hc
   }
 
-#' hgch_bar_stacked_hor_CaCaNu
+#' Horizontal stacked bar
 #' @name hgch_bar_stacked_hor_CaCaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Ca-Ca-Nu
 #' @examples
-#' hgch_bar_stacked_hor_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
+#' hgch_bar_stacked_hor_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 hgch_bar_stacked_hor_CaCaNu <-
   function(data,
            title = NULL,
@@ -707,14 +707,14 @@ hgch_bar_stacked_hor_CaCaNu <-
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
   }
-#' hgch_bar_stacked_100_hor_CaCaNu
+#' Horizontal 100% stacked bar
 #' @name hgch_bar_stacked_100_hor_CaCaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Ca-Ca-Nu
 #' @examples
-#' hgch_bar_stacked_100_hor_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
+#' hgch_bar_stacked_100_hor_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 hgch_bar_stacked_100_hor_CaCaNu <-
   function(data,
            title = NULL,
@@ -763,24 +763,24 @@ hgch_bar_stacked_100_hor_CaCaNu <-
     hc
   }
 
-#' hgch_bar_stacked_ver_CaDaNu
+#' Vertical stacked bar
 #' @name hgch_bar_stacked_ver_CaDaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ca-Nu
+#' @section ftype: Ca-Da-Nu
 #' @examples
-#' hgch_bar_stacked_ver_CaDaNu(sampleData("Ca-Ca-Nu",nrow = 10))
+#' hgch_bar_stacked_ver_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_bar_stacked_ver_CaDaNu <- hgch_bar_stacked_ver_CaCaNu
 
-#' hgch_bar_stacked_100_ver_CaDaNu
+#' Vertical 100% stacked bar
 #' @name hgch_bar_stacked_100_ver_CaDaNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ca-Nu
+#' @section ftype: Ca-Da-Nu
 #' @examples
-#' hgch_bar_stacked_100_ver_CaDaNu(sampleData("Ca-Ca-Nu",nrow = 10))
+#' hgch_bar_stacked_100_ver_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
 hgch_bar_stacked_100_ver_CaDaNu <- hgch_bar_stacked_100_ver_CaCaNu
 
 
@@ -788,8 +788,7 @@ hgch_bar_stacked_100_ver_CaDaNu <- hgch_bar_stacked_100_ver_CaCaNu
 
 
 
-#' hgch_bar_grouped_ver_CaNuP
-#' Multilines
+#' Vertical grouped bar
 #' @name hgch_bar_grouped_ver_CaNuP
 #' @param x A data.frame
 #' @export
@@ -851,13 +850,12 @@ hgch_bar_grouped_ver_CaNuP <- function(data,
     hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-#' hgch_bar_grouped_hor_CaNuP
-#' Multilines
+#' Horizontal grouped bar
 #' @name hgch_bar_grouped_hor_CaNuP
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftypes: Ye-Nu*
+#' @section ftypes: Ca-NuP
 #' @examples
 #' hgch_bar_grouped_hor_CaNuP(sampleData("Ca-NuP",nrow = 10))
 hgch_bar_grouped_hor_CaNuP <- function(data,
@@ -917,13 +915,12 @@ hgch_bar_grouped_hor_CaNuP <- function(data,
 
 
 
-#' hgch_bar_NuP
-#' Multilines
+#' Vertical bar
 #' @name hgch_bar_NuP
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftypes: Ye-Nu*
+#' @section ftypes: NuP
 #' @examples
 #' hgch_bar_NuP(sampleData("NuP",nrow = 10))
 hgch_bar_ver_NuP <- function(data,
@@ -970,7 +967,7 @@ hgch_bar_ver_NuP <- function(data,
 }
 
 
-#' hgch_waterfall_CaNu
+#' Waterfall
 #' @name hgch_waterfall_CaNu
 #' @param x A data.frame
 #' @export
@@ -1017,12 +1014,12 @@ hgch_waterfall_CaNu <-function(data, title = NULL,  xAxisTitle = NULL,
 }
 
 
-#' hgch_bar_grouped_ver_CaCa
+#' Vertical grouped bar
 #' @name hgch_bar_grouped_ver_CaCa
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu
+#' @section ftype: Ca-Ca
 #' @examples
 #' hgch_bar_grouped_ver_CaCa(sampleData("Ca-Ca",nrow = 10))
 hgch_bar_grouped_ver_CaCa <-
@@ -1075,7 +1072,7 @@ hgch_bar_grouped_ver_CaCa <-
   }
 
 
-#' hgch_bar_grouped_hor_CaCa
+#' Horizontal grouped bar
 #' @name hgch_bar_grouped_hor_CaCa
 #' @param x A data.frame
 #' @export

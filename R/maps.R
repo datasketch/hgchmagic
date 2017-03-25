@@ -11,14 +11,14 @@ count_pl <- function(x) {
 }
 
 
-#' hgch_map_choro_world_GeNu
+#' Choropleth's world map
 #' @name hgch_map_choro_world_GeNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca
+#' @section ftype: Ge-Nu
 #' @examples
-#' hgch_map_choro_world_GeNu(sampleData("Ca",nrow = 10))
+#' hgch_map_choro_world_GeNu(sampleData("Ge-Nu",nrow = 10))
 hgch_map_choro_world_GeNu <- function(data, title = NULL,
                                       subtitle = NULL,
                                       xAxisTitle = NULL,
@@ -52,14 +52,14 @@ hgch_map_choro_world_GeNu <- function(data, title = NULL,
 }
 
 
-#' hgch_map_bubbles_world_GeNu
+#' Bubble world map
 #' @name hgch_map_bubbles_world_GeNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu
+#' @section ftype: Ge-Nu
 #' @examples
-#' hgch_map_bubbles_world_GeNu(sampleData("Ca",nrow = 10))
+#' hgch_map_bubbles_world_GeNu(sampleData("Ge-Nu",nrow = 10))
 hgch_map_bubbles_world_GeNu <- function(data,
                                         title = NULL,
                                         subtitle = NULL,
@@ -130,17 +130,6 @@ hgch_map_bubbles_world_GeNu <- function(data,
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 #
 # data(GNI2014, package = "treemap")
 #
@@ -165,14 +154,14 @@ hgch_map_bubbles_world_GeNu <- function(data,
 ### Latin American
 
 
-#' hgch_map_bubbles_latinAmerican_GeNu
+#' Bubble latam map
 #' @name hgch_map_bubbles_latinAmerican_GeNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca, Ca0Nu
+#' @section ftype: Ge-Nu
 #' @examples
-#' hgch_map_bubbles_latinAmerican_GeNu(sampleData("Ca",nrow = 10))
+#' hgch_map_bubbles_latinAmerican_GeNu(sampleData("Ge-Nu",nrow = 10))
 hgch_map_bubbles_latinAmerican_GeNu <- function(data,
                                                 title = NULL,
                                                 subtitle = NULL,
@@ -255,14 +244,14 @@ hc <- highchart(type = "map") %>%
 }
 
 
-#' hgch_map_bubbles_latinAmerican_GeNuNu
+#' Bubble latam map
 #' @name hgch_map_bubbles_latinAmerican_GeNuNu
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca, Ca0Nu
+#' @section ftype: Ge-Nu-Nu
 #' @examples
-#' hgch_map_bubbles_latinAmerican_GeNuNu(sampleData("Ca",nrow = 10))
+#' hgch_map_bubbles_latinAmerican_GeNuNu(sampleData("Ge-Nu-Nu",nrow = 10))
 
 hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
                                                   title = NULL,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/area.R
 \name{hgch_area_DaNu}
 \alias{hgch_area_DaNu}
-\title{hgch_area_DaNu}
+\title{Vertical area}
 \usage{
 hgch_area_DaNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
@@ -15,7 +15,7 @@ hgch_area_DaNu(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_area_DaNu
+Vertical area
 }
 \section{ftype}{
  Da-Nu

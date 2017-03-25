@@ -2,16 +2,25 @@
 % Please edit documentation in R/scatter.R
 \name{hgch_scatter_CaNuNuNu}
 \alias{hgch_scatter_CaNuNuNu}
-\title{hgch_scatter_CaNuNuNu}
+\title{Scatter}
 \usage{
 hgch_scatter_CaNuNuNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL, export = FALSE,
   ...)
 }
+\arguments{
+\item{x}{A data.frame}
+}
+\value{
+highcharts viz
+}
 \description{
-hgch_scatter_CaNuNuNu
+Scatter
 }
 \section{ftype}{
  Ca-Nu-Nu-Nu
 }
 
+\examples{
+hgch_scatter_CaNuNuNu(sampleData("Ca-Nu-Nu-Nu",nrow = 10))
+}

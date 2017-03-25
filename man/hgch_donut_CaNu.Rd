@@ -2,12 +2,12 @@
 % Please edit documentation in R/viz.R
 \name{hgch_donut_CaNu}
 \alias{hgch_donut_CaNu}
-\title{hgch_donut_CaNu}
+\title{Donut}
 \usage{
 hgch_donut_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, back_color = "white",
-  color_title = "black", leg_op = TRUE, sort = "no", aggregate = "sum",
-  export = FALSE, ...)
+  color_title = "#333333", leg_op = TRUE, sort = "no",
+  aggregate = "sum", export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -16,10 +16,10 @@ hgch_donut_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_donut_CaNu
+Donut
 }
 \section{ftype}{
- Ca
+ Ca-Nu
 }
 
 \examples{

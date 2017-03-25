@@ -1,4 +1,4 @@
-#' hgch_polarcolumn_Ca
+#' Polar bar
 #' @name hgch_polarcolumn_Ca
 #' @param x A data.frame
 #' @export
@@ -31,7 +31,7 @@ hgch_polarcolumn_Ca <-function(data, title = ""){
     hc_add_series(data_graph, showInLegend = FALSE)
   hc
 }
-#' hgch_polarcolumn_CaNu
+#' Polar bar
 #' @name hgch_polarcolumn_CaNu
 #' @param x A data.frame
 #' @export
@@ -65,7 +65,7 @@ hgch_polarcolumn_CaNu <-function(data, title = ""){
   hc
 }
 
-#' hgch_spider_CaNu
+#' Radar
 #' @name hgch_spider_CaNu
 #' @param x A data.frame
 #' @export
@@ -99,7 +99,7 @@ hgch_spider_CaNu <-function(data, title = ""){
   hc
 }
 
-#' hgch_spider_CaNuNu
+#' Radar
 #' @name hgch_spider_CaNuNu
 #' @param x A data.frame
 #' @export
@@ -147,7 +147,7 @@ hgch_spider_CaNuNu <- function(data,
 
 
 
-#' hgch_bubble_CaNu
+#' Bubble
 #' @name hgch_bubble_CaNu
 #' @param x A data.frame
 #' @export
@@ -181,10 +181,14 @@ hgch_bubble_CaNu <-function(data, title = ""){
   hc
 }
 
-#' hgch_scatter_CaNuNu
+#' Scatter
 #' @name hgch_scatter_CaNuNu
+#' @param x A data.frame
 #' @export
+#' @return highcharts viz
 #' @section ftype: Ca-Nu-Nu
+#' @examples
+#' hgch_scatter_CaNuNu(sampleData("Ca-Nu-Nu",nrow = 10))
 hgch_scatter_CaNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL, export = FALSE,...){
 
   if(class(data)[1] == "Fringe"){
@@ -230,10 +234,15 @@ hgch_scatter_CaNuNu <- function(data, title = NULL, subtitle = NULL, caption = N
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-#' hgch_scatter_CaNuNuNu
+
+#' Scatter
 #' @name hgch_scatter_CaNuNuNu
+#' @param x A data.frame
 #' @export
+#' @return highcharts viz
 #' @section ftype: Ca-Nu-Nu-Nu
+#' @examples
+#' hgch_scatter_CaNuNuNu(sampleData("Ca-Nu-Nu-Nu",nrow = 10))
 hgch_scatter_CaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -262,10 +271,15 @@ hgch_scatter_CaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption =
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-#' hgch_scatter_CaCaNuNu
+
+#' Scatter
 #' @name hgch_scatter_CaCaNuNu
+#' @param x A data.frame
 #' @export
-#' @section ftype: Ca-Nu-Nu
+#' @return highcharts viz
+#' @section ftype: Ca-Ca-Nu-Nu
+#' @examples
+#' hgch_scatter_CaCaNuNu(sampleData("Ca-Ca-Nu-Nu",nrow = 10))
 hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   if(class(data)[1] == "Fringe"){
@@ -306,10 +320,14 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption =
   hc
 }
 
-#' hgch_scatter_CaCaNuNuNu
+#' Scatter
 #' @name hgch_scatter_CaCaNuNuNu
+#' @param x A data.frame
 #' @export
-#' @section ftype: Ca-Nu-Nu
+#' @return highcharts viz
+#' @section ftype: Ca-Ca-Nu-Nu-Nu
+#' @examples
+#' hgch_scatter_CaCaNuNuNu(sampleData("Ca-Ca-Nu-Nu-Nu",nrow = 10))
 hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
 

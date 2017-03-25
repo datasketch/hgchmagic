@@ -2,7 +2,7 @@
 % Please edit documentation in R/viz.R
 \name{hgch_donut_Ca}
 \alias{hgch_donut_Ca}
-\title{hgch_donut_Ca}
+\title{Donut}
 \usage{
 hgch_donut_Ca(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
@@ -15,7 +15,7 @@ hgch_donut_Ca(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_donut_Ca
+Donut
 }
 \section{ftype}{
  Ca

@@ -2,7 +2,7 @@
 % Please edit documentation in R/lines.R
 \name{hgch_line_DaNu}
 \alias{hgch_line_DaNu}
-\title{hgch_line_DaNu}
+\title{Line}
 \usage{
 hgch_line_DaNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
@@ -15,7 +15,7 @@ hgch_line_DaNu(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_line_DaNu
+Line
 }
 \section{ftype}{
  Da-Nu

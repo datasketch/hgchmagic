@@ -2,7 +2,7 @@
 % Please edit documentation in R/bars.R
 \name{hgch_bar_ver_top_Ca}
 \alias{hgch_bar_ver_top_Ca}
-\title{hgch_bar_ver_top_Ca}
+\title{Ordered vertical bar}
 \usage{
 hgch_bar_ver_top_Ca(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, reverse = TRUE,
@@ -15,7 +15,7 @@ hgch_bar_ver_top_Ca(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_bar_ver_top_Ca
+Ordered vertical bar
 }
 \section{ftype}{
  Ca

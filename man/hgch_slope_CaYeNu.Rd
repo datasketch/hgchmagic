@@ -2,8 +2,7 @@
 % Please edit documentation in R/lines.R
 \name{hgch_slope_CaYeNu}
 \alias{hgch_slope_CaYeNu}
-\title{hgch_slope_CaYeNu
-Slope}
+\title{Slope}
 \usage{
 hgch_slope_CaYeNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
@@ -16,7 +15,6 @@ hgch_slope_CaYeNu(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_slope_CaYeNu
 Slope
 }
 \section{ftypes}{

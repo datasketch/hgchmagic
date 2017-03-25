@@ -2,7 +2,7 @@
 % Please edit documentation in R/bars.R
 \name{hgch_bar_ver_CaNu}
 \alias{hgch_bar_ver_CaNu}
-\title{hgch_bar_ver_CaNu}
+\title{Vertical bar}
 \usage{
 hgch_bar_ver_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = NULL,
@@ -16,10 +16,10 @@ hgch_bar_ver_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_bar_ver_CaNu
+Vertical bar
 }
 \section{ftype}{
- Ca-Ye-Nu
+ Ca-Nu
 }
 
 \examples{

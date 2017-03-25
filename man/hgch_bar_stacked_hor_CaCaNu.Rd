@@ -2,7 +2,7 @@
 % Please edit documentation in R/bars.R
 \name{hgch_bar_stacked_hor_CaCaNu}
 \alias{hgch_bar_stacked_hor_CaCaNu}
-\title{hgch_bar_stacked_hor_CaCaNu}
+\title{Horizontal stacked bar}
 \usage{
 hgch_bar_stacked_hor_CaCaNu(data, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
@@ -15,12 +15,12 @@ hgch_bar_stacked_hor_CaCaNu(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-hgch_bar_stacked_hor_CaCaNu
+Horizontal stacked bar
 }
 \section{ftype}{
- Ca-Ye-Nu
+ Ca-Ca-Nu
 }
 
 \examples{
-hgch_bar_stacked_hor_CaCaNu(sampleData("Ye-Nu-Nu",nrow = 10))
+hgch_bar_stacked_hor_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 }

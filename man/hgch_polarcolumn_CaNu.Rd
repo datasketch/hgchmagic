@@ -2,7 +2,7 @@
 % Please edit documentation in R/scatter.R
 \name{hgch_polarcolumn_CaNu}
 \alias{hgch_polarcolumn_CaNu}
-\title{hgch_polarcolumn_CaNu}
+\title{Polar bar}
 \usage{
 hgch_polarcolumn_CaNu(data, title = "")
 }
@@ -13,7 +13,7 @@ hgch_polarcolumn_CaNu(data, title = "")
 highcharts viz
 }
 \description{
-hgch_polarcolumn_CaNu
+Polar bar
 }
 \section{ftype}{
  Ca-Nu

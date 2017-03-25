@@ -2,7 +2,7 @@
 % Please edit documentation in R/viz.R
 \name{hgch_pie_Ca}
 \alias{hgch_pie_Ca}
-\title{hgch_pie_Ca}
+\title{Pie}
 \usage{
 hgch_pie_Ca(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
@@ -15,7 +15,7 @@ hgch_pie_Ca(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_pie_Ca
+Pie
 }
 \section{ftype}{
  Ca

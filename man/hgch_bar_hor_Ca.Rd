@@ -2,7 +2,7 @@
 % Please edit documentation in R/bars.R
 \name{hgch_bar_hor_Ca}
 \alias{hgch_bar_hor_Ca}
-\title{hgch_bar_hor_Ca}
+\title{Horizontal bar}
 \usage{
 hgch_bar_hor_Ca(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
@@ -15,7 +15,7 @@ hgch_bar_hor_Ca(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-hgch_bar_hor_Ca
+Horizontal bar
 }
 \section{ftype}{
  Ca
