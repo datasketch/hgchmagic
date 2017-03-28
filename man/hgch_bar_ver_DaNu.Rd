@@ -4,10 +4,10 @@
 \alias{hgch_bar_ver_DaNu}
 \title{Vertical bar}
 \usage{
-hgch_bar_ver_DaNu(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = NULL,
-  back_color = "white", color_title = "black", startAtZero = FALSE,
-  theme = NULL, export = FALSE, ...)
+hgch_bar_ver_DaNu(data, topn = NULL, title = NULL, subtitle = NULL,
+  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
+  aggregate = NULL, back_color = "white", color_title = "black",
+  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

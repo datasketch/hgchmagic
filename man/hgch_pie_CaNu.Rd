@@ -2,12 +2,11 @@
 % Please edit documentation in R/viz.R
 \name{hgch_pie_CaNu}
 \alias{hgch_pie_CaNu}
-\title{Pie}
+\title{hgch_pie_CaNu}
 \usage{
 hgch_pie_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, back_color = "white",
-  leg_op = TRUE, color_title = "#333333", sort = "no",
-  aggregate = "sum", export = FALSE, ...)
+  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = "sum",
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -16,7 +15,7 @@ hgch_pie_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
 highcharts viz
 }
 \description{
-Pie
+hgch_pie_CaNu
 }
 \section{ftype}{
  Ca-Nu

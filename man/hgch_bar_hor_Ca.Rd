@@ -4,8 +4,8 @@
 \alias{hgch_bar_hor_Ca}
 \title{Horizontal bar}
 \usage{
-hgch_bar_hor_Ca(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
+hgch_bar_hor_Ca(data, topn = NULL, title = NULL, subtitle = NULL,
+  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
   aggregate = "count", theme = NULL, export = FALSE, ...)
 }
 \arguments{

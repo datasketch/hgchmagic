@@ -4,8 +4,8 @@
 \alias{hgch_bar_ver_top_CaNu}
 \title{Ordered vertical bar}
 \usage{
-hgch_bar_ver_top_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, reverse = TRUE,
+hgch_bar_ver_top_CaNu(data, topn = NULL, title = NULL, subtitle = NULL,
+  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, reverse = TRUE,
   aggregate = "mean", theme = NULL, export = FALSE, ...)
 }
 \arguments{

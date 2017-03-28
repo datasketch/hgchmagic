@@ -4,8 +4,8 @@
 \alias{hgch_bar_ver_top_Ca}
 \title{Ordered vertical bar}
 \usage{
-hgch_bar_ver_top_Ca(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, reverse = TRUE,
+hgch_bar_ver_top_Ca(data, topn = NULL, title = NULL, subtitle = NULL,
+  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, reverse = TRUE,
   aggregate = "count", theme = NULL, export = FALSE, ...)
 }
 \arguments{
@@ -22,5 +22,5 @@ Ordered vertical bar
 }
 
 \examples{
-hgch_bar_ver_top_Ca(sampleData("Ca-Nu",nrow = 10))
+hgch_bar_ver_top_Ca(sampleData("Ca",nrow = 10))
 }
