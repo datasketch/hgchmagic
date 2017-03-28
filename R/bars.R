@@ -697,7 +697,10 @@ hgch_bar_stacked_hor_CaCaNu <-
            title = NULL,
            subtitle = NULL,
            caption = NULL,
-           xAxisTitle = NULL,
+           xAxisTitle = NULL,tags$style(type="text/css",
+                                        ".shiny-output-error { visibility: hidden; }",
+                                        ".shiny-output-error:before { visibility: hidden; }"
+           )
            yAxisTitle = NULL,
            symbol = NULL,
            startAtZero = FALSE,
@@ -954,14 +957,17 @@ hgch_bar_grouped_hor_CaNuP <- function(data,
 #' @return highcharts viz
 #' @section ftypes: NuP
 #' @examples
-#' hgch_bar_NuP(sampleData("NuP",nrow = 10))
+#' hgch_bar_ver_NuP(sampleData("NuP",nrow = 10))
 hgch_bar_ver_NuP <- function(data,
                          title = NULL,
                          subtitle = NULL,
                          caption = NULL,
                          xAxisTitle = NULL,
                          yAxisTitle = NULL,
+                         symbol = NULL,
+                         startAtZero = NULL,
                          ...) {
+
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -1359,7 +1365,7 @@ hgch_bar_stacked_100_hor_CaCa <-
       return()
     #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
     hc <-
-      hchart(d, type = "column", hcaes(x = b, y = c, group = a)) %>%
+      hchart(d, type = "bar", hcaes(x = b, y = c, group = a)) %>%
       hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol)),
                      column = list(stacking = "percent")) %>%
       hc_title(text = title) %>%
