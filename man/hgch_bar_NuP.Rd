@@ -6,7 +6,8 @@
 \title{Vertical bar}
 \usage{
 hgch_bar_ver_NuP(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, ...)
+  xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
+  startAtZero = NULL, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -22,5 +23,5 @@ Vertical bar
 }
 
 \examples{
-hgch_bar_NuP(sampleData("NuP",nrow = 10))
+hgch_bar_ver_NuP(sampleData("NuP",nrow = 10))
 }

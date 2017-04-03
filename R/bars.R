@@ -697,10 +697,7 @@ hgch_bar_stacked_hor_CaCaNu <-
            title = NULL,
            subtitle = NULL,
            caption = NULL,
-           xAxisTitle = NULL,tags$style(type="text/css",
-                                        ".shiny-output-error { visibility: hidden; }",
-                                        ".shiny-output-error:before { visibility: hidden; }"
-           )
+           xAxisTitle = NULL,
            yAxisTitle = NULL,
            symbol = NULL,
            startAtZero = FALSE,
