@@ -1381,3 +1381,126 @@ hgch_bar_stacked_100_hor_CaCa <-
     hc
   }
 
+#' Circular bar
+#' @name hgch_circular_bar_CaNu
+#' @param x A data.frame
+#' @export
+#' @return highcharts viz
+#' @section ftype: Ca-Nu
+#' @examples
+#' hgch_circular_bar_CaNu(sampleData("Ca-Nu",nrow = 10))
+hgch_circular_bar_CaNu <- function(data,
+                                   title = NULL,
+                                   subtitle = NULL,
+                                   caption = NULL,
+                                   theme = NULL,
+                                   export = FALSE,
+                                   ...) {
+
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+
+  title <-  title %||% ""
+  subtitle <- subtitle %||% ""
+
+  df <- f$d
+  df <- df %>% plyr::rename(c('a' = 'name', 'b' = 'y'))
+
+  df <- df %>%
+    group_by(name) %>%
+    dplyr::summarise(y=mean(y))
+
+  if(length(is.na(df$name) > 0)) {
+    df$name[is.na(df$name)] <- 'Na'
+  }
+
+  df <- df %>%
+    drop_na(y) %>%
+    arrange(-y) %>%
+    dplyr::mutate(y = round((y/sum(y)) * 100, 2))
+  #df$color <- map(0:(dim(df)[1] - 1), function(i) JS(paste0("Highcharts.getOptions().colors[",i,"]")))
+  set.seed(23)
+  df$color <- map(getPalette()[1:dim(df)[1]], function(i) i)
+
+
+  rD <- function(n_rows){
+    vc <- c()
+
+    if(n_rows < 4){
+      vi <- 112
+    }else{
+      vi <-  80 #187
+    }
+
+    if(n_rows < 4){
+      dif <- 25
+    }else{
+      dif <- 10 #187
+    }
+    for(i in 1:n_rows){
+      if(i==1){
+        vc[i] <- vi - dif
+      }else{
+        nv1 <- vc[i-1]
+        Nv <- nv1 - dif
+        vc[i] <- Nv
+      }
+    }
+    vc
+  }
+
+
+  df$radius <- rD(n_rows = dim(df)[1])
+  df$innerRadius <- df$radius - ifelse(dim(df)[1] < 4, 24, 9)
+  df$radius <- paste0(df$radius, '%')
+  df$innerRadius <- paste0(df$innerRadius, '%')
+  df$borderColor <- getPalette()[1:dim(df)[1]]
+
+
+  a <- df %>%
+    dplyr::group_by(name,borderColor) %>%
+    do(data =  transpose(c(color = .$color, radius = .$radius, y = .$y, innerRadius = .$innerRadius)))
+  #a$borderColor <- df$color
+
+
+  xx <- list_parse(a)
+
+  outerRadius <- df$radius
+  innerRadius <- df$innerRadius
+  #backgroundColor <-  map(0:(dim(df)[1] - 1),function(i) JS(paste0("Highcharts.Color(Highcharts.getOptions().colors[",i, "]).setOpacity(0.3).get()")))
+  backgroundColor <-  map(getPalette()[1:dim(df)[1]],
+                          function(i) JS(paste0("Highcharts.Color(",paste0("'",i,"'"),").setOpacity(0.3).get()")))
+
+  #map(0:(dim(df)[1] - 1), function(i) JS(paste0("Highcharts.Color(Highcharts.getOptions().colors[",i,"]).setOpacity(0.3).get()")))
+  borderWidth <- rep(0, dim(df)[1])
+
+  res <- list(outerRadius = outerRadius,
+              innerRadius = innerRadius,
+              backgroundColor = backgroundColor,
+              borderWidth = borderWidth) %>% transpose()
+
+
+  #style = list(width = '1500px', height = '1500px', margin = '0 auto')
+
+  hc <- highchart() %>%
+    hc_chart(type = "solidgauge") %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_tooltip(borderWidth = 0,backgroundColor = 'none',shadow = FALSE,style = list(fontSize = '16px'),
+               pointFormat = '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}%</span>',
+               positioner = JS("function (labelWidth, labelHeight) {return {x: 200 - labelWidth / 2,y: 180};}")) %>%
+    hc_pane(startAngle = 0,endAngle = 360,
+            background = res ) %>%
+    hc_yAxis(min = 0,max = 100,lineWidth = 0,tickPositions = list()) %>%
+    hc_plotOptions(solidgauge = list(borderWidth = '2px',dataLabels = list(enabled = FALSE),linecap = 'round',stickyTracking = FALSE)) %>%
+    hc_add_series_list(xx)  %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_exporting(enabled = TRUE) %>%
+    hc_credits(enabled = TRUE, text = caption)
+
+  hc
+
+}
+

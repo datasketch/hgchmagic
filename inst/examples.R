@@ -169,6 +169,12 @@ hgch_bar_grouped_hor_CaNuP(data)
 hgch_bar_grouped_ver_CaCa(sampleData("Ca-Ca",nrow = 10))
 hgch_bar_grouped_hor_CaCa(sampleData("Ca-Ca",nrow = 10))
 
+
+data <- sampleData('Ca-Nu',nrow = 100)
+hgch_circular_bar_CaNu(data)
+df <- data.frame(name = c('bum','gtos'), y = c(34,90))
+hgch_circular_bar_CaNu(df, caption = 'ajknsa', title = 'ndjsdd', subtitle = 'njaks')
+
 data <- sampleData("NuP")
 
 hgch_waterfall_CaNu(sampleData("Ca-Nu",nrow = 10), title = "hola")
