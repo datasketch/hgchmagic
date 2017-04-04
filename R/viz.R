@@ -8,7 +8,7 @@
 #' @examples
 #' hgch_pie_Ca(sampleData("Ca",nrow = 10))
 hgch_pie_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            sort = "no", aggregate = "count", export = FALSE,...){
+                            sort = "no", aggregate = "count", export = FALSE, theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -20,7 +20,7 @@ hgch_pie_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAx
   if(nrow(d)==0) return()
   d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = n())
 
-  hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
+  hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
@@ -28,6 +28,9 @@ hgch_pie_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAx
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  hc
 }
 
 #' hgch_pie_CaNu
@@ -39,7 +42,7 @@ hgch_pie_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAx
 #' @examples
 #' hgch_pie_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                        sort = "no", aggregate = "sum", export = FALSE,...){
+                        sort = "no", aggregate = "sum", export = FALSE, theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -51,7 +54,7 @@ hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
   if(nrow(d)==0) return()
   d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = sum(b))
 
-  hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
+  hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
@@ -59,6 +62,10 @@ hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
+
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  hc
 }
 
 
@@ -71,7 +78,7 @@ hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
 #' @examples
 #' hgch_donut_Ca(sampleData("Ca",nrow = 10))
 hgch_donut_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                        sort = "no", aggregate = "count", export = FALSE,...){
+                        sort = "no", aggregate = "count", export = FALSE, theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -83,7 +90,7 @@ hgch_donut_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
   if(nrow(d)==0) return()
   d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = n())
 
-  hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
+  hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
       series = list(innerSize= '60%',dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
@@ -91,6 +98,10 @@ hgch_donut_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
+
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  hc
 }
 
 #' hgch_donut_CaNu
@@ -102,7 +113,7 @@ hgch_donut_Ca <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
 #' @examples
 #' hgch_donut_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                          sort = "no", aggregate = "sum", export = FALSE,...){
+                          sort = "no", aggregate = "sum", export = FALSE, theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -114,7 +125,7 @@ hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
   if(nrow(d)==0) return()
   d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = sum(b))
 
-  hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
+  hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
       series = list(innerSize= '60%',dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
@@ -122,6 +133,10 @@ hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
+
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  hc
 }
 
 
@@ -139,7 +154,7 @@ hgch_donut_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL,
 #' hgch_radar_Ca(sampleData("Ca", nrow = 10))
 hgch_radar_Ca <- function(data,
                             title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            sort = "no", aggregate = "mean", export = FALSE,...){
+                            sort = "no", aggregate = "mean", export = FALSE, theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -151,7 +166,7 @@ hgch_radar_Ca <- function(data,
   d <- na.omit(d)
   if(nrow(d)==0) return()
   d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = n())
-  highchart() %>%
+  hc <- highchart() %>%
     hc_chart(type = "line", polar = TRUE) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
@@ -164,6 +179,10 @@ hgch_radar_Ca <- function(data,
         data = d$b,
         pointPlacement = 'on'
       ))
+
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  hc
 }
 
 
@@ -177,7 +196,7 @@ hgch_radar_Ca <- function(data,
 #' hgch_radar_CaNu(sampleData("Ca-Nu",nrow = 10))
 hgch_radar_CaNu <- function(data,
                             title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            sort = "no", aggregate = "mean", export = FALSE,...){
+                            sort = "no", aggregate = "mean", export = FALSE, theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -189,7 +208,7 @@ hgch_radar_CaNu <- function(data,
   d <- na.omit(d)
   if(nrow(d)==0) return()
   d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b,na.rm = TRUE))
-  highchart() %>%
+  hc <- highchart() %>%
     hc_chart(type = "line", polar = TRUE) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
@@ -202,6 +221,10 @@ hgch_radar_CaNu <- function(data,
         data = d$b,
         pointPlacement = 'on'
       ))
+
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  hc
 }
 
 

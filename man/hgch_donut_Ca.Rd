@@ -6,7 +6,7 @@
 \usage{
 hgch_donut_Ca(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
-  aggregate = "count", export = FALSE, ...)
+  aggregate = "count", export = FALSE, theme = NULL, ...)
 }
 \arguments{
 \item{x}{A data.frame}

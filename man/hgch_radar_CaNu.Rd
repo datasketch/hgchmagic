@@ -6,7 +6,7 @@
 \usage{
 hgch_radar_CaNu(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = "mean",
-  export = FALSE, ...)
+  export = FALSE, theme = NULL, ...)
 }
 \arguments{
 \item{x}{A data.frame}
