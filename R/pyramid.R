@@ -1,12 +1,12 @@
 #' Pyramid
-#' @name hgch_pyramid_CaNu
+#' @name hgch_pyramid_CatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu
+#' @section ftype: Cat-Num
 #' @examples
-#' hgch_pyramid_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_pyramid_CaNu <-function(data, title = ""){
+#' hgch_pyramid_CatNum(sampleData("Cat-Num",nrow = 10))
+hgch_pyramid_CatNum <-function(data, title = ""){
 
   f <- fringe(data)
   nms <- getCnames(f)
@@ -40,14 +40,14 @@ hgch_pyramid_CaNu <-function(data, title = ""){
 
 
 #' Funnel
-#' @name hgch_funnel_CaNu
+#' @name hgch_funnel_CatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu
+#' @section ftype: Cat-Num
 #' @examples
-#' hgch_funnel_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_funnel_CaNu <-function(data, title = ""){
+#' hgch_funnel_CatNum(sampleData("Cat-Num",nrow = 10))
+hgch_funnel_CatNum <-function(data, title = ""){
 
 
   f <- fringe(data)

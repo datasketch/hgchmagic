@@ -1,12 +1,12 @@
 #' Polar bar
-#' @name hgch_polarcolumn_Ca
+#' @name hgch_polarcolumn_Cat
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca
+#' @section ftype: Cat
 #' @examples
-#' hgch_polarcolumn_Ca(sampleData("Ca",nrow = 10))
-hgch_polarcolumn_Ca <-function(data, title = ""){
+#' hgch_polarcolumn_Cat(sampleData("Cat",nrow = 10))
+hgch_polarcolumn_Cat <-function(data, title = ""){
 
   f <- fringe(data)
   nms <- getCnames(f)
@@ -27,19 +27,19 @@ hgch_polarcolumn_Ca <-function(data, title = ""){
     hc_title(text = title) %>%
     hc_chart(type = "column",
              polar = TRUE) %>%
-    hc_xAxis(categories = data_graph$name) %>%
+    hc_xAxis(Cattegories = data_graph$name) %>%
     hc_add_series(data_graph, showInLegend = FALSE)
   hc
 }
 #' Polar bar
-#' @name hgch_polarcolumn_CaNu
+#' @name hgch_polarcolumn_CatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu
+#' @section ftype: Cat-Num
 #' @examples
-#' hgch_polarcolumn_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_polarcolumn_CaNu <-function(data, title = ""){
+#' hgch_polarcolumn_CatNum(sampleData("Cat-Num",nrow = 10))
+hgch_polarcolumn_CatNum <-function(data, title = ""){
 
   f <- fringe(data)
   nms <- getCnames(f)
@@ -60,20 +60,20 @@ hgch_polarcolumn_CaNu <-function(data, title = ""){
     hc_title(text = title) %>%
     hc_chart(type = "column",
              polar = TRUE) %>%
-    hc_xAxis(categories = data_graph$name) %>%
+    hc_xAxis(Cattegories = data_graph$name) %>%
     hc_add_series(data_graph, showInLegend = FALSE)
   hc
 }
 
 #' Radar
-#' @name hgch_spider_CaNu
+#' @name hgch_spider_CatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu
+#' @section ftype: Cat-Num
 #' @examples
-#' hgch_spider_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_spider_CaNu <-function(data, title = ""){
+#' hgch_spider_CatNum(sampleData("Cat-Num",nrow = 10))
+hgch_spider_CatNum <-function(data, title = ""){
 
   f <- fringe(data)
   nms <- getCnames(f)
@@ -94,21 +94,21 @@ hgch_spider_CaNu <-function(data, title = ""){
     hc_title(text = title) %>%
     hc_chart(type = "line",
              polar = TRUE) %>%
-    hc_xAxis(categories = data_graph$name) %>%
+    hc_xAxis(Cattegories = data_graph$name) %>%
     hc_add_series(data_graph, showInLegend = FALSE)
   hc
 }
 
 #' Radar
-#' @name hgch_spider_CaNuNu
+#' @name hgch_spider_CatNumNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu-Nu
+#' @section ftype: Cat-Num-Num
 #' @examples
-#' hgch_spider_CaNuNu(sampleData("Ca-Nu-Nu",nrow = 10))
-hgch_spider_CaNuNu <- function(data,
-                               title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_spider_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
+hgch_spider_CatNumNum <- function(data,
+                               title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                sort = "no", aggregate = "mean", theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -127,7 +127,7 @@ hgch_spider_CaNuNu <- function(data,
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle),
-             categories = d$a,tickmarkPlacement = 'on',
+             Cattegories = d$a,tickmarkPlacement = 'on',
              lineWidth = 0) %>%
     hc_series(
       list(
@@ -148,14 +148,14 @@ hgch_spider_CaNuNu <- function(data,
 
 
 #' Bubble
-#' @name hgch_bubble_CaNu
+#' @name hgch_bubble_CatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu
+#' @section ftype: Cat-Num
 #' @examples
-#' hgch_bubble_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_bubble_CaNu <-function(data, title = ""){
+#' hgch_bubble_CatNum(sampleData("Cat-Num",nrow = 10))
+hgch_bubble_CatNum <-function(data, title = ""){
 
   f <- fringe(data)
   nms <- getCnames(f)
@@ -176,20 +176,20 @@ hgch_bubble_CaNu <-function(data, title = ""){
     hc_title(text = title) %>%
     hc_chart(type = "bubble",
              polar = FALSE) %>%
-    hc_xAxis(categories = data_graph$name) %>%
+    hc_xAxis(Cattegories = data_graph$name) %>%
     hc_add_series(data_graph, showInLegend = FALSE)
   hc
 }
 
-#' Scatter
-#' @name hgch_scatter_CaNuNu
+#' SCattter
+#' @name hgch_scatter_CatNumNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu-Nu
+#' @section ftype: Cat-Num-Num
 #' @examples
-#' hgch_scatter_CaNuNu(sampleData("Ca-Nu-Nu",nrow = 10))
-hgch_scatter_CaNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL, export = FALSE,...){
+#' hgch_scatter_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
+hgch_scatter_CatNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL, export = FALSE,...){
 
   if(class(data)[1] == "Fringe"){
     ni <- getClabels(data)
@@ -235,15 +235,15 @@ hgch_scatter_CaNuNu <- function(data, title = NULL, subtitle = NULL, caption = N
   hc
 }
 
-#' Scatter
-#' @name hgch_scatter_CaNuNuNu
+#' SCattter
+#' @name hgch_scatter_CatNumNumNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu-Nu-Nu
+#' @section ftype: Cat-Num-Num-Num
 #' @examples
-#' hgch_scatter_CaNuNuNu(sampleData("Ca-Nu-Nu-Nu",nrow = 10))
-hgch_scatter_CaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
+#' hgch_scatter_CatNumNumNum(sampleData("Cat-Num-Num-Num",nrow = 10))
+hgch_scatter_CatNumNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -272,15 +272,15 @@ hgch_scatter_CaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption =
   hc
 }
 
-#' Scatter
-#' @name hgch_scatter_CaCaNuNu
+#' SCattter
+#' @name hgch_scatter_CatCatNumNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ca-Nu-Nu
+#' @section ftype: Cat-Cat-Num-Num
 #' @examples
-#' hgch_scatter_CaCaNuNu(sampleData("Ca-Ca-Nu-Nu",nrow = 10))
-hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
+#' hgch_scatter_CatCatNumNum(sampleData("Cat-Cat-Num-Num",nrow = 10))
+hgch_scatter_CatCatNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   if(class(data)[1] == "Fringe"){
     ni <- getClabels(data)
@@ -320,15 +320,15 @@ hgch_scatter_CaCaNuNu <- function(data, title = NULL, subtitle = NULL, caption =
   hc
 }
 
-#' Scatter
-#' @name hgch_scatter_CaCaNuNuNu
+#' SCattter
+#' @name hgch_scatter_CatCatNumNumNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ca-Nu-Nu-Nu
+#' @section ftype: Cat-Cat-Num-Num-Num
 #' @examples
-#' hgch_scatter_CaCaNuNuNu(sampleData("Ca-Ca-Nu-Nu-Nu",nrow = 10))
-hgch_scatter_CaCaNuNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
+#' hgch_scatter_CatCatNumNumNum(sampleData("Cat-Cat-Num-Num-Num",nrow = 10))
+hgch_scatter_CatCatNumNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
 
   if(class(data)[1] == "Fringe"){

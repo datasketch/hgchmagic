@@ -1,16 +1,16 @@
 
 #' Treemap density by numeric variable
-#' @name hgch_treemap_CaNu
+#' @name hgch_treemap_CatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu
+#' @section ftype: Cat-Num
 #' @examples
-#' hgch_treemap_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_treemap_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_treemap_CatNum(sampleData("Cat-Num",nrow = 10))
+hgch_treemap_CatNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                               minColor = "#E63917", maxColor= "#18941E", back_color = 'white', color_title = 'black',
                               reverse = TRUE, export = FALSE,...){
-  # data <- sampleData("Ca-Nu")
+  # data <- sampleData("Cat-Num")
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -39,14 +39,14 @@ hgch_treemap_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NUL
 }
 
 #' Treemap coloured by first variable
-#' @name hgch_treemap_discrete_color_CaNu
+#' @name hgch_treemap_discrete_color_CatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu
+#' @section ftype: Cat-Num
 #' @examples
-#' hgch_treemap_discrete_color_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_treemap_discrete_color_CaNu <-function(data, title = NULL, subtitle = NULL,  xAxisTitle = NULL, yAxisTitle = NULL, export = FALSE){
+#' hgch_treemap_discrete_color_CatNum(sampleData("Cat-Num",nrow = 10))
+hgch_treemap_discrete_color_CatNum <-function(data, title = NULL, subtitle = NULL,  xAxisTitle = NULL, yAxisTitle = NULL, export = FALSE){
 
   f <- fringe(data)
   nms <- getCnames(f)
@@ -75,7 +75,7 @@ hgch_treemap_discrete_color_CaNu <-function(data, title = NULL, subtitle = NULL,
         hc_subtitle(text = subtitle) %>%
         hc_chart(type = "treemap",
                  polar = FALSE) %>%
-        hc_xAxis(categories = data_graph$name) %>%
+        hc_xAxis(Cattegories = data_graph$name) %>%
         hc_add_series(data_graph, showInLegend = FALSE)
   if (export)
     hc <- hc %>% hc_exporting(enabled = TRUE)
@@ -84,14 +84,14 @@ hgch_treemap_discrete_color_CaNu <-function(data, title = NULL, subtitle = NULL,
 
 
 #' Treemap density by numeric variable
-#' @name hgch_treemap_CaCaNu
+#' @name hgch_treemap_CatCatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ca-Nu
+#' @section ftype: Cat-Cat-Num
 #' @examples
-#' hgch_treemap_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
-hgch_treemap_CaCaNu <- function(data, title = NULL,subtitle = NULL,
+#' hgch_treemap_CatCatNum(sampleData("Cat-Cat-Num",nrow = 10))
+hgch_treemap_CatCatNum <- function(data, title = NULL,subtitle = NULL,
                                 minColor = "#E63917", maxColor= "#18941E",
                                 reverse = TRUE, export = FALSE,...){
   f <- fringe(data)

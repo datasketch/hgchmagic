@@ -1,12 +1,12 @@
 #' Vertical area
-#' @name hgch_area_DaNu
+#' @name hgch_area_DatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Da-Nu
+#' @section ftype: Dat-Num
 #' @examples
-#' hgch_area_DaNu(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_area_DaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_area_DatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
+hgch_area_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -44,25 +44,25 @@ hgch_area_DaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, 
 }
 
 #' Vertical area
-#' @name hgch_area_CaNu
+#' @name hgch_area_CatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu
+#' @section ftype: Cat-Num
 #' @examples
-#' hgch_area_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_area_CaNu <-hgch_area_DaNu
+#' hgch_area_CatNum(sampleDatta("Cat-Num",nrow = 10))
+hgch_area_CatNum <-hgch_area_DatNum
 
 
 #' Vertical area
-#' @name hgch_area_YeNu
+#' @name hgch_area_YeaNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ye-Nu
+#' @section ftype: Yea-Num
 #' @examples
-#' hgch_area_YeNu(sampleData("Ye-Nu",nrow = 10))
-hgch_area_YeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_area_YeaNum(sampleDatta("Yea-Num",nrow = 10))
+hgch_area_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -99,14 +99,14 @@ hgch_area_YeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, 
   hc
 }
 #' Vertical area
-#' @name hgch_area_CaCaNu
+#' @name hgch_area_CatCatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ca-Nu
+#' @section ftype: Cat-Cat-Num
 #' @examples
-#' hgch_area_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
-hgch_area_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_area_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+hgch_area_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -144,24 +144,24 @@ hgch_area_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL
   hc
 }
 #' Vertical area
-#' @name hgch_area_CaYeNu
+#' @name hgch_area_CatYeaNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Cat-Yea-Num
 #' @examples
-#' hgch_area_CaYeNu(sampleData("Ca-Ye-Nu",nrow = 10))
-hgch_area_CaYeNu <- hgch_area_CaCaNu
+#' hgch_area_CatYeaNum(sampleDatta("Cat-Yea-Num",nrow = 10))
+hgch_area_CatYeaNum <- hgch_area_CatCatNum
 
 #' Vertical stacked area
-#' @name hgch_area_stacked_CaCaNu
+#' @name hgch_area_stacked_CatCatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ca-Nu
+#' @section ftype: Cat-Cat-Num
 #' @examples
-#' hgch_area_stacked_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
-hgch_area_stacked_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_area_stacked_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+hgch_area_stacked_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                    symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -200,25 +200,25 @@ hgch_area_stacked_CaCaNu <- function(data, title = NULL, subtitle = NULL, captio
   hc
 }
 #' Vertical stacked area
-#' @name hgch_area_stacked_CaYeNu
+#' @name hgch_area_stacked_CatYeaNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Cat-Yea-Num
 #' @examples
-#' hgch_area_stacked_CaYeNu(sampleData("Ca-Ye-Nu",nrow = 10))
-hgch_area_stacked_CaYeNu <- hgch_area_stacked_CaCaNu
+#' hgch_area_stacked_CatYeaNum(sampleDatta("Cat-Yea-Num",nrow = 10))
+hgch_area_stacked_CatYeaNum <- hgch_area_stacked_CatCatNum
 
 
 #' Vertical 100% stacked area
-#' @name hgch_area_stacked_100_CaCaNu
+#' @name hgch_area_stacked_100_CatCatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ca-Nu
+#' @section ftype: Cat-Cat-Num
 #' @examples
-#' hgch_area_stacked_100_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
-hgch_area_stacked_100_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_area_stacked_100_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+hgch_area_stacked_100_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                        symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -257,24 +257,24 @@ hgch_area_stacked_100_CaCaNu <- function(data, title = NULL, subtitle = NULL, ca
   hc
 }
 #' Vertical 100% stacked area
-#' @name hgch_area_stacked_100_CaYeNu
+#' @name hgch_area_stacked_100_CatYeaNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Cat-Yea-Num
 #' @examples
-#' hgch_area_stacked_CaYeNu(sampleData("Ca-Ye-Nu",nrow = 10))
-hgch_area_stacked_100_CaYeNu <- hgch_area_stacked_100_CaCaNu
+#' hgch_area_stacked_CatYeaNum(sampleDatta("Cat-Yea-Num",nrow = 10))
+hgch_area_stacked_100_CatYeaNum <- hgch_area_stacked_100_CatCatNum
 
 #' Vertical area
-#' @name hgch_area_CaDaNu
+#' @name hgch_area_CatDatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Da-Nu
+#' @section ftype: Cat-Dat-Num
 #' @examples
-#' hgch_area_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_area_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_area_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
+hgch_area_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL,startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -312,14 +312,14 @@ hgch_area_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL
   hc
 }
 #' Vertical stacked area
-#' @name hgch_area_stacked_CaDaNu
+#' @name hgch_area_stacked_CatDatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Da-Nu
+#' @section ftype: Cat-Dat-Num
 #' @examples
-#' hgch_area_stacked_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_area_stacked_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_area_stacked_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
+hgch_area_stacked_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                    symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -360,14 +360,14 @@ hgch_area_stacked_CaDaNu <- function(data, title = NULL, subtitle = NULL, captio
 
 
 #' Vertical 100% stacked area
-#' @name hgch_area_stacked_100_CaDaNu
+#' @name hgch_area_stacked_100_CatDatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Da-Nu
+#' @section ftype: Cat-Dat-Num
 #' @examples
-#' hgch_area_stacked_100_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_area_stacked_100_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_area_stacked_100_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
+hgch_area_stacked_100_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                        symbol = NULL, startAtZero = FALSE,
                                        theme = NULL, export = FALSE,...){
 
@@ -409,16 +409,16 @@ hgch_area_stacked_100_CaDaNu <- function(data, title = NULL, subtitle = NULL, ca
 
 
 
-# #' hgch_2yline_YeNuNu
+# #' hgch_2yline_YeaNumNum
 # #' 2 y lines
 # #' @name hgch_multilines.
 # #' @param x A data.frame
 # #' @export
 # #' @return highcharts viz
-# #' @section ftypes: Ye-Nu-Nu
+# #' @section ftypes: Yea-Num-Num
 # #' @examples
-# #' hgch_2yline_YeNuNu(sampleData("Ye-Nu-Nu",nrow = 10))
-# hgch_2yline_YeNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL,
+# #' hgch_2yline_YeaNumNum(sampleDatta("Yea-Num-Num",nrow = 10))
+# hgch_2yline_YeaNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL,
 #                                yAxisTitle1 = NULL, yAxisTitle2 = NULL,
 #                                symbol = NULL, theme = NULL, export = FALSE,...){
 #
@@ -455,16 +455,16 @@ hgch_area_stacked_100_CaDaNu <- function(data, title = NULL, subtitle = NULL, ca
 #
 #
 #
-# #' hgch_multilines_YeNuP
+# #' hgch_multilines_YeaNumP
 # #' Multilines
 # #' @name hgch_multilines.
 # #' @param x A data.frame
 # #' @export
 # #' @return highcharts viz
-# #' @section ftypes: Ye-Nu*
+# #' @section ftypes: Yea-Num*
 # #' @examples
-# #' hgch_multilines_YeNuP(sampleData("Ye-Nu-Nu",nrow = 10))
-# hgch_multilines_YeNuP <- function(data,
+# #' hgch_multilines_YeaNumP(sampleDatta("Yea-Num-Num",nrow = 10))
+# hgch_multilines_YeaNumP <- function(data,
 #                                   title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
 #                                   symbol = NULL,  startAtZero = FALSE,...){
 #   f <- fringe(data)

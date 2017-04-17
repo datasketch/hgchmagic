@@ -1,13 +1,13 @@
 
 #' Line
-#' @name hgch_line_DaNu
+#' @name hgch_line_DatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Da-Nu
+#' @section ftype: Dat-Num
 #' @examples
-#' hgch_line_DaNu(sampleData("Da-Nu",nrow = 10))
-hgch_line_DaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_line_DatNum(sampleDatta("Dat-Num",nrow = 10))
+hgch_line_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -37,25 +37,25 @@ hgch_line_DaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, 
 }
 
 #' Line
-#' @name hgch_line_CaNu
+#' @name hgch_line_CatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Nu
+#' @section ftype: Cat-Num
 #' @examples
-#' hgch_line_CaNu(sampleData("Ca-Nu",nrow = 10))
-hgch_line_CaNu <-hgch_line_DaNu
+#' hgch_line_CatNum(sampleDatta("Cat-Num",nrow = 10))
+hgch_line_CatNum <-hgch_line_DatNum
 
 
 #' Line
-#' @name hgch_line_CaYeNu
+#' @name hgch_line_CatYeaNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ye-Nu
+#' @section ftype: Cat-Yea-Num
 #' @examples
-#' hgch_line_CaYeNu(sampleData("Ca-Ye-Nu",nrow = 10))
-hgch_line_CaYeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_line_CatYeaNum(sampleDatta("Cat-Yea-Num",nrow = 10))
+hgch_line_CatYeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
 
@@ -108,14 +108,14 @@ hgch_line_CaYeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL
 }
 
 #' Line
-#' @name hgch_line_YeNu
+#' @name hgch_line_YeaNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ye-Nu
+#' @section ftype: Yea-Num
 #' @examples
-#' hgch_line_YeNu(sampleData("Ye-Nu",nrow = 10))
-hgch_line_YeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_line_YeaNum(sampleDatta("Yea-Num",nrow = 10))
+hgch_line_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
   f <- fringe(data)
   nms <- getClabels(f)
@@ -142,25 +142,25 @@ hgch_line_YeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, 
   hc
 }
 #' Line
-#' @name hgch_line_CaCaNu
+#' @name hgch_line_CatCatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Ca-Nu
+#' @section ftype: Cat-Cat-Num
 #' @examples
-#' hgch_line_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
-hgch_line_CaCaNu <- hgch_line_CaYeNu
+#' hgch_line_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+hgch_line_CatCatNum <- hgch_line_CatYeaNum
 
 
 #' Line
-#' @name hgch_line_CaDaNu
+#' @name hgch_line_CatDatNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ca-Da-Nu
+#' @section ftype: Cat-Dat-Num
 #' @examples
-#' hgch_line_CaDaNu(sampleData("Ca-Da-Nu",nrow = 10))
-hgch_line_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_line_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
+hgch_line_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -195,14 +195,14 @@ hgch_line_CaDaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL
 
 
 #' 2 y line
-#' @name hgch_2yline_YeNuNu
+#' @name hgch_2yline_YeaNumNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftypes: Ye-Nu-Nu
+#' @section ftypes: Yea-Num-Num
 #' @examples
-#' hgch_2yline_YeNuNu(sampleData("Ye-Nu-Nu",nrow = 10))
-hgch_2yline_YeNuNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL,
+#' hgch_2yline_YeaNumNum(sampleDatta("Yea-Num-Num",nrow = 10))
+hgch_2yline_YeaNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL,
                                yAxisTitle1 = NULL, yAxisTitle2 = NULL,
                                symbol = NULL, theme = NULL, export = FALSE,...){
   f <- fringe(data)
@@ -243,14 +243,14 @@ hgch_2yline_YeNuNu <- function(data, title = NULL, subtitle = NULL, caption = NU
 
 
 #' Grouped line
-#' @name hgch_multilines_YeNuP
+#' @name hgch_multilines_YeaNumP
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftypes: Ye-NuP
+#' @section ftypes: Yea-NumP
 #' @examples
-#' hgch_multilines_YeNuP(sampleData("Ye-NuP",nrow = 10))
-hgch_multilines_YeNuP <- function(data,
+#' hgch_multilines_YeaNumP(sampleDatta("Yea-NumP",nrow = 10))
+hgch_multilines_YeaNumP <- function(data,
                                   title = NULL, subtitle = NULL, caption = NULL,
                                   xAxisTitle = NULL, yAxisTitle = NULL,
                                   symbol = NULL,  startAtZero = FALSE, theme = NULL, export = FALSE,...){
@@ -287,14 +287,14 @@ hgch_multilines_YeNuP <- function(data,
 }
 
 #' Slope
-#' @name hgch_slope_CaYeNu
+#' @name hgch_slope_CatYeaNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftypes: Ca-Ye-Nu
+#' @section ftypes: Cat-Yea-Num
 #' @examples
-#' hgch_slope_CaYeNu(sampleData('Ca-Ye-Nu'))
-hgch_slope_CaYeNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+#' hgch_slope_CatYeaNum(sampleDatta('Cat-Yea-Num'))
+hgch_slope_CatYeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                               symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
 

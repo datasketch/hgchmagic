@@ -12,14 +12,14 @@ count_pl <- function(x) {
 
 
 #' Choropleth's world map
-#' @name hgch_map_choro_world_GeNu
+#' @name hgch_map_choro_world_GcdNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ge-Nu
+#' @section ftype: Gcd-Num
 #' @examples
-#' hgch_map_choro_world_GeNu(sampleData("Ge-Nu",nrow = 10))
-hgch_map_choro_world_GeNu <- function(data, title = NULL,
+#' hgch_map_choro_world_GcdNum(sampleData("Gcd-Num",nrow = 10))
+hgch_map_choro_world_GcdNum <- function(data, title = NULL,
                                       subtitle = NULL,
                                       xAxisTitle = NULL,
                                       yAxisTitle = NULL,
@@ -53,14 +53,14 @@ hgch_map_choro_world_GeNu <- function(data, title = NULL,
 
 
 #' Bubble world map
-#' @name hgch_map_bubbles_world_GeNu
+#' @name hgch_map_bubbles_world_GcdNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ge-Nu
+#' @section ftype: Gcd-Num
 #' @examples
-#' hgch_map_bubbles_world_GeNu(sampleData("Ge-Nu",nrow = 10))
-hgch_map_bubbles_world_GeNu <- function(data,
+#' hgch_map_bubbles_world_GcdNum(sampleData("Gcd-Num",nrow = 10))
+hgch_map_bubbles_world_GcdNum <- function(data,
                                         title = NULL,
                                         subtitle = NULL,
                                         geoinfoPath = NULL,
@@ -155,14 +155,14 @@ hgch_map_bubbles_world_GeNu <- function(data,
 
 
 #' Bubble latam map
-#' @name hgch_map_bubbles_latinAmerican_GeNu
+#' @name hgch_map_bubbles_latinAmerican_GcdNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ge-Nu
+#' @section ftype: Gcd-Num
 #' @examples
-#' hgch_map_bubbles_latinAmerican_GeNu(sampleData("Ge-Nu",nrow = 10))
-hgch_map_bubbles_latinAmerican_GeNu <- function(data,
+#' hgch_map_bubbles_latinAmerican_GcdNum(sampleData("Gcd-Num",nrow = 10))
+hgch_map_bubbles_latinAmerican_GcdNum <- function(data,
                                                 title = NULL,
                                                 subtitle = NULL,
                                                 geoinfoPath = NULL,
@@ -245,15 +245,15 @@ hc <- highchart(type = "map") %>%
 
 
 #' Bubble latam map
-#' @name hgch_map_bubbles_latinAmerican_GeNuNu
+#' @name hgch_map_bubbles_latinAmerican_GcdNumNum
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Ge-Nu-Nu
+#' @section ftype: Gcd-Num-Num
 #' @examples
-#' hgch_map_bubbles_latinAmerican_GeNuNu(sampleData("Ge-Nu-Nu",nrow = 10))
+#' hgch_map_bubbles_latinAmerican_GcdNumNum(sampleData("Gcd-Num-Num",nrow = 10))
 
-hgch_map_bubbles_latinAmerican_GeNuNu <- function(data,
+hgch_map_bubbles_latinAmerican_GcdNumNum <- function(data,
                                                   title = NULL,
                                                   subtitle = NULL,
                                                   geoinfoPath = NULL,

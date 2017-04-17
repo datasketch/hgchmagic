@@ -8,69 +8,71 @@ library(hgchmagic)
 
 # Pie and Donut
 
-data <- sampleData("Ca", nrow = 10)
-hgch_pie_Ca(data, title = "TITLE", subtitle = "Subtitle")
+availableCtypeIds()
+
+data <- sampleData("Cat", nrow = 10)
+hgch_pie_Cat(data, title = "TITLE", subtitle = "Subtitle")
 
 
-hgch_donut_Ca(data)
-hgch_donut_Ca(data, title = "TITLE", subtitle = "Subtitle")
+hgch_donut_Cat(data)
+hgch_donut_Cat(data, title = "TITLE", subtitle = "Subtitle")
 
-data <- sampleData("Ca-Nu", nrow = 10)
-hgch_pie_CaNu(data, export = TRUE)
-hgch_donut_CaNu(data)
+data <- sampleData("Cat-Num", nrow = 10)
+hgch_pie_CatNum(data, export = TRUE)
+hgch_donut_CatNum(data)
 
 
 # Lines
 
-data <- sampleData("Da-Nu",gt0 = FALSE)
-hgch_line_DaNu(data)
-hgch_line_DaNu(data, export = TRUE)
+data <- sampleData("Dat-Num",gt0 = FALSE)
+hgch_line_DatNum(data)
+hgch_line_DatNum(data, export = TRUE)
 
-d <- sampleData("Ca-Nu",gt0 = FALSE)
-hgch_line_CaNu(d)
+d <- sampleData("Cat-Num",gt0 = FALSE)
+hgch_line_CatNum(d)
 
-data <- sampleData("Ca-Ye-Nu",nrow = 40)
-hgch_line_CaYeNu(data)
-hgch_line_CaYeNu(data, symbol = "square")
+data <- sampleData("Cat-Yea-Num",nrow = 40)
+hgch_line_CatYeaNum(data)
+hgch_line_CatYeaNum(data, symbol = "square")
 
-data <- sampleData("Ca-Ye-Nu",nrow = 40, asFringe = TRUE)
-hgch_line_CaYeNu(data)
-hgch_line_CaYeNu(data, symbol = "square")
+data <- sampleData("Cat-Yea-Num",nrow = 40, asFringe = TRUE)
+hgch_line_CatYeaNum(data)
+hgch_line_CatYeaNum(data, symbol = "square")
 
-data <- sampleData("Ca-Da-Nu", nrow = 100)
-hgch_line_CaDaNu(data)
-hgch_line_CaDaNu(data, symbol = "square")
+data <- sampleData("Cat-Dat-Num", nrow = 100)
+hgch_line_CatDatNum(data)
+hgch_line_CatDatNum(data, symbol = "square")
 
 data <- read_csv("inst/data/trends.csv")
 data$start <- as.Date(data$start)
-hgch_line_CaDaNu(data)
+hgch_line_CatDatNum(data)
 
-data <- sampleData("Ca-Ca-Nu", nrow = 100)
-hgch_line_CaCaNu(data, symbol = "square")
+data <- sampleData("Cat-Cat-Num", nrow = 100)
+hgch_line_CatCatNum(data, symbol = "square")
 
-data <- sampleData("Ye-Nu", nrow = 20)
-hgch_line_YeNu(data, symbol = "square")
+data <- sampleData("Yea-Num", nrow = 20)
+hgch_line_YeaNum(data, symbol = "square")
 
-data <- sampleData("Ye-Nu", nrow = 20)
+data <- sampleData("Yea-Num", nrow = 20)
 data <- sample_n(data,size = 20)
-hgch_line_YeNu(data, symbol = "square")
+hgch_line_YeaNum(data, symbol = "square")
 
 
 # Two axis lines
 
-data <- sampleData("Ye-Nu-Nu",nrow = 10)
+data <- sampleData("Yea-Num-Num",nrow = 10)
 data <- sample_n(data,size = 10)
-hgch_2yline_YeNuNu(data)
+hgch_2yline_YeaNumNum(data)
 
 # Multilines
 
-data <- sampleData("Ye-Nu-Nu",nrow = 20)
-hgch_multilines_YeNuP(data)
+data <- sampleData("Yea-Num-Num",nrow = 20)
+hgch_multilines_YeaNumP(data)
 data <- sample_n(data,size = 20)
-hgch_multilines_YeNuP(data)
+hgch_multilines_YeaNumP(data)
 
-data <- sampleData("Ye-Nu-Nu-Nu-Nu-Nu",nrow = 11)
-hgch_multilines_YeNuP(data)
+data <- sampleData("Yea-Num-Num-Num-Num-Num",nrow = 11)
+hgch_multilines_YeaNumP(data)
 
 
 #slope
@@ -79,7 +81,7 @@ data <- data.frame(hechos = c("secuestro", "secuestro", "delito", "delito", "ex"
                    year = c(2007,2015,2007,2015,2007,2015),
                    pop = c(230, 123, 7139, 21597, 1082, 5480))
 
-hgch_slope_CaYeNu(data)
+hgch_slope_CatYeaNum(data)
 
 # Bars
 
@@ -120,152 +122,152 @@ tmp_theme <- hc_theme(
 
 
 
-data <- sampleData("Ca", nrow = 50)
-hgch_bar_ver_Ca(data)
-hgch_bar_ver_Ca(data, theme = tmp_theme)
-hgch_bar_hor_Ca(data)
-hgch_bar_hor_top_Ca(data)
-hgch_bar_ver_top_Ca(data)
+data <- sampleData("Cat", nrow = 50)
+hgch_bar_ver_Cat(data)
+hgch_bar_ver_Cat(data, theme = tmp_theme)
+hgch_bar_hor_Cat(data)
+hgch_bar_hor_top_Cat(data)
+hgch_bar_ver_top_Cat(data)
 
-data <- sampleData("Ca-Nu", nrow = 20)
-hgch_bar_ver_CaNu(data)
-hgch_bar_ver_top_CaNu(data, export = TRUE)
-hgch_bar_hor_CaNu(data)
-hgch_bar_hor_top_CaNu(data)
-hgch_bar_hor_top_CaNu(data, export = TRUE)
+data <- sampleData("Cat-Num", nrow = 20)
+hgch_bar_ver_CatNum(data)
+hgch_bar_ver_top_CatNum(data, export = TRUE)
+hgch_bar_hor_CatNum(data)
+hgch_bar_hor_top_CatNum(data)
+hgch_bar_hor_top_CatNum(data, export = TRUE)
 
-data <- sampleData("Da-Nu", nrow = 100)
-hgch_bar_ver_DaNu(data)
+data <- sampleData("Dat-Num", nrow = 100)
+hgch_bar_ver_DatNum(data)
 
-data <- sampleData("Ye-Nu", nrow = 10)
-hgch_bar_ver_YeNu(data)
-hgch_bar_ver_YeNu(data, theme = tmp_theme)
+data <- sampleData("Yea-Num", nrow = 10)
+hgch_bar_ver_YeaNum(data)
+hgch_bar_ver_YeaNum(data, theme = tmp_theme)
 
-data <- sampleData("Ca-Ca-Nu", nrow = 100)
-hgch_bar_grouped_ver_CaCaNu(data)
-hgch_bar_grouped_hor_CaCaNu(data)
+data <- sampleData("Cat-Cat-Num", nrow = 100)
+hgch_bar_grouped_ver_CatCatNum(data)
+hgch_bar_grouped_hor_CatCatNum(data)
 
-data <- sampleData("Ca-Ye-Nu",nrow = 100, rep = TRUE, nlevels = 3)
-hgch_bar_grouped_ver_CaYeNu(data)
+data <- sampleData("Cat-Yea-Num",nrow = 100, rep = TRUE, nlevels = 3)
+hgch_bar_grouped_ver_CatYeaNum(data)
 
-data <- sampleData("Ca-Ca-Nu", nrow = 100)
-hgch_bar_stacked_ver_CaCaNu(data, theme = tmp_theme)
-hgch_bar_stacked_hor_CaCaNu(data)
-hgch_bar_stacked_100_ver_CaCaNu(data)
-hgch_bar_stacked_100_hor_CaCaNu(data)
+data <- sampleData("Cat-Cat-Num", nrow = 100)
+hgch_bar_stacked_ver_CatCatNum(data, theme = tmp_theme)
+hgch_bar_stacked_hor_CatCatNum(data)
+hgch_bar_stacked_100_ver_CatCatNum(data)
+hgch_bar_stacked_100_hor_CatCatNum(data)
 
-data <- sampleData("Ca-Da-Nu", nrow = 100)
-hgch_bar_stacked_ver_CaDaNu(data)
-hgch_bar_stacked_100_ver_CaDaNu(data)
+data <- sampleData("Cat-Dat-Num", nrow = 100)
+hgch_bar_stacked_ver_CatDatNum(data)
+hgch_bar_stacked_100_ver_CatDatNum(data)
 
-data <- sampleData("Ca-NuP", nrow = 5)
-hgch_bar_grouped_ver_CaNuP(data)
-hgch_bar_grouped_hor_CaNuP(data)
+data <- sampleData("Cat-NumP", nrow = 5)
+hgch_bar_grouped_ver_CatNumP(data)
+hgch_bar_grouped_hor_CatNumP(data)
 
-data <- sampleData("Ca-NuP",nrow = 10)
-hgch_bar_grouped_hor_CaNuP(data)
-
-
-hgch_bar_grouped_ver_CaCa(sampleData("Ca-Ca",nrow = 10))
-hgch_bar_grouped_hor_CaCa(sampleData("Ca-Ca",nrow = 10))
+data <- sampleData("Cat-NumP",nrow = 10)
+hgch_bar_grouped_hor_CatNumP(data)
 
 
-data <- sampleData('Ca-Nu',nrow = 100)
-hgch_circular_bar_CaNu(data)
+hgch_bar_grouped_ver_CatCat(sampleData("Cat-Cat",nrow = 10))
+hgch_bar_grouped_hor_CatCat(sampleData("Cat-Cat",nrow = 10))
+
+
+data <- sampleData('Cat-Num',nrow = 100)
+hgch_circular_bar_CatNum(data)
 df <- data.frame(name = c('bum','gtos'), y = c(34,90))
-hgch_circular_bar_CaNu(df, caption = 'ajknsa', title = 'ndjsdd', subtitle = 'njaks')
+hgch_circular_bar_CatNum(df, caption = 'ajknsa', title = 'ndjsdd', subtitle = 'njaks')
 
-data <- sampleData("NuP")
+data <- sampleData("NumP")
 
-hgch_waterfall_CaNu(sampleData("Ca-Nu",nrow = 10), title = "hola")
+hgch_waterfall_CatNum(sampleData("Cat-Num",nrow = 10), title = "hola")
 
 # Area
 
-data <- sampleData("Da-Nu")
-data <- sampleData("Da-Nu",gt0 = FALSE)
-hgch_area_DaNu(data)
-hgch_area_DaNu(data, startAtZero = TRUE)
+data <- sampleData("Dat-Num")
+data <- sampleData("Dat-Num",gt0 = FALSE)
+hgch_area_DatNum(data)
+hgch_area_DatNum(data, startAtZero = TRUE)
 
 
-d <- sampleData("Ca-Nu",gt0 = FALSE)
-hgch_area_CaNu(d)
+d <- sampleData("Cat-Num",gt0 = FALSE)
+hgch_area_CatNum(d)
 
-data <- sampleData("Ca-Ca-Nu", nrow = 100)
-hgch_area_CaCaNu(data)
-hgch_area_CaCaNu(data, symbol = "square")
-hgch_area_CaCaNu(data, symbol = "square", startAtZero = TRUE)
-hgch_area_stacked_CaCaNu(data)
-hgch_area_stacked_CaCaNu(data, symbol = "square")
-hgch_area_stacked_100_CaCaNu(data, symbol = "square")
+data <- sampleData("Cat-Cat-Num", nrow = 100)
+hgch_area_CatCatNum(data)
+hgch_area_CatCatNum(data, symbol = "square")
+hgch_area_CatCatNum(data, symbol = "square", startAtZero = TRUE)
+hgch_area_stacked_CatCatNum(data)
+hgch_area_stacked_CatCatNum(data, symbol = "square")
+hgch_area_stacked_100_CatCatNum(data, symbol = "square")
 
-data <- sampleData("Ca-Ye-Nu",nrow = 10)
-hgch_area_CaYeNu(data)
-hgch_area_CaYeNu(data, symbol = "square")
+data <- sampleData("Cat-Yea-Num",nrow = 10)
+hgch_area_CatYeaNum(data)
+hgch_area_CatYeaNum(data, symbol = "square")
 
-data <- sampleData("Ca-Ye-Nu",nrow = 100, gt0 = TRUE)
-hgch_area_CaYeNu(data)
-hgch_area_stacked_CaYeNu(data, symbol = "square")
-hgch_area_stacked_100_CaYeNu(data, symbol = "square")
+data <- sampleData("Cat-Yea-Num",nrow = 100, gt0 = TRUE)
+hgch_area_CatYeaNum(data)
+hgch_area_stacked_CatYeaNum(data, symbol = "square")
+hgch_area_stacked_100_CatYeaNum(data, symbol = "square")
 
-data <- sampleData("Ca-Da-Nu", nrow = 100)
-hgch_area_CaDaNu(data, title = "hola", yAxisTitle = "Ventas")
-hgch_area_CaDaNu(data, startAtZero = TRUE)
-hgch_area_stacked_CaDaNu(data)
-hgch_area_stacked_100_CaDaNu(data)
+data <- sampleData("Cat-Dat-Num", nrow = 100)
+hgch_area_CatDatNum(data, title = "hola", yAxisTitle = "Ventas")
+hgch_area_CatDatNum(data, startAtZero = TRUE)
+hgch_area_stacked_CatDatNum(data)
+hgch_area_stacked_100_CatDatNum(data)
 
-data <- sampleData("Ye-Nu", nrow = 20)
-hgch_area_YeNu(data, symbol = "square")
+data <- sampleData("Yea-Num", nrow = 20)
+hgch_area_YeaNum(data, symbol = "square")
 
 
 # Stream
 
-data <- sampleData("Ca-Ca-Nu", nrow = 100)
-hgch_stream_CaCaNu(data)
+data <- sampleData("Cat-Cat-Num", nrow = 100)
+hgch_stream_CatCatNum(data)
 
-hgch_area_stacked_CaCaNu(data, symbol = "square")
-hgch_area_stacked_100_CaCaNu(data, symbol = "square")
+hgch_area_stacked_CatCatNum(data, symbol = "square")
+hgch_area_stacked_100_CatCatNum(data, symbol = "square")
 
 
 # Treemap
-data <- sampleData("Ca-Nu",nrow = 10)
-hgch_treemap_CaNu(data, color_title = 'blue')
-hgch_treemap_CaNu(data, export = TRUE)
+data <- sampleData("Cat-Num",nrow = 10)
+hgch_treemap_CatNum(data, color_title = 'blue')
+hgch_treemap_CatNum(data, export = TRUE)
 
 
-hgch_treemap_discrete_color_CaNu(data, export = TRUE)
+hgch_treemap_discrete_color_CatNum(data, export = TRUE)
 
 
 ## Treemap 2Vars
 ## Nested Treemap
 
-data <- sampleData("Ca-Ca-Nu",nrow = 10, gt0 = TRUE)
-hgch_treemap_CaCaNu(data)
+data <- sampleData("Cat-Cat-Num",nrow = 10, gt0 = TRUE)
+hgch_treemap_CatCatNum(data)
 
 
 # Spider
-data <- sampleData("Ca-Nu", nrow = 10)
-hgch_spider_CaNu(data)
+data <- sampleData("Cat-Num", nrow = 10)
+hgch_spider_CatNum(data)
 
-data <- sampleData("Ca-Nu-Nu", nrow = 10)
-hgch_spider_CaNuNu(data)
+data <- sampleData("Cat-Num-Num", nrow = 10)
+hgch_spider_CatNumNum(data)
 
-hgch_polarcolumn_CaNu(sampleData("Ca-Nu",nrow = 10))
+hgch_polarcolumn_CatNum(sampleData("Cat-Num",nrow = 10))
 
 # Scatter
 
-hgch_bubble_CaNu(sampleData("Ca-Nu",nrow = 10))
+hgch_bubble_CatNum(sampleData("Cat-Num",nrow = 10))
 
-data <- sampleData("Ca-Nu-Nu", nrow = 20)
-hgch_scatter_CaNuNu(data)
+data <- sampleData("Cat-Num-Num", nrow = 20)
+hgch_scatter_CatNumNum(data)
 
-data <- sampleData("Ca-Nu-Nu-Nu", nrow = 10)
-hgch_scatter_CaNuNuNu(data)
+data <- sampleData("Cat-Num-Num-Num", nrow = 10)
+hgch_scatter_CatNumNumNum(data)
 
-data <- sampleData("Ca-Ca-Nu-Nu", nrow = 20)
-hgch_scatter_CaCaNuNu(data)
+data <- sampleData("Cat-Cat-Num-Num", nrow = 20)
+hgch_scatter_CatCatNumNum(data)
 
-data <- sampleData("Ca-Ca-Nu-Nu-Nu", nrow = 20)
-hgch_scatter_CaCaNuNuNu(data)
+data <- sampleData("Cat-Cat-Num-Num-Num", nrow = 20)
+hgch_scatter_CatCatNumNumNum(data)
 
 # Maps
 
@@ -273,12 +275,12 @@ geo <- read_csv(system.file("aux/world-geo.csv",package = "hgchmagic"))
 data <- data_frame(country = sample(geo$code))
 data$valor <- runif(6)
 
-hgch_map_choro_world_GeNu(data)
+hgch_map_choro_world_GcdNum(data)
 
 
 
 pobl <- data.frame(pais = c("US", "ZW", "FR", "CO"), pob = c(316129,14150, 7978979, 7979))
-hgch_map_bubbles_world_GeNu(pobl, geoinfoPath = "inst/aux/world-cod.csv", geoCodeVar='iso2', geoNameVar = "name")
+hgch_map_bubbles_world_GcdNum(pobl, geoinfoPath = "inst/aux/world-cod.csv", geoCodeVar='iso2', geoNameVar = "name")
 
 
 f <-  data.frame(
@@ -289,7 +291,7 @@ f <-  data.frame(
 
 
 
-hgch_map_bubbles_latinAmerican_GeNu(f,geoinfoPath = "inst/aux/latam-geo.csv",
+hgch_map_bubbles_latinAmerican_GcdNum(f,geoinfoPath = "inst/aux/latam-geo.csv",
                   geoCodeVar = "code",
                   geoNameVar = "name", export = TRUE, col_bur = 'black')
 
@@ -301,16 +303,16 @@ f2 <-  data.frame(
   yasksas = c(3345, 56.08089,NA)
 )
 
-hgch_map_bubbles_latinAmerican_GeNuNu(f2,geoinfoPath = "inst/aux/latam-geo.csv",
+hgch_map_bubbles_latinAmerican_GcdNumNum(f2,geoinfoPath = "inst/aux/latam-geo.csv",
                                     geoCodeVar = "code",
                                     geoNameVar = "name", export = TRUE, col_bone = 'orange', col_btwo = 'red')
 
 
 # Pyramid
-data <- sampleData('Ca-Nu')
-hgch_pyramid_CaNu(data)
+data <- sampleData('Cat-Num')
+hgch_pyramid_CatNum(data)
 
-hgch_funnel_CaNu(data)
+hgch_funnel_CatNum(data)
 
 
 # Heatmap
