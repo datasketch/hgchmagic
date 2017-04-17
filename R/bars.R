@@ -277,7 +277,7 @@ hgch_bar_ver_CaNu <-
     }
     hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
     if (export)
-      hc <- hc %>% hc_exporting(enabled = TRUE)
+      hc <- hc %>% hc_exporting(enabled = export)
     hc
 
   }
@@ -310,7 +310,8 @@ hgch_bar_ver_top_CaNu <- function(data,
     yAxisTitle = yAxisTitle,
     sort = "top",
     aggregate = aggregate,
-    theme = theme
+    theme = theme,
+    export = export
   )
 
 }

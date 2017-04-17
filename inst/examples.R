@@ -16,7 +16,7 @@ hgch_donut_Ca(data)
 hgch_donut_Ca(data, title = "TITLE", subtitle = "Subtitle")
 
 data <- sampleData("Ca-Nu", nrow = 10)
-hgch_pie_CaNu(data)
+hgch_pie_CaNu(data, export = TRUE)
 hgch_donut_CaNu(data)
 
 
@@ -129,7 +129,7 @@ hgch_bar_ver_top_Ca(data)
 
 data <- sampleData("Ca-Nu", nrow = 20)
 hgch_bar_ver_CaNu(data)
-hgch_bar_ver_top_CaNu(data)
+hgch_bar_ver_top_CaNu(data, export = TRUE)
 hgch_bar_hor_CaNu(data)
 hgch_bar_hor_top_CaNu(data)
 hgch_bar_hor_top_CaNu(data, export = TRUE)

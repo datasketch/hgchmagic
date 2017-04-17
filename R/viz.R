@@ -51,7 +51,7 @@ hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
   if(nrow(d)==0) return()
   d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = sum(b))
 
-  hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
+  hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
       series = list(dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
     ) %>%
@@ -59,6 +59,8 @@ hgch_pie_CaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, x
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle))
+  hc <-  hc %>% hc_exporting(enabled = export)
+  hc
 }
 
 
