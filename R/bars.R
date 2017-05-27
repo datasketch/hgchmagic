@@ -628,7 +628,7 @@ hgch_bar_stacked_ver_CatCatNum <-
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
   }
-#' Vertical 100% stacked bar
+#' Vertical 100 stacked bar
 #' @name hgch_bar_stacked_100_ver_CatCatNum
 #' @param x A data.frame
 #' @export
@@ -740,7 +740,7 @@ hgch_bar_stacked_hor_CatCatNum <-
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
   }
-#' Horizontal 100% stacked bar
+#' Horizontal 100 stacked bar
 #' @name hgch_bar_stacked_100_hor_CatCatNum
 #' @param x A data.frame
 #' @export
@@ -806,7 +806,7 @@ hgch_bar_stacked_100_hor_CatCatNum <-
 #' hgch_bar_stacked_ver_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
 hgch_bar_stacked_ver_CatDatNum <- hgch_bar_stacked_ver_CatCatNum
 
-#' Vertical 100% stacked bar
+#' Vertical 100 stacked bar
 #' @name hgch_bar_stacked_100_ver_CatDatNum
 #' @param x A data.frame
 #' @export

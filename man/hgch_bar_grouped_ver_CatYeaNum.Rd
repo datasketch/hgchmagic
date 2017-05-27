@@ -20,7 +20,7 @@ Vertical grouped bar
 \section{ftype}{
  Cat-Yea-Num
 }
-
 \examples{
 hgch_bar_grouped_ver_CatYeaNum(sampleDatta("Yea-Num-Num",nrow = 10))
 }
+

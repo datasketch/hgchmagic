@@ -20,7 +20,7 @@ Vertical grouped bar
 \section{ftype}{
  Cat-Cat
 }
-
 \examples{
 hgch_bar_grouped_ver_CatCat(sampleDatta("Cat-Cat",nrow = 10))
 }
+

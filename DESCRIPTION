@@ -2,7 +2,7 @@ Package: hgchmagic
 Title: A wrapper for highcharter
 Version: 0.0.0.1
 Author: Juan Pablo Marín Díaz
-Maintainer: Juan Pablo Marín Díaz <jpmarindiaz@gmail.com>
+Maintainer: Juan Pablo Marin Diaz <jpmarindiaz@gmail.com>
 Description: A wrapper for highcharter
 Imports:
     xts
@@ -16,4 +16,4 @@ Depends:
     highcharter (>= 0.4.0.9999)
 License: MIT
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 5.0.1

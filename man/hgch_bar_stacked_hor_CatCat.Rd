@@ -20,7 +20,7 @@ hgch_bar_stacked_hor_CatCat
 \section{ftype}{
  Cat-Cat
 }
-
 \examples{
 hgch_bar_stacked_hor_CatCat(sampleDatta("Cat-Cat",nrow = 10))
 }
+

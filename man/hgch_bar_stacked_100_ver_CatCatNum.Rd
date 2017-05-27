@@ -2,7 +2,7 @@
 % Please edit documentation in R/bars.R
 \name{hgch_bar_stacked_100_ver_CatCatNum}
 \alias{hgch_bar_stacked_100_ver_CatCatNum}
-\title{Vertical 100% stacked bar}
+\title{Vertical 100 stacked bar}
 \usage{
 hgch_bar_stacked_100_ver_CatCatNum(data, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
@@ -15,12 +15,12 @@ hgch_bar_stacked_100_ver_CatCatNum(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-Vertical 100% stacked bar
+Vertical 100 stacked bar
 }
 \section{ftype}{
  Cat-Cat-Num
 }
-
 \examples{
 hgch_bar_stacked_100_ver_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
 }
+

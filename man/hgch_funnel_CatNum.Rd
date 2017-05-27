@@ -18,7 +18,7 @@ Funnel
 \section{ftype}{
  Cat-Num
 }
-
 \examples{
 hgch_funnel_CatNum(sampleData("Cat-Num",nrow = 10))
 }
+

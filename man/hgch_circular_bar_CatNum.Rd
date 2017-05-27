@@ -19,7 +19,7 @@ Circular bar
 \section{ftype}{
  Cat-Num
 }
-
 \examples{
 hgch_circular_bar_CatNum(sampleDatta("Cat-Num",nrow = 10))
 }
+

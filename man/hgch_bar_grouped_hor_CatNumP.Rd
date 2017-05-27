@@ -20,7 +20,7 @@ Horizontal grouped bar
 \section{ftypes}{
  Cat-NumP
 }
-
 \examples{
 hgch_bar_grouped_hor_CatNumP(sampleDatta("Cat-NumP",nrow = 10))
 }
+

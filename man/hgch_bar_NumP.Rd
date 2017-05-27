@@ -21,7 +21,7 @@ Vertical bar
 \section{ftypes}{
  NumP
 }
-
 \examples{
 hgch_bar_ver_NumP(sampleDatta("NumP",nrow = 10))
 }
+

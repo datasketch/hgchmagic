@@ -20,7 +20,7 @@ Line
 \section{ftype}{
  Cat-Yea-Num
 }
-
 \examples{
 hgch_line_CatYeaNum(sampleDatta("Cat-Yea-Num",nrow = 10))
 }
+

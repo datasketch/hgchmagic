@@ -22,7 +22,7 @@ Bubble latam map
 \section{ftype}{
  Gcd-Num-Num
 }
-
 \examples{
 hgch_map_bubbles_latinAmerican_GcdNumNum(sampleData("Gcd-Num-Num",nrow = 10))
 }
+

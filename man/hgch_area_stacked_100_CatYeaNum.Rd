@@ -2,7 +2,7 @@
 % Please edit documentation in R/area.R
 \name{hgch_area_stacked_100_CatYeaNum}
 \alias{hgch_area_stacked_100_CatYeaNum}
-\title{Vertical 100% stacked area}
+\title{Vertical 100 stacked area}
 \usage{
 hgch_area_stacked_100_CatYeaNum(data, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
@@ -15,12 +15,12 @@ hgch_area_stacked_100_CatYeaNum(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-Vertical 100% stacked area
+Vertical 100 stacked area
 }
 \section{ftype}{
  Cat-Yea-Num
 }
-
 \examples{
 hgch_area_stacked_CatYeaNum(sampleDatta("Cat-Yea-Num",nrow = 10))
 }
+

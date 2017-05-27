@@ -20,7 +20,7 @@ Radar
 \section{ftype}{
  Cat-Num-Num
 }
-
 \examples{
 hgch_spider_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
 }
+

@@ -18,7 +18,7 @@ Polar bar
 \section{ftype}{
  Cat-Num
 }
-
 \examples{
 hgch_polarcolumn_CatNum(sampleData("Cat-Num",nrow = 10))
 }
+

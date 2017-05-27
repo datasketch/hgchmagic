@@ -1,8 +1,6 @@
 
-library(devtools)
-load_all()
-document()
-install()
+devtools::document()
+devtools::install()
 
 library(hgchmagic)
 

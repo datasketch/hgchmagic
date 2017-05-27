@@ -21,7 +21,7 @@ Vertical bar
 \section{ftype}{
  Cat-Num
 }
-
 \examples{
 hgch_bar_ver_CatNum(sampleDatta("Cat-Num",nrow = 10))
 }
+

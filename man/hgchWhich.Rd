@@ -25,3 +25,4 @@ hgchWhich(d)
 #' add(1, 1)
 hgch_test_docs2 <- NULL
 }
+

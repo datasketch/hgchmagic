@@ -18,7 +18,7 @@ Bubble
 \section{ftype}{
  Cat-Num
 }
-
 \examples{
 hgch_bubble_CatNum(sampleData("Cat-Num",nrow = 10))
 }
+

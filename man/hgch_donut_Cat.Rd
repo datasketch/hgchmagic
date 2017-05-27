@@ -20,7 +20,7 @@ hgch_donut_Cat
 \section{ftype}{
  Cat
 }
-
 \examples{
 hgch_donut_Cat(sampleData("Cat",nrow = 10))
 }
+

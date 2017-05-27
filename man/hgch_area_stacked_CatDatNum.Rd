@@ -20,7 +20,7 @@ Vertical stacked area
 \section{ftype}{
  Cat-Dat-Num
 }
-
 \examples{
 hgch_area_stacked_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
 }
+

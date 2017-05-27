@@ -20,7 +20,7 @@ SCattter
 \section{ftype}{
  Cat-Cat-Num-Num-Num
 }
-
 \examples{
 hgch_scatter_CatCatNumNumNum(sampleData("Cat-Cat-Num-Num-Num",nrow = 10))
 }
+

@@ -20,7 +20,7 @@ Vertical area
 \section{ftype}{
  Yea-Num
 }
-
 \examples{
 hgch_area_YeaNum(sampleDatta("Yea-Num",nrow = 10))
 }
+

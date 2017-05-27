@@ -20,7 +20,7 @@ Horizontal bar
 \section{ftype}{
  Cat
 }
-
 \examples{
 hgch_bar_hor_Cat(sampleDatta("Cat",nrow = 10))
 }
+

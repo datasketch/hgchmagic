@@ -20,7 +20,7 @@ hgch_pie_Cat
 \section{ftype}{
  Cat
 }
-
 \examples{
 hgch_pie_Cat(sampleData("Cat",nrow = 10))
 }
+

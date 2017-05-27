@@ -20,7 +20,7 @@ Ordered horizontal bar
 \section{ftype}{
  Cat
 }
-
 \examples{
 hgch_bar_hor_top_Cat(sampleDatta("Cat-Num",nrow = 10))
 }
+

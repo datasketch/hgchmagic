@@ -20,7 +20,7 @@ Line
 \section{ftype}{
  Cat-Num
 }
-
 \examples{
 hgch_line_CatNum(sampleDatta("Cat-Num",nrow = 10))
 }
+

@@ -210,7 +210,7 @@ hgch_area_stacked_CatCatNum <- function(data, title = NULL, subtitle = NULL, cap
 hgch_area_stacked_CatYeaNum <- hgch_area_stacked_CatCatNum
 
 
-#' Vertical 100% stacked area
+#' Vertical 100 stacked area
 #' @name hgch_area_stacked_100_CatCatNum
 #' @param x A data.frame
 #' @export
@@ -256,7 +256,7 @@ hgch_area_stacked_100_CatCatNum <- function(data, title = NULL, subtitle = NULL,
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-#' Vertical 100% stacked area
+#' Vertical 100 stacked area
 #' @name hgch_area_stacked_100_CatYeaNum
 #' @param x A data.frame
 #' @export
@@ -359,7 +359,7 @@ hgch_area_stacked_CatDatNum <- function(data, title = NULL, subtitle = NULL, cap
   }
 
 
-#' Vertical 100% stacked area
+#' Vertical 100 stacked area
 #' @name hgch_area_stacked_100_CatDatNum
 #' @param x A data.frame
 #' @export

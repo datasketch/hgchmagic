@@ -20,7 +20,7 @@ Grouped line
 \section{ftypes}{
  Yea-NumP
 }
-
 \examples{
 hgch_multilines_YeaNumP(sampleDatta("Yea-NumP",nrow = 10))
 }
+

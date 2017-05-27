@@ -1,5 +1,6 @@
-#'@name count_pl
-#'@export
+#' count_pl
+#' @name count_pl
+#' @export
 count_pl <- function(x) {
   if(is.na(x)){return(0)}
 

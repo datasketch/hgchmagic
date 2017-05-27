@@ -20,7 +20,7 @@ hgch_radar_CatNum
 \section{ftype}{
  Cat-Num
 }
-
 \examples{
 hgch_radar_CatNum(sampleData("Cat-Num",nrow = 10))
 }
+
