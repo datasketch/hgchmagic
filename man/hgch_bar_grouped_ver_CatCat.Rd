@@ -22,5 +22,5 @@ Vertical grouped bar
 }
 
 \examples{
-hgch_bar_grouped_ver_CatCat(sampleDatta("Cat-Cat",nrow = 10))
+hgch_bar_grouped_ver_CatCat(sampleData("Cat-Cat",nrow = 10))
 }

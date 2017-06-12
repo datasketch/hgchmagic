@@ -22,5 +22,5 @@ Ordered vertical bar
 }
 
 \examples{
-hgch_bar_ver_top_Cat(sampleDatta("Cat",nrow = 10))
+hgch_bar_ver_top_Cat(sampleData("Cat",nrow = 10))
 }

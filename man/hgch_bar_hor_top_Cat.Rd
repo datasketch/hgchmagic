@@ -22,5 +22,5 @@ Ordered horizontal bar
 }
 
 \examples{
-hgch_bar_hor_top_Cat(sampleDatta("Cat-Num",nrow = 10))
+hgch_bar_hor_top_Cat(sampleData("Cat-Num",nrow = 10))
 }

@@ -22,5 +22,5 @@ Vertical grouped bar
 }
 
 \examples{
-hgch_bar_grouped_ver_CatYeaNum(sampleDatta("Yea-Num-Num",nrow = 10))
+hgch_bar_grouped_ver_CatYeaNum(sampleData("Yea-Num-Num",nrow = 10))
 }

@@ -23,5 +23,5 @@ Vertical bar
 }
 
 \examples{
-hgch_bar_ver_YeaNum(sampleDatta("Yea-Num",nrow = 10))
+hgch_bar_ver_YeaNum(sampleData("Yea-Num",nrow = 10))
 }

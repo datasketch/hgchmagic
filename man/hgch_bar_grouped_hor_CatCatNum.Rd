@@ -22,5 +22,5 @@ Horizontal grouped bar
 }
 
 \examples{
-hgch_bar_grouped_hor_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+hgch_bar_grouped_hor_CatCatNum(sampleData("Cat-Cat-Num",nrow = 10))
 }

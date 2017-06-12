@@ -22,5 +22,5 @@ Vertical bar
 }
 
 \examples{
-hgch_bar_ver_Cat(sampleDatta("Cat",nrow = 10))
+hgch_bar_ver_Cat(sampleData("Cat",nrow = 10))
 }

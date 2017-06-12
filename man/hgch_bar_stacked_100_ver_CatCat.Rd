@@ -22,5 +22,5 @@ hgch_bar_stacked_100_ver_CatCat
 }
 
 \examples{
-hgch_bar_stacked_100_ver_CatCat(sampleDatta("Cat-Cat",nrow = 10))
+hgch_bar_stacked_100_ver_CatCat(sampleData("Cat-Cat",nrow = 10))
 }

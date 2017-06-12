@@ -22,5 +22,5 @@ Vertical stacked bar
 }
 
 \examples{
-hgch_bar_stacked_ver_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
+hgch_bar_stacked_ver_CatDatNum(sampleData("Cat-Dat-Num",nrow = 10))
 }

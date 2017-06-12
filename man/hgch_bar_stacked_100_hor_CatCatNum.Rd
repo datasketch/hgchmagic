@@ -22,5 +22,5 @@ Horizontal 100% stacked bar
 }
 
 \examples{
-hgch_bar_stacked_100_hor_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+hgch_bar_stacked_100_hor_CatCatNum(sampleData("Cat-Cat-Num",nrow = 10))
 }

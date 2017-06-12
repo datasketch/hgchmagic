@@ -21,5 +21,5 @@ Circular bar
 }
 
 \examples{
-hgch_circular_bar_CatNum(sampleDatta("Cat-Num",nrow = 10))
+hgch_circular_bar_CatNum(sampleData("Cat-Num",nrow = 10))
 }

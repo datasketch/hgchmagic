@@ -23,5 +23,5 @@ Vertical bar
 }
 
 \examples{
-hgch_bar_ver_NumP(sampleDatta("NumP",nrow = 10))
+hgch_bar_ver_NumP(sampleData("NumP",nrow = 10))
 }

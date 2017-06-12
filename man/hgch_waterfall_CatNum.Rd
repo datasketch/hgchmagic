@@ -21,5 +21,5 @@ Waterfall
 }
 
 \examples{
-hgch_waterfall_CatNum(sampleDatta("Cat-Num",nrow = 10))
+hgch_waterfall_CatNum(sampleData("Cat-Num",nrow = 10))
 }
