@@ -257,7 +257,7 @@ hgch_bar_ver_CatNum <-
       #   series = list(marker = list(enabled = TRUE, symbol =  symbol))
       # ) %>%
       hc_chart(backgroundColor = back_color) %>%
-      hc_title(text = title,style = list(color = color_title, useHTML = TRUE)) %>%
+      hc_title(text = title,style = list(color = color_title, useHTML = TRUE), align = 'center') %>%
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle),
                allowDecimals = FALSE) %>%
@@ -397,7 +397,7 @@ hgch_bar_hor_CatNum <- function(data,
   hc <- hchart(d, type = "bar", hcaes(x = a, y = b)) %>%
     hc_plotOptions(column = list(stacking = "normal")) %>%
     hc_chart(backgroundColor = back_color) %>%
-    hc_title(text = title,style = list(color = color_title, useHTML = TRUE)) %>%
+    hc_title(text = title,style = list(color = color_title, useHTML = TRUE), align = 'center') %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = xAxisTitle)) %>%
     hc_yAxis(title = list(text = yAxisTitle))  %>%
