@@ -147,39 +147,39 @@ hgch_spider_CatNumNum <- function(data,
 
 
 
-#' Bubble
-#' @name hgch_bubble_CatNum
-#' @param x A data.frame
-#' @export
-#' @return highcharts viz
-#' @section ftype: Cat-Num
-#' @examples
-#' hgch_bubble_CatNum(sampleData("Cat-Num",nrow = 10))
-hgch_bubble_CatNum <-function(data, title = ""){
-
-  f <- fringe(data)
-  nms <- getCnames(f)
-  data <- f$d
-  data <- plyr::rename(data, c("a" = "name"))
-
-  data_graph <- data %>%
-    dplyr::group_by(name) %>%
-    tidyr::drop_na(name) %>%
-    dplyr::summarise(value = mean(b, na.rm = TRUE ))
-
-  data_graph <- data_graph %>%
-    dplyr::mutate(y = value,
-                  z = sqrt(y),
-                  color = getPalette()[1:(dim(data_graph)[1])])
-
-  hc <- highchart() %>%
-    hc_title(text = title) %>%
-    hc_chart(type = "bubble",
-             polar = FALSE) %>%
-    hc_xAxis(Cattegories = data_graph$name) %>%
-    hc_add_series(data_graph, showInLegend = FALSE)
-  hc
-}
+# #' Bubble
+# #' @name hgch_bubble_CatNum
+# #' @param x A data.frame
+# #' @export
+# #' @return highcharts viz
+# #' @section ftype: Cat-Num
+# #' @examples
+# #' hgch_bubble_CatNum(sampleData("Cat-Num",nrow = 10))
+# hgch_bubble_CatNum <-function(data, title = ""){
+#
+#   f <- fringe(data)
+#   nms <- getCnames(f)
+#   data <- f$d
+#   data <- plyr::rename(data, c("a" = "name"))
+#
+#   data_graph <- data %>%
+#     dplyr::group_by(name) %>%
+#     tidyr::drop_na(name) %>%
+#     dplyr::summarise(value = mean(b, na.rm = TRUE ))
+#
+#   data_graph <- data_graph %>%
+#     dplyr::mutate(y = value,
+#                   z = sqrt(y),
+#                   color = getPalette()[1:(dim(data_graph)[1])])
+#
+#   hc <- highchart() %>%
+#     hc_title(text = title) %>%
+#     hc_chart(type = "bubble",
+#              polar = FALSE) %>%
+#     hc_xAxis(Cattegories = data_graph$name) %>%
+#     hc_add_series(data_graph, showInLegend = FALSE)
+#   hc
+# }
 
 #' SCattter
 #' @name hgch_scatter_CatNumNum
