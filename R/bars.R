@@ -1267,8 +1267,7 @@ hgch_bar_stacked_hor_CatCat <-
           #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
           hc <-
             hchart(d, type = "bar", hcaes(x = b, y = c, group = a)) %>%
-            hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol)),
-                           column = list(stacking = "normal")) %>%
+            hc_plotOptions(series = list(stacking = "normal", marker = list(enabled = TRUE, symbol =  symbol)))%>%
             hc_title(text = title) %>%
             hc_subtitle(text = subtitle) %>%
             hc_xAxis(title = list(text = xAxisTitle),

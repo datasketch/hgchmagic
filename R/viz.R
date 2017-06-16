@@ -139,11 +139,6 @@ hgch_donut_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NUL
   hc
 }
 
-
-
-
-
-
 #' hgch_radar_Cat
 #' @name hgch_radar_Cat
 #' @param x A data.frame
@@ -153,8 +148,8 @@ hgch_donut_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NUL
 #' @examples
 #' hgch_radar_Cat(sampleData("Cat", nrow = 10))
 hgch_radar_Cat <- function(data,
-                            title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                            sort = "no", aggregate = "mean", export = FALSE, theme = NULL, ...){
+                           title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                           sort = "no", aggregate = "mean", export = FALSE, theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
