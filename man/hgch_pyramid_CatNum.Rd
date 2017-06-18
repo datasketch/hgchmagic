@@ -15,7 +15,7 @@ highcharts viz
 \description{
 Pyramid
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Num
 }

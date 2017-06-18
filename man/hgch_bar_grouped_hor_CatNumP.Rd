@@ -17,7 +17,7 @@ highcharts viz
 \description{
 Horizontal grouped bar
 }
-\section{ftypes}{
+\section{ctypess}{
  Cat-NumP
 }
 

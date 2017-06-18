@@ -17,7 +17,7 @@ highcharts viz
 \description{
 Scatter grouped
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Cat-Num-Num
 }

@@ -14,7 +14,8 @@ funs <- map(db,f)
 funsMeta <- funs %>% bind_rows()
 funsMeta <- funsMeta %>% filter(grepl("^hgch_",name))
 meta <- funsMeta[c("name","title","desc","section")]
-meta$ftype <- stringr::str_extract(meta$section,"(?<=\n).*?(?=\n)$")
+meta$ctypes <- stringr::str_extract(meta$section,"(?<=\n).*?(?=\n)$")
 meta$section <- NULL
+meta$ftype <- ctypesToFtype(meta$ctypes, as_string = TRUE)
 meta$group <- stringr::str_extract(meta$name,"(?<=_).*?(?=_)")
 write_csv(meta,file.path("inst","meta.csv"))

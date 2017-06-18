@@ -15,7 +15,7 @@ highcharts viz
 \description{
 Funnel
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Num
 }

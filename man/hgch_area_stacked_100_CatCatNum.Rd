@@ -17,7 +17,7 @@ highcharts viz
 \description{
 Vertical 100 stacked area
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Cat-Num
 }

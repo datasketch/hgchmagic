@@ -17,7 +17,7 @@ highcharts viz
 \description{
 Vertical grouped bar
 }
-\section{ftypes}{
+\section{ctypess}{
  Yea-Num*
 }
 

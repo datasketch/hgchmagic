@@ -17,7 +17,7 @@ highcharts viz
 \description{
 Vertical bar
 }
-\section{ftypes}{
+\section{ctypess}{
  NumP
 }
 

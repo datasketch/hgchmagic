@@ -5,7 +5,7 @@
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Dat-Num
 #' @examples
 #' 
@@ -58,7 +58,7 @@ hgch_area_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num
 #' @examples
 #' 
@@ -77,7 +77,7 @@ hgch_area_CatNum <-hgch_area_DatNum
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Yea-Num
 #' @examples
 #' 
@@ -129,7 +129,7 @@ hgch_area_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
 #' 
@@ -182,7 +182,7 @@ hgch_area_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = N
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Yea-Num
 #' @examples
 #' 
@@ -200,7 +200,7 @@ hgch_area_CatYeaNum <- hgch_area_CatCatNum
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
 #' 
@@ -254,7 +254,7 @@ hgch_area_stacked_CatCatNum <- function(data, title = NULL, subtitle = NULL, cap
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Yea-Num
 #' @examples
 #' 
@@ -273,7 +273,7 @@ hgch_area_stacked_CatYeaNum <- hgch_area_stacked_CatCatNum
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
 #' 
@@ -327,7 +327,7 @@ hgch_area_stacked_100_CatCatNum <- function(data, title = NULL, subtitle = NULL,
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Yea-Num
 #' @examples
 #' 
@@ -345,7 +345,7 @@ hgch_area_stacked_100_CatYeaNum <- hgch_area_stacked_100_CatCatNum
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Dat-Num
 #' @examples
 #' 
@@ -398,7 +398,7 @@ hgch_area_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = N
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Dat-Num
 #' @examples
 #' 
@@ -454,7 +454,7 @@ hgch_area_stacked_CatDatNum <- function(data, title = NULL, subtitle = NULL, cap
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Dat-Num
 #' @examples
 #' 
@@ -509,7 +509,7 @@ hgch_area_stacked_100_CatDatNum <- function(data, title = NULL, subtitle = NULL,
 # #' @param x A data.frame
 # #' @export
 # #' @return highcharts viz
-# #' @section ftypes: Yea-Num-Num
+# #' @section ctypess: Yea-Num-Num
 # #' @examples
 # #' hgch_2yline_YeaNumNum(sampleDatta("Yea-Num-Num",nrow = 10))
 # hgch_2yline_YeaNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL,
@@ -555,7 +555,7 @@ hgch_area_stacked_100_CatDatNum <- function(data, title = NULL, subtitle = NULL,
 # #' @param x A data.frame
 # #' @export
 # #' @return highcharts viz
-# #' @section ftypes: Yea-Num*
+# #' @section ctypess: Yea-Num*
 # #' @examples
 # #' hgch_multilines_YeaNumP(sampleDatta("Yea-Num-Num",nrow = 10))
 # hgch_multilines_YeaNumP <- function(data,

@@ -17,7 +17,7 @@ highcharts viz
 \description{
 hgch_radar_Cat
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat
 }

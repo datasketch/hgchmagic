@@ -15,7 +15,7 @@ highcharts viz
 \description{
 Radar
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Num
 }

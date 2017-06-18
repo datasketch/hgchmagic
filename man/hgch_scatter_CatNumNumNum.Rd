@@ -17,7 +17,7 @@ highcharts viz
 \description{
 Scatter
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Num-Num-Num
 }

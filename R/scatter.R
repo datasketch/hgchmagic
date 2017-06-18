@@ -5,7 +5,7 @@
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat
 #' @examples
 #'
@@ -46,7 +46,7 @@ hgch_polarcolumn_Cat <-function(data, title = ""){
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num
 #' @examples
 #'
@@ -88,7 +88,7 @@ hgch_polarcolumn_CatNum <-function(data, title = ""){
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num
 #' @examples
 #'
@@ -130,7 +130,7 @@ hgch_spider_CatNum <-function(data, title = ""){
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num-Num
 #' @examples
 #'
@@ -181,7 +181,7 @@ hgch_spider_CatNumNum <- function(data,
 # #' @param x A data.frame
 # #' @export
 # #' @return highcharts viz
-# #' @section ftype: Cat-Num
+# #' @section ctypes: Cat-Num
 # #' @examples
 # #' hgch_bubble_CatNum(sampleData("Cat-Num",nrow = 10))
 # hgch_bubble_CatNum <-function(data, title = ""){
@@ -218,7 +218,7 @@ hgch_spider_CatNumNum <- function(data,
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num-Num
 #' @examples
 #'
@@ -280,7 +280,7 @@ hgch_scatter_CatNumNum <- function(data, title = NULL, subtitle = NULL, Catption
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num-Num-Num
 #' @examples
 #'
@@ -321,7 +321,7 @@ hgch_scatter_CatNumNumNum <- function(data, title = NULL, subtitle = NULL, Catpt
 #' Scatter grouped
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat-Num-Num
 #' @examples
 #' hgch_scatter_CatCatNumNum(sampleData("Cat-Cat-Num-Num",nrow = 10))
@@ -371,7 +371,7 @@ hgch_scatter_CatCatNumNum <- function(data, title = NULL, subtitle = NULL, Catpt
 #' Scatter
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat-Num-Num-Num
 #' @examples
 #' hgch_scatter_CatCatNumNumNum(sampleData("Cat-Cat-Num-Num-Num",nrow = 10))

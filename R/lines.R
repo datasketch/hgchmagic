@@ -5,7 +5,7 @@
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Dat-Num
 #' @examples
 #' 
@@ -50,7 +50,7 @@ hgch_line_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num
 #' @examples
 #' 
@@ -69,7 +69,7 @@ hgch_line_CatNum <-hgch_line_DatNum
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Yea-Num
 #' @examples
 #' 
@@ -137,7 +137,7 @@ hgch_line_CatYeaNum <- function(data, title = NULL, subtitle = NULL, caption = N
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Yea-Num
 #' @examples
 #' 
@@ -179,7 +179,7 @@ hgch_line_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
 #' 
@@ -198,7 +198,7 @@ hgch_line_CatCatNum <- hgch_line_CatYeaNum
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Dat-Num
 #' @examples
 #' 
@@ -248,7 +248,7 @@ hgch_line_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = N
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftypes: Yea-Num-Num
+#' @section ctypess: Yea-Num-Num
 #' @examples
 #' 
 #' hgch_2yline_YeaNumNum(sampleDatta("Yea-Num-Num",nrow = 10))
@@ -303,7 +303,7 @@ hgch_2yline_YeaNumNum <- function(data, title = NULL, subtitle = NULL, caption =
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftypes: Yea-NumP
+#' @section ctypess: Yea-NumP
 #' @examples
 #' 
 #' hgch_multilines_YeaNumP(sampleDatta("Yea-NumP",nrow = 10))
@@ -354,7 +354,7 @@ hgch_multilines_YeaNumP <- function(data,
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftypes: Cat-Yea-Num
+#' @section ctypess: Cat-Yea-Num
 #' @examples
 #' 
 #' hgch_slope_CatYeaNum(sampleDatta('Cat-Yea-Num'))

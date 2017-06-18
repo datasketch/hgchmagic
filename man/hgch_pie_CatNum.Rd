@@ -17,7 +17,7 @@ highcharts viz
 \description{
 hgch_pie_CatNum
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Num
 }

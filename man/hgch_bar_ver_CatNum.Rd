@@ -18,7 +18,7 @@ highcharts viz
 \description{
 Vertical bar
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Num
 }

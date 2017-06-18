@@ -17,7 +17,7 @@ highcharts viz
 \description{
 Vertical grouped bar
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Yea-Num
 }

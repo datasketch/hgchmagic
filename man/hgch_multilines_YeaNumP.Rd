@@ -17,7 +17,7 @@ highcharts viz
 \description{
 Grouped line
 }
-\section{ftypes}{
+\section{ctypess}{
  Yea-NumP
 }
 

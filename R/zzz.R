@@ -29,7 +29,7 @@
 #   funsMeta <- funs %>% bind_rows()
 #   funsMeta <- funsMeta %>% filter(grepl("^hgch_",name))
 #   meta <- funsMeta[c("name","title","desc","section")]
-#   meta$ftype <- stringr::str_extract(meta$section,"(?<=\n).*?(?=\n)$")
+#   meta$ctypes <- stringr::str_extract(meta$section,"(?<=\n).*?(?=\n)$")
 #   meta$section <- NULL
 #   write_csv(meta,file.path(dir,"meta.csv"))
 #   #message(dir)

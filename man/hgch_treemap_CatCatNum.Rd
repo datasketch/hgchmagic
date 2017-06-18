@@ -17,7 +17,7 @@ highcharts viz
 \description{
 Treemap density by numeric variable
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Cat-Num
 }

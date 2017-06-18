@@ -17,7 +17,7 @@ highcharts viz
 \description{
 hgch_donut_CatNum
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat
 }

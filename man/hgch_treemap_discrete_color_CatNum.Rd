@@ -16,7 +16,7 @@ highcharts viz
 \description{
 Treemap coloured by first variable
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Num
 }

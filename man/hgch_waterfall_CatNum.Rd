@@ -16,7 +16,7 @@ highcharts viz
 \description{
 Waterfall
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Num
 }

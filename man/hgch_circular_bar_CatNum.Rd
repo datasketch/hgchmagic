@@ -16,7 +16,7 @@ highcharts viz
 \description{
 Circular bar
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Num
 }

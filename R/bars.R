@@ -18,7 +18,7 @@
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat
 #' @examples
 #' hgch_bar_ver_Cat(sampleDatta("Cat",nrow = 10))
@@ -91,7 +91,7 @@ hgch_bar_ver_Cat <-
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat
 #' @examples
 #' hgch_bar_ver_top_Cat(sampleDatta("Cat",nrow = 10))
@@ -132,7 +132,7 @@ hgch_bar_ver_top_Cat <- function(data,
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat
 #' @examples
 #' hgch_bar_hor_Cat(sampleDatta("Cat",nrow = 10))
@@ -197,7 +197,7 @@ hgch_bar_hor_Cat <-
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat
 #' @examples
 #' hgch_bar_hor_top_Cat(sampleDatta("Cat-Num",nrow = 10))
@@ -240,7 +240,7 @@ hgch_bar_hor_top_Cat <- function(data,
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num
 #' @examples
 #' hgch_bar_ver_CatNum(sampleDatta("Cat-Num",nrow = 10))
@@ -332,7 +332,7 @@ hgch_bar_ver_CatNum <-
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num
 #' @examples
 #' hgch_bar_ver_top_CatNum(sampleDatta("Cat-Num",nrow = 10))
@@ -373,7 +373,7 @@ hgch_bar_ver_top_CatNum <- function(data,
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Yea-Num
 #' @examples
 #' hgch_bar_ver_YeaNum(sampleDatta("Yea-Num",nrow = 10))
@@ -390,7 +390,7 @@ hgch_bar_ver_YeaNum <- hgch_bar_ver_CatNum
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Dat-Num
 #' @examples
 #' hgch_bar_ver_DatNum(sampleDatta("Dat-Num",nrow = 10))
@@ -407,7 +407,7 @@ hgch_bar_ver_DatNum <- hgch_bar_ver_CatNum
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num
 #' @examples
 #' hgch_bar_hor_CatNum(sampleDatta("Cat-Num",nrow = 10))
@@ -487,7 +487,7 @@ hgch_bar_hor_CatNum <- function(data,
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num
 #' @examples
 #' hgch_bar_hor_top_CatNum(sampleDatta("Cat-Num",nrow = 10))
@@ -531,7 +531,7 @@ hgch_bar_hor_top_CatNum <- function(data,
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
 #' hgch_bar_grouped_ver_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
@@ -592,7 +592,7 @@ hgch_bar_grouped_ver_CatCatNum <-
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Yea-Num
 #' @examples
 #' hgch_bar_grouped_ver_CatYeaNum(sampleDatta("Yea-Num-Num",nrow = 10))
@@ -609,7 +609,7 @@ hgch_bar_grouped_ver_CatYeaNum <- hgch_bar_grouped_ver_CatCatNum
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
 #' hgch_bar_grouped_hor_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
@@ -667,7 +667,7 @@ hgch_bar_grouped_hor_CatCatNum <-
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
 #' hgch_bar_stacked_ver_CatCatNum(sampleData("Cat-Cat-Num",nrow = 10))
@@ -728,7 +728,7 @@ hgch_bar_stacked_ver_CatCatNum <-
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
 #' hgch_bar_stacked_100_ver_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
@@ -791,7 +791,7 @@ hgch_bar_stacked_100_ver_CatCatNum <-
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
 #' hgch_bar_stacked_hor_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
@@ -852,7 +852,7 @@ hgch_bar_stacked_hor_CatCatNum <-
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
 #' hgch_bar_stacked_100_hor_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
@@ -914,7 +914,7 @@ hgch_bar_stacked_100_hor_CatCatNum <-
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Dat-Num
 #' @examples
 #' hgch_bar_stacked_ver_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
@@ -929,7 +929,7 @@ hgch_bar_stacked_ver_CatDatNum <- hgch_bar_stacked_ver_CatCatNum
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Dat-Num
 #' @examples
 #' hgch_bar_stacked_100_ver_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
@@ -946,7 +946,7 @@ hgch_bar_stacked_100_ver_CatDatNum <- hgch_bar_stacked_100_ver_CatCatNum
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftypes: Yea-Num*
+#' @section ctypess: Yea-Num*
 #' @examples
 #' hgch_bar_grouped_ver_CatNumP(sampleDatta("Cat-NumP",nrow = 10))
 #' @export hgch_bar_grouped_ver_CatNumP
@@ -1013,7 +1013,7 @@ hgch_bar_grouped_ver_CatNumP <- function(data,
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftypes: Cat-NumP
+#' @section ctypess: Cat-NumP
 #' @examples
 #' hgch_bar_grouped_hor_CatNumP(sampleDatta("Cat-NumP",nrow = 10))
 #' @export hgch_bar_grouped_hor_CatNumP
@@ -1079,7 +1079,7 @@ hgch_bar_grouped_hor_CatNumP <- function(data,
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftypes: NumP
+#' @section ctypess: NumP
 #' @examples
 #' hgch_bar_ver_NumP(sampleData("NumP",nrow = 10))
 hgch_bar_ver_NumP <- function(data,
@@ -1138,7 +1138,7 @@ hgch_bar_ver_NumP <- function(data,
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num
 #' @examples
 #' hgch_waterfall_CatNum(sampleDatta("Cat-Num",nrow = 10))
@@ -1191,7 +1191,7 @@ hgch_waterfall_CatNum <-function(data, title = NULL,  xAxisTitle = NULL,
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat
 #' @examples
 #' hgch_bar_grouped_ver_CatCat(sampleDatta("Cat-Cat",nrow = 10))
@@ -1255,7 +1255,7 @@ hgch_bar_grouped_ver_CatCat <-
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat
 #' @examples
 #' hgch_bar_grouped_hor_CatCat(sampleDatta("Cat-Cat",nrow = 10))
@@ -1315,7 +1315,7 @@ hgch_bar_grouped_hor_CatCat <-
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat
 #' @examples
 #' hgch_bar_stacked_ver_CatCat(sampleDatta("Cat-Cat",nrow = 10))
@@ -1378,7 +1378,7 @@ hgch_bar_stacked_ver_CatCat <-
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat
 #' @examples
 #' hgch_bar_stacked_hor_CatCat(sampleDatta("Cat-Cat",nrow = 10))
@@ -1440,7 +1440,7 @@ hgch_bar_stacked_hor_CatCat <-
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat
 #' @examples
 #' hgch_bar_stacked_100_ver_CatCat(sampleDatta("Cat-Cat",nrow = 10))
@@ -1500,7 +1500,7 @@ hgch_bar_stacked_100_ver_CatCat <-
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Cat
 #' @examples
 #' hgch_bar_stacked_100_hor_CatCat(sampleDatta("Cat-Cat",nrow = 10))
@@ -1561,7 +1561,7 @@ hgch_bar_stacked_100_hor_CatCat <-
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num
 #' @section OtherInfo:
 #' moreInfo

@@ -17,7 +17,7 @@ highcharts viz
 \description{
 Horizontal 100 stacked bar
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Cat-Num
 }

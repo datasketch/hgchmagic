@@ -15,7 +15,7 @@ highcharts viz
 \description{
 Polar bar
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat
 }

@@ -17,7 +17,7 @@ highcharts viz
 \description{
 Ordered horizontal bar
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat
 }

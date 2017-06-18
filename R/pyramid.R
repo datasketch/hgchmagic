@@ -5,7 +5,7 @@
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num
 #' @examples
 #' 
@@ -54,7 +54,7 @@ hgch_pyramid_CatNum <-function(data, title = ""){
 #' 
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num
 #' @examples
 #' 

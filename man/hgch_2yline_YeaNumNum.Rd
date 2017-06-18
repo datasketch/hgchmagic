@@ -17,7 +17,7 @@ highcharts viz
 \description{
 2 y line
 }
-\section{ftypes}{
+\section{ctypess}{
  Yea-Num-Num
 }
 

@@ -7,14 +7,14 @@ hgchMeta <- function(){
 #' @export
 hgchWhich <- function(d){
   meta <- hgchMeta()
-  guessedftype <- guessFtype(d) # TODO possibleFtypes
-  meta %>% filter(ftype == guessedftype)
+  guessedctypes <- guessCtypes(d, as_string = TRUE) # TODO possibleFtypes
+  meta %>% filter(ctypes == guessedctypes)
 }
 
 #' @export
-hgchFtype <- function(ftypeIn){
+hgchCtypes <- function(ctypesIn){
   meta <- hgchMeta()
-  meta %>% filter(ftype == ftypeIn)
+  meta %>% filter(ctypes == ctypesIn)
 }
 
 #' @export

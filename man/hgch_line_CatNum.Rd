@@ -17,7 +17,7 @@ highcharts viz
 \description{
 Line
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Num
 }

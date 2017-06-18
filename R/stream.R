@@ -6,7 +6,7 @@
 # #' @param x A data.frame
 # #' @export
 # #' @return highcharts viz
-# #' @section ftype:
+# #' @section ctypes:
 #' Ca-Ca-Nu
 # #' @examples
 # #' hgch_stream_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
@@ -42,7 +42,7 @@
 # #' @param x A data.frame
 # #' @export
 # #' @return highcharts viz
-# #' @section ftype:
+# #' @section ctypes:
 #' Ca-Ye-Nu
 # #' @examples
 # #' hgch_stream_CaYeNu(sampleData("Ye-Nu-Nu",nrow = 10))
@@ -59,7 +59,7 @@
 # #' @param x A data.frame
 # #' @export
 # #' @return highcharts viz
-# #' @section ftype:
+# #' @section ctypes:
 #' Ca-Ca-Nu
 # #' @examples
 # #' hgch_stream_stacked_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))

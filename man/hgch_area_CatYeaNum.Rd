@@ -17,7 +17,7 @@ highcharts viz
 \description{
 Vertical area
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Yea-Num
 }

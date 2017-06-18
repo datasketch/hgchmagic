@@ -17,7 +17,7 @@
 #' #' @param x A data.frame
 #' #' @export
 #' #' @return highcharts viz
-#' #' @section ftype: Gcd-Num
+#' #' @section ctypes: Gcd-Num
 #' #' @examples
 #' #' hgch_map_choro_world_GcdNum(sampleData("Gcd-Num",nrow = 10))
 #' hgch_map_choro_world_GcdNum <- function(data, title = NULL,
@@ -58,7 +58,7 @@
 #' #' @param x A data.frame
 #' #' @export
 #' #' @return highcharts viz
-#' #' @section ftype: Gcd-Num
+#' #' @section ctypes: Gcd-Num
 #' #' @examples
 #' #' hgch_map_bubbles_world_GcdNum(sampleData("Gcd-Num",nrow = 10))
 #' hgch_map_bubbles_world_GcdNum <- function(data,
@@ -160,7 +160,7 @@
 #' #' @param x A data.frame
 #' #' @export
 #' #' @return highcharts viz
-#' #' @section ftype: Gcd-Num
+#' #' @section ctypes: Gcd-Num
 #' #' @examples
 #' #' hgch_map_bubbles_latinAmerican_GcdNum(sampleData("Gcd-Num",nrow = 10))
 #' hgch_map_bubbles_latinAmerican_GcdNum <- function(data,
@@ -250,7 +250,7 @@
 #' #' @param x A data.frame
 #' #' @export
 #' #' @return highcharts viz
-#' #' @section ftype: Gcd-Num-Num
+#' #' @section ctypes: Gcd-Num-Num
 #' #' @examples
 #' #' hgch_map_bubbles_latinAmerican_GcdNumNum(sampleData("Gcd-Num-Num",nrow = 10))
 #'

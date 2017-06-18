@@ -5,7 +5,7 @@
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat
 #' @examples
 #'
@@ -47,7 +47,7 @@ hgch_pie_Cat <- function(data, title = NULL, subtitle = NULL, caption = NULL, xA
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num
 #' @examples
 #'
@@ -91,7 +91,7 @@ hgch_pie_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat
 #' @examples
 #'
@@ -134,7 +134,7 @@ hgch_donut_Cat <- function(data, title = NULL, subtitle = NULL, caption = NULL, 
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat
 #' @examples
 #'
@@ -175,7 +175,7 @@ hgch_donut_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NUL
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat
 #' @examples
 #'
@@ -225,7 +225,7 @@ hgch_radar_Cat <- function(data,
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ftype:
+#' @section ctypes:
 #' Cat-Num
 #' @examples
 #'

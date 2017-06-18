@@ -17,7 +17,7 @@ highcharts viz
 \description{
 Slope
 }
-\section{ftypes}{
+\section{ctypess}{
  Cat-Yea-Num
 }
 

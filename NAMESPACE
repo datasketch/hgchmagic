@@ -2,7 +2,7 @@
 
 export(custom_theme)
 export(getPalette)
-export(hgchFtype)
+export(hgchCtypes)
 export(hgchMeta)
 export(hgchNames)
 export(hgchWhich)

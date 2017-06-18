@@ -17,7 +17,7 @@ highcharts viz
 \description{
 hgch_bar_stacked_100_hor_CatCat
 }
-\section{ftype}{
+\section{ctypes}{
 
 Cat-Cat
 }
