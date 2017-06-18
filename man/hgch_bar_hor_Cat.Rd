@@ -18,9 +18,12 @@ highcharts viz
 Horizontal bar
 }
 \section{ftype}{
- Cat
+
+Cat
 }
 \examples{
+
 hgch_bar_hor_Cat(sampleDatta("Cat",nrow = 10))
+
 }
 

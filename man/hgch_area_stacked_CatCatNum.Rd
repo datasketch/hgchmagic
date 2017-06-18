@@ -18,9 +18,12 @@ highcharts viz
 Vertical stacked area
 }
 \section{ftype}{
- Cat-Cat-Num
+
+Cat-Cat-Num
 }
 \examples{
+
 hgch_area_stacked_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+
 }
 

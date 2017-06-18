@@ -16,9 +16,12 @@ highcharts viz
 Polar bar
 }
 \section{ftype}{
- Cat
+
+Cat
 }
 \examples{
+
 hgch_polarcolumn_Cat(sampleData("Cat",nrow = 10))
+
 }
 

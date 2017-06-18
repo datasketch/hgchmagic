@@ -18,9 +18,12 @@ highcharts viz
 Vertical grouped bar
 }
 \section{ftype}{
- Cat-Cat-Num
+
+Cat-Cat-Num
 }
 \examples{
+
 hgch_bar_grouped_ver_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+
 }
 

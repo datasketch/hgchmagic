@@ -1,8 +1,26 @@
 
+source("inst/meta.R")
 devtools::document()
 devtools::install()
 
 library(hgchmagic)
+
+meta <- hgchMeta()
+hgchWhich()
+hgchList()
+hgchFtype()
+
+
+# Available
+
+dir <- find.package("hgchmagic", lib.loc = NULL)
+list.files(dir)
+file.info(system.file("meta.csv",package = "hgchmagic"))
+
+funsMeta <- hgchMeta()
+
+
+
 
 # Pie and Donut
 

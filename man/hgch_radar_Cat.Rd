@@ -18,9 +18,12 @@ highcharts viz
 hgch_radar_Cat
 }
 \section{ftype}{
- Cat
+
+Cat
 }
 \examples{
+
 hgch_radar_Cat(sampleData("Cat", nrow = 10))
+
 }
 

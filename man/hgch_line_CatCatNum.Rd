@@ -18,9 +18,12 @@ highcharts viz
 Line
 }
 \section{ftype}{
- Cat-Cat-Num
+
+Cat-Cat-Num
 }
 \examples{
+
 hgch_line_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+
 }
 

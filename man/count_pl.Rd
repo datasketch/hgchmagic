@@ -9,4 +9,13 @@ count_pl(x)
 \description{
 count_pl
 }
+\section{ftype}{
+
+Gcd-Num
+}
+
+\section{other}{
+
+moreinfo
+}
 

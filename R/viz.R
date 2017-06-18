@@ -1,12 +1,17 @@
-
 #' hgch_pie_Cat
-#' @name hgch_pie_Cat
+#' 
+#' hgch_pie_Cat
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat
+#' @section ftype:
+#' Cat
 #' @examples
+#' 
 #' hgch_pie_Cat(sampleData("Cat",nrow = 10))
+#' 
+#' @export hgch_pie_Cat
 hgch_pie_Cat <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                             sort = "no", aggregate = "count", export = FALSE, theme = NULL, ...){
 
@@ -33,14 +38,22 @@ hgch_pie_Cat <- function(data, title = NULL, subtitle = NULL, caption = NULL, xA
   hc
 }
 
+
+
 #' hgch_pie_CatNum
-#' @name hgch_pie_CatNum
+#' 
+#' hgch_pie_CatNum
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Num
+#' @section ftype:
+#' Cat-Num
 #' @examples
+#' 
 #' hgch_pie_CatNum(sampleData("Cat-Num",nrow = 10))
+#' 
+#' @export hgch_pie_CatNum
 hgch_pie_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                         sort = "no", aggregate = "sum", export = FALSE, theme = NULL, ...){
 
@@ -69,14 +82,22 @@ hgch_pie_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
 }
 
 
+
+
 #' hgch_donut_Cat
-#' @name hgch_donut_Cat
+#' 
+#' hgch_donut_Cat
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat
+#' @section ftype:
+#' Cat
 #' @examples
+#' 
 #' hgch_donut_Cat(sampleData("Cat",nrow = 10))
+#' 
+#' @export hgch_donut_Cat
 hgch_donut_Cat <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                         sort = "no", aggregate = "count", export = FALSE, theme = NULL, ...){
 
@@ -104,14 +125,22 @@ hgch_donut_Cat <- function(data, title = NULL, subtitle = NULL, caption = NULL, 
   hc
 }
 
+
+
 #' hgch_donut_CatNum
-#' @name hgch_donut_CatNum
+#' 
+#' hgch_donut_CatNum
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat
+#' @section ftype:
+#' Cat
 #' @examples
+#' 
 #' hgch_donut_CatNum(sampleData("Cat-Num",nrow = 10))
+#' 
+#' @export hgch_donut_CatNum
 hgch_donut_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                           sort = "no", aggregate = "sum", export = FALSE, theme = NULL, ...){
 
@@ -144,14 +173,22 @@ hgch_donut_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NUL
 
 
 
+
+
 #' hgch_radar_Cat
-#' @name hgch_radar_Cat
+#' 
+#' hgch_radar_Cat
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat
+#' @section ftype:
+#' Cat
 #' @examples
+#' 
 #' hgch_radar_Cat(sampleData("Cat", nrow = 10))
+#' 
+#' @export hgch_radar_Cat
 hgch_radar_Cat <- function(data,
                             title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                             sort = "no", aggregate = "mean", export = FALSE, theme = NULL, ...){
@@ -186,14 +223,22 @@ hgch_radar_Cat <- function(data,
 }
 
 
+
+
 #' hgch_radar_CatNum
-#' @name hgch_radar_CatNum
+#' 
+#' hgch_radar_CatNum
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Num
+#' @section ftype:
+#' Cat-Num
 #' @examples
+#' 
 #' hgch_radar_CatNum(sampleData("Cat-Num",nrow = 10))
+#' 
+#' @export hgch_radar_CatNum
 hgch_radar_CatNum <- function(data,
                             title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                             sort = "no", aggregate = "mean", export = FALSE, theme = NULL, ...){

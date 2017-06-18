@@ -18,9 +18,12 @@ highcharts viz
 SCattter
 }
 \section{ftype}{
- Cat-Num-Num
+
+Cat-Num-Num
 }
 \examples{
+
 hgch_scatter_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
+
 }
 

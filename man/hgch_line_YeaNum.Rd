@@ -18,9 +18,12 @@ highcharts viz
 Line
 }
 \section{ftype}{
- Yea-Num
+
+Yea-Num
 }
 \examples{
+
 hgch_line_YeaNum(sampleDatta("Yea-Num",nrow = 10))
+
 }
 

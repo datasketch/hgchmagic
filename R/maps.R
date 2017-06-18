@@ -1,6 +1,12 @@
 #' count_pl
-#' @name count_pl
-#' @export
+#'
+#' count_pl
+#'
+#' @section ftype:
+#' Gcd-Num
+#' @section other:
+#' moreinfo
+#' @export count_pl
 count_pl <- function(x) {
   if(is.na(x)){return(0)}
 
@@ -12,14 +18,22 @@ count_pl <- function(x) {
 }
 
 
+
+
 #' Choropleth's world map
-#' @name hgch_map_choro_world_GcdNum
+#'
+#' Choropleth's world map
+#'
+#'
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Gcd-Num
+#' @section ftype:
+#' Gcd-Num
 #' @examples
+#'
 #' hgch_map_choro_world_GcdNum(sampleData("Gcd-Num",nrow = 10))
+#'
+#' @export hgch_map_choro_world_GcdNum
 hgch_map_choro_world_GcdNum <- function(data, title = NULL,
                                       subtitle = NULL,
                                       xAxisTitle = NULL,
@@ -53,14 +67,22 @@ hgch_map_choro_world_GcdNum <- function(data, title = NULL,
 }
 
 
+
+
 #' Bubble world map
-#' @name hgch_map_bubbles_world_GcdNum
+#'
+#' Bubble world map
+#'
+#'
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Gcd-Num
+#' @section ftype:
+#' Gcd-Num
 #' @examples
+#'
 #' hgch_map_bubbles_world_GcdNum(sampleData("Gcd-Num",nrow = 10))
+#'
+#' @export hgch_map_bubbles_world_GcdNum
 hgch_map_bubbles_world_GcdNum <- function(data,
                                         title = NULL,
                                         subtitle = NULL,
@@ -155,14 +177,22 @@ hgch_map_bubbles_world_GcdNum <- function(data,
 ### Latin American
 
 
+
+
 #' Bubble latam map
-#' @name hgch_map_bubbles_latinAmerican_GcdNum
+#'
+#' Bubble latam map
+#'
+#'
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Gcd-Num
+#' @section ftype:
+#' Gcd-Num
 #' @examples
+#'
 #' hgch_map_bubbles_latinAmerican_GcdNum(sampleData("Gcd-Num",nrow = 10))
+#'
+#' @export hgch_map_bubbles_latinAmerican_GcdNum
 hgch_map_bubbles_latinAmerican_GcdNum <- function(data,
                                                 title = NULL,
                                                 subtitle = NULL,
@@ -250,10 +280,27 @@ hc <- highchart(type = "map") %>%
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ftype: Gcd-Num-Num
+#' @section ftype:
+#' Gcd-Num-Num
 #' @examples
 #' hgch_map_bubbles_latinAmerican_GcdNumNum(sampleData("Gcd-Num-Num",nrow = 10))
 
+
+
+#' Bubble latam map
+#'
+#' Bubble latam map
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ftype:
+#' Gcd-Num-Num
+#' @examples
+#'
+#' hgch_map_bubbles_latinAmerican_GcdNumNum(sampleData("Gcd-Num-Num",nrow = 10))
+#'
+#' @export hgch_map_bubbles_latinAmerican_GcdNumNum
 hgch_map_bubbles_latinAmerican_GcdNumNum <- function(data,
                                                   title = NULL,
                                                   subtitle = NULL,

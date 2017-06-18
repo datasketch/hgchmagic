@@ -19,9 +19,12 @@ highcharts viz
 Vertical bar
 }
 \section{ftype}{
- Yea-Num
+
+Yea-Num
 }
 \examples{
+
 hgch_bar_ver_YeaNum(sampleDatta("Yea-Num",nrow = 10))
+
 }
 

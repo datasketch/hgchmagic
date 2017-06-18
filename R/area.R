@@ -1,11 +1,17 @@
 #' Vertical area
-#' @name hgch_area_DatNum
+#' 
+#' Vertical area
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Dat-Num
+#' @section ftype:
+#' Dat-Num
 #' @examples
+#' 
 #' hgch_area_DatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
+#' 
+#' @export hgch_area_DatNum
 hgch_area_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
@@ -43,25 +49,41 @@ hgch_area_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
   hc
 }
 
+
+
 #' Vertical area
-#' @name hgch_area_CatNum
+#' 
+#' Vertical area
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Num
+#' @section ftype:
+#' Cat-Num
 #' @examples
+#' 
 #' hgch_area_CatNum(sampleDatta("Cat-Num",nrow = 10))
+#' 
+#' @export hgch_area_CatNum
 hgch_area_CatNum <-hgch_area_DatNum
 
 
+
+
 #' Vertical area
-#' @name hgch_area_YeaNum
+#' 
+#' Vertical area
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Yea-Num
+#' @section ftype:
+#' Yea-Num
 #' @examples
+#' 
 #' hgch_area_YeaNum(sampleDatta("Yea-Num",nrow = 10))
+#' 
+#' @export hgch_area_YeaNum
 hgch_area_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
@@ -98,14 +120,22 @@ hgch_area_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
+
+
 #' Vertical area
-#' @name hgch_area_CatCatNum
+#' 
+#' Vertical area
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Cat-Num
+#' @section ftype:
+#' Cat-Cat-Num
 #' @examples
+#' 
 #' hgch_area_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+#' 
+#' @export hgch_area_CatCatNum
 hgch_area_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
@@ -143,24 +173,40 @@ hgch_area_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = N
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
+
+
 #' Vertical area
-#' @name hgch_area_CatYeaNum
+#' 
+#' Vertical area
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Yea-Num
+#' @section ftype:
+#' Cat-Yea-Num
 #' @examples
+#' 
 #' hgch_area_CatYeaNum(sampleDatta("Cat-Yea-Num",nrow = 10))
+#' 
+#' @export hgch_area_CatYeaNum
 hgch_area_CatYeaNum <- hgch_area_CatCatNum
 
+
+
 #' Vertical stacked area
-#' @name hgch_area_stacked_CatCatNum
+#' 
+#' Vertical stacked area
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Cat-Num
+#' @section ftype:
+#' Cat-Cat-Num
 #' @examples
+#' 
 #' hgch_area_stacked_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+#' 
+#' @export hgch_area_stacked_CatCatNum
 hgch_area_stacked_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                    symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
@@ -199,25 +245,41 @@ hgch_area_stacked_CatCatNum <- function(data, title = NULL, subtitle = NULL, cap
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
+
+
 #' Vertical stacked area
-#' @name hgch_area_stacked_CatYeaNum
+#' 
+#' Vertical stacked area
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Yea-Num
+#' @section ftype:
+#' Cat-Yea-Num
 #' @examples
+#' 
 #' hgch_area_stacked_CatYeaNum(sampleDatta("Cat-Yea-Num",nrow = 10))
+#' 
+#' @export hgch_area_stacked_CatYeaNum
 hgch_area_stacked_CatYeaNum <- hgch_area_stacked_CatCatNum
 
 
+
+
 #' Vertical 100 stacked area
-#' @name hgch_area_stacked_100_CatCatNum
+#' 
+#' Vertical 100 stacked area
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Cat-Num
+#' @section ftype:
+#' Cat-Cat-Num
 #' @examples
+#' 
 #' hgch_area_stacked_100_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+#' 
+#' @export hgch_area_stacked_100_CatCatNum
 hgch_area_stacked_100_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                        symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
@@ -256,24 +318,40 @@ hgch_area_stacked_100_CatCatNum <- function(data, title = NULL, subtitle = NULL,
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
+
+
 #' Vertical 100 stacked area
-#' @name hgch_area_stacked_100_CatYeaNum
+#' 
+#' Vertical 100 stacked area
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Yea-Num
+#' @section ftype:
+#' Cat-Yea-Num
 #' @examples
+#' 
 #' hgch_area_stacked_CatYeaNum(sampleDatta("Cat-Yea-Num",nrow = 10))
+#' 
+#' @export hgch_area_stacked_100_CatYeaNum
 hgch_area_stacked_100_CatYeaNum <- hgch_area_stacked_100_CatCatNum
 
+
+
 #' Vertical area
-#' @name hgch_area_CatDatNum
+#' 
+#' Vertical area
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Dat-Num
+#' @section ftype:
+#' Cat-Dat-Num
 #' @examples
+#' 
 #' hgch_area_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
+#' 
+#' @export hgch_area_CatDatNum
 hgch_area_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL,startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
@@ -311,14 +389,22 @@ hgch_area_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = N
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
+
+
 #' Vertical stacked area
-#' @name hgch_area_stacked_CatDatNum
+#' 
+#' Vertical stacked area
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Dat-Num
+#' @section ftype:
+#' Cat-Dat-Num
 #' @examples
+#' 
 #' hgch_area_stacked_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
+#' 
+#' @export hgch_area_stacked_CatDatNum
 hgch_area_stacked_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                    symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
@@ -359,14 +445,22 @@ hgch_area_stacked_CatDatNum <- function(data, title = NULL, subtitle = NULL, cap
   }
 
 
+
+
 #' Vertical 100 stacked area
-#' @name hgch_area_stacked_100_CatDatNum
+#' 
+#' Vertical 100 stacked area
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Dat-Num
+#' @section ftype:
+#' Cat-Dat-Num
 #' @examples
+#' 
 #' hgch_area_stacked_100_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
+#' 
+#' @export hgch_area_stacked_100_CatDatNum
 hgch_area_stacked_100_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                        symbol = NULL, startAtZero = FALSE,
                                        theme = NULL, export = FALSE,...){

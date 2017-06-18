@@ -12,17 +12,30 @@ hgch_map_bubbles_latinAmerican_GcdNumNum(data, title = NULL,
 }
 \arguments{
 \item{x}{A data.frame}
+
+\item{x}{A data.frame}
 }
 \value{
+highcharts viz
+
 highcharts viz
 }
 \description{
 Bubble latam map
 }
 \section{ftype}{
- Gcd-Num-Num
+
+Gcd-Num-Num
+
+
+Gcd-Num-Num
 }
 \examples{
 hgch_map_bubbles_latinAmerican_GcdNumNum(sampleData("Gcd-Num-Num",nrow = 10))
+Bubble latam map
+
+Bubble latam map
+
+
 }
 

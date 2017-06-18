@@ -18,9 +18,12 @@ highcharts viz
 hgch_pie_Cat
 }
 \section{ftype}{
- Cat
+
+Cat
 }
 \examples{
+
 hgch_pie_Cat(sampleData("Cat",nrow = 10))
+
 }
 

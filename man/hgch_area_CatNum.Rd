@@ -18,9 +18,12 @@ highcharts viz
 Vertical area
 }
 \section{ftype}{
- Cat-Num
+
+Cat-Num
 }
 \examples{
+
 hgch_area_CatNum(sampleDatta("Cat-Num",nrow = 10))
+
 }
 

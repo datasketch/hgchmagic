@@ -9,6 +9,7 @@ Imports:
 Depends:
     R (>= 3.0.0),
     tools,
+    Rd2roxygen,
     datafringe,
     tidyverse,
     geojsonio,

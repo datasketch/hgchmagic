@@ -1,11 +1,17 @@
 #' Pyramid
-#' @name hgch_pyramid_CatNum
+#' 
+#' Pyramid
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Num
+#' @section ftype:
+#' Cat-Num
 #' @examples
+#' 
 #' hgch_pyramid_CatNum(sampleData("Cat-Num",nrow = 10))
+#' 
+#' @export hgch_pyramid_CatNum
 hgch_pyramid_CatNum <-function(data, title = ""){
 
   f <- fringe(data)
@@ -39,14 +45,22 @@ hgch_pyramid_CatNum <-function(data, title = ""){
 
 
 
+
+
 #' Funnel
-#' @name hgch_funnel_CatNum
+#' 
+#' Funnel
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Num
+#' @section ftype:
+#' Cat-Num
 #' @examples
+#' 
 #' hgch_funnel_CatNum(sampleData("Cat-Num",nrow = 10))
+#' 
+#' @export hgch_funnel_CatNum
 hgch_funnel_CatNum <-function(data, title = ""){
 
 

@@ -18,9 +18,12 @@ highcharts viz
 Treemap density by numeric variable
 }
 \section{ftype}{
- Cat-Cat-Num
+
+Cat-Cat-Num
 }
 \examples{
+
 hgch_treemap_CatCatNum(sampleData("Cat-Cat-Num",nrow = 10))
+
 }
 

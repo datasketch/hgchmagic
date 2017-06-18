@@ -21,6 +21,8 @@ Grouped line
  Yea-NumP
 }
 \examples{
+
 hgch_multilines_YeaNumP(sampleDatta("Yea-NumP",nrow = 10))
+
 }
 

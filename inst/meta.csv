@@ -1,0 +1,226 @@
+name,title,desc,ftype,group
+hgch_2yline_YeaNumNum,2 y line,"
+2 y line
+", Yea-Num-Num,2yline
+hgch_area_CatCatNum,Vertical area,"
+Vertical area
+",Cat-Cat-Num,area
+hgch_area_CatDatNum,Vertical area,"
+Vertical area
+",Cat-Dat-Num,area
+hgch_area_CatNum,Vertical area,"
+Vertical area
+",Cat-Num,area
+hgch_area_CatYeaNum,Vertical area,"
+Vertical area
+",Cat-Yea-Num,area
+hgch_area_DatNum,Vertical area,"
+Vertical area
+",Dat-Num,area
+hgch_area_YeaNum,Vertical area,"
+Vertical area
+",Yea-Num,area
+hgch_area_stacked_100_CatCatNum,Vertical 100 stacked area,"
+Vertical 100 stacked area
+",Cat-Cat-Num,area
+hgch_area_stacked_100_CatDatNum,Vertical 100 stacked area,"
+Vertical 100 stacked area
+",Cat-Dat-Num,area
+hgch_area_stacked_100_CatYeaNum,Vertical 100 stacked area,"
+Vertical 100 stacked area
+",Cat-Yea-Num,area
+hgch_area_stacked_CatCatNum,Vertical stacked area,"
+Vertical stacked area
+",Cat-Cat-Num,area
+hgch_area_stacked_CatDatNum,Vertical stacked area,"
+Vertical stacked area
+",Cat-Dat-Num,area
+hgch_area_stacked_CatYeaNum,Vertical stacked area,"
+Vertical stacked area
+",Cat-Yea-Num,area
+hgch_bar_grouped_hor_CatCat,Horizontal grouped bar,"
+Horizontal grouped bar
+",Cat-Cat,bar
+hgch_bar_grouped_hor_CatCatNum,Horizontal grouped bar,"
+Horizontal grouped bar
+",Cat-Cat-Num,bar
+hgch_bar_grouped_hor_CatNumP,Horizontal grouped bar,"
+Horizontal grouped bar
+", Cat-NumP,bar
+hgch_bar_grouped_ver_CatCat,Vertical grouped bar,"
+Vertical grouped bar
+",Cat-Cat,bar
+hgch_bar_grouped_ver_CatCatNum,Vertical grouped bar,"
+Vertical grouped bar
+",Cat-Cat-Num,bar
+hgch_bar_grouped_ver_CatNumP,Vertical grouped bar,"
+Vertical grouped bar
+", Yea-Num*,bar
+hgch_bar_grouped_ver_CatYeaNum,Vertical grouped bar,"
+Vertical grouped bar
+",Cat-Yea-Num,bar
+hgch_bar_hor_Cat,Horizontal bar,"
+Horizontal bar
+",Cat,bar
+hgch_bar_hor_CatNum,Horizontal bar,"
+Horizontal bar
+",Cat-Num,bar
+hgch_bar_hor_top_Cat,Ordered horizontal bar,"
+Ordered horizontal bar
+",Cat,bar
+hgch_bar_hor_top_CatNum,Ordered horizontal bar,"
+Ordered horizontal bar
+",Cat-Num,bar
+hgch_bar_stacked_100_hor_CatCat,hgch_bar_stacked_100_hor_CatCat,"
+hgch_bar_stacked_100_hor_CatCat
+",Cat-Cat,bar
+hgch_bar_stacked_100_hor_CatCatNum,Horizontal 100 stacked bar,"
+Horizontal 100 stacked bar
+",Cat-Cat-Num,bar
+hgch_bar_stacked_100_ver_CatCat,hgch_bar_stacked_100_ver_CatCat,"
+hgch_bar_stacked_100_ver_CatCat
+",Cat-Cat,bar
+hgch_bar_stacked_100_ver_CatCatNum,Vertical 100 stacked bar,"
+Vertical 100 stacked bar
+",Cat-Cat-Num,bar
+hgch_bar_stacked_100_ver_CatDatNum,Vertical 100 stacked bar,"
+Vertical 100 stacked bar
+",Cat-Dat-Num,bar
+hgch_bar_stacked_hor_CatCat,hgch_bar_stacked_hor_CatCat,"
+hgch_bar_stacked_hor_CatCat
+",Cat-Cat,bar
+hgch_bar_stacked_hor_CatCatNum,Horizontal stacked bar,"
+Horizontal stacked bar
+",Cat-Cat-Num,bar
+hgch_bar_stacked_ver_CatCat,hgch_bar_stacked_ver_CatCat,"
+hgch_bar_stacked_ver_CatCat
+",Cat-Cat,bar
+hgch_bar_stacked_ver_CatCatNum,Vertical stacked bar,"
+Vertical stacked bar
+",Cat-Cat-Num,bar
+hgch_bar_stacked_ver_CatDatNum,Vertical stacked bar,"
+Vertical stacked bar
+",Cat-Dat-Num,bar
+hgch_bar_ver_Cat,Vertical bar,"
+Vertical bar
+",Cat,bar
+hgch_bar_ver_CatNum,Vertical bar,"
+Vertical bar
+",Cat-Num,bar
+hgch_bar_ver_DatNum,Vertical bar,"
+Vertical bar
+",Dat-Num,bar
+hgch_bar_ver_NumP,Vertical bar,"
+Vertical bar
+", NumP,bar
+hgch_bar_ver_YeaNum,Vertical bar,"
+Vertical bar
+",Yea-Num,bar
+hgch_bar_ver_top_Cat,Ordered vertical bar,"
+Ordered vertical bar
+",Cat,bar
+hgch_bar_ver_top_CatNum,Ordered vertical bar,"
+Ordered vertical bar
+",Cat-Num,bar
+hgch_bubble_CatNum,Bubble,"
+Bubble
+",Cat-Num,bubble
+hgch_circular_bar_CatNum,Circular bar,"
+Circular bar
+",Cat-Num,circular
+hgch_donut_Cat,hgch_donut_Cat,"
+hgch_donut_Cat
+",Cat,donut
+hgch_donut_CatNum,hgch_donut_CatNum,"
+hgch_donut_CatNum
+",Cat,donut
+hgch_funnel_CatNum,Funnel,"
+Funnel
+",Cat-Num,funnel
+hgch_line_CatCatNum,Line,"
+Line
+",Cat-Cat-Num,line
+hgch_line_CatDatNum,Line,"
+Line
+",Cat-Dat-Num,line
+hgch_line_CatNum,Line,"
+Line
+",Cat-Num,line
+hgch_line_CatYeaNum,Line,"
+Line
+",Cat-Yea-Num,line
+hgch_line_DatNum,Line,"
+Line
+",Dat-Num,line
+hgch_line_YeaNum,Line,"
+Line
+",Yea-Num,line
+hgch_map_bubbles_latinAmerican_GcdNum,Bubble latam map,"
+Bubble latam map
+",Gcd-Num,map
+hgch_map_bubbles_latinAmerican_GcdNumNum,Bubble latam map,"
+Bubble latam map
+",Gcd-Num-Num,map
+hgch_map_bubbles_world_GcdNum,Bubble world map,"
+Bubble world map
+",Gcd-Num,map
+hgch_map_choro_world_GcdNum,Choropleth's world map,"
+Choropleth's world map
+",Gcd-Num,map
+hgch_multilines_YeaNumP,Grouped line,"
+Grouped line
+", Yea-NumP,multilines
+hgch_pie_Cat,hgch_pie_Cat,"
+hgch_pie_Cat
+",Cat,pie
+hgch_pie_CatNum,hgch_pie_CatNum,"
+hgch_pie_CatNum
+",Cat-Num,pie
+hgch_polarcolumn_Cat,Polar bar,"
+Polar bar
+",Cat,polarcolumn
+hgch_polarcolumn_CatNum,Polar bar,"
+Polar bar
+",Cat-Num,polarcolumn
+hgch_pyramid_CatNum,Pyramid,"
+Pyramid
+",Cat-Num,pyramid
+hgch_radar_Cat,hgch_radar_Cat,"
+hgch_radar_Cat
+",Cat,radar
+hgch_radar_CatNum,hgch_radar_CatNum,"
+hgch_radar_CatNum
+",Cat-Num,radar
+hgch_scatter_CatCatNumNum,SCattter,"
+SCattter
+",Cat-Cat-Num-Num,scatter
+hgch_scatter_CatCatNumNumNum,SCattter,"
+SCattter
+",Cat-Cat-Num-Num-Num,scatter
+hgch_scatter_CatNumNum,SCattter,"
+SCattter
+",Cat-Num-Num,scatter
+hgch_scatter_CatNumNumNum,SCattter,"
+SCattter
+",Cat-Num-Num-Num,scatter
+hgch_slope_CatYeaNum,Slope,"
+Slope
+", Cat-Yea-Num,slope
+hgch_spider_CatNum,Radar,"
+Radar
+",Cat-Num,spider
+hgch_spider_CatNumNum,Radar,"
+Radar
+",Cat-Num-Num,spider
+hgch_treemap_CatCatNum,Treemap density by numeric variable,"
+Treemap density by numeric variable
+",Cat-Cat-Num,treemap
+hgch_treemap_CatNum,Treemap density by numeric variable,"
+Treemap density by numeric variable
+",Cat-Num,treemap
+hgch_treemap_discrete_color_CatNum,Treemap coloured by first variable,"
+Treemap coloured by first variable
+",Cat-Num,treemap
+hgch_waterfall_CatNum,Waterfall,"
+Waterfall
+",Cat-Num,waterfall

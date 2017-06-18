@@ -18,9 +18,12 @@ highcharts viz
 hgch_donut_CatNum
 }
 \section{ftype}{
- Cat
+
+Cat
 }
 \examples{
+
 hgch_donut_CatNum(sampleData("Cat-Num",nrow = 10))
+
 }
 

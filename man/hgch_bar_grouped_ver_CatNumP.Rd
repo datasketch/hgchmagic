@@ -21,6 +21,8 @@ Vertical grouped bar
  Yea-Num*
 }
 \examples{
+
 hgch_bar_grouped_ver_CatNumP(sampleDatta("Cat-NumP",nrow = 10))
+
 }
 

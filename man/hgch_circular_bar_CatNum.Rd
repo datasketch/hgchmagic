@@ -17,9 +17,17 @@ highcharts viz
 Circular bar
 }
 \section{ftype}{
- Cat-Num
+
+Cat-Num
+}
+
+\section{OtherInfo}{
+
+moreInfo
 }
 \examples{
+
 hgch_circular_bar_CatNum(sampleDatta("Cat-Num",nrow = 10))
+
 }
 

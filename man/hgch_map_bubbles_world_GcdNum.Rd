@@ -19,9 +19,12 @@ highcharts viz
 Bubble world map
 }
 \section{ftype}{
- Gcd-Num
+
+Gcd-Num
 }
 \examples{
+
 hgch_map_bubbles_world_GcdNum(sampleData("Gcd-Num",nrow = 10))
+
 }
 

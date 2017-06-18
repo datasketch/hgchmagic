@@ -1,11 +1,17 @@
 #' Polar bar
-#' @name hgch_polarcolumn_Cat
+#' 
+#' Polar bar
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat
+#' @section ftype:
+#' Cat
 #' @examples
+#' 
 #' hgch_polarcolumn_Cat(sampleData("Cat",nrow = 10))
+#' 
+#' @export hgch_polarcolumn_Cat
 hgch_polarcolumn_Cat <-function(data, title = ""){
 
   f <- fringe(data)
@@ -31,14 +37,22 @@ hgch_polarcolumn_Cat <-function(data, title = ""){
     hc_add_series(data_graph, showInLegend = FALSE)
   hc
 }
+
+
 #' Polar bar
-#' @name hgch_polarcolumn_CatNum
+#' 
+#' Polar bar
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Num
+#' @section ftype:
+#' Cat-Num
 #' @examples
+#' 
 #' hgch_polarcolumn_CatNum(sampleData("Cat-Num",nrow = 10))
+#' 
+#' @export hgch_polarcolumn_CatNum
 hgch_polarcolumn_CatNum <-function(data, title = ""){
 
   f <- fringe(data)
@@ -65,14 +79,22 @@ hgch_polarcolumn_CatNum <-function(data, title = ""){
   hc
 }
 
+
+
 #' Radar
-#' @name hgch_spider_CatNum
+#' 
+#' Radar
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Num
+#' @section ftype:
+#' Cat-Num
 #' @examples
+#' 
 #' hgch_spider_CatNum(sampleData("Cat-Num",nrow = 10))
+#' 
+#' @export hgch_spider_CatNum
 hgch_spider_CatNum <-function(data, title = ""){
 
   f <- fringe(data)
@@ -99,14 +121,22 @@ hgch_spider_CatNum <-function(data, title = ""){
   hc
 }
 
+
+
 #' Radar
-#' @name hgch_spider_CatNumNum
+#' 
+#' Radar
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Num-Num
+#' @section ftype:
+#' Cat-Num-Num
 #' @examples
+#' 
 #' hgch_spider_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
+#' 
+#' @export hgch_spider_CatNumNum
 hgch_spider_CatNumNum <- function(data,
                                title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                                sort = "no", aggregate = "mean", theme = NULL, export = FALSE,...){
@@ -147,14 +177,22 @@ hgch_spider_CatNumNum <- function(data,
 
 
 
+
+
 #' Bubble
-#' @name hgch_bubble_CatNum
+#' 
+#' Bubble
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Num
+#' @section ftype:
+#' Cat-Num
 #' @examples
+#' 
 #' hgch_bubble_CatNum(sampleData("Cat-Num",nrow = 10))
+#' 
+#' @export hgch_bubble_CatNum
 hgch_bubble_CatNum <-function(data, title = ""){
 
   f <- fringe(data)
@@ -181,14 +219,22 @@ hgch_bubble_CatNum <-function(data, title = ""){
   hc
 }
 
+
+
 #' SCattter
-#' @name hgch_scatter_CatNumNum
+#' 
+#' SCattter
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Num-Num
+#' @section ftype:
+#' Cat-Num-Num
 #' @examples
+#' 
 #' hgch_scatter_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
+#' 
+#' @export hgch_scatter_CatNumNum
 hgch_scatter_CatNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL, export = FALSE,...){
 
   if(class(data)[1] == "Fringe"){
@@ -235,14 +281,22 @@ hgch_scatter_CatNumNum <- function(data, title = NULL, subtitle = NULL, Catption
   hc
 }
 
+
+
 #' SCattter
-#' @name hgch_scatter_CatNumNumNum
+#' 
+#' SCattter
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Num-Num-Num
+#' @section ftype:
+#' Cat-Num-Num-Num
 #' @examples
+#' 
 #' hgch_scatter_CatNumNumNum(sampleData("Cat-Num-Num-Num",nrow = 10))
+#' 
+#' @export hgch_scatter_CatNumNumNum
 hgch_scatter_CatNumNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
@@ -272,14 +326,22 @@ hgch_scatter_CatNumNumNum <- function(data, title = NULL, subtitle = NULL, Catpt
   hc
 }
 
+
+
 #' SCattter
-#' @name hgch_scatter_CatCatNumNum
+#' 
+#' SCattter
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Cat-Num-Num
+#' @section ftype:
+#' Cat-Cat-Num-Num
 #' @examples
+#' 
 #' hgch_scatter_CatCatNumNum(sampleData("Cat-Cat-Num-Num",nrow = 10))
+#' 
+#' @export hgch_scatter_CatCatNumNum
 hgch_scatter_CatCatNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   if(class(data)[1] == "Fringe"){
@@ -320,14 +382,22 @@ hgch_scatter_CatCatNumNum <- function(data, title = NULL, subtitle = NULL, Catpt
   hc
 }
 
+
+
 #' SCattter
-#' @name hgch_scatter_CatCatNumNumNum
+#' 
+#' SCattter
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Cat-Num-Num-Num
+#' @section ftype:
+#' Cat-Cat-Num-Num-Num
 #' @examples
+#' 
 #' hgch_scatter_CatCatNumNumNum(sampleData("Cat-Cat-Num-Num-Num",nrow = 10))
+#' 
+#' @export hgch_scatter_CatCatNumNumNum
 hgch_scatter_CatCatNumNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
 

@@ -19,9 +19,12 @@ highcharts viz
 Vertical bar
 }
 \section{ftype}{
- Dat-Num
+
+Dat-Num
 }
 \examples{
+
 hgch_bar_ver_DatNum(sampleDatta("Dat-Num",nrow = 10))
+
 }
 

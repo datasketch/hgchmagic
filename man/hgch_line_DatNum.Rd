@@ -18,9 +18,12 @@ highcharts viz
 Line
 }
 \section{ftype}{
- Dat-Num
+
+Dat-Num
 }
 \examples{
+
 hgch_line_DatNum(sampleDatta("Dat-Num",nrow = 10))
+
 }
 

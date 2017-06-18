@@ -18,9 +18,12 @@ highcharts viz
 Horizontal 100 stacked bar
 }
 \section{ftype}{
- Cat-Cat-Num
+
+Cat-Cat-Num
 }
 \examples{
+
 hgch_bar_stacked_100_hor_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+
 }
 

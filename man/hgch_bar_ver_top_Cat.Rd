@@ -18,9 +18,12 @@ highcharts viz
 Ordered vertical bar
 }
 \section{ftype}{
- Cat
+
+Cat
 }
 \examples{
+
 hgch_bar_ver_top_Cat(sampleDatta("Cat",nrow = 10))
+
 }
 

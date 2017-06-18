@@ -6,7 +6,8 @@
 # #' @param x A data.frame
 # #' @export
 # #' @return highcharts viz
-# #' @section ftype: Ca-Ca-Nu
+# #' @section ftype:
+#' Ca-Ca-Nu
 # #' @examples
 # #' hgch_stream_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 # hgch_stream_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
@@ -41,7 +42,8 @@
 # #' @param x A data.frame
 # #' @export
 # #' @return highcharts viz
-# #' @section ftype: Ca-Ye-Nu
+# #' @section ftype:
+#' Ca-Ye-Nu
 # #' @examples
 # #' hgch_stream_CaYeNu(sampleData("Ye-Nu-Nu",nrow = 10))
 # hgch_stream_CaYeNu <- hgch_stream_CaCaNu
@@ -57,7 +59,8 @@
 # #' @param x A data.frame
 # #' @export
 # #' @return highcharts viz
-# #' @section ftype: Ca-Ca-Nu
+# #' @section ftype:
+#' Ca-Ca-Nu
 # #' @examples
 # #' hgch_stream_stacked_CaCaNu(sampleData("Ca-Ca-Nu",nrow = 10))
 # hgch_stream_stacked_CaCaNu <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,

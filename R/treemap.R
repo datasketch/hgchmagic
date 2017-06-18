@@ -1,12 +1,17 @@
-
 #' Treemap density by numeric variable
-#' @name hgch_treemap_CatNum
+#' 
+#' Treemap density by numeric variable
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Num
+#' @section ftype:
+#' Cat-Num
 #' @examples
+#' 
 #' hgch_treemap_CatNum(sampleData("Cat-Num",nrow = 10))
+#' 
+#' @export hgch_treemap_CatNum
 hgch_treemap_CatNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                               minColor = "#E63917", maxColor= "#18941E", back_color = 'white', color_title = 'black',
                               reverse = TRUE, export = FALSE,...){
@@ -38,14 +43,22 @@ hgch_treemap_CatNum <- function(data, title = NULL, subtitle = NULL, Catption = 
   hc
 }
 
+
+
 #' Treemap coloured by first variable
-#' @name hgch_treemap_discrete_color_CatNum
+#' 
+#' Treemap coloured by first variable
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Num
+#' @section ftype:
+#' Cat-Num
 #' @examples
+#' 
 #' hgch_treemap_discrete_color_CatNum(sampleData("Cat-Num",nrow = 10))
+#' 
+#' @export hgch_treemap_discrete_color_CatNum
 hgch_treemap_discrete_color_CatNum <-function(data, title = NULL, subtitle = NULL,  xAxisTitle = NULL, yAxisTitle = NULL, export = FALSE){
 
   f <- fringe(data)
@@ -83,14 +96,22 @@ hgch_treemap_discrete_color_CatNum <-function(data, title = NULL, subtitle = NUL
 }
 
 
+
+
 #' Treemap density by numeric variable
-#' @name hgch_treemap_CatCatNum
+#' 
+#' Treemap density by numeric variable
+#' 
+#' 
 #' @param x A data.frame
-#' @export
 #' @return highcharts viz
-#' @section ftype: Cat-Cat-Num
+#' @section ftype:
+#' Cat-Cat-Num
 #' @examples
+#' 
 #' hgch_treemap_CatCatNum(sampleData("Cat-Cat-Num",nrow = 10))
+#' 
+#' @export hgch_treemap_CatCatNum
 hgch_treemap_CatCatNum <- function(data, title = NULL,subtitle = NULL,
                                 minColor = "#E63917", maxColor= "#18941E",
                                 reverse = TRUE, export = FALSE,...){

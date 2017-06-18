@@ -17,9 +17,12 @@ highcharts viz
 Treemap coloured by first variable
 }
 \section{ftype}{
- Cat-Num
+
+Cat-Num
 }
 \examples{
+
 hgch_treemap_discrete_color_CatNum(sampleData("Cat-Num",nrow = 10))
+
 }
 

@@ -18,9 +18,12 @@ highcharts viz
 hgch_bar_stacked_ver_CatCat
 }
 \section{ftype}{
- Cat-Cat
+
+Cat-Cat
 }
 \examples{
+
 hgch_bar_stacked_ver_CatCat(sampleDatta("Cat-Cat",nrow = 10))
+
 }
 

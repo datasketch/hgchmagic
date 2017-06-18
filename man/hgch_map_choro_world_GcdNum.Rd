@@ -19,9 +19,12 @@ highcharts viz
 Choropleth's world map
 }
 \section{ftype}{
- Gcd-Num
+
+Gcd-Num
 }
 \examples{
+
 hgch_map_choro_world_GcdNum(sampleData("Gcd-Num",nrow = 10))
+
 }
 

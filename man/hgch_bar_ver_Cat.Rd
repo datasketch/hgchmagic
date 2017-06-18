@@ -18,9 +18,12 @@ highcharts viz
 Vertical bar
 }
 \section{ftype}{
- Cat
+
+Cat
 }
 \examples{
+
 hgch_bar_ver_Cat(sampleDatta("Cat",nrow = 10))
+
 }
 

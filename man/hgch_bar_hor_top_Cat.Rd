@@ -18,9 +18,12 @@ highcharts viz
 Ordered horizontal bar
 }
 \section{ftype}{
- Cat
+
+Cat
 }
 \examples{
+
 hgch_bar_hor_top_Cat(sampleDatta("Cat-Num",nrow = 10))
+
 }
 
