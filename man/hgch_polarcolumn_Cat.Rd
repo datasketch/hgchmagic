@@ -19,9 +19,9 @@ Polar bar
 
 Cat
 }
+
 \examples{
 
 hgch_polarcolumn_Cat(sampleData("Cat",nrow = 10))
 
 }
-

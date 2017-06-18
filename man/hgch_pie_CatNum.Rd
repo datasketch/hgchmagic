@@ -21,9 +21,9 @@ hgch_pie_CatNum
 
 Cat-Num
 }
+
 \examples{
 
 hgch_pie_CatNum(sampleData("Cat-Num",nrow = 10))
 
 }
-

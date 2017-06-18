@@ -21,9 +21,9 @@ hgch_donut_CatNum
 
 Cat
 }
+
 \examples{
 
 hgch_donut_CatNum(sampleData("Cat-Num",nrow = 10))
 
 }
-

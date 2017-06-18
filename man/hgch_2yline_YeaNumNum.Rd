@@ -20,9 +20,9 @@ highcharts viz
 \section{ftypes}{
  Yea-Num-Num
 }
+
 \examples{
 
 hgch_2yline_YeaNumNum(sampleDatta("Yea-Num-Num",nrow = 10))
 
 }
-

@@ -20,7 +20,7 @@ Vertical bar
 \section{ftypes}{
  NumP
 }
-\examples{
-hgch_bar_ver_NumP(sampleDatta("NumP",nrow = 10))
-}
 
+\examples{
+hgch_bar_ver_NumP(sampleData("NumP",nrow = 10))
+}

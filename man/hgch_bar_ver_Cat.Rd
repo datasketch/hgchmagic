@@ -21,9 +21,7 @@ Vertical bar
 
 Cat
 }
+
 \examples{
-
 hgch_bar_ver_Cat(sampleDatta("Cat",nrow = 10))
-
 }
-

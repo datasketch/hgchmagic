@@ -21,9 +21,9 @@ Vertical area
 
 Cat-Num
 }
+
 \examples{
 
 hgch_area_CatNum(sampleDatta("Cat-Num",nrow = 10))
 
 }
-

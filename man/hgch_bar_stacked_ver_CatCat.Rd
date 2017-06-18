@@ -21,9 +21,7 @@ hgch_bar_stacked_ver_CatCat
 
 Cat-Cat
 }
+
 \examples{
-
 hgch_bar_stacked_ver_CatCat(sampleDatta("Cat-Cat",nrow = 10))
-
 }
-

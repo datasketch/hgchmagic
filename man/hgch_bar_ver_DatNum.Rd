@@ -22,9 +22,7 @@ Vertical bar
 
 Dat-Num
 }
+
 \examples{
-
 hgch_bar_ver_DatNum(sampleDatta("Dat-Num",nrow = 10))
-
 }
-

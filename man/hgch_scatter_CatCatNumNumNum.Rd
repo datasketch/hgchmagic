@@ -2,7 +2,7 @@
 % Please edit documentation in R/scatter.R
 \name{hgch_scatter_CatCatNumNumNum}
 \alias{hgch_scatter_CatCatNumNumNum}
-\title{SCattter}
+\title{Scatter}
 \usage{
 hgch_scatter_CatCatNumNumNum(data, title = NULL, subtitle = NULL,
   Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL,
@@ -15,15 +15,13 @@ hgch_scatter_CatCatNumNumNum(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-SCattter
+Scatter
 }
 \section{ftype}{
 
 Cat-Cat-Num-Num-Num
 }
+
 \examples{
-
 hgch_scatter_CatCatNumNumNum(sampleData("Cat-Cat-Num-Num-Num",nrow = 10))
-
 }
-

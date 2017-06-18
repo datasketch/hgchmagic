@@ -21,9 +21,9 @@ hgch_radar_Cat
 
 Cat
 }
+
 \examples{
 
 hgch_radar_Cat(sampleData("Cat", nrow = 10))
 
 }
-

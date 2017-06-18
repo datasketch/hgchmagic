@@ -21,9 +21,9 @@ Vertical 100 stacked area
 
 Cat-Yea-Num
 }
+
 \examples{
 
 hgch_area_stacked_CatYeaNum(sampleDatta("Cat-Yea-Num",nrow = 10))
 
 }
-

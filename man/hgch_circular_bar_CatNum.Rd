@@ -25,9 +25,7 @@ Cat-Num
 
 moreInfo
 }
+
 \examples{
-
 hgch_circular_bar_CatNum(sampleDatta("Cat-Num",nrow = 10))
-
 }
-

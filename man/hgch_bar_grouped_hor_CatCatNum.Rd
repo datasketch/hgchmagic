@@ -21,9 +21,7 @@ Horizontal grouped bar
 
 Cat-Cat-Num
 }
+
 \examples{
-
 hgch_bar_grouped_hor_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
-
 }
-

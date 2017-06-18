@@ -1,16 +1,16 @@
 #' Polar bar
-#' 
+#'
 #' Polar bar
-#' 
-#' 
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ftype:
 #' Cat
 #' @examples
-#' 
+#'
 #' hgch_polarcolumn_Cat(sampleData("Cat",nrow = 10))
-#' 
+#'
 #' @export hgch_polarcolumn_Cat
 hgch_polarcolumn_Cat <-function(data, title = ""){
 
@@ -40,18 +40,18 @@ hgch_polarcolumn_Cat <-function(data, title = ""){
 
 
 #' Polar bar
-#' 
+#'
 #' Polar bar
-#' 
-#' 
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ftype:
 #' Cat-Num
 #' @examples
-#' 
+#'
 #' hgch_polarcolumn_CatNum(sampleData("Cat-Num",nrow = 10))
-#' 
+#'
 #' @export hgch_polarcolumn_CatNum
 hgch_polarcolumn_CatNum <-function(data, title = ""){
 
@@ -82,18 +82,18 @@ hgch_polarcolumn_CatNum <-function(data, title = ""){
 
 
 #' Radar
-#' 
+#'
 #' Radar
-#' 
-#' 
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ftype:
 #' Cat-Num
 #' @examples
-#' 
+#'
 #' hgch_spider_CatNum(sampleData("Cat-Num",nrow = 10))
-#' 
+#'
 #' @export hgch_spider_CatNum
 hgch_spider_CatNum <-function(data, title = ""){
 
@@ -124,18 +124,18 @@ hgch_spider_CatNum <-function(data, title = ""){
 
 
 #' Radar
-#' 
+#'
 #' Radar
-#' 
-#' 
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ftype:
 #' Cat-Num-Num
 #' @examples
-#' 
+#'
 #' hgch_spider_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
-#' 
+#'
 #' @export hgch_spider_CatNumNum
 hgch_spider_CatNumNum <- function(data,
                                title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
@@ -176,64 +176,54 @@ hgch_spider_CatNumNum <- function(data,
 }
 
 
+# #' Bubble
+# #' @name hgch_bubble_CatNum
+# #' @param x A data.frame
+# #' @export
+# #' @return highcharts viz
+# #' @section ftype: Cat-Num
+# #' @examples
+# #' hgch_bubble_CatNum(sampleData("Cat-Num",nrow = 10))
+# hgch_bubble_CatNum <-function(data, title = ""){
+#
+#   f <- fringe(data)
+#   nms <- getCnames(f)
+#   data <- f$d
+#   data <- plyr::rename(data, c("a" = "name"))
+#
+#   data_graph <- data %>%
+#     dplyr::group_by(name) %>%
+#     tidyr::drop_na(name) %>%
+#     dplyr::summarise(value = mean(b, na.rm = TRUE ))
+#
+#   data_graph <- data_graph %>%
+#     dplyr::mutate(y = value,
+#                   z = sqrt(y),
+#                   color = getPalette()[1:(dim(data_graph)[1])])
+#
+#   hc <- highchart() %>%
+#     hc_title(text = title) %>%
+#     hc_chart(type = "bubble",
+#              polar = FALSE) %>%
+#     hc_xAxis(Cattegories = data_graph$name) %>%
+#     hc_add_series(data_graph, showInLegend = FALSE)
+#   hc
+# }
 
 
-
-#' Bubble
-#' 
-#' Bubble
-#' 
-#' 
-#' @param x A data.frame
-#' @return highcharts viz
-#' @section ftype:
-#' Cat-Num
-#' @examples
-#' 
-#' hgch_bubble_CatNum(sampleData("Cat-Num",nrow = 10))
-#' 
-#' @export hgch_bubble_CatNum
-hgch_bubble_CatNum <-function(data, title = ""){
-
-  f <- fringe(data)
-  nms <- getCnames(f)
-  data <- f$d
-  data <- plyr::rename(data, c("a" = "name"))
-
-  data_graph <- data %>%
-    dplyr::group_by(name) %>%
-    tidyr::drop_na(name) %>%
-    dplyr::summarise(value = mean(b, na.rm = TRUE ))
-
-  data_graph <- data_graph %>%
-    dplyr::mutate(y = value,
-                  z = sqrt(y),
-                  color = getPalette()[1:(dim(data_graph)[1])])
-
-  hc <- highchart() %>%
-    hc_title(text = title) %>%
-    hc_chart(type = "bubble",
-             polar = FALSE) %>%
-    hc_xAxis(Cattegories = data_graph$name) %>%
-    hc_add_series(data_graph, showInLegend = FALSE)
-  hc
-}
-
-
-
-#' SCattter
-#' 
-#' SCattter
-#' 
-#' 
+#' Scatter
+#'
+#' Scatter
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ftype:
 #' Cat-Num-Num
 #' @examples
-#' 
+#'
 #' hgch_scatter_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
-#' 
+#'
 #' @export hgch_scatter_CatNumNum
 hgch_scatter_CatNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL, export = FALSE,...){
 
@@ -283,19 +273,19 @@ hgch_scatter_CatNumNum <- function(data, title = NULL, subtitle = NULL, Catption
 
 
 
-#' SCattter
-#' 
-#' SCattter
-#' 
-#' 
+#' Scatter
+#'
+#' Scatter
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ftype:
 #' Cat-Num-Num-Num
 #' @examples
-#' 
+#'
 #' hgch_scatter_CatNumNumNum(sampleData("Cat-Num-Num-Num",nrow = 10))
-#' 
+#'
 #' @export hgch_scatter_CatNumNumNum
 hgch_scatter_CatNumNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
@@ -328,19 +318,13 @@ hgch_scatter_CatNumNumNum <- function(data, title = NULL, subtitle = NULL, Catpt
 
 
 
-#' SCattter
-#' 
-#' SCattter
-#' 
-#' 
+#' Scatter grouped
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ftype:
 #' Cat-Cat-Num-Num
 #' @examples
-#' 
 #' hgch_scatter_CatCatNumNum(sampleData("Cat-Cat-Num-Num",nrow = 10))
-#' 
 #' @export hgch_scatter_CatCatNumNum
 hgch_scatter_CatCatNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
@@ -384,23 +368,18 @@ hgch_scatter_CatCatNumNum <- function(data, title = NULL, subtitle = NULL, Catpt
 
 
 
-#' SCattter
-#' 
-#' SCattter
-#' 
-#' 
+#' Scatter
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ftype:
 #' Cat-Cat-Num-Num-Num
 #' @examples
-#' 
 #' hgch_scatter_CatCatNumNumNum(sampleData("Cat-Cat-Num-Num-Num",nrow = 10))
-#' 
 #' @export hgch_scatter_CatCatNumNumNum
-hgch_scatter_CatCatNumNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
-
-
+hgch_scatter_CatCatNumNumNum <- function(data, title = NULL, subtitle = NULL,
+                                         Catption = NULL,
+                                         xAxisTitle = NULL, yAxisTitle = NULL,
+                                         theme = NULL, export = FALSE,...){
   if(class(data)[1] == "Fringe"){
     ni <- getClabels(data)
   }else{

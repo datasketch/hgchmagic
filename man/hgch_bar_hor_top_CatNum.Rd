@@ -21,9 +21,7 @@ Ordered horizontal bar
 
 Cat-Num
 }
+
 \examples{
-
 hgch_bar_hor_top_CatNum(sampleDatta("Cat-Num",nrow = 10))
-
 }
-

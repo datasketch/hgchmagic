@@ -20,9 +20,9 @@ Slope
 \section{ftypes}{
  Cat-Yea-Num
 }
+
 \examples{
 
 hgch_slope_CatYeaNum(sampleDatta('Cat-Yea-Num'))
 
 }
-

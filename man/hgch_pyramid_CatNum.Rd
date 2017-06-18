@@ -19,9 +19,9 @@ Pyramid
 
 Cat-Num
 }
+
 \examples{
 
 hgch_pyramid_CatNum(sampleData("Cat-Num",nrow = 10))
 
 }
-

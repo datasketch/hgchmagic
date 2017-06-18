@@ -21,9 +21,7 @@ Vertical 100 stacked bar
 
 Cat-Dat-Num
 }
+
 \examples{
-
 hgch_bar_stacked_100_ver_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
-
 }
-

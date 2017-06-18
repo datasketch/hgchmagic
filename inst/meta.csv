@@ -122,9 +122,6 @@ Ordered vertical bar
 hgch_bar_ver_top_CatNum,Ordered vertical bar,"
 Ordered vertical bar
 ",Cat-Num,bar
-hgch_bubble_CatNum,Bubble,"
-Bubble
-",Cat-Num,bubble
 hgch_circular_bar_CatNum,Circular bar,"
 Circular bar
 ",Cat-Num,circular
@@ -155,18 +152,6 @@ Line
 hgch_line_YeaNum,Line,"
 Line
 ",Yea-Num,line
-hgch_map_bubbles_latinAmerican_GcdNum,Bubble latam map,"
-Bubble latam map
-",Gcd-Num,map
-hgch_map_bubbles_latinAmerican_GcdNumNum,Bubble latam map,"
-Bubble latam map
-",Gcd-Num-Num,map
-hgch_map_bubbles_world_GcdNum,Bubble world map,"
-Bubble world map
-",Gcd-Num,map
-hgch_map_choro_world_GcdNum,Choropleth's world map,"
-Choropleth's world map
-",Gcd-Num,map
 hgch_multilines_YeaNumP,Grouped line,"
 Grouped line
 ", Yea-NumP,multilines
@@ -191,17 +176,17 @@ hgch_radar_Cat
 hgch_radar_CatNum,hgch_radar_CatNum,"
 hgch_radar_CatNum
 ",Cat-Num,radar
-hgch_scatter_CatCatNumNum,SCattter,"
-SCattter
+hgch_scatter_CatCatNumNum,Scatter grouped,"
+Scatter grouped
 ",Cat-Cat-Num-Num,scatter
-hgch_scatter_CatCatNumNumNum,SCattter,"
-SCattter
+hgch_scatter_CatCatNumNumNum,Scatter,"
+Scatter
 ",Cat-Cat-Num-Num-Num,scatter
-hgch_scatter_CatNumNum,SCattter,"
-SCattter
+hgch_scatter_CatNumNum,Scatter,"
+Scatter
 ",Cat-Num-Num,scatter
-hgch_scatter_CatNumNumNum,SCattter,"
-SCattter
+hgch_scatter_CatNumNumNum,Scatter,"
+Scatter
 ",Cat-Num-Num-Num,scatter
 hgch_slope_CatYeaNum,Slope,"
 Slope

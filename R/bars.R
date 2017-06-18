@@ -1,3 +1,16 @@
+#' #'@name count_pl
+#' #'@export
+ count_pl <- function(x) {
+   if(is.na(x)){return(0)}
+
+   if ((x %% 1) != 0) {
+     nchar(strsplit(sub('0+$', '', as.character(x)), ".", fixed=TRUE)[[1]][[2]])
+   } else {
+     return(0)
+   }
+ }
+
+
 #' Vertical bar
 #'
 #' Vertical bar
@@ -8,9 +21,7 @@
 #' @section ftype:
 #' Cat
 #' @examples
-#'
 #' hgch_bar_ver_Cat(sampleDatta("Cat",nrow = 10))
-#'
 #' @export hgch_bar_ver_Cat
 hgch_bar_ver_Cat <-
   function(data,
@@ -83,7 +94,6 @@ hgch_bar_ver_Cat <-
 #' @section ftype:
 #' Cat
 #' @examples
-#'
 #' hgch_bar_ver_top_Cat(sampleDatta("Cat",nrow = 10))
 #'
 #' @export hgch_bar_ver_top_Cat
@@ -125,9 +135,7 @@ hgch_bar_ver_top_Cat <- function(data,
 #' @section ftype:
 #' Cat
 #' @examples
-#'
 #' hgch_bar_hor_Cat(sampleDatta("Cat",nrow = 10))
-#'
 #' @export hgch_bar_hor_Cat
 hgch_bar_hor_Cat <-
   function(data,
@@ -192,9 +200,7 @@ hgch_bar_hor_Cat <-
 #' @section ftype:
 #' Cat
 #' @examples
-#'
 #' hgch_bar_hor_top_Cat(sampleDatta("Cat-Num",nrow = 10))
-#'
 #' @export hgch_bar_hor_top_Cat
 hgch_bar_hor_top_Cat <- function(data,
                                 topn = NULL,
@@ -237,9 +243,7 @@ hgch_bar_hor_top_Cat <- function(data,
 #' @section ftype:
 #' Cat-Num
 #' @examples
-#'
 #' hgch_bar_ver_CatNum(sampleDatta("Cat-Num",nrow = 10))
-#'
 #' @export hgch_bar_ver_CatNum
 hgch_bar_ver_CatNum <-
   function(data,
@@ -295,7 +299,7 @@ hgch_bar_ver_CatNum <-
       #   series = list(marker = list(enabled = TRUE, symbol =  symbol))
       # ) %>%
       hc_chart(backgroundColor = back_color) %>%
-      hc_title(text = title,style = list(color = color_title, useHTML = TRUE)) %>%
+      hc_title(text = title,style = list(color = color_title, useHTML = TRUE), align = 'center') %>%
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle),
                allowDecimals = FALSE) %>%
@@ -331,9 +335,7 @@ hgch_bar_ver_CatNum <-
 #' @section ftype:
 #' Cat-Num
 #' @examples
-#'
 #' hgch_bar_ver_top_CatNum(sampleDatta("Cat-Num",nrow = 10))
-#'
 #' @export hgch_bar_ver_top_CatNum
 hgch_bar_ver_top_CatNum <- function(data,
                                   topn = NULL,
@@ -374,9 +376,7 @@ hgch_bar_ver_top_CatNum <- function(data,
 #' @section ftype:
 #' Yea-Num
 #' @examples
-#'
 #' hgch_bar_ver_YeaNum(sampleDatta("Yea-Num",nrow = 10))
-#'
 #' @export hgch_bar_ver_YeaNum
 hgch_bar_ver_YeaNum <- hgch_bar_ver_CatNum
 
@@ -393,9 +393,7 @@ hgch_bar_ver_YeaNum <- hgch_bar_ver_CatNum
 #' @section ftype:
 #' Dat-Num
 #' @examples
-#'
 #' hgch_bar_ver_DatNum(sampleDatta("Dat-Num",nrow = 10))
-#'
 #' @export hgch_bar_ver_DatNum
 hgch_bar_ver_DatNum <- hgch_bar_ver_CatNum
 
@@ -412,9 +410,7 @@ hgch_bar_ver_DatNum <- hgch_bar_ver_CatNum
 #' @section ftype:
 #' Cat-Num
 #' @examples
-#'
 #' hgch_bar_hor_CatNum(sampleDatta("Cat-Num",nrow = 10))
-#'
 #' @export hgch_bar_hor_CatNum
 hgch_bar_hor_CatNum <- function(data,
                               topn = NULL,
@@ -467,7 +463,7 @@ hgch_bar_hor_CatNum <- function(data,
   hc <- hchart(d, type = "bar", hcaes(x = a, y = b)) %>%
     hc_plotOptions(column = list(stacking = "normal")) %>%
     hc_chart(backgroundColor = back_color) %>%
-    hc_title(text = title,style = list(color = color_title, useHTML = TRUE)) %>%
+    hc_title(text = title,style = list(color = color_title, useHTML = TRUE), align = 'center') %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = xAxisTitle)) %>%
     hc_yAxis(title = list(text = yAxisTitle))  %>%
@@ -494,9 +490,7 @@ hgch_bar_hor_CatNum <- function(data,
 #' @section ftype:
 #' Cat-Num
 #' @examples
-#'
 #' hgch_bar_hor_top_CatNum(sampleDatta("Cat-Num",nrow = 10))
-#'
 #' @export hgch_bar_hor_top_CatNum
 hgch_bar_hor_top_CatNum <- function(data,
                                   topn = NULL,
@@ -540,9 +534,7 @@ hgch_bar_hor_top_CatNum <- function(data,
 #' @section ftype:
 #' Cat-Cat-Num
 #' @examples
-#'
 #' hgch_bar_grouped_ver_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
-#'
 #' @export hgch_bar_grouped_ver_CatCatNum
 hgch_bar_grouped_ver_CatCatNum <-
   function(data,
@@ -603,9 +595,7 @@ hgch_bar_grouped_ver_CatCatNum <-
 #' @section ftype:
 #' Cat-Yea-Num
 #' @examples
-#'
 #' hgch_bar_grouped_ver_CatYeaNum(sampleDatta("Yea-Num-Num",nrow = 10))
-#'
 #' @export hgch_bar_grouped_ver_CatYeaNum
 hgch_bar_grouped_ver_CatYeaNum <- hgch_bar_grouped_ver_CatCatNum
 
@@ -622,9 +612,7 @@ hgch_bar_grouped_ver_CatYeaNum <- hgch_bar_grouped_ver_CatCatNum
 #' @section ftype:
 #' Cat-Cat-Num
 #' @examples
-#'
 #' hgch_bar_grouped_hor_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
-#'
 #' @export hgch_bar_grouped_hor_CatCatNum
 hgch_bar_grouped_hor_CatCatNum <-
   function(data,
@@ -680,11 +668,9 @@ hgch_bar_grouped_hor_CatCatNum <-
 #' @export
 #' @return highcharts viz
 #' @section ftype:
-#'
-
 #' Cat-Cat-Num
 #' @examples
-#' hgch_bar_stacked_ver_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+#' hgch_bar_stacked_ver_CatCatNum(sampleData("Cat-Cat-Num",nrow = 10))
 hgch_bar_stacked_ver_CatCatNum <-
   function(data,
            title = NULL,
@@ -745,9 +731,7 @@ hgch_bar_stacked_ver_CatCatNum <-
 #' @section ftype:
 #' Cat-Cat-Num
 #' @examples
-#'
 #' hgch_bar_stacked_100_ver_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
-#'
 #' @export hgch_bar_stacked_100_ver_CatCatNum
 hgch_bar_stacked_100_ver_CatCatNum <-
   function(data,
@@ -810,9 +794,7 @@ hgch_bar_stacked_100_ver_CatCatNum <-
 #' @section ftype:
 #' Cat-Cat-Num
 #' @examples
-#'
 #' hgch_bar_stacked_hor_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
-#'
 #' @export hgch_bar_stacked_hor_CatCatNum
 hgch_bar_stacked_hor_CatCatNum <-
   function(data,
@@ -873,9 +855,7 @@ hgch_bar_stacked_hor_CatCatNum <-
 #' @section ftype:
 #' Cat-Cat-Num
 #' @examples
-#'
 #' hgch_bar_stacked_100_hor_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
-#'
 #' @export hgch_bar_stacked_100_hor_CatCatNum
 hgch_bar_stacked_100_hor_CatCatNum <-
   function(data,
@@ -937,12 +917,9 @@ hgch_bar_stacked_100_hor_CatCatNum <-
 #' @section ftype:
 #' Cat-Dat-Num
 #' @examples
-#'
 #' hgch_bar_stacked_ver_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
-#'
 #' @export hgch_bar_stacked_ver_CatDatNum
 hgch_bar_stacked_ver_CatDatNum <- hgch_bar_stacked_ver_CatCatNum
-
 
 
 #' Vertical 100 stacked bar
@@ -955,15 +932,9 @@ hgch_bar_stacked_ver_CatDatNum <- hgch_bar_stacked_ver_CatCatNum
 #' @section ftype:
 #' Cat-Dat-Num
 #' @examples
-#'
 #' hgch_bar_stacked_100_ver_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
-#'
 #' @export hgch_bar_stacked_100_ver_CatDatNum
 hgch_bar_stacked_100_ver_CatDatNum <- hgch_bar_stacked_100_ver_CatCatNum
-
-
-
-
 
 
 
@@ -977,9 +948,7 @@ hgch_bar_stacked_100_ver_CatDatNum <- hgch_bar_stacked_100_ver_CatCatNum
 #' @return highcharts viz
 #' @section ftypes: Yea-Num*
 #' @examples
-#'
 #' hgch_bar_grouped_ver_CatNumP(sampleDatta("Cat-NumP",nrow = 10))
-#'
 #' @export hgch_bar_grouped_ver_CatNumP
 hgch_bar_grouped_ver_CatNumP <- function(data,
                                        title = NULL,
@@ -1046,9 +1015,7 @@ hgch_bar_grouped_ver_CatNumP <- function(data,
 #' @return highcharts viz
 #' @section ftypes: Cat-NumP
 #' @examples
-#'
 #' hgch_bar_grouped_hor_CatNumP(sampleDatta("Cat-NumP",nrow = 10))
-#'
 #' @export hgch_bar_grouped_hor_CatNumP
 hgch_bar_grouped_hor_CatNumP <- function(data,
                                        title = NULL,
@@ -1114,7 +1081,7 @@ hgch_bar_grouped_hor_CatNumP <- function(data,
 #' @return highcharts viz
 #' @section ftypes: NumP
 #' @examples
-#' hgch_bar_ver_NumP(sampleDatta("NumP",nrow = 10))
+#' hgch_bar_ver_NumP(sampleData("NumP",nrow = 10))
 hgch_bar_ver_NumP <- function(data,
                          title = NULL,
                          subtitle = NULL,
@@ -1174,9 +1141,7 @@ hgch_bar_ver_NumP <- function(data,
 #' @section ftype:
 #' Cat-Num
 #' @examples
-#'
 #' hgch_waterfall_CatNum(sampleDatta("Cat-Num",nrow = 10))
-#'
 #' @export hgch_waterfall_CatNum
 hgch_waterfall_CatNum <-function(data, title = NULL,  xAxisTitle = NULL,
                                yAxisTitle = NULL){
@@ -1229,9 +1194,7 @@ hgch_waterfall_CatNum <-function(data, title = NULL,  xAxisTitle = NULL,
 #' @section ftype:
 #' Cat-Cat
 #' @examples
-#'
 #' hgch_bar_grouped_ver_CatCat(sampleDatta("Cat-Cat",nrow = 10))
-#'
 #' @export hgch_bar_grouped_ver_CatCat
 hgch_bar_grouped_ver_CatCat <-
   function(data,
@@ -1295,9 +1258,7 @@ hgch_bar_grouped_ver_CatCat <-
 #' @section ftype:
 #' Cat-Cat
 #' @examples
-#'
 #' hgch_bar_grouped_hor_CatCat(sampleDatta("Cat-Cat",nrow = 10))
-#'
 #' @export hgch_bar_grouped_hor_CatCat
 hgch_bar_grouped_hor_CatCat <-
   function(data,
@@ -1357,9 +1318,7 @@ hgch_bar_grouped_hor_CatCat <-
 #' @section ftype:
 #' Cat-Cat
 #' @examples
-#'
 #' hgch_bar_stacked_ver_CatCat(sampleDatta("Cat-Cat",nrow = 10))
-#'
 #' @export hgch_bar_stacked_ver_CatCat
 hgch_bar_stacked_ver_CatCat <-
       function(data,
@@ -1422,9 +1381,7 @@ hgch_bar_stacked_ver_CatCat <-
 #' @section ftype:
 #' Cat-Cat
 #' @examples
-#'
 #' hgch_bar_stacked_hor_CatCat(sampleDatta("Cat-Cat",nrow = 10))
-#'
 #' @export hgch_bar_stacked_hor_CatCat
 hgch_bar_stacked_hor_CatCat <-
         function(data,
@@ -1453,8 +1410,7 @@ hgch_bar_stacked_hor_CatCat <-
           #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
           hc <-
             hchart(d, type = "bar", hcaes(x = b, y = c, group = a)) %>%
-            hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol)),
-                           column = list(stacking = "normal")) %>%
+            hc_plotOptions(series = list(stacking = "normal", marker = list(enabled = TRUE, symbol =  symbol)))%>%
             hc_title(text = title) %>%
             hc_subtitle(text = subtitle) %>%
             hc_xAxis(title = list(text = xAxisTitle),
@@ -1487,9 +1443,7 @@ hgch_bar_stacked_hor_CatCat <-
 #' @section ftype:
 #' Cat-Cat
 #' @examples
-#'
 #' hgch_bar_stacked_100_ver_CatCat(sampleDatta("Cat-Cat",nrow = 10))
-#'
 #' @export hgch_bar_stacked_100_ver_CatCat
 hgch_bar_stacked_100_ver_CatCat <-
         function(data,
@@ -1549,9 +1503,7 @@ hgch_bar_stacked_100_ver_CatCat <-
 #' @section ftype:
 #' Cat-Cat
 #' @examples
-#'
 #' hgch_bar_stacked_100_hor_CatCat(sampleDatta("Cat-Cat",nrow = 10))
-#'
 #' @export hgch_bar_stacked_100_hor_CatCat
 hgch_bar_stacked_100_hor_CatCat <-
   function(data,
@@ -1579,8 +1531,8 @@ hgch_bar_stacked_100_hor_CatCat <-
     #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
     hc <-
       hchart(d, type = "bar", hcaes(x = b, y = c, group = a)) %>%
-      hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol)),
-                     column = list(stacking = "percent")) %>%
+      hc_plotOptions(series = list(stacking = "percent", marker = list(enabled = TRUE, symbol =  symbol))) %>%
+                    # column = list(stacking = "percent")) %>%
       hc_title(text = title) %>%
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle),
@@ -1614,9 +1566,7 @@ hgch_bar_stacked_100_hor_CatCat <-
 #' @section OtherInfo:
 #' moreInfo
 #' @examples
-#'
 #' hgch_circular_bar_CatNum(sampleDatta("Cat-Num",nrow = 10))
-#'
 #' @export hgch_circular_bar_CatNum
 hgch_circular_bar_CatNum <- function(data,
                                    title = NULL,

@@ -21,9 +21,9 @@ Line
 
 Cat-Dat-Num
 }
+
 \examples{
 
 hgch_line_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
 
 }
-

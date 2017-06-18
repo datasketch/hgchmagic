@@ -20,9 +20,7 @@ Waterfall
 
 Cat-Num
 }
+
 \examples{
-
 hgch_waterfall_CatNum(sampleDatta("Cat-Num",nrow = 10))
-
 }
-

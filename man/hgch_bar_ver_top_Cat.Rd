@@ -21,9 +21,8 @@ Ordered vertical bar
 
 Cat
 }
-\examples{
 
+\examples{
 hgch_bar_ver_top_Cat(sampleDatta("Cat",nrow = 10))
 
 }
-

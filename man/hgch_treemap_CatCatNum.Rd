@@ -21,9 +21,9 @@ Treemap density by numeric variable
 
 Cat-Cat-Num
 }
+
 \examples{
 
 hgch_treemap_CatCatNum(sampleData("Cat-Cat-Num",nrow = 10))
 
 }
-

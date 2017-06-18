@@ -1,16 +1,12 @@
 #' Treemap density by numeric variable
-#' 
-#' Treemap density by numeric variable
-#' 
-#' 
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ftype:
 #' Cat-Num
 #' @examples
-#' 
+#'
 #' hgch_treemap_CatNum(sampleData("Cat-Num",nrow = 10))
-#' 
+#'
 #' @export hgch_treemap_CatNum
 hgch_treemap_CatNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                               minColor = "#E63917", maxColor= "#18941E", back_color = 'white', color_title = 'black',
@@ -46,18 +42,14 @@ hgch_treemap_CatNum <- function(data, title = NULL, subtitle = NULL, Catption = 
 
 
 #' Treemap coloured by first variable
-#' 
-#' Treemap coloured by first variable
-#' 
-#' 
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ftype:
 #' Cat-Num
 #' @examples
-#' 
+#'
 #' hgch_treemap_discrete_color_CatNum(sampleData("Cat-Num",nrow = 10))
-#' 
+#'
 #' @export hgch_treemap_discrete_color_CatNum
 hgch_treemap_discrete_color_CatNum <-function(data, title = NULL, subtitle = NULL,  xAxisTitle = NULL, yAxisTitle = NULL, export = FALSE){
 
@@ -99,18 +91,18 @@ hgch_treemap_discrete_color_CatNum <-function(data, title = NULL, subtitle = NUL
 
 
 #' Treemap density by numeric variable
-#' 
+#'
 #' Treemap density by numeric variable
-#' 
-#' 
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ftype:
 #' Cat-Cat-Num
 #' @examples
-#' 
+#'
 #' hgch_treemap_CatCatNum(sampleData("Cat-Cat-Num",nrow = 10))
-#' 
+#'
 #' @export hgch_treemap_CatCatNum
 hgch_treemap_CatCatNum <- function(data, title = NULL,subtitle = NULL,
                                 minColor = "#E63917", maxColor= "#18941E",

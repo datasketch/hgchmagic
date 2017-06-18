@@ -2,7 +2,7 @@
 % Please edit documentation in R/scatter.R
 \name{hgch_scatter_CatCatNumNum}
 \alias{hgch_scatter_CatCatNumNum}
-\title{SCattter}
+\title{Scatter grouped}
 \usage{
 hgch_scatter_CatCatNumNum(data, title = NULL, subtitle = NULL,
   Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL,
@@ -15,15 +15,13 @@ hgch_scatter_CatCatNumNum(data, title = NULL, subtitle = NULL,
 highcharts viz
 }
 \description{
-SCattter
+Scatter grouped
 }
 \section{ftype}{
 
 Cat-Cat-Num-Num
 }
+
 \examples{
-
 hgch_scatter_CatCatNumNum(sampleData("Cat-Cat-Num-Num",nrow = 10))
-
 }
-
