@@ -18,7 +18,7 @@ highcharts viz
 Vertical grouped bar
 }
 \section{ctypess}{
- Yea-Num*
+ Yea-NumP
 }
 
 \examples{
