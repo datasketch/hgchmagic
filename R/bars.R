@@ -946,7 +946,7 @@ hgch_bar_stacked_100_ver_CatDatNum <- hgch_bar_stacked_100_ver_CatCatNum
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ctypess: Yea-NumP
+#' @section ctypess: Cat-NumP
 #' @examples
 #' hgch_bar_grouped_ver_CatNumP(sampleDatta("Cat-NumP",nrow = 10))
 #' @export hgch_bar_grouped_ver_CatNumP

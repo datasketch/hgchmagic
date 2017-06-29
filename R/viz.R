@@ -135,7 +135,7 @@ hgch_donut_Cat <- function(data, title = NULL, subtitle = NULL, caption = NULL, 
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ctypes:
-#' Cat
+#' Cat-Num
 #' @examples
 #'
 #' hgch_donut_CatNum(sampleData("Cat-Num",nrow = 10))
