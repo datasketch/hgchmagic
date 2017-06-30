@@ -55,7 +55,7 @@ Vertical grouped bar
 ",Cat-Cat-Num,Cat2-Num,bar
 hgch_bar_grouped_ver_CatNumP,Vertical grouped bar,"
 Vertical grouped bar
-", Yea-NumP,NumP- Yea,bar
+", Cat-NumP, Cat-NumP,bar
 hgch_bar_grouped_ver_CatYeaNum,Vertical grouped bar,"
 Vertical grouped bar
 ",Cat-Yea-Num,Cat-Num-Yea,bar
@@ -130,7 +130,7 @@ hgch_donut_Cat
 ",Cat,Cat,donut
 hgch_donut_CatNum,hgch_donut_CatNum,"
 hgch_donut_CatNum
-",Cat,Cat,donut
+",Cat-Num,Cat-Num,donut
 hgch_funnel_CatNum,Funnel,"
 Funnel
 ",Cat-Num,Cat-Num,funnel

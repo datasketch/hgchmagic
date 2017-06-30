@@ -1,4 +1,5 @@
 library(tidyverse)
+library(homodatum)
 # Create meta data for funs
 db <- tools::Rd_db("hgchmagic")
 if(length(db)==0) stop("Restart session")

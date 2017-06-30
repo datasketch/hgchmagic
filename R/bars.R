@@ -21,7 +21,7 @@
 #' @section ctypes:
 #' Cat
 #' @examples
-#' hgch_bar_ver_Cat(sampleDatta("Cat",nrow = 10))
+#' hgch_bar_ver_Cat(sampleData("Cat",nrow = 10))
 #' @export hgch_bar_ver_Cat
 hgch_bar_ver_Cat <-
   function(data,

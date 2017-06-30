@@ -19,7 +19,7 @@ hgch_donut_CatNum
 }
 \section{ctypes}{
 
-Cat
+Cat-Num
 }
 
 \examples{
