@@ -255,7 +255,7 @@ hgch_bar_ver_CatNum <-
            yAxisTitle = NULL,
            sort = "no",
            aggregate = NULL,
-           back_color = 'white',
+           #back_color = 'white',
            color_title = 'black',
            startAtZero = FALSE,
            theme = NULL,
@@ -298,7 +298,7 @@ hgch_bar_ver_CatNum <-
       # hc_plotOptions(
       #   series = list(marker = list(enabled = TRUE, symbol =  symbol))
       # ) %>%
-      hc_chart(backgroundColor = back_color) %>%
+      #hc_chart(backgroundColor = back_color) %>%
       hc_title(text = title,style = list(color = color_title, useHTML = TRUE), align = 'center') %>%
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle),
@@ -421,7 +421,7 @@ hgch_bar_hor_CatNum <- function(data,
                               yAxisTitle = NULL,
                               sort = "no",
                               aggregate = "mean",
-                              back_color = 'white',
+                              #back_color = 'white',
                               color_title = 'black',
                               theme = NULL,
                               export = FALSE,
@@ -462,7 +462,7 @@ hgch_bar_hor_CatNum <- function(data,
   }
   hc <- hchart(d, type = "bar", hcaes(x = a, y = b)) %>%
     hc_plotOptions(column = list(stacking = "normal")) %>%
-    hc_chart(backgroundColor = back_color) %>%
+    #hc_chart(backgroundColor = back_color) %>%
     hc_title(text = title,style = list(color = color_title, useHTML = TRUE), align = 'center') %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = xAxisTitle)) %>%
