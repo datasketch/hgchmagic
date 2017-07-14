@@ -6,8 +6,8 @@
 \usage{
 hgch_bar_hor_CatNum(data, topn = NULL, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
-  aggregate = "mean", back_color = "white", color_title = "black",
-  theme = NULL, export = FALSE, ...)
+  aggregate = "mean", color_title = "black", theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
