@@ -66,7 +66,7 @@ hgch_pie_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
   title <-  title %||% ""
   d <- f$d
   if(nrow(d)==0) return()
-  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = sum(b))
+  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = sum(b, na.rm = TRUE))
 
   hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
@@ -155,7 +155,7 @@ hgch_donut_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NUL
   title <-  title %||% ""
   d <- f$d
   if(nrow(d)==0) return()
-  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = sum(b))
+  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = sum(b, na.rm = TRUE))
 
   hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
