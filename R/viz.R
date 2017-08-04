@@ -27,8 +27,9 @@ hgch_pie_Cat <- function(data, title = NULL, subtitle = NULL, caption = NULL, xA
 
   hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
-      series = list(dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
+      series = list(dataLabels = list(enabled = TRUE, format = '<b>{point.a}</b>: {point.b}'))
     ) %>%
+    hc_tooltip(headerFormat = "", pointFormat = "<b>{point.a}</b>: {point.b}", followPointer=TRUE, shared = TRUE) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
@@ -65,12 +66,13 @@ hgch_pie_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
   title <-  title %||% ""
   d <- f$d
   if(nrow(d)==0) return()
-  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = sum(b))
+  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = sum(b, na.rm = TRUE))
 
   hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
-      series = list(dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
+      series = list(dataLabels = list(enabled = TRUE, format = '<b>{point.a}</b>: {point.b}'))
     ) %>%
+    hc_tooltip(headerFormat = "", pointFormat = "<b>{point.a}</b>: {point.b}", followPointer=TRUE, shared = TRUE) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
@@ -113,8 +115,9 @@ hgch_donut_Cat <- function(data, title = NULL, subtitle = NULL, caption = NULL, 
 
   hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
-      series = list(innerSize= '60%',dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
+      series = list(innerSize= '60%',dataLabels = list(enabled = TRUE,format=   '<b>{point.a}</b>: {point.b}'))
     ) %>%
+    hc_tooltip(headerFormat = "", pointFormat = "<b>{point.a}</b>: {point.b}", followPointer=TRUE, shared = TRUE) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
@@ -152,12 +155,13 @@ hgch_donut_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NUL
   title <-  title %||% ""
   d <- f$d
   if(nrow(d)==0) return()
-  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = sum(b))
+  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = sum(b, na.rm = TRUE))
 
   hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
-      series = list(innerSize= '60%',dataLabels = list(enabled = TRUE,format=   '<b>{point.name}</b>: {point.percentage:.1f} %'))
+      series = list(innerSize= '60%',dataLabels = list(enabled = TRUE,format=   '<b>{point.a}</b>: {point.b}'))
     ) %>%
+    hc_tooltip(headerFormat = "", pointFormat = "<b>{point.a}</b>: {point.b}", followPointer=TRUE, shared = TRUE) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
