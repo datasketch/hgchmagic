@@ -1,5 +1,6 @@
 
 source("inst/meta.R")
+devtools::load_all()
 devtools::document()
 devtools::install()
 
@@ -30,11 +31,12 @@ data <- sampleData("Cat", nrow = 10)
 hgch_pie_Cat(data, title = "TITLE", subtitle = "Subtitle")
 
 
+
 hgch_donut_Cat(data)
 hgch_donut_Cat(data, title = "TITLE", subtitle = "Subtitle")
 
 data <- sampleData("Cat-Num", nrow = 10)
-hgch_pie_CatNum(data, export = TRUE)
+hgch_pie_CatNum(data, export = TRUE, font_size = '17px')
 hgch_donut_CatNum(data)
 
 

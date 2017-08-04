@@ -5,7 +5,7 @@
 \title{hgch_pie_Cat}
 \usage{
 hgch_pie_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
+  xAxisTitle = NULL, yAxisTitle = NULL, font_size = "13px", sort = "no",
   aggregate = "count", export = FALSE, theme = NULL, ...)
 }
 \arguments{

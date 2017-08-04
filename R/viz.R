@@ -12,7 +12,7 @@
 #' hgch_pie_Cat(sampleData("Cat",nrow = 10))
 #'
 #' @export hgch_pie_Cat
-hgch_pie_Cat <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+hgch_pie_Cat <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, font_size = '13px',
                             sort = "no", aggregate = "count", export = FALSE, theme = NULL, ...){
 
   f <- fringe(data)
@@ -27,7 +27,23 @@ hgch_pie_Cat <- function(data, title = NULL, subtitle = NULL, caption = NULL, xA
 
   hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
-      series = list(dataLabels = list(enabled = TRUE, format = '<b>{point.a}</b>: {point.b}'))
+      series = list(dataLabels = list(enabled = TRUE, format = '<b>{point.a}</b>: {point.b}')),
+     # hc_plotOptions(
+        pie = list(
+          #allowPointSelect =  TRUE,
+          cursor = 'pointer',
+          dataLabels = list(
+            #enabled = FALSE,
+            style = list(
+              connectorWidth = 0,
+              fontSize = font_size,
+              #color = "#393939",
+              #fontFamily = "roboto_slab_bold",
+              strokeWidth=1,
+              fill = 'none')
+          )
+        )
+
     ) %>%
     hc_tooltip(headerFormat = "", pointFormat = "<b>{point.a}</b>: {point.b}", followPointer=TRUE, shared = TRUE) %>%
     hc_title(text = title) %>%
@@ -56,7 +72,7 @@ hgch_pie_Cat <- function(data, title = NULL, subtitle = NULL, caption = NULL, xA
 #'
 #' @export hgch_pie_CatNum
 hgch_pie_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                        sort = "no", aggregate = "sum", export = FALSE, theme = NULL, ...){
+                        sort = "no", aggregate = "sum", export = FALSE, font_size = '13px', theme = NULL, ...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -70,7 +86,21 @@ hgch_pie_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
 
   hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
-      series = list(dataLabels = list(enabled = TRUE, format = '<b>{point.a}</b>: {point.b}'))
+      series = list(dataLabels = list(enabled = TRUE, format = '<b>{point.a}</b>: {point.b}')),
+                    pie = list(
+                      #allowPointSelect =  TRUE,
+                      cursor = 'pointer',
+                      dataLabels = list(
+                        #enabled = FALSE,
+                        style = list(
+                          connectorWidth = 0,
+                          fontSize = font_size,
+                          #color = "#393939",
+                          #fontFamily = "roboto_slab_bold",
+                          strokeWidth=1,
+                          fill = 'none')
+                      )
+                    )
     ) %>%
     hc_tooltip(headerFormat = "", pointFormat = "<b>{point.a}</b>: {point.b}", followPointer=TRUE, shared = TRUE) %>%
     hc_title(text = title) %>%
