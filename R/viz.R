@@ -37,6 +37,7 @@ hgch_pie_Cat <- function(data, title = NULL, subtitle = NULL, caption = NULL, xA
             style = list(
               connectorWidth = 0,
               fontSize = font_size,
+              width = '100px',
               #color = "#393939",
               #fontFamily = "roboto_slab_bold",
               strokeWidth=1,
@@ -94,6 +95,7 @@ hgch_pie_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
                         #enabled = FALSE,
                         style = list(
                           connectorWidth = 0,
+                          width = '100px',
                           fontSize = font_size,
                           #color = "#393939",
                           #fontFamily = "roboto_slab_bold",
