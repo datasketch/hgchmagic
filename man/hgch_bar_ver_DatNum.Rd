@@ -24,5 +24,5 @@ Dat-Num
 }
 
 \examples{
-hgch_bar_ver_DatNum(sampleDatta("Dat-Num",nrow = 10))
+hgch_bar_ver_DatNum(sampleData("Dat-Num", nrow = 10))
 }

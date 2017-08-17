@@ -24,6 +24,6 @@ Yea-Num
 
 \examples{
 
-hgch_area_YeaNum(sampleDatta("Yea-Num",nrow = 10))
+hgch_area_YeaNum(sampleData("Yea-Num", nrow = 10))
 
 }

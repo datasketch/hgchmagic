@@ -23,5 +23,5 @@ Cat-Cat-Num
 }
 
 \examples{
-hgch_bar_grouped_ver_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+hgch_bar_grouped_ver_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
 }

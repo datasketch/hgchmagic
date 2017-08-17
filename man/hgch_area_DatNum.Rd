@@ -24,6 +24,6 @@ Dat-Num
 
 \examples{
 
-hgch_area_DatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
+hgch_area_DatNum(sampleData("Dat-Num", nrow = 10))
 
 }
