@@ -6,7 +6,8 @@
 \usage{
 hgch_bar_grouped_ver_CatNumP(data, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
+  aggregation = "sum", startAtZero = FALSE, theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -17,10 +18,11 @@ highcharts viz
 \description{
 Vertical grouped bar
 }
-\section{ctypess}{
- Cat-NumP
+\section{ctypes}{
+
+Cat-NumP
 }
 
 \examples{
-hgch_bar_grouped_ver_CatNumP(sampleDatta("Cat-NumP",nrow = 10))
+hgch_bar_grouped_ver_CatNumP(sampleData("Cat-NumP", nrow = 10))
 }

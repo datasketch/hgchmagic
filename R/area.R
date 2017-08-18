@@ -13,7 +13,8 @@
 #'
 #' @export hgch_area_DatNum
 hgch_area_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                           symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
+                             symbol = NULL, aggregation = "sum",
+                             startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -22,7 +23,7 @@ hgch_area_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
   yAxisTitle <- yAxisTitle %||% nms[2]
   title <-  title %||% ""
 
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b))
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = agg(aggregation, b))
   if(nrow(d)==0) return()
   hc <- hchart(d, type = "area", hcaes(x = a, y = b)) %>%
   hc_plotOptions(
@@ -86,7 +87,8 @@ hgch_area_CatNum <-hgch_area_DatNum
 #'
 #' @export hgch_area_YeaNum
 hgch_area_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                           symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
+                           symbol = NULL, aggregation = "sum",
+                           startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -95,7 +97,7 @@ hgch_area_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
   yAxisTitle <- yAxisTitle %||% nms[2]
   title <-  title %||% ""
 
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b))
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = agg(aggregation, b))
   if(nrow(d)==0) return()
   hc <- hchart(d, type = "area", hcaes(x = a, y = b)) %>%
     hc_plotOptions(
@@ -140,7 +142,8 @@ hgch_area_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
 #'
 #' @export hgch_area_CatCatNum
 hgch_area_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
+                             symbol = NULL, aggregation = "sum",
+                             startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -149,7 +152,7 @@ hgch_area_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = N
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
 
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
   hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
@@ -215,7 +218,8 @@ hgch_area_CatYeaNum <- hgch_area_CatCatNum
 #'
 #' @export hgch_area_stacked_CatCatNum
 hgch_area_stacked_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                   symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
+                                   symbol = NULL, agreggation = "sum",
+                                   startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -224,7 +228,7 @@ hgch_area_stacked_CatCatNum <- function(data, title = NULL, subtitle = NULL, cap
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
 
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
   hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
@@ -292,7 +296,8 @@ hgch_area_stacked_CatYeaNum <- hgch_area_stacked_CatCatNum
 #'
 #' @export hgch_area_stacked_100_CatCatNum
 hgch_area_stacked_100_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                       symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
+                                       symbol = NULL, aggregation = "sum",
+                                       startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -301,7 +306,7 @@ hgch_area_stacked_100_CatCatNum <- function(data, title = NULL, subtitle = NULL,
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
 
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
   hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
@@ -368,7 +373,8 @@ hgch_area_stacked_100_CatYeaNum <- hgch_area_stacked_100_CatCatNum
 #'
 #' @export hgch_area_CatDatNum
 hgch_area_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL,startAtZero = FALSE, theme = NULL, export = FALSE,...){
+                             symbol = NULL, aggregation = "sum",
+                             startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -377,7 +383,7 @@ hgch_area_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = N
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
 
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
   hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
@@ -424,7 +430,8 @@ hgch_area_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = N
 #'
 #' @export hgch_area_stacked_CatDatNum
 hgch_area_stacked_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                   symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
+                                   symbol = NULL, aggregation = "sum",
+                                   startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -433,7 +440,7 @@ hgch_area_stacked_CatDatNum <- function(data, title = NULL, subtitle = NULL, cap
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
 
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
   hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
@@ -483,8 +490,8 @@ hgch_area_stacked_CatDatNum <- function(data, title = NULL, subtitle = NULL, cap
 #'
 #' @export hgch_area_stacked_100_CatDatNum
 hgch_area_stacked_100_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                       symbol = NULL, startAtZero = FALSE,
-                                       theme = NULL, export = FALSE,...){
+                                       symbol = NULL, aggregation = "sum",
+                                       startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -493,7 +500,7 @@ hgch_area_stacked_100_CatDatNum <- function(data, title = NULL, subtitle = NULL,
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
 
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = mean(c))
+  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
   if(nrow(d)==0) return()
   #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
   hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%

@@ -6,7 +6,7 @@
 \usage{
 hgch_bar_hor_top_Cat(data, topn = NULL, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, reverse = TRUE,
-  aggregate = "count", theme = NULL, export = FALSE, ...)
+  theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

@@ -11,6 +11,7 @@
  # }
 
 
+
 #' Vertical bar
 #'
 #' Vertical bar
@@ -32,7 +33,6 @@ hgch_bar_ver_Cat <-
            xAxisTitle = NULL,
            yAxisTitle = NULL,
            sort = "no",
-           aggregate = "count",
            theme = NULL,
            export = FALSE,
            ...) {
@@ -99,7 +99,6 @@ hgch_bar_ver_top_Cat <- function(data,
                                 xAxisTitle = NULL,
                                 yAxisTitle = NULL,
                                 reverse = TRUE,
-                                aggregate = "count",
                                 theme = NULL,
                                 export = FALSE,
                                 ...) {
@@ -110,7 +109,6 @@ hgch_bar_ver_top_Cat <- function(data,
     xAxisTitle = xAxisTitle,
     yAxisTitle = yAxisTitle,
     sort = "top",
-    aggregate = aggregate,
     theme = theme
   )
 
@@ -138,7 +136,6 @@ hgch_bar_hor_Cat <-
            xAxisTitle = NULL,
            yAxisTitle = NULL,
            sort = "no",
-           aggregate = "count",
            theme = NULL,
            export = FALSE,
            ...) {
@@ -202,7 +199,6 @@ hgch_bar_hor_top_Cat <- function(data,
                                 xAxisTitle = NULL,
                                 yAxisTitle = NULL,
                                 reverse = TRUE,
-                                aggregate = "count",
                                 theme = NULL,
                                 export = FALSE,
                                 ...) {
@@ -214,12 +210,9 @@ hgch_bar_hor_top_Cat <- function(data,
     xAxisTitle = xAxisTitle,
     yAxisTitle = yAxisTitle,
     sort = "top",
-    aggregate = aggregate,
     theme = theme
   )
 }
-
-
 
 
 
@@ -244,7 +237,7 @@ hgch_bar_ver_CatNum <-
            xAxisTitle = NULL,
            yAxisTitle = NULL,
            sort = "no",
-           aggregate = NULL,
+           aggregation = "sum",
            #back_color = 'white',
            color_title = 'black',
            startAtZero = FALSE,
@@ -269,7 +262,7 @@ hgch_bar_ver_CatNum <-
     d <- f$d %>%
       tidyr::drop_na() %>%
       dplyr::group_by(a) %>%
-      dplyr::summarise(b = mean(b))
+      dplyr::summarise(b = agg(aggregation, b))
 
     #d$w <- map_chr(d$b, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
 
@@ -333,7 +326,7 @@ hgch_bar_ver_top_CatNum <- function(data,
                                   xAxisTitle = NULL,
                                   yAxisTitle = NULL,
                                   reverse = TRUE,
-                                  aggregate = "mean",
+                                  aggregation = "sum",
                                   theme = NULL,
                                   export = FALSE,
                                   ...) {
@@ -345,7 +338,7 @@ hgch_bar_ver_top_CatNum <- function(data,
     xAxisTitle = xAxisTitle,
     yAxisTitle = yAxisTitle,
     sort = "top",
-    aggregate = aggregate,
+    aggregation = aggregation,
     theme = theme,
     export = export
   )
@@ -408,7 +401,7 @@ hgch_bar_hor_CatNum <- function(data,
                               xAxisTitle = NULL,
                               yAxisTitle = NULL,
                               sort = "no",
-                              aggregate = "mean",
+                              aggregation = "sum",
                               #back_color = 'white',
                               color_title = 'black',
                               theme = NULL,
@@ -428,8 +421,6 @@ hgch_bar_hor_CatNum <- function(data,
 
   xAxisTitle <- xAxisTitle %||% nms[2]
   yAxisTitle <- yAxisTitle %||% nms[1]
-  # xAxisTitle <- xAxisTitle %||% ""
-  # yAxisTitle <- yAxisTitle %||% ""
   title <-  title %||% " "
   d <- f$d
   d <- na.omit(d)
@@ -437,7 +428,7 @@ hgch_bar_hor_CatNum <- function(data,
     return()
   d <-  d %>%
         dplyr::group_by(a) %>%
-        dplyr::summarise(b = mean(b, na.rm = TRUE)) %>%
+        dplyr::summarise(b = agg(aggregation, b)) %>%
         drop_na()
 
   #d$w <- map_chr(d$b, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
@@ -457,7 +448,7 @@ hgch_bar_hor_CatNum <- function(data,
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = yAxisTitle)) %>%
     hc_yAxis(title = list(text = xAxisTitle))  %>%
-    hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(" ",yAxisTitle, ": "), "{point.key}</b><br/>"),
+    hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(yAxisTitle, ": "), "{point.key}</b><br/>"),
                pointFormat = paste("<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "{point.b}</b><br/>"))
     # hc_tooltip(
     #   headerFormat= '',
@@ -492,7 +483,7 @@ hgch_bar_hor_top_CatNum <- function(data,
                                   xAxisTitle = NULL,
                                   yAxisTitle = NULL,
                                   reverse = TRUE,
-                                  aggregate = "mean",
+                                  aggregation = "sum",
                                   theme = NULL,
                                   export = FALSE,
                                   ...) {
@@ -504,7 +495,7 @@ hgch_bar_hor_top_CatNum <- function(data,
     xAxisTitle = xAxisTitle,
     yAxisTitle = yAxisTitle,
     sort = "top",
-    aggregate = aggregate,
+    aggregation = aggregation,
     theme = theme,
     export = export
   )
@@ -534,6 +525,7 @@ hgch_bar_grouped_ver_CatCatNum <-
            xAxisTitle = NULL,
            yAxisTitle = NULL,
            symbol = NULL,
+           aggregation = "sum",
            startAtZero = FALSE,
            theme = NULL,
            export = FALSE,
@@ -547,7 +539,9 @@ hgch_bar_grouped_ver_CatCatNum <-
     symbol <- symbol %||% "circle"
 
     d <-
-      f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = mean(c))
+      f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
+    # para que las fechas sean categóricas
+    d$b <- as.character(d$b)
     if (nrow(d) == 0)
       return()
     #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
@@ -558,7 +552,10 @@ hgch_bar_grouped_ver_CatCatNum <-
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle),
                allowDecimals = FALSE) %>%
-      hc_yAxis(title = list(text = yAxisTitle))
+      hc_yAxis(title = list(text = yAxisTitle)) %>%
+      hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "{point.key}</b><br/>"),
+                 pointFormat = paste("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "{point.a}</b><br/><b style = 'font-size:12px'>",
+                                     paste0(yAxisTitle, ": "), "{point.c}</b><br/>"))
     if (startAtZero) {
       hc <-
         hc %>% hc_yAxis(
@@ -585,7 +582,7 @@ hgch_bar_grouped_ver_CatCatNum <-
 #' @section ctypes:
 #' Cat-Yea-Num
 #' @examples
-#' hgch_bar_grouped_ver_CatYeaNum(sampleDatta("Yea-Num-Num",nrow = 10))
+#' hgch_bar_grouped_ver_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
 #' @export hgch_bar_grouped_ver_CatYeaNum
 hgch_bar_grouped_ver_CatYeaNum <- hgch_bar_grouped_ver_CatCatNum
 
@@ -602,7 +599,7 @@ hgch_bar_grouped_ver_CatYeaNum <- hgch_bar_grouped_ver_CatCatNum
 #' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
-#' hgch_bar_grouped_hor_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+#' hgch_bar_grouped_hor_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
 #' @export hgch_bar_grouped_hor_CatCatNum
 hgch_bar_grouped_hor_CatCatNum <-
   function(data,
@@ -612,6 +609,7 @@ hgch_bar_grouped_hor_CatCatNum <-
            xAxisTitle = NULL,
            yAxisTitle = NULL,
            symbol = NULL,
+           aggregation = "sum",
            startAtZero = FALSE,
            theme = NULL,
            export = FALSE,
@@ -619,13 +617,13 @@ hgch_bar_grouped_hor_CatCatNum <-
     f <- fringe(data)
     nms <- getClabels(f)
 
-    xAxisTitle <- xAxisTitle %||% nms[2]
-    yAxisTitle <- yAxisTitle %||% nms[3]
+    xAxisTitle <- xAxisTitle %||% nms[3]
+    yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
 
     d <-
-      f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = mean(c))
+      f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
     if (nrow(d) == 0)
       return()
     #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
@@ -633,9 +631,12 @@ hgch_bar_grouped_hor_CatCatNum <-
       hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
       hc_title(text = title) %>%
       hc_subtitle(text = subtitle) %>%
-      hc_xAxis(title = list(text = xAxisTitle),
+      hc_xAxis(title = list(text = yAxisTitle),
                allowDecimals = FALSE) %>%
-      hc_yAxis(title = list(text = yAxisTitle))
+      hc_yAxis(title = list(text = xAxisTitle)) %>%
+      hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(yAxisTitle, ": "), "{point.key}</b><br/>"),
+                 pointFormat = paste("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "{point.a}</b><br/><b style = 'font-size:12px'>",
+                                     paste0(yAxisTitle, ": "), "{point.c}</b><br/>"))
     if (startAtZero) {
       hc <-
         hc %>% hc_yAxis(
@@ -660,7 +661,7 @@ hgch_bar_grouped_hor_CatCatNum <-
 #' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
-#' hgch_bar_stacked_ver_CatCatNum(sampleData("Cat-Cat-Num",nrow = 10))
+#' hgch_bar_stacked_ver_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
 hgch_bar_stacked_ver_CatCatNum <-
   function(data,
            title = NULL,
@@ -669,6 +670,7 @@ hgch_bar_stacked_ver_CatCatNum <-
            xAxisTitle = NULL,
            yAxisTitle = NULL,
            symbol = NULL,
+           aggregation = "sum",
            startAtZero = FALSE,
            theme = NULL,
            export = FALSE,
@@ -682,7 +684,7 @@ hgch_bar_stacked_ver_CatCatNum <-
     symbol <- symbol %||% "circle"
 
     d <-
-      f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = mean(c))
+      f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
     if (nrow(d) == 0)
       return()
     #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
@@ -694,7 +696,10 @@ hgch_bar_stacked_ver_CatCatNum <-
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle),
                allowDecimals = FALSE) %>%
-      hc_yAxis(title = list(text = yAxisTitle))
+      hc_yAxis(title = list(text = yAxisTitle)) %>%
+      hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "{point.key}</b><br/>"),
+                 pointFormat = paste("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "{point.a}</b><br/><b style = 'font-size:12px'>",
+                                     paste0(yAxisTitle, ": "), "{point.c}</b><br/>"))
     if (startAtZero) {
       hc <-
         hc %>% hc_yAxis(
@@ -721,7 +726,7 @@ hgch_bar_stacked_ver_CatCatNum <-
 #' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
-#' hgch_bar_stacked_100_ver_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+#' hgch_bar_stacked_100_ver_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
 #' @export hgch_bar_stacked_100_ver_CatCatNum
 hgch_bar_stacked_100_ver_CatCatNum <-
   function(data,
@@ -731,6 +736,7 @@ hgch_bar_stacked_100_ver_CatCatNum <-
            xAxisTitle = NULL,
            yAxisTitle = NULL,
            symbol = NULL,
+           aggregation ="sum",
            startAtZero = FALSE,
            theme = NULL,
            export = FALSE,
@@ -744,7 +750,7 @@ hgch_bar_stacked_100_ver_CatCatNum <-
     symbol <- symbol %||% "circle"
 
     d <-
-      f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = mean(c))
+      f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
     if (nrow(d) == 0)
       return()
     #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
@@ -756,7 +762,10 @@ hgch_bar_stacked_100_ver_CatCatNum <-
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle),
                allowDecimals = FALSE) %>%
-      hc_yAxis(title = list(text = yAxisTitle))
+      hc_yAxis(title = list(text = yAxisTitle)) %>%
+      hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "{point.key}</b><br/>"),
+                 pointFormat = paste("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "{point.a}</b><br/><b style = 'font-size:12px'>",
+                                     paste0(yAxisTitle, ": "), "{point.c}</b><br/>"))
     if (startAtZero) {
       hc <-
         hc %>% hc_yAxis(
@@ -784,7 +793,7 @@ hgch_bar_stacked_100_ver_CatCatNum <-
 #' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
-#' hgch_bar_stacked_hor_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+#' hgch_bar_stacked_hor_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
 #' @export hgch_bar_stacked_hor_CatCatNum
 hgch_bar_stacked_hor_CatCatNum <-
   function(data,
@@ -794,6 +803,7 @@ hgch_bar_stacked_hor_CatCatNum <-
            xAxisTitle = NULL,
            yAxisTitle = NULL,
            symbol = NULL,
+           aggregation = "sum",
            startAtZero = FALSE,
            theme = NULL,
            export = FALSE,
@@ -801,13 +811,13 @@ hgch_bar_stacked_hor_CatCatNum <-
     f <- fringe(data)
     nms <- getClabels(f)
 
-    xAxisTitle <- xAxisTitle %||% nms[2]
-    yAxisTitle <- yAxisTitle %||% nms[3]
+    xAxisTitle <- xAxisTitle %||% nms[3]
+    yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
 
     d <-
-      f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = mean(c))
+      f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
     if (nrow(d) == 0)
       return()
     #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
@@ -816,13 +826,16 @@ hgch_bar_stacked_hor_CatCatNum <-
                      bar = list(stacking = "normal")) %>%
       hc_title(text = title) %>%
       hc_subtitle(text = subtitle) %>%
-      hc_xAxis(title = list(text = xAxisTitle),
+      hc_xAxis(title = list(text = yAxisTitle),
                allowDecimals = FALSE) %>%
-      hc_yAxis(title = list(text = yAxisTitle))
+      hc_yAxis(title = list(text = xAxisTitle)) %>%
+      hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(yAxisTitle, ": "), "{point.key}</b><br/>"),
+                 pointFormat = paste("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "{point.a}</b><br/><b style = 'font-size:12px'>",
+                                     paste0(xAxisTitle, ": "), "{point.c}</b><br/>"))
     if (startAtZero) {
       hc <-
         hc %>% hc_yAxis(
-          title = list(text = yAxisTitle),
+          title = list(text = xAxisTitle),
           minRange = 0.1,
           min = 0,
           minPadding = 0
@@ -845,7 +858,7 @@ hgch_bar_stacked_hor_CatCatNum <-
 #' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
-#' hgch_bar_stacked_100_hor_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+#' hgch_bar_stacked_100_hor_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
 #' @export hgch_bar_stacked_100_hor_CatCatNum
 hgch_bar_stacked_100_hor_CatCatNum <-
   function(data,
@@ -855,6 +868,7 @@ hgch_bar_stacked_100_hor_CatCatNum <-
            xAxisTitle = NULL,
            yAxisTitle = NULL,
            symbol = NULL,
+           aggregation = "sum",
            startAtZero = FALSE,
            theme = NULL,
            export = FALSE,
@@ -862,13 +876,13 @@ hgch_bar_stacked_100_hor_CatCatNum <-
     f <- fringe(data)
     nms <- getClabels(f)
 
-    xAxisTitle <- xAxisTitle %||% nms[2]
-    yAxisTitle <- yAxisTitle %||% nms[3]
+    xAxisTitle <- xAxisTitle %||% nms[3]
+    yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
 
     d <-
-      f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = mean(c))
+      f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
     if (nrow(d) == 0)
       return()
     #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
@@ -877,13 +891,16 @@ hgch_bar_stacked_100_hor_CatCatNum <-
                      bar = list(stacking = "percent")) %>%
       hc_title(text = title) %>%
       hc_subtitle(text = subtitle) %>%
-      hc_xAxis(title = list(text = xAxisTitle),
+      hc_xAxis(title = list(text = yAxisTitle),
                allowDecimals = FALSE) %>%
-      hc_yAxis(title = list(text = yAxisTitle))
+      hc_yAxis(title = list(text = xAxisTitle)) %>%
+      hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(yAxisTitle, ": "), "{point.key}</b><br/>"),
+                 pointFormat = paste("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "{point.a}</b><br/><b style = 'font-size:12px'>",
+                                     paste0(xAxisTitle, ": "), "{point.c}</b><br/>"))
     if (startAtZero) {
       hc <-
         hc %>% hc_yAxis(
-          title = list(text = yAxisTitle),
+          title = list(text = xAxisTitle),
           minRange = 0.1,
           min = 0,
           minPadding = 0
@@ -907,7 +924,7 @@ hgch_bar_stacked_100_hor_CatCatNum <-
 #' @section ctypes:
 #' Cat-Dat-Num
 #' @examples
-#' hgch_bar_stacked_ver_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
+#' hgch_bar_stacked_ver_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
 #' @export hgch_bar_stacked_ver_CatDatNum
 hgch_bar_stacked_ver_CatDatNum <- hgch_bar_stacked_ver_CatCatNum
 
@@ -922,7 +939,7 @@ hgch_bar_stacked_ver_CatDatNum <- hgch_bar_stacked_ver_CatCatNum
 #' @section ctypes:
 #' Cat-Dat-Num
 #' @examples
-#' hgch_bar_stacked_100_ver_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
+#' hgch_bar_stacked_100_ver_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
 #' @export hgch_bar_stacked_100_ver_CatDatNum
 hgch_bar_stacked_100_ver_CatDatNum <- hgch_bar_stacked_100_ver_CatCatNum
 
@@ -936,9 +953,10 @@ hgch_bar_stacked_100_ver_CatDatNum <- hgch_bar_stacked_100_ver_CatCatNum
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ctypess: Cat-NumP
+#' @section ctypes:
+#' Cat-NumP
 #' @examples
-#' hgch_bar_grouped_ver_CatNumP(sampleDatta("Cat-NumP",nrow = 10))
+#' hgch_bar_grouped_ver_CatNumP(sampleData("Cat-NumP", nrow = 10))
 #' @export hgch_bar_grouped_ver_CatNumP
 hgch_bar_grouped_ver_CatNumP <- function(data,
                                        title = NULL,
@@ -947,6 +965,7 @@ hgch_bar_grouped_ver_CatNumP <- function(data,
                                        xAxisTitle = NULL,
                                        yAxisTitle = NULL,
                                        symbol = NULL,
+                                       aggregation = "sum",
                                        startAtZero = FALSE,
                                        theme = NULL,
                                        export = FALSE,
@@ -956,16 +975,16 @@ hgch_bar_grouped_ver_CatNumP <- function(data,
 
   xAxisTitle <- xAxisTitle %||% nms[1]
   yAxisTitle <- yAxisTitle %||% ""
-  title <-  title %||% f$name
+  title <-  title %||% ""
   symbol <- symbol %||% "circle"
-  d <- f$d %>% tidyr::gather(variable, value,-a) %>%
+  d <- f$d %>% tidyr::gather(variable, value,-a) %>% dplyr::filter(!is.na(a)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(a, variable) %>%
-    dplyr::summarise(value = mean(value)) %>% dplyr::ungroup()
+    dplyr::summarise(value = agg(aggregation, value)) %>% dplyr::ungroup()
   codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
 
   d <- d %>%
     dplyr::mutate(variable = fct_recode_df(d, "variable", codes))
-  d$text1 <- map_chr(d$value, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  # d$text1 <- map_chr(d$value, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
 
   hc <-
     hchart(d, type = "column", hcaes(x = a, y = value, group = variable)) %>%
@@ -975,11 +994,13 @@ hgch_bar_grouped_ver_CatNumP <- function(data,
     hc_xAxis(title = list(text = xAxisTitle),
              allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text = yAxisTitle)) %>%
-    hc_tooltip(
-      headerFormat= '',
-      pointFormat ="<b>{point.a}</b> <br>
-                    {point.variable}: {point.text1}"
-    )
+    hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "{point.key}</b><br/>"),
+               pointFormat = paste("<b style = 'font-size:12px'>", "{point.variable}: {point.value}</b><br/>"))
+    # hc_tooltip(
+    #   headerFormat= '',
+    #   pointFormat ="<b>{point.a}</b> <br>
+    #                 {point.variable}: {point.text1}"
+    # )
   if (startAtZero) {
     hc <-
       hc %>% hc_yAxis(
@@ -1003,54 +1024,52 @@ hgch_bar_grouped_ver_CatNumP <- function(data,
 #'
 #' @param x A data.frame
 #' @return highcharts viz
-#' @section ctypess: Cat-NumP
+#' @section ctypes:
+#' Cat-NumP
 #' @examples
-#' hgch_bar_grouped_hor_CatNumP(sampleDatta("Cat-NumP",nrow = 10))
+#' hgch_bar_grouped_hor_CatNumP(sampleData("Cat-NumP", nrow = 10))
 #' @export hgch_bar_grouped_hor_CatNumP
 hgch_bar_grouped_hor_CatNumP <- function(data,
-                                       title = NULL,
-                                       subtitle = NULL,
-                                       caption = NULL,
-                                       xAxisTitle = NULL,
-                                       yAxisTitle = NULL,
-                                       symbol = NULL,
-                                       startAtZero = FALSE,
-                                       theme = NULL,
-                                       export = FALSE,
-                                       ...) {
+                                         title = NULL,
+                                         subtitle = NULL,
+                                         caption = NULL,
+                                         xAxisTitle = NULL,
+                                         yAxisTitle = NULL,
+                                         symbol = NULL,
+                                         aggregation = "sum",
+                                         startAtZero = FALSE,
+                                         theme = NULL,
+                                         export = FALSE,
+                                         ...) {
   f <- fringe(data)
   nms <- getClabels(f)
 
-  xAxisTitle <- xAxisTitle %||% nms[1]
-  yAxisTitle <- yAxisTitle %||% ""
-  title <-  title %||% f$name
+  xAxisTitle <- xAxisTitle %||% ""
+  yAxisTitle <- yAxisTitle %||% nms[1]
+  title <-  title %||% ""
   symbol <- symbol %||% "circle"
-  d <- f$d %>% tidyr::gather(variable, value,-a) %>%
+  d <- f$d %>% tidyr::gather(variable, value, -a) %>% dplyr::filter(!is.na(a)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(a, variable) %>%
-    dplyr::summarise(value = mean(value)) %>% dplyr::ungroup()
+    dplyr::summarise(value = agg(aggregation, value)) %>% dplyr::ungroup()
   codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
   d <- d %>%
     dplyr::mutate(variable = fct_recode_df(d, "variable", codes))
-
-  d$text1 <- map_chr(d$value, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  #d$text1 <- map_chr(d$value, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
 
     hc <-
     hchart(d, type = "bar", hcaes(x = a, y = value, group = variable)) %>%
-    hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
-    hc_title(text = title) %>%
-    hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text = xAxisTitle),
-             allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text = yAxisTitle)) %>%
-    hc_tooltip(
-      headerFormat= '',
-      pointFormat ="<b>{point.a}</b> <br>
-                    {point.variable}: {point.text1}"
-    )
+      hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
+      hc_title(text = title) %>%
+      hc_subtitle(text = subtitle) %>%
+      hc_xAxis(title = list(text = yAxisTitle),
+               allowDecimals = FALSE) %>%
+      hc_yAxis(title = list(text = xAxisTitle)) %>%
+      hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(yAxisTitle, ": "), "{point.key}</b><br/>"),
+                 pointFormat = paste("<b style = 'font-size:12px'>", "{point.variable}: {point.value}</b><br/>"))
   if (startAtZero) {
     hc <-
       hc %>% hc_yAxis(
-        title = list(text = yAxisTitle),
+        title = list(text = xAxisTitle),
         minRange = 0.1,
         min = 0,
         minPadding = 0
@@ -1069,9 +1088,10 @@ hgch_bar_grouped_hor_CatNumP <- function(data,
 #' @param x A data.frame
 #' @export
 #' @return highcharts viz
-#' @section ctypess: NumP
+#' @section ctypes:
+#' NumP
 #' @examples
-#' hgch_bar_ver_NumP(sampleData("NumP",nrow = 10))
+#' hgch_bar_ver_NumP(sampleData("NumP", nrow = 10))
 hgch_bar_ver_NumP <- function(data,
                          title = NULL,
                          subtitle = NULL,
@@ -1079,7 +1099,10 @@ hgch_bar_ver_NumP <- function(data,
                          xAxisTitle = NULL,
                          yAxisTitle = NULL,
                          symbol = NULL,
-                         startAtZero = NULL,
+                         aggregation = "sum",
+                         startAtZero = FALSE,
+                         theme = NULL,
+                         export = FALSE,
                          ...) {
 
   f <- fringe(data)
@@ -1087,35 +1110,14 @@ hgch_bar_ver_NumP <- function(data,
 
   xAxisTitle <- xAxisTitle %||% ""
   yAxisTitle <- yAxisTitle %||% nms[1]
-  title <-  title %||% f$name
+  title <-  title %||% ""
 
-  d <- f$d %>% tidyr::gather(variable, value,-a) %>%
-    dplyr::filter(!is.na(value)) %>% dplyr::group_by(a, variable) %>%
-    dplyr::summarise(value = mean(value)) %>% dplyr::ungroup()
+  d <- f$d %>% tidyr::gather(variable, value, 1:ncol(f$d)) %>%
+    dplyr::filter(!is.na(value)) %>% dplyr::group_by(variable) %>% dplyr::ungroup()
   codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
   d <- d %>%
     dplyr::mutate(variable = fct_recode_df(d, "variable", codes))
-  hc <-
-    hchart(d, type = "line", hcaes(x = a, y = value, group = variable)) %>%
-    hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
-    hc_title(text = title) %>%
-    hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text = xAxisTitle),
-             allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text = yAxisTitle))
-  if (startAtZero) {
-    hc <-
-      hc %>% hc_yAxis(
-        title = list(text = yAxisTitle),
-        minRange = 0.1,
-        min = 0,
-        minPadding = 0
-      )
-  }
-  hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
-  if (export)
-    hc <- hc %>% hc_exporting(enabled = TRUE)
-  hc
+ hgch_bar_ver_CatNum(d)
 }
 
 
@@ -1131,10 +1133,10 @@ hgch_bar_ver_NumP <- function(data,
 #' @section ctypes:
 #' Cat-Num
 #' @examples
-#' hgch_waterfall_CatNum(sampleDatta("Cat-Num",nrow = 10))
+#' hgch_waterfall_CatNum(sampleData("Cat-Num", nrow = 10))
 #' @export hgch_waterfall_CatNum
 hgch_waterfall_CatNum <-function(data, title = NULL,  xAxisTitle = NULL,
-                               yAxisTitle = NULL){
+                                 aggregation = "sum", yAxisTitle = NULL){
 
   f <- fringe(data)
   nms <- getCnames(f)
@@ -1163,11 +1165,13 @@ hgch_waterfall_CatNum <-function(data, title = NULL,  xAxisTitle = NULL,
   hc <- highchart() %>%
     hc_title(text = title) %>%
     hc_xAxis(text = list(text = xAxisTitle)) %>%
-    hc_xAxis(text = list(text = yAxisTitle)) %>%
+    hc_yAxis(text = list(text = yAxisTitle)) %>%
     hc_chart(type = "waterfall",
              polar = FALSE) %>%
     hc_xAxis(categories = data_graph$name) %>%
-    hc_add_series(data_graph, showInLegend = FALSE)
+    hc_add_series(data_graph, showInLegend = FALSE) %>%
+    hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "{point.key}</b><br/>"),
+               pointFormat = paste("<b style = 'font-size:12px'>", paste0(yAxisTitle, ": "), "{point.value}</b><br/>"))
   hc
 }
 
@@ -1184,7 +1188,7 @@ hgch_waterfall_CatNum <-function(data, title = NULL,  xAxisTitle = NULL,
 #' @section ctypes:
 #' Cat-Cat
 #' @examples
-#' hgch_bar_grouped_ver_CatCat(sampleDatta("Cat-Cat",nrow = 10))
+#' hgch_bar_grouped_ver_CatCat(sampleData("Cat-Cat", nrow = 10))
 #' @export hgch_bar_grouped_ver_CatCat
 hgch_bar_grouped_ver_CatCat <-
   function(data,
@@ -1203,7 +1207,7 @@ hgch_bar_grouped_ver_CatCat <-
     nms <- getClabels(f)
 
     xAxisTitle <- xAxisTitle %||% nms[2]
-    yAxisTitle <- yAxisTitle %||% nms[3]
+    yAxisTitle <- yAxisTitle %||% "Cantidad"
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
 
@@ -1219,7 +1223,10 @@ hgch_bar_grouped_ver_CatCat <-
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle),
                allowDecimals = FALSE) %>%
-      hc_yAxis(title = list(text = yAxisTitle))
+      hc_yAxis(title = list(text = yAxisTitle)) %>%
+      hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "{point.key}</b><br/>"),
+                 pointFormat = paste("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "{point.a}</b><br/>",
+                                     "<b style = 'font-size:12px'>", paste0(yAxisTitle, ": "), "{point.c}</b><br/>"))
     if (startAtZero) {
       hc <-
         hc %>% hc_yAxis(
@@ -1248,7 +1255,7 @@ hgch_bar_grouped_ver_CatCat <-
 #' @section ctypes:
 #' Cat-Cat
 #' @examples
-#' hgch_bar_grouped_hor_CatCat(sampleDatta("Cat-Cat",nrow = 10))
+#' hgch_bar_grouped_hor_CatCat(sampleData("Cat-Cat", nrow = 10))
 #' @export hgch_bar_grouped_hor_CatCat
 hgch_bar_grouped_hor_CatCat <-
   function(data,
@@ -1265,8 +1272,8 @@ hgch_bar_grouped_hor_CatCat <-
     f <- fringe(data)
     nms <- getClabels(f)
 
-    xAxisTitle <- xAxisTitle %||% nms[2]
-    yAxisTitle <- yAxisTitle %||% nms[3]
+    xAxisTitle <- xAxisTitle %||% "Cantidad"
+    yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
 
@@ -1279,13 +1286,16 @@ hgch_bar_grouped_hor_CatCat <-
       hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
       hc_title(text = title) %>%
       hc_subtitle(text = subtitle) %>%
-      hc_xAxis(title = list(text = xAxisTitle),
+      hc_xAxis(title = list(text = yAxisTitle),
                allowDecimals = FALSE) %>%
-      hc_yAxis(title = list(text = yAxisTitle))
+      hc_yAxis(title = list(text = xAxisTitle)) %>%
+      hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(yAxisTitle, ": "), "{point.key}</b><br/>"),
+                 pointFormat = paste("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "{point.a}</b><br/>",
+                                     "<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "{point.c}</b><br/>"))
     if (startAtZero) {
       hc <-
         hc %>% hc_yAxis(
-          title = list(text = yAxisTitle),
+          title = list(text = xAxisTitle),
           minRange = 0.1,
           min = 0,
           minPadding = 0
@@ -1308,56 +1318,59 @@ hgch_bar_grouped_hor_CatCat <-
 #' @section ctypes:
 #' Cat-Cat
 #' @examples
-#' hgch_bar_stacked_ver_CatCat(sampleDatta("Cat-Cat",nrow = 10))
+#' hgch_bar_stacked_ver_CatCat(sampleData("Cat-Cat", nrow = 10))
 #' @export hgch_bar_stacked_ver_CatCat
 hgch_bar_stacked_ver_CatCat <-
-      function(data,
-                           title = NULL,
-                           subtitle = NULL,
-                           caption = NULL,
-                           xAxisTitle = NULL,
-                           yAxisTitle = NULL,
-                           symbol = NULL,
-                           startAtZero = FALSE,
-                           theme = NULL,
-                           export = FALSE,
-                           ...) {
-          f <- fringe(data)
-          nms <- getClabels(f)
+  function(data,
+           title = NULL,
+           subtitle = NULL,
+           caption = NULL,
+           xAxisTitle = NULL,
+           yAxisTitle = NULL,
+           symbol = NULL,
+           startAtZero = FALSE,
+           theme = NULL,
+           export = FALSE,
+           ...) {
+    f <- fringe(data)
+    nms <- getClabels(f)
 
-            xAxisTitle <- xAxisTitle %||% nms[2]
-            yAxisTitle <- yAxisTitle %||% nms[3]
-            title <-  title %||% ""
-            symbol <- symbol %||% "circle"
+    xAxisTitle <- xAxisTitle %||% nms[2]
+    yAxisTitle <- yAxisTitle %||% "Cantidad"
+    title <-  title %||% ""
+    symbol <- symbol %||% "circle"
 
-              d <-
-                  f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = n())
-              if (nrow(d) == 0)
-                  return()
-              #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-                hc <-
-                  hchart(d, type = "column", hcaes(x = b, y = c, group = a)) %>%
-                    hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol)),
-                                                         column = list(stacking = "normal")) %>%
-                    hc_title(text = title) %>%
-                    hc_subtitle(text = subtitle) %>%
-                    hc_xAxis(title = list(text = xAxisTitle),
-                                             allowDecimals = FALSE) %>%
-                    hc_yAxis(title = list(text = yAxisTitle))
-                if (startAtZero) {
-                    hc <-
-                        hc %>% hc_yAxis(
-                            title = list(text = yAxisTitle),
-                            minRange = 0.1,
-                            min = 0,
-                            minPadding = 0
-                          )
-                  }
-                hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
-                if (export)
-                    hc <- hc %>% hc_exporting(enabled = TRUE)
-                     hc
-      }
+    d <-
+      f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = n())
+    if (nrow(d) == 0)
+      return()
+    #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
+    hc <-
+      hchart(d, type = "column", hcaes(x = b, y = c, group = a)) %>%
+      hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol)),
+                     column = list(stacking = "normal")) %>%
+      hc_title(text = title) %>%
+      hc_subtitle(text = subtitle) %>%
+      hc_xAxis(title = list(text = xAxisTitle),
+               allowDecimals = FALSE) %>%
+      hc_yAxis(title = list(text = yAxisTitle)) %>%
+      hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "{point.key}</b><br/>"),
+                 pointFormat = paste("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "{point.a}</b><br/>",
+                                     "<b style = 'font-size:12px'>", paste0(yAxisTitle, ": "), "{point.c}</b><br/>"))
+    if (startAtZero) {
+      hc <-
+        hc %>% hc_yAxis(
+          title = list(text = yAxisTitle),
+          minRange = 0.1,
+          min = 0,
+          minPadding = 0
+        )
+    }
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    if (export)
+      hc <- hc %>% hc_exporting(enabled = TRUE)
+    hc
+  }
 
 
 
@@ -1371,7 +1384,7 @@ hgch_bar_stacked_ver_CatCat <-
 #' @section ctypes:
 #' Cat-Cat
 #' @examples
-#' hgch_bar_stacked_hor_CatCat(sampleDatta("Cat-Cat",nrow = 10))
+#' hgch_bar_stacked_hor_CatCat(sampleData("Cat-Cat", nrow = 10))
 #' @export hgch_bar_stacked_hor_CatCat
 hgch_bar_stacked_hor_CatCat <-
         function(data,
@@ -1388,8 +1401,8 @@ hgch_bar_stacked_hor_CatCat <-
           f <- fringe(data)
           nms <- getClabels(f)
 
-          xAxisTitle <- xAxisTitle %||% nms[2]
-          yAxisTitle <- yAxisTitle %||% nms[3]
+          xAxisTitle <- xAxisTitle %||% "Cantidad"
+          yAxisTitle <- yAxisTitle %||% nms[2]
           title <-  title %||% ""
           symbol <- symbol %||% "circle"
 
@@ -1403,13 +1416,16 @@ hgch_bar_stacked_hor_CatCat <-
             hc_plotOptions(series = list(stacking = "normal", marker = list(enabled = TRUE, symbol =  symbol)))%>%
             hc_title(text = title) %>%
             hc_subtitle(text = subtitle) %>%
-            hc_xAxis(title = list(text = xAxisTitle),
+            hc_xAxis(title = list(text = yAxisTitle),
                      allowDecimals = FALSE) %>%
-            hc_yAxis(title = list(text = yAxisTitle))
+            hc_yAxis(title = list(text = xAxisTitle)) %>%
+            hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(yAxisTitle, ": "), "{point.key}</b><br/>"),
+                       pointFormat = paste("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "{point.a}</b><br/>",
+                                           "<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "{point.c}</b><br/>"))
           if (startAtZero) {
             hc <-
               hc %>% hc_yAxis(
-                title = list(text = yAxisTitle),
+                title = list(text = xAxisTitle),
                 minRange = 0.1,
                 min = 0,
                 minPadding = 0
@@ -1433,7 +1449,7 @@ hgch_bar_stacked_hor_CatCat <-
 #' @section ctypes:
 #' Cat-Cat
 #' @examples
-#' hgch_bar_stacked_100_ver_CatCat(sampleDatta("Cat-Cat",nrow = 10))
+#' hgch_bar_stacked_100_ver_CatCat(sampleData("Cat-Cat", nrow = 10))
 #' @export hgch_bar_stacked_100_ver_CatCat
 hgch_bar_stacked_100_ver_CatCat <-
         function(data,
@@ -1451,7 +1467,7 @@ hgch_bar_stacked_100_ver_CatCat <-
         nms <- getClabels(f)
 
         xAxisTitle <- xAxisTitle %||% nms[2]
-        yAxisTitle <- yAxisTitle %||% nms[3]
+        yAxisTitle <- yAxisTitle %||% "Cantidad"
         title <-  title %||% ""
         symbol <- symbol %||% "circle"
 
@@ -1467,7 +1483,10 @@ hgch_bar_stacked_100_ver_CatCat <-
         hc_subtitle(text = subtitle) %>%
         hc_xAxis(title = list(text = xAxisTitle),
                  allowDecimals = FALSE) %>%
-        hc_yAxis(title = list(text = yAxisTitle))
+        hc_yAxis(title = list(text = yAxisTitle)) %>%
+          hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "{point.key}</b><br/>"),
+                     pointFormat = paste("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "{point.a}</b><br/>",
+                                         "<b style = 'font-size:12px'>", paste0(yAxisTitle, ": "), "{point.c}</b><br/>"))
         if (startAtZero) {
           hc <-hc %>% hc_yAxis(
             title = list(text = yAxisTitle),
@@ -1493,7 +1512,7 @@ hgch_bar_stacked_100_ver_CatCat <-
 #' @section ctypes:
 #' Cat-Cat
 #' @examples
-#' hgch_bar_stacked_100_hor_CatCat(sampleDatta("Cat-Cat",nrow = 10))
+#' hgch_bar_stacked_100_hor_CatCat(sampleData("Cat-Cat", nrow = 10))
 #' @export hgch_bar_stacked_100_hor_CatCat
 hgch_bar_stacked_100_hor_CatCat <-
   function(data,
@@ -1510,8 +1529,8 @@ hgch_bar_stacked_100_hor_CatCat <-
     f <- fringe(data)
     nms <- getClabels(f)
 
-    xAxisTitle <- xAxisTitle %||% nms[2]
-    yAxisTitle <- yAxisTitle %||% nms[3]
+    xAxisTitle <- xAxisTitle %||% "Cantidad"
+    yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
 
@@ -1527,7 +1546,10 @@ hgch_bar_stacked_100_hor_CatCat <-
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle),
                allowDecimals = FALSE) %>%
-      hc_yAxis(title = list(text = yAxisTitle))
+      hc_yAxis(title = list(text = yAxisTitle)) %>%
+      hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(yAxisTitle, ": "), "{point.key}</b><br/>"),
+                 pointFormat = paste("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "</b><b style = 'color:{point.color}'>{point.a}</b><br/>",
+                                     "<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "{point.c}</b><br/>"))
     if (startAtZero) {
       hc <-hc %>% hc_yAxis(
         title = list(text = yAxisTitle),
@@ -1556,15 +1578,16 @@ hgch_bar_stacked_100_hor_CatCat <-
 #' @section OtherInfo:
 #' moreInfo
 #' @examples
-#' hgch_circular_bar_CatNum(sampleDatta("Cat-Num",nrow = 10))
+#' hgch_circular_bar_CatNum(sampleData("Cat-Num", nrow = 10))
 #' @export hgch_circular_bar_CatNum
 hgch_circular_bar_CatNum <- function(data,
-                                   title = NULL,
-                                   subtitle = NULL,
-                                   caption = NULL,
-                                   theme = NULL,
-                                   export = FALSE,
-                                   ...) {
+                                     title = NULL,
+                                     subtitle = NULL,
+                                     caption = NULL,
+                                     theme = NULL,
+                                     export = FALSE,
+                                     aggregation = "sum",
+                                     ...) {
 
 
   f <- fringe(data)
@@ -1579,7 +1602,7 @@ hgch_circular_bar_CatNum <- function(data,
 
   df <- df %>%
     group_by(name) %>%
-    dplyr::summarise(y=mean(y))
+    dplyr::summarise(y = agg(aggregation, y))
 
   if(length(is.na(df$name) > 0)) {
     df$name[is.na(df$name)] <- 'Na'

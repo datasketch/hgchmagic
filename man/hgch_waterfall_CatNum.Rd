@@ -5,7 +5,7 @@
 \title{Waterfall}
 \usage{
 hgch_waterfall_CatNum(data, title = NULL, xAxisTitle = NULL,
-  yAxisTitle = NULL)
+  aggregation = "sum", yAxisTitle = NULL)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -22,5 +22,5 @@ Cat-Num
 }
 
 \examples{
-hgch_waterfall_CatNum(sampleDatta("Cat-Num",nrow = 10))
+hgch_waterfall_CatNum(sampleData("Cat-Num", nrow = 10))
 }

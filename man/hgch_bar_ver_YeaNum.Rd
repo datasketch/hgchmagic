@@ -6,7 +6,7 @@
 \usage{
 hgch_bar_ver_YeaNum(data, topn = NULL, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
-  aggregate = NULL, color_title = "black", startAtZero = FALSE,
+  aggregation = "sum", color_title = "black", startAtZero = FALSE,
   theme = NULL, export = FALSE, ...)
 }
 \arguments{

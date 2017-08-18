@@ -6,7 +6,7 @@
 \usage{
 hgch_bar_hor_top_CatNum(data, topn = NULL, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, reverse = TRUE,
-  aggregate = "mean", theme = NULL, export = FALSE, ...)
+  aggregation = "sum", theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

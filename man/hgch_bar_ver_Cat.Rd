@@ -8,7 +8,7 @@ Vertical bar}
 \usage{
 hgch_bar_ver_Cat(data, topn = NULL, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
-  aggregate = "count", theme = NULL, export = FALSE, ...)
+  theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

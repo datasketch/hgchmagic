@@ -6,7 +6,8 @@
 \usage{
 hgch_area_YeaNum(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
+  aggregation = "sum", startAtZero = FALSE, theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

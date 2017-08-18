@@ -5,7 +5,8 @@
 \title{Circular bar}
 \usage{
 hgch_circular_bar_CatNum(data, title = NULL, subtitle = NULL,
-  caption = NULL, theme = NULL, export = FALSE, ...)
+  caption = NULL, theme = NULL, export = FALSE, aggregation = "sum",
+  ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -27,5 +28,5 @@ moreInfo
 }
 
 \examples{
-hgch_circular_bar_CatNum(sampleDatta("Cat-Num",nrow = 10))
+hgch_circular_bar_CatNum(sampleData("Cat-Num", nrow = 10))
 }

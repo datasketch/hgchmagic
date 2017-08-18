@@ -6,7 +6,7 @@
 \usage{
 hgch_bar_hor_CatNum(data, topn = NULL, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
-  aggregate = "mean", color_title = "black", theme = NULL,
+  aggregation = "sum", color_title = "black", theme = NULL,
   export = FALSE, ...)
 }
 \arguments{

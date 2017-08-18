@@ -6,7 +6,8 @@
 \usage{
 hgch_bar_ver_NumP(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  startAtZero = NULL, ...)
+  aggregation = "sum", startAtZero = FALSE, theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -17,10 +18,11 @@ highcharts viz
 \description{
 Vertical bar
 }
-\section{ctypess}{
- NumP
+\section{ctypes}{
+
+NumP
 }
 
 \examples{
-hgch_bar_ver_NumP(sampleData("NumP",nrow = 10))
+hgch_bar_ver_NumP(sampleData("NumP", nrow = 10))
 }

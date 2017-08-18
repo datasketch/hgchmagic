@@ -6,7 +6,8 @@
 \usage{
 hgch_bar_stacked_100_hor_CatCatNum(data, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
+  aggregation = "sum", startAtZero = FALSE, theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -23,5 +24,5 @@ Cat-Cat-Num
 }
 
 \examples{
-hgch_bar_stacked_100_hor_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
+hgch_bar_stacked_100_hor_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
 }
