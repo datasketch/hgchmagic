@@ -218,7 +218,7 @@ hgch_area_CatYeaNum <- hgch_area_CatCatNum
 #'
 #' @export hgch_area_stacked_CatCatNum
 hgch_area_stacked_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                   symbol = NULL, agreggation = "sum",
+                                   symbol = NULL, aggregation = "sum",
                                    startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)

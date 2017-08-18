@@ -24,6 +24,6 @@ Dat-Num
 
 \examples{
 
-hgch_line_DatNum(sampleDatta("Dat-Num",nrow = 10))
+hgch_line_DatNum(sampleData("Dat-Num", nrow = 10))
 
 }

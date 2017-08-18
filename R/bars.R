@@ -1112,7 +1112,7 @@ hgch_bar_ver_NumP <- function(data,
   yAxisTitle <- yAxisTitle %||% nms[1]
   title <-  title %||% ""
 
-  d <- f$d %>% tidyr::gather(variable, value, 1:ncol(f$d)) %>%
+  d <- f$d %>% tidyr::gather(variable, value, 1:length(nms)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(variable) %>% dplyr::ungroup()
   codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
   d <- d %>%

@@ -6,7 +6,7 @@
 \usage{
 hgch_area_stacked_CatCatNum(data, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  agreggation = "sum", startAtZero = FALSE, theme = NULL,
+  aggregation = "sum", startAtZero = FALSE, theme = NULL,
   export = FALSE, ...)
 }
 \arguments{

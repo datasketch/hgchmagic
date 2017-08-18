@@ -1,19 +1,19 @@
 #' Line
-#' 
+#'
 #' Line
-#' 
-#' 
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ctypes:
 #' Dat-Num
 #' @examples
-#' 
-#' hgch_line_DatNum(sampleDatta("Dat-Num",nrow = 10))
-#' 
+#'
+#' hgch_line_DatNum(sampleData("Dat-Num", nrow = 10))
+#'
 #' @export hgch_line_DatNum
 hgch_line_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                           symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
+                             symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -44,18 +44,18 @@ hgch_line_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
 
 
 #' Line
-#' 
+#'
 #' Line
-#' 
-#' 
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ctypes:
 #' Cat-Num
 #' @examples
-#' 
+#'
 #' hgch_line_CatNum(sampleDatta("Cat-Num",nrow = 10))
-#' 
+#'
 #' @export hgch_line_CatNum
 hgch_line_CatNum <-hgch_line_DatNum
 
@@ -63,18 +63,18 @@ hgch_line_CatNum <-hgch_line_DatNum
 
 
 #' Line
-#' 
+#'
 #' Line
-#' 
-#' 
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ctypes:
 #' Cat-Yea-Num
 #' @examples
-#' 
+#'
 #' hgch_line_CatYeaNum(sampleDatta("Cat-Yea-Num",nrow = 10))
-#' 
+#'
 #' @export hgch_line_CatYeaNum
 hgch_line_CatYeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
@@ -131,18 +131,18 @@ hgch_line_CatYeaNum <- function(data, title = NULL, subtitle = NULL, caption = N
 
 
 #' Line
-#' 
+#'
 #' Line
-#' 
-#' 
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ctypes:
 #' Yea-Num
 #' @examples
-#' 
+#'
 #' hgch_line_YeaNum(sampleDatta("Yea-Num",nrow = 10))
-#' 
+#'
 #' @export hgch_line_YeaNum
 hgch_line_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                            symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
@@ -173,18 +173,18 @@ hgch_line_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
 
 
 #' Line
-#' 
+#'
 #' Line
-#' 
-#' 
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
-#' 
+#'
 #' hgch_line_CatCatNum(sampleDatta("Cat-Cat-Num",nrow = 10))
-#' 
+#'
 #' @export hgch_line_CatCatNum
 hgch_line_CatCatNum <- hgch_line_CatYeaNum
 
@@ -192,18 +192,18 @@ hgch_line_CatCatNum <- hgch_line_CatYeaNum
 
 
 #' Line
-#' 
+#'
 #' Line
-#' 
-#' 
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ctypes:
 #' Cat-Dat-Num
 #' @examples
-#' 
+#'
 #' hgch_line_CatDatNum(sampleDatta("Cat-Dat-Num",nrow = 10))
-#' 
+#'
 #' @export hgch_line_CatDatNum
 hgch_line_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                              symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
@@ -242,17 +242,17 @@ hgch_line_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = N
 
 
 #' 2 y line
-#' 
+#'
 #' 2 y line
-#' 
-#' 
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ctypess: Yea-Num-Num
 #' @examples
-#' 
+#'
 #' hgch_2yline_YeaNumNum(sampleDatta("Yea-Num-Num",nrow = 10))
-#' 
+#'
 #' @export hgch_2yline_YeaNumNum
 hgch_2yline_YeaNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL,
                                yAxisTitle1 = NULL, yAxisTitle2 = NULL,
@@ -297,17 +297,17 @@ hgch_2yline_YeaNumNum <- function(data, title = NULL, subtitle = NULL, caption =
 
 
 #' Grouped line
-#' 
+#'
 #' Grouped line
-#' 
-#' 
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ctypess: Yea-NumP
 #' @examples
-#' 
+#'
 #' hgch_multilines_YeaNumP(sampleDatta("Yea-NumP",nrow = 10))
-#' 
+#'
 #' @export hgch_multilines_YeaNumP
 hgch_multilines_YeaNumP <- function(data,
                                   title = NULL, subtitle = NULL, caption = NULL,
@@ -348,17 +348,17 @@ hgch_multilines_YeaNumP <- function(data,
 
 
 #' Slope
-#' 
+#'
 #' Slope
-#' 
-#' 
+#'
+#'
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ctypess: Cat-Yea-Num
 #' @examples
-#' 
+#'
 #' hgch_slope_CatYeaNum(sampleDatta('Cat-Yea-Num'))
-#' 
+#'
 #' @export hgch_slope_CatYeaNum
 hgch_slope_CatYeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
                               symbol = NULL, startAtZero = FALSE, theme = NULL, export = FALSE,...){
