@@ -4,6 +4,7 @@ hgchMeta <- function(){
   read_csv(system.file("meta.csv",package = "hgchmagic"))
 }
 
+
 #' @export
 hgchWhich <- function(d){
   meta <- hgchMeta()

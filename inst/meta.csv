@@ -1,211 +1,216 @@
-name,title,desc,ctypes,ftype,group
+name,title,desc,ctypes,ftype,group,status
 hgch_2yline_YeaNumNum,2 y line,"
 2 y line
-", Yea-Num-Num,Num2- Yea,2yline
+",Yea-Num-Num,Num2-Yea,2yline,NA
+hgch_2yline_YeaNumNum,2 y line,"
+2 y line
+",Yea-Num-Num,Num2-Yea,2yline,NA
 hgch_area_CatCatNum,Vertical area,"
 Vertical area
-",Cat-Cat-Num,Cat2-Num,area
+",Cat-Cat-Num,Cat2-Num,area,OK
 hgch_area_CatDatNum,Vertical area,"
 Vertical area
-",Cat-Dat-Num,Cat-Dat-Num,area
+",Cat-Dat-Num,Cat-Dat-Num,area,OK
 hgch_area_CatNum,Vertical area,"
 Vertical area
-",Cat-Num,Cat-Num,area
+",Cat-Num,Cat-Num,area,OK
 hgch_area_CatYeaNum,Vertical area,"
 Vertical area
-",Cat-Yea-Num,Cat-Num-Yea,area
+",Cat-Yea-Num,Cat-Num-Yea,area,OK
 hgch_area_DatNum,Vertical area,"
 Vertical area
-",Dat-Num,Dat-Num,area
+",Dat-Num,Dat-Num,area,OK
 hgch_area_YeaNum,Vertical area,"
 Vertical area
-",Yea-Num,Num-Yea,area
+",Yea-Num,Num-Yea,area,OK
 hgch_area_stacked_100_CatCatNum,Vertical 100 stacked area,"
 Vertical 100 stacked area
-",Cat-Cat-Num,Cat2-Num,area
+",Cat-Cat-Num,Cat2-Num,area,OK
 hgch_area_stacked_100_CatDatNum,Vertical 100 stacked area,"
 Vertical 100 stacked area
-",Cat-Dat-Num,Cat-Dat-Num,area
+",Cat-Dat-Num,Cat-Dat-Num,area,OK
 hgch_area_stacked_100_CatYeaNum,Vertical 100 stacked area,"
 Vertical 100 stacked area
-",Cat-Yea-Num,Cat-Num-Yea,area
+",Cat-Yea-Num,Cat-Num-Yea,area,OK
 hgch_area_stacked_CatCatNum,Vertical stacked area,"
 Vertical stacked area
-",Cat-Cat-Num,Cat2-Num,area
+",Cat-Cat-Num,Cat2-Num,area,OK
 hgch_area_stacked_CatDatNum,Vertical stacked area,"
 Vertical stacked area
-",Cat-Dat-Num,Cat-Dat-Num,area
+",Cat-Dat-Num,Cat-Dat-Num,area,OK
 hgch_area_stacked_CatYeaNum,Vertical stacked area,"
 Vertical stacked area
-",Cat-Yea-Num,Cat-Num-Yea,area
+",Cat-Yea-Num,Cat-Num-Yea,area,OK
 hgch_bar_grouped_hor_CatCat,Horizontal grouped bar,"
 Horizontal grouped bar
-",Cat-Cat,Cat2,bar
+",Cat-Cat,Cat2,bar,OK
 hgch_bar_grouped_hor_CatCatNum,Horizontal grouped bar,"
 Horizontal grouped bar
-",Cat-Cat-Num,Cat2-Num,bar
+",Cat-Cat-Num,Cat2-Num,bar,OK
 hgch_bar_grouped_hor_CatNumP,Horizontal grouped bar,"
 Horizontal grouped bar
-", Cat-NumP, Cat-NumP,bar
+",Cat-NumP,Cat-NumP,bar,OK
 hgch_bar_grouped_ver_CatCat,Vertical grouped bar,"
 Vertical grouped bar
-",Cat-Cat,Cat2,bar
+",Cat-Cat,Cat2,bar,OK
 hgch_bar_grouped_ver_CatCatNum,Vertical grouped bar,"
 Vertical grouped bar
-",Cat-Cat-Num,Cat2-Num,bar
+",Cat-Cat-Num,Cat2-Num,bar,OK
 hgch_bar_grouped_ver_CatNumP,Vertical grouped bar,"
 Vertical grouped bar
-", Cat-NumP, Cat-NumP,bar
+",Cat-NumP,Cat-NumP,bar,OK
 hgch_bar_grouped_ver_CatYeaNum,Vertical grouped bar,"
 Vertical grouped bar
-",Cat-Yea-Num,Cat-Num-Yea,bar
+",Cat-Yea-Num,Cat-Num-Yea,bar,OK
 hgch_bar_hor_Cat,Horizontal bar,"
 Horizontal bar
-",Cat,Cat,bar
+",Cat,Cat,bar,OK
 hgch_bar_hor_CatNum,Horizontal bar,"
 Horizontal bar
-",Cat-Num,Cat-Num,bar
+",Cat-Num,Cat-Num,bar,OK
 hgch_bar_hor_top_Cat,Ordered horizontal bar,"
 Ordered horizontal bar
-",Cat,Cat,bar
+",Cat,Cat,bar,OK
 hgch_bar_hor_top_CatNum,Ordered horizontal bar,"
 Ordered horizontal bar
-",Cat-Num,Cat-Num,bar
+",Cat-Num,Cat-Num,bar,OK
 hgch_bar_stacked_100_hor_CatCat,hgch_bar_stacked_100_hor_CatCat,"
 hgch_bar_stacked_100_hor_CatCat
-",Cat-Cat,Cat2,bar
+",Cat-Cat,Cat2,bar,OK
 hgch_bar_stacked_100_hor_CatCatNum,Horizontal 100 stacked bar,"
 Horizontal 100 stacked bar
-",Cat-Cat-Num,Cat2-Num,bar
+",Cat-Cat-Num,Cat2-Num,bar,OK
 hgch_bar_stacked_100_ver_CatCat,hgch_bar_stacked_100_ver_CatCat,"
 hgch_bar_stacked_100_ver_CatCat
-",Cat-Cat,Cat2,bar
+",Cat-Cat,Cat2,bar,OK
 hgch_bar_stacked_100_ver_CatCatNum,Vertical 100 stacked bar,"
 Vertical 100 stacked bar
-",Cat-Cat-Num,Cat2-Num,bar
+",Cat-Cat-Num,Cat2-Num,bar,OK
 hgch_bar_stacked_100_ver_CatDatNum,Vertical 100 stacked bar,"
 Vertical 100 stacked bar
-",Cat-Dat-Num,Cat-Dat-Num,bar
+",Cat-Dat-Num,Cat-Dat-Num,bar,OK
 hgch_bar_stacked_hor_CatCat,hgch_bar_stacked_hor_CatCat,"
 hgch_bar_stacked_hor_CatCat
-",Cat-Cat,Cat2,bar
+",Cat-Cat,Cat2,bar,OK
 hgch_bar_stacked_hor_CatCatNum,Horizontal stacked bar,"
 Horizontal stacked bar
-",Cat-Cat-Num,Cat2-Num,bar
+",Cat-Cat-Num,Cat2-Num,bar,OK
 hgch_bar_stacked_ver_CatCat,hgch_bar_stacked_ver_CatCat,"
 hgch_bar_stacked_ver_CatCat
-",Cat-Cat,Cat2,bar
+",Cat-Cat,Cat2,bar,OK
 hgch_bar_stacked_ver_CatCatNum,Vertical stacked bar,"
 Vertical stacked bar
-",Cat-Cat-Num,Cat2-Num,bar
+",Cat-Cat-Num,Cat2-Num,bar,OK
 hgch_bar_stacked_ver_CatDatNum,Vertical stacked bar,"
 Vertical stacked bar
-",Cat-Dat-Num,Cat-Dat-Num,bar
-hgch_bar_ver_Cat,Vertical bar,"
+",Cat-Dat-Num,Cat-Dat-Num,bar,OK
+hgch_bar_ver_Cat,"#'@name count_pl
+#'@export
+Vertical bar","
 Vertical bar
-",Cat,Cat,bar
+",Cat,Cat,bar,OK
 hgch_bar_ver_CatNum,Vertical bar,"
 Vertical bar
-",Cat-Num,Cat-Num,bar
+",Cat-Num,Cat-Num,bar,OK
 hgch_bar_ver_DatNum,Vertical bar,"
 Vertical bar
-",Dat-Num,Dat-Num,bar
+",Dat-Num,Dat-Num,bar,OK
 hgch_bar_ver_NumP,Vertical bar,"
 Vertical bar
-", NumP, NumP,bar
+",NumP,NumP,bar,OK
 hgch_bar_ver_YeaNum,Vertical bar,"
 Vertical bar
-",Yea-Num,Num-Yea,bar
+",Yea-Num,Num-Yea,bar,OK
 hgch_bar_ver_top_Cat,Ordered vertical bar,"
 Ordered vertical bar
-",Cat,Cat,bar
+",Cat,Cat,bar,OK
 hgch_bar_ver_top_CatNum,Ordered vertical bar,"
 Ordered vertical bar
-",Cat-Num,Cat-Num,bar
+",Cat-Num,Cat-Num,bar,OK
 hgch_circular_bar_CatNum,Circular bar,"
 Circular bar
-",Cat-Num,Cat-Num,circular
+",Cat-Num,Cat-Num,circular,OK
 hgch_donut_Cat,hgch_donut_Cat,"
 hgch_donut_Cat
-",Cat,Cat,donut
+",Cat,Cat,donut,NA
 hgch_donut_CatNum,hgch_donut_CatNum,"
 hgch_donut_CatNum
-",Cat-Num,Cat-Num,donut
+",Cat-Num,Cat-Num,donut,NA
 hgch_funnel_CatNum,Funnel,"
 Funnel
-",Cat-Num,Cat-Num,funnel
+",Cat-Num,Cat-Num,funnel,NA
 hgch_line_CatCatNum,Line,"
 Line
-",Cat-Cat-Num,Cat2-Num,line
+",Cat-Cat-Num,Cat2-Num,line,OK
 hgch_line_CatDatNum,Line,"
 Line
-",Cat-Dat-Num,Cat-Dat-Num,line
+",Cat-Dat-Num,Cat-Dat-Num,line,OK
 hgch_line_CatNum,Line,"
 Line
-",Cat-Num,Cat-Num,line
+",Cat-Num,Cat-Num,line,OK
 hgch_line_CatYeaNum,Line,"
 Line
-",Cat-Yea-Num,Cat-Num-Yea,line
+",Cat-Yea-Num,Cat-Num-Yea,line,OK
 hgch_line_DatNum,Line,"
 Line
-",Dat-Num,Dat-Num,line
+",Dat-Num,Dat-Num,line,OK
 hgch_line_YeaNum,Line,"
 Line
-",Yea-Num,Num-Yea,line
+",Yea-Num,Num-Yea,line,OK
 hgch_multilines_YeaNumP,Grouped line,"
 Grouped line
-", Yea-NumP,NumP- Yea,multilines
+", Yea-NumP,NumP- Yea,multilines,NA
+hgch_multilines_YeaNumP,Grouped line,"
+Grouped line
+", Yea-NumP,NumP- Yea,multilines,OK
 hgch_pie_Cat,hgch_pie_Cat,"
 hgch_pie_Cat
-",Cat,Cat,pie
+",Cat,Cat,pie,NA
 hgch_pie_CatNum,hgch_pie_CatNum,"
 hgch_pie_CatNum
-",Cat-Num,Cat-Num,pie
+",Cat-Num,Cat-Num,pie,NA
 hgch_polarcolumn_Cat,Polar bar,"
 Polar bar
-",Cat,Cat,polarcolumn
+",Cat,Cat,polarcolumn,NA
 hgch_polarcolumn_CatNum,Polar bar,"
 Polar bar
-",Cat-Num,Cat-Num,polarcolumn
+",Cat-Num,Cat-Num,polarcolumn,NA
 hgch_pyramid_CatNum,Pyramid,"
 Pyramid
-",Cat-Num,Cat-Num,pyramid
+",Cat-Num,Cat-Num,pyramid,NA
 hgch_radar_Cat,hgch_radar_Cat,"
 hgch_radar_Cat
-",Cat,Cat,radar
+",Cat,Cat,radar,NA
 hgch_radar_CatNum,hgch_radar_CatNum,"
 hgch_radar_CatNum
-",Cat-Num,Cat-Num,radar
+",Cat-Num,Cat-Num,radar,NA
 hgch_scatter_CatCatNumNum,Scatter grouped,"
 Scatter grouped
-",Cat-Cat-Num-Num,Cat2-Num2,scatter
+",Cat-Cat-Num-Num,Cat2-Num2,scatter,NA
 hgch_scatter_CatCatNumNumNum,Scatter,"
 Scatter
-",Cat-Cat-Num-Num-Num,Cat2-Num3,scatter
+",Cat-Cat-Num-Num-Num,Cat2-Num3,scatter,NA
 hgch_scatter_CatNumNum,Scatter,"
 Scatter
-",Cat-Num-Num,Cat-Num2,scatter
+",Cat-Num-Num,Cat-Num2,scatter,NA
 hgch_scatter_CatNumNumNum,Scatter,"
 Scatter
-",Cat-Num-Num-Num,Cat-Num3,scatter
-hgch_slope_CatYeaNum,Slope,"
-Slope
-", Cat-Yea-Num, Cat-Num-Yea,slope
+",Cat-Num-Num-Num,Cat-Num3,scatter,NA
 hgch_spider_CatNum,Radar,"
 Radar
-",Cat-Num,Cat-Num,spider
+",Cat-Num,Cat-Num,spider,NA
 hgch_spider_CatNumNum,Radar,"
 Radar
-",Cat-Num-Num,Cat-Num2,spider
+",Cat-Num-Num,Cat-Num2,spider,NA
 hgch_treemap_CatCatNum,Treemap density by numeric variable,"
 Treemap density by numeric variable
-",Cat-Cat-Num,Cat2-Num,treemap
+",Cat-Cat-Num,Cat2-Num,treemap,NA
 hgch_treemap_CatNum,Treemap density by numeric variable,"
 Treemap density by numeric variable
-",Cat-Num,Cat-Num,treemap
+",Cat-Num,Cat-Num,treemap,NA
 hgch_treemap_discrete_color_CatNum,Treemap coloured by first variable,"
 Treemap coloured by first variable
-",Cat-Num,Cat-Num,treemap
+",Cat-Num,Cat-Num,treemap,NA
 hgch_waterfall_CatNum,Waterfall,"
 Waterfall
-",Cat-Num,Cat-Num,waterfall
+",Cat-Num,Cat-Num,waterfall,OK
