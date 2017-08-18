@@ -6,7 +6,8 @@
 \usage{
 hgch_line_CatYeaNum(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
+  aggregation = "sum", startAtZero = FALSE, theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -24,6 +25,6 @@ Cat-Yea-Num
 
 \examples{
 
-hgch_line_CatYeaNum(sampleDatta("Cat-Yea-Num",nrow = 10))
+hgch_line_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
 
 }

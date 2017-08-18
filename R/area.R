@@ -99,7 +99,7 @@ hgch_area_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = agg(aggregation, b))
   if(nrow(d)==0) return()
-  hc <- hchart(d, type = "area", hcaes(x = a, y = b)) %>%
+  hc <- hchart(d, type = "area", hcaes(x = sort(as.character(a), decreasing = TRUE), y = b)) %>%
     hc_plotOptions(
       series = list(marker = list(enabled = TRUE, symbol =  symbol))
     ) %>%

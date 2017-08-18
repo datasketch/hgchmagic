@@ -6,7 +6,8 @@
 \usage{
 hgch_multilines_YeaNumP(data, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
+  aggregation = "sum", startAtZero = FALSE, theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -23,6 +24,6 @@ Grouped line
 
 \examples{
 
-hgch_multilines_YeaNumP(sampleDatta("Yea-NumP",nrow = 10))
+hgch_multilines_YeaNumP(sampleData("Yea-NumP", nrow = 10))
 
 }

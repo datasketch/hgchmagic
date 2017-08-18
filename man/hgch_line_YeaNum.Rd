@@ -6,7 +6,8 @@
 \usage{
 hgch_line_YeaNum(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
+  aggregation = "sum", startAtZero = FALSE, theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -24,6 +25,6 @@ Yea-Num
 
 \examples{
 
-hgch_line_YeaNum(sampleDatta("Yea-Num",nrow = 10))
+hgch_line_YeaNum(sampleData("Yea-Num", nrow = 10))
 
 }

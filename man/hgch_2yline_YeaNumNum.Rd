@@ -6,7 +6,7 @@
 \usage{
 hgch_2yline_YeaNumNum(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle1 = NULL, yAxisTitle2 = NULL,
-  symbol = NULL, theme = NULL, export = FALSE, ...)
+  aggregation = "sum", symbol = NULL, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -17,12 +17,13 @@ highcharts viz
 \description{
 2 y line
 }
-\section{ctypess}{
- Yea-Num-Num
+\section{ctypes}{
+
+Yea-Num-Num
 }
 
 \examples{
 
-hgch_2yline_YeaNumNum(sampleDatta("Yea-Num-Num",nrow = 10))
+hgch_2yline_YeaNumNum(sampleData("Yea-Num-Num", nrow = 10))
 
 }

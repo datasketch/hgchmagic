@@ -277,7 +277,7 @@ hgch_bar_ver_CatNum <-
         d <- d
       }
     }
-    hc <- hchart(d, type = "column", hcaes(x = a, y = b)) %>%
+    hc <- hchart(d, type = "column", hcaes(x = as.character(a), y = b)) %>%
       # hc_plotOptions(
       #   series = list(marker = list(enabled = TRUE, symbol =  symbol))
       # ) %>%
