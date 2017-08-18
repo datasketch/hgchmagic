@@ -2,9 +2,7 @@
 % Please edit documentation in R/bars.R
 \name{hgch_bar_ver_Cat}
 \alias{hgch_bar_ver_Cat}
-\title{#'@name count_pl
-#'@export
-Vertical bar}
+\title{Vertical bar}
 \usage{
 hgch_bar_ver_Cat(data, topn = NULL, title = NULL, subtitle = NULL,
   caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",

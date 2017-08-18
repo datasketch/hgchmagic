@@ -23,6 +23,7 @@ hgch_line_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
   yAxisTitle <- yAxisTitle %||% nms[2]
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
+  caption <- caption %||% ""
 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = agg(aggregation, b))
   if(nrow(d)==0) return()
@@ -39,7 +40,8 @@ hgch_line_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
@@ -94,6 +96,7 @@ hgch_line_CatYeaNum <- function(data, title = NULL, subtitle = NULL, caption = N
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
+  caption <- caption %||% ""
 
   d  <- f$d %>%
     tidyr::drop_na() %>%
@@ -122,7 +125,8 @@ hgch_line_CatYeaNum <- function(data, title = NULL, subtitle = NULL, caption = N
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
@@ -153,6 +157,7 @@ hgch_line_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
   yAxisTitle <- yAxisTitle %||% nms[2]
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
+  caption <- caption %||% ""
 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = agg(aggregation, b))
   if(nrow(d)==0) return()
@@ -169,7 +174,8 @@ hgch_line_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
@@ -218,6 +224,7 @@ hgch_line_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = N
   xAxisTitle <- xAxisTitle %||% nms[2]
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
+  caption <- caption %||% ""
 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>%
     dplyr::summarise(c = agg(aggregation, c)) %>%
@@ -239,7 +246,8 @@ hgch_line_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = N
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
@@ -272,6 +280,7 @@ hgch_2yline_YeaNumNum <- function(data, title = NULL, subtitle = NULL, caption =
   yAxisTitle1 <- yAxisTitle1 %||% nms[2]
   yAxisTitle2 <- yAxisTitle2 %||% nms[3]
   title <-  title %||% ""
+  caption <- caption %||% ""
 
   d <- f$d %>%
     tidyr::drop_na(a) %>%
@@ -297,7 +306,8 @@ hgch_2yline_YeaNumNum <- function(data, title = NULL, subtitle = NULL, caption =
     hc_add_series(name = yAxisTitle1, data = d$b) %>%
     hc_add_series(name = yAxisTitle2, data = d$c, yAxis = 1)
 
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   hc
 }
 
@@ -327,6 +337,8 @@ hgch_multilines_YeaNumP <- function(data, title = NULL, subtitle = NULL, caption
   yAxisTitle <- yAxisTitle %||% ""
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
+  caption <- caption %||% ""
+
   d <- f$d %>% tidyr::gather(variable,value, -a) %>% dplyr::filter(!is.na(a)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(a,variable) %>%
     dplyr::summarise(value = agg(aggregation, value)) %>% dplyr::ungroup()# %>%
@@ -349,7 +361,8 @@ hgch_multilines_YeaNumP <- function(data, title = NULL, subtitle = NULL, caption
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }

@@ -1,5 +1,5 @@
-#' #'@name count_pl
-#' #'@export
+# #@name count_pl
+# #@export
  # count_pl <- function(x) {
  #   if(is.na(x)){return(0)}
  #
@@ -49,6 +49,7 @@ hgch_bar_ver_Cat <-
     xAxisTitle <- xAxisTitle %||% nms[1]
     yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
+    caption <- caption %||% ""
     d <- f$d
     if (nrow(d) == 0)
       return()
@@ -70,7 +71,8 @@ hgch_bar_ver_Cat <-
       hc_yAxis(title = list(text = yAxisTitle)) %>%
       hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", xAxisTitle, "</b><br/>"),
                  pointFormat = "<b style = 'font-size:12px'>{point.a}: {point.b}</b>")
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+      hc_credits(enabled = TRUE, text = caption)
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
@@ -106,10 +108,13 @@ hgch_bar_ver_top_Cat <- function(data,
     data,
     topn = topn,
     title = title,
+    subtitle = subtitle,
+    caption = caption,
     xAxisTitle = xAxisTitle,
     yAxisTitle = yAxisTitle,
     sort = "top",
-    theme = theme
+    theme = theme,
+    export = export
   )
 
 }
@@ -152,6 +157,7 @@ hgch_bar_hor_Cat <-
     xAxisTitle <- xAxisTitle %||% nms[2]
     yAxisTitle <- yAxisTitle %||% nms[1]
     title <-  title %||% ""
+    caption <- caption %||% ""
     d <- f$d
     if (nrow(d) == 0)
       return()
@@ -172,7 +178,8 @@ hgch_bar_hor_Cat <-
       hc_yAxis(title = list(text = xAxisTitle))%>%
       hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", yAxisTitle, "</b><br/>"),
                  pointFormat = "<b style = 'font-size:12px'>{point.a}: {point.b}</b>")
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+      hc_credits(enabled = TRUE, text = caption)
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
@@ -207,10 +214,12 @@ hgch_bar_hor_top_Cat <- function(data,
     topn = topn,
     title = title,
     subtitle = subtitle,
+    caption = caption,
     xAxisTitle = xAxisTitle,
     yAxisTitle = yAxisTitle,
     sort = "top",
-    theme = theme
+    theme = theme,
+    export = export
   )
 }
 
@@ -258,6 +267,7 @@ hgch_bar_ver_CatNum <-
     xAxisTitle <- xAxisTitle %||% nms[1]
     yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
+    caption <- caption %||% ""
 
     d <- f$d %>%
       tidyr::drop_na() %>%
@@ -298,7 +308,8 @@ hgch_bar_ver_CatNum <-
           minPadding = 0
         )
     }
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+      hc_credits(enabled = TRUE, text = caption)
     if (export)
       hc <- hc %>% hc_exporting(enabled = export)
     hc
@@ -335,6 +346,7 @@ hgch_bar_ver_top_CatNum <- function(data,
     topn = topn,
     title = title,
     subtitle = subtitle,
+    caption = caption,
     xAxisTitle = xAxisTitle,
     yAxisTitle = yAxisTitle,
     sort = "top",
@@ -422,6 +434,7 @@ hgch_bar_hor_CatNum <- function(data,
   xAxisTitle <- xAxisTitle %||% nms[2]
   yAxisTitle <- yAxisTitle %||% nms[1]
   title <-  title %||% " "
+  caption <- caption %||% ""
   d <- f$d
   d <- na.omit(d)
   if (nrow(d) == 0)
@@ -456,7 +469,8 @@ hgch_bar_hor_CatNum <- function(data,
     #                      y, ': {point.w}'))
     #hc_tooltip( pointFormat=paste0(
     #  y,': {point.b}'))
-  hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if (export)
     hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
@@ -492,6 +506,7 @@ hgch_bar_hor_top_CatNum <- function(data,
     topn = topn,
     title = title,
     subtitle = subtitle,
+    caption = caption,
     xAxisTitle = xAxisTitle,
     yAxisTitle = yAxisTitle,
     sort = "top",
@@ -537,6 +552,7 @@ hgch_bar_grouped_ver_CatCatNum <-
     yAxisTitle <- yAxisTitle %||% nms[3]
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
+    caption <- caption %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
@@ -565,7 +581,8 @@ hgch_bar_grouped_ver_CatCatNum <-
           minPadding = 0
         )
     }
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+      hc_credits(enabled = TRUE, text = caption)
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
@@ -621,6 +638,7 @@ hgch_bar_grouped_hor_CatCatNum <-
     yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
+    caption <- caption %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
@@ -646,7 +664,8 @@ hgch_bar_grouped_hor_CatCatNum <-
           minPadding = 0
         )
     }
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+      hc_credits(enabled = TRUE, text = caption)
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
@@ -682,6 +701,7 @@ hgch_bar_stacked_ver_CatCatNum <-
     yAxisTitle <- yAxisTitle %||% nms[3]
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
+    caption <- caption %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
@@ -709,7 +729,8 @@ hgch_bar_stacked_ver_CatCatNum <-
           minPadding = 0
         )
     }
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+      hc_credits(enabled = TRUE, text = caption)
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
@@ -748,6 +769,7 @@ hgch_bar_stacked_100_ver_CatCatNum <-
     yAxisTitle <- yAxisTitle %||% nms[3]
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
+    caption <- caption %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
@@ -775,7 +797,8 @@ hgch_bar_stacked_100_ver_CatCatNum <-
           minPadding = 0
         )
     }
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+      hc_credits(enabled = TRUE, text = caption)
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
@@ -815,6 +838,7 @@ hgch_bar_stacked_hor_CatCatNum <-
     yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
+    caption <- caption %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
@@ -841,7 +865,8 @@ hgch_bar_stacked_hor_CatCatNum <-
           minPadding = 0
         )
     }
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+      hc_credits(enabled = TRUE, text = caption)
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
@@ -880,6 +905,7 @@ hgch_bar_stacked_100_hor_CatCatNum <-
     yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
+    caption <- caption %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
@@ -906,7 +932,8 @@ hgch_bar_stacked_100_hor_CatCatNum <-
           minPadding = 0
         )
     }
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+      hc_credits(enabled = TRUE, text = caption)
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
@@ -977,6 +1004,8 @@ hgch_bar_grouped_ver_CatNumP <- function(data,
   yAxisTitle <- yAxisTitle %||% ""
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
+  caption <- caption %||% ""
+
   d <- f$d %>% tidyr::gather(variable, value,-a) %>% dplyr::filter(!is.na(a)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(a, variable) %>%
     dplyr::summarise(value = agg(aggregation, value)) %>% dplyr::ungroup()
@@ -1010,7 +1039,8 @@ hgch_bar_grouped_ver_CatNumP <- function(data,
         minPadding = 0
       )
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if (export)
     hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
@@ -1048,6 +1078,8 @@ hgch_bar_grouped_hor_CatNumP <- function(data,
   yAxisTitle <- yAxisTitle %||% nms[1]
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
+  caption <- caption %||% ""
+
   d <- f$d %>% tidyr::gather(variable, value, -a) %>% dplyr::filter(!is.na(a)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(a, variable) %>%
     dplyr::summarise(value = agg(aggregation, value)) %>% dplyr::ungroup()
@@ -1075,7 +1107,8 @@ hgch_bar_grouped_hor_CatNumP <- function(data,
         minPadding = 0
       )
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if (export)
     hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
@@ -1111,13 +1144,15 @@ hgch_bar_ver_NumP <- function(data,
   xAxisTitle <- xAxisTitle %||% ""
   yAxisTitle <- yAxisTitle %||% nms[1]
   title <-  title %||% ""
+  caption <- caption %||% ""
 
   d <- f$d %>% tidyr::gather(variable, value, 1:length(nms)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(variable) %>% dplyr::ungroup()
   codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
   d <- d %>%
     dplyr::mutate(variable = fct_recode_df(d, "variable", codes))
- hgch_bar_ver_CatNum(d)
+ hgch_bar_ver_CatNum(d, title = title, subtitle = subtitle, caption = caption, xAxisTitle = xAxisTitle, yAxisTitle = yAxisTitle,
+                     symbol = symbol, aggregation = aggregation, startAtZero = startAtZero, theme = theme, export = export)
 }
 
 
@@ -1135,7 +1170,7 @@ hgch_bar_ver_NumP <- function(data,
 #' @examples
 #' hgch_waterfall_CatNum(sampleData("Cat-Num", nrow = 10))
 #' @export hgch_waterfall_CatNum
-hgch_waterfall_CatNum <-function(data, title = NULL,  xAxisTitle = NULL,
+hgch_waterfall_CatNum <-function(data, title = NULL,  xAxisTitle = NULL, caption = NULL,
                                  aggregation = "sum", yAxisTitle = NULL){
 
   f <- fringe(data)
@@ -1143,6 +1178,8 @@ hgch_waterfall_CatNum <-function(data, title = NULL,  xAxisTitle = NULL,
   xAxisTitle <- xAxisTitle %||% nms[1]
   yAxisTitle <- yAxisTitle %||% nms[2]
   title <-  title %||% ""
+  caption <- caption %||% ""
+
   data <- f$d
   data <- plyr::rename(data, c("a" = "name"))
 
@@ -1171,7 +1208,8 @@ hgch_waterfall_CatNum <-function(data, title = NULL,  xAxisTitle = NULL,
     hc_xAxis(categories = data_graph$name) %>%
     hc_add_series(data_graph, showInLegend = FALSE) %>%
     hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "{point.key}</b><br/>"),
-               pointFormat = paste("<b style = 'font-size:12px'>", paste0(yAxisTitle, ": "), "{point.value}</b><br/>"))
+               pointFormat = paste("<b style = 'font-size:12px'>", paste0(yAxisTitle, ": "), "{point.value}</b><br/>")) %>%
+    hc_credits(enabled = TRUE, text = caption)
   hc
 }
 
@@ -1210,6 +1248,7 @@ hgch_bar_grouped_ver_CatCat <-
     yAxisTitle <- yAxisTitle %||% "Cantidad"
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
+    caption <- caption %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = n())
@@ -1236,7 +1275,8 @@ hgch_bar_grouped_ver_CatCat <-
           minPadding = 0
         )
     }
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+      hc_credits(enabled = TRUE, text = caption)
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
@@ -1276,6 +1316,7 @@ hgch_bar_grouped_hor_CatCat <-
     yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
+    caption <- caption %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = n())
@@ -1301,7 +1342,8 @@ hgch_bar_grouped_hor_CatCat <-
           minPadding = 0
         )
     }
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+      hc_credits(enabled = TRUE, text = caption)
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
@@ -1339,6 +1381,7 @@ hgch_bar_stacked_ver_CatCat <-
     yAxisTitle <- yAxisTitle %||% "Cantidad"
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
+    caption <- caption %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = n())
@@ -1366,7 +1409,8 @@ hgch_bar_stacked_ver_CatCat <-
           minPadding = 0
         )
     }
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+      hc_credits(enabled = TRUE, text = caption)
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
@@ -1405,6 +1449,7 @@ hgch_bar_stacked_hor_CatCat <-
           yAxisTitle <- yAxisTitle %||% nms[2]
           title <-  title %||% ""
           symbol <- symbol %||% "circle"
+          caption <- caption %||% ""
 
           d <-
             f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = n())
@@ -1431,7 +1476,8 @@ hgch_bar_stacked_hor_CatCat <-
                 minPadding = 0
               )
           }
-          hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+          hc <- hc %>% hc_add_theme(custom_theme(custom = theme))%>%
+            hc_credits(enabled = TRUE, text = caption)
           if (export)
             hc <- hc %>% hc_exporting(enabled = TRUE)
           hc
@@ -1470,6 +1516,7 @@ hgch_bar_stacked_100_ver_CatCat <-
         yAxisTitle <- yAxisTitle %||% "Cantidad"
         title <-  title %||% ""
         symbol <- symbol %||% "circle"
+        caption <- caption %||% ""
 
         d <- f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = n())
         if (nrow(d) == 0)
@@ -1495,7 +1542,9 @@ hgch_bar_stacked_100_ver_CatCat <-
             minPadding = 0
             )
             }
-            hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+            hc <- hc %>% hc_add_theme(custom_theme(custom = theme))%>%
+              hc_credits(enabled = TRUE, text = caption)
+
             if (export)
             hc <- hc %>% hc_exporting(enabled = TRUE)
             hc
@@ -1533,6 +1582,7 @@ hgch_bar_stacked_100_hor_CatCat <-
     yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
+    caption <- caption %||% ""
 
     d <- f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = n())
     if (nrow(d) == 0)
@@ -1558,7 +1608,8 @@ hgch_bar_stacked_100_hor_CatCat <-
         minPadding = 0
       )
     }
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
+      hc_credits(enabled = TRUE, text = caption)
     if (export)
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
@@ -1596,6 +1647,7 @@ hgch_circular_bar_CatNum <- function(data,
 
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
 
   df <- f$d
   df <- df %>% plyr::rename(c('a' = 'name', 'b' = 'y'))

@@ -22,6 +22,7 @@ hgch_area_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
   xAxisTitle <- xAxisTitle %||% nms[1]
   yAxisTitle <- yAxisTitle %||% nms[2]
   title <-  title %||% ""
+  caption <- caption %||% ""
 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = agg(aggregation, b))
   if(nrow(d)==0) return()
@@ -46,7 +47,8 @@ hgch_area_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
@@ -96,6 +98,7 @@ hgch_area_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
   xAxisTitle <- xAxisTitle %||% nms[1]
   yAxisTitle <- yAxisTitle %||% nms[2]
   title <-  title %||% ""
+  caption <- caption %||% ""
 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = agg(aggregation, b))
   if(nrow(d)==0) return()
@@ -121,7 +124,8 @@ hgch_area_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
@@ -151,6 +155,7 @@ hgch_area_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = N
   xAxisTitle <- xAxisTitle %||% nms[2]
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
+  caption <- caption %||% ""
 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
   if(nrow(d)==0) return()
@@ -179,7 +184,8 @@ hgch_area_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = N
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
@@ -227,6 +233,7 @@ hgch_area_stacked_CatCatNum <- function(data, title = NULL, subtitle = NULL, cap
   xAxisTitle <- xAxisTitle %||% nms[2]
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
+  caption <- caption %||% ""
 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
   if(nrow(d)==0) return()
@@ -256,7 +263,8 @@ hgch_area_stacked_CatCatNum <- function(data, title = NULL, subtitle = NULL, cap
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
@@ -305,6 +313,7 @@ hgch_area_stacked_100_CatCatNum <- function(data, title = NULL, subtitle = NULL,
   xAxisTitle <- xAxisTitle %||% nms[2]
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
+  caption <- caption %||% ""
 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
   if(nrow(d)==0) return()
@@ -334,7 +343,8 @@ hgch_area_stacked_100_CatCatNum <- function(data, title = NULL, subtitle = NULL,
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
@@ -382,6 +392,7 @@ hgch_area_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = N
   xAxisTitle <- xAxisTitle %||% nms[2]
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
+  caption <- caption %||% ""
 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
   if(nrow(d)==0) return()
@@ -409,7 +420,8 @@ hgch_area_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = N
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
@@ -439,6 +451,7 @@ hgch_area_stacked_CatDatNum <- function(data, title = NULL, subtitle = NULL, cap
   xAxisTitle <- xAxisTitle %||% nms[2]
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
+  caption <- caption %||% ""
 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
   if(nrow(d)==0) return()
@@ -467,7 +480,8 @@ hgch_area_stacked_CatDatNum <- function(data, title = NULL, subtitle = NULL, cap
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
   }
@@ -499,6 +513,7 @@ hgch_area_stacked_100_CatDatNum <- function(data, title = NULL, subtitle = NULL,
   xAxisTitle <- xAxisTitle %||% nms[2]
   yAxisTitle <- yAxisTitle %||% nms[3]
   title <-  title %||% ""
+  caption <- caption %||% ""
 
   d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
   if(nrow(d)==0) return()
@@ -527,7 +542,8 @@ hgch_area_stacked_100_CatDatNum <- function(data, title = NULL, subtitle = NULL,
   if(startAtZero){
     hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
   }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
   if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
