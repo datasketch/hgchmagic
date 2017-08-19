@@ -49,16 +49,16 @@ Horizontal grouped bar
 ",Cat-Cat-Num,Cat2-Num,bar,OK
 hgch_bar_grouped_hor_CatNum,Horizontal grouped bar,"
 Horizontal grouped bar
-",Cat-Num,Cat-Num,bar,NA
+",Cat-Num,Cat-Num,bar,OK
 hgch_bar_grouped_hor_CatNumNum,Horizontal grouped bar,"
 Horizontal grouped bar
-",Cat-Num-Num,Cat-Num2,bar,NA
+",Cat-Num-Num,Cat-Num2,bar,OK
 hgch_bar_grouped_hor_CatNumNumNum,Horizontal grouped bar,"
 Horizontal grouped bar
-",Cat-Num-Num-Num,Cat-Num3,bar,NA
+",Cat-Num-Num-Num,Cat-Num3,bar,OK
 hgch_bar_grouped_hor_CatNumNumNumNum,Horizontal grouped bar,"
 Horizontal grouped bar
-",Cat-Num-Num-Num-Num,Cat-Num4,bar,NA
+",Cat-Num-Num-Num-Num,Cat-Num4,bar,OK
 hgch_bar_grouped_ver_CatCat,Vertical grouped bar,"
 Vertical grouped bar
 ",Cat-Cat,Cat2,bar,OK
@@ -67,16 +67,16 @@ Vertical grouped bar
 ",Cat-Cat-Num,Cat2-Num,bar,OK
 hgch_bar_grouped_ver_CatNum,Vertical grouped bar,"
 Vertical grouped bar
-",Cat-Num,Cat-Num,bar,NA
+",Cat-Num,Cat-Num,bar,OK
 hgch_bar_grouped_ver_CatNumNum,Vertical grouped bar,"
 Vertical grouped bar
-",Cat-Num-Num,Cat-Num2,bar,NA
+",Cat-Num-Num,Cat-Num2,bar,OK
 hgch_bar_grouped_ver_CatNumNumNum,Vertical grouped bar,"
 Vertical grouped bar
-",Cat-Num-Num-Num,Cat-Num3,bar,NA
+",Cat-Num-Num-Num,Cat-Num3,bar,OK
 hgch_bar_grouped_ver_CatNumNumNumNum,Vertical grouped bar,"
 Vertical grouped bar
-",Cat-Num-Num-Num-Num,Cat-Num4,bar,NA
+",Cat-Num-Num-Num-Num,Cat-Num4,bar,OK
 hgch_bar_grouped_ver_CatYeaNum,Vertical grouped bar,"
 Vertical grouped bar
 ",Cat-Yea-Num,Cat-Num-Yea,bar,OK
@@ -184,16 +184,16 @@ Line
 ",Yea-Num,Num-Yea,line,OK
 hgch_multilines_YeaNum,Grouped line,"
 Grouped line
-", Yea-Num,Num- Yea,multilines,NA
+", Yea-Num,Num- Yea,multilines,OK
 hgch_multilines_YeaNumNum,Grouped line,"
 Grouped line
-", Yea-Num-Num,Num2- Yea,multilines,NA
+", Yea-Num-Num,Num2- Yea,multilines,OK
 hgch_multilines_YeaNumNumNum,Grouped line,"
 Grouped line
-", Yea-Num-Num-Num,Num3- Yea,multilines,NA
+", Yea-Num-Num-Num,Num3- Yea,multilines,OK
 hgch_multilines_YeaNumNumNumNum,Grouped line,"
 Grouped line
-", Yea-Num-Num-Num-Num,Num4- Yea,multilines,NA
+", Yea-Num-Num-Num-Num,Num4- Yea,multilines,OK
 hgch_pie_Cat,hgch_pie_Cat,"
 hgch_pie_Cat
 ",Cat,Cat,pie,NA
