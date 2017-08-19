@@ -49,7 +49,7 @@ Horizontal grouped bar
 ",Cat-Cat-Num,Cat2-Num,bar,OK
 hgch_bar_grouped_hor_CatNum,Horizontal grouped bar,"
 Horizontal grouped bar
-",Cat-Num,Cat-Num,bar,OK
+",Cat-Num,Cat-Num,bar,NA
 hgch_bar_grouped_hor_CatNumNum,Horizontal grouped bar,"
 Horizontal grouped bar
 ",Cat-Num-Num,Cat-Num2,bar,OK
@@ -67,7 +67,7 @@ Vertical grouped bar
 ",Cat-Cat-Num,Cat2-Num,bar,OK
 hgch_bar_grouped_ver_CatNum,Vertical grouped bar,"
 Vertical grouped bar
-",Cat-Num,Cat-Num,bar,OK
+",Cat-Num,Cat-Num,bar,NA
 hgch_bar_grouped_ver_CatNumNum,Vertical grouped bar,"
 Vertical grouped bar
 ",Cat-Num-Num,Cat-Num2,bar,OK

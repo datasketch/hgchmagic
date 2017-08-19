@@ -292,7 +292,7 @@ hgch_bar_ver_CatNum <-
       #   series = list(marker = list(enabled = TRUE, symbol =  symbol))
       # ) %>%
       #hc_chart(backgroundColor = back_color) %>%
-      hc_title(text = title,style = list(color = color_title, useHTML = TRUE), align = 'center') %>%
+      hc_title(text = title,style = list(color = color_title, useHTML = TRUE)) %>%
       hc_subtitle(text = subtitle) %>%
       hc_xAxis(title = list(text = xAxisTitle),
                allowDecimals = FALSE) %>%
@@ -406,19 +406,19 @@ hgch_bar_ver_DatNum <- hgch_bar_ver_CatNum
 #' hgch_bar_hor_CatNum(sampleData("Cat-Num", nrow = 10))
 #' @export hgch_bar_hor_CatNum
 hgch_bar_hor_CatNum <- function(data,
-                              topn = NULL,
-                              title = NULL,
-                              subtitle = NULL,
-                              caption = NULL,
-                              xAxisTitle = NULL,
-                              yAxisTitle = NULL,
-                              sort = "no",
-                              aggregation = "sum",
-                              #back_color = 'white',
-                              color_title = 'black',
-                              theme = NULL,
-                              export = FALSE,
-                              ...) {
+                                topn = NULL,
+                                title = NULL,
+                                subtitle = NULL,
+                                caption = NULL,
+                                xAxisTitle = NULL,
+                                yAxisTitle = NULL,
+                                sort = "no",
+                                aggregation = "sum",
+                                #back_color = 'white',
+                                color_title = 'black',
+                                theme = NULL,
+                                export = FALSE,
+                                ...) {
 
   if(class(data)[1] == "Fringe"){
     ni <- getClabels(data)
@@ -457,7 +457,7 @@ hgch_bar_hor_CatNum <- function(data,
   hc <- hchart(d, type = "bar", hcaes(x = a, y = b)) %>%
     hc_plotOptions(column = list(stacking = "normal")) %>%
     #hc_chart(backgroundColor = back_color) %>%
-    hc_title(text = title,style = list(color = color_title, useHTML = TRUE), align = 'center') %>%
+    hc_title(text = title,style = list(color = color_title, useHTML = TRUE)) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = yAxisTitle)) %>%
     hc_yAxis(title = list(text = xAxisTitle))  %>%
@@ -490,17 +490,17 @@ hgch_bar_hor_CatNum <- function(data,
 #' hgch_bar_hor_top_CatNum(sampleData("Cat-Num", nrow = 10))
 #' @export hgch_bar_hor_top_CatNum
 hgch_bar_hor_top_CatNum <- function(data,
-                                  topn = NULL,
-                                  title = NULL,
-                                  subtitle = NULL,
-                                  caption = NULL,
-                                  xAxisTitle = NULL,
-                                  yAxisTitle = NULL,
-                                  reverse = TRUE,
-                                  aggregation = "sum",
-                                  theme = NULL,
-                                  export = FALSE,
-                                  ...) {
+                                    topn = NULL,
+                                    title = NULL,
+                                    subtitle = NULL,
+                                    caption = NULL,
+                                    xAxisTitle = NULL,
+                                    yAxisTitle = NULL,
+                                    reverse = TRUE,
+                                    aggregation = "sum",
+                                    theme = NULL,
+                                    export = FALSE,
+                                    ...) {
   hgch_bar_hor_CatNum(
     data,
     topn = topn,

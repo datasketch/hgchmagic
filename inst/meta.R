@@ -48,7 +48,7 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
                          "status" = c("OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", NA, NA,
 
                                       "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK",
-                                      "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK",
+                                      "OK", "OK", NA, "OK", "OK", "OK", NA, "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK",
                                       "OK",
 
                                       "OK", "OK", "OK", "OK", "OK", "OK", NA, "OK", "OK", "OK", "OK", NA),
@@ -105,5 +105,5 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
 
                                        "Ordenar los años", "Ordenar los años", "Ordenar los años", "Ordenar los años", "Ordenar los años", NA, NA, NA, NA, NA, NA, NA)
 )
-metaStatus <- left_join(select(hgchmagic::hgchMeta(), name), metaStatus, by = name)
+#metaStatus <- left_join(select(hgchmagic::hgchMeta(), name), metaStatus, by = name)
 write_csv(metaStatus, "inst/meta-status.csv")
