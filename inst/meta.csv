@@ -92,14 +92,14 @@ Ordered horizontal bar
 hgch_bar_hor_top_CatNum,Ordered horizontal bar,"
 Ordered horizontal bar
 ",Cat-Num,Cat-Num,bar,OK
-hgch_bar_stacked_100_hor_CatCat,hgch_bar_stacked_100_hor_CatCat,"
-hgch_bar_stacked_100_hor_CatCat
+hgch_bar_stacked_100_hor_CatCat,Horizontal 100 stacked bar,"
+Horizontal 100 stacked bar
 ",Cat-Cat,Cat2,bar,OK
 hgch_bar_stacked_100_hor_CatCatNum,Horizontal 100 stacked bar,"
 Horizontal 100 stacked bar
 ",Cat-Cat-Num,Cat2-Num,bar,OK
-hgch_bar_stacked_100_ver_CatCat,hgch_bar_stacked_100_ver_CatCat,"
-hgch_bar_stacked_100_ver_CatCat
+hgch_bar_stacked_100_ver_CatCat,Vertical 100 stacked bar,"
+Vertical 100 stacked bar
 ",Cat-Cat,Cat2,bar,OK
 hgch_bar_stacked_100_ver_CatCatNum,Vertical 100 stacked bar,"
 Vertical 100 stacked bar
@@ -107,14 +107,14 @@ Vertical 100 stacked bar
 hgch_bar_stacked_100_ver_CatDatNum,Vertical 100 stacked bar,"
 Vertical 100 stacked bar
 ",Cat-Dat-Num,Cat-Dat-Num,bar,OK
-hgch_bar_stacked_hor_CatCat,hgch_bar_stacked_hor_CatCat,"
-hgch_bar_stacked_hor_CatCat
+hgch_bar_stacked_hor_CatCat,Horizontal stacked bar,"
+Horizontal stacked bar
 ",Cat-Cat,Cat2,bar,OK
 hgch_bar_stacked_hor_CatCatNum,Horizontal stacked bar,"
 Horizontal stacked bar
 ",Cat-Cat-Num,Cat2-Num,bar,OK
-hgch_bar_stacked_ver_CatCat,hgch_bar_stacked_ver_CatCat,"
-hgch_bar_stacked_ver_CatCat
+hgch_bar_stacked_ver_CatCat,Vertical stacked bar,"
+Vertical stacked bar
 ",Cat-Cat,Cat2,bar,OK
 hgch_bar_stacked_ver_CatCatNum,Vertical stacked bar,"
 Vertical stacked bar

@@ -1,14 +1,13 @@
-# #@name count_pl
-# #@export
- # count_pl <- function(x) {
- #   if(is.na(x)){return(0)}
- #
- #   if ((x %% 1) != 0) {
- #     nchar(strsplit(sub('0+$', '', as.character(x)), ".", fixed=TRUE)[[1]][[2]])
- #   } else {
- #     return(0)
- #   }
- # }
+#'@name count_pl
+#' @export
+count_pl <- function(x) {
+  if(is.na(x)){return(0)}
+  if ((x %% 1) != 0) {
+    nchar(strsplit(sub('0+$', '', as.character(x)), ".", fixed=TRUE)[[1]][[2]])
+  } else {
+    return(0)
+  }
+}
 
 
 
@@ -673,6 +672,9 @@ hgch_bar_grouped_hor_CatCatNum <-
 
 
 #' Vertical stacked bar
+#'
+#' Vertical stacked bar
+#'
 #' @name hgch_bar_stacked_ver_CatCatNum
 #' @param x A data.frame
 #' @export
@@ -1541,6 +1543,9 @@ hgch_bar_grouped_hor_CatNumNumNumNum <- function(data,
 
 
 #' Vertical bar
+#'
+#' Vertical bar
+#'
 #' @name hgch_bar_ver_Num
 #' @param x A data.frame
 #' @export
@@ -1580,6 +1585,9 @@ hgch_bar_ver_Num <- function(data,
 }
 
 #' Vertical bar
+#'
+#' Vertical bar
+#'
 #' @name hgch_bar_ver_NumNum
 #' @param x A data.frame
 #' @export
@@ -1619,6 +1627,9 @@ hgch_bar_ver_NumNum <- function(data,
 }
 
 #' Vertical bar
+#'
+#' Vertical bar
+#'
 #' @name hgch_bar_ver_NumNumNum
 #' @param x A data.frame
 #' @export
@@ -1659,6 +1670,9 @@ hgch_bar_ver_NumNumNum <- function(data,
 
 
 #' Vertical bar
+#'
+#' Vertical bar
+#'
 #' @name hgch_bar_ver_NumNumNumNum
 #' @param x A data.frame
 #' @export
@@ -1891,10 +1905,9 @@ hgch_bar_grouped_hor_CatCat <-
   }
 
 
-#' hgch_bar_stacked_ver_CatCat
+#' Vertical stacked bar
 #'
-#' hgch_bar_stacked_ver_CatCat
-#'
+#' Vertical stacked bar
 #'
 #' @param x A data.frame
 #' @return highcharts viz
@@ -1959,9 +1972,9 @@ hgch_bar_stacked_ver_CatCat <-
 
 
 
-#' hgch_bar_stacked_hor_CatCat
+#' Horizontal stacked bar
 #'
-#' hgch_bar_stacked_hor_CatCat
+#' Horizontal stacked bar
 #'
 #'
 #' @param x A data.frame
@@ -2026,9 +2039,9 @@ hgch_bar_stacked_hor_CatCat <-
 
 
 
-#' hgch_bar_stacked_100_ver_CatCat
+#' Vertical 100 stacked bar
 #'
-#' hgch_bar_stacked_100_ver_CatCat
+#' Vertical 100 stacked bar
 #'
 #'
 #' @param x A data.frame
@@ -2092,9 +2105,9 @@ hgch_bar_stacked_100_ver_CatCat <-
         }
 
 
-#' hgch_bar_stacked_100_hor_CatCat
+#' Horizontal 100 stacked bar
 #'
-#' hgch_bar_stacked_100_hor_CatCat
+#' Horizontal 100 stacked bar
 #'
 #'
 #' @param x A data.frame
