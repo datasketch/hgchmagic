@@ -84,10 +84,14 @@ hgch_2yline_YeaNumNum(data)
 
 # Multilines
 
-data <- sampleData("Yea-Num-Num",nrow = 20)
-hgch_multilines_YeaNumP(data)
+data <- sampleData("Yea-Num-Num",nrow = 70)
+hgch_multilines_YeaNumNum(data)
+
+data <- sampleData("Yea-Num",nrow = 70)
+hgch_multilines_YeaNum(data)
+
 data <- sample_n(data,size = 20)
-hgch_multilines_YeaNumP(data)
+hgch_multilines_YeaNum(data)
 
 data <- sampleData("Yea-Num-Num-Num-Num-Num",nrow = 11)
 hgch_multilines_YeaNumP(data)
