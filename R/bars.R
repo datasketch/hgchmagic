@@ -46,9 +46,11 @@ hgch_bar_ver_Cat <-
     nms <- getClabels(f)
 
     xAxisTitle <- xAxisTitle %||% nms[1]
-    yAxisTitle <- yAxisTitle %||% nms[2]
+    yAxisTitle <- yAxisTitle %||% ""
     title <-  title %||% ""
     caption <- caption %||% ""
+    subtitle <- subtitle %||% ""
+
     d <- f$d
     if (nrow(d) == 0)
       return()
@@ -153,10 +155,12 @@ hgch_bar_hor_Cat <-
     f <- fringe(data)
     nms <- getClabels(f)
 
-    xAxisTitle <- xAxisTitle %||% nms[2]
+    xAxisTitle <- xAxisTitle %||% ""
     yAxisTitle <- yAxisTitle %||% nms[1]
     title <-  title %||% ""
     caption <- caption %||% ""
+    subtitle <- subtitle %||% ""
+
     d <- f$d
     if (nrow(d) == 0)
       return()
@@ -267,6 +271,7 @@ hgch_bar_ver_CatNum <-
     yAxisTitle <- yAxisTitle %||% nms[2]
     title <-  title %||% ""
     caption <- caption %||% ""
+    subtitle <- subtitle %||% ""
 
     d <- f$d %>%
       tidyr::drop_na() %>%
@@ -434,6 +439,8 @@ hgch_bar_hor_CatNum <- function(data,
   yAxisTitle <- yAxisTitle %||% nms[1]
   title <-  title %||% " "
   caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
+
   d <- f$d
   d <- na.omit(d)
   if (nrow(d) == 0)
@@ -552,6 +559,7 @@ hgch_bar_grouped_ver_CatCatNum <-
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
     caption <- caption %||% ""
+    subtitle <- subtitle %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
@@ -638,6 +646,7 @@ hgch_bar_grouped_hor_CatCatNum <-
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
     caption <- caption %||% ""
+    subtitle <- subtitle %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
@@ -772,6 +781,7 @@ hgch_bar_stacked_100_ver_CatCatNum <-
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
     caption <- caption %||% ""
+    subtitle <- subtitle %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
@@ -841,6 +851,7 @@ hgch_bar_stacked_hor_CatCatNum <-
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
     caption <- caption %||% ""
+    subtitle <- subtitle %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
@@ -908,6 +919,7 @@ hgch_bar_stacked_100_hor_CatCatNum <-
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
     caption <- caption %||% ""
+    subtitle <- subtitle %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = agg(aggregation, c))
@@ -1003,10 +1015,11 @@ hgch_bar_grouped_ver_CatNum <- function(data,
   nms <- getClabels(f)
 
   xAxisTitle <- xAxisTitle %||% nms[1]
-  yAxisTitle <- yAxisTitle %||% ""
+  yAxisTitle <- yAxisTitle %||% nms[2]
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
   caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
 
   d <- f$d %>% tidyr::gather(variable, value,-a) %>% dplyr::filter(!is.na(a)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(a, variable) %>%
@@ -1081,6 +1094,7 @@ hgch_bar_grouped_ver_CatNumNum <- function(data,
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
   caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
 
   d <- f$d %>% tidyr::gather(variable, value,-a) %>% dplyr::filter(!is.na(a)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(a, variable) %>%
@@ -1228,6 +1242,7 @@ hgch_bar_grouped_ver_CatNumNumNumNum <- function(data,
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
   caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
 
   d <- f$d %>% tidyr::gather(variable, value,-a) %>% dplyr::filter(!is.na(a)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(a, variable) %>%
@@ -1302,6 +1317,7 @@ hgch_bar_grouped_hor_CatNum <- function(data,
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
   caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
 
   d <- f$d %>% tidyr::gather(variable, value, -a) %>% dplyr::filter(!is.na(a)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(a, variable) %>%
@@ -1370,6 +1386,7 @@ hgch_bar_grouped_hor_CatNumNum <- function(data,
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
   caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
 
   d <- f$d %>% tidyr::gather(variable, value, -a) %>% dplyr::filter(!is.na(a)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(a, variable) %>%
@@ -1438,6 +1455,7 @@ hgch_bar_grouped_hor_CatNumNumNum <- function(data,
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
   caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
 
   d <- f$d %>% tidyr::gather(variable, value, -a) %>% dplyr::filter(!is.na(a)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(a, variable) %>%
@@ -1506,6 +1524,7 @@ hgch_bar_grouped_hor_CatNumNumNumNum <- function(data,
   title <-  title %||% ""
   symbol <- symbol %||% "circle"
   caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
 
   d <- f$d %>% tidyr::gather(variable, value, -a) %>% dplyr::filter(!is.na(a)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(a, variable) %>%
@@ -1574,6 +1593,7 @@ hgch_bar_ver_Num <- function(data,
   yAxisTitle <- yAxisTitle %||% nms[1]
   title <-  title %||% ""
   caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
 
   d <- f$d %>% tidyr::gather(variable, value, 1:length(nms)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(variable) %>% dplyr::ungroup()
@@ -1616,6 +1636,7 @@ hgch_bar_ver_NumNum <- function(data,
   yAxisTitle <- yAxisTitle %||% nms[1]
   title <-  title %||% ""
   caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
 
   d <- f$d %>% tidyr::gather(variable, value, 1:length(nms)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(variable) %>% dplyr::ungroup()
@@ -1658,6 +1679,7 @@ hgch_bar_ver_NumNumNum <- function(data,
   yAxisTitle <- yAxisTitle %||% nms[1]
   title <-  title %||% ""
   caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
 
   d <- f$d %>% tidyr::gather(variable, value, 1:length(nms)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(variable) %>% dplyr::ungroup()
@@ -1701,6 +1723,8 @@ hgch_bar_ver_NumNumNumNum <- function(data,
   yAxisTitle <- yAxisTitle %||% nms[1]
   title <-  title %||% ""
   caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
+
 
   d <- f$d %>% tidyr::gather(variable, value, 1:length(nms)) %>%
     dplyr::filter(!is.na(value)) %>% dplyr::group_by(variable) %>% dplyr::ungroup()
@@ -1734,6 +1758,7 @@ hgch_waterfall_CatNum <-function(data, title = NULL,  xAxisTitle = NULL, caption
   yAxisTitle <- yAxisTitle %||% nms[2]
   title <-  title %||% ""
   caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
 
   data <- f$d
   data <- plyr::rename(data, c("a" = "name"))
@@ -1804,6 +1829,7 @@ hgch_bar_grouped_ver_CatCat <-
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
     caption <- caption %||% ""
+    subtitle <- subtitle %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = n())
@@ -1872,6 +1898,7 @@ hgch_bar_grouped_hor_CatCat <-
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
     caption <- caption %||% ""
+    subtitle <- subtitle %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = n())
@@ -1936,6 +1963,7 @@ hgch_bar_stacked_ver_CatCat <-
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
     caption <- caption %||% ""
+    subtitle <- subtitle %||% ""
 
     d <-
       f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = n())
@@ -2004,6 +2032,7 @@ hgch_bar_stacked_hor_CatCat <-
           title <-  title %||% ""
           symbol <- symbol %||% "circle"
           caption <- caption %||% ""
+          subtitle <- subtitle %||% ""
 
           d <-
             f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = n())
@@ -2071,6 +2100,7 @@ hgch_bar_stacked_100_ver_CatCat <-
         title <-  title %||% ""
         symbol <- symbol %||% "circle"
         caption <- caption %||% ""
+        subtitle <- subtitle %||% ""
 
         d <- f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = n())
         if (nrow(d) == 0)
@@ -2137,6 +2167,7 @@ hgch_bar_stacked_100_hor_CatCat <-
     title <-  title %||% ""
     symbol <- symbol %||% "circle"
     caption <- caption %||% ""
+    subtitle <- subtitle %||% ""
 
     d <- f$d %>% na.omit() %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = n())
     if (nrow(d) == 0)

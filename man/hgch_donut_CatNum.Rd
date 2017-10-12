@@ -5,8 +5,7 @@
 \title{hgch_donut_CatNum}
 \usage{
 hgch_donut_CatNum(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = "sum",
-  export = FALSE, theme = NULL, ...)
+  sort = "no", aggregate = "sum", export = FALSE, theme = NULL, ...)
 }
 \arguments{
 \item{x}{A data.frame}

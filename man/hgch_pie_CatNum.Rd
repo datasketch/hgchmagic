@@ -5,8 +5,8 @@
 \title{hgch_pie_CatNum}
 \usage{
 hgch_pie_CatNum(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = "sum",
-  export = FALSE, font_size = "13px", theme = NULL, ...)
+  sort = "no", aggregate = "sum", export = FALSE, font_size = "13px",
+  theme = NULL, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -24,6 +24,6 @@ Cat-Num
 
 \examples{
 
-hgch_pie_CatNum(sampleData("Cat-Num",nrow = 10))
+hgch_pie_CatNum(sampleData("Cat-Num", nrow = 10))
 
 }

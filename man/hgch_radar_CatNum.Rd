@@ -5,8 +5,7 @@
 \title{hgch_radar_CatNum}
 \usage{
 hgch_radar_CatNum(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no", aggregate = "mean",
-  export = FALSE, theme = NULL, ...)
+  sort = "no", aggregate = "mean", export = FALSE, theme = NULL, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -24,6 +23,6 @@ Cat-Num
 
 \examples{
 
-hgch_radar_CatNum(sampleData("Cat-Num",nrow = 10))
+hgch_radar_CatNum(sampleData("Cat-Num", nrow = 10))
 
 }

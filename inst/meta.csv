@@ -157,10 +157,10 @@ Circular bar
 ",Cat-Num,Cat-Num,circular,OK
 hgch_donut_Cat,hgch_donut_Cat,"
 hgch_donut_Cat
-",Cat,Cat,donut,NA
+",Cat,Cat,donut,OK
 hgch_donut_CatNum,hgch_donut_CatNum,"
 hgch_donut_CatNum
-",Cat-Num,Cat-Num,donut,NA
+",Cat-Num,Cat-Num,donut,OK
 hgch_funnel_CatNum,Funnel,"
 Funnel
 ",Cat-Num,Cat-Num,funnel,NA
@@ -196,10 +196,10 @@ Grouped line
 ", Yea-Num-Num-Num-Num,Num4- Yea,multilines,OK
 hgch_pie_Cat,hgch_pie_Cat,"
 hgch_pie_Cat
-",Cat,Cat,pie,NA
+",Cat,Cat,pie,OK
 hgch_pie_CatNum,hgch_pie_CatNum,"
 hgch_pie_CatNum
-",Cat-Num,Cat-Num,pie,NA
+",Cat-Num,Cat-Num,pie,OK
 hgch_polarcolumn_Cat,Polar bar,"
 Polar bar
 ",Cat,Cat,polarcolumn,NA
@@ -211,10 +211,16 @@ Pyramid
 ",Cat-Num,Cat-Num,pyramid,NA
 hgch_radar_Cat,hgch_radar_Cat,"
 hgch_radar_Cat
-",Cat,Cat,radar,NA
+",Cat,Cat,radar,OK
 hgch_radar_CatNum,hgch_radar_CatNum,"
 hgch_radar_CatNum
-",Cat-Num,Cat-Num,radar,NA
+",Cat-Num,Cat-Num,radar,OK
+hgch_radar_CatNumNum,hgch_radar_CatNumNum,"
+hgch_radar_CatNumNum
+",Cat-Num-Num,Cat-Num2,radar,OK
+hgch_radar_CatNumNumNum,hgch_radar_CatNumNumNum,"
+hgch_radar_CatNumNumNum
+",Cat-Num-Num-Num,Cat-Num3,radar,OK
 hgch_scatter_CatCatNumNum,Scatter grouped,"
 Scatter grouped
 ",Cat-Cat-Num-Num,Cat2-Num2,scatter,NA

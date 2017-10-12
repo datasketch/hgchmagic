@@ -43,7 +43,12 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
 
                                     "hgch_line_DatNum", "hgch_line_CatNum", "hgch_line_CatYeaNum", "hgch_line_YeaNum", "hgch_line_CatCatNum",
                                     "hgch_line_CatDatNum", "hgch_2yline_YeaNumNum", "hgch_multilines_YeaNum", "hgch_multilines_YeaNumNum",
-                                    "hgch_multilines_YeaNumNumNum", "hgch_multilines_YeaNumNumNumNum", "hgch_slope_CatYeaNum "),
+                                    "hgch_multilines_YeaNumNumNum", "hgch_multilines_YeaNumNumNumNum", "hgch_slope_CatYeaNum ",
+
+                                    "hgch_pie_Cat", "hgch_pie_CatNum", "hgch_donut_Cat", "hgch_donut_CatNum", "hgch_radar_Cat",
+                                    "hgch_radar_CatNum", "hgch_radar_CatNumNum", "hgch_radar_CatNumNumNum", "hgch_radar_CatNumNumNumNum"),
+
+
 
                          "status" = c("OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", NA, NA,
 
@@ -51,7 +56,9 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
                                       "OK", "OK", NA, "OK", "OK", "OK", NA, "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK",
                                       "OK",
 
-                                      "OK", "OK", "OK", "OK", "OK", "OK", NA, "OK", "OK", "OK", "OK", NA),
+                                      "OK", "OK", "OK", "OK", "OK", "OK", NA, "OK", "OK", "OK", "OK", NA,
+
+                                      "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK"),
 
                          "coments" = c("Esta gráfica no sirve cuando hay un sólo dato. Se podrían agregar los marcadores cuando el número de observaciones es pequeño.
                 El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.",
@@ -103,7 +110,9 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
                                        "Sólo sirve para variables con pocos niveles categóricos",
                                        NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
 
-                                       "Ordenar los años", "Ordenar los años", "Ordenar los años", "Ordenar los años", "Ordenar los años", NA, NA, NA, NA, NA, NA, NA)
+                                       "Ordenar los años", "Ordenar los años", "Ordenar los años", "Ordenar los años", "Ordenar los años", NA, NA, NA, NA, NA, NA, NA,
+
+                                       NA, NA, NA, NA, NA, NA, NA, NA, NA)
 )
 #metaStatus <- left_join(select(hgchmagic::hgchMeta(), name), metaStatus, by = name)
 write_csv(metaStatus, "inst/meta-status.csv")

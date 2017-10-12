@@ -71,3 +71,12 @@ hgch_multilines_YeaNumNum,OK,NA
 hgch_multilines_YeaNumNumNum,OK,NA
 hgch_multilines_YeaNumNumNumNum,OK,NA
 hgch_slope_CatYeaNum ,NA,NA
+hgch_pie_Cat,OK,NA
+hgch_pie_CatNum,OK,NA
+hgch_donut_Cat,OK,NA
+hgch_donut_CatNum,OK,NA
+hgch_radar_Cat,OK,NA
+hgch_radar_CatNum,OK,NA
+hgch_radar_CatNumNum,OK,NA
+hgch_radar_CatNumNumNum,OK,NA
+hgch_radar_CatNumNumNumNum,OK,NA

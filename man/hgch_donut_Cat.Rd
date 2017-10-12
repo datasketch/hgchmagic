@@ -5,8 +5,7 @@
 \title{hgch_donut_Cat}
 \usage{
 hgch_donut_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, sort = "no",
-  aggregate = "count", export = FALSE, theme = NULL, ...)
+  sort = "no", aggregate = "count", export = FALSE, theme = NULL, ...)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -24,6 +23,6 @@ Cat
 
 \examples{
 
-hgch_donut_Cat(sampleData("Cat",nrow = 10))
+hgch_donut_Cat(sampleData("Cat", nrow = 10))
 
 }
