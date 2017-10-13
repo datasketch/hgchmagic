@@ -95,7 +95,7 @@ hgch_polarcolumn_CatNum <-function(data, title = ""){
 #' hgch_spider_CatNum(sampleData("Cat-Num",nrow = 10))
 #'
 #' @export hgch_spider_CatNum
-hgch_spider_CatNum <-function(data, title = ""){
+hgch_spider_CatNum <- function(data, title = ""){
 
   f <- fringe(data)
   nms <- getCnames(f)
@@ -146,7 +146,7 @@ hgch_spider_CatNumNum <- function(data,
 
   xAxisTitle <- xAxisTitle %||% ""
   yAxisTitle <- yAxisTitle %||% ""
-  title <-  title %||% nms[2]
+  title <-  title %||% ""
   d <- f$d
   d <- na.omit(d)
   if(nrow(d)==0) return()

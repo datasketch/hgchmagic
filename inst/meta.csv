@@ -194,6 +194,9 @@ Grouped line
 hgch_multilines_YeaNumNumNumNum,Grouped line,"
 Grouped line
 ", Yea-Num-Num-Num-Num,Num4- Yea,multilines,OK
+hgch_multilines_YeaNumP,Grouped line,"
+Grouped line
+", Yea-NumP,NumP- Yea,multilines,NA
 hgch_pie_Cat,hgch_pie_Cat,"
 hgch_pie_Cat
 ",Cat,Cat,pie,OK
@@ -221,6 +224,9 @@ hgch_radar_CatNumNum
 hgch_radar_CatNumNumNum,hgch_radar_CatNumNumNum,"
 hgch_radar_CatNumNumNum
 ",Cat-Num-Num-Num,Cat-Num3,radar,OK
+hgch_radar_CatNumNumNumNum,hgch_radar_CatNumNumNumNum,"
+hgch_radar_CatNumNumNumNum
+",Cat-Num-Num-Num-Num,Cat-Num4,radar,OK
 hgch_scatter_CatCatNumNum,Scatter grouped,"
 Scatter grouped
 ",Cat-Cat-Num-Num,Cat2-Num2,scatter,NA

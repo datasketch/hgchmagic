@@ -8,9 +8,9 @@
 #' hgch_treemap_CatNum(sampleData("Cat-Num",nrow = 10))
 #'
 #' @export hgch_treemap_CatNum
-hgch_treemap_CatNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                              minColor = "#E63917", maxColor= "#18941E", back_color = 'white', color_title = 'black',
-                              reverse = TRUE, export = FALSE,...){
+hgch_treemap_CatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
+                                minColor = "#E63917", maxColor= "#18941E", back_color = 'white', color_title = 'black',
+                                reverse = TRUE, export = FALSE,...){
   # data <- sampleData("Cat-Num")
   f <- fringe(data)
   nms <- getClabels(f)

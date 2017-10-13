@@ -420,6 +420,69 @@ hgch_radar_CatNumNumNum <- function(data, title = NULL, subtitle = NULL, caption
   hc
 }
 
+#' hgch_radar_CatNumNumNumNum
+#'
+#' hgch_radar_CatNumNumNumNum
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Cat-Num-Num-Num-Num
+#' @examples
+#'
+#' hgch_radar_CatNumNumNumNum(sampleData("Cat-Num-Num-Num-Num", nrow = 10))
+#'
+#' @export hgch_radar_CatNumNumNumNum
+hgch_radar_CatNumNumNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
+                                       sort = "no", aggregate = "mean", export = FALSE, theme = NULL, ...){
 
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  title <-  title %||% ""
+  subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
+
+  d <- f$d
+  d <- na.omit(d)
+  if(nrow(d) == 0) return()
+  d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = mean(b, na.rm = TRUE),
+                                                     c = mean(c, na.rm = TRUE),
+                                                     d = mean(d, na.rm = TRUE),
+                                                     e = mean(e, na.rm = TRUE))
+  hc <- highchart() %>%
+    hc_chart(type = "line", polar = TRUE) %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_xAxis(title = "",
+             categories = d$a, tickmarkPlacement = 'on', lineWidth = 0) %>%
+    hc_credits(enabled = TRUE, text = caption) %>%
+    hc_series(
+      list(
+        name = nms[2],
+        data = d$b,
+        pointPlacement = 'on'
+      ),
+      list(
+        name = nms[3],
+        data = d$c,
+        pointPlacement = 'on'
+      ),
+      list(
+        name = nms[4],
+        data = d$d,
+        pointPlacement = 'on'
+      ),
+      list(
+        name = nms[5],
+        data = d$e,
+        pointPlacement = 'on'
+      ))
+
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  hc
+}
 
 
