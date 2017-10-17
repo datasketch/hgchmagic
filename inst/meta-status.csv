@@ -80,3 +80,9 @@ hgch_radar_CatNum,OK,NA
 hgch_donut_CatNumNum,OK,NA
 hgch_radar_CatNumNumNum,OK,NA
 hgch_radar_CatNumNumNumNum,OK,NA
+hgch_treemap_Cat,OK,NA
+hgch_treemap_discrete_color_Cat,OK,NA
+hgch_treemap_CatNum,OK,NA
+hgch_treemap_discrete_color_CatNum,OK,NA
+hgch_treemap_nested_CatCatNum ,OK,NA
+hgch_treemap_nested_grouped_CatCatNum,OK,NA

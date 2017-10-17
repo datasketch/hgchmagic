@@ -5,7 +5,8 @@
 \title{Treemap coloured by first variable}
 \usage{
 hgch_treemap_discrete_color_CatNum(data, title = NULL, subtitle = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, export = FALSE)
+  caption = NULL, back_color = "white", color_title = "black",
+  export = FALSE)
 }
 \arguments{
 \item{x}{A data.frame}
@@ -23,6 +24,6 @@ Cat-Num
 
 \examples{
 
-hgch_treemap_discrete_color_CatNum(sampleData("Cat-Num",nrow = 10))
+hgch_treemap_discrete_color_CatNum(sampleData("Cat-Num", nrow = 10))
 
 }

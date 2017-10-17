@@ -220,7 +220,7 @@ hgch_radar_CatNum
 ",Cat-Num,Cat-Num,radar,OK
 hgch_radar_CatNumNum,hgch_radar_CatNumNum,"
 hgch_radar_CatNumNum
-",Cat-Num-Num,Cat-Num2,radar,OK
+",Cat-Num-Num,Cat-Num2,radar,NA
 hgch_radar_CatNumNumNum,hgch_radar_CatNumNumNum,"
 hgch_radar_CatNumNumNum
 ",Cat-Num-Num-Num,Cat-Num3,radar,OK
@@ -245,15 +245,24 @@ Radar
 hgch_spider_CatNumNum,Radar,"
 Radar
 ",Cat-Num-Num,Cat-Num2,spider,NA
-hgch_treemap_CatCatNum,Treemap density by numeric variable,"
-Treemap density by numeric variable
-",Cat-Cat-Num,Cat2-Num,treemap,NA
+hgch_treemap_Cat,Treemap density coloured by categorical variable,"
+Treemap density coloured by categorical variable
+",Cat,Cat,treemap,OK
 hgch_treemap_CatNum,Treemap density by numeric variable,"
 Treemap density by numeric variable
-",Cat-Num,Cat-Num,treemap,NA
+",Cat-Num,Cat-Num,treemap,OK
+hgch_treemap_discrete_color_Cat,Treemap coloured by categorical variable,"
+Treemap coloured by categorical variable
+",Cat,Cat,treemap,OK
 hgch_treemap_discrete_color_CatNum,Treemap coloured by first variable,"
 Treemap coloured by first variable
-",Cat-Num,Cat-Num,treemap,NA
+",Cat-Num,Cat-Num,treemap,OK
+hgch_treemap_nested_CatCatNum,Nested treemap density by numeric variable,"
+Nested treemap density by numeric variable
+",Cat-Cat-Num,Cat2-Num,treemap,OK
+hgch_treemap_nested_grouped_CatCatNum,Nested treemap grouped by categorical variable,"
+Nested treemap grouped by categorical variable
+",Cat-Cat-Num,Cat2-Num,treemap,OK
 hgch_waterfall_CatNum,Waterfall,"
 Waterfall
 ",Cat-Num,Cat-Num,waterfall,OK

@@ -46,7 +46,11 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
                                     "hgch_multilines_YeaNumNumNum", "hgch_multilines_YeaNumNumNumNum", "hgch_slope_CatYeaNum ",
 
                                     "hgch_pie_Cat", "hgch_pie_CatNum", "hgch_donut_Cat", "hgch_donut_CatNum", "hgch_radar_Cat",
-                                    "hgch_radar_CatNum", "hgch_donut_CatNumNum", "hgch_radar_CatNumNumNum", "hgch_radar_CatNumNumNumNum"),
+                                    "hgch_radar_CatNum", "hgch_donut_CatNumNum", "hgch_radar_CatNumNumNum", "hgch_radar_CatNumNumNumNum",
+
+                                    "hgch_treemap_Cat", "hgch_treemap_discrete_color_Cat", "hgch_treemap_CatNum",
+                                    "hgch_treemap_discrete_color_CatNum", "hgch_treemap_nested_CatCatNum ",
+                                    "hgch_treemap_nested_grouped_CatCatNum"),
 
 
 
@@ -58,7 +62,9 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
 
                                       "OK", "OK", "OK", "OK", "OK", "OK", NA, "OK", "OK", "OK", "OK", NA,
 
-                                      "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK"),
+                                      "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK",
+
+                                      "OK", "OK", "OK", "OK", "OK", "OK"),
 
                          "coments" = c("Esta gráfica no sirve cuando hay un sólo dato. Se podrían agregar los marcadores cuando el número de observaciones es pequeño.
                 El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.",
@@ -112,7 +118,9 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
 
                                        "Ordenar los años", "Ordenar los años", "Ordenar los años", "Ordenar los años", "Ordenar los años", NA, NA, NA, NA, NA, NA, NA,
 
-                                       NA, NA, NA, NA, NA, NA, NA, NA, NA)
+                                       NA, NA, NA, NA, NA, NA, NA, NA, NA,
+
+                                       NA, NA, NA, NA, NA, NA)
 )
 #metaStatus <- left_join(select(hgchmagic::hgchMeta(), name), metaStatus, by = name)
 write_csv(metaStatus, "inst/meta-status.csv")
