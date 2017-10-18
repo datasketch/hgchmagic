@@ -225,7 +225,8 @@ hgch_spider_CatNumNum <- function(data,
 #' hgch_scatter_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
 #'
 #' @export hgch_scatter_CatNumNum
-hgch_scatter_CatNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL, export = FALSE,...){
+hgch_scatter_CatNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL,
+                                   yAxisTitle = NULL, theme = NULL, export = FALSE,...){
 
   if(class(data)[1] == "Fringe"){
     ni <- getClabels(data)
@@ -242,14 +243,19 @@ hgch_scatter_CatNumNum <- function(data, title = NULL, subtitle = NULL, Catption
   xAxisTitle <- xAxisTitle %||% getClabels(f)[2]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
   title <-  title %||% ""
+  caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
 
   d <- f$d %>% drop_na()  %>% dplyr::group_by(a) %>%
-    dplyr::summarise(b = mean(b,na.rm = TRUE),c = mean(c, na.rm = TRUE))
+    dplyr::summarise(b = mean(b,na.rm = TRUE), c = mean(c, na.rm = TRUE))
 
   d$text1 <- map_chr(d$b, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
   d$text2 <- map_chr(d$c, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
 
   hc <- hchart(d, type = "bubble", hcaes(x = b, y = c)) %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_credits(enabled = TRUE, text = caption) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
        hc_tooltip(
@@ -287,7 +293,8 @@ hgch_scatter_CatNumNum <- function(data, title = NULL, subtitle = NULL, Catption
 #' hgch_scatter_CatNumNumNum(sampleData("Cat-Num-Num-Num",nrow = 10))
 #'
 #' @export hgch_scatter_CatNumNumNum
-hgch_scatter_CatNumNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
+hgch_scatter_CatNumNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
+                                      xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -295,12 +302,17 @@ hgch_scatter_CatNumNumNum <- function(data, title = NULL, subtitle = NULL, Catpt
   xAxisTitle <- xAxisTitle %||% getClabels(f)[2]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
   title <-  title %||% ""
+  caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
 
   d <- f$d %>% dplyr::filter(!is.na(a)) %>% dplyr::group_by(a) %>%
     dplyr::summarise(b = mean(b, na.rm = TRUE), c = mean(c, na.rm = TRUE),d = mean(d, na.rm = TRUE))
 
   hc <- hchart(d, type = "bubble", hcaes(x = b, y = c, size = d)) %>%
     hc_chart(zoomType = "xy") %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_credits(enabled = TRUE, text = caption) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
     hc_tooltip(pointFormat = "<br>
@@ -326,7 +338,8 @@ hgch_scatter_CatNumNumNum <- function(data, title = NULL, subtitle = NULL, Catpt
 #' @examples
 #' hgch_scatter_CatCatNumNum(sampleData("Cat-Cat-Num-Num",nrow = 10))
 #' @export hgch_scatter_CatCatNumNum
-hgch_scatter_CatCatNumNum <- function(data, title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
+hgch_scatter_CatCatNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
+                                      xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
 
   if(class(data)[1] == "Fringe"){
     ni <- getClabels(data)
@@ -340,9 +353,12 @@ hgch_scatter_CatCatNumNum <- function(data, title = NULL, subtitle = NULL, Catpt
   f <- fringe(data)
   nms <- getClabels(f)
 
-  xAxisTitle <- xAxisTitle %||% getClabels(f)[3]
-  yAxisTitle <- yAxisTitle %||% getClabels(f)[4]
+  xAxisTitle <- xAxisTitle %||% getClabels(f)[2]
+  yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
   title <-  title %||% ""
+  caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
+
   d <- f$d %>% tidyr::drop_na()%>% dplyr::group_by(a,b) %>%
     dplyr::summarise(c = mean(c, na.rm = TRUE),d = mean(d,na.rm = TRUE))
 
@@ -352,6 +368,9 @@ hgch_scatter_CatCatNumNum <- function(data, title = NULL, subtitle = NULL, Catpt
 
   hc <- hchart(d, type = "scatter", hcaes(x = c, y = d, group = b)) %>%
     hc_chart(zoomType = "xy") %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_credits(enabled = TRUE, text = caption) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
     hc_tooltip(pointFormat = paste0("<br>
@@ -377,7 +396,7 @@ hgch_scatter_CatCatNumNum <- function(data, title = NULL, subtitle = NULL, Catpt
 #' hgch_scatter_CatCatNumNumNum(sampleData("Cat-Cat-Num-Num-Num",nrow = 10))
 #' @export hgch_scatter_CatCatNumNumNum
 hgch_scatter_CatCatNumNumNum <- function(data, title = NULL, subtitle = NULL,
-                                         Catption = NULL,
+                                         caption = NULL,
                                          xAxisTitle = NULL, yAxisTitle = NULL,
                                          theme = NULL, export = FALSE,...){
   if(class(data)[1] == "Fringe"){
@@ -396,6 +415,9 @@ hgch_scatter_CatCatNumNumNum <- function(data, title = NULL, subtitle = NULL,
   xAxisTitle <- xAxisTitle %||% getClabels(f)[3]
   yAxisTitle <- yAxisTitle %||% getClabels(f)[4]
   title <-  title %||% ""
+  caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
+
   d <- f$d %>% tidyr::drop_na() %>% dplyr::group_by(a,b) %>%
     dplyr::summarise(c = mean(c,na.rm = TRUE), d = mean(d,na.rm = TRUE),e = mean(e,na.rm = TRUE))
 
@@ -405,6 +427,9 @@ hgch_scatter_CatCatNumNumNum <- function(data, title = NULL, subtitle = NULL,
 
   hc <- hchart(d, type = "bubble", hcaes(x = c, y = d, group = b, size = e)) %>%
     hc_chart(zoomType = "xy") %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_credits(enabled = TRUE, text = caption) %>%
     hc_xAxis(title = list(text=xAxisTitle)) %>%
     hc_yAxis(title = list(text=yAxisTitle)) %>%
     hc_tooltip(
