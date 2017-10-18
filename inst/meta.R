@@ -56,7 +56,7 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
                                     "hgch_treemap_discrete_color_CatNum", "hgch_treemap_nested_CatCatNum ",
                                     "hgch_treemap_nested_grouped_CatCatNum",
 
-                                    "hgch_scatter_CatNumNum", "hgch_scatter_CatNumNumNum", "hgch_scatter_CatCatNumNum", "hgch_scatter_CatCatNumNumNum"),
+                                    "hgch_scatter_CatNumNum", "hgch_scatter_grouped_CatNumNum", "hgch_scatter_CatNumNumNum", "hgch_scatter_CatCatNumNum", "hgch_scatter_CatCatNumNumNum"),
 
 
 
@@ -73,7 +73,7 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
 
                                       "OK", "OK", "OK", "OK", "OK", "OK",
 
-                                      "OK", "OK", "OK", "OK"),
+                                      "OK", "OK", "OK", "OK", "OK"),
 
                          "coments" = c("Esta gráfica no sirve cuando hay un sólo dato. Se podrían agregar los marcadores cuando el número de observaciones es pequeño.
                 El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.",
@@ -142,7 +142,7 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
 
                                        NA, NA, NA, NA, NA, NA,
 
-                                       NA, NA, NA, NA)
+                                       NA, NA, NA, NA, NA)
 )
 #metaStatus <- left_join(select(hgchmagic::hgchMeta(), name), metaStatus, by = name)
 write_csv(metaStatus, "inst/meta-status.csv")

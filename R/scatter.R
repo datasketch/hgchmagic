@@ -278,6 +278,62 @@ hgch_scatter_CatNumNum <- function(data, title = NULL, subtitle = NULL, caption 
 }
 
 
+#' Grouped scatter
+#'
+#' Grouped scatter
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Cat-Num-Num
+#' @examples
+#'
+#' hgch_scatter_grouped_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
+#'
+#' @export hgch_scatter_grouped_CatNumNum
+hgch_scatter_grouped_CatNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL,
+                                           yAxisTitle = NULL, theme = NULL, export = FALSE,...){
+
+  if(class(data)[1] == "Fringe"){
+    ni <- getClabels(data)
+  }else{
+    ni <- names(data)
+  }
+
+  x <- ni[2]
+  y <- ni[3]
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% getClabels(f)[2]
+  yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
+  title <-  title %||% ""
+  caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
+
+  d <- f$d %>% drop_na()
+
+  d$text1 <- map_chr(d$b, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d$text2 <- map_chr(d$c, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+
+  hc <- hchart(d, type = "scatter", hcaes(x = b, y = c, group = a)) %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_credits(enabled = TRUE, text = caption) %>%
+    hc_xAxis(title = list(text=xAxisTitle)) %>%
+    hc_yAxis(title = list(text=yAxisTitle)) %>%
+    hc_tooltip(
+      headerFormat= '',
+      pointFormat = paste0("<br><strong>{point.a}</strong><br>",
+                           x, ": {point.text1} <br>",
+                           y, ": {point.text2}"))
+  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  hc
+}
+
 
 #' Scatter
 #'

@@ -5,7 +5,7 @@
 \title{Scatter grouped}
 \usage{
 hgch_scatter_CatCatNumNum(data, title = NULL, subtitle = NULL,
-  Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL,
+  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL,
   export = FALSE, ...)
 }
 \arguments{

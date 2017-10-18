@@ -284,6 +284,9 @@ Scatter
 hgch_scatter_CatNumNumNum,Scatter,"
 Scatter
 ",Cat-Num-Num-Num,Cat-Num3,scatter,OK
+hgch_scatter_grouped_CatNumNum,Grouped scatter,"
+Grouped scatter
+",Cat-Num-Num,Cat-Num2,scatter,OK
 hgch_spider_CatNum,Radar,"
 Radar
 ",Cat-Num,Cat-Num,spider,NA

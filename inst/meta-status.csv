@@ -106,6 +106,7 @@ hgch_treemap_discrete_color_CatNum,OK,NA
 hgch_treemap_nested_CatCatNum ,OK,NA
 hgch_treemap_nested_grouped_CatCatNum,OK,NA
 hgch_scatter_CatNumNum,OK,NA
+hgch_scatter_grouped_CatNumNum,OK,NA
 hgch_scatter_CatNumNumNum,OK,NA
 hgch_scatter_CatCatNumNum,OK,NA
 hgch_scatter_CatCatNumNumNum,OK,NA
