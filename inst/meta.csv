@@ -274,16 +274,16 @@ hgch_radar_CatNumNumNumNum
 ",Cat-Num-Num-Num-Num,Cat-Num4,radar,OK
 hgch_scatter_CatCatNumNum,Scatter grouped,"
 Scatter grouped
-",Cat-Cat-Num-Num,Cat2-Num2,scatter,NA
+",Cat-Cat-Num-Num,Cat2-Num2,scatter,OK
 hgch_scatter_CatCatNumNumNum,Scatter,"
 Scatter
-",Cat-Cat-Num-Num-Num,Cat2-Num3,scatter,NA
+",Cat-Cat-Num-Num-Num,Cat2-Num3,scatter,OK
 hgch_scatter_CatNumNum,Scatter,"
 Scatter
-",Cat-Num-Num,Cat-Num2,scatter,NA
+",Cat-Num-Num,Cat-Num2,scatter,OK
 hgch_scatter_CatNumNumNum,Scatter,"
 Scatter
-",Cat-Num-Num-Num,Cat-Num3,scatter,NA
+",Cat-Num-Num-Num,Cat-Num3,scatter,OK
 hgch_spider_CatNum,Radar,"
 Radar
 ",Cat-Num,Cat-Num,spider,NA
