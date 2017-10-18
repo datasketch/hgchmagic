@@ -26,31 +26,48 @@ hgch_2yline_YeaNumNum,NA,Falta revisar y habilitar función.
 hgch_multilines_YeaNumP,NA,Falta revisar y habilitar función.
 hgch_bar_ver_Cat,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas. 
 hgch_bar_ver_top_Cat,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
-hgch_bar_hor_Cat,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_hor_Cat,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas. 
 hgch_bar_hor_top_Cat,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
-hgch_bar_ver_CatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
-hgch_bar_ver_top_CatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
-hgch_bar_ver_YeaNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_ver_CatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas. 
+hgch_bar_ver_top_CatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas. 
+hgch_bar_ver_YeaNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas. 
 hgch_bar_ver_DatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
-hgch_bar_hor_CatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
-hgch_bar_hor_top_CatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_hor_CatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas. 
+hgch_bar_hor_top_CatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas. 
+hgch_bar_hor_YeaNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_hor_DatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas. 
 hgch_bar_grouped_ver_CatCatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
 hgch_bar_grouped_ver_CatYeaNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_grouped_ver_CatDatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
 hgch_bar_grouped_hor_CatCatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_grouped_hor_CatYeaNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_grouped_hor_CatDatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
 hgch_bar_stacked_ver_CatCatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
 hgch_bar_stacked_100_ver_CatCatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
 hgch_bar_stacked_hor_CatCatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
 hgch_bar_stacked_100_hor_CatCatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
 hgch_bar_stacked_ver_CatDatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_stacked_ver_CatYeaNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_stacked_hor_CatDatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_stacked_hor_CatYeaNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
 hgch_bar_stacked_100_ver_CatDatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
-hgch_bar_grouped_ver_CatNum,NA,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
-hgch_bar_grouped_ver_CatNumNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_stacked_100_ver_CatYeaNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_stacked_100_hor_CatDatNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_stacked_100_hor_CatYeaNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
 hgch_bar_grouped_ver_CatNumNumNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
-hgch_bar_grouped_ver_CatNumNumNumNum,OK,Sólo sirve para variables con pocos niveles categóricos
-hgch_bar_grouped_hor_CatNum,NA,NA
-hgch_bar_grouped_hor_CatNumNum,OK,NA
+hgch_bar_grouped_ver_CatNumNumNumNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_grouped_ver_CatNumNum,OK,El eje 'y' debería centrarse en 0 (cuando hay valores negativos). Argumento que controle los separadores decimales y de miles en las variables numéricas.
+hgch_bar_grouped_hor_CatNumNum,OK,Sólo sirve para variables con pocos niveles categóricos
 hgch_bar_grouped_hor_CatNumNumNum,OK,NA
 hgch_bar_grouped_hor_CatNumNumNumNum,OK,NA
+hgch_bar_ver_Num,OK,NA
+hgch_bar_ver_NumNum,OK,NA
+hgch_bar_ver_NumNumNum,OK,NA
+hgch_bar_ver_NumNumNumNum,OK,NA
+hgch_bar_hor_Num,OK,NA
+hgch_bar_hor_NumNum,OK,NA
+hgch_bar_hor_NumNumNum,OK,NA
+hgch_bar_hor_NumNumNumNum,OK,NA
 hgch_waterfall_CatNum,OK,NA
 hgch_bar_grouped_ver_CatCat,OK,NA
 hgch_bar_grouped_hor_CatCat,OK,NA
@@ -59,6 +76,8 @@ hgch_bar_stacked_hor_CatCat,OK,NA
 hgch_bar_stacked_100_ver_CatCat,OK,NA
 hgch_bar_stacked_100_hor_CatCat,OK,NA
 hgch_circular_bar_CatNum,OK,NA
+hgch_bar_grouped_ver_CatNum,NA,NA
+hgch_bar_grouped_hor_CatNum,NA,NA
 hgch_line_DatNum,OK,Ordenar los años
 hgch_line_CatNum,OK,Ordenar los años
 hgch_line_CatYeaNum,OK,Ordenar los años

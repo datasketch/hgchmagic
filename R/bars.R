@@ -95,16 +95,16 @@ hgch_bar_ver_Cat <-
 #'
 #' @export hgch_bar_ver_top_Cat
 hgch_bar_ver_top_Cat <- function(data,
-                                topn = NULL,
-                                title = NULL,
-                                subtitle = NULL,
-                                caption = NULL,
-                                xAxisTitle = NULL,
-                                yAxisTitle = NULL,
-                                reverse = TRUE,
-                                theme = NULL,
-                                export = FALSE,
-                                ...) {
+                                 topn = NULL,
+                                 title = NULL,
+                                 subtitle = NULL,
+                                 caption = NULL,
+                                 xAxisTitle = NULL,
+                                 yAxisTitle = NULL,
+                                 reverse = TRUE,
+                                 theme = NULL,
+                                 export = FALSE,
+                                 ...) {
   hgch_bar_ver_Cat(
     data,
     topn = topn,
@@ -460,7 +460,7 @@ hgch_bar_hor_CatNum <- function(data,
       d <- d
     }
   }
-  hc <- hchart(d, type = "bar", hcaes(x = a, y = b)) %>%
+  hc <- hchart(d, type = "bar", hcaes(x = as.character(a), y = b)) %>%
     hc_plotOptions(column = list(stacking = "normal")) %>%
     #hc_chart(backgroundColor = back_color) %>%
     hc_title(text = title,style = list(color = color_title, useHTML = TRUE)) %>%
@@ -523,7 +523,36 @@ hgch_bar_hor_top_CatNum <- function(data,
 
 }
 
+#' Horizontal bar
+#'
+#' Horizontal bar
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Yea-Num
+#' @examples
+#' hgch_bar_hor_YeaNum(sampleData("Yea-Num", nrow = 10))
+#' @export hgch_bar_hor_YeaNum
+hgch_bar_hor_YeaNum <- hgch_bar_hor_CatNum
 
+
+
+
+#' Horizontal bar
+#'
+#' Horizontal bar
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Dat-Num
+#' @examples
+#' hgch_bar_hor_DatNum(sampleData("Dat-Num", nrow = 10))
+#' @export hgch_bar_hor_DatNum
+hgch_bar_hor_DatNum <- hgch_bar_hor_CatNum
 
 
 #' Vertical grouped bar
@@ -569,7 +598,7 @@ hgch_bar_grouped_ver_CatCatNum <-
       return()
     #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
     hc <-
-      hchart(d, type = "column", hcaes(x = b, y = c, group = a)) %>%
+      hchart(d, type = "column", hcaes(x = as.character(b), y = c, group = a)) %>%
       hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
       hc_title(text = title) %>%
       hc_subtitle(text = subtitle) %>%
@@ -609,6 +638,22 @@ hgch_bar_grouped_ver_CatCatNum <-
 #' hgch_bar_grouped_ver_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
 #' @export hgch_bar_grouped_ver_CatYeaNum
 hgch_bar_grouped_ver_CatYeaNum <- hgch_bar_grouped_ver_CatCatNum
+
+
+
+#' Vertical grouped bar
+#'
+#' Vertical grouped bar
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Cat-Dat-Num
+#' @examples
+#' hgch_bar_grouped_ver_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
+#' @export hgch_bar_grouped_ver_CatDatNum
+hgch_bar_grouped_ver_CatDatNum <- hgch_bar_grouped_ver_CatCatNum
 
 
 
@@ -653,7 +698,7 @@ hgch_bar_grouped_hor_CatCatNum <-
     if (nrow(d) == 0)
       return()
     #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-    hc <- hchart(d, type = "bar", hcaes(x = b, y = c, group = a)) %>%
+    hc <- hchart(d, type = "bar", hcaes(x = as.character(b), y = c, group = a)) %>%
       hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol))) %>%
       hc_title(text = title) %>%
       hc_subtitle(text = subtitle) %>%
@@ -678,6 +723,39 @@ hgch_bar_grouped_hor_CatCatNum <-
       hc <- hc %>% hc_exporting(enabled = TRUE)
     hc
   }
+
+
+
+#' Horizontal grouped bar
+#'
+#' Horizontal grouped bar
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Cat-Yea-Num
+#' @examples
+#' hgch_bar_grouped_hor_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
+#' @export hgch_bar_grouped_hor_CatYeaNum
+hgch_bar_grouped_hor_CatYeaNum <- hgch_bar_grouped_hor_CatCatNum
+
+
+
+#' Horizontal grouped bar
+#'
+#' Horizontal grouped bar
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Cat-Dat-Num
+#' @examples
+#' hgch_bar_grouped_hor_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
+#' @export hgch_bar_grouped_hor_CatDatNum
+hgch_bar_grouped_hor_CatDatNum <- hgch_bar_grouped_hor_CatCatNum
+
 
 
 #' Vertical stacked bar
@@ -720,7 +798,7 @@ hgch_bar_stacked_ver_CatCatNum <-
       return()
     #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
     hc <-
-      hchart(d, type = "column", hcaes(x = b, y = c, group = a)) %>%
+      hchart(d, type = "column", hcaes(x = as.character(b), y = c, group = a)) %>%
       hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol)),
                      column = list(stacking = "normal")) %>%
       hc_title(text = title) %>%
@@ -789,7 +867,7 @@ hgch_bar_stacked_100_ver_CatCatNum <-
       return()
     #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
     hc <-
-      hchart(d, type = "column", hcaes(x = b, y = c, group = a)) %>%
+      hchart(d, type = "column", hcaes(x = as.character(b), y = c, group = a)) %>%
       hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol)),
                      column = list(stacking = "percent")) %>%
       hc_title(text = title) %>%
@@ -858,7 +936,7 @@ hgch_bar_stacked_hor_CatCatNum <-
     if (nrow(d) == 0)
       return()
     #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-    hc <- hchart(d, type = "bar", hcaes(x = b, y = c, group = a)) %>%
+    hc <- hchart(d, type = "bar", hcaes(x = as.character(b), y = c, group = a)) %>%
       hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol)),
                      bar = list(stacking = "normal")) %>%
       hc_title(text = title) %>%
@@ -926,7 +1004,7 @@ hgch_bar_stacked_100_hor_CatCatNum <-
     if (nrow(d) == 0)
       return()
     #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-    hc <- hchart(d, type = "bar", hcaes(x = b, y = c, group = a)) %>%
+    hc <- hchart(d, type = "bar", hcaes(x = as.character(b), y = c, group = a)) %>%
       hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol =  symbol)),
                      bar = list(stacking = "percent")) %>%
       hc_title(text = title) %>%
@@ -954,6 +1032,20 @@ hgch_bar_stacked_100_hor_CatCatNum <-
   }
 
 
+#' Vertical stacked bar
+#'
+#' Vertical stacked bar
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Cat-Yea-Num
+#' @examples
+#' hgch_bar_stacked_ver_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
+#' @export hgch_bar_stacked_ver_CatYeaNum
+hgch_bar_stacked_ver_CatYeaNum <- hgch_bar_stacked_ver_CatCatNum
+
 
 #' Vertical stacked bar
 #'
@@ -970,6 +1062,37 @@ hgch_bar_stacked_100_hor_CatCatNum <-
 hgch_bar_stacked_ver_CatDatNum <- hgch_bar_stacked_ver_CatCatNum
 
 
+#' Horizontal stacked bar
+#'
+#' Horizontal stacked bar
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Cat-Yea-Num
+#' @examples
+#' hgch_bar_stacked_hor_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
+#' @export hgch_bar_stacked_hor_CatYeaNum
+hgch_bar_stacked_hor_CatYeaNum <- hgch_bar_stacked_hor_CatCatNum
+
+
+
+#' Horizontal stacked bar
+#'
+#' Horizontal stacked bar
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Cat-Dat-Num
+#' @examples
+#' hgch_bar_stacked_hor_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
+#' @export hgch_bar_stacked_hor_CatDatNum
+hgch_bar_stacked_hor_CatDatNum <- hgch_bar_stacked_hor_CatCatNum
+
+
 #' Vertical 100 stacked bar
 #'
 #' Vertical 100 stacked bar
@@ -984,6 +1107,50 @@ hgch_bar_stacked_ver_CatDatNum <- hgch_bar_stacked_ver_CatCatNum
 #' @export hgch_bar_stacked_100_ver_CatDatNum
 hgch_bar_stacked_100_ver_CatDatNum <- hgch_bar_stacked_100_ver_CatCatNum
 
+
+#' Vertical 100 stacked bar
+#'
+#' Vertical 100 stacked bar
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Cat-Yea-Num
+#' @examples
+#' hgch_bar_stacked_100_ver_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
+#' @export hgch_bar_stacked_100_ver_CatYeaNum
+hgch_bar_stacked_100_ver_CatYeaNum <- hgch_bar_stacked_100_ver_CatCatNum
+
+
+#' Horizontal 100 stacked bar
+#'
+#' Horizontal 100 stacked bar
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Cat-Dat-Num
+#' @examples
+#' hgch_bar_stacked_100_hor_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
+#' @export hgch_bar_stacked_100_hor_CatDatNum
+hgch_bar_stacked_100_hor_CatDatNum <- hgch_bar_stacked_100_hor_CatCatNum
+
+
+#' Horizontal 100 stacked bar
+#'
+#' Horizontal 100 stacked bar
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Cat-Yea-Num
+#' @examples
+#' hgch_bar_stacked_100_hor_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
+#' @export hgch_bar_stacked_100_hor_CatYeaNum
+hgch_bar_stacked_100_hor_CatYeaNum <- hgch_bar_stacked_100_hor_CatCatNum
 
 
 
@@ -1567,7 +1734,7 @@ hgch_bar_grouped_hor_CatNumNumNumNum <- function(data,
 #'
 #' @name hgch_bar_ver_Num
 #' @param x A data.frame
-#' @export
+#' @export hgch_bar_ver_Num
 #' @return highcharts viz
 #' @section ctypes:
 #' Num
@@ -1610,7 +1777,7 @@ hgch_bar_ver_Num <- function(data,
 #'
 #' @name hgch_bar_ver_NumNum
 #' @param x A data.frame
-#' @export
+#' @export hgch_bar_ver_NumNum
 #' @return highcharts viz
 #' @section ctypes:
 #' Num-Num
@@ -1653,7 +1820,7 @@ hgch_bar_ver_NumNum <- function(data,
 #'
 #' @name hgch_bar_ver_NumNumNum
 #' @param x A data.frame
-#' @export
+#' @export hgch_bar_ver_NumNumNum
 #' @return highcharts viz
 #' @section ctypes:
 #' Num-Num-Num
@@ -1697,7 +1864,7 @@ hgch_bar_ver_NumNumNum <- function(data,
 #'
 #' @name hgch_bar_ver_NumNumNumNum
 #' @param x A data.frame
-#' @export
+#' @export hgch_bar_ver_NumNumNumNum
 #' @return highcharts viz
 #' @section ctypes:
 #' Num-Num-Num-Num
@@ -1732,6 +1899,181 @@ hgch_bar_ver_NumNumNumNum <- function(data,
   d <- d %>%
     dplyr::mutate(variable = fct_recode_df(d, "variable", codes))
   hgch_bar_ver_CatNum(d, title = title, subtitle = subtitle, caption = caption, xAxisTitle = xAxisTitle, yAxisTitle = yAxisTitle,
+                      symbol = symbol, aggregation = aggregation, startAtZero = startAtZero, theme = theme, export = export)
+}
+
+
+#' Horizontal bar
+#'
+#' Horizontal bar
+#'
+#' @name hgch_bar_hor_Num
+#' @param x A data.frame
+#' @export hgch_bar_hor_Num
+#' @return highcharts viz
+#' @section ctypes:
+#' Num
+#' @examples
+#' hgch_bar_hor_Num(sampleData("Num", nrow = 10))
+hgch_bar_hor_Num <- function(data,
+                             title = NULL,
+                             subtitle = NULL,
+                             caption = NULL,
+                             xAxisTitle = NULL,
+                             yAxisTitle = NULL,
+                             symbol = NULL,
+                             aggregation = "sum",
+                             startAtZero = FALSE,
+                             theme = NULL,
+                             export = FALSE,
+                             ...) {
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% ""
+  yAxisTitle <- yAxisTitle %||% ""
+  title <-  title %||% ""
+  caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
+
+  d <- f$d %>% tidyr::gather(variable, value, 1:length(nms)) %>%
+    dplyr::filter(!is.na(value)) %>% dplyr::group_by(variable) %>% dplyr::ungroup()
+  codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
+  d <- d %>%
+    dplyr::mutate(variable = fct_recode_df(d, "variable", codes))
+  hgch_bar_hor_CatNum(d, title = title, subtitle = subtitle, caption = caption, xAxisTitle = xAxisTitle, yAxisTitle = yAxisTitle,
+                      symbol = symbol, aggregation = aggregation, startAtZero = startAtZero, theme = theme, export = export)
+}
+
+#' Horizontal bar
+#'
+#' Horizontal bar
+#'
+#' @name hgch_bar_hor_NumNum
+#' @param x A data.frame
+#' @export hgch_bar_hor_NumNum
+#' @return highcharts viz
+#' @section ctypes:
+#' Num-Num
+#' @examples
+#' hgch_bar_hor_NumNum(sampleData("Num-Num", nrow = 10))
+hgch_bar_hor_NumNum <- function(data,
+                                title = NULL,
+                                subtitle = NULL,
+                                caption = NULL,
+                                xAxisTitle = NULL,
+                                yAxisTitle = NULL,
+                                symbol = NULL,
+                                aggregation = "sum",
+                                startAtZero = FALSE,
+                                theme = NULL,
+                                export = FALSE,
+                                ...) {
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% ""
+  yAxisTitle <- yAxisTitle %||% ""
+  title <-  title %||% ""
+  caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
+
+  d <- f$d %>% tidyr::gather(variable, value, 1:length(nms)) %>%
+    dplyr::filter(!is.na(value)) %>% dplyr::group_by(variable) %>% dplyr::ungroup()
+  codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
+  d <- d %>%
+    dplyr::mutate(variable = fct_recode_df(d, "variable", codes))
+  hgch_bar_hor_CatNum(d, title = title, subtitle = subtitle, caption = caption, xAxisTitle = xAxisTitle, yAxisTitle = yAxisTitle,
+                      symbol = symbol, aggregation = aggregation, startAtZero = startAtZero, theme = theme, export = export)
+}
+
+#' Horizontal bar
+#'
+#' Horizontal bar
+#'
+#' @name hgch_bar_hor_NumNumNum
+#' @param x A data.frame
+#' @export hgch_bar_hor_NumNumNum
+#' @return highcharts viz
+#' @section ctypes:
+#' Num-Num-Num
+#' @examples
+#' hgch_bar_hor_NumNumNum(sampleData("Num-Num-Num", nrow = 10))
+hgch_bar_hor_NumNumNum <- function(data,
+                                   title = NULL,
+                                   subtitle = NULL,
+                                   caption = NULL,
+                                   xAxisTitle = NULL,
+                                   yAxisTitle = NULL,
+                                   symbol = NULL,
+                                   aggregation = "sum",
+                                   startAtZero = FALSE,
+                                   theme = NULL,
+                                   export = FALSE,
+                                   ...) {
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% ""
+  yAxisTitle <- yAxisTitle %||% ""
+  title <-  title %||% ""
+  caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
+
+  d <- f$d %>% tidyr::gather(variable, value, 1:length(nms)) %>%
+    dplyr::filter(!is.na(value)) %>% dplyr::group_by(variable) %>% dplyr::ungroup()
+  codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
+  d <- d %>%
+    dplyr::mutate(variable = fct_recode_df(d, "variable", codes))
+  hgch_bar_hor_CatNum(d, title = title, subtitle = subtitle, caption = caption, xAxisTitle = xAxisTitle, yAxisTitle = yAxisTitle,
+                      symbol = symbol, aggregation = aggregation, startAtZero = startAtZero, theme = theme, export = export)
+}
+
+
+#' Horizontal bar
+#'
+#' Horizontal bar
+#'
+#' @name hgch_bar_hor_NumNumNumNum
+#' @param x A data.frame
+#' @export hgch_bar_hor_NumNumNumNum
+#' @return highcharts viz
+#' @section ctypes:
+#' Num-Num-Num-Num
+#' @examples
+#' hgch_bar_hor_NumNumNumNum(sampleData("Num-Num-Num-Num", nrow = 10))
+hgch_bar_hor_NumNumNumNum <- function(data,
+                                      title = NULL,
+                                      subtitle = NULL,
+                                      caption = NULL,
+                                      xAxisTitle = NULL,
+                                      yAxisTitle = NULL,
+                                      symbol = NULL,
+                                      aggregation = "sum",
+                                      startAtZero = FALSE,
+                                      theme = NULL,
+                                      export = FALSE,
+                                      ...) {
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% ""
+  yAxisTitle <- yAxisTitle %||% ""
+  title <-  title %||% ""
+  caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
+
+
+  d <- f$d %>% tidyr::gather(variable, value, 1:length(nms)) %>%
+    dplyr::filter(!is.na(value)) %>% dplyr::group_by(variable) %>% dplyr::ungroup()
+  codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
+  d <- d %>%
+    dplyr::mutate(variable = fct_recode_df(d, "variable", codes))
+  hgch_bar_hor_CatNum(d, title = title, subtitle = subtitle, caption = caption, xAxisTitle = xAxisTitle, yAxisTitle = yAxisTitle,
                       symbol = symbol, aggregation = aggregation, startAtZero = startAtZero, theme = theme, export = export)
 }
 

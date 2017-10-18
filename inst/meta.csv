@@ -47,6 +47,9 @@ Horizontal grouped bar
 hgch_bar_grouped_hor_CatCatNum,Horizontal grouped bar,"
 Horizontal grouped bar
 ",Cat-Cat-Num,Cat2-Num,bar,OK
+hgch_bar_grouped_hor_CatDatNum,Horizontal grouped bar,"
+Horizontal grouped bar
+",Cat-Dat-Num,Cat-Dat-Num,bar,OK
 hgch_bar_grouped_hor_CatNum,Horizontal grouped bar,"
 Horizontal grouped bar
 ",Cat-Num,Cat-Num,bar,NA
@@ -59,12 +62,18 @@ Horizontal grouped bar
 hgch_bar_grouped_hor_CatNumNumNumNum,Horizontal grouped bar,"
 Horizontal grouped bar
 ",Cat-Num-Num-Num-Num,Cat-Num4,bar,OK
+hgch_bar_grouped_hor_CatYeaNum,Horizontal grouped bar,"
+Horizontal grouped bar
+",Cat-Yea-Num,Cat-Num-Yea,bar,OK
 hgch_bar_grouped_ver_CatCat,Vertical grouped bar,"
 Vertical grouped bar
 ",Cat-Cat,Cat2,bar,OK
 hgch_bar_grouped_ver_CatCatNum,Vertical grouped bar,"
 Vertical grouped bar
 ",Cat-Cat-Num,Cat2-Num,bar,OK
+hgch_bar_grouped_ver_CatDatNum,Vertical grouped bar,"
+Vertical grouped bar
+",Cat-Dat-Num,Cat-Dat-Num,bar,OK
 hgch_bar_grouped_ver_CatNum,Vertical grouped bar,"
 Vertical grouped bar
 ",Cat-Num,Cat-Num,bar,NA
@@ -86,6 +95,24 @@ Horizontal bar
 hgch_bar_hor_CatNum,Horizontal bar,"
 Horizontal bar
 ",Cat-Num,Cat-Num,bar,OK
+hgch_bar_hor_DatNum,Horizontal bar,"
+Horizontal bar
+",Dat-Num,Dat-Num,bar,OK
+hgch_bar_hor_Num,Horizontal bar,"
+Horizontal bar
+",Num,Num,bar,OK
+hgch_bar_hor_NumNum,Horizontal bar,"
+Horizontal bar
+",Num-Num,Num2,bar,OK
+hgch_bar_hor_NumNumNum,Horizontal bar,"
+Horizontal bar
+",Num-Num-Num,Num3,bar,OK
+hgch_bar_hor_NumNumNumNum,Horizontal bar,"
+Horizontal bar
+",Num-Num-Num-Num,Num4,bar,OK
+hgch_bar_hor_YeaNum,Horizontal bar,"
+Horizontal bar
+",Yea-Num,Num-Yea,bar,OK
 hgch_bar_hor_top_Cat,Ordered horizontal bar,"
 Ordered horizontal bar
 ",Cat,Cat,bar,OK
@@ -98,6 +125,12 @@ Horizontal 100 stacked bar
 hgch_bar_stacked_100_hor_CatCatNum,Horizontal 100 stacked bar,"
 Horizontal 100 stacked bar
 ",Cat-Cat-Num,Cat2-Num,bar,OK
+hgch_bar_stacked_100_hor_CatDatNum,Horizontal 100 stacked bar,"
+Horizontal 100 stacked bar
+",Cat-Dat-Num,Cat-Dat-Num,bar,OK
+hgch_bar_stacked_100_hor_CatYeaNum,Horizontal 100 stacked bar,"
+Horizontal 100 stacked bar
+",Cat-Yea-Num,Cat-Num-Yea,bar,OK
 hgch_bar_stacked_100_ver_CatCat,Vertical 100 stacked bar,"
 Vertical 100 stacked bar
 ",Cat-Cat,Cat2,bar,OK
@@ -107,12 +140,21 @@ Vertical 100 stacked bar
 hgch_bar_stacked_100_ver_CatDatNum,Vertical 100 stacked bar,"
 Vertical 100 stacked bar
 ",Cat-Dat-Num,Cat-Dat-Num,bar,OK
+hgch_bar_stacked_100_ver_CatYeaNum,Vertical 100 stacked bar,"
+Vertical 100 stacked bar
+",Cat-Yea-Num,Cat-Num-Yea,bar,OK
 hgch_bar_stacked_hor_CatCat,Horizontal stacked bar,"
 Horizontal stacked bar
 ",Cat-Cat,Cat2,bar,OK
 hgch_bar_stacked_hor_CatCatNum,Horizontal stacked bar,"
 Horizontal stacked bar
 ",Cat-Cat-Num,Cat2-Num,bar,OK
+hgch_bar_stacked_hor_CatDatNum,Horizontal stacked bar,"
+Horizontal stacked bar
+",Cat-Dat-Num,Cat-Dat-Num,bar,OK
+hgch_bar_stacked_hor_CatYeaNum,Horizontal stacked bar,"
+Horizontal stacked bar
+",Cat-Yea-Num,Cat-Num-Yea,bar,OK
 hgch_bar_stacked_ver_CatCat,Vertical stacked bar,"
 Vertical stacked bar
 ",Cat-Cat,Cat2,bar,OK
@@ -122,6 +164,9 @@ Vertical stacked bar
 hgch_bar_stacked_ver_CatDatNum,Vertical stacked bar,"
 Vertical stacked bar
 ",Cat-Dat-Num,Cat-Dat-Num,bar,OK
+hgch_bar_stacked_ver_CatYeaNum,Vertical stacked bar,"
+Vertical stacked bar
+",Cat-Yea-Num,Cat-Num-Yea,bar,OK
 hgch_bar_ver_Cat,Vertical bar,"
 Vertical bar
 ",Cat,Cat,bar,OK
@@ -133,16 +178,16 @@ Vertical bar
 ",Dat-Num,Dat-Num,bar,OK
 hgch_bar_ver_Num,Vertical bar,"
 Vertical bar
-",Num,Num,bar,NA
+",Num,Num,bar,OK
 hgch_bar_ver_NumNum,Vertical bar,"
 Vertical bar
-",Num-Num,Num2,bar,NA
+",Num-Num,Num2,bar,OK
 hgch_bar_ver_NumNumNum,Vertical bar,"
 Vertical bar
-",Num-Num-Num,Num3,bar,NA
+",Num-Num-Num,Num3,bar,OK
 hgch_bar_ver_NumNumNumNum,Vertical bar,"
 Vertical bar
-",Num-Num-Num-Num,Num4,bar,NA
+",Num-Num-Num-Num,Num4,bar,OK
 hgch_bar_ver_YeaNum,Vertical bar,"
 Vertical bar
 ",Yea-Num,Num-Yea,bar,OK
