@@ -209,7 +209,10 @@ hgch_treemap_nested_CatCatNum <- function(data, title = NULL, subtitle = NULL, c
 
   title <-  title %||% f$name
   data <- f$d
-  data <- data %>% drop_na(a, b) %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = mean(c, na.rm = TRUE))
+  data <- data %>%
+    drop_na(a, b) %>%
+    dplyr::group_by(a, b) %>%
+    dplyr::summarise(c = mean(c, na.rm = TRUE))
 
   hc_trm = with(environment(hc_add_series_treemap),
                 ## Modified `hc_add_series_treemap`
@@ -282,8 +285,7 @@ hgch_treemap_nested_CatCatNum <- function(data, title = NULL, subtitle = NULL, c
 #' hgch_treemap_nested_grouped_CatCatNum(sampleData("Cat-Cat-Num",nrow = 10))
 #'
 #' @export hgch_treemap_nested_grouped_CatCatNum
-hgch_treemap_nested_grouped_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
-                                                  minColor = "#E63917", maxColor = "#18941E", export = FALSE,...){
+hgch_treemap_nested_grouped_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, export = FALSE,...){
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -297,7 +299,7 @@ hgch_treemap_nested_grouped_CatCatNum <- function(data, title = NULL, subtitle =
                          index = c("a", "b"),
                          vSize = "c",
                          vColor = "c",
-                         palette = viridis::viridis(6),
+                         palette = getPalette()[1:(dim(data)[1])],
                          draw = FALSE)
   hc <- hctreemap(tm, allowDrillToNode = TRUE, layoutAlgorithm = "squarified") %>%
     hc_title(text = title) %>%
@@ -328,11 +330,11 @@ hgch_treemap_nested_grouped_CatCatNum <- function(data, title = NULL, subtitle =
 #' Cat-Num-Num
 #' @examples
 #'
-#' hgch_treemap_nested_grouped_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
+#' hgch_treemap_nested_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
 #'
-#' @export hgch_treemap_nested_grouped_CatNumNum
-hgch_treemap_nested_grouped_CatNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
-                                                  minColor = "#440154", maxColor = "#FDE725", export = FALSE,...){
+#' @export hgch_treemap_nested_CatNumNum
+hgch_treemap_nested_CatNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
+                                          minColor = "#440154", maxColor = "#FDE725", export = FALSE,...){
   f <- fringe(data)
   nms <- getClabels(f)
 
@@ -343,7 +345,7 @@ hgch_treemap_nested_grouped_CatNumNum <- function(data, title = NULL, subtitle =
   data <- data %>%
     drop_na(a, b, c) %>%
     dplyr::group_by(a) %>%
-    dplyr::summarise(b = mean(b, na.rm = TRUE), c = mean(c, na.rm = TRUE))
+    dplyr::summarise(b = sum(b, na.rm = TRUE), c = sum(c, na.rm = TRUE))
 
   hc_trm = with(environment(hc_add_series_treemap),
                 ## Modified `hc_add_series_treemap`
