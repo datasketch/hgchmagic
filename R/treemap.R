@@ -317,4 +317,95 @@ hgch_treemap_nested_grouped_CatCatNum <- function(data, title = NULL, subtitle =
 }
 
 
+#' Nested treemap density
+#'
+#' Nested treemap density
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Cat-Num-Num
+#' @examples
+#'
+#' hgch_treemap_nested_grouped_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
+#'
+#' @export hgch_treemap_nested_grouped_CatNumNum
+hgch_treemap_nested_grouped_CatNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
+                                                  minColor = "#440154", maxColor = "#FDE725", export = FALSE,...){
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  title <-  title %||% f$name
+  subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
+  data <- f$d
+  data <- data %>%
+    drop_na(a, b, c) %>%
+    dplyr::group_by(a) %>%
+    dplyr::summarise(b = mean(b, na.rm = TRUE), c = mean(c, na.rm = TRUE))
+
+  hc_trm = with(environment(hc_add_series_treemap),
+                ## Modified `hc_add_series_treemap`
+                ## names colorValue correctly for connection to `hc_colorAxis`
+                function (hc, tm, ...)
+                {
+                  assertthat::assert_that(is.highchart(hc), is.list(tm))
+                  df <- tm$tm %>% tbl_df() %>% select_("-x0", "-y0", "-w",
+                                                       "-h", "-stdErr", "-vColorValue") %>% rename_(value = "vSize",
+                                                                                                    colorValue = "vColor") %>% purrr::map_if(is.factor, as.character) %>%
+                    data.frame(stringsAsFactors = FALSE) %>% tbl_df()
+                  ndepth <- which(names(df) == "value") - 1
+                  ds <- map_df(seq(ndepth), function(lvl) {
+                    df2 <- df %>% filter_(sprintf("level == %s", lvl)) %>%
+                      rename_(name = names(df)[lvl]) %>% mutate_(id = "highcharter::str_to_id(name)")
+                    if (lvl > 1) {
+                      df2 <- df2 %>% mutate_(parent = names(df)[lvl - 1],
+                                             parent = "highcharter::str_to_id(parent)")
+                    }
+                    else {
+                      df2 <- df2 %>% mutate_(parent = NA)
+                    }
+                    df2
+                  })
+                  ds <- list_parse(ds)
+                  ds <- map(ds, function(x) {
+                    if (is.na(x$parent))
+                      x$parent <- NULL
+                    x
+                  })
+                  hc %>% hc_add_series(data = ds, type = "treemap", ...)
+                }
+  )
+
+
+  tm <- treemap::treemap(data,
+                         index = "a",
+                         vSize = "b",
+                         vColor = "c",
+                         palette = c(minColor, maxColor),
+                         type = "dens",
+                         draw = FALSE)
+
+  hc <- highchart()
+  hc <- hc_trm(hc, tm, allowDrillToNode = TRUE, layoutAlgorithm = "squarified") %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_credits(enabled = TRUE, text = caption) %>%
+    hc_plotOptions(
+      series = list(
+        levels = list(
+          level = 1,
+          dataLabels = list(enabled = TRUE),
+          borderWidth = 3
+        )
+      )
+    ) %>%
+    hc_colorAxis(maxColor = maxColor, minColor = minColor)
+  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  hc
+}
+
+
+
 
