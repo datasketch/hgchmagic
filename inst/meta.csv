@@ -311,6 +311,9 @@ Nested treemap density by numeric variable
 hgch_treemap_nested_grouped_CatCatNum,Nested treemap grouped by categorical variable,"
 Nested treemap grouped by categorical variable
 ",Cat-Cat-Num,Cat2-Num,treemap,OK
+hgch_treemap_nested_grouped_CatNumNum,Nested treemap density,"
+Nested treemap density
+",Cat-Num-Num,Cat-Num2,treemap,OK
 hgch_waterfall_CatNum,Waterfall,"
 Waterfall
 ",Cat-Num,Cat-Num,waterfall,OK

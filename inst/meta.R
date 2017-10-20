@@ -54,7 +54,7 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
 
                                     "hgch_treemap_Cat", "hgch_treemap_discrete_color_Cat", "hgch_treemap_CatNum",
                                     "hgch_treemap_discrete_color_CatNum", "hgch_treemap_nested_CatCatNum ",
-                                    "hgch_treemap_nested_grouped_CatCatNum",
+                                    "hgch_treemap_nested_grouped_CatCatNum", "hgch_treemap_nested_grouped_CatNumNum",
 
                                     "hgch_scatter_CatNumNum", "hgch_scatter_grouped_CatNumNum", "hgch_scatter_CatNumNumNum", "hgch_scatter_CatCatNumNum", "hgch_scatter_CatCatNumNumNum"),
 
@@ -71,7 +71,7 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
 
                                       "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK", "OK",
 
-                                      "OK", "OK", "OK", "OK", "OK", "OK",
+                                      "OK", "OK", "OK", "OK", "OK", "OK", "OK",
 
                                       "OK", "OK", "OK", "OK", "OK"),
 
@@ -140,7 +140,7 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
 
                                        NA, NA, NA, NA, NA, NA, NA, NA, NA,
 
-                                       NA, NA, NA, NA, NA, NA,
+                                       NA, NA, NA, NA, NA, NA, NA,
 
                                        NA, NA, NA, NA, NA)
 )
