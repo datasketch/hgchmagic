@@ -5,8 +5,7 @@
 \title{Nested treemap grouped by categorical variable}
 \usage{
 hgch_treemap_nested_grouped_CatCatNum(data, title = NULL, subtitle = NULL,
-  caption = NULL, minColor = "#E63917", maxColor = "#18941E",
-  export = FALSE, ...)
+  caption = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
