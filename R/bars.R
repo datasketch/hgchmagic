@@ -45,7 +45,7 @@ hgch_bar_ver_Cat <-
     f <- fringe(data)
     nms <- getClabels(f)
 
-    xAxisTitle <- xAxisTitle %||% nms[1]
+    xAxisTitle <- xAxisTitle %||% ""
     yAxisTitle <- yAxisTitle %||% ""
     title <-  title %||% ""
     caption <- caption %||% ""
@@ -1036,14 +1036,13 @@ hgch_bar_stacked_100_hor_CatCatNum <-
 #'
 #' Vertical stacked bar
 #'
-#'
+#' @export hgch_bar_stacked_ver_CatYeaNum
 #' @param x A data.frame
 #' @return highcharts viz
 #' @section ctypes:
 #' Cat-Yea-Num
 #' @examples
 #' hgch_bar_stacked_ver_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
-#' @export hgch_bar_stacked_ver_CatYeaNum
 hgch_bar_stacked_ver_CatYeaNum <- hgch_bar_stacked_ver_CatCatNum
 
 
