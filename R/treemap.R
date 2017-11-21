@@ -253,8 +253,9 @@ hgch_treemap_nested_CatCatNum <- function(data, title = NULL, subtitle = NULL, c
                          vColor = "c",
                          type = "value",
                          palette = c("#009EE3", "#9B71AF"),
-                         #palette = hgchmagic::getPalette()[1:11],
                          draw = FALSE)
+                         #palette = hgchmagic::getPalette()[1:11],
+
   hc <- highchart()
   hc <- hc_trm(hc, tm, allowDrillToNode = TRUE, layoutAlgorithm = "squarified") %>%
     hc_title(text = title) %>%
@@ -282,7 +283,7 @@ hgch_treemap_nested_CatCatNum <- function(data, title = NULL, subtitle = NULL, c
 #' Cat-Cat-Num
 #' @examples
 #'
-#' hgch_treemap_nested_grouped_CatCatNum(sampleData("Cat-Cat-Num",nrow = 10))
+#' hgch_treemap_nested_grouped_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
 #'
 #' @export hgch_treemap_nested_grouped_CatCatNum
 hgch_treemap_nested_grouped_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, export = FALSE,...){
@@ -293,6 +294,9 @@ hgch_treemap_nested_grouped_CatCatNum <- function(data, title = NULL, subtitle =
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
   data <- f$d
+  data <- data %>% dplyr::mutate(a = ifelse(is.na(a), "NA", a),
+                                 b = ifelse(is.na(b), "NA", b))
+
   data <- data %>% drop_na(a, b) %>% dplyr::group_by(a, b) %>% dplyr::summarise(c = mean(c, na.rm = TRUE))
 
   tm <- treemap::treemap(data,
@@ -330,7 +334,7 @@ hgch_treemap_nested_grouped_CatCatNum <- function(data, title = NULL, subtitle =
 #' Cat-Num-Num
 #' @examples
 #'
-#' hgch_treemap_nested_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
+#' hgch_treemap_nested_CatNumNum(sampleData("Cat-Num-Num", nrow = 10))
 #'
 #' @export hgch_treemap_nested_CatNumNum
 hgch_treemap_nested_CatNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
@@ -342,6 +346,7 @@ hgch_treemap_nested_CatNumNum <- function(data, title = NULL, subtitle = NULL, c
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
   data <- f$d
+  data <- data %>% dplyr::mutate(a = ifelse(is.na(a), "NA", a))
   data <- data %>%
     drop_na(a, b, c) %>%
     dplyr::group_by(a) %>%
@@ -404,7 +409,7 @@ hgch_treemap_nested_CatNumNum <- function(data, title = NULL, subtitle = NULL, c
       )
     ) %>%
     hc_colorAxis(maxColor = maxColor, minColor = minColor)
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  if (export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
 
