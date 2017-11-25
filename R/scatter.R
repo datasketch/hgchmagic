@@ -33,7 +33,7 @@ hgch_polarcolumn_Cat <-function(data, title = ""){
     hc_title(text = title) %>%
     hc_chart(type = "column",
              polar = TRUE) %>%
-    hc_xAxis(Cattegories = data_graph$name) %>%
+    hc_xAxis(categories = data_graph$name) %>%
     hc_add_series(data_graph, showInLegend = FALSE)
   hc
 }
@@ -74,7 +74,7 @@ hgch_polarcolumn_CatNum <-function(data, title = ""){
     hc_title(text = title) %>%
     hc_chart(type = "column",
              polar = TRUE) %>%
-    hc_xAxis(Cattegories = data_graph$name) %>%
+    hc_xAxis(categories = data_graph$name) %>%
     hc_add_series(data_graph, showInLegend = FALSE)
   hc
 }
