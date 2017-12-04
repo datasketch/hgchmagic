@@ -6,8 +6,7 @@
 \usage{
 hgch_bar_ver_Num(data, title = NULL, subtitle = NULL, caption = NULL,
   xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  aggregation = "sum", startAtZero = FALSE, theme = NULL,
-  export = FALSE, ...)
+  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

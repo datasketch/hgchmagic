@@ -24,6 +24,6 @@ Cat-Num-Num
 
 \examples{
 
-hgch_treemap_nested_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
+hgch_treemap_nested_CatNumNum(sampleData("Cat-Num-Num", nrow = 10))
 
 }

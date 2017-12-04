@@ -29,9 +29,9 @@ metaStatus <- data.frame("name" = c("hgch_area_DatNum", "hgch_area_CatNum", "hgc
                                     "hgch_area_stacked_100_CatYeaNum", "hgch_area_CatDatNum", "hgch_area_stacked_CatDatNum",
                                     "hgch_area_stacked_100_CatDatNum", "hgch_2yline_YeaNumNum", "hgch_multilines_YeaNumP",
 
-                                    "hgch_bar_ver_Cat", "hgch_bar_ver_top_Cat", "hgch_bar_hor_Cat", "hgch_bar_hor_top_Cat", "hgch_bar_ver_CatNum",
-                                    "hgch_bar_ver_top_CatNum", "hgch_bar_ver_YeaNum", "hgch_bar_ver_DatNum", "hgch_bar_hor_CatNum",
-                                    "hgch_bar_hor_top_CatNum", "hgch_bar_hor_YeaNum", "hgch_bar_hor_DatNum", "hgch_bar_grouped_ver_CatCatNum", "hgch_bar_grouped_ver_CatYeaNum",
+                                    "hgch_bar_ver_Cat", "hgch_bar_top_ver_Cat", "hgch_bar_hor_Cat", "hgch_bar_top_hor_Cat", "hgch_bar_ver_CatNum",
+                                    "hgch_bar_top_ver_CatNum", "hgch_bar_ver_YeaNum", "hgch_bar_ver_DatNum", "hgch_bar_hor_CatNum",
+                                    "hgch_bar_top_hor_CatNum", "hgch_bar_hor_YeaNum", "hgch_bar_hor_DatNum", "hgch_bar_grouped_ver_CatCatNum", "hgch_bar_grouped_ver_CatYeaNum",
                                     "hgch_bar_grouped_ver_CatDatNum", "hgch_bar_grouped_hor_CatCatNum", "hgch_bar_grouped_hor_CatYeaNum",
                                     "hgch_bar_grouped_hor_CatDatNum", "hgch_bar_stacked_ver_CatCatNum", "hgch_bar_stacked_100_ver_CatCatNum",
                                     "hgch_bar_stacked_hor_CatCatNum", "hgch_bar_stacked_100_hor_CatCatNum", "hgch_bar_stacked_ver_CatDatNum",

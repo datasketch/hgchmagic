@@ -45,7 +45,7 @@ hgch_bar_ver_Cat <-
     f <- fringe(data)
     nms <- getClabels(f)
 
-    xAxisTitle <- xAxisTitle %||% ""
+    xAxisTitle <- xAxisTitle %||% nms[1]
     yAxisTitle <- yAxisTitle %||% ""
     title <-  title %||% ""
     caption <- caption %||% ""
@@ -91,10 +91,10 @@ hgch_bar_ver_Cat <-
 #' @section ctypes:
 #' Cat
 #' @examples
-#' hgch_bar_ver_top_Cat(sampleData("Cat", nrow = 10))
+#' hgch_bar_top_ver_Cat(sampleData("Cat", nrow = 10))
 #'
-#' @export hgch_bar_ver_top_Cat
-hgch_bar_ver_top_Cat <- function(data,
+#' @export hgch_bar_top_ver_Cat
+hgch_bar_top_ver_Cat <- function(data,
                                  topn = NULL,
                                  title = NULL,
                                  subtitle = NULL,
@@ -199,9 +199,9 @@ hgch_bar_hor_Cat <-
 #' @section ctypes:
 #' Cat
 #' @examples
-#' hgch_bar_hor_top_Cat(sampleData("Cat", nrow = 10))
-#' @export hgch_bar_hor_top_Cat
-hgch_bar_hor_top_Cat <- function(data,
+#' hgch_bar_top_hor_Cat(sampleData("Cat", nrow = 10))
+#' @export hgch_bar_top_hor_Cat
+hgch_bar_top_hor_Cat <- function(data,
                                 topn = NULL,
                                 title = NULL,
                                 subtitle = NULL,
@@ -331,9 +331,9 @@ hgch_bar_ver_CatNum <-
 #' @section ctypes:
 #' Cat-Num
 #' @examples
-#' hgch_bar_ver_top_CatNum(sampleData("Cat-Num", nrow = 10))
-#' @export hgch_bar_ver_top_CatNum
-hgch_bar_ver_top_CatNum <- function(data,
+#' hgch_bar_top_ver_CatNum(sampleData("Cat-Num", nrow = 10))
+#' @export hgch_bar_top_ver_CatNum
+hgch_bar_top_ver_CatNum <- function(data,
                                   topn = NULL,
                                   title = NULL,
                                   subtitle = NULL,
@@ -493,9 +493,9 @@ hgch_bar_hor_CatNum <- function(data,
 #' @section ctypes:
 #' Cat-Num
 #' @examples
-#' hgch_bar_hor_top_CatNum(sampleData("Cat-Num", nrow = 10))
-#' @export hgch_bar_hor_top_CatNum
-hgch_bar_hor_top_CatNum <- function(data,
+#' hgch_bar_top_hor_CatNum(sampleData("Cat-Num", nrow = 10))
+#' @export hgch_bar_top_hor_CatNum
+hgch_bar_top_hor_CatNum <- function(data,
                                     topn = NULL,
                                     title = NULL,
                                     subtitle = NULL,
@@ -507,18 +507,17 @@ hgch_bar_hor_top_CatNum <- function(data,
                                     theme = NULL,
                                     export = FALSE,
                                     ...) {
-  hgch_bar_hor_CatNum(
-    data,
-    topn = topn,
-    title = title,
-    subtitle = subtitle,
-    caption = caption,
-    xAxisTitle = xAxisTitle,
-    yAxisTitle = yAxisTitle,
-    sort = "top",
-    aggregation = aggregation,
-    theme = theme,
-    export = export
+  hgch_bar_hor_CatNum(data,
+                      topn = topn,
+                      title = title,
+                      subtitle = subtitle,
+                      caption = caption,
+                      xAxisTitle = xAxisTitle,
+                      yAxisTitle = yAxisTitle,
+                      sort = "top",
+                      aggregation = aggregation,
+                      theme = theme,
+                      export = export
   )
 
 }
@@ -1746,7 +1745,6 @@ hgch_bar_ver_Num <- function(data,
                          xAxisTitle = NULL,
                          yAxisTitle = NULL,
                          symbol = NULL,
-                         aggregation = "sum",
                          startAtZero = FALSE,
                          theme = NULL,
                          export = FALSE,
@@ -1761,13 +1759,14 @@ hgch_bar_ver_Num <- function(data,
   caption <- caption %||% ""
   subtitle <- subtitle %||% ""
 
-  d <- f$d %>% tidyr::gather(variable, value, 1:length(nms)) %>%
-    dplyr::filter(!is.na(value)) %>% dplyr::group_by(variable) %>% dplyr::ungroup()
-  codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
-  d <- d %>%
-    dplyr::mutate(variable = fct_recode_df(d, "variable", codes))
+ d <- f$d %>% tidyr::gather(variable, value, 1:length(nms)) %>%
+   dplyr::filter(!is.na(value)) %>% dplyr::group_by(variable) %>% dplyr::ungroup()
+ codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
+ d <- d %>%
+   dplyr::mutate(variable = fct_recode_df(d, "variable", codes))
  hgch_bar_ver_CatNum(d, title = title, subtitle = subtitle, caption = caption, xAxisTitle = xAxisTitle, yAxisTitle = yAxisTitle,
                      symbol = symbol, aggregation = aggregation, startAtZero = startAtZero, theme = theme, export = export)
+
 }
 
 #' Vertical bar
