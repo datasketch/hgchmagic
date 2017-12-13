@@ -209,6 +209,9 @@ hgch_donut_CatNum
 hgch_funnel_CatNum,Funnel,"
 Funnel
 ",Cat-Num,Cat-Num,funnel,NA
+hgch_heatmap_matrix_CatCatNum,Heatmap matrix,"
+Heatmap matrix
+",CatCatNum,CatCatNum,heatmap,NA
 hgch_line_CatCatNum,Line,"
 Line
 ",Cat-Cat-Num,Cat2-Num,line,OK
@@ -229,19 +232,19 @@ Line
 ",Yea-Num,Num-Yea,line,OK
 hgch_multilines_YeaNum,Grouped line,"
 Grouped line
-", Yea-Num,Num- Yea,multilines,OK
+", Yea-Num, Yea-Num,multilines,OK
 hgch_multilines_YeaNumNum,Grouped line,"
 Grouped line
-", Yea-Num-Num,Num2- Yea,multilines,OK
+", Yea-Num-Num, Yea-Num2,multilines,OK
 hgch_multilines_YeaNumNumNum,Grouped line,"
 Grouped line
-", Yea-Num-Num-Num,Num3- Yea,multilines,OK
+", Yea-Num-Num-Num, Yea-Num3,multilines,OK
 hgch_multilines_YeaNumNumNumNum,Grouped line,"
 Grouped line
-", Yea-Num-Num-Num-Num,Num4- Yea,multilines,OK
+", Yea-Num-Num-Num-Num, Yea-Num4,multilines,OK
 hgch_multilines_YeaNumP,Grouped line,"
 Grouped line
-", Yea-NumP,NumP- Yea,multilines,NA
+", Yea-NumP, Yea-NumP,multilines,NA
 hgch_pie_Cat,hgch_pie_Cat,"
 hgch_pie_Cat
 ",Cat,Cat,pie,OK
