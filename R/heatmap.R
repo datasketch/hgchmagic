@@ -45,8 +45,8 @@ hgch_heatmap_matrix_CatCatNum <- function(data,
       hc_add_series(data = d, type = "heatmap", hcaes(x = b, y = a, value = c)) %>%
       hc_title(text = title) %>%
       hc_subtitle(text = subtitle) %>%
-      hc_yAxis(categories = unique(d[[1]]),title = list(text = xAxisTitle)) %>%
-      hc_xAxis(categories = unique(d[[2]]),title = list(text = yAxisTitle)) %>%
+      hc_yAxis(categories = unique(d[[1]]),title = list(text = yAxisTitle)) %>%
+      hc_xAxis(categories = unique(d[[2]]),title = list(text = xAxisTitle)) %>%
       hc_colorAxis() %>%
       hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", xAxisTitle, "</b><br/>"),
                  pointFormat = "<b style = 'font-size:12px'>{point.a}: {point.b}</b>")
