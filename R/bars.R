@@ -9,7 +9,35 @@ count_pl <- function(x) {
   }
 }
 
+hgch_bar <- function (data,
+                      filterNA = TRUE,
+                      title = NULL,
+                      subtitle = NULL,
+                      caption = NULL,
+                      xAxisTitle = NULL,
+                      yAxisTitle = NULL,
+                      symbol = NULL,
+                      alignment = "ver",
+                      cTypes = c("Cat")) {
 
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  labes <- getAxisLabes(c(xAxisTitle, yAxisTitle), nms, alignment, cTypes)
+  xAxisTitle <- labels[[1]]
+  yAxisTitle <- labels[[2]]
+
+  title <-  title %||% ""
+  symbol <- symbol %||% "circle"
+  caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
+
+  d <- parseNA(f$d, filterNA)
+  if (nrow(d) == 0)
+    return()
+
+  hgch_bar_top_hor_Cat(data)
+}
 
 #' Vertical bar
 #'
@@ -36,15 +64,6 @@ hgch_bar_ver_Cat <-
            export = FALSE,
            ...) {
 
-    if(class(data)[1] == "Fringe"){
-      ni <- getClabels(data)
-    }else{
-      ni <- names(data)
-    }
-
-    f <- fringe(data)
-    nms <- getClabels(f)
-
     xAxisTitle <- xAxisTitle %||% nms[1]
     yAxisTitle <- yAxisTitle %||% ""
     title <-  title %||% ""
@@ -63,7 +82,6 @@ hgch_bar_ver_Cat <-
         d <- d
       }
     }
-    d$ni <- ni
 
     hc <- hchart(d, type = "column", hcaes(x = a, y = b)) %>%
       hc_title(text = title) %>%
@@ -144,26 +162,9 @@ hgch_bar_hor_Cat <-
            sort = "no",
            theme = NULL,
            export = FALSE,
+           filterNA = TRUE,
            ...) {
 
-    if(class(data)[1] == "Fringe"){
-      ni <- getClabels(data)
-    }else{
-      ni <- names(data)
-    }
-
-    f <- fringe(data)
-    nms <- getClabels(f)
-
-    xAxisTitle <- xAxisTitle %||% ""
-    yAxisTitle <- yAxisTitle %||% nms[1]
-    title <-  title %||% ""
-    caption <- caption %||% ""
-    subtitle <- subtitle %||% ""
-
-    d <- f$d
-    if (nrow(d) == 0)
-      return()
     d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = n())
     if (sort == "top") {
       d <- d %>% dplyr::arrange(desc(b))
@@ -211,6 +212,7 @@ hgch_bar_top_hor_Cat <- function(data,
                                 reverse = TRUE,
                                 theme = NULL,
                                 export = FALSE,
+                                filterNA = TRUE,
                                 ...) {
   hgch_bar_hor_Cat(
     data,
@@ -222,7 +224,8 @@ hgch_bar_top_hor_Cat <- function(data,
     yAxisTitle = yAxisTitle,
     sort = "top",
     theme = theme,
-    export = export
+    export = export,
+    filterNA = filterNA
   )
 }
 
