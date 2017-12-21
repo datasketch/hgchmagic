@@ -9,6 +9,8 @@ count_pl <- function(x) {
   }
 }
 
+
+
 #' Vertical bar
 #'
 #' Vertical bar
@@ -34,6 +36,16 @@ hgch_bar_ver_Cat <-
            export = FALSE,
            ...) {
 
+    if(class(data)[1] == "Fringe"){
+      ni <- getClabels(data)
+    }else{
+      ni <- names(data)
+    }
+
+    f <- fringe(data)
+    nms <- getClabels(f)
+
+
     xAxisTitle <- xAxisTitle %||% nms[1]
     yAxisTitle <- yAxisTitle %||% ""
     title <-  title %||% ""
@@ -52,6 +64,8 @@ hgch_bar_ver_Cat <-
         d <- d
       }
     }
+
+    d$ni <- ni
 
     hc <- hchart(d, type = "column", hcaes(x = a, y = b)) %>%
       hc_title(text = title) %>%
