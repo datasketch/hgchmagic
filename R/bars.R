@@ -45,7 +45,6 @@ hgch_bar_ver_Cat <-
     f <- fringe(data)
     nms <- getClabels(f)
 
-
     xAxisTitle <- xAxisTitle %||% nms[1]
     yAxisTitle <- yAxisTitle %||% ""
     title <-  title %||% ""
@@ -64,7 +63,6 @@ hgch_bar_ver_Cat <-
         d <- d
       }
     }
-
     d$ni <- ni
 
     hc <- hchart(d, type = "column", hcaes(x = a, y = b)) %>%
