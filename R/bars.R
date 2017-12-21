@@ -16,19 +16,13 @@ hgch_bar <- function (data,
                       caption = NULL,
                       xAxisTitle = NULL,
                       yAxisTitle = NULL,
-                      symbol = NULL,
                       alignment = "ver",
                       cTypes = c("Cat")) {
 
   f <- fringe(data)
   nms <- getClabels(f)
 
-  labes <- getAxisLabes(c(xAxisTitle, yAxisTitle), nms, alignment, cTypes)
-  xAxisTitle <- labels[[1]]
-  yAxisTitle <- labels[[2]]
-
   title <-  title %||% ""
-  symbol <- symbol %||% "circle"
   caption <- caption %||% ""
   subtitle <- subtitle %||% ""
 
@@ -36,7 +30,7 @@ hgch_bar <- function (data,
   if (nrow(d) == 0)
     return()
 
-  hgch_bar_top_hor_Cat(data)
+  hgch_bar_top_hor_Cat(d, nms)
 }
 
 #' Vertical bar
@@ -153,6 +147,7 @@ hgch_bar_top_ver_Cat <- function(data,
 #' @export hgch_bar_hor_Cat
 hgch_bar_hor_Cat <-
   function(data,
+           nms,
            topn = NULL,
            title = NULL,
            subtitle = NULL,
@@ -162,8 +157,10 @@ hgch_bar_hor_Cat <-
            sort = "no",
            theme = NULL,
            export = FALSE,
-           filterNA = TRUE,
            ...) {
+
+    xAxisTitle <- xAxisTitle %||% ""
+    yAxisTitle <- yAxisTitle %||% nms[1]
 
     d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = n())
     if (sort == "top") {
@@ -203,19 +200,20 @@ hgch_bar_hor_Cat <-
 #' hgch_bar_top_hor_Cat(sampleData("Cat", nrow = 10))
 #' @export hgch_bar_top_hor_Cat
 hgch_bar_top_hor_Cat <- function(data,
-                                topn = NULL,
-                                title = NULL,
-                                subtitle = NULL,
-                                caption = NULL,
-                                xAxisTitle = NULL,
-                                yAxisTitle = NULL,
-                                reverse = TRUE,
-                                theme = NULL,
-                                export = FALSE,
-                                filterNA = TRUE,
-                                ...) {
+                                 nsm,
+                                 topn = NULL,
+                                 title = NULL,
+                                 subtitle = NULL,
+                                 caption = NULL,
+                                 xAxisTitle = NULL,
+                                 yAxisTitle = NULL,
+                                 reverse = TRUE,
+                                 theme = NULL,
+                                 export = FALSE,
+                                 ...) {
   hgch_bar_hor_Cat(
     data,
+    nms,
     topn = topn,
     title = title,
     subtitle = subtitle,
@@ -224,8 +222,7 @@ hgch_bar_top_hor_Cat <- function(data,
     yAxisTitle = yAxisTitle,
     sort = "top",
     theme = theme,
-    export = export,
-    filterNA = filterNA
+    export = export
   )
 }
 
