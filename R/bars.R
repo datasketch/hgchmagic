@@ -9,30 +9,6 @@ count_pl <- function(x) {
   }
 }
 
-hgch_bar <- function (data,
-                      filterNA = TRUE,
-                      title = NULL,
-                      subtitle = NULL,
-                      caption = NULL,
-                      xAxisTitle = NULL,
-                      yAxisTitle = NULL,
-                      alignment = "ver",
-                      cTypes = c("Cat")) {
-
-  f <- fringe(data)
-  nms <- getClabels(f)
-
-  title <-  title %||% ""
-  caption <- caption %||% ""
-  subtitle <- subtitle %||% ""
-
-  d <- parseNA(f$d, filterNA)
-  if (nrow(d) == 0)
-    return()
-
-  hgch_bar_top_hor_Cat(d, nms)
-}
-
 #' Vertical bar
 #'
 #' Vertical bar
@@ -131,102 +107,6 @@ hgch_bar_top_ver_Cat <- function(data,
   )
 
 }
-
-
-#' Horizontal bar
-#'
-#' Horizontal bar
-#'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
-#' @section ctypes:
-#' Cat
-#' @examples
-#' hgch_bar_hor_Cat(sampleData("Cat", nrow = 10))
-#' @export hgch_bar_hor_Cat
-hgch_bar_hor_Cat <-
-  function(data,
-           nms,
-           topn = NULL,
-           title = NULL,
-           subtitle = NULL,
-           caption = NULL,
-           xAxisTitle = NULL,
-           yAxisTitle = NULL,
-           sort = "no",
-           theme = NULL,
-           export = FALSE,
-           ...) {
-
-    xAxisTitle <- xAxisTitle %||% ""
-    yAxisTitle <- yAxisTitle %||% nms[1]
-
-    d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = n())
-    if (sort == "top") {
-      d <- d %>% dplyr::arrange(desc(b))
-      if (!is.null(topn)) {
-        d <- dplyr::slice(d, 1:topn)
-      } else {
-        d <- d
-      }
-    }
-    hc <- hchart(d, type = "bar", hcaes(x = a, y = b)) %>%
-      hc_plotOptions(column = list(stacking = "normal")) %>%
-      hc_title(text = title) %>%
-      hc_subtitle(text = subtitle) %>%
-      hc_xAxis(title = list(text = yAxisTitle)) %>%
-      hc_yAxis(title = list(text = xAxisTitle))%>%
-      hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", yAxisTitle, "</b><br/>"),
-                 pointFormat = "<b style = 'font-size:12px'>{point.a}: {point.b}</b>")
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
-      hc_credits(enabled = TRUE, text = caption)
-    if (export)
-      hc <- hc %>% hc_exporting(enabled = TRUE)
-    hc
-  }
-
-
-#' Ordered horizontal bar
-#'
-#' Ordered horizontal bar
-#'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
-#' @section ctypes:
-#' Cat
-#' @examples
-#' hgch_bar_top_hor_Cat(sampleData("Cat", nrow = 10))
-#' @export hgch_bar_top_hor_Cat
-hgch_bar_top_hor_Cat <- function(data,
-                                 nsm,
-                                 topn = NULL,
-                                 title = NULL,
-                                 subtitle = NULL,
-                                 caption = NULL,
-                                 xAxisTitle = NULL,
-                                 yAxisTitle = NULL,
-                                 reverse = TRUE,
-                                 theme = NULL,
-                                 export = FALSE,
-                                 ...) {
-  hgch_bar_hor_Cat(
-    data,
-    nms,
-    topn = topn,
-    title = title,
-    subtitle = subtitle,
-    caption = caption,
-    xAxisTitle = xAxisTitle,
-    yAxisTitle = yAxisTitle,
-    sort = "top",
-    theme = theme,
-    export = export
-  )
-}
-
-
 
 #' Vertical bar
 #'
@@ -361,7 +241,77 @@ hgch_bar_top_ver_CatNum <- function(data,
 
 }
 
+#' Ordered and Unordered Horizontal bar
+#'
+#' Ordered and Unordered Horizontal bar
+#'
+#'
+#' @param x A data.frame
+#' @return highcharts viz
+#' @section ctypes:
+#' Cat
+#' @examples
+#' hgch_bar_hor_Cat(sampleData("Cat", nrow = 10))
+#' hgch_bar_hor_Cat(sampleData("Cat", nrow = 10), sort = "top")
+#' hgch_bar_hor_Cat(sampleData("Cat", nrow = 10), filterNA = FALSE)
+#' @export hgch_bar_hor_Cat
+hgch_bar_hor_Cat <- function (data,
+                              topn = NULL,
+                              filterNA = TRUE,
+                              title = NULL,
+                              subtitle = NULL,
+                              caption = NULL,
+                              xAxisTitle = NULL,
+                              yAxisTitle = NULL,
+                              sort = "no",
+                              theme = NULL,
+                              export = FALSE) {
 
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  xAxisTitle <- xAxisTitle %||% ""
+  yAxisTitle <- yAxisTitle %||% nms[1]
+  title <-  title %||% ""
+  caption <- caption %||% ""
+  subtitle <- subtitle %||% ""
+
+  d <- parseNA(f$d, filterNA)
+  if (nrow(d) == 0)
+    return()
+
+  d <- d %>%
+    dplyr::group_by(a) %>%
+    dplyr::summarise(b = n())
+
+  if (sort == "top") {
+    d <- d %>%
+      dplyr::arrange(desc(b))
+    if (!is.null(topn)) {
+      d <- d %>%
+        dplyr::slice(1:topn)
+    }
+  }
+
+  header <- paste("<b style = 'font-size:12px'>", yAxisTitle, "</b><br/>")
+  point <- "<b style = 'font-size:12px'>{point.a}: {point.b}</b>"
+
+  hc <- hchart(d, type = "bar", hcaes(x = a, y = b)) %>%
+    hc_plotOptions(column = list(stacking = "normal")) %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_xAxis(title = list(text = yAxisTitle)) %>%
+    hc_yAxis(title = list(text = xAxisTitle)) %>%
+    hc_tooltip(headerFormat = header, pointFormat = point) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
+
+  if (export)
+    hc <- hc %>%
+      hc_exporting(enabled = TRUE)
+
+  hc
+}
 
 #' Vertical bar
 #'
