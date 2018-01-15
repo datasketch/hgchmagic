@@ -241,6 +241,12 @@ data <- sampleData("Yea-Num", nrow = 20)
 hgch_area_YeaNum(data, symbol = "square")
 
 
+# Heatmap
+
+data <- sampleData("Cat-Cat-Num", nrow = 40)
+hgch_heatmap_matrix_CatCatNum(data)
+
+
 # Stream
 
 data <- sampleData("Cat-Cat-Num", nrow = 100)
