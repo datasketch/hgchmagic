@@ -1,552 +1,362 @@
-#' Vertical area
-#'
-#' Vertical area
-#'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
-#' @section ctypes:
-#' Dat-Num
-#' @examples
-#'
-#' hgch_area_DatNum(sampleData("Dat-Num", nrow = 10))
-#'
-#' @export hgch_area_DatNum
-hgch_area_DatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL, aggregation = "sum",
-                             startAtZero = FALSE, theme = NULL, export = FALSE,...){
+#data, title, subtitle, caption, theme, export
+#con ejes: horLabel, verLabel, yLine
 
-  f <- fringe(data)
-  nms <- getClabels(f)
-
-  xAxisTitle <- xAxisTitle %||% nms[1]
-  yAxisTitle <- yAxisTitle %||% nms[2]
-  title <-  title %||% ""
-  caption <- caption %||% ""
-
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = agg(aggregation, b))
-  if(nrow(d)==0) return()
-  hc <- hchart(d, type = "area", hcaes(x = a, y = b)) %>%
-  hc_plotOptions(
-     series = list(marker = list(enabled = FALSE, symbol =  symbol))) %>%
-    hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "</b><b style = 'font-size:12px'>{point.key}</b><br/>"),
-               pointFormat = paste0("<b style = 'font-size:12px'>", yAxisTitle,"</b>: {point.b}")) %>%
-    hc_title(text = title) %>%
-    hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle))
-  if(!is.null(symbol)){
-   hc <- hc %>% hc_plotOptions(
-     series = list(marker = list(enabled = TRUE, symbol =  symbol))
-   )
-  }else{
-   hc <- hc %>% hc_plotOptions(
-     series = list(marker = list(enabled = FALSE))
-   )
-  }
-  if(startAtZero){
-    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
-  }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
-    hc_credits(enabled = TRUE, text = caption)
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
-  hc
-}
-
-
-
-#' Vertical area
+#' Vertical area (categories)
 #'
-#' Vertical area
+#' Compare quantities among categories
 #'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat-Num
 #' @examples
-#'
 #' hgch_area_CatNum(sampleData("Cat-Num", nrow = 10))
-#'
 #' @export hgch_area_CatNum
-hgch_area_CatNum <-hgch_area_DatNum
+hgch_area_CatNum <- function(data,
+                             title = NULL,
+                             subtitle = NULL,
+                             caption = NULL,
+                             horLabel = NULL,
+                             verLabel = NULL,
+                             yLine = NULL,
+                             yLineLabel = NULL,
+                             agg = "sum",
+                             theme = NULL,
+                             export = FALSE,...) {
 
+  f <- fringe(data)
+  nms <- getClabels(f)
 
+  horLabel <- horLabel %||% nms[1]
+  verLabel <- verLabel %||% nms[2]
+  yLineLabel <- yLineLabel %||% yLine
+  title <-  title %||% ""
+  subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
 
+  d <- f$d %>%
+    tidyr::replace_na(list(a = ifelse(is.character(f$d$a), "NA", NA), b = NA)) %>%
+    dplyr::group_by(a) %>%
+    dplyr::summarise(b = agg(agg, b))
 
-#' Vertical area
+  if (nrow(d) == 0) return()
+  hc <- hchart(d, type = "area", hcaes(x = a, y = b)) %>%
+    hc_tooltip(headerFormat = paste("<b>", paste0(horLabel, ": "), "</b>{point.key}<br/>"),
+               pointFormat = paste0("<b>", verLabel, "</b>: {point.b}")) %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text = paste(agg, verLabel)), plotLines = list(list(value = yLine,
+                                                                              color = 'black',
+                                                                              dashStyle = 'shortdash',
+                                                                              width = 2,
+                                                                              label = list(text = yLineLabel)))) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
+  hc
+}
+
+#' Vertical area (years)
 #'
-#' Vertical area
+#' Compare quantities over years
 #'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Yea-Num
 #' @examples
-#'
 #' hgch_area_YeaNum(sampleData("Yea-Num", nrow = 10))
-#'
 #' @export hgch_area_YeaNum
-hgch_area_YeaNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                           symbol = NULL, aggregation = "sum",
-                           startAtZero = FALSE, theme = NULL, export = FALSE,...){
-
-  f <- fringe(data)
-  nms <- getClabels(f)
-
-  xAxisTitle <- xAxisTitle %||% nms[1]
-  yAxisTitle <- yAxisTitle %||% nms[2]
-  title <-  title %||% ""
-  caption <- caption %||% ""
-
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a) %>% dplyr::summarise(b = agg(aggregation, b))
-  if(nrow(d)==0) return()
-  hc <- hchart(d, type = "area", hcaes(x = sort(as.character(a), decreasing = TRUE), y = b)) %>%
-    hc_plotOptions(
-      series = list(marker = list(enabled = TRUE, symbol =  symbol))
-    ) %>%
-    hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(xAxisTitle, ": "), "</b><b style = 'font-size:12px'>{point.key}</b><br/>"),
-               pointFormat = paste0("<b style = 'font-size:12px'>", yAxisTitle,"</b>: {point.b}")) %>%
-    hc_title(text = title) %>%
-    hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle))
-  if(!is.null(symbol)){
-    hc <- hc %>% hc_plotOptions(
-      series = list(marker = list(enabled = TRUE, symbol =  symbol))
-    )
-  }else{
-    hc <- hc %>% hc_plotOptions(
-      series = list(marker = list(enabled = FALSE))
-    )
-  }
-  if(startAtZero){
-    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
-  }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
-    hc_credits(enabled = TRUE, text = caption)
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
-  hc
-}
+hgch_area_YeaNum <- hgch_area_CatNum
 
 
-#' Vertical area
+#' Vertical area (dates)
 #'
-#' Vertical area
+#' Compare a quantities over time (Year-month-day)
 #'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Dat-Num
+#' @examples
+#' hgch_area_DatNum(sampleData("Dat-Num", nrow = 10))
+#' @export hgch_area_DatNum
+hgch_area_DatNum <- hgch_area_CatNum
+
+
+
+#' Vertical area (two categories)
 #'
-#' @param x A data.frame
-#' @return highcharts viz
+#' Compare quantities among two categories
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
-#'
 #' hgch_area_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
-#'
 #' @export hgch_area_CatCatNum
-hgch_area_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL, aggregation = "sum",
-                             startAtZero = FALSE, theme = NULL, export = FALSE,...){
+hgch_area_CatCatNum <- function(data,
+                                title = NULL,
+                                subtitle = NULL,
+                                caption = NULL,
+                                horLabel = NULL,
+                                verLabel = NULL,
+                                yLine = NULL,
+                                yLineLabel = NULL,
+                                agg = "sum",
+                                theme = NULL,
+                                export = FALSE,...) {
 
   f <- fringe(data)
   nms <- getClabels(f)
 
-  xAxisTitle <- xAxisTitle %||% nms[2]
-  yAxisTitle <- yAxisTitle %||% nms[3]
+  horLabel <- horLabel %||% nms[2]
+  verLabel <- verLabel %||% nms[3]
+  yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
+  subtitle <- subtitle %||% ""
   caption <- caption %||% ""
 
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
-  if(nrow(d)==0) return()
-  #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
+  d <- f$d %>%
+    tidyr::replace_na(list(a = ifelse(is.character(f$d$a), "NA", NA),
+                           b = ifelse(is.character(f$d$b), "NA", NA),
+                           c = NA)) %>%
+    dplyr::group_by(a, b) %>%
+    dplyr::summarise(c = agg(agg, c))
+
+  if (nrow(d) == 0) return()
+
   hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
-    hc_plotOptions(
-      series = list(marker = list(enabled = TRUE, symbol =  symbol))
-    ) %>%
     hc_tooltip(headerFormat = "",
-               pointFormat = paste0("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "</b>{point.a}<br/><b style = 'font-size:12px'>",
-                                    paste0(xAxisTitle, ": "),"</b>{point.b}<br/><b style = 'font-size:12px'>",
-                                    yAxisTitle,"</b>: {point.c}")) %>%
+               pointFormat = paste0("<b>", paste0(nms[1], ": "), "</b>{point.a}<br/><b>",
+                                    paste0(horLabel, ": "), "</b>{point.b}<br/><b>",
+                                    verLabel, "</b>: {point.c}")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle))
-  if(!is.null(symbol)){
-    hc <- hc %>% hc_plotOptions(
-      series = list(marker = list(enabled = TRUE, symbol =  symbol))
-    )
-  }else{
-    hc <- hc %>% hc_plotOptions(
-      series = list(marker = list(enabled = FALSE))
-    )
-  }
-  if(startAtZero){
-    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
-  }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text = paste(agg, verLabel)), plotLines = list(list(value = yLine,
+                                                                              color = 'black',
+                                                                              dashStyle = 'shortdash',
+                                                                              width = 2,
+                                                                              label = list(text = yLineLabel)))) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption)
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  if (export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
 
 
-#' Vertical area
+#' Vertical area (categories, years)
 #'
-#' Vertical area
+#' Compare quantities among categories over years
 #'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat-Yea-Num
 #' @examples
-#'
 #' hgch_area_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
-#'
 #' @export hgch_area_CatYeaNum
 hgch_area_CatYeaNum <- hgch_area_CatCatNum
 
 
+#' Vertical area (categories, dates)
+#'
+#' Compare quantities among categories over dates
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Cat-Dat-Num
+#' @examples
+#' hgch_area_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
+#' @export hgch_area_CatDatNum
+hgch_area_CatDatNum <- hgch_area_CatCatNum
 
-#' Vertical stacked area
+
+
+#' Vertical stacked area (two categories)
 #'
-#' Vertical stacked area
+#' Compare quantities among stacked categories
 #'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
-#'
 #' hgch_area_stacked_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
-#'
 #' @export hgch_area_stacked_CatCatNum
-hgch_area_stacked_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                   symbol = NULL, aggregation = "sum",
-                                   startAtZero = FALSE, theme = NULL, export = FALSE,...){
+hgch_area_stacked_CatCatNum <- function(data,
+                                        title = NULL,
+                                        subtitle = NULL,
+                                        caption = NULL,
+                                        horLabel = NULL,
+                                        verLabel = NULL,
+                                        yLine = NULL,
+                                        yLineLabel = NULL,
+                                        agg = "sum",
+                                        theme = NULL,
+                                        export = FALSE,...) {
 
   f <- fringe(data)
   nms <- getClabels(f)
 
-  xAxisTitle <- xAxisTitle %||% nms[2]
-  yAxisTitle <- yAxisTitle %||% nms[3]
+  horLabel <- horLabel %||% nms[2]
+  verLabel <- verLabel %||% nms[3]
+  yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
+  subtitle <- subtitle %||% ""
   caption <- caption %||% ""
 
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
-  if(nrow(d)==0) return()
-  #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
+  d <- f$d %>%
+    tidyr::replace_na(list(a = ifelse(is.character(f$d$a), "NA", NA),
+                           b = ifelse(is.character(f$d$b), "NA", NA),
+                           c = NA)) %>%
+    dplyr::group_by(a, b) %>%
+    dplyr::summarise(c = agg(agg, c))
+
+  if (nrow(d) == 0) return()
   hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
-    hc_plotOptions(
-      series = list(marker = list(enabled = TRUE, symbol =  symbol)),
-      area = list(stacking = "normal")
-    ) %>%
+    hc_plotOptions(area = list(stacking = "normal")) %>%
     hc_tooltip(headerFormat = "",
                pointFormat = paste0("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "</b>{point.a}<br/><b style = 'font-size:12px'>",
-                                    paste0(xAxisTitle, ": "),"</b>{point.b}<br/><b style = 'font-size:12px'>",
-                                    yAxisTitle,"</b>: {point.c}")) %>%
+                                    paste0(horLabel, ": "), "</b>{point.b}<br/><b style = 'font-size:12px'>",
+                                    verLabel, "</b>: {point.c}")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle))
-  if(!is.null(symbol)){
-    hc <- hc %>% hc_plotOptions(
-      series = list(marker = list(enabled = TRUE, symbol =  symbol))
-    )
-  }else{
-    hc <- hc %>% hc_plotOptions(
-      series = list(marker = list(enabled = FALSE))
-    )
-  }
-  if(startAtZero){
-    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
-  }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text = paste(agg, verLabel)), plotLines = list(list(value = yLine,
+                                                                              color = 'black',
+                                                                              dashStyle = 'shortdash',
+                                                                              width = 2,
+                                                                              label = list(text = yLineLabel)))) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption)
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  if (export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
 
 
-#' Vertical stacked area
+#' Vertical stacked area (categories, years)
 #'
-#' Vertical stacked area
+#' Compare quantities among stacked categories over years
 #'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat-Yea-Num
 #' @examples
-#'
 #' hgch_area_stacked_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
-#'
 #' @export hgch_area_stacked_CatYeaNum
 hgch_area_stacked_CatYeaNum <- hgch_area_stacked_CatCatNum
 
 
+#' Vertical stacked area (categories, dates)
+#'
+#' Compare quantities among stacked categories over dates
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Cat-Dat-Num
+#' @examples
+#' hgch_area_stacked_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
+#' @export hgch_area_stacked_CatDatNum
+hgch_area_stacked_CatDatNum <- hgch_area_stacked_CatCatNum
 
 
-#' Vertical 100 stacked area
+#' Vertical 100% stacked area (two categories)
 #'
-#' Vertical 100 stacked area
+#' Compare quantities among 100% stacked categories over dates
 #'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
-#'
 #' hgch_area_stacked_100_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
-#'
 #' @export hgch_area_stacked_100_CatCatNum
-hgch_area_stacked_100_CatCatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                       symbol = NULL, aggregation = "sum",
-                                       startAtZero = FALSE, theme = NULL, export = FALSE,...){
+hgch_area_stacked_100_CatCatNum <- function(data,
+                                            title = NULL,
+                                            subtitle = NULL,
+                                            caption = NULL,
+                                            horLabel = NULL,
+                                            verLabel = NULL,
+                                            yLine = NULL,
+                                            yLineLabel = NULL,
+                                            agg = "sum",
+                                            theme = NULL,
+                                            export = FALSE,...) {
 
   f <- fringe(data)
   nms <- getClabels(f)
 
-  xAxisTitle <- xAxisTitle %||% nms[2]
-  yAxisTitle <- yAxisTitle %||% nms[3]
+  horLabel <- horLabel %||% nms[2]
+  verLabel <- verLabel %||% nms[3]
+  yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
+  subtitle <- subtitle %||% ""
   caption <- caption %||% ""
 
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
-  if(nrow(d)==0) return()
-  #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
+  d <- f$d %>%
+    tidyr::replace_na(list(a = ifelse(is.character(f$d$a), "NA", NA),
+                           b = ifelse(is.character(f$d$b), "NA", NA),
+                           c = NA)) %>%
+    dplyr::group_by(a, b) %>%
+    dplyr::summarise(c = agg(agg, c))
+
+  if (nrow(d) == 0) return()
   hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
-    hc_plotOptions(
-      series = list(marker = list(enabled = TRUE, symbol =  symbol)),
-      area = list(stacking = "percent")
-    ) %>%
+    hc_plotOptions(area = list(stacking = "percent")) %>%
     hc_tooltip(headerFormat = "",
                pointFormat = paste0("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "</b>{point.a}<br/><b style = 'font-size:12px'>",
-                                    paste0(xAxisTitle, ": "),"</b>{point.b}<br/><b style = 'font-size:12px'>",
-                                    yAxisTitle,"</b>: {point.c}")) %>%
+                                    paste0(horLabel, ": "), "</b>{point.b}<br/><b style = 'font-size:12px'>",
+                                    verLabel, "</b>: {point.c} ({point.percentage:.1f}%)")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle))
-  if(!is.null(symbol)){
-    hc <- hc %>% hc_plotOptions(
-      series = list(marker = list(enabled = TRUE, symbol =  symbol))
-    )
-  }else{
-    hc <- hc %>% hc_plotOptions(
-      series = list(marker = list(enabled = FALSE))
-    )
-  }
-  if(startAtZero){
-    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
-  }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
+    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text = paste(agg, verLabel)), plotLines = list(list(value = yLine,
+                                                                              color = 'black',
+                                                                              dashStyle = 'shortdash',
+                                                                              width = 2,
+                                                                              label = list(text = yLineLabel))),
+             labels = list(format = "{value}%")) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption)
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  if (export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
 
 
-#' Vertical 100 stacked area
+#' Vertical 100% stacked area (categories, years)
 #'
-#' Vertical 100 stacked area
+#' Compare quantities among 100% stacked categories over years
 #'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat-Yea-Num
 #' @examples
-#'
-#' hgch_area_stacked_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
-#'
+#' hgch_area_stacked_100_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
 #' @export hgch_area_stacked_100_CatYeaNum
 hgch_area_stacked_100_CatYeaNum <- hgch_area_stacked_100_CatCatNum
 
 
-
-#' Vertical area
+#' Vertical 100% stacked area (categories, dates)
 #'
-#' Vertical area
+#' Compare quantities among 100% stacked categories over dates
 #'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat-Dat-Num
 #' @examples
-#'
-#' hgch_area_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
-#'
-#' @export hgch_area_CatDatNum
-hgch_area_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                             symbol = NULL, aggregation = "sum",
-                             startAtZero = FALSE, theme = NULL, export = FALSE,...){
-
-  f <- fringe(data)
-  nms <- getClabels(f)
-
-  xAxisTitle <- xAxisTitle %||% nms[2]
-  yAxisTitle <- yAxisTitle %||% nms[3]
-  title <-  title %||% ""
-  caption <- caption %||% ""
-
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
-  if(nrow(d)==0) return()
-  #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-  hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
-    hc_plotOptions(
-      series = list(marker = list(enabled = FALSE, symbol =  symbol))
-    ) %>%
-    hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(nms[2], ": "), "</b><b style = 'font-size:12px'>{point.key}</b><br/>"),
-              pointFormat = paste0("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "</b>{point.a}<br/>
-                                    <b style = 'font-size:12px'>", yAxisTitle,"</b>: {point.c}")) %>%
-    hc_title(text = title) %>%
-    hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle))
-  if(!is.null(symbol)){
-    hc <- hc %>% hc_plotOptions(
-      series = list(marker = list(enabled = TRUE, symbol =  symbol))
-    )
-  }else{
-    hc <- hc %>% hc_plotOptions(
-      series = list(marker = list(enabled = FALSE))
-    )
-  }
-  if(startAtZero){
-    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
-  }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
-    hc_credits(enabled = TRUE, text = caption)
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
-  hc
-}
-
-
-#' Vertical stacked area
-#'
-#' Vertical stacked area
-#'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
-#' @section ctypes:
-#' Cat-Dat-Num
-#' @examples
-#'
-#' hgch_area_stacked_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
-#'
-#' @export hgch_area_stacked_CatDatNum
-hgch_area_stacked_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                   symbol = NULL, aggregation = "sum",
-                                   startAtZero = FALSE, theme = NULL, export = FALSE,...){
-
-  f <- fringe(data)
-  nms <- getClabels(f)
-
-  xAxisTitle <- xAxisTitle %||% nms[2]
-  yAxisTitle <- yAxisTitle %||% nms[3]
-  title <-  title %||% ""
-  caption <- caption %||% ""
-
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
-  if(nrow(d)==0) return()
-  #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-  hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
-    hc_plotOptions(
-      series = list(marker = list(enabled = FALSE, symbol =  symbol)),
-      area = list(stacking = "normal")
-    ) %>%
-    hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(nms[2], ": "), "</b><b style = 'font-size:12px'>{point.key}</b><br/>"),
-               pointFormat = paste0("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "</b>{point.a}<br/>
-                                    <b style = 'font-size:12px'>", yAxisTitle,"</b>: {point.c}")) %>%
-    hc_title(text = title) %>%
-    hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle))
-  if(!is.null(symbol)){
-    hc <- hc %>% hc_plotOptions(
-      series = list(marker = list(enabled = TRUE, symbol =  symbol))
-    )
-  }else{
-    hc <- hc %>% hc_plotOptions(
-      series = list(marker = list(enabled = FALSE))
-    )
-  }
-  if(startAtZero){
-    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
-  }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
-    hc_credits(enabled = TRUE, text = caption)
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
-  hc
-  }
-
-
-
-
-#' Vertical 100 stacked area
-#'
-#' Vertical 100 stacked area
-#'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
-#' @section ctypes:
-#' Cat-Dat-Num
-#' @examples
-#'
 #' hgch_area_stacked_100_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
-#'
 #' @export hgch_area_stacked_100_CatDatNum
-hgch_area_stacked_100_CatDatNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                                       symbol = NULL, aggregation = "sum",
-                                       startAtZero = FALSE, theme = NULL, export = FALSE,...){
-
-  f <- fringe(data)
-  nms <- getClabels(f)
-
-  xAxisTitle <- xAxisTitle %||% nms[2]
-  yAxisTitle <- yAxisTitle %||% nms[3]
-  title <-  title %||% ""
-  caption <- caption %||% ""
-
-  d <- f$d %>% na.omit() %>% dplyr::group_by(a,b) %>% dplyr::summarise(c = agg(aggregation, c))
-  if(nrow(d)==0) return()
-  #d <- d %>% group_by(a) %>% summarise(b = mean(b,na.rm = TRUE)) %>% arrange(desc(b))
-  hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
-    hc_plotOptions(
-      series = list(marker = list(enabled = FALSE, symbol =  symbol)),
-      area = list(stacking = "percent")
-    ) %>%
-    hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", paste0(nms[2], ": "), "</b><b style = 'font-size:12px'>{point.key}</b><br/>"),
-               pointFormat = paste0("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "</b>{point.a}<br/>
-                                    <b style = 'font-size:12px'>", yAxisTitle,"</b>: {point.c}")) %>%
-    hc_title(text = title) %>%
-    hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text=xAxisTitle), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text=yAxisTitle))
-  if(!is.null(symbol)){
-    hc <- hc %>% hc_plotOptions(
-      series = list(marker = list(enabled = TRUE, symbol =  symbol))
-    )
-  }else{
-    hc <- hc %>% hc_plotOptions(
-      series = list(marker = list(enabled = FALSE))
-    )
-  }
-  if(startAtZero){
-    hc <- hc %>% hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
-  }
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme)) %>%
-    hc_credits(enabled = TRUE, text = caption)
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
-  hc
-}
+hgch_area_stacked_100_CatDatNum <- hgch_area_stacked_100_CatCatNum
 
 
 
