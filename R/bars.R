@@ -9,75 +9,76 @@ count_pl <- function(x) {
   }
 }
 
-
-
-#' Vertical bar
+#' Vertical bar (category)
 #'
-#' Vertical bar
+#' Compare category's levels
 #'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat
 #' @examples
 #' hgch_bar_ver_Cat(sampleData("Cat", nrow = 10))
 #' @export hgch_bar_ver_Cat
-hgch_bar_ver_Cat <-
-  function(data,
-           topn = NULL,
-           title = NULL,
-           subtitle = NULL,
-           caption = NULL,
-           xAxisTitle = NULL,
-           yAxisTitle = NULL,
-           sort = "no",
-           theme = NULL,
-           export = FALSE,
-           ...) {
+hgch_bar_ver_Cat <- function(data,
+                             title = NULL,
+                             subtitle = NULL,
+                             caption = NULL,
+                             horLabel = NULL,
+                             verLabel = NULL,
+                             yLine = NULL,
+                             yLineLabel = NULL,
+                             agg = "sum",
+                             sort = "no",
+                             topn = NULL,
+                             theme = NULL,
+                             export = FALSE,...) {
 
-    if(class(data)[1] == "Fringe"){
-      ni <- getClabels(data)
-    }else{
-      ni <- names(data)
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  horLabel <- horLabel %||% nms[1]
+  verLabel <- verLabel %||% nms[1]
+  yLineLabel <- yLineLabel %||% yLine
+  title <-  title %||% ""
+  subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
+
+  d <- f$d %>%
+    tidyr::replace_na(list(a = ifelse(is.character(f$d$a), "NA", NA))) %>%
+    dplyr::group_by(a) %>%
+    dplyr::summarise(b = n())
+
+  if (sort == "desc") {
+    d <- d %>%
+      dplyr::arrange(desc(b))
+    if (!is.null(topn)) {
+      d <- d %>%
+        dplyr::slice(1:topn)
     }
-
-    f <- fringe(data)
-    nms <- getClabels(f)
-
-    xAxisTitle <- xAxisTitle %||% nms[1]
-    yAxisTitle <- yAxisTitle %||% ""
-    title <-  title %||% ""
-    caption <- caption %||% ""
-    subtitle <- subtitle %||% ""
-
-    d <- f$d
-    if (nrow(d) == 0)
-      return()
-    d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = n()) %>% drop_na()
-    if (sort == "top") {
-      d <- d %>% dplyr::arrange(desc(b))
-      if (!is.null(topn)) {
-        d <- dplyr::slice(d, 1:topn)
-      } else {
-        d <- d
-      }
-    }
-    d$ni <- ni
-
-    hc <- hchart(d, type = "column", hcaes(x = a, y = b)) %>%
-      hc_title(text = title) %>%
-      hc_subtitle(text = subtitle) %>%
-      hc_xAxis(title = list(text = xAxisTitle)) %>%
-      hc_yAxis(title = list(text = yAxisTitle)) %>%
-      hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", xAxisTitle, "</b><br/>"),
-                 pointFormat = "<b style = 'font-size:12px'>{point.a}: {point.b}</b>")
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
-      hc_credits(enabled = TRUE, text = caption)
-    if (export)
-      hc <- hc %>% hc_exporting(enabled = TRUE)
-    hc
   }
+  if (sort == "asc") {
+    d <- d %>%
+      dplyr::arrange(b)
+  }
+  if (nrow(d) == 0) return()
+  hc <- hchart(d, type = "column", hcaes(x = a, y = b)) %>%
+    hc_tooltip(headerFormat = paste("<b>", paste0(horLabel, ": "), "</b>{point.key}<br/>"),
+               pointFormat = paste0("<b>", verLabel, "</b>: {point.b}")) %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text = paste(agg, verLabel)), plotLines = list(list(value = yLine,
+                                                                              color = 'black',
+                                                                              dashStyle = 'shortdash',
+                                                                              width = 2,
+                                                                              label = list(text = yLineLabel)))) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
+  hc
+}
 
 
 
@@ -121,72 +122,83 @@ hgch_bar_top_ver_Cat <- function(data,
 }
 
 
-#' Horizontal bar
+#' Horizontal bar (category)
 #'
-#' Horizontal bar
+#' Compare category's levels
 #'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat
 #' @examples
 #' hgch_bar_hor_Cat(sampleData("Cat", nrow = 10))
 #' @export hgch_bar_hor_Cat
-hgch_bar_hor_Cat <-
-  function(data,
-           topn = NULL,
-           title = NULL,
-           subtitle = NULL,
-           caption = NULL,
-           xAxisTitle = NULL,
-           yAxisTitle = NULL,
-           sort = "no",
-           theme = NULL,
-           export = FALSE,
-           ...) {
+hgch_bar_hor_Cat <- function(data,
+                             title = NULL,
+                             subtitle = NULL,
+                             caption = NULL,
+                             horLabel = NULL,
+                             verLabel = NULL,
+                             yLine = NULL,
+                             yLineLabel = NULL,
+                             agg = "sum",
+                             dropNa = FALSE,
+                             order = NULL,
+                             sort = "no",
+                             sliceN = NULL,
+                             theme = NULL,
+                             export = FALSE,...) {
 
-    if(class(data)[1] == "Fringe"){
-      ni <- getClabels(data)
-    }else{
-      ni <- names(data)
+  f <- fringe(data)
+  nms <- getClabels(f)
+
+  horLabel <- horLabel %||% nms[1]
+  verLabel <- verLabel %||% nms[1]
+  yLineLabel <- yLineLabel %||% yLine
+  title <-  title %||% ""
+  subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
+
+  d <- f$d %>%
+    tidyr::replace_na(list(a = ifelse(is.character(f$d$a), "NA", NA))) %>%
+    dplyr::group_by(a) %>%
+    dplyr::summarise(b = n())
+
+  if (sort == "desc") {
+    d <- d %>%
+      dplyr::arrange(desc(b))
+    if (!is.null(topn)) {
+      d <- d %>%
+        dplyr::slice(1:topn)
     }
-
-    f <- fringe(data)
-    nms <- getClabels(f)
-
-    xAxisTitle <- xAxisTitle %||% ""
-    yAxisTitle <- yAxisTitle %||% nms[1]
-    title <-  title %||% ""
-    caption <- caption %||% ""
-    subtitle <- subtitle %||% ""
-
-    d <- f$d
-    if (nrow(d) == 0)
-      return()
-    d <- d %>% dplyr::group_by(a) %>% dplyr::summarise(b = n())
-    if (sort == "top") {
-      d <- d %>% dplyr::arrange(desc(b))
-      if (!is.null(topn)) {
-        d <- dplyr::slice(d, 1:topn)
-      } else {
-        d <- d
-      }
-    }
-    hc <- hchart(d, type = "bar", hcaes(x = a, y = b)) %>%
-      hc_plotOptions(column = list(stacking = "normal")) %>%
-      hc_title(text = title) %>%
-      hc_subtitle(text = subtitle) %>%
-      hc_xAxis(title = list(text = yAxisTitle)) %>%
-      hc_yAxis(title = list(text = xAxisTitle))%>%
-      hc_tooltip(headerFormat = paste("<b style = 'font-size:12px'>", yAxisTitle, "</b><br/>"),
-                 pointFormat = "<b style = 'font-size:12px'>{point.a}: {point.b}</b>")
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme)) %>%
-      hc_credits(enabled = TRUE, text = caption)
-    if (export)
-      hc <- hc %>% hc_exporting(enabled = TRUE)
-    hc
   }
+  if (sort == "asc") {
+    d <- d %>%
+      dplyr::arrange(b)
+  }
+  if (nrow(d) == 0) return()
+  hc <- hchart(d, type = "bar", hcaes(x = a, y = b)) %>%
+    hc_plotOptions(column = list(stacking = "normal")) %>%
+    hc_tooltip(headerFormat = paste("<b>", paste0(horLabel, ": "), "</b>{point.key}<br/>"),
+               pointFormat = paste0("<b>", verLabel, "</b>: {point.b}")) %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_xAxis(title = list(text = verLabel), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text = paste(agg, horLabel)), plotLines = list(list(value = yLine,
+                                                                              color = 'black',
+                                                                              dashStyle = 'shortdash',
+                                                                              width = 2,
+                                                                              label = list(text = yLineLabel)))) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
+
+  # hc_xAxis(title = list(text = yAxisTitle)) %>%
+  # hc_yAxis(title = list(text = xAxisTitle))%>%
+
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
+    hc
+}
 
 
 #' Ordered horizontal bar

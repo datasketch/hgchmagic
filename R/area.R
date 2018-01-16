@@ -1,7 +1,84 @@
 #data, title, subtitle, caption, theme, export
 #con ejes: horLabel, verLabel, yLine
 
-#' Vertical area (categories)
+#' Vertical area (category)
+#'
+#' Compare category's levels
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Oca
+#' @examples
+#' hgch_area_Cat(sampleData("Cat", nrow = 10))
+#' @export hgch_area_Oca
+hgch_area_Oca <- function(data,
+                          title = NULL,
+                          subtitle = NULL,
+                          caption = NULL,
+                          horLabel = NULL,
+                          verLabel = NULL,
+                          yLine = NULL,
+                          yLineLabel = NULL,
+                          dropNa = FALSE,
+                          order = NULL,
+                          theme = NULL,
+                          export = FALSE,...) {
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+  if (dropNa) {
+    d <- d %>%
+      tidyr::drop_na()
+    setEqual <- !setequal(order, unique(d$a)) &
+      !setequal(na.omit(order), unique(d$a)) &
+      !setequal(order[order != "NA"], unique(d$a))
+  } else {
+    d <- d%>%
+      tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA)))
+    order[is.na(order)] <- "NA"
+    setEqual <- !setequal(order, unique(d$a)) &
+      !setequal(order, unique(d$a)[unique(d$a) != "NA"]) &
+      !setequal(na.omit(order), unique(d$a)) &
+      !setequal(order[order != "NA"], unique(d$a))
+  }
+  if (is.null(order) | nrow(d) == 0 | setEqual) return()
+      #(!setequal(order, unique(d$a)) &
+      # !setequal(order, unique(d$a)[unique(d$a) != "NA"]))) return()
+
+  horLabel <- horLabel %||% nms[1]
+  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[1], paste("sum", nms[1]))
+  yLineLabel <- yLineLabel %||% yLine
+  title <-  title %||% ""
+  subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
+
+  d <- d  %>%
+    dplyr::group_by(a) %>%
+    dplyr::summarise(b = n())
+
+  d <- d[order(match(d$a, order)), ]
+
+  hc <- hchart(d, type = "area", hcaes(x = a, y = b)) %>%
+    hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol = "circle"))) %>%
+    hc_tooltip(headerFormat = paste("<b>", paste0(horLabel, ": "), "</b>{point.key}<br/>"),
+               pointFormat = paste0("<b>", verLabel, "</b>: {point.b}")) %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
+    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = yLine,
+                                                                  color = 'black',
+                                                                  dashStyle = 'shortdash',
+                                                                  width = 2,
+                                                                  label = list(text = yLineLabel)))) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
+  hc
+}
+
+#' Vertical area (categorical, numerical)
 #'
 #' Compare quantities among categories
 #'

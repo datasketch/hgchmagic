@@ -521,7 +521,7 @@ hgch_multilines_YeaNumNumNumNum <- function(data, title = NULL, subtitle = NULL,
 #' @section ctypess: Yea-NumP
 #' @examples
 #'
-#' hgch_multilines_YeaNumP(sampleDatta("Yea-NumP",nrow = 10))
+#' hgch_multilines_YeaNumP(sampleData("Yea-NumP",nrow = 10))
 #'
 #' @export hgch_multilines_YeaNumP
 hgch_multilines_YeaNumP <- function(data,
