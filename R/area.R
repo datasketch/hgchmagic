@@ -23,28 +23,29 @@ hgch_area_Oca <- function(data,
                           dropNa = FALSE,
                           order = NULL,
                           theme = NULL,
-                          export = FALSE,...) {
+                          export = FALSE, ...) {
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
-  if (dropNa) {
+
+  if (dropNa)
     d <- d %>%
       tidyr::drop_na()
-    setEqual <- !setequal(order, unique(d$a)) &
-      !setequal(na.omit(order), unique(d$a)) &
-      !setequal(order[order != "NA"], unique(d$a))
-  } else {
-    d <- d%>%
-      tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA)))
-    order[is.na(order)] <- "NA"
-    setEqual <- !setequal(order, unique(d$a)) &
-      !setequal(order, unique(d$a)[unique(d$a) != "NA"]) &
-      !setequal(na.omit(order), unique(d$a)) &
-      !setequal(order[order != "NA"], unique(d$a))
-  }
-  if (is.null(order) | nrow(d) == 0 | setEqual) return()
-      #(!setequal(order, unique(d$a)) &
-      # !setequal(order, unique(d$a)[unique(d$a) != "NA"]))) return()
+  #   setEqual <- !setequal(order, unique(d$a)) &
+  #     !setequal(na.omit(order), unique(d$a)) &
+  #     !setequal(order[order != "NA"], unique(d$a))
+  # } else {
+  #   d <- d%>%
+  #     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA)))
+  #   order[is.na(order)] <- "NA"
+  #   setEqual <- !setequal(order, unique(d$a)) &
+  #     !setequal(order, unique(d$a)[unique(d$a) != "NA"]) &
+  #     !setequal(na.omit(order), unique(d$a)) &
+  #     !setequal(order[order != "NA"], unique(d$a))
+
+  if (is.null(order) | nrow(d) == 0 | (!setequal(order, unique(d$a)) &
+                                       !setequal(order, na.omit(unique(d$a))) &
+                                       !setequal(na.omit(order), unique(d$a)))) return()
 
   horLabel <- horLabel %||% nms[1]
   verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[1], paste("sum", nms[1]))
@@ -54,8 +55,11 @@ hgch_area_Oca <- function(data,
   caption <- caption %||% ""
 
   d <- d  %>%
+    tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA))) %>%
     dplyr::group_by(a) %>%
     dplyr::summarise(b = n())
+
+  order[is.na(order)] <- "NA"
 
   d <- d[order(match(d$a, order)), ]
 
