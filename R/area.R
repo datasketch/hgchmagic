@@ -1,7 +1,4 @@
-#data, title, subtitle, caption, theme, export
-#con ejes: horLabel, verLabel, yLine
-
-#' Vertical area (category)
+#' Vertical area (ordered categories)
 #'
 #' Compare category's levels
 #'
@@ -10,7 +7,7 @@
 #' @section ctypes:
 #' Oca
 #' @examples
-#' hgch_area_Cat(sampleData("Cat", nrow = 10))
+#' hgch_area_Oca(sampleData("Cat", nrow = 10))
 #' @export hgch_area_Oca
 hgch_area_Oca <- function(data,
                           title = NULL,
@@ -28,9 +25,6 @@ hgch_area_Oca <- function(data,
   nms <- getClabels(f)
   d <- f$d
 
-  if (dropNa)
-    d <- d %>%
-      tidyr::drop_na()
   #   setEqual <- !setequal(order, unique(d$a)) &
   #     !setequal(na.omit(order), unique(d$a)) &
   #     !setequal(order[order != "NA"], unique(d$a))
@@ -42,10 +36,10 @@ hgch_area_Oca <- function(data,
   #     !setequal(order, unique(d$a)[unique(d$a) != "NA"]) &
   #     !setequal(na.omit(order), unique(d$a)) &
   #     !setequal(order[order != "NA"], unique(d$a))
+  # if (is.null(order) | nrow(d) == 0 | (!setequal(order, unique(d$a)) &
+  #                                      !setequal(order, na.omit(unique(d$a))) &
+  #                                      !setequal(na.omit(order), unique(d$a)))) return()
 
-  if (is.null(order) | nrow(d) == 0 | (!setequal(order, unique(d$a)) &
-                                       !setequal(order, na.omit(unique(d$a))) &
-                                       !setequal(na.omit(order), unique(d$a)))) return()
 
   horLabel <- horLabel %||% nms[1]
   verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[1], paste("sum", nms[1]))
@@ -54,13 +48,18 @@ hgch_area_Oca <- function(data,
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
 
+  if (dropNa)
+    d <- d %>%
+    tidyr::drop_na()
+
   d <- d  %>%
     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA))) %>%
     dplyr::group_by(a) %>%
     dplyr::summarise(b = n())
 
+  order <- union(order, unique(d$a)[!is.na(unique(d$a))])
+  if (all(!is.na(order)) & any(is.na(d$a))) order <- c(union(order, unique(d$a[!is.na(d$a)])), NA)
   order[is.na(order)] <- "NA"
-
   d <- d[order(match(d$a, order)), ]
 
   hc <- hchart(d, type = "area", hcaes(x = a, y = b)) %>%
@@ -82,18 +81,19 @@ hgch_area_Oca <- function(data,
   hc
 }
 
-#' Vertical area (categorical, numerical)
+
+#' Vertical area (ordered categories, numbers)
 #'
 #' Compare quantities among categories
 #'
 #' @param data A data.frame
 #' @return Highcharts visualization
 #' @section ctypes:
-#' Cat-Num
+#' Oca-Num
 #' @examples
-#' hgch_area_CatNum(sampleData("Cat-Num", nrow = 10))
-#' @export hgch_area_CatNum
-hgch_area_CatNum <- function(data,
+#' hgch_area_OcaNum(sampleData("Cat-Num", nrow = 10))
+#' @export hgch_area_OcaNum
+hgch_area_OcaNum <- function(data,
                              title = NULL,
                              subtitle = NULL,
                              caption = NULL,
@@ -102,36 +102,56 @@ hgch_area_CatNum <- function(data,
                              yLine = NULL,
                              yLineLabel = NULL,
                              agg = "sum",
+                             dropNa = FALSE,
+                             order = NULL,
+                             percentage = FALSE,
                              theme = NULL,
-                             export = FALSE,...) {
-
+                             export = FALSE, ...) {
   f <- fringe(data)
   nms <- getClabels(f)
+  d <- f$d
 
   horLabel <- horLabel %||% nms[1]
-  verLabel <- verLabel %||% nms[2]
+  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste("sum", nms[2]))
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
 
-  d <- f$d %>%
-    tidyr::replace_na(list(a = ifelse(is.character(f$d$a), "NA", NA), b = NA)) %>%
+  if (dropNa)
+    d <- d %>%
+    tidyr::drop_na()
+
+  d <- d  %>%
+    tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
+                           b = NA)) %>%
     dplyr::group_by(a) %>%
     dplyr::summarise(b = agg(agg, b))
 
-  if (nrow(d) == 0) return()
+  if (percentage) {
+    d <- d %>%
+      dplyr::mutate(b = b / sum(b))
+    verLabel <- paste("%", verLabel)
+  }
+
+  order <- union(order, unique(d$a)[!is.na(unique(d$a))])
+  if (all(!is.na(order)) & any(is.na(d$a))) order <- c(union(order, unique(d$a[!is.na(d$a)])), NA)
+  order[is.na(order)] <- "NA"
+  d <- d[order(match(d$a, order)), ]
+
   hc <- hchart(d, type = "area", hcaes(x = a, y = b)) %>%
+    hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol = "circle"))) %>%
     hc_tooltip(headerFormat = paste("<b>", paste0(horLabel, ": "), "</b>{point.key}<br/>"),
-               pointFormat = paste0("<b>", verLabel, "</b>: {point.b}")) %>%
+               pointFormat = paste0("<b>", verLabel, "</b>: {point.b", ifelse(percentage, ":.3f}", "}"))) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text = paste(agg, verLabel)), plotLines = list(list(value = yLine,
-                                                                              color = 'black',
-                                                                              dashStyle = 'shortdash',
-                                                                              width = 2,
-                                                                              label = list(text = yLineLabel)))) %>%
+    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = yLine,
+                                                                  icolor = 'black',
+                                                                  iiidashStyle = 'shortdash',
+                                                                  width = 2,
+                                                                  label = list(text = yLineLabel))),
+             labels = list(format = ifelse(percentage, "{value}%", "{value}"))) %>%
     hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption)
   if (export) hc <- hc %>%
@@ -139,7 +159,8 @@ hgch_area_CatNum <- function(data,
   hc
 }
 
-#' Vertical area (years)
+
+#' Vertical area (years, numbers)
 #'
 #' Compare quantities over years
 #'
@@ -150,10 +171,10 @@ hgch_area_CatNum <- function(data,
 #' @examples
 #' hgch_area_YeaNum(sampleData("Yea-Num", nrow = 10))
 #' @export hgch_area_YeaNum
-hgch_area_YeaNum <- hgch_area_CatNum
+hgch_area_YeaNum <- hgch_area_OcaNum
 
 
-#' Vertical area (dates)
+#' Vertical area (dates, numbers)
 #'
 #' Compare a quantities over time (Year-month-day)
 #'
@@ -164,22 +185,22 @@ hgch_area_YeaNum <- hgch_area_CatNum
 #' @examples
 #' hgch_area_DatNum(sampleData("Dat-Num", nrow = 10))
 #' @export hgch_area_DatNum
-hgch_area_DatNum <- hgch_area_CatNum
+hgch_area_DatNum <- hgch_area_OcaNum
 
 
 
-#' Vertical area (two categories)
+#' Vertical area (categories, ordered categories, numbers)
 #'
 #' Compare quantities among two categories
 #'
 #' @param data A data.frame
 #' @return Highcharts visualization
 #' @section ctypes:
-#' Cat-Cat-Num
+#' Cat-Oca-Num
 #' @examples
-#' hgch_area_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
-#' @export hgch_area_CatCatNum
-hgch_area_CatCatNum <- function(data,
+#' hgch_area_CatOcaNum(sampleData("Cat-Cat-Num", nrow = 10))
+#' @export hgch_area_CatOcaNum
+hgch_area_CatOcaNum <- function(data,
                                 title = NULL,
                                 subtitle = NULL,
                                 caption = NULL,
@@ -188,49 +209,69 @@ hgch_area_CatCatNum <- function(data,
                                 yLine = NULL,
                                 yLineLabel = NULL,
                                 agg = "sum",
+                                dropNa = FALSE,
+                                order = NULL,
+                                percentage = FALSE,
                                 theme = NULL,
-                                export = FALSE,...) {
-
+                                export = FALSE, ...) {
   f <- fringe(data)
   nms <- getClabels(f)
+  d <- f$d
 
   horLabel <- horLabel %||% nms[2]
-  verLabel <- verLabel %||% nms[3]
+  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a) & nrow(d) == dplyr::n_distinct(d$b),
+                                   nms[3], paste("sum", nms[3]))
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
 
-  d <- f$d %>%
-    tidyr::replace_na(list(a = ifelse(is.character(f$d$a), "NA", NA),
-                           b = ifelse(is.character(f$d$b), "NA", NA),
+  if (dropNa)
+    d <- d %>%
+    tidyr::drop_na()
+
+  d <- d  %>%
+    tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
+                           b = ifelse(is.character(d$b), "NA", NA),
                            c = NA)) %>%
     dplyr::group_by(a, b) %>%
     dplyr::summarise(c = agg(agg, c))
 
-  if (nrow(d) == 0) return()
+  if (percentage) {
+    d <- d %>%
+      dplyr::mutate(c = c / sum(c))
+    verLabel <- paste("%", verLabel)
+  }
+
+  order <- union(order, unique(d$b)[!is.na(unique(d$b))])
+  if (all(!is.na(order)) & any(is.na(d$b))) order <- c(union(order, unique(d$b[!is.na(d$b)])), NA)
+  order[is.na(order)] <- "NA"
+  d <- d[order(match(d$b, order)), ]
 
   hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
+    hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol = "circle"))) %>%
     hc_tooltip(headerFormat = "",
                pointFormat = paste0("<b>", paste0(nms[1], ": "), "</b>{point.a}<br/><b>",
                                     paste0(horLabel, ": "), "</b>{point.b}<br/><b>",
-                                    verLabel, "</b>: {point.c}")) %>%
+                                    verLabel, "</b>: {point.c", ifelse(percentage, ":.3f}", "}"))) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text = paste(agg, verLabel)), plotLines = list(list(value = yLine,
-                                                                              color = 'black',
-                                                                              dashStyle = 'shortdash',
-                                                                              width = 2,
-                                                                              label = list(text = yLineLabel)))) %>%
+    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = yLine,
+                                                                  color = 'black',
+                                                                  dashStyle = 'shortdash',
+                                                                  width = 2,
+                                                                  label = list(text = yLineLabel))),
+             labels = list(format = ifelse(percentage, "{value}%", "{value}"))) %>%
     hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption)
-  if (export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
   hc
 }
 
 
-#' Vertical area (categories, years)
+#' Vertical area (categories, years, numbers)
 #'
 #' Compare quantities among categories over years
 #'
@@ -241,10 +282,10 @@ hgch_area_CatCatNum <- function(data,
 #' @examples
 #' hgch_area_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
 #' @export hgch_area_CatYeaNum
-hgch_area_CatYeaNum <- hgch_area_CatCatNum
+hgch_area_CatYeaNum <- hgch_area_CatOcaNum
 
 
-#' Vertical area (categories, dates)
+#' Vertical area (categories, dates, numbers)
 #'
 #' Compare quantities among categories over dates
 #'
@@ -255,22 +296,21 @@ hgch_area_CatYeaNum <- hgch_area_CatCatNum
 #' @examples
 #' hgch_area_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
 #' @export hgch_area_CatDatNum
-hgch_area_CatDatNum <- hgch_area_CatCatNum
+hgch_area_CatDatNum <- hgch_area_CatOcaNum
 
 
-
-#' Vertical stacked area (two categories)
+#' Vertical stacked area (categories, ordered categories, numbers)
 #'
 #' Compare quantities among stacked categories
 #'
 #' @param data A data.frame
 #' @return Highcharts visualization
 #' @section ctypes:
-#' Cat-Cat-Num
+#' Cat-Oca-Num
 #' @examples
-#' hgch_area_stacked_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
-#' @export hgch_area_stacked_CatCatNum
-hgch_area_stacked_CatCatNum <- function(data,
+#' hgch_area_stacked_CatOcaNum(sampleData("Cat-Cat-Num", nrow = 10))
+#' @export hgch_area_stacked_CatOcaNum
+hgch_area_stacked_CatOcaNum <- function(data,
                                         title = NULL,
                                         subtitle = NULL,
                                         caption = NULL,
@@ -279,49 +319,73 @@ hgch_area_stacked_CatCatNum <- function(data,
                                         yLine = NULL,
                                         yLineLabel = NULL,
                                         agg = "sum",
+                                        dropNa = FALSE,
+                                        order = NULL,
+                                        percentage = FALSE,
                                         theme = NULL,
-                                        export = FALSE,...) {
+                                        export = FALSE, ...) {
+
+
 
   f <- fringe(data)
   nms <- getClabels(f)
+  d <- f$d
 
   horLabel <- horLabel %||% nms[2]
-  verLabel <- verLabel %||% nms[3]
+  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a) & nrow(d) == dplyr::n_distinct(d$b),
+                                   nms[3], paste("sum", nms[3]))
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
 
-  d <- f$d %>%
-    tidyr::replace_na(list(a = ifelse(is.character(f$d$a), "NA", NA),
-                           b = ifelse(is.character(f$d$b), "NA", NA),
+  if (dropNa)
+    d <- d %>%
+    tidyr::drop_na()
+
+  d <- d  %>%
+    tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
+                           b = ifelse(is.character(d$b), "NA", NA),
                            c = NA)) %>%
     dplyr::group_by(a, b) %>%
     dplyr::summarise(c = agg(agg, c))
 
-  if (nrow(d) == 0) return()
+  if (percentage) {
+    d <- d %>%
+      dplyr::mutate(c = c / sum(c))
+    verLabel <- paste("%", verLabel)
+  }
+
+  order <- union(order, unique(d$b)[!is.na(unique(d$b))])
+  if (all(!is.na(order)) & any(is.na(d$b))) order <- c(union(order, unique(d$b[!is.na(d$b)])), NA)
+  order[is.na(order)] <- "NA"
+  d <- d[order(match(d$b, order)), ]
+
   hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
-    hc_plotOptions(area = list(stacking = "normal")) %>%
+    hc_plotOptions(area = list(stacking = "normal"),
+                   series = list(marker = list(enabled = TRUE, symbol = "circle"))) %>%
     hc_tooltip(headerFormat = "",
-               pointFormat = paste0("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "</b>{point.a}<br/><b style = 'font-size:12px'>",
-                                    paste0(horLabel, ": "), "</b>{point.b}<br/><b style = 'font-size:12px'>",
-                                    verLabel, "</b>: {point.c}")) %>%
+               pointFormat = paste0("<b>", paste0(nms[1], ": "), "</b>{point.a}<br/><b>",
+                                    paste0(horLabel, ": "), "</b>{point.b}<br/><b>",
+                                    verLabel, "</b>: {point.c", ifelse(percentage, ":.3f}", "}"))) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text = paste(agg, verLabel)), plotLines = list(list(value = yLine,
-                                                                              color = 'black',
-                                                                              dashStyle = 'shortdash',
-                                                                              width = 2,
-                                                                              label = list(text = yLineLabel)))) %>%
+    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = yLine,
+                                                                  color = 'black',
+                                                                  dashStyle = 'shortdash',
+                                                                  width = 2,
+                                                                  label = list(text = yLineLabel))),
+             labels = list(format = ifelse(percentage, "{value}%", "{value}"))) %>%
     hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption)
-  if (export) hc <- hc %>% hc_exporting(enabled = TRUE)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
   hc
 }
 
 
-#' Vertical stacked area (categories, years)
+#' Vertical stacked area (categories, years, numbers)
 #'
 #' Compare quantities among stacked categories over years
 #'
@@ -332,10 +396,10 @@ hgch_area_stacked_CatCatNum <- function(data,
 #' @examples
 #' hgch_area_stacked_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
 #' @export hgch_area_stacked_CatYeaNum
-hgch_area_stacked_CatYeaNum <- hgch_area_stacked_CatCatNum
+hgch_area_stacked_CatYeaNum <- hgch_area_stacked_CatOcaNum
 
 
-#' Vertical stacked area (categories, dates)
+#' Vertical stacked area (categories, dates, numbers)
 #'
 #' Compare quantities among stacked categories over dates
 #'
@@ -346,21 +410,21 @@ hgch_area_stacked_CatYeaNum <- hgch_area_stacked_CatCatNum
 #' @examples
 #' hgch_area_stacked_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
 #' @export hgch_area_stacked_CatDatNum
-hgch_area_stacked_CatDatNum <- hgch_area_stacked_CatCatNum
+hgch_area_stacked_CatDatNum <- hgch_area_stacked_CatOcaNum
 
 
-#' Vertical 100% stacked area (two categories)
+#' Vertical 100% stacked area (categories, ordered categories, numbers)
 #'
 #' Compare quantities among 100% stacked categories over dates
 #'
 #' @param data A data.frame
 #' @return Highcharts visualization
 #' @section ctypes:
-#' Cat-Cat-Num
+#' Cat-Oca-Num
 #' @examples
-#' hgch_area_stacked_100_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
-#' @export hgch_area_stacked_100_CatCatNum
-hgch_area_stacked_100_CatCatNum <- function(data,
+#' hgch_area_stacked_100_CatOcaNum(sampleData("Cat-Cat-Num", nrow = 10))
+#' @export hgch_area_stacked_100_CatOcaNum
+hgch_area_stacked_100_CatOcaNum <- function(data,
                                             title = NULL,
                                             subtitle = NULL,
                                             caption = NULL,
@@ -369,33 +433,47 @@ hgch_area_stacked_100_CatCatNum <- function(data,
                                             yLine = NULL,
                                             yLineLabel = NULL,
                                             agg = "sum",
+                                            dropNa = FALSE,
+                                            order = NULL,
                                             theme = NULL,
-                                            export = FALSE,...) {
+                                            export = FALSE, ...) {
+
+
 
   f <- fringe(data)
   nms <- getClabels(f)
+  d <- f$d
 
   horLabel <- horLabel %||% nms[2]
-  verLabel <- verLabel %||% nms[3]
+  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a) & nrow(d) == dplyr::n_distinct(d$b),
+                                   nms[3], paste("sum", nms[3]))
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
 
-  d <- f$d %>%
-    tidyr::replace_na(list(a = ifelse(is.character(f$d$a), "NA", NA),
-                           b = ifelse(is.character(f$d$b), "NA", NA),
+  if (dropNa)
+    d <- d %>%
+    tidyr::drop_na()
+
+  d <- d  %>%
+    tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
+                           b = ifelse(is.character(d$b), "NA", NA),
                            c = NA)) %>%
     dplyr::group_by(a, b) %>%
     dplyr::summarise(c = agg(agg, c))
 
-  if (nrow(d) == 0) return()
+  order <- union(order, unique(d$b)[!is.na(unique(d$b))])
+  if (all(!is.na(order)) & any(is.na(d$b))) order <- c(union(order, unique(d$b[!is.na(d$b)])), NA)
+  order[is.na(order)] <- "NA"
+  d <- d[order(match(d$b, order)), ]
+
   hc <- hchart(d, type = "area", hcaes(x = b, y = c, group = a)) %>%
     hc_plotOptions(area = list(stacking = "percent")) %>%
     hc_tooltip(headerFormat = "",
                pointFormat = paste0("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "</b>{point.a}<br/><b style = 'font-size:12px'>",
                                     paste0(horLabel, ": "), "</b>{point.b}<br/><b style = 'font-size:12px'>",
-                                    verLabel, "</b>: {point.c} ({point.percentage:.1f}%)")) %>%
+                                    verLabel, "</b>: {point.c} ({point.percentage:.3f}%)")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
@@ -412,7 +490,7 @@ hgch_area_stacked_100_CatCatNum <- function(data,
 }
 
 
-#' Vertical 100% stacked area (categories, years)
+#' Vertical 100% stacked area (categories, years, numbers)
 #'
 #' Compare quantities among 100% stacked categories over years
 #'
@@ -423,10 +501,10 @@ hgch_area_stacked_100_CatCatNum <- function(data,
 #' @examples
 #' hgch_area_stacked_100_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
 #' @export hgch_area_stacked_100_CatYeaNum
-hgch_area_stacked_100_CatYeaNum <- hgch_area_stacked_100_CatCatNum
+hgch_area_stacked_100_CatYeaNum <- hgch_area_stacked_100_CatOcaNum
 
 
-#' Vertical 100% stacked area (categories, dates)
+#' Vertical 100% stacked area (categories, dates, numbers)
 #'
 #' Compare quantities among 100% stacked categories over dates
 #'
@@ -437,7 +515,7 @@ hgch_area_stacked_100_CatYeaNum <- hgch_area_stacked_100_CatCatNum
 #' @examples
 #' hgch_area_stacked_100_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
 #' @export hgch_area_stacked_100_CatDatNum
-hgch_area_stacked_100_CatDatNum <- hgch_area_stacked_100_CatCatNum
+hgch_area_stacked_100_CatDatNum <- hgch_area_stacked_100_CatOcaNum
 
 
 

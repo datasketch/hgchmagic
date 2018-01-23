@@ -8,7 +8,7 @@
 #' @section ctypes:
 #' CatCatNum
 #' @examples
-#' hgch_heatmap_matrix_CatCatNum(sampleData("CatCatNum", nrow = 20))
+#' hgch_heatmap_matrix_CatCatNum(sampleData("Cat-Cat-Num", nrow = 20))
 #' @export hgch_heatmap_matrix_CatCatNum
 hgch_heatmap_matrix_CatCatNum <- function(data,
            title = NULL,
