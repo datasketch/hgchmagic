@@ -147,8 +147,8 @@ hgch_area_OcaNum <- function(data,
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = yLine,
-                                                                  icolor = 'black',
-                                                                  iiidashStyle = 'shortdash',
+                                                                  color = 'black',
+                                                                  dashStyle = 'shortdash',
                                                                   width = 2,
                                                                   label = list(text = yLineLabel))),
              labels = list(format = ifelse(percentage, "{value}%", "{value}"))) %>%
@@ -516,6 +516,91 @@ hgch_area_stacked_100_CatYeaNum <- hgch_area_stacked_100_CatOcaNum
 #' hgch_area_stacked_100_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
 #' @export hgch_area_stacked_100_CatDatNum
 hgch_area_stacked_100_CatDatNum <- hgch_area_stacked_100_CatOcaNum
+
+
+#' Area (ordered category, n numbers)
+#'
+#' Compare n quantities among category's levels
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Oca-NumP
+#' @examples
+#' hgch_area_OcaNumP(sampleData("Oca-NumP", nrow = 10))
+#' @export hgch_area_OcaNumP
+hgch_area_OcaNumP <- function(data,
+                              title = NULL,
+                              subtitle = NULL,
+                              caption = NULL,
+                              horLabel = NULL,
+                              verLabel = NULL,
+                              yLine = NULL,
+                              yLineLabel = NULL,
+                              agg = "sum",
+                              dropNa = FALSE,
+                              order = NULL,
+                              percentage = FALSE,
+                              theme = NULL,
+                              export = FALSE, ...) {
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+  codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
+
+  d <- d  %>%
+    tidyr::gather(variable, value, -a) %>%
+    dplyr::group_by(a, variable) %>%
+    dplyr::summarise(value = agg(agg, value)) %>%
+    dplyr::ungroup() %>%
+    dplyr::select(2, 1, 3)
+  d <- dplyr::mutate(d, variable = fct_recode_df(d, "variable", codes))
+  names(d)[2] <- nms[1]
+
+  hc <- hgch_area_CatOcaNum(data = d,
+                            title = title ,
+                            subtitle = subtitle,
+                            caption = caption,
+                            horLabel = horLabel,
+                            verLabel = verLabel,
+                            yLine = yLine,
+                            yLineLabel = yLineLabel,
+                            agg = agg,
+                            dropNa = dropNa,
+                            order = order,
+                            percentage = percentage,
+                            theme = theme,
+                            export = export, ...)
+  hc
+}
+
+
+#' Area (years, n numbers)
+#'
+#' Compare n quantities over years
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Yea-NumP
+#' @examples
+#' hgch_area_YeaNumP(sampleData("Yea-NumP", nrow = 10))
+#' @export hgch_area_YeaNumP
+hgch_area_YeaNumP <- hgch_area_OcaNumP
+
+
+#' Area (dates, n numbers)
+#'
+#' Compare n quantities over dates
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Dat-NumP
+#' @examples
+#' hgch_area_DatNumP(sampleData("Dat-NumP", nrow = 10))
+#' @export hgch_area_DatNumP
+hgch_area_DatNumP <- hgch_area_OcaNumP
 
 
 

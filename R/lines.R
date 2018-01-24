@@ -19,7 +19,7 @@ hgch_line_Oca <- function(data,
                           yLineLabel = NULL,
                           dropNa = FALSE,
                           order = NULL,
-                          startAtZero = FALSE,
+                          startAtZero = TRUE,
                           theme = NULL,
                           export = FALSE, ...) {
   f <- fringe(data)
@@ -96,7 +96,7 @@ hgch_line_OcaNum <- function(data,
                              dropNa = FALSE,
                              order = NULL,
                              percentage = FALSE,
-                             startAtZero = FALSE,
+                             startAtZero = TRUE,
                              theme = NULL,
                              export = FALSE, ...) {
   f <- fringe(data)
@@ -140,7 +140,7 @@ hgch_line_OcaNum <- function(data,
     hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
     hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = yLine,
                                                                   icolor = 'black',
-                                                                  iiidashStyle = 'shortdash',
+                                                                  dashStyle = 'shortdash',
                                                                   width = 2,
                                                                   label = list(text = yLineLabel))),
              labels = list(format = ifelse(percentage, "{value}%", "{value}")),
@@ -207,7 +207,7 @@ hgch_line_CatOcaNum <- function(data,
                                 dropNa = FALSE,
                                 order = NULL,
                                 percentage = FALSE,
-                                startAtZero = FALSE,
+                                startAtZero = TRUE,
                                 theme = NULL,
                                 export = FALSE, ...) {
   f <- fringe(data)
@@ -322,18 +322,13 @@ hgch_line_OcaNumP <- function(data,
                               dropNa = FALSE,
                               order = NULL,
                               percentage = FALSE,
-                              startAtZero = FALSE,
+                              startAtZero = TRUE,
                               theme = NULL,
                               export = FALSE, ...) {
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
   codes <- data_frame(variable = letters[1:ncol(f$d)], to = nms)
- # horLabel <- horLabel %||% nms[1]
-  # POR DEFINIR
-  #verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a) & nrow(d) == dplyr::n_distinct(d$b),
-  #                                 nms[3], paste("sum", nms[3]))
-
 
   d <- d  %>%
     tidyr::gather(variable, value, -a) %>%
