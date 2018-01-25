@@ -27,7 +27,7 @@ hgch_line_Oca <- function(data,
   d <- f$d
 
   horLabel <- horLabel %||% nms[1]
-  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[1], paste("sum", nms[1]))
+  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[1], paste("count", nms[1]))
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
@@ -64,9 +64,6 @@ hgch_line_Oca <- function(data,
              minPadding = if (startAtZero) 0) %>%
     hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption)
-  # if (startAtZero) hc <- hc %>%
-  #   hc_yAxis(title = list(text=yAxisTitle), minRange = 0.1, min = 0, minPadding = 0)
-  #   #   }
   if (export) hc <- hc %>%
     hc_exporting(enabled = TRUE)
   hc
@@ -104,7 +101,7 @@ hgch_line_OcaNum <- function(data,
   d <- f$d
 
   horLabel <- horLabel %||% nms[1]
-  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste("sum", nms[2]))
+  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste(agg, nms[2]))
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
@@ -215,8 +212,7 @@ hgch_line_CatOcaNum <- function(data,
   d <- f$d
 
   horLabel <- horLabel %||% nms[2]
-  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a) & nrow(d) == dplyr::n_distinct(d$b),
-                                   nms[3], paste("sum", nms[3]))
+  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[3], paste(agg, nms[3]))
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""

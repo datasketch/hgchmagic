@@ -13,23 +13,47 @@ hgch_pie_Cat <- function(data,
                          title = NULL,
                          subtitle = NULL,
                          caption = NULL,
-                         agg = "count",
+                         dropNa = FALSE,
+                         order = NULL,
+                         sort = "no",
+                         sliceN = NULL,
                          theme = NULL,
-                         export = FALSE,...) {
+                         export = FALSE, ...) {
 
   f <- fringe(data)
   nms <- getClabels(f)
+  d <- f$d
 
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
 
-  d <- f$d %>%
-    tidyr::replace_na(list(a = ifelse(is.character(f$d$a), "NA", NA))) %>%
+  if (dropNa)
+    d <- d %>%
+    tidyr::drop_na()
+
+  d <- d  %>%
+    tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA))) %>%
     dplyr::group_by(a) %>%
     dplyr::summarise(b = n())
 
-  if (nrow(d) == 0) return()
+  order <- union(order, unique(d$a)[!is.na(unique(d$a))])
+  if (all(!is.na(order)) & any(is.na(d$a))) order <- c(union(order, unique(d$a[!is.na(d$a)])), NA)
+  order[is.na(order)] <- "NA"
+  d <- d[order(match(d$a, order)), ]
+
+  if (sort == "desc")
+    d <- d %>%
+    dplyr::arrange(desc(b))
+
+  if (sort == "asc")
+    d <- d %>%
+    dplyr::arrange(b)
+
+  if (!is.null(sliceN))
+    d <- d %>%
+    dplyr::slice(1:sliceN)
+
 
   hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(series = list(dataLabels = list(enabled = TRUE, format = '<b>{point.a}</b>: {point.b} ({point.percentage:.1f}%)')),
@@ -49,7 +73,7 @@ hgch_pie_Cat <- function(data,
 }
 
 
-#' Pie (quatities)
+#' Pie (categories, numbers)
 #'
 #' Comparing quantities among categories
 #'
@@ -64,33 +88,60 @@ hgch_pie_CatNum <- function(data,
                             title = NULL,
                             subtitle = NULL,
                             caption = NULL,
+                            yLine = NULL,
+                            dropNa = FALSE,
                             agg = "sum",
+                            order = NULL,
+                            sort = "no",
+                            sliceN = NULL,
                             theme = NULL,
-                            export = FALSE,...) {
+                            export = FALSE, ...) {
 
   f <- fringe(data)
   nms <- getClabels(f)
+  d <- f$d
 
-  title <- title %||% ""
+  title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
 
-  d <- f$d %>%
-    tidyr::replace_na(list(a = ifelse(is.character(f$d$a), "NA", NA))) %>%
+  if (dropNa)
+    d <- d %>%
+    tidyr::drop_na()
+
+  d <- d  %>%
+    tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
+                           b = NA)) %>%
     dplyr::group_by(a) %>%
     dplyr::summarise(b = agg(agg, b))
 
-  if (nrow(d) == 0) return()
+  order <- union(order, unique(d$a)[!is.na(unique(d$a))])
+  if (all(!is.na(order)) & any(is.na(d$a))) order <- c(union(order, unique(d$a[!is.na(d$a)])), NA)
+  order[is.na(order)] <- "NA"
+  d <- d[order(match(d$a, order)), ]
+
+  if (sort == "desc")
+    d <- d %>%
+    dplyr::arrange(desc(b))
+
+  if (sort == "asc")
+    d <- d %>%
+    dplyr::arrange(b)
+
+  if (!is.null(sliceN))
+    d <- d %>%
+    dplyr::slice(1:sliceN)
 
   hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
-    hc_plotOptions(series = list(dataLabels = list(enabled = TRUE, format = '<b>{point.a}</b>: {point.b} ({point.percentage:.1f}%)')),
-                   pie = list(cursor = 'pointer', dataLabels = list(style = list(connectorWidth = 0,
-                                                                                 width = '100px',
+    hc_plotOptions(series = list(dataLabels = list(enabled = TRUE, format = "<b>{point.a}</b>: {point.b} ({point.percentage:.1f}%)")),
+                   pie = list(cursor = "pointer", dataLabels = list(style = list(connectorWidth = 0,
+                                                                                 width = "100px",
                                                                                  #color = "#393939",
                                                                                  #fontFamily = "roboto_slab_bold",
                                                                                  strokeWidth = 1,
-                                                                                 fill = 'none')))) %>%
-    hc_tooltip(headerFormat = "", pointFormat = "<b>{point.a}</b>: {point.b} ({point.percentage:.3f}%)", followPointer = TRUE, shared = TRUE) %>%
+                                                                                 fill = "none")))) %>%
+    hc_tooltip(headerFormat = "", pointFormat = paste(ifelse(nrow(f$d) == dplyr::n_distinct(f$d$a), "", agg),
+                                                      "<b>{point.a}</b>: {point.b} ({point.percentage:.3f}%)"), followPointer = TRUE, shared = TRUE) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
@@ -99,7 +150,6 @@ hgch_pie_CatNum <- function(data,
   if (export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
-
 
 #' Donut (categories)
 #'
@@ -116,23 +166,47 @@ hgch_donut_Cat <- function(data,
                            title = NULL,
                            subtitle = NULL,
                            caption = NULL,
-                           agg = "count",
+                           dropNa = FALSE,
+                           order = NULL,
+                           sort = "no",
+                           sliceN = NULL,
                            theme = NULL,
-                           export = FALSE,...) {
+                           export = FALSE, ...) {
 
   f <- fringe(data)
   nms <- getClabels(f)
+  d <- f$d
 
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
 
-  d <- f$d %>%
-    tidyr::replace_na(list(a = ifelse(is.character(f$d$a), "NA", NA))) %>%
+  if (dropNa)
+    d <- d %>%
+    tidyr::drop_na()
+
+  d <- d  %>%
+    tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA))) %>%
     dplyr::group_by(a) %>%
     dplyr::summarise(b = n())
 
-  if (nrow(d) == 0) return()
+  order <- union(order, unique(d$a)[!is.na(unique(d$a))])
+  if (all(!is.na(order)) & any(is.na(d$a))) order <- c(union(order, unique(d$a[!is.na(d$a)])), NA)
+  order[is.na(order)] <- "NA"
+  d <- d[order(match(d$a, order)), ]
+
+  if (sort == "desc")
+    d <- d %>%
+    dplyr::arrange(desc(b))
+
+  if (sort == "asc")
+    d <- d %>%
+    dplyr::arrange(b)
+
+  if (!is.null(sliceN))
+    d <- d %>%
+    dplyr::slice(1:sliceN)
+
 
   hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
     hc_plotOptions(series = list(innerSize = "60%", dataLabels = list(enabled = TRUE, format = '<b>{point.a}</b>: {point.b} ({point.percentage:.1f}%)')),
@@ -147,14 +221,12 @@ hgch_donut_Cat <- function(data,
     hc_subtitle(text = subtitle) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_add_theme(custom_theme(custom = theme))
-
   if (export) hc <- hc %>% hc_exporting(enabled = TRUE)
   hc
 }
 
 
-
-#' Donut (quantities)
+#' Donut (categories, numbers)
 #'
 #' Comparing quantities among categories
 #'
@@ -169,33 +241,60 @@ hgch_donut_CatNum <- function(data,
                               title = NULL,
                               subtitle = NULL,
                               caption = NULL,
+                              yLine = NULL,
+                              dropNa = FALSE,
                               agg = "sum",
+                              order = NULL,
+                              sort = "no",
+                              sliceN = NULL,
                               theme = NULL,
-                              export = FALSE,...) {
+                              export = FALSE, ...) {
 
   f <- fringe(data)
   nms <- getClabels(f)
+  d <- f$d
 
-  title <- title %||% ""
+  title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
 
-  d <- f$d %>%
-    tidyr::replace_na(list(a = ifelse(is.character(f$d$a), "NA", NA))) %>%
+  if (dropNa)
+    d <- d %>%
+    tidyr::drop_na()
+
+  d <- d  %>%
+    tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
+                           b = NA)) %>%
     dplyr::group_by(a) %>%
     dplyr::summarise(b = agg(agg, b))
 
-  if (nrow(d) == 0) return()
+  order <- union(order, unique(d$a)[!is.na(unique(d$a))])
+  if (all(!is.na(order)) & any(is.na(d$a))) order <- c(union(order, unique(d$a[!is.na(d$a)])), NA)
+  order[is.na(order)] <- "NA"
+  d <- d[order(match(d$a, order)), ]
+
+  if (sort == "desc")
+    d <- d %>%
+    dplyr::arrange(desc(b))
+
+  if (sort == "asc")
+    d <- d %>%
+    dplyr::arrange(b)
+
+  if (!is.null(sliceN))
+    d <- d %>%
+    dplyr::slice(1:sliceN)
 
   hc <- hchart(d, type = "pie", hcaes(x = a, y = b)) %>%
-    hc_plotOptions(series = list(innerSize = "60%", dataLabels = list(enabled = TRUE, format = '<b>{point.a}</b>: {point.b} ({point.percentage:.1f}%)')),
-                   pie = list(cursor = 'pointer', dataLabels = list(style = list(connectorWidth = 0,
-                                                                                 width = '100px',
+    hc_plotOptions(series = list(innerSize = "60%", dataLabels = list(enabled = TRUE, format = "<b>{point.a}</b>: {point.b} ({point.percentage:.1f}%)")),
+                   pie = list(cursor = "pointer", dataLabels = list(style = list(connectorWidth = 0,
+                                                                                 width = "100px",
                                                                                  #color = "#393939",
                                                                                  #fontFamily = "roboto_slab_bold",
                                                                                  strokeWidth = 1,
-                                                                                 fill = 'none')))) %>%
-    hc_tooltip(headerFormat = "", pointFormat = "<b>{point.a}</b>: {point.b} ({point.percentage:.3f}%)", followPointer = TRUE, shared = TRUE) %>%
+                                                                                 fill = "none")))) %>%
+    hc_tooltip(headerFormat = "", pointFormat = paste(ifelse(nrow(f$d) == dplyr::n_distinct(f$d$a), "", agg),
+                                                      "<b>{point.a}</b>: {point.b} ({point.percentage:.3f}%)"), followPointer = TRUE, shared = TRUE) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_credits(enabled = TRUE, text = caption) %>%

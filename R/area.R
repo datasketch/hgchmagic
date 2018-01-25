@@ -42,7 +42,7 @@ hgch_area_Oca <- function(data,
 
 
   horLabel <- horLabel %||% nms[1]
-  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[1], paste("sum", nms[1]))
+  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[1], paste("count", nms[1]))
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
@@ -112,7 +112,7 @@ hgch_area_OcaNum <- function(data,
   d <- f$d
 
   horLabel <- horLabel %||% nms[1]
-  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste("sum", nms[2]))
+  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste(agg, nms[2]))
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
@@ -219,8 +219,7 @@ hgch_area_CatOcaNum <- function(data,
   d <- f$d
 
   horLabel <- horLabel %||% nms[2]
-  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a) & nrow(d) == dplyr::n_distinct(d$b),
-                                   nms[3], paste("sum", nms[3]))
+  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[3], paste(agg, nms[3]))
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
@@ -332,8 +331,7 @@ hgch_area_stacked_CatOcaNum <- function(data,
   d <- f$d
 
   horLabel <- horLabel %||% nms[2]
-  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a) & nrow(d) == dplyr::n_distinct(d$b),
-                                   nms[3], paste("sum", nms[3]))
+  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[3], paste(agg, nms[3]))
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
@@ -445,8 +443,7 @@ hgch_area_stacked_100_CatOcaNum <- function(data,
   d <- f$d
 
   horLabel <- horLabel %||% nms[2]
-  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a) & nrow(d) == dplyr::n_distinct(d$b),
-                                   nms[3], paste("sum", nms[3]))
+  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[3], paste(agg, nms[3]))
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
@@ -477,7 +474,7 @@ hgch_area_stacked_100_CatOcaNum <- function(data,
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text = paste(agg, verLabel)), plotLines = list(list(value = yLine,
+    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = yLine,
                                                                               color = 'black',
                                                                               dashStyle = 'shortdash',
                                                                               width = 2,
