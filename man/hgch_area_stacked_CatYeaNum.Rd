@@ -2,21 +2,21 @@
 % Please edit documentation in R/area.R
 \name{hgch_area_stacked_CatYeaNum}
 \alias{hgch_area_stacked_CatYeaNum}
-\title{Vertical stacked area}
+\title{Vertical stacked area (categories, years, numbers)}
 \usage{
 hgch_area_stacked_CatYeaNum(data, title = NULL, subtitle = NULL,
-  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  aggregation = "sum", startAtZero = FALSE, theme = NULL,
-  export = FALSE, ...)
+  caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
+  yLineLabel = NULL, agg = "sum", dropNa = FALSE, order = NULL,
+  percentage = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
-\item{x}{A data.frame}
+\item{data}{A data.frame}
 }
 \value{
-highcharts viz
+Highcharts visualization
 }
 \description{
-Vertical stacked area
+Compare quantities among stacked categories over years
 }
 \section{ctypes}{
 
@@ -24,7 +24,5 @@ Cat-Yea-Num
 }
 
 \examples{
-
 hgch_area_stacked_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
-
 }

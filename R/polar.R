@@ -8,7 +8,7 @@
 #' Oca
 #' @examples
 #' hgch_radar_Oca(sampleData("Cat", nrow = 10))
-#' @export hgch_radar_Cat
+#' @export hgch_radar_Oca
 hgch_radar_Oca <- function(data,
                            title = NULL,
                            subtitle = NULL,
@@ -305,7 +305,7 @@ hgch_radar_OcaNumP <- function(data,
 #' Oca
 #' @examples
 #' hgch_polarbar_Oca(sampleData("Cat", nrow = 10))
-#' @export hgch_polarbar_Cat
+#' @export hgch_polarbar_Oca
 hgch_polarbar_Oca <- function(data,
                               title = NULL,
                               subtitle = NULL,

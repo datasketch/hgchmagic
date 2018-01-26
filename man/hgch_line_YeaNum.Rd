@@ -2,21 +2,21 @@
 % Please edit documentation in R/lines.R
 \name{hgch_line_YeaNum}
 \alias{hgch_line_YeaNum}
-\title{Line}
+\title{Line (years, numbers)}
 \usage{
 hgch_line_YeaNum(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  aggregation = "sum", startAtZero = FALSE, theme = NULL,
-  export = FALSE, ...)
+  horLabel = NULL, verLabel = NULL, yLine = NULL, yLineLabel = NULL,
+  agg = "sum", dropNa = FALSE, order = NULL, percentage = FALSE,
+  startAtZero = TRUE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
-\item{x}{A data.frame}
+\item{data}{A data.frame}
 }
 \value{
-highcharts viz
+Highcharts visualization
 }
 \description{
-Line
+Compare quantities over years
 }
 \section{ctypes}{
 
@@ -24,7 +24,5 @@ Yea-Num
 }
 
 \examples{
-
 hgch_line_YeaNum(sampleData("Yea-Num", nrow = 10))
-
 }

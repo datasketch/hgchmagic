@@ -23,6 +23,6 @@ Grouped line
 
 \examples{
 
-hgch_multilines_YeaNumP(sampleDatta("Yea-NumP",nrow = 10))
+hgch_multilines_YeaNumP(sampleData("Yea-NumP",nrow = 10))
 
 }

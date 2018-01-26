@@ -5,7 +5,8 @@
 \title{Waterfall}
 \usage{
 hgch_waterfall_CatNum(data, title = NULL, xAxisTitle = NULL,
-  caption = NULL, aggregation = "sum", yAxisTitle = NULL)
+  caption = NULL, aggregation = "sum", yAxisTitle = NULL,
+  subtitle = NULL)
 }
 \arguments{
 \item{x}{A data.frame}

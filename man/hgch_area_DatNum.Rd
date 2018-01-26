@@ -2,21 +2,21 @@
 % Please edit documentation in R/area.R
 \name{hgch_area_DatNum}
 \alias{hgch_area_DatNum}
-\title{Vertical area}
+\title{Vertical area (dates, numbers)}
 \usage{
 hgch_area_DatNum(data, title = NULL, subtitle = NULL, caption = NULL,
-  xAxisTitle = NULL, yAxisTitle = NULL, symbol = NULL,
-  aggregation = "sum", startAtZero = FALSE, theme = NULL,
-  export = FALSE, ...)
+  horLabel = NULL, verLabel = NULL, yLine = NULL, yLineLabel = NULL,
+  agg = "sum", dropNa = FALSE, order = NULL, percentage = FALSE,
+  theme = NULL, export = FALSE, ...)
 }
 \arguments{
-\item{x}{A data.frame}
+\item{data}{A data.frame}
 }
 \value{
-highcharts viz
+Highcharts visualization
 }
 \description{
-Vertical area
+Compare a quantities over time (Year-month-day)
 }
 \section{ctypes}{
 
@@ -24,7 +24,5 @@ Dat-Num
 }
 
 \examples{
-
 hgch_area_DatNum(sampleData("Dat-Num", nrow = 10))
-
 }

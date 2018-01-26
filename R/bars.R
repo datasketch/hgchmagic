@@ -233,7 +233,7 @@ hgch_bar_DatNum <- hgch_bar_OcaNum
 #' Cat-Oca
 #' @examples
 #' hgch_bar_grouped_CatOca(sampleData("Cat-Cat", nrow = 10))
-#' @export hgch_bar_grouped_OcaNum
+#' @export hgch_bar_grouped_CatOca
 hgch_bar_grouped_CatOca <- function(data,
                                     title = NULL,
                                     subtitle = NULL,
@@ -324,7 +324,7 @@ hgch_bar_grouped_CatOca <- function(data,
 #' Cat-Oca
 #' @examples
 #' hgch_bar_stacked_CatOca(sampleData("Cat-Cat", nrow = 10))
-#' @export hgch_bar_stacked_OcaNum
+#' @export hgch_bar_stacked_CatOca
 hgch_bar_stacked_CatOca <-  function(data,
                                      title = NULL,
                                      subtitle = NULL,
@@ -417,7 +417,7 @@ hgch_bar_stacked_CatOca <-  function(data,
 #' Cat-Oca
 #' @examples
 #' hgch_bar_stacked_100_CatOca(sampleData("Cat-Cat", nrow = 10))
-#' @export hgch_bar_stacked_100_OcaNum
+#' @export hgch_bar_stacked_100_CatOca
 hgch_bar_stacked_100_CatOca <-  function(data,
                                          title = NULL,
                                          subtitle = NULL,

@@ -23,5 +23,5 @@ CatCatNum
 }
 
 \examples{
-hgch_heatmap_matrix_CatCatNum(sampleData("CatCatNum", nrow = 20))
+hgch_heatmap_matrix_CatCatNum(sampleData("Cat-Cat-Num", nrow = 20))
 }
