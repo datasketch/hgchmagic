@@ -5,206 +5,273 @@ hgch_2yline_YeaNumNum,2 y line,"
 hgch_2yline_YeaNumNum,2 y line,"
 2 y line
 ",Yea-Num-Num,Num2-Yea,2yline,NA
-hgch_area_CatCatNum,Vertical area,"
-Vertical area
-",Cat-Cat-Num,Cat2-Num,area,OK
-hgch_area_CatDatNum,Vertical area,"
-Vertical area
+hgch_area_CatDatNum,"Vertical area (categories, dates, numbers)","
+Compare quantities among categories over dates
 ",Cat-Dat-Num,Cat-Dat-Num,area,OK
-hgch_area_CatNum,Vertical area,"
-Vertical area
-",Cat-Num,Cat-Num,area,OK
-hgch_area_CatYeaNum,Vertical area,"
-Vertical area
+hgch_area_CatOcaNum,"Vertical area (categories, ordered categories, numbers)","
+Compare quantities among two categories
+",Cat-Oca-Num,Cat-Num-Oca,area,NA
+hgch_area_CatYeaNum,"Vertical area (categories, years, numbers)","
+Compare quantities among categories over years
 ",Cat-Yea-Num,Cat-Num-Yea,area,OK
-hgch_area_DatNum,Vertical area,"
-Vertical area
+hgch_area_DatNum,"Vertical area (dates, numbers)","
+Compare a quantities over time (Year-month-day)
 ",Dat-Num,Dat-Num,area,OK
-hgch_area_YeaNum,Vertical area,"
-Vertical area
+hgch_area_DatNumP,"Area (dates, n numbers)","
+Compare n quantities over dates
+",Dat-NumP,Dat-NumP,area,NA
+hgch_area_Oca,Vertical area (ordered categories),"
+Compare category's levels
+",Oca,Oca,area,NA
+hgch_area_OcaNum,"Vertical area (ordered categories, numbers)","
+Compare quantities among categories
+",Oca-Num,Num-Oca,area,NA
+hgch_area_OcaNumP,"Area (ordered category, n numbers)","
+Compare n quantities among category's levels
+",Oca-NumP,NumP-Oca,area,NA
+hgch_area_YeaNum,"Vertical area (years, numbers)","
+Compare quantities over years
 ",Yea-Num,Num-Yea,area,OK
-hgch_area_stacked_100_CatCatNum,Vertical 100 stacked area,"
-Vertical 100 stacked area
-",Cat-Cat-Num,Cat2-Num,area,OK
-hgch_area_stacked_100_CatDatNum,Vertical 100 stacked area,"
-Vertical 100 stacked area
+hgch_area_YeaNumP,"Area (years, n numbers)","
+Compare n quantities over years
+",Yea-NumP,NumP-Yea,area,NA
+hgch_area_stacked_100_CatDatNum,"Vertical 100% stacked area (categories, dates, numbers)}
+
+hgch_area_stacked_100_CatDatNum(data, title = NULL, subtitle = NULL,
+  caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
+  yLineLabel = NULL, agg = ""sum"", dropNa = FALSE, order = NULL,
+  theme = NULL, export = FALSE, ...)
+
+
+\itemdataA data.frame
+
+
+Highcharts visualization
+
+
+Compare quantities among 100% stacked categories over dates
+
+ctypes
+
+Cat-Dat-Num
+
+
+
+hgch_area_stacked_100_CatDatNum(sampleData(""Cat-Dat-Num"", nrow = 10))
+
+",,NA,"NA",area,OK
+hgch_area_stacked_100_CatOcaNum,"Vertical 100% stacked area (categories, ordered categories, numbers)}
+
+hgch_area_stacked_100_CatOcaNum(data, title = NULL, subtitle = NULL,
+  caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
+  yLineLabel = NULL, agg = ""sum"", dropNa = FALSE, order = NULL,
+  theme = NULL, export = FALSE, ...)
+
+
+\itemdataA data.frame
+
+
+Highcharts visualization
+
+
+Compare quantities among 100% stacked categories over dates
+
+ctypes
+
+Cat-Oca-Num
+
+
+
+hgch_area_stacked_100_CatOcaNum(sampleData(""Cat-Cat-Num"", nrow = 10))
+
+",,NA,"NA",area,NA
+hgch_area_stacked_100_CatYeaNum,"Vertical 100% stacked area (categories, years, numbers)}
+
+hgch_area_stacked_100_CatYeaNum(data, title = NULL, subtitle = NULL,
+  caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
+  yLineLabel = NULL, agg = ""sum"", dropNa = FALSE, order = NULL,
+  theme = NULL, export = FALSE, ...)
+
+
+\itemdataA data.frame
+
+
+Highcharts visualization
+
+
+Compare quantities among 100% stacked categories over years
+
+ctypes
+
+Cat-Yea-Num
+
+
+
+hgch_area_stacked_100_CatYeaNum(sampleData(""Cat-Yea-Num"", nrow = 10))
+
+",,NA,"NA",area,OK
+hgch_area_stacked_CatDatNum,"Vertical stacked area (categories, dates, numbers)","
+Compare quantities among stacked categories over dates
 ",Cat-Dat-Num,Cat-Dat-Num,area,OK
-hgch_area_stacked_100_CatYeaNum,Vertical 100 stacked area,"
-Vertical 100 stacked area
+hgch_area_stacked_CatOcaNum,"Vertical stacked area (categories, ordered categories, numbers)","
+Compare quantities among stacked categories
+",Cat-Oca-Num,Cat-Num-Oca,area,NA
+hgch_area_stacked_CatYeaNum,"Vertical stacked area (categories, years, numbers)","
+Compare quantities among stacked categories over years
 ",Cat-Yea-Num,Cat-Num-Yea,area,OK
-hgch_area_stacked_CatCatNum,Vertical stacked area,"
-Vertical stacked area
-",Cat-Cat-Num,Cat2-Num,area,OK
-hgch_area_stacked_CatDatNum,Vertical stacked area,"
-Vertical stacked area
-",Cat-Dat-Num,Cat-Dat-Num,area,OK
-hgch_area_stacked_CatYeaNum,Vertical stacked area,"
-Vertical stacked area
-",Cat-Yea-Num,Cat-Num-Yea,area,OK
-hgch_bar_grouped_hor_CatCat,Horizontal grouped bar,"
-Horizontal grouped bar
-",Cat-Cat,Cat2,bar,OK
-hgch_bar_grouped_hor_CatCatNum,Horizontal grouped bar,"
-Horizontal grouped bar
-",Cat-Cat-Num,Cat2-Num,bar,OK
-hgch_bar_grouped_hor_CatDatNum,Horizontal grouped bar,"
-Horizontal grouped bar
-",Cat-Dat-Num,Cat-Dat-Num,bar,OK
-hgch_bar_grouped_hor_CatNum,Horizontal grouped bar,"
-Horizontal grouped bar
-",Cat-Num,Cat-Num,bar,NA
-hgch_bar_grouped_hor_CatNumNum,Horizontal grouped bar,"
-Horizontal grouped bar
-",Cat-Num-Num,Cat-Num2,bar,OK
-hgch_bar_grouped_hor_CatNumNumNum,Horizontal grouped bar,"
-Horizontal grouped bar
-",Cat-Num-Num-Num,Cat-Num3,bar,OK
-hgch_bar_grouped_hor_CatNumNumNumNum,Horizontal grouped bar,"
-Horizontal grouped bar
-",Cat-Num-Num-Num-Num,Cat-Num4,bar,OK
-hgch_bar_grouped_hor_CatYeaNum,Horizontal grouped bar,"
-Horizontal grouped bar
-",Cat-Yea-Num,Cat-Num-Yea,bar,OK
-hgch_bar_grouped_ver_CatCat,Vertical grouped bar,"
-Vertical grouped bar
-",Cat-Cat,Cat2,bar,OK
-hgch_bar_grouped_ver_CatCatNum,Vertical grouped bar,"
-Vertical grouped bar
-",Cat-Cat-Num,Cat2-Num,bar,OK
-hgch_bar_grouped_ver_CatDatNum,Vertical grouped bar,"
-Vertical grouped bar
-",Cat-Dat-Num,Cat-Dat-Num,bar,OK
-hgch_bar_grouped_ver_CatNum,Vertical grouped bar,"
-Vertical grouped bar
-",Cat-Num,Cat-Num,bar,NA
-hgch_bar_grouped_ver_CatNumNum,Vertical grouped bar,"
-Vertical grouped bar
-",Cat-Num-Num,Cat-Num2,bar,OK
-hgch_bar_grouped_ver_CatNumNumNum,Vertical grouped bar,"
-Vertical grouped bar
-",Cat-Num-Num-Num,Cat-Num3,bar,OK
-hgch_bar_grouped_ver_CatNumNumNumNum,Vertical grouped bar,"
-Vertical grouped bar
-",Cat-Num-Num-Num-Num,Cat-Num4,bar,OK
-hgch_bar_grouped_ver_CatYeaNum,Vertical grouped bar,"
-Vertical grouped bar
-",Cat-Yea-Num,Cat-Num-Yea,bar,OK
-hgch_bar_hor_Cat,Horizontal bar,"
-Horizontal bar
-",Cat,Cat,bar,OK
-hgch_bar_hor_CatNum,Horizontal bar,"
-Horizontal bar
-",Cat-Num,Cat-Num,bar,OK
-hgch_bar_hor_DatNum,Horizontal bar,"
-Horizontal bar
-",Dat-Num,Dat-Num,bar,OK
-hgch_bar_hor_Num,Horizontal bar,"
-Horizontal bar
-",Num,Num,bar,OK
-hgch_bar_hor_NumNum,Horizontal bar,"
-Horizontal bar
-",Num-Num,Num2,bar,OK
-hgch_bar_hor_NumNumNum,Horizontal bar,"
-Horizontal bar
-",Num-Num-Num,Num3,bar,OK
-hgch_bar_hor_NumNumNumNum,Horizontal bar,"
-Horizontal bar
-",Num-Num-Num-Num,Num4,bar,OK
-hgch_bar_hor_YeaNum,Horizontal bar,"
-Horizontal bar
-",Yea-Num,Num-Yea,bar,OK
-hgch_bar_stacked_100_hor_CatCat,Horizontal 100 stacked bar,"
-Horizontal 100 stacked bar
-",Cat-Cat,Cat2,bar,OK
-hgch_bar_stacked_100_hor_CatCatNum,Horizontal 100 stacked bar,"
-Horizontal 100 stacked bar
-",Cat-Cat-Num,Cat2-Num,bar,OK
-hgch_bar_stacked_100_hor_CatDatNum,Horizontal 100 stacked bar,"
-Horizontal 100 stacked bar
-",Cat-Dat-Num,Cat-Dat-Num,bar,OK
-hgch_bar_stacked_100_hor_CatYeaNum,Horizontal 100 stacked bar,"
-Horizontal 100 stacked bar
-",Cat-Yea-Num,Cat-Num-Yea,bar,OK
-hgch_bar_stacked_100_ver_CatCat,Vertical 100 stacked bar,"
-Vertical 100 stacked bar
-",Cat-Cat,Cat2,bar,OK
-hgch_bar_stacked_100_ver_CatCatNum,Vertical 100 stacked bar,"
-Vertical 100 stacked bar
-",Cat-Cat-Num,Cat2-Num,bar,OK
-hgch_bar_stacked_100_ver_CatDatNum,Vertical 100 stacked bar,"
-Vertical 100 stacked bar
-",Cat-Dat-Num,Cat-Dat-Num,bar,OK
-hgch_bar_stacked_100_ver_CatYeaNum,Vertical 100 stacked bar,"
-Vertical 100 stacked bar
-",Cat-Yea-Num,Cat-Num-Yea,bar,OK
-hgch_bar_stacked_hor_CatCat,Horizontal stacked bar,"
-Horizontal stacked bar
-",Cat-Cat,Cat2,bar,OK
-hgch_bar_stacked_hor_CatCatNum,Horizontal stacked bar,"
-Horizontal stacked bar
-",Cat-Cat-Num,Cat2-Num,bar,OK
-hgch_bar_stacked_hor_CatDatNum,Horizontal stacked bar,"
-Horizontal stacked bar
-",Cat-Dat-Num,Cat-Dat-Num,bar,OK
-hgch_bar_stacked_hor_CatYeaNum,Horizontal stacked bar,"
-Horizontal stacked bar
-",Cat-Yea-Num,Cat-Num-Yea,bar,OK
-hgch_bar_stacked_ver_CatCat,Vertical stacked bar,"
-Vertical stacked bar
-",Cat-Cat,Cat2,bar,OK
-hgch_bar_stacked_ver_CatCatNum,Vertical stacked bar,"
-Vertical stacked bar
-",Cat-Cat-Num,Cat2-Num,bar,OK
-hgch_bar_stacked_ver_CatDatNum,Vertical stacked bar,"
-Vertical stacked bar
-",Cat-Dat-Num,Cat-Dat-Num,bar,OK
-hgch_bar_stacked_ver_CatYeaNum,Vertical stacked bar,"
-Vertical stacked bar
-",Cat-Yea-Num,Cat-Num-Yea,bar,OK
-hgch_bar_top_hor_Cat,Ordered horizontal bar,"
-Ordered horizontal bar
-",Cat,Cat,bar,OK
-hgch_bar_top_hor_CatNum,Ordered horizontal bar,"
-Ordered horizontal bar
-",Cat-Num,Cat-Num,bar,OK
-hgch_bar_top_ver_Cat,Ordered vertical bar,"
-Ordered vertical bar
-",Cat,Cat,bar,OK
-hgch_bar_top_ver_CatNum,Ordered vertical bar,"
-Ordered vertical bar
-",Cat-Num,Cat-Num,bar,OK
-hgch_bar_ver_Cat,Vertical bar,"
-Vertical bar
-",Cat,Cat,bar,OK
-hgch_bar_ver_CatNum,Vertical bar,"
-Vertical bar
-",Cat-Num,Cat-Num,bar,OK
-hgch_bar_ver_DatNum,Vertical bar,"
-Vertical bar
-",Dat-Num,Dat-Num,bar,OK
-hgch_bar_ver_Num,Vertical bar,"
-Vertical bar
-",Num,Num,bar,OK
-hgch_bar_ver_NumNum,Vertical bar,"
-Vertical bar
-",Num-Num,Num2,bar,OK
-hgch_bar_ver_NumNumNum,Vertical bar,"
-Vertical bar
-",Num-Num-Num,Num3,bar,OK
-hgch_bar_ver_NumNumNumNum,Vertical bar,"
-Vertical bar
-",Num-Num-Num-Num,Num4,bar,OK
-hgch_bar_ver_YeaNum,Vertical bar,"
-Vertical bar
-",Yea-Num,Num-Yea,bar,OK
+hgch_bar_DatNum,"Bar (dates, numbers)","
+Compare quantities over dates
+",Dat-Num,Dat-Num,bar,NA
+hgch_bar_Oca,Bar (ordered categories),"
+Compare category's levels
+",Oca,Oca,bar,NA
+hgch_bar_OcaNum,"Bar (ordered categories, numbers)","
+Compare quantities among categories
+",Oca-Num,Num-Oca,bar,NA
+hgch_bar_YeaNum,"Bar (years, numbers)","
+Compare quantities over years
+",Yea-Num,Num-Yea,bar,NA
+hgch_bar_grouped_CatDatNum,"Grouped bar (categories, dates, numbers)","
+Compare quantities among categories over dates
+",Cat-Dat-Num,Cat-Dat-Num,bar,NA
+hgch_bar_grouped_CatOca,"Grouped bar (categories, ordered categories)","
+Compare quantities among two categories
+",Cat-Oca,Cat-Oca,bar,NA
+hgch_bar_grouped_CatOcaNum,"Grouped bar (categories, ordered categories, numbers)","
+Compare quantities among two categories
+",Cat-Oca-Num,Cat-Num-Oca,bar,NA
+hgch_bar_grouped_CatYeaNum,"Grouped bar (categories, year, numbers)","
+Compare quantities among categories over years
+",Cat-Yea-Num,Cat-Num-Yea,bar,NA
+hgch_bar_grouped_DatNumP,"Bar (dates, n numbers)","
+Compare n quantities over dates
+",Dat-NumP,Dat-NumP,bar,NA
+hgch_bar_grouped_OcaNumP,"Bar (ordered category, n numbers)","
+Compare n quantities among category's levels
+",Oca-NumP,NumP-Oca,bar,NA
+hgch_bar_grouped_YeaNumP,"Bar (years, n numbers)","
+Compare n quantities over years
+",Yea-NumP,NumP-Yea,bar,NA
+hgch_bar_stacked_100_CatDatNum,"100% stacked bar (categories, dates, numbers)}
+
+hgch_bar_stacked_100_CatDatNum(data, title = NULL, subtitle = NULL,
+  caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
+  yLineLabel = NULL, agg = ""sum"", dropNa = FALSE, order = NULL,
+  orientation = ""ver"", sliceN = NULL, theme = NULL, export = FALSE, ...)
+
+
+\itemdataA data.frame
+
+
+Highcharts visualization
+
+
+Compare quantities among 100% stacked categories over dates
+
+ctypes
+
+Cat-Dat-Num
+
+
+
+hgch_bar_stacked_100_CatYeaNum(sampleData(""Cat-Dat-Num"", nrow = 10))
+
+",,NA,"NA",bar,NA
+hgch_bar_stacked_100_CatOca,"100% stacked bar (categories, ordered categories)}
+
+hgch_bar_stacked_100_CatOca(data, title = NULL, subtitle = NULL,
+  caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
+  yLineLabel = NULL, dropNa = FALSE, order = NULL, orientation = ""ver"",
+  sort = ""no"", sliceN = NULL, theme = NULL, export = FALSE, ...)
+
+
+\itemdataA data.frame
+
+
+Highcharts visualization
+
+
+Compare 100% stacked categories
+
+ctypes
+
+Cat-Oca
+
+
+
+hgch_bar_stacked_100_CatOca(sampleData(""Cat-Cat"", nrow = 10))
+
+",,NA,"NA",bar,NA
+hgch_bar_stacked_100_CatOcaNum,"100% stacked bar (categories, ordered categories, numbers)}
+
+hgch_bar_stacked_100_CatOcaNum(data, title = NULL, subtitle = NULL,
+  caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
+  yLineLabel = NULL, agg = ""sum"", dropNa = FALSE, order = NULL,
+  orientation = ""ver"", sliceN = NULL, theme = NULL, export = FALSE, ...)
+
+
+\itemdataA data.frame
+
+
+Highcharts visualization
+
+
+Compare quantities among 100% stacked categories
+
+ctypes
+
+Cat-Oca-Num
+
+
+
+hgch_bar_stacked_100_CatOcaNum(sampleData(""Cat-Cat-Num"", nrow = 10))
+
+",,NA,"NA",bar,NA
+hgch_bar_stacked_100_CatYeaNum,"100% stacked bar (categories, years, numbers)}
+
+hgch_bar_stacked_100_CatYeaNum(data, title = NULL, subtitle = NULL,
+  caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
+  yLineLabel = NULL, agg = ""sum"", dropNa = FALSE, order = NULL,
+  orientation = ""ver"", sliceN = NULL, theme = NULL, export = FALSE, ...)
+
+
+\itemdataA data.frame
+
+
+Highcharts visualization
+
+
+Compare quantities among 100% stacked categories over years
+
+ctypes
+
+Cat-Yea-Num
+
+
+
+hgch_bar_stacked_100_CatYeaNum(sampleData(""Cat-Yea-Num"", nrow = 10))
+
+",,NA,"NA",bar,NA
+hgch_bar_stacked_CatDatNum,"Stacked bar (categories, dates, numbers)","
+Compare quantities among stacked categories over dates
+",Cat-Dat-Num,Cat-Dat-Num,bar,NA
+hgch_bar_stacked_CatOca,"Stacked bar (categories, ordered categories)","
+Compare stacked categories
+",Cat-Oca,Cat-Oca,bar,NA
+hgch_bar_stacked_CatOcaNum,"Stacked bar (categories, ordered categories, numbers)","
+Compare quantities among stacked categories
+",Cat-Oca-Num,Cat-Num-Oca,bar,NA
+hgch_bar_stacked_CatYeaNum,"Stacked bar (categories, years, numbers)","
+Compare quantities among stacked categories over years
+",Cat-Yea-Num,Cat-Num-Yea,bar,NA
 hgch_circular_bar_CatNum,Circular bar,"
 Circular bar
 ",Cat-Num,Cat-Num,circular,OK
-hgch_donut_Cat,hgch_donut_Cat,"
-hgch_donut_Cat
+hgch_donut_Cat,Donut (categories),"
+Comparing counts of categories
 ",Cat,Cat,donut,OK
-hgch_donut_CatNum,hgch_donut_CatNum,"
-hgch_donut_CatNum
+hgch_donut_CatNum,"Donut (categories, numbers)","
+Comparing quantities among categories
 ",Cat-Num,Cat-Num,donut,OK
 hgch_funnel_CatNum,Funnel,"
 Funnel
@@ -212,45 +279,57 @@ Funnel
 hgch_heatmap_matrix_CatCatNum,Heatmap matrix,"
 Heatmap matrix
 ",CatCatNum,CatCatNum,heatmap,NA
-hgch_line_CatCatNum,Line,"
-Line
-",Cat-Cat-Num,Cat2-Num,line,OK
-hgch_line_CatDatNum,Line,"
-Line
+hgch_line_CatDatNum,"Line (categories, dates, numbers)","
+Compare quantities among categories over dates
 ",Cat-Dat-Num,Cat-Dat-Num,line,OK
-hgch_line_CatNum,Line,"
-Line
-",Cat-Num,Cat-Num,line,OK
-hgch_line_CatYeaNum,Line,"
-Line
+hgch_line_CatOcaNum,"Line (categories, ordered categories, numbers)","
+Compare quantities among two categories
+",Cat-Oca-Num,Cat-Num-Oca,line,NA
+hgch_line_CatYeaNum,"Line (categories, years, numbers)","
+Compare quantities among categories over years
 ",Cat-Yea-Num,Cat-Num-Yea,line,OK
-hgch_line_DatNum,Line,"
-Line
+hgch_line_DatNum,"Line (dates, numbers)","
+Compare a quantities over time (Year-month-day)
 ",Dat-Num,Dat-Num,line,OK
-hgch_line_YeaNum,Line,"
-Line
+hgch_line_DatNumP,"Line (dates, n numbers)","
+Compare n quantities over dates
+",Dat-NumP,Dat-NumP,line,NA
+hgch_line_Oca,Line (ordered categories),"
+Compare category's levels
+",Oca,Oca,line,NA
+hgch_line_OcaNum,"Line (ordered categories, numbers)","
+Compare quantities among categories
+",Oca-Num,Num-Oca,line,NA
+hgch_line_OcaNumP,"Line (ordered category, n numbers)","
+Compare n quantities among category's levels
+",Oca-NumP,NumP-Oca,line,NA
+hgch_line_YeaNum,"Line (years, numbers)","
+Compare quantities over years
 ",Yea-Num,Num-Yea,line,OK
-hgch_multilines_YeaNum,Grouped line,"
-Grouped line
-", Yea-Num, Yea-Num,multilines,OK
-hgch_multilines_YeaNumNum,Grouped line,"
-Grouped line
-", Yea-Num-Num, Yea-Num2,multilines,OK
-hgch_multilines_YeaNumNumNum,Grouped line,"
-Grouped line
-", Yea-Num-Num-Num, Yea-Num3,multilines,OK
-hgch_multilines_YeaNumNumNumNum,Grouped line,"
-Grouped line
-", Yea-Num-Num-Num-Num, Yea-Num4,multilines,OK
+hgch_line_YeaNumP,"Line (years, n numbers)","
+Compare n quantities over years
+",Yea-NumP,NumP-Yea,line,NA
 hgch_multilines_YeaNumP,Grouped line,"
 Grouped line
-", Yea-NumP, Yea-NumP,multilines,NA
-hgch_pie_Cat,hgch_pie_Cat,"
-hgch_pie_Cat
+", Yea-NumP,NumP- Yea,multilines,NA
+hgch_pie_Cat,Pie (categories),"
+Comparing counts of categories
 ",Cat,Cat,pie,OK
-hgch_pie_CatNum,hgch_pie_CatNum,"
-hgch_pie_CatNum
+hgch_pie_CatNum,"Pie (categories, numbers)","
+Comparing quantities among categories
 ",Cat-Num,Cat-Num,pie,OK
+hgch_polarbar_Oca,Polar bar (ordered categories),"
+Comparing counts of categories
+",Oca,Oca,polarbar,NA
+hgch_polarbar_OcaNum,"Polar bar (ordered categories, numbers)","
+Comparing quantities among categories
+",Oca-Num,Num-Oca,polarbar,NA
+hgch_polarbar_grouped_CatOcaNum,"Polar bar (categories, ordered categories, numbers)","
+Compare grouped quantities among two categories
+",Cat-Oca-Num,Cat-Num-Oca,polarbar,NA
+hgch_polarbar_grouped_OcaNumP,"Polar bar (ordered categories, n numbers)","
+Comparing n grouped quantities among categories
+",Oca-NumP,NumP-Oca,polarbar,NA
 hgch_polarcolumn_Cat,Polar bar,"
 Polar bar
 ",Cat,Cat,polarcolumn,NA
@@ -260,21 +339,18 @@ Polar bar
 hgch_pyramid_CatNum,Pyramid,"
 Pyramid
 ",Cat-Num,Cat-Num,pyramid,NA
-hgch_radar_Cat,hgch_radar_Cat,"
-hgch_radar_Cat
-",Cat,Cat,radar,OK
-hgch_radar_CatNum,hgch_radar_CatNum,"
-hgch_radar_CatNum
-",Cat-Num,Cat-Num,radar,OK
-hgch_radar_CatNumNum,hgch_radar_CatNumNum,"
-hgch_radar_CatNumNum
-",Cat-Num-Num,Cat-Num2,radar,NA
-hgch_radar_CatNumNumNum,hgch_radar_CatNumNumNum,"
-hgch_radar_CatNumNumNum
-",Cat-Num-Num-Num,Cat-Num3,radar,OK
-hgch_radar_CatNumNumNumNum,hgch_radar_CatNumNumNumNum,"
-hgch_radar_CatNumNumNumNum
-",Cat-Num-Num-Num-Num,Cat-Num4,radar,OK
+hgch_radar_CatOcaNum,"Radar (categories, ordered categories, numbers)","
+Compare quantities among two categories
+",Cat-Oca-Num,Cat-Num-Oca,radar,NA
+hgch_radar_Oca,Radar (ordered categories),"
+Comparing counts of categories
+",Oca,Oca,radar,NA
+hgch_radar_OcaNum,"Radar (ordered categories, numbers)","
+Comparing quantities among categories
+",Oca-Num,Num-Oca,radar,NA
+hgch_radar_OcaNumP,"Radar (ordered categories, n numbers)","
+Comparing n quantities among categories
+",Oca-NumP,NumP-Oca,radar,NA
 hgch_scatter_CatCatNumNum,Scatter grouped,"
 Scatter grouped
 ",Cat-Cat-Num-Num,Cat2-Num2,scatter,OK
