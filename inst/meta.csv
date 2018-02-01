@@ -375,6 +375,9 @@ Radar
 hgch_treemap_Cat,Treemap density coloured by categorical variable,"
 Treemap density coloured by categorical variable
 ",Cat,Cat,treemap,OK
+hgch_treemap_CatCatNum,Treemap coloured by first variable and grouped by second variable,"
+Treemap coloured by first variable and grouped by second variable
+",Cat-Cat-Num,Cat2-Num,treemap,NA
 hgch_treemap_CatNum,Treemap density by numeric variable,"
 Treemap density by numeric variable
 ",Cat-Num,Cat-Num,treemap,OK
@@ -384,9 +387,6 @@ Treemap coloured by categorical variable
 hgch_treemap_discrete_color_CatNum,Treemap coloured by first variable,"
 Treemap coloured by first variable
 ",Cat-Num,Cat-Num,treemap,OK
-hgch_treemap_nested_CatCatNum,Nested treemap density by numeric variable,"
-Nested treemap density by numeric variable
-",Cat-Cat-Num,Cat2-Num,treemap,OK
 hgch_treemap_nested_CatNumNum,Nested treemap density,"
 Nested treemap density
 ",Cat-Num-Num,Cat-Num2,treemap,OK

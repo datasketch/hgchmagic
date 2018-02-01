@@ -5,8 +5,8 @@
 \title{Treemap coloured by first variable and grouped by second variable}
 \usage{
 hgch_treemap_CatCatNum(data, title = NULL, subtitle = NULL,
-  caption = NULL, agg = "sum", percentage = FALSE, theme = NULL,
-  colors = NULL, export = FALSE, ...)
+  caption = NULL, agg = "sum", theme = NULL, colors = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}
