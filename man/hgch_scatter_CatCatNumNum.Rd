@@ -2,20 +2,21 @@
 % Please edit documentation in R/scatter.R
 \name{hgch_scatter_CatCatNumNum}
 \alias{hgch_scatter_CatCatNumNum}
-\title{Scatter grouped}
+\title{Scatter (categories, categories, numbers, numbers)}
 \usage{
 hgch_scatter_CatCatNumNum(data, title = NULL, subtitle = NULL,
-  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL, theme = NULL,
-  export = FALSE, ...)
+  caption = NULL, horLabel = NULL, verLabel = NULL, horLine = NULL,
+  horLineLabel = NULL, verLine = NULL, verLineLabel = NULL,
+  theme = NULL, export = FALSE, ...)
 }
 \arguments{
-\item{x}{A data.frame}
+\item{data}{A data.frame}
 }
 \value{
-highcharts viz
+Highcharts visualization
 }
 \description{
-Scatter grouped
+Two numeric variables set in a cartesian plane with two categories
 }
 \section{ctypes}{
 
@@ -23,5 +24,5 @@ Cat-Cat-Num-Num
 }
 
 \examples{
-hgch_scatter_CatCatNumNum(sampleData("Cat-Cat-Num-Num",nrow = 10))
+hgch_scatter_CatCatNumNum(sampleData("Cat-Cat-Num-Num", nrow = 10))
 }

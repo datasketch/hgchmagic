@@ -1,7 +1,7 @@
-#'@name count_pl
+#' @name count_pl
 #' @export
 count_pl <- function(x) {
-  if(is.na(x)){return(0)}
+  if (is.na(x)) {return(0)}
   if ((x %% 1) != 0) {
     nchar(strsplit(sub('0+$', '', as.character(x)), ".", fixed=TRUE)[[1]][[2]])
   } else {

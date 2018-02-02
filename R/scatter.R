@@ -1,504 +1,518 @@
-#' Polar bar
+#' Scatter (numbers, numbers)
 #'
-#' Polar bar
+#' Two numeric variables set in a cartesian plane
 #'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
-#' Cat
+#' Num-Num
 #' @examples
-#'
-#' hgch_polarcolumn_Cat(sampleData("Cat",nrow = 10))
-#'
-#' @export hgch_polarcolumn_Cat
-hgch_polarcolumn_Cat <-function(data, title = ""){
-
-  f <- fringe(data)
-  nms <- getCnames(f)
-  data <- f$d
-  data <- plyr::rename(data, c("a" = "name"))
-
-  data_graph <- data %>%
-    dplyr::group_by(name) %>%
-    tidyr::drop_na(name) %>%
-    dplyr::summarise(value = n())
-
-  data_graph <- data_graph %>%
-    dplyr::mutate(y = value,
-                  z = ((0:(dim(data_graph)[1]-1))*y) - median((0:(dim(data_graph)[1]-1))*y),
-                  color = getPalette()[1:(dim(data_graph)[1])])
-
-  hc <- highchart() %>%
-    hc_title(text = title) %>%
-    hc_chart(type = "column",
-             polar = TRUE) %>%
-    hc_xAxis(categories = data_graph$name) %>%
-    hc_add_series(data_graph, showInLegend = FALSE)
-  hc
-}
-
-
-#' Polar bar
-#'
-#' Polar bar
-#'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
-#' @section ctypes:
-#' Cat-Num
-#' @examples
-#'
-#' hgch_polarcolumn_CatNum(sampleData("Cat-Num",nrow = 10))
-#'
-#' @export hgch_polarcolumn_CatNum
-hgch_polarcolumn_CatNum <-function(data, title = ""){
-
-  f <- fringe(data)
-  nms <- getCnames(f)
-  data <- f$d
-  data <- plyr::rename(data, c("a" = "name"))
-
-  data_graph <- data %>%
-    dplyr::group_by(name) %>%
-    tidyr::drop_na(name) %>%
-    dplyr::summarise(value = mean(b, na.rm = TRUE ))
-
-  data_graph <- data_graph %>%
-    dplyr::mutate(y = value,
-                  z = ((0:(dim(data_graph)[1]-1))*y) - median((0:(dim(data_graph)[1]-1))*y),
-                  color = getPalette()[1:(dim(data_graph)[1])])
-
-  hc <- highchart() %>%
-    hc_title(text = title) %>%
-    hc_chart(type = "column",
-             polar = TRUE) %>%
-    hc_xAxis(categories = data_graph$name) %>%
-    hc_add_series(data_graph, showInLegend = FALSE)
-  hc
-}
-
-
-
-#' Radar
-#'
-#' Radar
-#'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
-#' @section ctypes:
-#' Cat-Num
-#' @examples
-#'
-#' hgch_spider_CatNum(sampleData("Cat-Num",nrow = 10))
-#'
-#' @export hgch_spider_CatNum
-hgch_spider_CatNum <- function(data, title = ""){
-
-  f <- fringe(data)
-  nms <- getCnames(f)
-  data <- f$d
-  data <- plyr::rename(data, c("a" = "name"))
-
-  data_graph <- data %>%
-    dplyr::group_by(name) %>%
-    tidyr::drop_na(name) %>%
-    dplyr::summarise(value = mean(b, na.rm = TRUE ))
-
-  data_graph <- data_graph %>%
-    dplyr::mutate(y = value,
-                  z = ((0:(dim(data_graph)[1]-1))*y) - median((0:(dim(data_graph)[1]-1))*y),
-                  color = getPalette()[1:(dim(data_graph)[1])])
-
-  hc <- highchart() %>%
-    hc_title(text = title) %>%
-    hc_chart(type = "line",
-             polar = TRUE) %>%
-    hc_xAxis(Cattegories = data_graph$name) %>%
-    hc_add_series(data_graph, showInLegend = FALSE)
-  hc
-}
-
-
-
-#' Radar
-#'
-#' Radar
-#'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
-#' @section ctypes:
-#' Cat-Num-Num
-#' @examples
-#'
-#' hgch_spider_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
-#'
-#' @export hgch_spider_CatNumNum
-hgch_spider_CatNumNum <- function(data,
-                               title = NULL, subtitle = NULL, Catption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-                               sort = "no", aggregate = "mean", theme = NULL, export = FALSE,...){
-
+#' hgch_scatter_NumNum(sampleData("Num-Num", nrow = 10))
+#' @export hgch_scatter_NumNum
+hgch_scatter_NumNum <- function(data,
+                                title = NULL,
+                                subtitle = NULL,
+                                caption = NULL,
+                                horLabel = NULL,
+                                verLabel = NULL,
+                                horLine = NULL,
+                                horLineLabel = NULL,
+                                verLine = NULL,
+                                verLineLabel = NULL,
+                                theme = NULL,
+                                export = FALSE, ...) {
   f <- fringe(data)
   nms <- getClabels(f)
-
-  xAxisTitle <- xAxisTitle %||% ""
-  yAxisTitle <- yAxisTitle %||% ""
-  title <-  title %||% ""
   d <- f$d
-  d <- na.omit(d)
-  if(nrow(d)==0) return()
-  d <- d %>% dplyr::group_by(a) %>%
-    dplyr::summarise(b = mean(b,na.rm = TRUE), c = mean(c, na.rm = TRUE))
-  hc <- highchart() %>%
-    hc_chart(type = "line", polar = TRUE) %>%
+
+  horLabel <- horLabel %||% nms[1]
+  verLabel <- verLabel %||% nms[2]
+  horLineLabel <- horLineLabel %||% horLine
+  verLineLabel <- verLineLabel %||% verLine
+  title <-  title %||% ""
+  subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
+
+  d <- d %>%
+    tidyr::drop_na()
+
+  hc <- hchart(d, type = "scatter", hcaes(x = a, y = b)) %>%
+    hc_tooltip(headerFormat = "",
+               pointFormat = paste0("<b>", horlabel, "</b>: {point.a} <br/><b>",
+                                    verLabel, "</b>: {point.b}")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text=xAxisTitle),
-             Cattegories = d$a,tickmarkPlacement = 'on',
-             lineWidth = 0) %>%
-    hc_series(
-      list(
-        name = nms[2],
-        data = d$b,
-        pointPlacement = 'on'
-      ),
-      list(
-        name = nms[3],
-        data = d$c,
-        pointPlacement = 'on'
-      ))
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE, plotLines = list(list(value = verLine,
+                                                                                         color = 'black',
+                                                                                         dashStyle = 'shortdash',
+                                                                                         width = 2,
+                                                                                         label = list(text = verLineLabel)))) %>%
+    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = horLine,
+                                                                  color = 'black',
+                                                                  dashStyle = 'shortdash',
+                                                                  width = 2,
+                                                                  label = list(text = horLineLabel)))) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
   hc
 }
 
 
-# #' Bubble
-# #' @name hgch_bubble_CatNum
-# #' @param x A data.frame
-# #' @export
-# #' @return highcharts viz
-# #' @section ctypes: Cat-Num
-# #' @examples
-# #' hgch_bubble_CatNum(sampleData("Cat-Num",nrow = 10))
-# hgch_bubble_CatNum <-function(data, title = ""){
-#
-#   f <- fringe(data)
-#   nms <- getCnames(f)
-#   data <- f$d
-#   data <- plyr::rename(data, c("a" = "name"))
-#
-#   data_graph <- data %>%
-#     dplyr::group_by(name) %>%
-#     tidyr::drop_na(name) %>%
-#     dplyr::summarise(value = mean(b, na.rm = TRUE ))
-#
-#   data_graph <- data_graph %>%
-#     dplyr::mutate(y = value,
-#                   z = sqrt(y),
-#                   color = getPalette()[1:(dim(data_graph)[1])])
-#
-#   hc <- highchart() %>%
-#     hc_title(text = title) %>%
-#     hc_chart(type = "bubble",
-#              polar = FALSE) %>%
-#     hc_xAxis(Cattegories = data_graph$name) %>%
-#     hc_add_series(data_graph, showInLegend = FALSE)
-#   hc
-# }
+#' Scatter (numbers, numbers, numbers)
+#'
+#' Two numeric variables set in a cartesian plane with a size
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Num-Num-Num
+#' @examples
+#' hgch_scatter_NumNumNum(sampleData("Num-Num-Num", nrow = 10))
+#' @export hgch_scatter_NumNumNum
+hgch_scatter_NumNumNum <- function(data,
+                                   title = NULL,
+                                   subtitle = NULL,
+                                   caption = NULL,
+                                   horLabel = NULL,
+                                   verLabel = NULL,
+                                   horLine = NULL,
+                                   horLineLabel = NULL,
+                                   verLine = NULL,
+                                   verLineLabel = NULL,
+                                   theme = NULL,
+                                   export = FALSE, ...) {
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+
+  horLabel <- horLabel %||% nms[1]
+  verLabel <- verLabel %||% nms[2]
+  horLineLabel <- horLineLabel %||% horLine
+  verLineLabel <- verLineLabel %||% verLine
+  title <-  title %||% ""
+  subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
+
+  d <- d %>%
+    tidyr::drop_na()
+
+  hc <- hchart(d, type = "scatter", hcaes(x = a, y = b, size = c)) %>%
+    hc_tooltip(headerFormat = "",
+               pointFormat = paste0("<b>", horLabel, "</b>: {point.a}<br/><b>",
+                                    verLabel, "</b>: {point.b}<br/><b>",
+                                    nms[3], "</b>: {point.c}")) %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE,  plotLines = list(list(value = verLine,
+                                                                                          color = 'black',
+                                                                                          dashStyle = 'shortdash',
+                                                                                          width = 2,
+                                                                                          label = list(text = verLineLabel)))) %>%
+    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = horLine,
+                                                                  color = 'black',
+                                                                  dashStyle = 'shortdash',
+                                                                  width = 2,
+                                                                  label = list(text = horLineLabel)))) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
+  hc
+}
 
 
-#' Scatter
+
+
+#' Scatter (categories, numbers, numbers)
 #'
-#' Scatter
+#' Two numeric variables set in a cartesian plane with a category
 #'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat-Num-Num
 #' @examples
-#'
-#' hgch_scatter_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
-#'
+#' hgch_scatter_CatNumNum(sampleData("Cat-Num-Num", nrow = 10))
 #' @export hgch_scatter_CatNumNum
-hgch_scatter_CatNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL,
-                                   yAxisTitle = NULL, theme = NULL, export = FALSE,...){
-
-  if(class(data)[1] == "Fringe"){
-    ni <- getClabels(data)
-  }else{
-    ni <- names(data)
-  }
-
-  x <- ni[2]
-  y <- ni[3]
-
+hgch_scatter_CatNumNum <- function(data,
+                                   title = NULL,
+                                   subtitle = NULL,
+                                   caption = NULL,
+                                   horLabel = NULL,
+                                   verLabel = NULL,
+                                   horLine = NULL,
+                                   horLineLabel = NULL,
+                                   verLine = NULL,
+                                   verLineLabel = NULL,
+                                   theme = NULL,
+                                   export = FALSE, ...) {
   f <- fringe(data)
   nms <- getClabels(f)
+  d <- f$d
 
-  xAxisTitle <- xAxisTitle %||% getClabels(f)[2]
-  yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
+  horLabel <- horLabel %||% nms[2]
+  verLabel <- verLabel %||% nms[3]
+  horLineLabel <- horLineLabel %||% horLine
+  verLineLabel <- verLineLabel %||% verLine
   title <-  title %||% ""
-  caption <- caption %||% ""
   subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
 
-  d <- f$d %>% drop_na()  %>% dplyr::group_by(a) %>%
-    dplyr::summarise(b = mean(b,na.rm = TRUE), c = mean(c, na.rm = TRUE))
-
-  d$text1 <- map_chr(d$b, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
-  d$text2 <- map_chr(d$c, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d <- d %>%
+    tidyr::drop_na()
 
   hc <- hchart(d, type = "bubble", hcaes(x = b, y = c)) %>%
+    hc_plotOptions(series = list(dataLabels = list(enabled = TRUE,
+                                                   format = "{point.a}"),
+                                 marker = list(#fillColor = "rgba(47,11,113,0.6)",
+                                               lineColor = NULL, lineWidth = 0))) %>%
+    hc_tooltip(headerFormat = "",
+               pointFormat = paste0("<b>", nms[1], "</b>: {point.a}<br/><b>",
+                                    horLabel, "</b>: {point.b}<br/><b>",
+                                    verLabel, "</b>: {point.c}")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_credits(enabled = TRUE, text = caption) %>%
-    hc_xAxis(title = list(text=xAxisTitle)) %>%
-    hc_yAxis(title = list(text=yAxisTitle)) %>%
-       hc_tooltip(
-         headerFormat= '',
-         pointFormat = paste0("<br><strong>{point.a}</strong><br>",
-                                       x, ": {point.text1} <br>",
-                                       y, ": {point.text2}")) %>%
-      hc_plotOptions(
-      series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'
-                                       #,
-                                      # style = list(textOutline="1px 1px #000000",
-                                      #              fontSize = "11px",
-                                      #              color = "#000")
-      ),
-      marker = list(fillColor = "rgba(47,11,113,0.6)",lineColor=NULL,lineWidth = 0))
-    )
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE, plotLines = list(list(value = verLine,
+                                                                                         color = 'black',
+                                                                                         dashStyle = 'shortdash',
+                                                                                         width = 2,
+                                                                                         label = list(text = verLineLabel)))) %>%
+    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = horLine,
+                                                                  color = 'black',
+                                                                  dashStyle = 'shortdash',
+                                                                  width = 2,
+                                                                  label = list(text = horLineLabel)))) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
   hc
 }
 
 
-#' Grouped scatter
+#' Coloured scatter (categories, numbers, numbers)
 #'
-#' Grouped scatter
+#' Two numeric variables set in a cartesian plane coloured by a category
 #'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat-Num-Num
 #' @examples
-#'
-#' hgch_scatter_grouped_CatNumNum(sampleData("Cat-Num-Num",nrow = 10))
-#'
-#' @export hgch_scatter_grouped_CatNumNum
-hgch_scatter_grouped_CatNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL, xAxisTitle = NULL,
-                                           yAxisTitle = NULL, theme = NULL, export = FALSE,...){
-
-  if(class(data)[1] == "Fringe"){
-    ni <- getClabels(data)
-  }else{
-    ni <- names(data)
-  }
-
-  x <- ni[2]
-  y <- ni[3]
-
+#' hgch_scatter_coloured_CatNumNum(sampleData("Cat-Num-Num", nrow = 10))
+#' @export hgch_scatter_coloured_CatNumNum
+hgch_scatter_coloured_CatNumNum <- function(data,
+                                            title = NULL,
+                                            subtitle = NULL,
+                                            caption = NULL,
+                                            horLabel = NULL,
+                                            verLabel = NULL,
+                                            horLine = NULL,
+                                            horLineLabel = NULL,
+                                            verLine = NULL,
+                                            verLineLabel = NULL,
+                                            theme = NULL,
+                                            export = FALSE, ...) {
   f <- fringe(data)
   nms <- getClabels(f)
+  d <- f$d
 
-  xAxisTitle <- xAxisTitle %||% getClabels(f)[2]
-  yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
+  horLabel <- horLabel %||% nms[2]
+  verLabel <- verLabel %||% nms[3]
+  horLineLabel <- horLineLabel %||% horLine
+  verLineLabel <- verLineLabel %||% verLine
   title <-  title %||% ""
-  caption <- caption %||% ""
   subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
 
-  d <- f$d %>% drop_na()
-
-  d$text1 <- map_chr(d$b, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
-  d$text2 <- map_chr(d$c, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
+  d <- d %>%
+    tidyr::drop_na()
 
   hc <- hchart(d, type = "scatter", hcaes(x = b, y = c, group = a)) %>%
+    hc_tooltip(headerFormat = "",
+               pointFormat = paste0("<b>", nms[1], "</b>: {point.a}<br/><b>",
+                                    horLabel, "</b>: {point.b}<br/><b>",
+                                    verLabel, "</b>: {point.c}")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_credits(enabled = TRUE, text = caption) %>%
-    hc_xAxis(title = list(text=xAxisTitle)) %>%
-    hc_yAxis(title = list(text=yAxisTitle)) %>%
-    hc_tooltip(
-      headerFormat= '',
-      pointFormat = paste0("<br><strong>{point.a}</strong><br>",
-                           x, ": {point.text1} <br>",
-                           y, ": {point.text2}"))
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE, plotLines = list(list(value = verLine,
+                                                                                         color = 'black',
+                                                                                         dashStyle = 'shortdash',
+                                                                                         width = 2,
+                                                                                         label = list(text = verLineLabel)))) %>%
+    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = horLine,
+                                                                  color = 'black',
+                                                                  dashStyle = 'shortdash',
+                                                                  width = 2,
+                                                                  label = list(text = horLineLabel)))) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
   hc
 }
 
 
-#' Scatter
+#' Scatter (categories, numbers, numbers, numbers)
 #'
-#' Scatter
+#' Two numeric variables set in a cartesian plane with a category and size
 #'
-#'
-#' @param x A data.frame
-#' @return highcharts viz
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat-Num-Num-Num
 #' @examples
-#'
-#' hgch_scatter_CatNumNumNum(sampleData("Cat-Num-Num-Num",nrow = 10))
-#'
+#' hgch_scatter_CatNumNumNum(sampleData("Cat-Num-Num-Num", nrow = 10))
 #' @export hgch_scatter_CatNumNumNum
-hgch_scatter_CatNumNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
-                                      xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
-
+hgch_scatter_CatNumNumNum <- function(data,
+                                      title = NULL,
+                                      subtitle = NULL,
+                                      caption = NULL,
+                                      horLabel = NULL,
+                                      verLabel = NULL,
+                                      horLine = NULL,
+                                      horLineLabel = NULL,
+                                      verLine = NULL,
+                                      verLineLabel = NULL,
+                                      theme = NULL,
+                                      export = FALSE, ...) {
   f <- fringe(data)
   nms <- getClabels(f)
+  d <- f$d
 
-  xAxisTitle <- xAxisTitle %||% getClabels(f)[2]
-  yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
+  horLabel <- horLabel %||% nms[2]
+  verLabel <- verLabel %||% nms[3]
+  horLineLabel <- horLineLabel %||% horLine
+  verLineLabel <- verLineLabel %||% verLine
   title <-  title %||% ""
-  caption <- caption %||% ""
   subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
 
-  d <- f$d %>% dplyr::filter(!is.na(a)) %>% dplyr::group_by(a) %>%
-    dplyr::summarise(b = mean(b, na.rm = TRUE), c = mean(c, na.rm = TRUE),d = mean(d, na.rm = TRUE))
+  d <- d %>%
+    tidyr::drop_na()
 
   hc <- hchart(d, type = "bubble", hcaes(x = b, y = c, size = d)) %>%
-    hc_chart(zoomType = "xy") %>%
+    hc_plotOptions(series = list(dataLabels = list(enabled = TRUE,
+                                                   format = "{point.a}"))) %>%
+    hc_tooltip(headerFormat = "",
+               pointFormat = paste0("<b>", nms[1], "</b>: {point.a}<br/><b>",
+                                    horLabel, "</b>: {point.b}<br/><b>",
+                                    verLabel, "</b>: {point.c}<br/><b>",
+                                    nms[4], "</b>: {point.d}")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_credits(enabled = TRUE, text = caption) %>%
-    hc_xAxis(title = list(text=xAxisTitle)) %>%
-    hc_yAxis(title = list(text=yAxisTitle)) %>%
-    hc_tooltip(pointFormat = "<br>
-               <strong>{point.a}</strong><br>
-               x:{point.x} <br>
-               y: {point.y} <br>
-               Tamaño: {point.size}") %>%
-    hc_plotOptions(
-      series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))
-    )
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE, plotLines = list(list(value = verLine,
+                                                                                         color = 'black',
+                                                                                         dashStyle = 'shortdash',
+                                                                                         width = 2,
+                                                                                         label = list(text = verLineLabel)))) %>%
+    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = horLine,
+                                                                  color = 'black',
+                                                                  dashStyle = 'shortdash',
+                                                                  width = 2,
+                                                                  label = list(text = horLineLabel)))) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
   hc
 }
 
 
+#' Coloured scatter (categories, numbers, numbers, numbers)
+#'
+#' Two numeric variables set in a cartesian plane coloured by a category and size
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Cat-Num-Num
+#' @examples
+#' hgch_scatter_coloured_CatNumNumNum(sampleData("Cat-Num-Num", nrow = 10))
+#' @export hgch_scatter_coloured_CatNumNumNum
+hgch_scatter_coloured_CatNumNumNum <- function(data,
+                                               title = NULL,
+                                               subtitle = NULL,
+                                               caption = NULL,
+                                               horLabel = NULL,
+                                               verLabel = NULL,
+                                               horLine = NULL,
+                                               horLineLabel = NULL,
+                                               verLine = NULL,
+                                               verLineLabel = NULL,
+                                               theme = NULL,
+                                               export = FALSE, ...) {
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
 
-#' Scatter grouped
-#' @param x A data.frame
-#' @return highcharts viz
+  horLabel <- horLabel %||% nms[2]
+  verLabel <- verLabel %||% nms[3]
+  horLineLabel <- horLineLabel %||% horLine
+  verLineLabel <- verLineLabel %||% verLine
+  title <-  title %||% ""
+  subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
+
+  d <- d %>%
+    tidyr::drop_na()
+
+  hc <- hchart(d, type = "bubble", hcaes(x = b, y = c, size = d, group = a)) %>%
+    hc_tooltip(headerFormat = "",
+               pointFormat = paste0("<b>", nms[1], "</b>: {point.a}<br/><b>",
+                                    horLabel, "</b>: {point.b}<br/><b>",
+                                    verLabel, "</b>: {point.c}<br/><b>",
+                                    nms[4], "</b>: {point.d}")) %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE, plotLines = list(list(value = verLine,
+                                                                                         color = 'black',
+                                                                                         dashStyle = 'shortdash',
+                                                                                         width = 2,
+                                                                                         label = list(text = verLineLabel)))) %>%
+    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = horLine,
+                                                                  color = 'black',
+                                                                  dashStyle = 'shortdash',
+                                                                  width = 2,
+                                                                  label = list(text = horLineLabel)))) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
+  hc
+}
+
+
+#' Scatter (categories, categories, numbers, numbers)
+#'
+#' Two numeric variables set in a cartesian plane with two categories
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat-Cat-Num-Num
 #' @examples
-#' hgch_scatter_CatCatNumNum(sampleData("Cat-Cat-Num-Num",nrow = 10))
+#' hgch_scatter_CatCatNumNum(sampleData("Cat-Cat-Num-Num", nrow = 10))
 #' @export hgch_scatter_CatCatNumNum
-hgch_scatter_CatCatNumNum <- function(data, title = NULL, subtitle = NULL, caption = NULL,
-                                      xAxisTitle = NULL, yAxisTitle = NULL,theme = NULL, export = FALSE,...){
-
-  if(class(data)[1] == "Fringe"){
-    ni <- getClabels(data)
-  }else{
-    ni <- names(data)
-  }
-
-  x <- ni[3]
-  y <-  ni[4]
-
+hgch_scatter_CatCatNumNum <- function(data,
+                                      title = NULL,
+                                      subtitle = NULL,
+                                      caption = NULL,
+                                      horLabel = NULL,
+                                      verLabel = NULL,
+                                      horLine = NULL,
+                                      horLineLabel = NULL,
+                                      verLine = NULL,
+                                      verLineLabel = NULL,
+                                      theme = NULL,
+                                      export = FALSE, ...) {
   f <- fringe(data)
   nms <- getClabels(f)
+  d <- f$d
 
-  xAxisTitle <- xAxisTitle %||% getClabels(f)[2]
-  yAxisTitle <- yAxisTitle %||% getClabels(f)[3]
+  horLabel <- horLabel %||% nms[3]
+  verLabel <- verLabel %||% nms[4]
+  horLineLabel <- horLineLabel %||% horLine
+  verLineLabel <- verLineLabel %||% verLine
   title <-  title %||% ""
-  caption <- caption %||% ""
   subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
 
-  d <- f$d %>% tidyr::drop_na()%>% dplyr::group_by(a,b) %>%
-    dplyr::summarise(c = mean(c, na.rm = TRUE),d = mean(d,na.rm = TRUE))
+  d <- d %>%
+    tidyr::drop_na()
 
-  d$text1 <- map_chr(d$c, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
-  d$text2 <- map_chr(d$d, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
-
-
-  hc <- hchart(d, type = "scatter", hcaes(x = c, y = d, group = b)) %>%
-    hc_chart(zoomType = "xy") %>%
+  hc <- hchart(d, type = "bubble", hcaes(x = c, y = d, group = a)) %>%
+    hc_plotOptions(series = list(dataLabels = list(enabled = TRUE,
+                                                   format = "{point.b}"))) %>%
+    hc_tooltip(headerFormat = "",
+               pointFormat = paste0("<b>", nms[1], "</b>: {point.a}<br/><b>",
+                                    nms[2], "</b>: {point.b}<br/><b>",
+                                    horLabel, "</b>: {point.c}<br/><b>",
+                                    verLabel, "</b>: {point.d}")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_credits(enabled = TRUE, text = caption) %>%
-    hc_xAxis(title = list(text=xAxisTitle)) %>%
-    hc_yAxis(title = list(text=yAxisTitle)) %>%
-    hc_tooltip(pointFormat = paste0("<br>
-               <strong>{point.a}</strong><br>",
-                                    x, ":{point.text1} <br>",
-                                    y, ": {point.text2}")) %>%
-    hc_plotOptions(
-      series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))
-    )
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE, plotLines = list(list(value = verLine,
+                                                                                         color = 'black',
+                                                                                         dashStyle = 'shortdash',
+                                                                                         width = 2,
+                                                                                         label = list(text = verLineLabel)))) %>%
+    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = horLine,
+                                                                  color = 'black',
+                                                                  dashStyle = 'shortdash',
+                                                                  width = 2,
+                                                                  label = list(text = horLineLabel)))) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
   hc
 }
 
 
-
-#' Scatter
-#' @param x A data.frame
-#' @return highcharts viz
+#' Scatter (categories, categories, numbers, numbers, numbers)
+#'
+#' Two numeric variables set in a cartesian plane with two categories and size
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
 #' @section ctypes:
 #' Cat-Cat-Num-Num-Num
 #' @examples
-#' hgch_scatter_CatCatNumNumNum(sampleData("Cat-Cat-Num-Num-Num",nrow = 10))
+#' hgch_scatter_CatCatNumNumNum(sampleData("Cat-Cat-Num-Num-Num", nrow = 10))
 #' @export hgch_scatter_CatCatNumNumNum
-hgch_scatter_CatCatNumNumNum <- function(data, title = NULL, subtitle = NULL,
+hgch_scatter_CatCatNumNumNum <- function(data,
+                                         title = NULL,
+                                         subtitle = NULL,
                                          caption = NULL,
-                                         xAxisTitle = NULL, yAxisTitle = NULL,
-                                         theme = NULL, export = FALSE,...){
-  if(class(data)[1] == "Fringe"){
-    ni <- getClabels(data)
-  }else{
-    ni <- names(data)
-  }
-
-  x <- ni[3]
-  y <- ni[4]
-  t <- ni[5]
-
+                                         horLabel = NULL,
+                                         verLabel = NULL,
+                                         horLine = NULL,
+                                         horLineLabel = NULL,
+                                         verLine = NULL,
+                                         verLineLabel = NULL,
+                                         theme = NULL,
+                                         export = FALSE, ...) {
   f <- fringe(data)
   nms <- getClabels(f)
+  d <- f$d
 
-  xAxisTitle <- xAxisTitle %||% getClabels(f)[3]
-  yAxisTitle <- yAxisTitle %||% getClabels(f)[4]
+  horLabel <- horLabel %||% nms[3]
+  verLabel <- verLabel %||% nms[4]
+  horLineLabel <- horLineLabel %||% horLine
+  verLineLabel <- verLineLabel %||% verLine
   title <-  title %||% ""
-  caption <- caption %||% ""
   subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
 
-  d <- f$d %>% tidyr::drop_na() %>% dplyr::group_by(a,b) %>%
-    dplyr::summarise(c = mean(c,na.rm = TRUE), d = mean(d,na.rm = TRUE),e = mean(e,na.rm = TRUE))
+  d <- d %>%
+    tidyr::drop_na()
 
-  d$text1 <- map_chr(d$c, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
-  d$text2 <- map_chr(d$d, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
-  d$text3 <- map_chr(d$e, function(x) format(round(x,2), nsmall=(ifelse(count_pl(x)>2, 2, 0)), big.mark=","))
-
-  hc <- hchart(d, type = "bubble", hcaes(x = c, y = d, group = b, size = e)) %>%
-    hc_chart(zoomType = "xy") %>%
+  hc <- hchart(d, type = "bubble", hcaes(x = c, y = d, size = e, group = a)) %>%
+    hc_plotOptions(series = list(dataLabels = list(enabled = TRUE,
+                                                   format = "{point.b}"))) %>%
+    hc_tooltip(headerFormat = "",
+               pointFormat = paste0("<b>", nms[1], "</b>: {point.a}<br/><b>",
+                                    nms[2], "</b>: {point.b}<br/><b>",
+                                    horLabel, "</b>: {point.c}<br/><b>",
+                                    verLabel, "</b>: {point.d}<br/><b>",
+                                    nms[5], "</b>: {point.e}")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_credits(enabled = TRUE, text = caption) %>%
-    hc_xAxis(title = list(text=xAxisTitle)) %>%
-    hc_yAxis(title = list(text=yAxisTitle)) %>%
-    hc_tooltip(
-      pointFormat = paste0("<br>
-               <strong>{point.a}</strong><br>",
-                           x, ": {point.text1} <br>",
-                           y, ": {point.text2} <br>",
-                           t, ": {point.text3}")
-    ) %>%
-    hc_plotOptions(
-      series = list(dataLabels = list(enabled = TRUE,format= '{point.a}'))
-    )
-  hc <- hc %>% hc_add_theme(custom_theme(custom=theme))
-  if(export) hc <- hc %>% hc_exporting(enabled = TRUE)
+    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE, plotLines = list(list(value = verLine,
+                                                                                         color = 'black',
+                                                                                         dashStyle = 'shortdash',
+                                                                                         width = 2,
+                                                                                         label = list(text = verLineLabel)))) %>%
+    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = horLine,
+                                                                  color = 'black',
+                                                                  dashStyle = 'shortdash',
+                                                                  width = 2,
+                                                                  label = list(text = horLineLabel)))) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
   hc
 }
