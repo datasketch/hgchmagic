@@ -345,7 +345,7 @@ hgch_bar_stacked_CatOca <-  function(data,
   d <- f$d
 
   horLabel <- horLabel %||% nms[2]
-  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[1], paste("count", nms[1]))
+  verLabel <- verLabel %||% paste("count", nms[1])
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
