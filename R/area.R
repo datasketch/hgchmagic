@@ -25,24 +25,8 @@ hgch_area_Oca <- function(data,
   nms <- getClabels(f)
   d <- f$d
 
-  #   setEqual <- !setequal(order, unique(d$a)) &
-  #     !setequal(na.omit(order), unique(d$a)) &
-  #     !setequal(order[order != "NA"], unique(d$a))
-  # } else {
-  #   d <- d%>%
-  #     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA)))
-  #   order[is.na(order)] <- "NA"
-  #   setEqual <- !setequal(order, unique(d$a)) &
-  #     !setequal(order, unique(d$a)[unique(d$a) != "NA"]) &
-  #     !setequal(na.omit(order), unique(d$a)) &
-  #     !setequal(order[order != "NA"], unique(d$a))
-  # if (is.null(order) | nrow(d) == 0 | (!setequal(order, unique(d$a)) &
-  #                                      !setequal(order, na.omit(unique(d$a))) &
-  #                                      !setequal(na.omit(order), unique(d$a)))) return()
-
-
   horLabel <- horLabel %||% nms[1]
-  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[1], paste("count", nms[1]))
+  verLabel <- verLabel %||% paste("count", nms[1])
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
