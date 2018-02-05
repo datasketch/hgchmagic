@@ -204,7 +204,7 @@ hgch_area_stacked_CatOca <- function(data,
   d <- f$d
 
   horLabel <- horLabel %||% nms[1]
-  verLabel <- verLabel %||% paste("count", nms[2])
+  verLabel <- verLabel %||% "count"
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
@@ -236,7 +236,7 @@ hgch_area_stacked_CatOca <- function(data,
                    series = list(marker = list(enabled = TRUE, symbol = "circle"))) %>%
     hc_tooltip(headerFormat = "",
                pointFormat = paste0("<b>", paste0(horLabel, ": "), "</b>{point.a}<br/><b>",
-                                    paste0(verLabel, ": "), "</b>{point.b}<br/><b>",
+                                    paste0(nms[2], ": "), "</b>{point.b}<br/><b>",
                                     "count", "</b>: {point.c", ifelse(percentage, ":.3f}", "}"))) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
@@ -287,7 +287,7 @@ hgch_area_stacked_100_CatOca <- function(data,
   d <- f$d
 
   horLabel <- horLabel %||% nms[1]
-  verLabel <- verLabel %||% paste("count", nms[2])
+  verLabel <- verLabel %||% "count"
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
@@ -319,7 +319,7 @@ hgch_area_stacked_100_CatOca <- function(data,
                    series = list(marker = list(enabled = TRUE, symbol = "circle"))) %>%
     hc_tooltip(headerFormat = "",
                pointFormat = paste0("<b>", paste0(horLabel, ": "), "</b>{point.a}<br/><b>",
-                                    paste0(verLabel, ": "), "</b>{point.b}<br/><b>",
+                                    paste0(nms[2], ": "), "</b>{point.b}<br/><b>",
                                     "count", "</b>: {point.c", ifelse(percentage, ":.3f}", "}"))) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
