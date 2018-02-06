@@ -218,7 +218,10 @@ hgch_area_stacked_CatOca <- function(data,
     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
                            b = ifelse(is.character(d$b), "NA", NA))) %>%
     dplyr::group_by(a, b) %>%
-    dplyr::summarise(c = n())
+    dplyr::summarise(c = n()) %>%
+    tidyr::spread(b, c) %>%
+    tidyr::gather(b, c, -a)
+  d$c[is.na(d$c)] <- 0
 
   if (percentage) {
     d <- d %>%
@@ -280,8 +283,6 @@ hgch_area_stacked_100_CatOca <- function(data,
                                          theme = NULL,
                                          export = FALSE, ...) {
 
-
-
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
@@ -301,7 +302,10 @@ hgch_area_stacked_100_CatOca <- function(data,
     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
                            b = ifelse(is.character(d$b), "NA", NA))) %>%
     dplyr::group_by(a, b) %>%
-    dplyr::summarise(c = n())
+    dplyr::summarise(c = n()) %>%
+    tidyr::spread(b, c) %>%
+    tidyr::gather(b, c, -a)
+  d$c[is.na(d$c)] <- 0
 
   if (percentage) {
     d <- d %>%
@@ -473,8 +477,6 @@ hgch_area_stacked_CatOcaNum <- function(data,
                                         theme = NULL,
                                         export = FALSE, ...) {
 
-
-
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
@@ -495,7 +497,10 @@ hgch_area_stacked_CatOcaNum <- function(data,
                            b = ifelse(is.character(d$b), "NA", NA),
                            c = NA)) %>%
     dplyr::group_by(a, b) %>%
-    dplyr::summarise(c = agg(agg, c))
+    dplyr::summarise(c = agg(agg, c)) %>%
+    tidyr::spread(b, c) %>%
+    tidyr::gather(b, c, -a)
+  d$c[is.na(d$c)] <- 0
 
   if (percentage) {
     d <- d %>%
@@ -607,7 +612,10 @@ hgch_area_stacked_100_CatOcaNum <- function(data,
                            b = ifelse(is.character(d$b), "NA", NA),
                            c = NA)) %>%
     dplyr::group_by(a, b) %>%
-    dplyr::summarise(c = agg(agg, c))
+    dplyr::summarise(c = agg(agg, c)) %>%
+    tidyr::spread(b, c) %>%
+    tidyr::gather(b, c, -a)
+  d$c[is.na(d$c)] <- 0
 
   order <- union(order, unique(d$b)[!is.na(unique(d$b))])
   if (all(!is.na(order)) & any(is.na(d$b))) order <- c(union(order, unique(d$b[!is.na(d$b)])), NA)
