@@ -6,7 +6,7 @@
 \usage{
 hgch_line_Oca(data, title = NULL, subtitle = NULL, caption = NULL,
   horLabel = NULL, verLabel = NULL, yLine = NULL, yLineLabel = NULL,
-  dropNa = FALSE, order = NULL, startAtZero = TRUE, theme = NULL,
+  dropNa = FALSE, order = NULL, startAtZero = FALSE, theme = NULL,
   export = FALSE, ...)
 }
 \arguments{
