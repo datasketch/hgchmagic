@@ -345,7 +345,7 @@ hgch_bar_stacked_CatOca <-  function(data,
   d <- f$d
 
   horLabel <- horLabel %||% nms[2]
-  verLabel <- verLabel %||% paste("count", nms[1])
+  verLabel <- verLabel %||% "count"
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
@@ -389,8 +389,8 @@ hgch_bar_stacked_CatOca <-  function(data,
   hc <- hc %>%
     hc_tooltip(headerFormat = "",
                pointFormat = paste0("<b>", paste0(nms[1], ": "), "</b>{point.a}<br/><b>",
-                                    paste0(horLabel, ": "), "</b>{point.b}<br/><b>",
-                                    verLabel, "</b>: {point.c}")) %>%
+                                    paste0(verLabel, ": "), "</b>{point.b}<br/><b>",
+                                    "count", "</b>: {point.c}")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
@@ -438,7 +438,7 @@ hgch_bar_stacked_100_CatOca <-  function(data,
   d <- f$d
 
   horLabel <- horLabel %||% nms[2]
-  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[1], paste("count", nms[1]))
+  verLabel <- verLabel %||% "count"
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
@@ -483,7 +483,7 @@ hgch_bar_stacked_100_CatOca <-  function(data,
     hc_tooltip(headerFormat = "",
                pointFormat = paste0("<b style = 'font-size:12px'>", paste0(nms[1], ": "), "</b>{point.a}<br/><b style = 'font-size:12px'>",
                                     paste0(horLabel, ": "), "</b>{point.b}<br/><b style = 'font-size:12px'>",
-                                    verLabel, "</b>: {point.c} ({point.percentage:.3f}%)")) %>%
+                                    "count", "</b>: {point.c} ({point.percentage:.3f}%)")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
