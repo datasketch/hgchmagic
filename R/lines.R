@@ -7,7 +7,7 @@
 #' @section ctypes:
 #' Oca
 #' @examples
-#' hgch_line_Oca(sampleData("Cat", nrow = 10))
+#' hgch_line_Oca(sampleData("Oca", nrow = 10))
 #' @export hgch_line_Oca
 hgch_line_Oca <- function(data,
                           title = NULL,
@@ -19,6 +19,7 @@ hgch_line_Oca <- function(data,
                           yLineLabel = NULL,
                           dropNa = FALSE,
                           order = NULL,
+                          percentage = FALSE,
                           startAtZero = FALSE,
                           theme = NULL,
                           export = FALSE, ...) {
@@ -42,6 +43,12 @@ hgch_line_Oca <- function(data,
     dplyr::group_by(a) %>%
     dplyr::summarise(b = n())
 
+  if (percentage) {
+    d <- d %>%
+      dplyr::mutate(b = b / sum(b))
+    verLabel <- paste("%", verLabel)
+  }
+
   order <- union(order, unique(d$a)[!is.na(unique(d$a))])
   if (all(!is.na(order)) & any(is.na(d$a))) order <- c(union(order, unique(d$a[!is.na(d$a)])), NA)
   order[is.na(order)] <- "NA"
@@ -50,7 +57,7 @@ hgch_line_Oca <- function(data,
   hc <- hchart(d, type = "line", hcaes(x = a, y = b)) %>%
     hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol = "circle"))) %>%
     hc_tooltip(headerFormat = paste("<b>", paste0(horLabel, ": "), "</b>{point.key}<br/>"),
-               pointFormat = paste0("<b>", verLabel, "</b>: {point.b}")) %>%
+               pointFormat = paste0("<b>", verLabel, "</b>: {point.b", ifelse(percentage, ":.3f}", "}"))) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
@@ -59,6 +66,7 @@ hgch_line_Oca <- function(data,
                                                                   dashStyle = 'shortdash',
                                                                   width = 2,
                                                                   label = list(text = yLineLabel))),
+             labels = list(format = ifelse(percentage, "{value}%", "{value}")),
              minRange = if (startAtZero) 0.1,
              min = if (startAtZero) 0,
              minPadding = if (startAtZero) 0) %>%
@@ -79,7 +87,7 @@ hgch_line_Oca <- function(data,
 #' @section ctypes:
 #' Oca-Num
 #' @examples
-#' hgch_line_OcaNum(sampleData("Cat-Num", nrow = 10))
+#' hgch_line_OcaNum(sampleData("Oca-Num", nrow = 10))
 #' @export hgch_line_OcaNum
 hgch_line_OcaNum <- function(data,
                              title = NULL,
@@ -190,7 +198,7 @@ hgch_line_DatNum <- hgch_line_OcaNum
 #' @section ctypes:
 #' Cat-Oca-Num
 #' @examples
-#' hgch_line_CatOcaNum(sampleData("Cat-Cat-Num", nrow = 10))
+#' hgch_line_CatOcaNum(sampleData("Cat-Oca-Num", nrow = 10))
 #' @export hgch_line_CatOcaNum
 hgch_line_CatOcaNum <- function(data,
                                 title = NULL,

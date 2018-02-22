@@ -31,6 +31,7 @@ hgch_bar_Oca <- function(data,
                          dropNa = FALSE,
                          order = NULL,
                          orientation = "ver",
+                         percentage = FALSE,
                          sort = "no",
                          sliceN = NULL,
                          theme = NULL,
@@ -54,6 +55,12 @@ hgch_bar_Oca <- function(data,
     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA))) %>%
     dplyr::group_by(a) %>%
     dplyr::summarise(b = n())
+
+  if (percentage) {
+    d <- d %>%
+      dplyr::mutate(b = b / sum(b))
+    verLabel <- paste("%", verLabel)
+  }
 
   order <- union(order, unique(d$a)[!is.na(unique(d$a))])
   if (all(!is.na(order)) & any(is.na(d$a))) order <- c(union(order, unique(d$a[!is.na(d$a)])), NA)
@@ -88,7 +95,8 @@ hgch_bar_Oca <- function(data,
                                                                   color = 'black',
                                                                   dashStyle = 'shortdash',
                                                                   width = 2,
-                                                                  label = list(text = yLineLabel)))) %>%
+                                                                  label = list(text = yLineLabel))),
+             labels = list(format = ifelse(percentage, "{value}%", "{value}"))) %>%
     hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption)
   if (export) hc <- hc %>%

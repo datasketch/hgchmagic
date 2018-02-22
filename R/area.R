@@ -7,7 +7,7 @@
 #' @section ctypes:
 #' Oca
 #' @examples
-#' hgch_area_Oca(sampleData("Cat", nrow = 10))
+#' hgch_area_Oca(sampleData("Oca", nrow = 10))
 #' @export hgch_area_Oca
 hgch_area_Oca <- function(data,
                           title = NULL,
@@ -19,6 +19,7 @@ hgch_area_Oca <- function(data,
                           yLineLabel = NULL,
                           dropNa = FALSE,
                           order = NULL,
+                          percentage = FALSE,
                           theme = NULL,
                           export = FALSE, ...) {
   f <- fringe(data)
@@ -41,6 +42,12 @@ hgch_area_Oca <- function(data,
     dplyr::group_by(a) %>%
     dplyr::summarise(b = n())
 
+  if (percentage) {
+    d <- d %>%
+      dplyr::mutate(b = b / sum(b))
+    verLabel <- paste("%", verLabel)
+  }
+
   order <- union(order, unique(d$a)[!is.na(unique(d$a))])
   if (all(!is.na(order)) & any(is.na(d$a))) order <- c(union(order, unique(d$a[!is.na(d$a)])), NA)
   order[is.na(order)] <- "NA"
@@ -49,7 +56,7 @@ hgch_area_Oca <- function(data,
   hc <- hchart(d, type = "area", hcaes(x = a, y = b)) %>%
     hc_plotOptions(series = list(marker = list(enabled = TRUE, symbol = "circle"))) %>%
     hc_tooltip(headerFormat = paste("<b>", paste0(horLabel, ": "), "</b>{point.key}<br/>"),
-               pointFormat = paste0("<b>", verLabel, "</b>: {point.b}")) %>%
+               pointFormat = paste0("<b>", verLabel, "</b>: {point.b", ifelse(percentage, ":.3f}", "}"))) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
@@ -57,7 +64,8 @@ hgch_area_Oca <- function(data,
                                                                   color = 'black',
                                                                   dashStyle = 'shortdash',
                                                                   width = 2,
-                                                                  label = list(text = yLineLabel)))) %>%
+                                                                  label = list(text = yLineLabel))),
+             labels = list(format = ifelse(percentage, "{value}%", "{value}"))) %>%
     hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption)
   if (export) hc <- hc %>%
@@ -75,7 +83,7 @@ hgch_area_Oca <- function(data,
 #' @section ctypes:
 #' Oca-Num
 #' @examples
-#' hgch_area_OcaNum(sampleData("Cat-Num", nrow = 10))
+#' hgch_area_OcaNum(sampleData("Oca-Num", nrow = 10))
 #' @export hgch_area_OcaNum
 hgch_area_OcaNum <- function(data,
                              title = NULL,
@@ -106,11 +114,21 @@ hgch_area_OcaNum <- function(data,
     d <- d %>%
     tidyr::drop_na()
 
+  # d <- d  %>%
+  #   tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
+  #                          b = NA)) %>%
+  #   dplyr::group_by(a) %>%
+  #   dplyr::summarise(b = agg(agg, b))
   d <- d  %>%
     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
-                           b = NA)) %>%
+                           b = ifelse(is.character(d$b), "NA", NA))) %>%
     dplyr::group_by(a) %>%
-    dplyr::summarise(b = agg(agg, b))
+    dplyr::summarise(b = agg(agg, b)) %>%
+    tidyr::spread(a, b) %>%
+    tidyr::gather(a, b) %>%
+    dplyr::mutate(format = b)
+  d$b[is.na(d$b)] <- 0
+
 
   if (percentage) {
     d <- d %>%
@@ -220,12 +238,14 @@ hgch_area_stacked_CatOca <- function(data,
     dplyr::group_by(a, b) %>%
     dplyr::summarise(c = n()) %>%
     tidyr::spread(b, c) %>%
-    tidyr::gather(b, c, -a)
+    tidyr::gather(b, c, -a) %>%
+    dplyr::mutate(format = ifelse(is.na(c), "NA", c))
   d$c[is.na(d$c)] <- 0
 
   if (percentage) {
     d <- d %>%
-      dplyr::mutate(c = c / sum(c))
+      dplyr::mutate(c = c / sum(c),
+                    format = ifelse(is.na(c), "NA", c))
     verLabel <- paste("%", verLabel)
   }
 
@@ -240,7 +260,7 @@ hgch_area_stacked_CatOca <- function(data,
     hc_tooltip(headerFormat = "",
                pointFormat = paste0("<b>", paste0(horLabel, ": "), "</b>{point.a}<br/><b>",
                                     paste0(nms[2], ": "), "</b>{point.b}<br/><b>",
-                                    "count", "</b>: {point.c", ifelse(percentage, ":.3f}", "}"))) %>%
+                                    verLabel, "</b>: {point.format", ifelse(percentage, ":.3f}", "}"))) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
@@ -288,7 +308,7 @@ hgch_area_stacked_100_CatOca <- function(data,
   d <- f$d
 
   horLabel <- horLabel %||% nms[1]
-  verLabel <- verLabel %||% "count"
+  verLabel <- verLabel %||% ifelse(percentage, "% count", "count")
   yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
@@ -304,12 +324,14 @@ hgch_area_stacked_100_CatOca <- function(data,
     dplyr::group_by(a, b) %>%
     dplyr::summarise(c = n()) %>%
     tidyr::spread(b, c) %>%
-    tidyr::gather(b, c, -a)
+    tidyr::gather(b, c, -a) %>%
+    dplyr::mutate(format = ifelse(is.na(c), "NA", c))
   d$c[is.na(d$c)] <- 0
 
   if (percentage) {
     d <- d %>%
-      dplyr::mutate(c = c / sum(c))
+      dplyr::mutate(c = c / sum(c),
+                    format = ifelse(is.na(c), "NA", c))
     verLabel <- paste("%", verLabel)
   }
 
@@ -324,7 +346,7 @@ hgch_area_stacked_100_CatOca <- function(data,
     hc_tooltip(headerFormat = "",
                pointFormat = paste0("<b>", paste0(horLabel, ": "), "</b>{point.a}<br/><b>",
                                     paste0(nms[2], ": "), "</b>{point.b}<br/><b>",
-                                    "count", "</b>: {point.c", ifelse(percentage, ":.3f}", "}"))) %>%
+                                    verLabel, "</b>: {point.format", ifelse(percentage, ":.3f}", "}"))) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
@@ -389,11 +411,14 @@ hgch_area_CatOcaNum <- function(data,
     dplyr::group_by(a, b) %>%
     dplyr::summarise(c = agg(agg, c)) %>%
     tidyr::spread(b, c) %>%
-    tidyr::gather(b, c, -a)
+    tidyr::gather(b, c, -a) #%>%
+   # dplyr::mutate(format = ifelse(is.na(c), "NA", c))
+  d$c[is.na(d$c)] <- 0
 
   if (percentage) {
     d <- d %>%
-      dplyr::mutate(c = c / sum(c))
+      dplyr::mutate(c = c / sum(c))#,
+                    #format = ifelse(is.na(c), "NA", c / sum(d$c, na.rm = TRUE)))
     verLabel <- paste("%", verLabel)
   }
 
