@@ -218,7 +218,7 @@ hgch_treemap_CatCatNum  <- function(data,
 
   ColInt <- if (is.null(colors)) {
     getPalette()[1:Ngr]} else {
-      colors
+      colors <- colorRampPalette(colors)(Ngr)
     }
 
 
@@ -248,7 +248,7 @@ hgch_treemap_CatCatNum  <- function(data,
                              style = list(
                                      fontSize = '15px',
                                      fontWeight = 'bold'
-                             )))))  %>%
+                             ))))) %>%
     hc_add_theme(custom_theme(custom = theme))
 
   if (export) hc <- hc %>%
