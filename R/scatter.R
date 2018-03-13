@@ -38,7 +38,7 @@ hgch_scatter_NumNum <- function(data,
 
   hc <- hchart(d, type = "scatter", hcaes(x = a, y = b)) %>%
     hc_tooltip(headerFormat = "",
-               pointFormat = paste0("<b>", horlabel, "</b>: {point.a} <br/><b>",
+               pointFormat = paste0("<b>", horLabel, "</b>: {point.a} <br/><b>",
                                     verLabel, "</b>: {point.b}")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
@@ -330,7 +330,7 @@ hgch_scatter_CatNumNumNum <- function(data,
 #' @section ctypes:
 #' Cat-Num-Num
 #' @examples
-#' hgch_scatter_coloured_CatNumNumNum(sampleData("Cat-Num-Num", nrow = 10))
+#' hgch_scatter_coloured_CatNumNumNum(sampleData("Cat-Num-Num-Num", nrow = 10))
 #' @export hgch_scatter_coloured_CatNumNumNum
 hgch_scatter_coloured_CatNumNumNum <- function(data,
                                                title = NULL,
