@@ -77,7 +77,7 @@ sortSlice <- function(data, col, sort, sliceN) {
 
 # sorting <- paste0('desc(', sortby, ')') #nse
 # ord <- dplyr::arrange_(filt, .dots = sorting) #use arrange_
-return(ord)
+#return(ord)
 
 # highlight value
 #'@export

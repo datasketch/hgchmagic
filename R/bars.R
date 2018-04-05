@@ -1287,8 +1287,6 @@ hgch_circular_bar_CatNum <- function(data,
     hc_add_theme(custom_theme(custom = theme)) %>%
     hc_exporting(enabled = TRUE) %>%
     hc_credits(enabled = TRUE, text = caption)
-
   hc
-
 }
 

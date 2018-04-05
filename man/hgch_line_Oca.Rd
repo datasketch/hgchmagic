@@ -6,8 +6,8 @@
 \usage{
 hgch_line_Oca(data, title = NULL, subtitle = NULL, caption = NULL,
   horLabel = NULL, verLabel = NULL, yLine = NULL, yLineLabel = NULL,
-  dropNa = FALSE, order = NULL, startAtZero = FALSE, theme = NULL,
-  export = FALSE, ...)
+  dropNa = FALSE, order = NULL, percentage = FALSE, startAtZero = FALSE,
+  theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}
@@ -24,5 +24,5 @@ Oca
 }
 
 \examples{
-hgch_line_Oca(sampleData("Cat", nrow = 10))
+hgch_line_Oca(sampleData("Oca", nrow = 10))
 }

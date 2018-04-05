@@ -24,5 +24,5 @@ Oca-Num
 }
 
 \examples{
-hgch_area_OcaNum(sampleData("Cat-Num", nrow = 10))
+hgch_area_OcaNum(sampleData("Oca-Num", nrow = 10))
 }
