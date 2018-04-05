@@ -1,52 +1,61 @@
-#' @name count_pl
-#' @export
-count_pl <- function(x) {
-  if (is.na(x)) {return(0)}
-  if ((x %% 1) != 0) {
-    nchar(strsplit(sub('0+$', '', as.character(x)), ".", fixed=TRUE)[[1]][[2]])
-  } else {
-    return(0)
-  }
-}
-
-#' Bar (ordered categories)
+#' Bar (categories)
 #'
 #' Compare category's levels
 #'
 #' @param data A data.frame
 #' @return Highcharts visualization
 #' @section ctypes:
-#' Oca
+#' Cat, Yea, Dat
 #' @examples
-#' hgch_bar_Oca(sampleData("Cat", nrow = 10))
-#' @export hgch_bar_Oca
-hgch_bar_Oca <- function(data,
+#' hgch_bar_Cat(sampleData("Cat", nrow = 10))
+#' @export hgch_bar_Cat
+hgch_bar_Cat <- function(data,
                          title = NULL,
                          subtitle = NULL,
                          caption = NULL,
                          horLabel = NULL,
                          verLabel = NULL,
-                         yLine = NULL,
-                         yLineLabel = NULL,
+                         horLine = NULL,
+                         horLineLabel = NULL,
+                         verLine = NULL,
+                         verLineLabel = NULL,
+                         colors = c("#009EE3", "#F9B233"),
                          dropNa = FALSE,
+                         format = "{value}",
+                         highlightValue = NULL,
                          order = NULL,
                          orientation = "ver",
                          percentage = FALSE,
                          sort = "no",
                          sliceN = NULL,
                          theme = NULL,
+                         tooltip = list("headerFormat" = NULL,
+                                        "pointFormat" = NULL,
+                                        "shared" = NULL),
                          export = FALSE, ...) {
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
 
-  horLabel <- horLabel %||% nms[1]
-  verLabel <- verLabel %||% paste("count", nms[1])
-  yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
-
+  labelsXY <- orientationXY(orientation,
+                            x = nms[1],
+                            y = paste("count", nms[1]),
+                            hor = horLabel,
+                            ver = verLabel)
+  lineXY <- orientationXY(orientation,
+                          NULL,
+                          NULL,
+                          hor = horLine,
+                          ver = verLine)
+  lineLabelsXY <- orientationXY(orientation,
+                                x = horLine,
+                                y = verLine,
+                                hor = horLineLabel,
+                                ver = verLineLabel,
+                                line = TRUE)
   if (dropNa)
     d <- d %>%
     tidyr::drop_na()
@@ -56,47 +65,34 @@ hgch_bar_Oca <- function(data,
     dplyr::group_by(a) %>%
     dplyr::summarise(b = n())
 
-  if (percentage) {
-    d <- d %>%
-      dplyr::mutate(b = b / sum(b))
-    verLabel <- paste("%", verLabel)
-  }
+  d <- percentColumn(d, "b", percentage)
+  d <- orderCategory(d, "a", order)
+  d <- sortSlice(d, "b", sort, sliceN)
+  d <- highlightValueData(d, "a", highlightValue, colors[1], colors[2])
+  tooltip <- tooltipHc(d, nms, tooltip, labelsXY[2], "b", percentage)
 
-  order <- union(order, unique(d$a)[!is.na(unique(d$a))])
-  if (all(!is.na(order)) & any(is.na(d$a))) order <- c(union(order, unique(d$a[!is.na(d$a)])), NA)
-  order[is.na(order)] <- "NA"
-  d <- d[order(match(d$a, order)), ]
-
-  if (sort == "desc")
-    d <- d %>%
-    dplyr::arrange(desc(b))
-
-  if (sort == "asc")
-    d <- d %>%
-    dplyr::arrange(b)
-
-  if (!is.null(sliceN))
-    d <- d %>%
-    dplyr::slice(1:sliceN)
-
-  if (orientation == "ver")
-    hc <-  hchart(d, type = "column", hcaes(x = a, y = b))
-
-  if (orientation == "hor")
-    hc <- hchart(d, type = "bar", hcaes(x = a, y = b))
-
-  hc <- hc %>%
-    hc_tooltip(headerFormat = paste("<b>", paste0(horLabel, ": "), "</b>{point.key}<br/>"),
-               pointFormat = paste0("<b>", verLabel, "</b>: {point.b}")) %>%
+  hc <- hchart(d, type = ifelse(orientation == "hor", "bar", "column"), hcaes(x = a, y = b, color = color)) %>%
+    hc_tooltip(headerFormat = tooltip$headerFormat,
+               pointFormat = tooltip$pointFormat,
+               shared = tooltip$shared) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = yLine,
-                                                                  color = 'black',
-                                                                  dashStyle = 'shortdash',
-                                                                  width = 2,
-                                                                  label = list(text = yLineLabel))),
-             labels = list(format = ifelse(percentage, "{value}%", "{value}"))) %>%
+    hc_xAxis(title = list(text = labelsXY[1]),
+             allowDecimals = FALSE,
+             plotLines = list(list(value = lineXY[2],
+                                   color = 'black',
+                                   dashStyle = 'shortdash',
+                                   width = 2,
+                                   label = list(text = lineLabelsXY[1])))) %>%
+    hc_yAxis(title = list(text = labelsXY[2]),
+             plotLines = list(list(value = lineXY[1],
+                                   color = 'black',
+                                   dashStyle = 'shortdash',
+                                   width = 2,
+                                   label = list(text = lineLabelsXY[2]))),
+             labels = list(format = format)) %>%
+             #labels = list(format = ifelse(percentage, "{value}%", "{value}"))) %>%
+    #hc_legend(layout = legendLayout) %>%
     hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption)
   if (export) hc <- hc %>%
@@ -105,45 +101,67 @@ hgch_bar_Oca <- function(data,
 }
 
 
-#' Bar (ordered categories, numbers)
+#' Bar (categories, numbers)
 #'
-#' Compare quantities among categories
+#' Compare aggregations among category's levels
 #'
 #' @param data A data.frame
 #' @return Highcharts visualization
 #' @section ctypes:
-#' Oca-Num
+#' Cat-Num, Yea-Num, Dat-Num,
 #' @examples
-#' hgch_bar_OcaNum(sampleData("Cat-Num", nrow = 10))
-#' @export hgch_bar_OcaNum
-hgch_bar_OcaNum <- function(data,
+#' hgch_bar_CatNum(sampleData("Cat-Num", nrow = 10))
+#' @export hgch_bar_CatNum
+hgch_bar_CatNum <- function(data,
                             title = NULL,
                             subtitle = NULL,
                             caption = NULL,
                             horLabel = NULL,
                             verLabel = NULL,
-                            yLine = NULL,
-                            yLineLabel = NULL,
+                            horLine = NULL,
+                            horLineLabel = NULL,
+                            verLine = NULL,
+                            verLineLabel = NULL,
                             agg = "sum",
+                            colors = c("#009EE3", "#F9B233"),
                             dropNa = FALSE,
+                            format = "{value}",
+                            highlightValue = NULL,
                             order = NULL,
                             orientation = "ver",
                             percentage = FALSE,
                             sort = "no",
                             sliceN = NULL,
                             theme = NULL,
+                            tooltip = list("headerFormat" = NULL,
+                                           "pointFormat" = NULL,
+                                           "shared" = NULL),
                             export = FALSE, ...) {
   f <- fringe(data)
   nms <- getClabels(f)
-  d <- f$d
+  d <- f$dlibrary(foreign)
+  library(tidyverse)
+  library(haven)
 
-  horLabel <- horLabel %||% nms[1]
-  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste(agg, nms[2]))
-  yLineLabel <- yLineLabel %||% yLine
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
-
+  labelsXY <- orientationXY(orientation,
+                            x = nms[1],
+                            y = ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste(agg, nms[2])),
+                            hor = horLabel,
+                            ver = verLabel)
+  lineXY <- orientationXY(orientation,
+                          NULL,
+                          NULL,
+                          hor = horLine,
+                          ver = verLine)
+  lineLabelsXY <- orientationXY(orientation,
+                                x = horLine,
+                                y = verLine,
+                                hor = horLineLabel,
+                                ver = verLineLabel,
+                                line = TRUE)
   if (dropNa)
     d <- d %>%
     tidyr::drop_na()
@@ -154,47 +172,33 @@ hgch_bar_OcaNum <- function(data,
     dplyr::group_by(a) %>%
     dplyr::summarise(b = agg(agg, b))
 
-  if (percentage) {
-    d <- d %>%
-      dplyr::mutate(b = b / sum(b))
-    verLabel <- paste("%", verLabel)
-  }
+  d <- percentColumn(d, "b", percentage)
+  d <- orderCategory(d, "a", order)
+  d <- sortSlice(d, "b", sort, sliceN)
+  d <- highlightValueData(d, "a", highlightValue, colors[1], colors[2])
+  tooltip <- tooltipHc(d, nms, tooltip, labelsXY[2], "b", percentage)
 
-  order <- union(order, unique(d$a)[!is.na(unique(d$a))])
-  if (all(!is.na(order)) & any(is.na(d$a))) order <- c(union(order, unique(d$a[!is.na(d$a)])), NA)
-  order[is.na(order)] <- "NA"
-  d <- d[order(match(d$a, order)), ]
-
-  if (sort == "desc")
-    d <- d %>%
-    dplyr::arrange(desc(b))
-
-  if (sort == "asc")
-    d <- d %>%
-    dplyr::arrange(b)
-
-  if (!is.null(sliceN))
-    d <- d %>%
-    dplyr::slice(1:sliceN)
-
-  if (orientation == "ver")
-    hc <-  hchart(d, type = "column", hcaes(x = a, y = b))
-
-  if (orientation == "hor")
-    hc <- hchart(d, type = "bar", hcaes(x = a, y = b))
-
-  hc <- hc %>%
-    hc_tooltip(headerFormat = paste("<b>", paste0(horLabel, ": "), "</b>{point.key}<br/>"),
-               pointFormat = paste0("<b>", verLabel, "</b>: {point.b}")) %>%
+  hc <- hchart(d, type = ifelse(orientation == "hor", "bar", "column"), hcaes(x = a, y = b, color = color)) %>%
+    hc_tooltip(headerFormat = tooltip$headerFormat,
+               pointFormat = tooltip$pointFormat,
+               shared = tooltip$shared) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text = horLabel), allowDecimals = FALSE) %>%
-    hc_yAxis(title = list(text = verLabel), plotLines = list(list(value = yLine,
-                                                                  color = 'black',
-                                                                  dashStyle = 'shortdash',
-                                                                  width = 2,
-                                                                  label = list(text = yLineLabel))),
-             labels = list(format = ifelse(percentage, "{value}%", "{value}"))) %>%
+    hc_xAxis(title = list(text = labelsXY[1]),
+             allowDecimals = FALSE,
+             plotLines = list(list(value = lineXY[2],
+                                   color = 'black',
+                                   dashStyle = 'shortdash',
+                                   width = 2,
+                                   label = list(text = lineLabelsXY[1])))) %>%
+    hc_yAxis(title = list(text = labelsXY[2]),
+             plotLines = list(list(value = lineXY[1],
+                                   color = 'black',
+                                   dashStyle = 'shortdash',
+                                   width = 2,
+                                   label = list(text = lineLabelsXY[2]))),
+             labels = list(format = format)) %>%
+    #hc_legend(layout = legendLayout) %>%
     hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption)
   if (export) hc <- hc %>%
@@ -214,7 +218,7 @@ hgch_bar_OcaNum <- function(data,
 #' @examples
 #' hgch_bar_YeaNum(sampleData("Yea-Num", nrow = 10))
 #' @export hgch_bar_YeaNum
-hgch_bar_YeaNum <- hgch_bar_OcaNum
+hgch_bar_YeaNum <- hgch_bar_CatNum
 
 
 #' Bar (dates, numbers)
@@ -228,7 +232,7 @@ hgch_bar_YeaNum <- hgch_bar_OcaNum
 #' @examples
 #' hgch_bar_DatNum(sampleData("Dat-Num", nrow = 10))
 #' @export hgch_bar_DatNum
-hgch_bar_DatNum <- hgch_bar_OcaNum
+hgch_bar_DatNum <- hgch_bar_CatNum
 
 
 #' Grouped bar (categories, ordered categories)
@@ -238,11 +242,119 @@ hgch_bar_DatNum <- hgch_bar_OcaNum
 #' @param data A data.frame
 #' @return Highcharts visualization
 #' @section ctypes:
-#' Cat-Oca
+#' Cat-Cat, Cat-Dat, Cat-Yea, Yea-Cat, Yea-Dat, Yea-Yea, Dat-Cat, Dat-Yea, Dat-Dat
 #' @examples
-#' hgch_bar_grouped_CatOca(sampleData("Cat-Cat", nrow = 10))
-#' @export hgch_bar_grouped_CatOca
-hgch_bar_grouped_CatOca <- function(data,
+#' hgch_bar_grouped_CatCat(sampleData("Cat-Cat", nrow = 10))
+#' @export hgch_bar_grouped_CatCat
+hgch_bar_grouped_CatCat <- function(data,
+                                    title = NULL,
+                                    subtitle = NULL,
+                                    caption = NULL,
+                                    horLabel = NULL,
+                                    verLabel = NULL,
+                                    horLine = NULL,
+                                    horLineLabel = NULL,
+                                    verLine = NULL,
+                                    verLineLabel = NULL,
+                                    colors = c("#009EE3", "#F9B233"),
+                                    dropNa = FALSE,
+                                    format = "{value}",
+                                    legendLayout = "horizontal",
+                                    #highlightValue = NULL,
+                                    order = NULL,
+                                    orientation = "ver",
+                                    percentage = FALSE,
+                                    sort = "no",
+                                    sliceN = NULL,
+                                    theme = NULL,
+                                    tooltip = list("headerFormat" = NULL,
+                                                   "pointFormat" = NULL,
+                                                   "shared" = NULL),
+                                    export = FALSE, ...) {
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+
+  title <-  title %||% ""
+  subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
+
+  labelsXY <- orientationXY(orientation,
+                            x = nms[1],
+                            y = paste("count", nms[2]),
+                            hor = horLabel,
+                            ver = verLabel)
+  lineXY <- orientationXY(orientation,
+                          NULL,
+                          NULL,
+                          hor = horLine,
+                          ver = verLine)
+  lineLabelsXY <- orientationXY(orientation,
+                                x = horLine,
+                                y = verLine,
+                                hor = horLineLabel,
+                                ver = verLineLabel,
+                                line = TRUE)
+  if (dropNa)
+    d <- d %>%
+    tidyr::drop_na()
+
+  d <- d  %>%
+    tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
+                           b = ifelse(is.character(d$b), "NA", NA))) %>%
+    dplyr::group_by(a, b) %>%
+    dplyr::summarise(c = n()) %>%
+    tidyr::spread(b, c) %>%
+    tidyr::gather(b, c, -a) %>%
+    dplyr::mutate(format = ifelse(is.na(c), "NA", c))
+  d$c[is.na(d$c)] <- 0
+
+  d <- percentColumn(d, "c", percentage)
+  d <- orderCategory(d, "a", order)
+  d <- sortSlice(d, "c", sort, sliceN)
+  tooltip <- tooltipHc(d, nms, tooltip, labelsXY[2], "c", percentage)
+
+  hc <- hchart(d, type = ifelse(orientation == "hor", "bar", "column"), hcaes(x = a, y = c, group = b)) %>%
+    hc_tooltip(headerFormat = tooltip$headerFormat,
+               pointFormat = tooltip$pointFormat,
+               shared = tooltip$shared) %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
+    hc_xAxis(title = list(text = labelsXY[1]),
+             allowDecimals = FALSE,
+             plotLines = list(list(value = lineXY[2],
+                                   color = 'black',
+                                   dashStyle = 'shortdash',
+                                   width = 2,
+                                   label = list(text = lineLabelsXY[1])))) %>%
+    hc_yAxis(title = list(text = labelsXY[2]),
+             plotLines = list(list(value = lineXY[1],
+                                   color = 'black',
+                                   dashStyle = 'shortdash',
+                                   width = 2,
+                                   label = list(text = lineLabelsXY[2]))),
+             labels = list(format = format)) %>%
+    hc_legend(layout = legendLayout) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
+    hc_credits(enabled = TRUE, text = caption)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
+  hc
+}
+
+
+#' Grouped bar (categories, ordered categories)
+#'
+#' Compare quantities among two categories
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Cat-Cat, Cat-Dat, Cat-Yea, Yea-Cat, Yea-Dat, Yea-Yea, Dat-Cat, Dat-Yea, Dat-Dat
+#' @examples
+#' hgch_bar_grouped_CatCat(sampleData("Cat-Cat", nrow = 10))
+#' @export hgch_bar_grouped_CatCat
+hgch_bar_grouped_CatCat <- function(data,
                                     title = NULL,
                                     subtitle = NULL,
                                     caption = NULL,
@@ -276,7 +388,13 @@ hgch_bar_grouped_CatOca <- function(data,
     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
                            b = ifelse(is.character(d$b), "NA", NA))) %>%
     dplyr::group_by(a, b) %>%
-    dplyr::summarise(c = n())
+    dplyr::summarise(c = n()) %>%
+    tidyr::spread(b, c) %>%
+    tidyr::gather(b, c, -a) %>%
+    dplyr::mutate(format = ifelse(is.na(c), "NA", c))
+  d$c[is.na(d$c)] <- 0
+
+
 
   order <- union(order, unique(d$b)[!is.na(unique(d$b))])
   if (all(!is.na(order)) & any(is.na(d$b))) order <- c(union(order, unique(d$b[!is.na(d$b)])), NA)

@@ -15,13 +15,24 @@ hgch_area_Oca <- function(data,
                           caption = NULL,
                           horLabel = NULL,
                           verLabel = NULL,
-                          yLine = NULL,
-                          yLineLabel = NULL,
-                          dropNa = FALSE,
-                          order = NULL,
-                          percentage = FALSE,
-                          theme = NULL,
-                          export = FALSE, ...) {
+                          horLine = NULL,
+                          horLineLabel = NULL,
+                          verLine = NULL,
+                          verLineLabel = NULL,
+                          format =
+  #                         title = NULL,
+  #                         subtitle = NULL,
+  #                         caption = NULL,
+  #                         horLabel = NULL,
+  #                         verLabel = NULL,
+  #                         yLine = NULL,
+  #                         yLineLabel = NULL,
+  #                         dropNa = FALSE,
+  #                         order = NULL,
+  #                         percentage = FALSE,
+  #                         theme = NULL,
+  #                         export = FALSE, ...
+  ) {
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
