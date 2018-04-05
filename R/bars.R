@@ -139,9 +139,7 @@ hgch_bar_CatNum <- function(data,
                             export = FALSE, ...) {
   f <- fringe(data)
   nms <- getClabels(f)
-  d <- f$dlibrary(foreign)
-  library(tidyverse)
-  library(haven)
+  d <- f$d
 
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
@@ -447,11 +445,11 @@ hgch_bar_grouped_CatCat <- function(data,
 #' @param data A data.frame
 #' @return Highcharts visualization
 #' @section ctypes:
-#' Cat-Oca
+#' Cat-Cat
 #' @examples
-#' hgch_bar_stacked_CatOca(sampleData("Cat-Cat", nrow = 10))
-#' @export hgch_bar_stacked_CatOca
-hgch_bar_stacked_CatOca <-  function(data,
+#' hgch_bar_stacked_CatCat(sampleData("Cat-Cat", nrow = 10))
+#' @export hgch_bar_stacked_CatCat
+hgch_bar_stacked_CatCat <-  function(data,
                                      title = NULL,
                                      subtitle = NULL,
                                      caption = NULL,
@@ -540,11 +538,11 @@ hgch_bar_stacked_CatOca <-  function(data,
 #' @param data A data.frame
 #' @return Highcharts visualization
 #' @section ctypes:
-#' Cat-Oca
+#' Cat-Cat
 #' @examples
-#' hgch_bar_stacked_100_CatOca(sampleData("Cat-Cat", nrow = 10))
-#' @export hgch_bar_stacked_100_CatOca
-hgch_bar_stacked_100_CatOca <-  function(data,
+#' hgch_bar_stacked_100_CatCat(sampleData("Cat-Cat", nrow = 10))
+#' @export hgch_bar_stacked_100_CatCat
+hgch_bar_stacked_100_CatCat <-  function(data,
                                          title = NULL,
                                          subtitle = NULL,
                                          caption = NULL,
@@ -634,11 +632,11 @@ hgch_bar_stacked_100_CatOca <-  function(data,
 #' @param data A data.frame
 #' @return Highcharts visualization
 #' @section ctypes:
-#' Cat-Oca-Num
+#' Cat-Cat-Num
 #' @examples
-#' hgch_bar_grouped_CatOcaNum(sampleData("Cat-Cat-Num", nrow = 10))
-#' @export hgch_bar_grouped_CatOcaNum
-hgch_bar_grouped_CatOcaNum <- function(data,
+#' hgch_bar_grouped_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
+#' @export hgch_bar_grouped_CatCatNum
+hgch_bar_grouped_CatCatNum <- function(data,
                                        title = NULL,
                                        subtitle = NULL,
                                        caption = NULL,
@@ -742,7 +740,7 @@ hgch_bar_grouped_CatOcaNum <- function(data,
 #' @examples
 #' hgch_bar_grouped_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
 #' @export hgch_bar_grouped_CatYeaNum
-hgch_bar_grouped_CatYeaNum <- hgch_bar_grouped_CatOcaNum
+hgch_bar_grouped_CatYeaNum <- hgch_bar_grouped_CatCatNum
 
 
 #' Grouped bar (categories, dates, numbers)
@@ -756,7 +754,7 @@ hgch_bar_grouped_CatYeaNum <- hgch_bar_grouped_CatOcaNum
 #' @examples
 #' hgch_bar_grouped_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
 #' @export hgch_bar_grouped_CatDatNum
-hgch_bar_grouped_CatDatNum <- hgch_bar_grouped_CatOcaNum
+hgch_bar_grouped_CatDatNum <- hgch_bar_grouped_CatCatNum
 
 
 #' Stacked bar (categories, ordered categories, numbers)
@@ -766,11 +764,11 @@ hgch_bar_grouped_CatDatNum <- hgch_bar_grouped_CatOcaNum
 #' @param data A data.frame
 #' @return Highcharts visualization
 #' @section ctypes:
-#' Cat-Oca-Num
+#' Cat-Cat-Num
 #' @examples
-#' hgch_bar_stacked_CatOcaNum(sampleData("Cat-Cat-Num", nrow = 10))
-#' @export hgch_bar_stacked_CatOcaNum
-hgch_bar_stacked_CatOcaNum <- function(data,
+#' hgch_bar_stacked_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
+#' @export hgch_bar_stacked_CatCatNum
+hgch_bar_stacked_CatCatNum <- function(data,
                                        title = NULL,
                                        subtitle = NULL,
                                        caption = NULL,
@@ -876,7 +874,7 @@ hgch_bar_stacked_CatOcaNum <- function(data,
 #' @examples
 #' hgch_bar_stacked_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
 #' @export hgch_bar_stacked_CatYeaNum
-hgch_bar_stacked_CatYeaNum <- hgch_bar_stacked_CatOcaNum
+hgch_bar_stacked_CatYeaNum <- hgch_bar_stacked_CatCatNum
 
 
 #' Stacked bar (categories, dates, numbers)
@@ -890,7 +888,7 @@ hgch_bar_stacked_CatYeaNum <- hgch_bar_stacked_CatOcaNum
 #' @examples
 #' hgch_bar_stacked_CatYeaNum(sampleData("Cat-Dat-Num", nrow = 10))
 #' @export hgch_bar_stacked_CatDatNum
-hgch_bar_stacked_CatDatNum <- hgch_bar_stacked_CatOcaNum
+hgch_bar_stacked_CatDatNum <- hgch_bar_stacked_CatCatNum
 
 
 #' 100% stacked bar (categories, ordered categories, numbers)
@@ -900,11 +898,11 @@ hgch_bar_stacked_CatDatNum <- hgch_bar_stacked_CatOcaNum
 #' @param data A data.frame
 #' @return Highcharts visualization
 #' @section ctypes:
-#' Cat-Oca-Num
+#' Cat-Cat-Num
 #' @examples
-#' hgch_bar_stacked_100_CatOcaNum(sampleData("Cat-Cat-Num", nrow = 10))
-#' @export hgch_bar_stacked_100_CatOcaNum
-hgch_bar_stacked_100_CatOcaNum <- function(data,
+#' hgch_bar_stacked_100_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
+#' @export hgch_bar_stacked_100_CatCatNum
+hgch_bar_stacked_100_CatCatNum <- function(data,
                                            title = NULL,
                                            subtitle = NULL,
                                            caption = NULL,
@@ -994,7 +992,7 @@ hgch_bar_stacked_100_CatOcaNum <- function(data,
 #' @examples
 #' hgch_bar_stacked_100_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
 #' @export hgch_bar_stacked_100_CatYeaNum
-hgch_bar_stacked_100_CatYeaNum <- hgch_bar_stacked_100_CatOcaNum
+hgch_bar_stacked_100_CatYeaNum <- hgch_bar_stacked_100_CatCatNum
 
 
 #' 100% stacked bar (categories, dates, numbers)
@@ -1008,7 +1006,7 @@ hgch_bar_stacked_100_CatYeaNum <- hgch_bar_stacked_100_CatOcaNum
 #' @examples
 #' hgch_bar_stacked_100_CatYeaNum(sampleData("Cat-Dat-Num", nrow = 10))
 #' @export hgch_bar_stacked_100_CatDatNum
-hgch_bar_stacked_100_CatDatNum <- hgch_bar_stacked_100_CatOcaNum
+hgch_bar_stacked_100_CatDatNum <- hgch_bar_stacked_100_CatCatNum
 
 
 #' Bar (ordered category, n numbers)
@@ -1018,11 +1016,11 @@ hgch_bar_stacked_100_CatDatNum <- hgch_bar_stacked_100_CatOcaNum
 #' @param data A data.frame
 #' @return Highcharts visualization
 #' @section ctypes:
-#' Oca-NumP
+#' Cat-NumP
 #' @examples
-#' hgch_bar_grouped_OcaNumP(sampleData("Oca-NumP", nrow = 10))
-#' @export hgch_bar_grouped_OcaNumP
-hgch_bar_grouped_OcaNumP <- function(data,
+#' hgch_bar_grouped_CatNumP(sampleData("Cat-NumP", nrow = 10))
+#' @export hgch_bar_grouped_CatNumP
+hgch_bar_grouped_CatNumP <- function(data,
                                      title = NULL,
                                      subtitle = NULL,
                                      caption = NULL,
@@ -1053,7 +1051,7 @@ hgch_bar_grouped_OcaNumP <- function(data,
   d <- dplyr::mutate(d, variable = fct_recode_df(d, "variable", codes))
   names(d)[2] <- nms[1]
 
-  hc <- hgch_bar_grouped_CatOcaNum(data = d,
+  hc <- hgch_bar_grouped_CatCatNum(data = d,
                                    title = title ,
                                    subtitle = subtitle,
                                    caption = caption,
@@ -1085,7 +1083,7 @@ hgch_bar_grouped_OcaNumP <- function(data,
 #' @examples
 #' hgch_bar_grouped_YeaNumP(sampleData("Yea-NumP", nrow = 10))
 #' @export hgch_bar_grouped_YeaNumP
-hgch_bar_grouped_YeaNumP <- hgch_bar_grouped_OcaNumP
+hgch_bar_grouped_YeaNumP <- hgch_bar_grouped_CatNumP
 
 
 #' Bar (dates, n numbers)
@@ -1099,7 +1097,7 @@ hgch_bar_grouped_YeaNumP <- hgch_bar_grouped_OcaNumP
 #' @examples
 #' hgch_bar_grouped_DatNumP(sampleData("Dat-NumP", nrow = 10))
 #' @export hgch_bar_grouped_DatNumP
-hgch_bar_grouped_DatNumP <- hgch_bar_grouped_OcaNumP
+hgch_bar_grouped_DatNumP <- hgch_bar_grouped_CatNumP
 
 
 
