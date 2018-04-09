@@ -108,11 +108,12 @@ confirmCtypes <- function(data, ctypes) {
 }
 
 # default tooltip for highcharts
-tooltipHc <- function(data, names, tooltip, agg, colAgg, percentage) {
+#'@export
+tooltipHc <- function(data, names, tooltip, agg, colAgg, percentage, stacked100 = FALSE) {
   if (is.null(unlist(tooltip))) {
-    n0 <- length(names) - 1
-    if (ncol(data) != length(names)) {
-      n0 <- length(names)
+    n0 <- length(names)
+    if (sum(names(data) %in% letters) == length(names)) {
+      n0 <- length(names) - 1
     }
     pf <- map_chr(1:n0, ~paste0(names[.x], ": <b>{point.", letters[.x], "}</b>"))
     pf <- paste(pf, collapse = "<br>")
@@ -121,7 +122,8 @@ tooltipHc <- function(data, names, tooltip, agg, colAgg, percentage) {
                   "<br>",
                   paste0(agg,
                          ": <b>{point.",
-                         ifelse(percentage, "percent}%</b>", paste0(colAgg, "}</b>"))))
+                         ifelse(stacked100, "percentage:.3f}%", paste0(colAgg, "} ")),
+                         ifelse(percentage, "({point.percent:.3f}%)</b>", "</b>")))
     }
     tooltip <- list("headerFormat" = "",
                     "pointFormat" = pf,
