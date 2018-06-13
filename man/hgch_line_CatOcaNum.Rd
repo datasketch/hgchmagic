@@ -24,5 +24,5 @@ Cat-Oca-Num
 }
 
 \examples{
-hgch_line_CatOcaNum(sampleData("Cat-Cat-Num", nrow = 10))
+hgch_line_CatOcaNum(sampleData("Cat-Oca-Num", nrow = 10))
 }

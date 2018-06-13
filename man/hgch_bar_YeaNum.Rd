@@ -5,9 +5,12 @@
 \title{Bar (years, numbers)}
 \usage{
 hgch_bar_YeaNum(data, title = NULL, subtitle = NULL, caption = NULL,
-  horLabel = NULL, verLabel = NULL, yLine = NULL, yLineLabel = NULL,
-  agg = "sum", dropNa = FALSE, order = NULL, orientation = "ver",
+  horLabel = NULL, verLabel = NULL, horLine = NULL, horLineLabel = NULL,
+  verLine = NULL, verLineLabel = NULL, agg = "sum",
+  colors = c("#009EE3", "#F9B233"), dropNa = FALSE, format = "{value}",
+  highlightValue = NULL, order = NULL, orientation = "ver",
   percentage = FALSE, sort = "no", sliceN = NULL, theme = NULL,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
   export = FALSE, ...)
 }
 \arguments{
