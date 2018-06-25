@@ -144,19 +144,11 @@ tmp_theme <- hc_theme(
 
 
 
-data <- sampleData("Cat", nrow = 50)
-hgch_bar_ver_Cat(data)
-hgch_bar_ver_Cat(data, theme = tmp_theme)
-hgch_bar_hor_Cat(data)
-hgch_bar_hor_top_Cat(data)
-hgch_bar_ver_top_Cat(data)
+data <- sampleData("Cat", nrow = 500000)
+hgch_bar_Cat(data, percentage = TRUE)
 
 data <- sampleData("Cat-Num", nrow = 20)
-hgch_bar_ver_CatNum(data)
-hgch_bar_ver_top_CatNum(data, export = TRUE)
-hgch_bar_hor_CatNum(data)
-hgch_bar_hor_top_CatNum(data)
-hgch_bar_hor_top_CatNum(data, export = TRUE)
+hgch_bar_CatNum(data, marks = c(",", "."), nDigits = 0, percentage = TRUE)
 
 data <- sampleData("Dat-Num", nrow = 100)
 hgch_bar_ver_DatNum(data)

@@ -24,5 +24,5 @@ Cat-Num-Num
 }
 
 \examples{
-hgch_scatter_coloured_CatNumNumNum(sampleData("Cat-Num-Num", nrow = 10))
+hgch_scatter_coloured_CatNumNumNum(sampleData("Cat-Num-Num-Num", nrow = 10))
 }

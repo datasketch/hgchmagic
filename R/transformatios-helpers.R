@@ -48,11 +48,11 @@ orderCategory <- function(data, col, order) {
 
 # converts a numeric column into the equivalent percentage column
 #'@export
-percentColumn <- function(data, col, percentage = TRUE) {
+percentColumn <- function(data, col, percentage = TRUE, nDt) {
   if (percentage)
     data$percent <- round((data[[col]] * 100) / sum(data[[col]], na.rm = TRUE),
                           #esto puede ser variable dep el format...
-                          digits = 3)
+                          digits = nDt)
   data
 }
 
@@ -109,7 +109,7 @@ confirmCtypes <- function(data, ctypes) {
 
 # default tooltip for highcharts
 #'@export
-tooltipHc <- function(data, names, tooltip, agg, colAgg, percentage, stacked100 = FALSE) {
+tooltipHc <- function(data, names, tooltip, agg, colAgg, percentage,  nDt, stacked100 = FALSE) {
   if (is.null(unlist(tooltip))) {
     n0 <- length(names)
     if (sum(names(data) %in% letters) == length(names)) {
@@ -122,8 +122,8 @@ tooltipHc <- function(data, names, tooltip, agg, colAgg, percentage, stacked100 
                   "<br>",
                   paste0(agg,
                          ": <b>{point.",
-                         ifelse(stacked100, "percentage:.3f}%", paste0(colAgg, "} ")),
-                         ifelse(percentage, "({point.percent:.3f}%)</b>", "</b>")))
+                         ifelse(stacked100, paste0("percentage:.", nDt,"f}%"), paste0(colAgg, "} ")),
+                         ifelse(percentage, paste0("({point.percent:.",nDt,"f}%)</b>"), "</b>")))
     }
     tooltip <- list("headerFormat" = "",
                     "pointFormat" = pf,
@@ -132,4 +132,25 @@ tooltipHc <- function(data, names, tooltip, agg, colAgg, percentage, stacked100 
   tooltip
 }
 
+
+# default thounsands separate and decimap Points highcharts
+#'@export
+sepThous <- function(marksT) {
+    lang <- getOption("highcharter.lang")
+    lang$thousandsSep <- marksT[1]
+    lang$decimalPoint <- marksT[2]
+    lang$numericSymbols <- highcharter::JS("null")
+  lang
+}
+
+#' @name count_pl
+#' @export
+count_pl <- function(x) {
+  if (is.na(x)) {return(0)}
+  if ((x %% 1) != 0) {
+    nchar(strsplit(sub('0+$', '', as.character(x)), ".", fixed=TRUE)[[1]][[2]])
+  } else {
+    return(0)
+  }
+}
 

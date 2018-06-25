@@ -2,12 +2,15 @@
 % Please edit documentation in R/bars.R
 \name{hgch_bar_stacked_100_CatCat}
 \alias{hgch_bar_stacked_100_CatCat}
-\title{100% stacked bar (categories, ordered categories)}
+\title{100% stacked bar by first category (categories, ordered categories)}
 \usage{
 hgch_bar_stacked_100_CatCat(data, title = NULL, subtitle = NULL,
-  caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
-  yLineLabel = NULL, dropNa = FALSE, order = NULL, orientation = "ver",
-  sort = "no", sliceN = NULL, theme = NULL, export = FALSE, ...)
+  caption = NULL, horLabel = NULL, verLabel = NULL, horLine = NULL,
+  horLineLabel = NULL, verLine = NULL, verLineLabel = NULL,
+  dropNa = FALSE, format = "{value}", legendLayout = "horizontal",
+  order = NULL, orientation = "ver", sliceN = NULL, theme = NULL,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
+  export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}
@@ -20,7 +23,7 @@ Compare 100% stacked categories
 }
 \section{ctypes}{
 
-Cat-Cat
+Cat-Cat, Cat-Dat, Cat-Yea, Yea-Cat, Yea-Dat, Yea-Yea, Dat-Cat, Dat-Yea, Dat-Dat
 }
 
 \examples{

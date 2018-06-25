@@ -5,9 +5,12 @@
 \title{100% stacked bar (categories, dates, numbers)}
 \usage{
 hgch_bar_stacked_100_CatDatNum(data, title = NULL, subtitle = NULL,
-  caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
-  yLineLabel = NULL, agg = "sum", dropNa = FALSE, order = NULL,
-  orientation = "ver", sliceN = NULL, theme = NULL, export = FALSE, ...)
+  caption = NULL, horLabel = NULL, verLabel = NULL, horLine = NULL,
+  horLineLabel = NULL, verLine = NULL, verLineLabel = NULL, agg = "sum",
+  dropNa = FALSE, format = "{value}", legendLayout = "horizontal",
+  order = NULL, orientation = "ver", sliceN = NULL, theme = NULL,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
+  export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

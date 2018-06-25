@@ -19,6 +19,8 @@ hgch_bar_Cat <- function(data,
                          horLineLabel = NULL,
                          verLine = NULL,
                          verLineLabel = NULL,
+                         marks = c(" ", "."),
+                         nDigits = 2,
                          colors = c("#009EE3", "#F9B233"),
                          dropNa = FALSE,
                          format = "{value}",
@@ -33,6 +35,11 @@ hgch_bar_Cat <- function(data,
                                         "pointFormat" = NULL,
                                         "shared" = NULL),
                          export = FALSE, ...) {
+
+
+
+  options(highcharter.lang = sepThous(marks))
+
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
@@ -64,12 +71,21 @@ hgch_bar_Cat <- function(data,
     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA))) %>%
     dplyr::group_by(a) %>%
     dplyr::summarise(b = n())
-
-  d <- percentColumn(d, "b", percentage)
+  d$b <- round(d$b, digits = nDigits)
+  d <- percentColumn(d, "b", percentage, nDt = nDigits)
   d <- orderCategory(d, "a", order)
   d <- sortSlice(d, "b", sort, sliceN)
   d <- highlightValueData(d, "a", highlightValue, colors[1], colors[2])
-  tooltip <- tooltipHc(d, nms, tooltip, paste("count", nms[1]), "b", percentage)
+
+
+
+  if (percentage) {
+    d <- plyr::rename(d, c('b' = 'conteo'))
+    d$b <- d$percent
+    tooltip <- tooltipHc(d, nms, tooltip, paste("count", nms[1]), "conteo", percentage,  nDt = nDigits)
+  } else {
+    tooltip <- tooltipHc(d, nms, tooltip, paste("count", nms[1]), "b", percentage,  nDt = nDigits)
+  }
 
   hc <- hchart(d, type = ifelse(orientation == "hor", "bar", "column"), hcaes(x = a, y = b, color = color)) %>%
     hc_tooltip(headerFormat = tooltip$headerFormat,
@@ -89,11 +105,16 @@ hgch_bar_Cat <- function(data,
                                    color = 'black',
                                    dashStyle = 'shortdash',
                                    width = 2,
-                                   label = list(text = lineLabelsXY[2]))),
-             labels = list(format = format)) %>%
-             #labels = list(format = ifelse(percentage, "{value}%", "{value}"))) %>%
-    #hc_legend(layout = legendLayout) %>%
-    hc_add_theme(custom_theme(custom = theme)) %>%
+                                   label = list(text = lineLabelsXY[2]))))
+  if (percentage) {
+    hc <- hc %>% hc_yAxis(
+      labels = list(
+        formatter = JS('function() {
+                      return this.value+"%";}')
+      )
+    )
+  }
+  hc <- hc %>%  hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption)
   if (export) hc <- hc %>%
     hc_exporting(enabled = TRUE)
@@ -123,6 +144,8 @@ hgch_bar_CatNum <- function(data,
                             verLine = NULL,
                             verLineLabel = NULL,
                             agg = "sum",
+                            marks = c("", "."),
+                            nDigits = 0,
                             colors = c("#009EE3", "#F9B233"),
                             dropNa = FALSE,
                             format = "{value}",
@@ -137,6 +160,9 @@ hgch_bar_CatNum <- function(data,
                                            "pointFormat" = NULL,
                                            "shared" = NULL),
                             export = FALSE, ...) {
+
+  #options(highcharter.lang = sepThous(marks))
+
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
@@ -170,11 +196,13 @@ hgch_bar_CatNum <- function(data,
     dplyr::group_by(a) %>%
     dplyr::summarise(b = agg(agg, b))
 
-  d <- percentColumn(d, "b", percentage)
+  d <- percentColumn(d, "b", percentage, nDt = nDigits)
   d <- orderCategory(d, "a", order)
   d <- sortSlice(d, "b", sort, sliceN)
   d <- highlightValueData(d, "a", highlightValue, colors[1], colors[2])
-  tooltip <- tooltipHc(d, nms, tooltip, paste(agg, nms[2]), "b", percentage)
+  tooltip <- tooltipHc(d, nms, tooltip, paste(agg, nms[2]), "b", percentage, nDt = nDigits)
+
+  options(highcharter.lang = sepThous(marks))
 
   hc <- hchart(d, type = ifelse(orientation == "hor", "bar", "column"), hcaes(x = a, y = b, color = color)) %>%
     hc_tooltip(headerFormat = tooltip$headerFormat,
@@ -183,7 +211,7 @@ hgch_bar_CatNum <- function(data,
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(title = list(text = labelsXY[1]),
-             allowDecimals = FALSE,
+             #allowDecimals = FALSE,
              plotLines = list(list(value = lineXY[2],
                                    color = 'black',
                                    dashStyle = 'shortdash',
@@ -195,7 +223,12 @@ hgch_bar_CatNum <- function(data,
                                    dashStyle = 'shortdash',
                                    width = 2,
                                    label = list(text = lineLabelsXY[2]))),
-             labels = list(format = format)) %>%
+             labels = list(
+               format= '{value}',
+               formatter= JS(paste0("function () {
+                 return Highcharts.numberFormat(this.value,",nDigits,",'", marks[2],"','", marks[1],"');
+               }")
+             ))) %>%
     #hc_legend(layout = legendLayout) %>%
     hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption)
