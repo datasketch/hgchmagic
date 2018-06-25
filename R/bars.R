@@ -898,7 +898,7 @@ hgch_bar_stacked_100_CatCatNum <- function(data,
                                                           "pointFormat" = NULL,
                                                           "shared" = NULL),
                                            export = FALSE, ...) {
-  data <- sampleData('Cat-Cat-Num')
+
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
