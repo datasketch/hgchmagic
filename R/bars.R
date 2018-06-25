@@ -886,6 +886,7 @@ hgch_bar_stacked_100_CatCatNum <- function(data,
                                            verLine = NULL,
                                            verLineLabel = NULL,
                                            agg = "sum",
+                                           nDigits = 2,
                                            dropNa = FALSE,
                                            format = "{value}",
                                            legendLayout = "horizontal",
@@ -897,6 +898,7 @@ hgch_bar_stacked_100_CatCatNum <- function(data,
                                                           "pointFormat" = NULL,
                                                           "shared" = NULL),
                                            export = FALSE, ...) {
+  data <- sampleData('Cat-Cat-Num')
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
@@ -939,7 +941,7 @@ hgch_bar_stacked_100_CatCatNum <- function(data,
 
   d <- orderCategory(d, "a", order)
   d <- sortSlice(d, "c", "no", sliceN) # FALTA
-  tooltip <- tooltipHc(d, nms, tooltip, paste("count", nms[2]), "c", FALSE, stacked100 = TRUE)
+  tooltip <- tooltipHc(d, nms, tooltip, paste("count", nms[2]), "c", FALSE, stacked100 = TRUE, nDt = nDigits)
 
   hc <- hchart(d, type = ifelse(orientation == "hor", "bar", "column"), hcaes(x = a, y = c, group = b)) %>%
     hc_plotOptions(bar = list(stacking = "percent"), column = list(stacking = "percent")) %>%
