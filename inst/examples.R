@@ -148,7 +148,7 @@ data <- sampleData("Cat", nrow = 500000)
 hgch_bar_Cat(data, percentage = TRUE)
 
 data <- sampleData("Cat-Num", nrow = 20)
-hgch_bar_CatNum(data, marks = c(",", "."), nDigits = 0, percentage = TRUE)
+hgch_bar_CatNum(data, marks = c(",", "."))
 
 data <- sampleData("Dat-Num", nrow = 100)
 hgch_bar_ver_DatNum(data)

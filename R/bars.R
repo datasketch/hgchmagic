@@ -133,35 +133,32 @@ hgch_bar_Cat <- function(data,
 #' @examples
 #' hgch_bar_CatNum(sampleData("Cat-Num", nrow = 10))
 #' @export hgch_bar_CatNum
-hgch_bar_CatNum <- function(data,
-                            title = NULL,
-                            subtitle = NULL,
-                            caption = NULL,
-                            horLabel = NULL,
-                            verLabel = NULL,
-                            horLine = NULL,
-                            horLineLabel = NULL,
-                            verLine = NULL,
-                            verLineLabel = NULL,
-                            agg = "sum",
-                            marks = c("", "."),
-                            nDigits = 0,
-                            colors = c("#009EE3", "#F9B233"),
-                            dropNa = FALSE,
-                            format = "{value}",
-                            highlightValue = NULL,
-                            order = NULL,
-                            orientation = "ver",
-                            percentage = FALSE,
-                            sort = "no",
-                            sliceN = NULL,
-                            theme = NULL,
-                            tooltip = list("headerFormat" = NULL,
-                                           "pointFormat" = NULL,
-                                           "shared" = NULL),
-                            export = FALSE, ...) {
+hgch_bar_CatNum <-  function(data,
+                             title = NULL,
+                             subtitle = NULL,
+                             caption = NULL,
+                             horLabel = NULL,
+                             verLabel = NULL,
+                             horLine = NULL,
+                             horLineLabel = NULL,
+                             verLine = NULL,
+                             verLineLabel = NULL,
+                             agg = "sum",
+                             orientation = "ver",
+                             marks = c("", "."),
+                             nDigits = NULL,
+                             dropNa = FALSE,
+                             colorHighlightValue = '#F9B233',
+                             percentage = FALSE,
+                             format = c('', ''),
+                             highlightValue = NULL,
+                             order = NULL,
+                             sort = "no",
+                             sliceN = NULL,
+                             tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                             export = FALSE,
+                             thema = tma()) {
 
-  #options(highcharter.lang = sepThous(marks))
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -170,6 +167,7 @@ hgch_bar_CatNum <- function(data,
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
+
   labelsXY <- orientationXY(orientation,
                             x = nms[1],
                             y = ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste(agg, nms[2])),
@@ -186,6 +184,7 @@ hgch_bar_CatNum <- function(data,
                                 hor = horLineLabel,
                                 ver = verLineLabel,
                                 line = TRUE)
+
   if (dropNa)
     d <- d %>%
     tidyr::drop_na()
@@ -196,47 +195,110 @@ hgch_bar_CatNum <- function(data,
     dplyr::group_by(a) %>%
     dplyr::summarise(b = agg(agg, b))
 
-  d <- percentColumn(d, "b", percentage, nDt = nDigits)
+  if (is.null(nDigits)) {
+    nDig <- 0
+  } else {
+    nDig <- nDigits
+  }
+
+  if (percentage) {
+    d$b <- (d[['b']] * 100) / sum(d[['b']], na.rm = TRUE)
+  }
+
+  d$b <- round(d$b, nDig)
   d <- orderCategory(d, "a", order)
   d <- sortSlice(d, "b", sort, sliceN)
-  d <- highlightValueData(d, "a", highlightValue, colors[1], colors[2])
-  tooltip <- tooltipHc(d, nms, tooltip, paste(agg, nms[2]), "b", percentage, nDt = nDigits)
 
-  options(highcharter.lang = sepThous(marks))
 
-  hc <- hchart(d, type = ifelse(orientation == "hor", "bar", "column"), hcaes(x = a, y = b, color = color)) %>%
-    hc_tooltip(headerFormat = tooltip$headerFormat,
-               pointFormat = tooltip$pointFormat,
-               shared = tooltip$shared) %>%
+  d <- d %>% plyr::rename(c('b' = 'y'))
+  d$color <- NA
+
+  if (!is.null(highlightValue)) {
+    w <- which(d$a %in% highlightValue)
+    d$color[w] <- colorHighlightValue
+  }
+
+  data <- list()
+  bla <- map(1:nrow(d), function(z){
+    data$data[[z]] <<- list("name" = d$a[z],
+                            "y" = d$y[z],
+                            "color" = as.character(d$color[z]))
+  })
+
+  formatLabAxis <- paste0('{value:', marks[1], marks[2], 'f}')
+  if (!is.null(nDigits)) {
+    formatLabAxis <- paste0('{value:', marks[1], marks[2], nDigits, 'f}')
+  }
+
+
+  if (is.null(format)) {
+    format[1] = ""
+    format[2] = ""
+  }
+
+  aggFormAxis <- 'function() {return this.value+"";}'
+
+
+  if (percentage) {
+    aggFormAxis <- 'function() {return this.value+"%";}'
+    format[2] <- "%"
+  }
+
+
+
+
+  aggFormAxis <- paste0('function() {return "', format[1],'" + this.value+"', format[2],'";}')
+
+  if (is.null(tooltip$pointFormat)) {
+    tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(agg, ' ' ,nms[2], ': '), format[1],'{point.y}', format[2])
+  }
+  if (is.null(tooltip$headerFormat)) {
+    tooltip$headerFormat <- ""
+  }
+
+  global_options(marks[1])
+
+  hc <- highchart() %>%
+    hc_chart(type = ifelse(orientation == "hor", "bar", "column")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_xAxis(title = list(text = labelsXY[1]),
-             #allowDecimals = FALSE,
-             plotLines = list(list(value = lineXY[2],
-                                   color = 'black',
-                                   dashStyle = 'shortdash',
-                                   width = 2,
-                                   label = list(text = lineLabelsXY[1])))) %>%
-    hc_yAxis(title = list(text = labelsXY[2]),
-             plotLines = list(list(value = lineXY[1],
-                                   color = 'black',
-                                   dashStyle = 'shortdash',
-                                   width = 2,
-                                   label = list(text = lineLabelsXY[2]))),
-             labels = list(
-               format= '{value}',
-               formatter= JS(paste0("function () {
-                 return Highcharts.numberFormat(this.value,",nDigits,",'", marks[2],"','", marks[1],"');
-               }")
-             ))) %>%
-    #hc_legend(layout = legendLayout) %>%
-    hc_add_theme(custom_theme(custom = theme)) %>%
-    hc_credits(enabled = TRUE, text = caption)
+    hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
+    hc_xAxis(
+      title =  list(text = labelsXY[1]),
+      plotLines = list(
+        list(value = lineXY[2],
+             color = 'black',
+             dashStyle = 'shortdash',
+             width = 2,
+             label = list(text = lineLabelsXY[1]))),
+      type= 'category'
+    ) %>%
+    hc_yAxis(
+      title = list (
+        text = labelsXY[2]),
+      plotLines = list(
+        list(value = lineXY[1],
+             color = 'black',
+             dashStyle = 'shortdash',
+             width = 2,
+             zIndex = 5,
+             label = list(text = lineLabelsXY[2]))),
+      labels = list (
+        format = formatLabAxis,
+        formatter = JS(aggFormAxis)
+      )
+    ) %>%
+    hc_series(
+      data
+    ) %>%
+    hc_add_theme(custom_theme(custom = thema)) %>%
+    hc_credits(enabled = TRUE, text = caption) %>%
+    hc_legend(enabled = FALSE)
   if (export) hc <- hc %>%
     hc_exporting(enabled = TRUE)
   hc
-}
 
+}
 
 #' Bar (years, numbers)
 #'
