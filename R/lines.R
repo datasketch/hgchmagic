@@ -397,7 +397,10 @@ hgch_line_CatYeaNum <- function(data,
 
   hc <- highchart() %>%
     hc_chart(type = 'line') %>%
+    hc_title(text = title) %>%
+    hc_subtitle(text = subtitle) %>%
     hc_xAxis(
+      title = list(text = verLabel),
       categories = map(as.character(sort(unique(d$b))), function(z) z),
       type = 'category',
       plotBands = list(
@@ -413,6 +416,7 @@ hgch_line_CatYeaNum <- function(data,
       ))
     ) %>%
     hc_yAxis(
+      title = list(text = horLabel),
       labels = list(
         format = '{value}',#formatLabAxis,
         formatter = JS(aggFormAxis)
