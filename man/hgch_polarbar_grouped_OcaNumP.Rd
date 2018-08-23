@@ -6,7 +6,8 @@
 \usage{
 hgch_polarbar_grouped_OcaNumP(data, title = NULL, subtitle = NULL,
   caption = NULL, yLine = NULL, dropNa = FALSE, agg = "sum",
-  order = NULL, percentage = FALSE, theme = NULL, export = FALSE, ...)
+  order = NULL, percentage = FALSE, theme = NULL, export = FALSE,
+  ...)
 }
 \arguments{
 \item{data}{A data.frame}

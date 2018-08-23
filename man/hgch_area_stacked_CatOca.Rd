@@ -6,8 +6,8 @@
 \usage{
 hgch_area_stacked_CatOca(data, title = NULL, subtitle = NULL,
   caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
-  yLineLabel = NULL, dropNa = FALSE, order = NULL, percentage = FALSE,
-  theme = NULL, export = FALSE, ...)
+  yLineLabel = NULL, dropNa = FALSE, order = NULL,
+  percentage = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

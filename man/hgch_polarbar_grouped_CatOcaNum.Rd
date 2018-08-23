@@ -6,7 +6,8 @@
 \usage{
 hgch_polarbar_grouped_CatOcaNum(data, title = NULL, subtitle = NULL,
   caption = NULL, yLine = NULL, agg = "sum", dropNa = FALSE,
-  order = NULL, percentage = FALSE, theme = NULL, export = FALSE, ...)
+  order = NULL, percentage = FALSE, theme = NULL, export = FALSE,
+  ...)
 }
 \arguments{
 \item{data}{A data.frame}

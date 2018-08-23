@@ -7,8 +7,8 @@
 hgch_bar_grouped_YeaNumP(data, title = NULL, subtitle = NULL,
   caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
   yLineLabel = NULL, agg = "sum", dropNa = FALSE, order = NULL,
-  orientation = "ver", percentage = FALSE, sort = "no", sliceN = NULL,
-  theme = NULL, export = FALSE, ...)
+  orientation = "ver", percentage = FALSE, sort = "no",
+  sliceN = NULL, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

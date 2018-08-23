@@ -4,10 +4,10 @@
 \alias{hgch_scatter_NumNum}
 \title{Scatter (numbers, numbers)}
 \usage{
-hgch_scatter_NumNum(data, title = NULL, subtitle = NULL, caption = NULL,
-  horLabel = NULL, verLabel = NULL, horLine = NULL, horLineLabel = NULL,
-  verLine = NULL, verLineLabel = NULL, theme = NULL, export = FALSE,
-  ...)
+hgch_scatter_NumNum(data, title = NULL, subtitle = NULL,
+  caption = NULL, horLabel = NULL, verLabel = NULL, horLine = NULL,
+  horLineLabel = NULL, verLine = NULL, verLineLabel = NULL,
+  theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

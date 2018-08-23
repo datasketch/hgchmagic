@@ -4,9 +4,10 @@
 \alias{hgch_donut_CatNum}
 \title{Donut (categories, numbers)}
 \usage{
-hgch_donut_CatNum(data, title = NULL, subtitle = NULL, caption = NULL,
-  yLine = NULL, dropNa = FALSE, agg = "sum", order = NULL,
-  sort = "no", sliceN = NULL, theme = NULL, export = FALSE, ...)
+hgch_donut_CatNum(data, title = NULL, subtitle = NULL,
+  caption = NULL, yLine = NULL, dropNa = FALSE, agg = "sum",
+  order = NULL, sort = "no", sliceN = NULL, theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

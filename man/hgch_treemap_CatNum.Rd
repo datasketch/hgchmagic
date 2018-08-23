@@ -4,9 +4,10 @@
 \alias{hgch_treemap_CatNum}
 \title{Treemap density by numeric variable}
 \usage{
-hgch_treemap_CatNum(data, title = NULL, subtitle = NULL, caption = NULL,
-  minColor = "#E63917", maxColor = "#18941E", back_color = "white",
-  color_title = "black", reverse = TRUE, export = FALSE, ...)
+hgch_treemap_CatNum(data, title = NULL, subtitle = NULL,
+  caption = NULL, minColor = "#E63917", maxColor = "#18941E",
+  back_color = "white", color_title = "black", reverse = TRUE,
+  export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

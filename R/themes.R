@@ -127,6 +127,10 @@ tma <- function(background = 'transparent',
                 plotBorderColor = "#cccccc",
                 plotBorderWidth = 1,
                 showLabel = FALSE,
+                symbLine = TRUE,
+                lineWidth = 2,
+                negativeColor = FALSE,
+                linePointStart = 0,
                 labsData = list(colLabel = NULL, familyLabel = 'Ubuntu',sizeLabel = NULL,
                                 textDecoration = 'none', textShadow = 'none', textOutline = 'none'),
                 stylesY = list(gridLineWidth = 1, lineColor = '#ccd6eb', tickColor = '#ccd6eb', gridLineColor = '#e6e6e6',
@@ -191,6 +195,28 @@ tma <- function(background = 'transparent',
             textShadow = labsData$textShadow,
             textOutline = labsData$textOutline
           )
+        )
+      ),
+      line = list(
+        colorByPoint = diffColorsBar,
+        dataLabels = list (
+          enabled = showLabel,
+          style = list (
+            color = labsData$colLabel,
+            fontFamily = labsData$familyLabel,
+            fontSize = labsData$sizeLabel,
+            textDecoration= labsData$textDecoration,
+            textShadow = labsData$textShadow,
+            textOutline = labsData$textOutline
+          )
+        )
+      ),
+      series = list(
+        lineWidth = lineWidth,
+        negativeColor = negativeColor,
+        pointStart = linePointStart,
+        marker = list(
+          enabled = symbLine
         )
       )
     ),

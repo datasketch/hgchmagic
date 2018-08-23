@@ -4,9 +4,10 @@
 \alias{hgch_radar_OcaNumP}
 \title{Radar (ordered categories, n numbers)}
 \usage{
-hgch_radar_OcaNumP(data, title = NULL, subtitle = NULL, caption = NULL,
-  yLine = NULL, dropNa = FALSE, agg = "sum", order = NULL,
-  percentage = FALSE, theme = NULL, export = FALSE, ...)
+hgch_radar_OcaNumP(data, title = NULL, subtitle = NULL,
+  caption = NULL, yLine = NULL, dropNa = FALSE, agg = "sum",
+  order = NULL, percentage = FALSE, theme = NULL, export = FALSE,
+  ...)
 }
 \arguments{
 \item{data}{A data.frame}

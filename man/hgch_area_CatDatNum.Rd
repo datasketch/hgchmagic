@@ -4,10 +4,10 @@
 \alias{hgch_area_CatDatNum}
 \title{Vertical area (categories, dates, numbers)}
 \usage{
-hgch_area_CatDatNum(data, title = NULL, subtitle = NULL, caption = NULL,
-  horLabel = NULL, verLabel = NULL, yLine = NULL, yLineLabel = NULL,
-  agg = "sum", dropNa = FALSE, order = NULL, percentage = FALSE,
-  theme = NULL, export = FALSE, ...)
+hgch_area_CatDatNum(data, title = NULL, subtitle = NULL,
+  caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
+  yLineLabel = NULL, agg = "sum", dropNa = FALSE, order = NULL,
+  percentage = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

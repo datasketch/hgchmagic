@@ -5,9 +5,9 @@
 \title{Vertical area (ordered categories, numbers)}
 \usage{
 hgch_area_OcaNum(data, title = NULL, subtitle = NULL, caption = NULL,
-  horLabel = NULL, verLabel = NULL, yLine = NULL, yLineLabel = NULL,
-  agg = "sum", dropNa = FALSE, order = NULL, percentage = FALSE,
-  theme = NULL, export = FALSE, ...)
+  horLabel = NULL, verLabel = NULL, yLine = NULL,
+  yLineLabel = NULL, agg = "sum", dropNa = FALSE, order = NULL,
+  percentage = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

@@ -11,6 +11,8 @@ agg <- function(aggregation,...){
   f
 }
 
+
+
 # defines horLabel and verLabel depending orientation
 #'@export
 orientationXY <- function(orientation, x, y, hor, ver, line = FALSE) {
@@ -136,11 +138,11 @@ tooltipHc <- function(data, names, tooltip, agg, colAgg, percentage,  nDt, stack
 # default thounsands separate and decimap Points highcharts
 #'@export
 sepThous <- function(marksT) {
-    lang <- getOption("highcharter.lang")
-    lang$thousandsSep <- marksT[1]
-    lang$decimalPoint <- marksT[2]
-    lang$numericSymbols <- highcharter::JS("null")
-  lang
+  hcopts <- getOption("highcharter.options")
+  hcopts$lang$thousandsSep <-marksT[1]
+  hcopts$lang$decimalPoint <-marksT[2]
+  hcopts$lang$numericSymbols <- highcharter::JS("null")
+  options(highcharter.options = hcopts)
 }
 
 #' @name count_pl

@@ -5,10 +5,10 @@
 \title{Vertical area (ordered categories)}
 \usage{
 hgch_area_Oca(data, title = NULL, subtitle = NULL, caption = NULL,
-  horLabel = NULL, verLabel = NULL, horLine = NULL, horLineLabel = NULL,
-  verLine = NULL, verLineLabel = NULL, format = "{value}",
-  dropNa = FALSE, order = NULL, percentage = FALSE, theme = NULL,
-  export = FALSE, ...)
+  horLabel = NULL, verLabel = NULL, horLine = NULL,
+  horLineLabel = NULL, verLine = NULL, verLineLabel = NULL,
+  format = "{value}", dropNa = FALSE, order = NULL,
+  percentage = FALSE, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

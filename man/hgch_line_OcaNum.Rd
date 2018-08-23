@@ -5,9 +5,10 @@
 \title{Line (ordered categories, numbers)}
 \usage{
 hgch_line_OcaNum(data, title = NULL, subtitle = NULL, caption = NULL,
-  horLabel = NULL, verLabel = NULL, yLine = NULL, yLineLabel = NULL,
-  agg = "sum", dropNa = FALSE, order = NULL, percentage = FALSE,
-  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
+  horLabel = NULL, verLabel = NULL, yLine = NULL,
+  yLineLabel = NULL, agg = "sum", dropNa = FALSE, order = NULL,
+  percentage = FALSE, startAtZero = FALSE, theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

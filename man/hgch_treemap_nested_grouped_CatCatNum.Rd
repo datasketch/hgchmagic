@@ -4,8 +4,8 @@
 \alias{hgch_treemap_nested_grouped_CatCatNum}
 \title{Nested treemap grouped by categorical variable}
 \usage{
-hgch_treemap_nested_grouped_CatCatNum(data, title = NULL, subtitle = NULL,
-  caption = NULL, export = FALSE, ...)
+hgch_treemap_nested_grouped_CatCatNum(data, title = NULL,
+  subtitle = NULL, caption = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{x}{A data.frame}

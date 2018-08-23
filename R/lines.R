@@ -288,7 +288,161 @@ hgch_line_CatOcaNum <- function(data,
 #' @examples
 #' hgch_line_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
 #' @export hgch_line_CatYeaNum
-hgch_line_CatYeaNum <- hgch_line_CatOcaNum
+hgch_line_CatYeaNum <- function(data,
+                                title = NULL,
+                                subtitle = NULL,
+                                caption = NULL,
+                                horLabel = NULL,
+                                verLabel = NULL,
+                                yLine = NULL,
+                                yLineLabel = NULL,
+                                agg = "sum",
+                                dropNa = FALSE,
+                                nDigits = NULL,
+                                marks = c('', '.'),
+                                format = c('', ''),
+                                order = NULL,
+                                percentage = FALSE,
+                                startAtZero = FALSE,
+                                tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                export = FALSE,
+                                thema = tma(),
+                                plotBandsFromX = NULL,
+                                plotBandsToX = NULL,
+                                plotBandsColorX = 'rgba(68, 170, 213, .2)',
+                                plotBandsFromY = NULL,
+                                plotBandsToY = NULL,
+                                plotBandsColorY = 'rgba(68, 170, 213, .2)',
+                                plotLineValueY = NULL,
+                                plotLineValueX = NULL,
+                                plotLineDashStyleY = 'shortdash',
+                                plotLineDashStyleX = 'shortdash', ...) {
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+
+  horLabel <- horLabel %||% nms[2]
+  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[3], paste(agg, nms[3]))
+  yLineLabel <- yLineLabel %||% yLine
+  title <-  title %||% ""
+  subtitle <- subtitle %||% ""
+  caption <- caption %||% ""
+
+
+  k <- d %>% group_by(a, b) %>% dplyr::summarise(cont = n())
+  k <- k %>% filter(cont == 1)
+  k <- k %>% left_join(d)
+  k <- k[is.na(k$c),]
+  k$c[is.na(k$c)] <- 'NA'
+  k <- k %>% dplyr::select(a, b, valor = c)
+
+
+  if (dropNa)
+    d <- d %>%
+    tidyr::drop_na()
+
+  d <- d %>%
+    tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
+                           b = ifelse(is.character(d$b), "NA", NA),
+                           c = NA)) %>%
+    dplyr::group_by(a, b) %>%
+    dplyr::summarise(c = agg(agg, c))
+
+  if (is.null(nDigits)) {
+    nDig <- 0
+  } else {
+    nDig <- nDigits
+  }
+
+  if (percentage) {
+    d <- d %>% group_by(a) %>%
+      dplyr::mutate(c = (c / sum(c)) * 100)
+  }
+
+  d$c <- round(d$c, nDig)
+
+
+  if (nrow(k) > 0) {
+    d <- d %>% left_join(k)
+    d$valor <- as.numeric(coalesce(d$valor, as.character(d$c)))
+    d <- d %>% select(a, b, c = valor)
+  }
+
+
+
+  series <- map(unique(d[[1]]), function(i) {
+    d0 <- d %>%
+      filter(a %in% i)
+    l0 <- list("name" = i,
+               "data" = d0$c)
+  })
+
+
+  if (percentage & nchar(format[2]) == 0) {
+    format[2] <- "%"
+  }
+
+  aggFormAxis <- paste0("function() { return '", format[1] , "' + Highcharts.numberFormat(this.value, ", nDig, ", '", marks[2], "', '", marks[1], "') + '", format[2], "'}"
+  )
+
+
+  # if (is.null(tooltip$pointFormat)) {
+  #   tooltip$pointFormat <-  paste0(nms[2], ': ', '{point.categories}')#paste0(agg, ' ' ,nms[3], ': ')#'{point.y}'
+  # }
+  # if (is.null(tooltip$headerFormat)) {
+  #   tooltip$headerFormat <- " "
+  # }
+
+
+
+  hc <- highchart() %>%
+    hc_chart(type = 'line') %>%
+    hc_xAxis(
+      categories = map(as.character(sort(unique(d$b))), function(z) z),
+      type = 'category',
+      plotBands = list(
+        from = plotBandsFromX,
+        to = plotBandsToX,
+        color = plotBandsColorX
+      ),
+      plotLines = list(list(
+        color = 'black',
+        dashStyle = plotLineDashStyleX,
+        width = 2,
+        value = plotLineValueX
+      ))
+    ) %>%
+    hc_yAxis(
+      labels = list(
+        format = '{value}',#formatLabAxis,
+        formatter = JS(aggFormAxis)
+      ),
+      minRange = if (startAtZero) 0.1,
+      min = if (startAtZero) 0,
+      minPadding = if (startAtZero) 0,
+      plotBands = list(
+        from = plotBandsFromY,
+        to = plotBandsToY,
+        color = plotBandsColorY#'rgba(68, 170, 213, .2)'
+      ),
+      plotLines = list(list(
+        color = 'black',
+        dashStyle = plotLineDashStyleY,
+        width = 2,
+        value = plotLineValueY
+      ))
+    ) %>%
+    hc_add_series_list(series) %>%
+    #hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
+    hc_add_theme(custom_theme(custom = thema)) %>%
+    hc_credits(enabled = TRUE, text = caption) #%>%
+  #hc_legend(enabled = FALSE)
+  if (export) hc <- hc %>%
+    hc_exporting(enabled = TRUE)
+
+  hc
+
+}
 
 
 #' Line (categories, dates, numbers)

@@ -6,8 +6,8 @@
 \usage{
 hgch_bar_stacked_100_CatYeaNum(data, title = NULL, subtitle = NULL,
   caption = NULL, horLabel = NULL, verLabel = NULL, horLine = NULL,
-  horLineLabel = NULL, verLine = NULL, verLineLabel = NULL, agg = "sum",
-  nDigits = 2, dropNa = FALSE, format = "{value}",
+  horLineLabel = NULL, verLine = NULL, verLineLabel = NULL,
+  agg = "sum", nDigits = 2, dropNa = FALSE, format = "{value}",
   legendLayout = "horizontal", order = NULL, orientation = "ver",
   sliceN = NULL, theme = NULL, tooltip = list(headerFormat = NULL,
   pointFormat = NULL, shared = NULL), export = FALSE, ...)

@@ -4,9 +4,9 @@
 \alias{hgch_polarbar_Oca}
 \title{Polar bar (ordered categories)}
 \usage{
-hgch_polarbar_Oca(data, title = NULL, subtitle = NULL, caption = NULL,
-  yLine = NULL, dropNa = FALSE, order = NULL, sort = "no",
-  sliceN = NULL, theme = NULL, export = FALSE, ...)
+hgch_polarbar_Oca(data, title = NULL, subtitle = NULL,
+  caption = NULL, yLine = NULL, dropNa = FALSE, order = NULL,
+  sort = "no", sliceN = NULL, theme = NULL, export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

@@ -4,10 +4,11 @@
 \alias{hgch_line_DatNumP}
 \title{Line (dates, n numbers)}
 \usage{
-hgch_line_DatNumP(data, title = NULL, subtitle = NULL, caption = NULL,
-  horLabel = NULL, verLabel = NULL, yLine = NULL, yLineLabel = NULL,
-  agg = "sum", dropNa = FALSE, order = NULL, percentage = FALSE,
-  startAtZero = FALSE, theme = NULL, export = FALSE, ...)
+hgch_line_DatNumP(data, title = NULL, subtitle = NULL,
+  caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
+  yLineLabel = NULL, agg = "sum", dropNa = FALSE, order = NULL,
+  percentage = FALSE, startAtZero = FALSE, theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

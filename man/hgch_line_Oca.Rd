@@ -5,9 +5,10 @@
 \title{Line (ordered categories)}
 \usage{
 hgch_line_Oca(data, title = NULL, subtitle = NULL, caption = NULL,
-  horLabel = NULL, verLabel = NULL, yLine = NULL, yLineLabel = NULL,
-  dropNa = FALSE, order = NULL, percentage = FALSE, startAtZero = FALSE,
-  theme = NULL, export = FALSE, ...)
+  horLabel = NULL, verLabel = NULL, yLine = NULL,
+  yLineLabel = NULL, dropNa = FALSE, order = NULL,
+  percentage = FALSE, startAtZero = FALSE, theme = NULL,
+  export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

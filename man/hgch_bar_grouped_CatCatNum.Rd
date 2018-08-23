@@ -6,11 +6,12 @@
 \usage{
 hgch_bar_grouped_CatCatNum(data, title = NULL, subtitle = NULL,
   caption = NULL, horLabel = NULL, verLabel = NULL, horLine = NULL,
-  horLineLabel = NULL, verLine = NULL, verLineLabel = NULL, agg = "sum",
-  dropNa = FALSE, format = "{value}", legendLayout = "horizontal",
-  order = NULL, orientation = "ver", percentage = FALSE, sort = "no",
-  sliceN = NULL, theme = NULL, tooltip = list(headerFormat = NULL,
-  pointFormat = NULL, shared = NULL), export = FALSE, ...)
+  horLineLabel = NULL, verLine = NULL, verLineLabel = NULL,
+  agg = "sum", dropNa = FALSE, format = "{value}",
+  legendLayout = "horizontal", order = NULL, orientation = "ver",
+  percentage = FALSE, sort = "no", sliceN = NULL, theme = NULL,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
+  export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}
