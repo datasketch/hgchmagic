@@ -6,9 +6,16 @@
 \usage{
 hgch_line_CatYeaNum(data, title = NULL, subtitle = NULL,
   caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
-  yLineLabel = NULL, agg = "sum", dropNa = FALSE, order = NULL,
-  percentage = FALSE, startAtZero = FALSE, theme = NULL,
-  export = FALSE, ...)
+  yLineLabel = NULL, agg = "sum", dropNa = FALSE, nDigits = NULL,
+  marks = c("", "."), format = c("", ""), order = NULL,
+  percentage = FALSE, startAtZero = FALSE,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  export = FALSE, thema = tma(), plotBandsFromX = NULL,
+  plotBandsToX = NULL, plotBandsColorX = "rgba(68, 170, 213, .2)",
+  plotBandsFromY = NULL, plotBandsToY = NULL,
+  plotBandsColorY = "rgba(68, 170, 213, .2)", plotLineValueY = NULL,
+  plotLineValueX = NULL, plotLineDashStyleY = "shortdash",
+  plotLineDashStyleX = "shortdash", ...)
 }
 \arguments{
 \item{data}{A data.frame}

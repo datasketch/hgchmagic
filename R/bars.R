@@ -245,9 +245,9 @@ hgch_bar_CatNum <-  function(data,
   }
 
 
+  aggFormAxis <- paste0("function() { return '", format[1] , "' + Highcharts.numberFormat(this.value, ", nDig, ", '", marks[2], "', '", marks[1], "') + '", format[2], "'}"
+  )
 
-
-  aggFormAxis <- paste0('function() {return "', format[1],'" + this.value+"', format[2],'";}')
 
   if (is.null(tooltip$pointFormat)) {
     tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(agg, ' ' ,nms[2], ': '), format[1],'{point.y}', format[2])
@@ -256,7 +256,7 @@ hgch_bar_CatNum <-  function(data,
     tooltip$headerFormat <- ""
   }
 
-  global_options(marks[1])
+  global_options(marks[1], marks[2])
 
   hc <- highchart() %>%
     hc_chart(type = ifelse(orientation == "hor", "bar", "column")) %>%

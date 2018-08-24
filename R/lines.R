@@ -385,13 +385,17 @@ hgch_line_CatYeaNum <- function(data,
   aggFormAxis <- paste0("function() { return '", format[1] , "' + Highcharts.numberFormat(this.value, ", nDig, ", '", marks[2], "', '", marks[1], "') + '", format[2], "'}"
   )
 
+  if (is.null(tooltip$pointFormat)) {
+    tooltip$pointFormat <-paste0('<b>', nms[2], ': </b>{point.category}</br>',
+                                 '<b>', nms[1], ': </b>{series.name}</br>',
+                                 paste0(agg, ' ' ,nms[3], ': '), format[1],'{point.y}', format[2])
+  }
+  if (is.null(tooltip$headerFormat)) {
+    tooltip$headerFormat <- " "
+  }
 
-  # if (is.null(tooltip$pointFormat)) {
-  #   tooltip$pointFormat <-  paste0(nms[2], ': ', '{point.categories}')#paste0(agg, ' ' ,nms[3], ': ')#'{point.y}'
-  # }
-  # if (is.null(tooltip$headerFormat)) {
-  #   tooltip$headerFormat <- " "
-  # }
+
+  global_options(marks[1], marks[2])
 
 
 
@@ -437,7 +441,7 @@ hgch_line_CatYeaNum <- function(data,
       ))
     ) %>%
     hc_add_series_list(series) %>%
-    #hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
     hc_add_theme(custom_theme(custom = thema)) %>%
     hc_credits(enabled = TRUE, text = caption) #%>%
   #hc_legend(enabled = FALSE)

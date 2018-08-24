@@ -100,11 +100,11 @@ custom_theme  <- function(custom = NULL,...){
 
 
 #' @export
-global_options <- function(marksMil){
+global_options <- function(marksMil, marksDec){
 
   hcoptslang <- getOption("highcharter.lang")
   hcoptslang$thousandsSep <- marksMil
-
+  hcoptslang$decimalPoint <- marksDec
   options(highcharter.lang = hcoptslang)
 }
 
