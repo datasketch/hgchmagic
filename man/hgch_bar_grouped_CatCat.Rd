@@ -7,11 +7,10 @@
 hgch_bar_grouped_CatCat(data, title = NULL, subtitle = NULL,
   caption = NULL, horLabel = NULL, verLabel = NULL, horLine = NULL,
   horLineLabel = NULL, verLine = NULL, verLineLabel = NULL,
-  dropNa = FALSE, format = "{value}", legendLayout = "horizontal",
-  order = NULL, orientation = "ver", percentage = FALSE,
-  sort = "no", sliceN = NULL, theme = NULL,
-  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
-  export = FALSE, ...)
+  dropNa = c(FALSE, FALSE), order = NULL, orientation = "ver",
+  percentage = FALSE, sort = "no", format = c("", ""),
+  sliceN = NULL, theme = tma(), tooltip = list(headerFormat = NULL,
+  pointFormat = NULL, shared = NULL), export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

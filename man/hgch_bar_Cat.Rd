@@ -7,12 +7,12 @@
 hgch_bar_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
   horLabel = NULL, verLabel = NULL, horLine = NULL,
   horLineLabel = NULL, verLine = NULL, verLineLabel = NULL,
-  marks = c(" ", "."), nDigits = 2, colors = c("#009EE3", "#F9B233"),
-  dropNa = FALSE, format = "{value}", highlightValue = NULL,
-  order = NULL, orientation = "ver", percentage = FALSE,
-  sort = "no", sliceN = NULL, theme = NULL,
-  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
-  export = FALSE, ...)
+  orientation = "ver", marks = c("", "."), nDigits = NULL,
+  dropNa = FALSE, colorHighlightValue = "#F9B233",
+  percentage = FALSE, format = c("", ""), highlightValue = NULL,
+  order = NULL, sort = "no", sliceN = NULL,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  export = FALSE, thema = tma())
 }
 \arguments{
 \item{data}{A data.frame}
