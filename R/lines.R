@@ -288,6 +288,7 @@ hgch_line_CatOcaNum <- function(data,
 #' @examples
 #' hgch_line_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
 #' @export hgch_line_CatYeaNum
+
 hgch_line_CatYeaNum <- function(data,
                                 title = NULL,
                                 subtitle = NULL,
@@ -329,13 +330,26 @@ hgch_line_CatYeaNum <- function(data,
   caption <- caption %||% ""
 
 
-  k <- d %>% group_by(a, b) %>% dplyr::summarise(cont = n())
-  k <- k %>% filter(cont == 1)
-  k <- k %>% left_join(d)
-  k <- k[is.na(k$c),]
-  k$c[is.na(k$c)] <- 'NA'
-  k <- k %>% dplyr::select(a, b, valor = c)
+  #uniqYear <- sort(unique(d$b))
 
+  # k <- d %>% group_by(a, b) %>% dplyr::summarise(cont = n())
+  # k <- k %>% filter(cont == 1)
+  # k <- k %>% left_join(d)
+  # k <- k[is.na(k$c),]
+  # k$c[is.na(k$c)] <- 'NA'
+  # k <- k %>% dplyr::select(a, b, valor = c)
+
+
+  if (dropNa)
+    d <- d %>%
+    tidyr::drop_na()
+
+  # d <- d %>%
+  #   tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
+  #                          b = ifelse(is.character(d$b), "NA", NA),
+  #                          c = NA)) %>%
+  #   dplyr::group_by(a, b) %>%
+  #   dplyr::summarise(c = agg(agg, c))
 
   if (dropNa)
     d <- d %>%
@@ -346,7 +360,11 @@ hgch_line_CatYeaNum <- function(data,
                            b = ifelse(is.character(d$b), "NA", NA),
                            c = NA)) %>%
     dplyr::group_by(a, b) %>%
-    dplyr::summarise(c = agg(agg, c))
+    dplyr::summarise(c = agg(agg, c)) %>%
+    tidyr::spread(b, c) %>%
+    tidyr::gather(b, c, -a)
+  d$c[is.na(d$c)] <- NA
+
 
   if (is.null(nDigits)) {
     nDig <- 0
@@ -362,11 +380,11 @@ hgch_line_CatYeaNum <- function(data,
   d$c <- round(d$c, nDig)
 
 
-  if (nrow(k) > 0) {
-    d <- d %>% left_join(k)
-    d$valor <- as.numeric(coalesce(d$valor, as.character(d$c)))
-    d <- d %>% select(a, b, c = valor)
-  }
+  # if (nrow(k) > 0) {
+  #   d <- d %>% left_join(k)
+  #   d$valor <- as.numeric(coalesce(d$valor, as.character(d$c)))
+  #   d <- d %>% select(a, b, c = valor)
+  # }
 
 
 
@@ -375,6 +393,7 @@ hgch_line_CatYeaNum <- function(data,
       filter(a %in% i)
     l0 <- list("name" = i,
                "data" = d0$c)
+    l0
   })
 
 
@@ -451,7 +470,6 @@ hgch_line_CatYeaNum <- function(data,
   hc
 
 }
-
 
 #' Line (categories, dates, numbers)
 #'
