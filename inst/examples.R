@@ -147,7 +147,11 @@ tmp_theme <- hc_theme(
 
 
 data <- sampleData("Cat", nrow = 500000)
-hgch_bar_Cat(data, percentage = TRUE)
+hgch_bar_Cat(data)
+hgch_bar_Cat(data, colorScale = 'continuous')
+hgch_bar_Cat(data, percentage = TRUE,
+             colors = c('orange'), colorScale = 'discrete',
+             highlightValue = 'CatC', highlightValueColor = 'red')
 
 data <- sampleData("Cat-Num", nrow = 20)
 hgch_bar_CatNum(data, marks = c(",", "."))

@@ -111,7 +111,7 @@ global_options <- function(marksMil, marksDec){
 #' @export
 tma <- function(background = 'transparent',
                 bordercolor = 'transparent',
-                colores = c("#2E0F35", "#74D1F7", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2"),
+                colores = NULL,#c("#2E0F35", "#74D1F7", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2"),
                 width = NULL,
                 height = NULL,
                 fontFamily = 'Ubuntu',
@@ -120,18 +120,18 @@ tma <- function(background = 'transparent',
                 marginLeft = NULL,
                 marginRight = NULL,
                 marginTop = NULL,
-                diffColorsBar = FALSE,
+                diffColorsBar = TRUE,
                 borderRadius = 0,
                 borderWidth = 0,
                 plotBackgroundColor = "transparent",
                 plotBorderColor = "#cccccc",
                 plotBorderWidth = 1,
-                showLabel = FALSE,
+                showText = TRUE,
                 symbLine = TRUE,
                 lineWidth = 2,
                 negativeColor = FALSE,
                 linePointStart = 0,
-                labsData = list(colLabel = NULL, familyLabel = 'Ubuntu',sizeLabel = NULL,
+                labsData = list(colLabel = '#0E0329', familyLabel = 'Ubuntu',sizeLabel = NULL,
                                 textDecoration = 'none', textShadow = 'none', textOutline = 'none'),
                 stylesY = list(gridLineWidth = 1, lineColor = '#ccd6eb', tickColor = '#ccd6eb', gridLineColor = '#e6e6e6',
                                tickLength = 10, lineWidth = 1),
@@ -172,7 +172,7 @@ tma <- function(background = 'transparent',
       bar = list(
         colorByPoint = diffColorsBar,
         dataLabels = list (
-          enabled = showLabel,
+          enabled = showText,
           style = list (
             color = labsData$colLabel,
             fontFamily = labsData$familyLabel,
@@ -186,7 +186,7 @@ tma <- function(background = 'transparent',
       column = list(
         colorByPoint = diffColorsBar,
         dataLabels = list (
-          enabled = showLabel,
+          enabled = showText,
           style = list (
             color = labsData$colLabel,
             fontFamily = labsData$familyLabel,
@@ -200,7 +200,7 @@ tma <- function(background = 'transparent',
       line = list(
         colorByPoint = diffColorsBar,
         dataLabels = list (
-          enabled = showLabel,
+          enabled = showText,
           style = list (
             color = labsData$colLabel,
             fontFamily = labsData$familyLabel,

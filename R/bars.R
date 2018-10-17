@@ -19,20 +19,24 @@ hgch_bar_Cat <-  function(data,
                           horLineLabel = NULL,
                           verLine = NULL,
                           verLineLabel = NULL,
-                          orientation = "ver",
-                          marks = c("", "."),
-                          nDigits = NULL,
+                          colors = NULL,
+                          colorText = "#0E0329",
+                          colorScale = "no",
                           dropNa = FALSE,
-                          colorHighlightValue = '#F9B233',
-                          percentage = FALSE,
-                          format = c('', ''),
+                          tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                          format = c("", ""),
                           highlightValue = NULL,
+                          highlightValueColor = "#F9B233",
+                          labelWrap = 12,
+                          marks = c(".", ","),
+                          nDigits = 2,
                           order = NULL,
+                          orientation = "ver",
+                          percentage = FALSE,
                           sort = "no",
                           sliceN = NULL,
-                          tooltip = list(headerFormat = NULL, pointFormat = NULL),
                           export = FALSE,
-                          thema = tma()) {
+                          theme = tma(), ...) {
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -43,7 +47,7 @@ hgch_bar_Cat <-  function(data,
   caption <- caption %||% ""
   labelsXY <- orientationXY(orientation,
                             x = nms[1],
-                            y = ifelse(percentage, paste("percentage", nms[1]), paste("count", nms[1])),
+                            y = paste("count", nms[1]),
                             hor = horLabel,
                             ver = verLabel)
   lineXY <- orientationXY(orientation,
@@ -51,12 +55,34 @@ hgch_bar_Cat <-  function(data,
                           NULL,
                           hor = horLine,
                           ver = verLine)
+
   lineLabelsXY <- orientationXY(orientation,
                                 x = horLine,
                                 y = verLine,
                                 hor = horLineLabel,
                                 ver = verLineLabel,
                                 line = TRUE)
+
+  if (colorScale == 'discrete') {
+    colorDefault <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
+    } else {
+    colorDefault <- leaflet::colorNumeric(c("#2E0F35", "#A6CEDE"), 1:length(unique(d$a)))(1:length(unique(d$a)))
+  }
+
+  if (is.null(theme$colors)) {
+    if (!is.null(colors)) {
+      theme$colors <- unname(fillColors(d, "a", colors, colorScale))
+    } else {
+      if (colorScale == 'no') {
+      theme$colors <- c("#74D1F7", "#74D1F7")
+      } else {
+      theme$colors <- colorDefault
+      }
+
+    }
+  }
+
+
   if (dropNa)
     d <- d %>%
     tidyr::drop_na()
@@ -79,16 +105,15 @@ hgch_bar_Cat <-  function(data,
   }
 
   d$b <- round(d$b, nDig)
-  d <- orderCategory(d, "a", order)
+  d <- orderCategory(d, "a", order, labelWrap)
   d <- sortSlice(d, "b", sort, sliceN)
-
 
   d <- d %>% plyr::rename(c('b' = 'y'))
   d$color <- NA
 
   if (!is.null(highlightValue)) {
     w <- which(d$a %in% highlightValue)
-    d$color[w] <- colorHighlightValue
+    d$color[w] <- highlightValueColor
   }
 
   data <- list()
@@ -169,15 +194,13 @@ hgch_bar_Cat <-  function(data,
     hc_series(
       data
     ) %>%
-    hc_add_theme(custom_theme(custom = thema)) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(enabled = FALSE)
   if (export) hc <- hc %>%
     hc_exporting(enabled = TRUE)
   hc
-
 }
-
 
 #' Bar (categories, numbers)
 #'
