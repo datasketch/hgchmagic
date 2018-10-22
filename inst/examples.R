@@ -151,11 +151,12 @@ hgch_bar_Cat(data)
 hgch_bar_Cat(data, colorScale = 'continuous')
 hgch_bar_Cat(data, percentage = TRUE,
              colors = c('orange'), colorScale = 'discrete',
-             highlightValue = 'CatC', highlightValueColor = 'red')
+             highlightValue = 'NA', highlightValueColor = 'red')
 
 data <- sampleData("Cat-Num", nrow = 20)
 hgch_bar_CatNum(data, marks = c(",", "."))
-
+hgch_bar_CatNum(data, horLineLabel = 'hola', horLine = 2000)
+hgch_bar_CatNum(data, orientation = 'hor',  horLine = 4)
 data <- sampleData("Dat-Num", nrow = 100)
 hgch_bar_ver_DatNum(data)
 

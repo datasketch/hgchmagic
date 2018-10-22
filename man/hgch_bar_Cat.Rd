@@ -6,12 +6,12 @@
 \usage{
 hgch_bar_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
   horLabel = NULL, verLabel = NULL, horLine = NULL,
-  horLineLabel = NULL, verLine = NULL, verLineLabel = NULL,
+  horLineLabel = " ", verLine = NULL, verLineLabel = " ",
   colors = NULL, colorText = "#0E0329", colorScale = "no",
   dropNa = FALSE, tooltip = list(headerFormat = NULL, pointFormat =
   NULL), format = c("", ""), highlightValue = NULL,
   highlightValueColor = "#F9B233", labelWrap = 12, marks = c(".",
-  ","), nDigits = 2, order = NULL, orientation = "ver",
+  ","), nDigits = NULL, order = NULL, orientation = "ver",
   percentage = FALSE, sort = "no", sliceN = NULL, export = FALSE,
   theme = tma(), ...)
 }

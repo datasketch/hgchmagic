@@ -16,9 +16,9 @@ hgch_bar_Cat <-  function(data,
                           horLabel = NULL,
                           verLabel = NULL,
                           horLine = NULL,
-                          horLineLabel = NULL,
+                          horLineLabel = " ",
                           verLine = NULL,
-                          verLineLabel = NULL,
+                          verLineLabel = " ",
                           colors = NULL,
                           colorText = "#0E0329",
                           colorScale = "no",
@@ -29,7 +29,7 @@ hgch_bar_Cat <-  function(data,
                           highlightValueColor = "#F9B233",
                           labelWrap = 12,
                           marks = c(".", ","),
-                          nDigits = 2,
+                          nDigits = NULL,
                           order = NULL,
                           orientation = "ver",
                           percentage = FALSE,
@@ -50,18 +50,11 @@ hgch_bar_Cat <-  function(data,
                             y = paste("count", nms[1]),
                             hor = horLabel,
                             ver = verLabel)
-  lineXY <- orientationXY(orientation,
-                          NULL,
-                          NULL,
-                          hor = horLine,
-                          ver = verLine)
+  lineXY <- linesOrientation(orientation, horLine, verLine)
 
-  lineLabelsXY <- orientationXY(orientation,
-                                x = horLine,
-                                y = verLine,
-                                hor = horLineLabel,
-                                ver = verLineLabel,
-                                line = TRUE)
+  lineLabelsXY <- linesOrLabel(orientation,
+                               horLineLabel,
+                               verLineLabel)
 
   if (colorScale == 'discrete') {
     colorDefault <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
@@ -172,8 +165,13 @@ hgch_bar_Cat <-  function(data,
         list(value = lineXY[2],
              color = 'black',
              dashStyle = 'shortdash',
+             zIndex = 5,
              width = 2,
-             label = list(text = lineLabelsXY[1]))),
+             label = list(
+               text= lineLabelsXY[1],
+               style = list(
+                 color = 'black')
+               ))),
       type= 'category'
     ) %>%
     hc_yAxis(
@@ -220,15 +218,18 @@ hgch_bar_CatNum <-  function(data,
                              horLabel = NULL,
                              verLabel = NULL,
                              horLine = NULL,
-                             horLineLabel = NULL,
+                             horLineLabel = " ",
                              verLine = NULL,
-                             verLineLabel = NULL,
+                             verLineLabel = " ",
+                             labelWrap = 12,
+                             colors = NULL,
+                             colorScale = 'no',
                              agg = "sum",
                              orientation = "ver",
-                             marks = c("", "."),
+                             marks = c(".", ","),
                              nDigits = NULL,
                              dropNa = FALSE,
-                             colorHighlightValue = '#F9B233',
+                             highlightValueColor = '#F9B233',
                              percentage = FALSE,
                              format = c('', ''),
                              highlightValue = NULL,
@@ -237,7 +238,7 @@ hgch_bar_CatNum <-  function(data,
                              sliceN = NULL,
                              tooltip = list(headerFormat = NULL, pointFormat = NULL),
                              export = FALSE,
-                             thema = tma()) {
+                             theme = tma()) {
 
 
   f <- fringe(data)
@@ -253,17 +254,30 @@ hgch_bar_CatNum <-  function(data,
                             y = ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste(agg, nms[2])),
                             hor = horLabel,
                             ver = verLabel)
-  lineXY <- orientationXY(orientation,
-                          NULL,
-                          NULL,
-                          hor = horLine,
-                          ver = verLine)
-  lineLabelsXY <- orientationXY(orientation,
-                                x = horLine,
-                                y = verLine,
-                                hor = horLineLabel,
-                                ver = verLineLabel,
-                                line = TRUE)
+  lineXY <- linesOrientation(orientation, horLine, verLine)
+
+  lineLabelsXY <- linesOrLabel(orientation,
+                               horLineLabel,
+                               verLineLabel)
+
+  if (colorScale == 'discrete') {
+    colorDefault <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
+  } else {
+    colorDefault <- leaflet::colorNumeric(c("#2E0F35", "#A6CEDE"), 1:length(unique(d$a)))(1:length(unique(d$a)))
+  }
+
+  if (is.null(theme$colors)) {
+    if (!is.null(colors)) {
+      theme$colors <- unname(fillColors(d, "a", colors, colorScale))
+    } else {
+      if (colorScale == 'no') {
+        theme$colors <- c("#74D1F7", "#74D1F7")
+      } else {
+        theme$colors <- colorDefault
+      }
+
+    }
+  }
 
   if (dropNa)
     d <- d %>%
@@ -286,7 +300,7 @@ hgch_bar_CatNum <-  function(data,
   }
 
   d$b <- round(d$b, nDig)
-  d <- orderCategory(d, "a", order)
+  d <- orderCategory(d, "a", order, labelWrap)
   d <- sortSlice(d, "b", sort, sliceN)
 
 
@@ -295,7 +309,7 @@ hgch_bar_CatNum <-  function(data,
 
   if (!is.null(highlightValue)) {
     w <- which(d$a %in% highlightValue)
-    d$color[w] <- colorHighlightValue
+    d$color[w] <- highlightValueColor
   }
 
   data <- list()
@@ -349,8 +363,14 @@ hgch_bar_CatNum <-  function(data,
         list(value = lineXY[2],
              color = 'black',
              dashStyle = 'shortdash',
+             zIndex = 5,
              width = 2,
-             label = list(text = lineLabelsXY[1]))),
+             label = list(
+               text = lineLabelsXY[1],
+               style = list(
+                 color = 'black'
+               )
+             ))),
       type= 'category'
     ) %>%
     hc_yAxis(
@@ -362,7 +382,12 @@ hgch_bar_CatNum <-  function(data,
              dashStyle = 'shortdash',
              width = 2,
              zIndex = 5,
-             label = list(text = lineLabelsXY[2]))),
+             label = list(
+               text = lineLabelsXY[2],
+               style = list(
+                 color = 'black'
+               )
+             ))),
       labels = list (
         format = formatLabAxis,
         formatter = JS(aggFormAxis)
@@ -371,7 +396,7 @@ hgch_bar_CatNum <-  function(data,
     hc_series(
       data
     ) %>%
-    hc_add_theme(custom_theme(custom = thema)) %>%
+    hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(enabled = FALSE)
   if (export) hc <- hc %>%
@@ -379,7 +404,6 @@ hgch_bar_CatNum <-  function(data,
   hc
 
 }
-
 #' Bar (years, numbers)
 #'
 #' Compare quantities over years

@@ -30,9 +30,70 @@ orientationXY <- function(orientation, x, y, hor, ver, line = FALSE) {
       y0 <- x1
     }
   }
-  c(x0, y0)
+  v <- c(x0, y0)
+
+  v
 }
 
+# defines horLine and verLine depending orientation
+#'@export
+linesOrientation <- function(orientation, horLine = NULL, verLine = NULL) {
+
+  if (orientation  == 'hor') {
+    if (!is.null(horLine)) {
+      lineY <- horLine - 1
+      } else {
+    lineY <- 'NULL' }
+    if (!is.null(verLine)) {
+      lineX <- verLine
+    } else {
+      lineX <- 'NULL'
+    }
+  } else {
+    if (!is.null(horLine)) {
+      lineX <- horLine
+    } else {
+      lineX <- 'NULL' }
+    if (!is.null(verLine)) {
+      lineY <- verLine - 1
+    } else {
+      lineY <- 'NULL'
+    }
+  }
+
+  v <- c(lineX, lineY)
+  v
+}
+
+# defines horLine and verLine label depending orientation
+#'@export
+linesOrLabel <- function(orientation, horLineLabel = NULL, verLineLabel = NULL) {
+
+  if (orientation  == 'ver') {
+    if (!is.null(horLineLabel)) {
+      labelY <- horLineLabel
+    } else {
+      labelY <- 'NULL' }
+    if (!is.null(verLineLabel)) {
+      labelX <- verLineLabel
+    } else {
+      labelX <- 'NULL'
+    }
+  } else {
+    if (!is.null(horLineLabel)) {
+      labelX <- horLineLabel
+    } else {
+      labelX <- 'NULL' }
+    if (!is.null(verLineLabel)) {
+      labelY <- verLineLabel
+    } else {
+      labelY <- 'NULL'
+    }
+  }
+
+  v <- c(labelX, labelY)
+  v
+}
 
 # ds palette
 #' @export

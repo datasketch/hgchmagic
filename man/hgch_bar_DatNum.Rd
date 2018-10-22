@@ -6,13 +6,14 @@
 \usage{
 hgch_bar_DatNum(data, title = NULL, subtitle = NULL, caption = NULL,
   horLabel = NULL, verLabel = NULL, horLine = NULL,
-  horLineLabel = NULL, verLine = NULL, verLineLabel = NULL,
-  agg = "sum", orientation = "ver", marks = c("", "."),
-  nDigits = NULL, dropNa = FALSE, colorHighlightValue = "#F9B233",
+  horLineLabel = " ", verLine = NULL, verLineLabel = " ",
+  labelWrap = 12, colors = NULL, colorScale = "no", agg = "sum",
+  orientation = "ver", marks = c(".", ","), nDigits = NULL,
+  dropNa = FALSE, highlightValueColor = "#F9B233",
   percentage = FALSE, format = c("", ""), highlightValue = NULL,
   order = NULL, sort = "no", sliceN = NULL,
   tooltip = list(headerFormat = NULL, pointFormat = NULL),
-  export = FALSE, thema = tma())
+  export = FALSE, theme = tma())
 }
 \arguments{
 \item{data}{A data.frame}
