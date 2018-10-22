@@ -161,7 +161,11 @@ orderCategory <- function(data, col, order, labelWrap) {
     order[is.na(order)] <- "NA"
     data <- data[order(match(data[[col]], order)), ]
   }
+  if (is.null(labelWrap)) {
+  data <- data
+  } else {
   data[[col]] <- gsub("\\\n", "<br/>", str_wrap(data[[col]], labelWrap))
+  }
   data
 }
 

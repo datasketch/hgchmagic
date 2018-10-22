@@ -479,17 +479,11 @@ hgch_bar_grouped_CatCat <- function(data,
                             y = paste("count", nms[2]),
                             hor = horLabel,
                             ver = verLabel)
-  lineXY <- orientationXY(orientation,
-                          NULL,
-                          NULL,
-                          hor = horLine,
-                          ver = verLine)
-  lineLabelsXY <- orientationXY(orientation,
-                                x = horLine,
-                                y = verLine,
-                                hor = horLineLabel,
-                                ver = verLineLabel,
-                                line = TRUE)
+  lineXY <- linesOrientation(orientation, horLine, verLine)
+
+  lineLabelsXY <- linesOrLabel(orientation,
+                               horLineLabel,
+                               verLineLabel)
 
   if (dropNa[1])
     d <- d %>%
