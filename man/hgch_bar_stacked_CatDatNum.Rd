@@ -6,10 +6,13 @@
 \usage{
 hgch_bar_stacked_CatDatNum(data, title = NULL, subtitle = NULL,
   caption = NULL, horLabel = NULL, verLabel = NULL, horLine = NULL,
-  horLineLabel = NULL, verLine = NULL, verLineLabel = NULL,
-  agg = "sum", dropNa = FALSE, format = "{value}",
-  legendLayout = "horizontal", order = NULL, orientation = "ver",
-  percentage = FALSE, sort = "no", sliceN = NULL, theme = NULL,
+  horLineLabel = " ", verLine = NULL, verLineLabel = " ",
+  agg = "sum", colors = c("#009EE3", "#F9B233"),
+  colorScale = "discrete", dropNa = c(FALSE, FALSE), format = c("",
+  ""), labelWrap = c(12, 12), leyendPosition = "right",
+  marks = c(".", ","), nDigits = NULL, order1 = NULL,
+  order2 = NULL, orientation = "ver", percentage = FALSE,
+  showText = TRUE, theme = tma(diffColorsBar = FALSE),
   tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
   export = FALSE, ...)
 }

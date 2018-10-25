@@ -7,13 +7,13 @@
 hgch_bar_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
   horLabel = NULL, verLabel = NULL, horLine = NULL,
   horLineLabel = " ", verLine = NULL, verLineLabel = " ",
-  colors = NULL, colorText = "#0E0329", colorScale = "no",
-  dropNa = FALSE, tooltip = list(headerFormat = NULL, pointFormat =
-  NULL), format = c("", ""), highlightValue = NULL,
-  highlightValueColor = "#F9B233", labelWrap = 12, marks = c(".",
-  ","), nDigits = NULL, order = NULL, orientation = "ver",
-  percentage = FALSE, sort = "no", sliceN = NULL, export = FALSE,
-  theme = tma(), ...)
+  labelWrap = 12, colors = NULL, colorScale = "no", agg = "sum",
+  orientation = "ver", marks = c(".", ","), nDigits = NULL,
+  dropNa = FALSE, highlightValueColor = "#F9B233",
+  percentage = FALSE, format = c("", ""), highlightValue = NULL,
+  order = NULL, sort = "no", sliceN = NULL,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  export = FALSE, theme = tma(), ...)
 }
 \arguments{
 \item{data}{A data.frame}

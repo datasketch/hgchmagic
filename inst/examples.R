@@ -147,7 +147,11 @@ tmp_theme <- hc_theme(
 
 
 data <- sampleData("Cat", nrow = 500000)
-hgch_bar_Cat(data, labelWrap = NULL)
+hgch_bar_Cat(data, labelWrap = NULL, title = 'titulo',
+             subtitle = 'subtitulo', caption = 'creditos',
+             horLabel = 'titulo horizontal', verLabel = 'titulo vertical', horLine = 10000, verLine = 4,
+             horLineLabel = 'linea horizontal', verLineLabel = 'linea vertical', colors = c('darkred', 'gray', 'orange', '#F3D3D3', '#FA4B4C'),
+             colorScale = 'discrete', orientation = 'ver', marks = c(',', '.'), nDigits = 2, dropNa = TRUE)
 hgch_bar_Cat(data, colorScale = 'continuous')
 hgch_bar_Cat(data, percentage = TRUE,
              colors = c('orange'), colorScale = 'discrete',
@@ -158,39 +162,26 @@ hgch_bar_CatNum(data, marks = c(",", "."))
 hgch_bar_CatNum(data, horLineLabel = 'hola', horLine = 2000)
 hgch_bar_CatNum(data, orientation = 'hor',  horLine = 4)
 data <- sampleData("Dat-Num", nrow = 100)
-hgch_bar_ver_DatNum(data)
+hgch_bar_DatNum(data)
 
 data <- sampleData("Yea-Num", nrow = 10)
-hgch_bar_ver_YeaNum(data)
-hgch_bar_ver_YeaNum(data, theme = tmp_theme)
+hgch_bar_YeaNum(data)
+hgch_bar_YeaNum(data, horLine = 500)
 
 data <- sampleData("Cat-Cat-Num", nrow = 100)
-hgch_bar_grouped_ver_CatCatNum(data)
-hgch_bar_grouped_hor_CatCatNum(data)
+hgch_bar_grouped_CatCatNum(data)
+hgch_bar_grouped_CatCatNum(data, order1 = c('CatB'), order2 = c('X_C', 'X_B'), labelWrap = c(NULL, NULL))
+hgch_bar_grouped_CatCatNum(data, percentage = TRUE, format = c('','v'))
+hgch_bar_grouped_CatCatNum(data, title = 'título', subtitle = 'subtitulo', caption = 'caption',
+                           verLabel = 'título vertical',  horLabel = 'título horizontal', verLine = 5, verLineLabel = 'hoa')
 
-data <- sampleData("Cat-Yea-Num",nrow = 100, rep = TRUE, nlevels = 3)
-hgch_bar_grouped_ver_CatYeaNum(data)
-
-data <- sampleData("Cat-Cat-Num", nrow = 100)
-hgch_bar_stacked_ver_CatCatNum(data, theme = tmp_theme)
-hgch_bar_stacked_hor_CatCatNum(data)
-hgch_bar_stacked_100_ver_CatCatNum(data)
-hgch_bar_stacked_100_hor_CatCatNum(data)
-
-data <- sampleData("Cat-Dat-Num", nrow = 100)
-hgch_bar_stacked_ver_CatDatNum(data)
-hgch_bar_stacked_100_ver_CatDatNum(data)
-
-data <- sampleData("Cat-NumP", nrow = 5)
-hgch_bar_grouped_ver_CatNumP(data)
-hgch_bar_grouped_hor_CatNumP(data)
-
-data <- sampleData("Cat-NumP",nrow = 10)
-hgch_bar_grouped_hor_CatNumP(data)
+hgch_bar_grouped_CatCatNum(data, orientation = 'hor', title = 'título', subtitle = 'subtitulo', caption = 'caption',
+                           verLabel = 'título vertical',  horLabel = 'título horizontal', verLine = 4000,
+                           marks = c(',', '.'), nDigits = 3, percentage = TRUE)
 
 
-hgch_bar_grouped_ver_CatCat(sampleData("Cat-Cat",nrow = 10))
-hgch_bar_grouped_hor_CatCat(sampleData("Cat-Cat",nrow = 10))
+
+
 
 
 data <- sampleData('Cat-Num',nrow = 100)

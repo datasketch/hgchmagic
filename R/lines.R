@@ -340,10 +340,6 @@ hgch_line_CatYeaNum <- function(data,
   # k <- k %>% dplyr::select(a, b, valor = c)
 
 
-  if (dropNa)
-    d <- d %>%
-    tidyr::drop_na()
-
   # d <- d %>%
   #   tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
   #                          b = ifelse(is.character(d$b), "NA", NA),

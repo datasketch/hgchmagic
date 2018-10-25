@@ -13,7 +13,7 @@ hgch_bar_DatNum(data, title = NULL, subtitle = NULL, caption = NULL,
   percentage = FALSE, format = c("", ""), highlightValue = NULL,
   order = NULL, sort = "no", sliceN = NULL,
   tooltip = list(headerFormat = NULL, pointFormat = NULL),
-  export = FALSE, theme = tma())
+  export = FALSE, theme = tma(), ...)
 }
 \arguments{
 \item{data}{A data.frame}
