@@ -197,20 +197,7 @@ tma <- function(background = 'transparent',
           )
         )
       ),
-      line = list(
-        colorByPoint = diffColorsBar,
-        dataLabels = list (
-          enabled = showText,
-          style = list (
-            color = labsData$colLabel,
-            fontFamily = labsData$familyLabel,
-            fontSize = labsData$sizeLabel,
-            textDecoration= labsData$textDecoration,
-            textShadow = labsData$textShadow,
-            textOutline = labsData$textOutline
-          )
-        )
-      ),
+
       series = list(
         lineWidth = lineWidth,
         negativeColor = negativeColor,

@@ -550,6 +550,18 @@ hgch_bar_grouped_CatCat <-function(data,
   hgch_bar_grouped_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,agg,colors,colorScale,dropNa,format,labelWrap,leyendPosition, marks, nDigits,order1,order2,orientation,percentage,showText,theme,tooltip,export, ...)
 }
 
+#' Grouped bar (categories, years, numbers)
+#'
+#' Compare quantities among categories over years
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Cat-Yea-Num
+#' @examples
+#' hgch_bar_grouped_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
+#' @export hgch_bar_grouped_CatYeaNum
+hgch_bar_grouped_CatYeaNum <- hgch_bar_grouped_CatCatNum
 
 #' Compare quantities among stacked categories
 #'

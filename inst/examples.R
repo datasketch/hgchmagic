@@ -48,9 +48,11 @@ data <- sampleData("Dat-Num",gt0 = FALSE)
 hgch_line_DatNum(data)
 hgch_line_DatNum(data, export = TRUE)
 
+dc <- sampleData('Cat', nrow = 1000)
+hgch_line_Cat(dc)
 d <- sampleData("Cat-Num",gt0 = FALSE)
-hgch_line_CatNum(d)
-
+hgch_line_CatNum(d, theme = tma(), percentage = T, startAtZero = F, plotBandsFromX = 1, plotBandsToX = 2)
+hgch_line_CatNum(d, theme = tma(), verLine = 5, horLine = 3000, spline = T, colors = c('orange'), sort = 'asc')
 data <- sampleData("Cat-Yea-Num",nrow = 40)
 hgch_line_CatYeaNum(data)
 hgch_line_CatYeaNum(data, symbol = "square")
@@ -164,8 +166,8 @@ hgch_bar_CatNum(data, orientation = 'hor',  horLine = 4)
 data <- sampleData("Dat-Num", nrow = 100)
 hgch_bar_DatNum(data)
 
-data <- sampleData("Yea-Num", nrow = 10)
-hgch_bar_YeaNum(data)
+data <- sampleData("Yea-Num", nrow = 100)
+hgch_bar_YeaNum(data, order = c('1909'))
 hgch_bar_YeaNum(data, horLine = 500)
 
 data <- sampleData("Cat-Cat-Num", nrow = 100)
@@ -175,12 +177,17 @@ hgch_bar_grouped_CatCatNum(data, percentage = TRUE, format = c('','v'))
 hgch_bar_grouped_CatCatNum(data, title = 'título', subtitle = 'subtitulo', caption = 'caption',
                            verLabel = 'título vertical',  horLabel = 'título horizontal', verLine = 5, verLineLabel = 'hoa')
 
-hgch_bar_grouped_CatCatNum(data, orientation = 'hor', title = 'título', subtitle = 'subtitulo', caption = 'caption',
+dyear <- sampleData('Cat-Yea-Num', nrow = 100)
+hgch_bar_stacked_CatYeaNum(dyear)
+hgch_bar_grouped_CatYeaNum(dyear, title = 'título', subtitle = 'subtitulo', caption = 'caption',
+                           verLabel = 'título vertical',  horLabel = 'título horizontal', verLine = 5, verLineLabel = 'hoa')
+
+df <- sampleData("Cat-Cat-Num", nrow = 100)
+hgch_bar_stacked_CatCatNum(df, orientation = 'hor', title = 'título', subtitle = 'subtitulo', caption = 'caption',
                            verLabel = 'título vertical',  horLabel = 'título horizontal', verLine = 4000,
                            marks = c(',', '.'), nDigits = 3, percentage = TRUE)
 
-
-
+#
 
 
 
