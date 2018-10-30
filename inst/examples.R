@@ -5,7 +5,6 @@ devtools::document()
 devtools::install()
 
 
-
 library(hgchmagic)
 
 meta <- hgchMeta()
@@ -70,7 +69,10 @@ data$start <- as.Date(data$start)
 hgch_line_CatDatNum(data)
 
 data <- sampleData("Cat-Cat-Num", nrow = 100)
-hgch_line_CatCatNum(data, symbol = "square")
+hgch_line_CatCatNum(data, horLine = 300, horLineLabel = 'hola',
+                    agg = 'mean', colors = c('red'), dropNa = c(F, T))
+
+
 
 data <- sampleData("Yea-Num", nrow = 20)
 hgch_line_YeaNum(data, symbol = "square")

@@ -587,18 +587,7 @@
 
 #'
 #'
-#' #' Line (dates, numbers)
-#' #'
-#' #' Compare a quantities over time (Year-month-day)
-#' #'
-#' #' @param data A data.frame
-#' #' @return Highcharts visualization
-#' #' @section ctypes:
-#' #' Dat-Num
-#' #' @examples
-#' #' hgch_line_DatNum(sampleData("Dat-Num", nrow = 10))
-#' #' @export hgch_line_DatNum
-#' hgch_line_DatNum <- hgch_line_OcaNum
+
 #'
 #'
 #'
