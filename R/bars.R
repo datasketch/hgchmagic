@@ -86,6 +86,8 @@ hgch_bar_CatNum <-  function(data,
                            b = NA)) %>%
     dplyr::group_by(a) %>%
     dplyr::summarise(b = agg(agg, b))
+  d$a <- as.character(d$a)
+  d$a[is.na(d$a)] <- 'NA'
 
   if (is.null(nDigits)) {
     nDig <- 0
@@ -562,6 +564,20 @@ hgch_bar_grouped_CatCat <-function(data,
 #' hgch_bar_grouped_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
 #' @export hgch_bar_grouped_CatYeaNum
 hgch_bar_grouped_CatYeaNum <- hgch_bar_grouped_CatCatNum
+
+
+#' Grouped bar (categories, years, numbers)
+#'
+#' Compare quantities among categories over years
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Cat-Dat-Num
+#' @examples
+#' hgch_bar_grouped_CatDatNum(sampleData("Cat-Yea-Num", nrow = 10))
+#' @export hgch_bar_grouped_CatDatNum
+hgch_bar_grouped_CatDatNum <- hgch_bar_grouped_CatCatNum
 
 #' Compare quantities among stacked categories
 #'

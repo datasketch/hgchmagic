@@ -58,7 +58,7 @@ hgch_line_CatNum <-  function(data,
 
   if (is.null(theme$colors)) {
     if (!is.null(colors)) {
-      theme$colors <- unname(fillColors(d, "a", colors, colorScale = 'discrete'))
+      theme$colors <- unname(fillColors(d, "a", colors, colorScale = 'no'))
     } else {
       theme$colors <- colorDefault
     }
@@ -73,6 +73,9 @@ hgch_line_CatNum <-  function(data,
                            b = NA)) %>%
     dplyr::group_by(a) %>%
     dplyr::summarise(b = agg(agg, b))
+
+  d$a <- as.character(d$a)
+  d$a[is.na(d$a)] <- 'NA'
 
   if (is.null(nDigits)) {
     nDig <- 0
@@ -367,7 +370,10 @@ hgch_line_CatCatNum <- function(data,
     tidyr::spread(b, c) %>%
     tidyr::gather(b, c, -a)
   d$c[is.na(d$c)] <- NA
-
+  d$a <- as.character(d$a)
+  d$a[is.na(d$a)] <- NA
+  d$b <- as.character(d$b)
+  d$b[is.na(d$b)] <- NA
 
   if (is.null(nDigits)) {
     nDig <- 0
@@ -565,3 +571,18 @@ hgch_line_CatCat <- function(data,
 #' @export hgch_line_CatYeaNum
 
 hgch_line_CatYeaNum <- hgch_line_CatCatNum
+
+
+#' Line (categories, years, numbers)
+#'
+#' Compare quantities among categories over years
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Cat-Yea-Num
+#' @examples
+#' hgch_line_CatDatNum(sampleData("Cat-Dat-Num", nrow = 70))
+#' @export hgch_line_CatDatNum
+
+hgch_line_CatDatNum <- hgch_line_CatCatNum
