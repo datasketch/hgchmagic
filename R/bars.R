@@ -871,3 +871,50 @@ hgch_bar_stacked_CatYeaNum <- hgch_bar_stacked_CatCatNum
 #' hgch_bar_stacked_CatYeaNum(sampleData("Cat-Dat-Num", nrow = 10))
 #' @export hgch_bar_stacked_CatDatNum
 hgch_bar_stacked_CatDatNum <- hgch_bar_stacked_CatCatNum
+
+
+#' Bar (ordered category, n numbers)
+#'
+#' Compare n quantities among category's levels
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Cat-NumP
+#' @examples
+#' hgch_bar_grouped_CatNumP(sampleData("Cat-NumP", nrow = 10))
+#' @export hgch_bar_grouped_CatNumP
+
+hgch_bar_grouped_CatNumP <- function(data,
+                                   title = NULL,
+                                   subtitle = NULL,
+                                   caption = NULL,
+                                   horLabel = NULL,
+                                   verLabel = NULL,
+                                   horLine = NULL,
+                                   horLineLabel = " ",
+                                   verLine = NULL,
+                                   verLineLabel = " ",
+                                   agg = "sum",
+                                   colors = c("#009EE3", "#F9B233"),
+                                   colorScale = 'discrete',
+                                   dropNa = c(FALSE, FALSE),
+                                   format = c("", ""),
+                                   labelWrap = c(12, 12),
+                                   leyendPosition = "right",
+                                   marks = c(".", ","),
+                                   nDigits = NULL,
+                                   order1 = NULL,
+                                   order2 = NULL,
+                                   orientation = "ver",
+                                   percentage = FALSE,
+                                   showText = TRUE,
+                                   theme = tma(diffColorsBar = FALSE),
+                                   tooltip = list("headerFormat" = NULL,
+                                                  "pointFormat" = NULL,
+                                                  "shared" = NULL),
+                                   export = FALSE, ...) {
+
+  data <- data %>% gather("Categories", "Conteo", names(data)[-1])
+  hgch_bar_grouped_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,agg,colors,colorScale,dropNa,format,labelWrap,leyendPosition, marks, nDigits,order1,order2,orientation,percentage,showText,theme,tooltip,export, ...)
+}

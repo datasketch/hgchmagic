@@ -1,5 +1,5 @@
 
-source("inst/meta.R")
+#source("inst/meta.R")
 devtools::load_all()
 devtools::document()
 devtools::install()
@@ -70,6 +70,9 @@ hgch_bar_grouped_CatYeaNum(dfCAN)
 hgch_bar_stacked_CatYeaNum(dfCAN, percentage = TRUE)
 
 
+# Categoricos y P columnas numericas
+dfCNp <- sampleData('Cat-NumP')
+hgch_bar_grouped_CatNumP(dfCNp)
 # Líneas ------------------------------------------------------------------
 
 
@@ -123,7 +126,9 @@ hgch_line_CatDatNum(dfCDN)
 dfCAN <- sampleData('Cat-Yea-Num')
 hgch_line_CatYeaNum(dfCAN, startAtZero = F)
 
-
+# Categoricos y P columnas numericas
+dfCNp <- sampleData('Cat-NumP')
+hgch_line_CatNumP(dfCNp)
 
 # # Available
 #

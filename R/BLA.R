@@ -139,18 +139,7 @@
 #' hgch_bar_stacked_100_CatDatNum <- hgch_bar_stacked_100_CatCatNum
 #'
 #'
-#' #' Bar (ordered category, n numbers)
-#' #'
-#' #' Compare n quantities among category's levels
-#' #'
-#' #' @param data A data.frame
-#' #' @return Highcharts visualization
-#' #' @section ctypes:
-#' #' Cat-NumP
-#' #' @examples
-#' #' hgch_bar_grouped_CatNumP(sampleData("Cat-NumP", nrow = 10))
-#' #' @export hgch_bar_grouped_CatNumP
-#' hgch_bar_grouped_CatNumP <- function(data,
+# function(data,
 #'                                      title = NULL,
 #'                                      subtitle = NULL,
 #'                                      caption = NULL,
@@ -884,17 +873,7 @@
 #'
 #'
 #'
-#' #' Line (ordered category, n numbers)
-#' #'
-#' #' Compare n quantities among category's levels
-#' #'
-#' #' @param data A data.frame
-#' #' @return Highcharts visualization
-#' #' @section ctypes:
-#' #' Oca-NumP
-#' #' @examples
-#' #' hgch_line_OcaNumP(sampleData("Oca-NumP", nrow = 10))
-#' #' @export hgch_line_OcaNumP
+
 #' hgch_line_OcaNumP <- function(data,
 #'                               title = NULL,
 #'                               subtitle = NULL,

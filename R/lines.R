@@ -586,3 +586,57 @@ hgch_line_CatYeaNum <- hgch_line_CatCatNum
 #' @export hgch_line_CatDatNum
 
 hgch_line_CatDatNum <- hgch_line_CatCatNum
+
+
+#' Line (ordered category, n numbers)
+#'
+#' Compare n quantities among category's levels
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Cat-NumP
+#' @examples
+#' hgch_line_CatNumP(sampleData("Cat-NumP", nrow = 10))
+#' @export hgch_line_CatNumP
+
+hgch_line_CatNumP <- function(data,
+                              title = NULL,
+                              subtitle = NULL,
+                              caption = NULL,
+                              horLabel = NULL,
+                              verLabel = NULL,
+                              horLine = NULL,
+                              horLineLabel = " ",
+                              verLine = NULL,
+                              verLineLabel = " ",
+                              startAtZero = TRUE,
+                              agg = "sum",
+                              spline = FALSE,
+                              colors = NULL,
+                              dropNa = c(FALSE, FALSE),
+                              format = c("", ""),
+                              labelWrap = c(12, 12),
+                              leyendPosition = "right",
+                              marks = c(".", ","),
+                              nDigits = NULL,
+                              order1 = NULL,
+                              order2 = NULL,
+                              percentage = FALSE,
+                              showText = TRUE,
+                              theme = tma(),
+                              plotBandsFromX = NULL,
+                              plotBandsToX = NULL,
+                              plotBandsColorX = 'rgba(68, 170, 213, .2)',
+                              plotBandsFromY = NULL,
+                              plotBandsToY = NULL,
+                              plotBandsColorY = 'rgba(68, 170, 213, .2)',
+                              tooltip = list("headerFormat" = NULL,
+                                             "pointFormat" = NULL,
+                                             "shared" = NULL),
+                              export = FALSE, ...) {
+
+  data <- data %>% gather("Categories", "Conteo", names(data)[-1])
+  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNa = dropNa,format = format,labelWrap = labelWrap,leyendPosition = leyendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,plotBandsFromX = plotBandsFromX,plotBandsToX = plotBandsToX,plotBandsColorX = plotBandsColorX,plotBandsFromY = plotBandsFromY,plotBandsToY = plotBandsToY,plotBandsColorY = plotBandsColorY,tooltip = tooltip,export = export, ...)
+  h
+}
