@@ -19,6 +19,7 @@ hgch_line_CatNum <-  function(data,
                               horLineLabel = " ",
                               verLine = NULL,
                               verLineLabel = " ",
+                              orientation = "ver",
                               startAtZero = TRUE,
                               labelWrap = 12,
                               colors = NULL,
@@ -32,12 +33,6 @@ hgch_line_CatNum <-  function(data,
                               order = NULL,
                               sort = "no",
                               sliceN = NULL,
-                              plotBandsFromX = NULL,
-                              plotBandsToX = NULL,
-                              plotBandsColorX = 'rgba(68, 170, 213, .2)',
-                              plotBandsFromY = NULL,
-                              plotBandsToY = NULL,
-                              plotBandsColorY = 'rgba(68, 170, 213, .2)',
                               tooltip = list(headerFormat = NULL, pointFormat = NULL),
                               export = FALSE,
                               theme = tma(), ...) {
@@ -50,8 +45,16 @@ hgch_line_CatNum <-  function(data,
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
-  horLabel <- horLabel %||% nms[1]
-  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste(agg, nms[2]))
+  labelsXY <- orientationXY(orientation,
+                            x = nms[1],
+                            y = ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste(agg, nms[2])),
+                            hor = horLabel,
+                            ver = verLabel)
+  lineXY <- linesOrientation(orientation, horLine, verLine)
+
+  lineLabelsXY <- linesOrLabel(orientation,
+                               horLineLabel,
+                               verLineLabel)
 
   colorDefault <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
 
@@ -88,8 +91,8 @@ hgch_line_CatNum <-  function(data,
   }
 
   d$b <- round(d$b, nDig)
-  d <- orderCategory(d, "a", order, labelWrap)
   d <- sortSlice(d, "b", sort, sliceN)
+  d <- orderCategory(d, "a", order, labelWrap)
 
 
   d <- d %>% plyr::rename(c('b' = 'y'))
@@ -137,26 +140,23 @@ hgch_line_CatNum <-  function(data,
   global_options(marks[1], marks[2])
 
   hc <- highchart() %>%
-    hc_chart(type = ifelse(spline, "spline", "line")) %>%
+    hc_chart(type = ifelse(spline, "spline", "line"),
+             inverted = ifelse(orientation == 'ver', FALSE, TRUE)) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
     hc_xAxis(
-      title =  list(text = horLabel),
+      title =  list(text = labelsXY[1]),
       categories = map(as.character(unique(d$a)), function(z) z),
-      plotBands = list(
-        from = plotBandsFromX,
-        to = plotBandsToX,
-        color = plotBandsColorX
-      ),
+
       plotLines = list(
-        list(value = verLine,
+        list(value = lineXY[2],
              color = 'black',
              dashStyle = 'shortdash',
              zIndex = 5,
              width = 2,
              label = list(
-               text = verLineLabel,
+               text = lineLabelsXY[1],
                style = list(
                  color = 'black'
                )
@@ -164,24 +164,19 @@ hgch_line_CatNum <-  function(data,
       #type= 'category'
     ) %>%
     hc_yAxis(
-      title = list (
-        text = verLabel),
       minRange = if (startAtZero) 0.1,
       min = if (startAtZero) 0,
       minPadding = if (startAtZero) 0,
-      plotBands = list(
-        from = plotBandsFromY,
-        to = plotBandsToY,
-        color = plotBandsColorY
-      ),
+      title = list (
+        text = labelsXY[2]),
       plotLines = list(
-        list(value = horLine,
+        list(value = lineXY[1],
              color = 'black',
              dashStyle = 'shortdash',
              width = 2,
              zIndex = 5,
              label = list(
-               text = horLineLabel,
+               text = lineLabelsXY[2],
                style = list(
                  color = 'black'
                )
@@ -223,6 +218,7 @@ hgch_line_Cat <-  function(data,
                            horLineLabel = " ",
                            verLine = NULL,
                            verLineLabel = " ",
+                           orientation = "ver",
                            startAtZero = TRUE,
                            labelWrap = 12,
                            colors = NULL,
@@ -236,22 +232,17 @@ hgch_line_Cat <-  function(data,
                            order = NULL,
                            sort = "no",
                            sliceN = NULL,
-                           plotBandsFromX = NULL,
-                           plotBandsToX = NULL,
-                           plotBandsColorX = 'rgba(68, 170, 213, .2)',
-                           plotBandsFromY = NULL,
-                           plotBandsToY = NULL,
-                           plotBandsColorY = 'rgba(68, 170, 213, .2)',
                            tooltip = list(headerFormat = NULL, pointFormat = NULL),
                            export = FALSE,
                            theme = tma(), ...) {
 
-
+  nameD <- paste('count', names(data))
   data <- data  %>%
     dplyr::group_by_(names(data)) %>%
     dplyr::summarise(Conteo = n())
+  data <- plyr::rename(data, c("Conteo" = nameD))
 
-  h <- hgch_line_CatNum(data = data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine ,verLineLabel = verLineLabel,startAtZero = startAtZero,labelWrap = labelWrap,colors ,agg = agg,spline = spline,marks = marks,nDigits = nDigits,dropNa = dropNa,percentage = percentage,format = format,order = order,sort = sort,sliceN = sliceN,plotBandsFromX = plotBandsFromX,plotBandsToX = plotBandsToX,plotBandsColorX = plotBandsColorX,plotBandsFromY = plotBandsFromY ,plotBandsToY = plotBandsToY,plotBandsColorY = plotBandsColorY,tooltip = tooltip,export = export,theme = theme, ...)
+  h <- hgch_line_CatNum(data = data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine, verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,labelWrap = labelWrap,colors ,agg = agg,spline = spline,marks = marks,nDigits = nDigits,dropNa = dropNa,percentage = percentage,format = format,order = order,sort = sort,sliceN = sliceN, tooltip = tooltip,export = export,theme = theme, ...)
   h
 }
 
@@ -304,6 +295,7 @@ hgch_line_CatCatNum <- function(data,
                                 horLineLabel = " ",
                                 verLine = NULL,
                                 verLineLabel = " ",
+                                orientation = "ver",
                                 startAtZero = TRUE,
                                 agg = "sum",
                                 spline = FALSE,
@@ -317,14 +309,7 @@ hgch_line_CatCatNum <- function(data,
                                 order1 = NULL,
                                 order2 = NULL,
                                 percentage = FALSE,
-                                showText = TRUE,
                                 theme = tma(),
-                                plotBandsFromX = NULL,
-                                plotBandsToX = NULL,
-                                plotBandsColorX = 'rgba(68, 170, 213, .2)',
-                                plotBandsFromY = NULL,
-                                plotBandsToY = NULL,
-                                plotBandsColorY = 'rgba(68, 170, 213, .2)',
                                 tooltip = list("headerFormat" = NULL,
                                                "pointFormat" = NULL,
                                                "shared" = NULL),
@@ -338,8 +323,17 @@ hgch_line_CatCatNum <- function(data,
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
-  horLabel <- horLabel %||% nms[1]
-  verLabel <- verLabel %||% ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste(agg, nms[2]))
+  labelsXY <- orientationXY(orientation,
+                            x = nms[1],
+                            y = ifelse(nrow(d) == dplyr::n_distinct(d$b), nms[3], paste(agg, nms[3])),
+                            hor = horLabel,
+                            ver = verLabel)
+
+  lineXY <- linesOrientation(orientation, horLine, verLine)
+
+  lineLabelsXY <- linesOrLabel(orientation,
+                               horLineLabel,
+                               verLineLabel)
 
   colorDefault <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
 
@@ -348,8 +342,8 @@ hgch_line_CatCatNum <- function(data,
     if (!is.null(colors)) {
       theme$colors <- unname(fillColors(d, "a", colors, 'discrete'))
     } else {
-        theme$colors <- colorDefault
-      }
+      theme$colors <- colorDefault
+    }
   }
 
   if (dropNa[1])
@@ -438,26 +432,21 @@ hgch_line_CatCatNum <- function(data,
 
 
   hc <- highchart() %>%
-    hc_chart(type = ifelse(spline, "spline", "line")) %>%
+    hc_chart(type = ifelse(spline, "spline", "line"),
+             inverted = ifelse(orientation == 'ver', FALSE, TRUE)) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(
       categories = map(as.character(unique(d$b)), function(z) z),
-      title = list(text = horLabel),
-      #allowDecimals = FALSE,
-      plotBands = list(
-        from = plotBandsFromX,
-        to = plotBandsToX,
-        color = plotBandsColorX
-      ),
+      title = list(text = labelsXY[1]),
       plotLines = list(
-        list(value = verLine,
+        list(value = lineXY[2],
              color = 'black',
              dashStyle = 'shortdash',
              zIndex = 5,
              width = 2,
              label = list(
-               text = verLineLabel,
+               text = lineLabelsXY[1],
                style = list(
                  color = 'black'
                )
@@ -465,24 +454,19 @@ hgch_line_CatCatNum <- function(data,
       type= 'category'
     ) %>%
     hc_yAxis(
-      title = list (
-        text = verLabel),
       minRange = if (startAtZero) 0.1,
       min = if (startAtZero) 0,
       minPadding = if (startAtZero) 0,
-      plotBands = list(
-        from = plotBandsFromY,
-        to = plotBandsToY,
-        color = plotBandsColorY
-      ),
+      title = list (
+        text = labelsXY[2]),
       plotLines = list(
-        list(value = horLine,
+        list(value = lineXY[1],
              color = 'black',
              dashStyle = 'shortdash',
              width = 2,
              zIndex = 5,
              label = list(
-               text = horLineLabel,
+               text = lineLabelsXY[2],
                style = list(
                  color = 'black'
                )
@@ -524,6 +508,7 @@ hgch_line_CatCat <- function(data,
                              horLineLabel = " ",
                              verLine = NULL,
                              verLineLabel = " ",
+                             orientation = "ver",
                              startAtZero = TRUE,
                              agg = "sum",
                              spline = FALSE,
@@ -537,24 +522,19 @@ hgch_line_CatCat <- function(data,
                              order1 = NULL,
                              order2 = NULL,
                              percentage = FALSE,
-                             showText = TRUE,
                              theme = tma(),
-                             plotBandsFromX = NULL,
-                             plotBandsToX = NULL,
-                             plotBandsColorX = 'rgba(68, 170, 213, .2)',
-                             plotBandsFromY = NULL,
-                             plotBandsToY = NULL,
-                             plotBandsColorY = 'rgba(68, 170, 213, .2)',
                              tooltip = list("headerFormat" = NULL,
                                             "pointFormat" = NULL,
                                             "shared" = NULL),
                              export = FALSE, ...) {
 
   datN <- names(data)
+  nameD <- paste('count', datN[1])
   data <- data %>%
     dplyr::group_by_(datN[1], datN[2]) %>%
     dplyr::summarise(Conteo = n())
-  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNa = dropNa,format = format,labelWrap = labelWrap,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,plotBandsFromX = plotBandsFromX,plotBandsToX = plotBandsToX,plotBandsColorX = plotBandsColorX,plotBandsFromY = plotBandsFromY,plotBandsToY = plotBandsToY,plotBandsColorY = plotBandsColorY,tooltip = tooltip,export = export, ...)
+  data <- plyr::rename(data, c("Conteo" = nameD))
+  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNa = dropNa,format = format,labelWrap = labelWrap,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,theme = theme,tooltip = tooltip,export = export, ...)
   h
 }
 
@@ -610,6 +590,7 @@ hgch_line_CatNumP <- function(data,
                               horLineLabel = " ",
                               verLine = NULL,
                               verLineLabel = " ",
+                              orientation = "ver",
                               startAtZero = TRUE,
                               agg = "sum",
                               spline = FALSE,
@@ -623,20 +604,13 @@ hgch_line_CatNumP <- function(data,
                               order1 = NULL,
                               order2 = NULL,
                               percentage = FALSE,
-                              showText = TRUE,
                               theme = tma(),
-                              plotBandsFromX = NULL,
-                              plotBandsToX = NULL,
-                              plotBandsColorX = 'rgba(68, 170, 213, .2)',
-                              plotBandsFromY = NULL,
-                              plotBandsToY = NULL,
-                              plotBandsColorY = 'rgba(68, 170, 213, .2)',
                               tooltip = list("headerFormat" = NULL,
                                              "pointFormat" = NULL,
                                              "shared" = NULL),
                               export = FALSE, ...) {
 
   data <- data %>% gather("Categories", "Conteo", names(data)[-1])
-  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNa = dropNa,format = format,labelWrap = labelWrap,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,plotBandsFromX = plotBandsFromX,plotBandsToX = plotBandsToX,plotBandsColorX = plotBandsColorX,plotBandsFromY = plotBandsFromY,plotBandsToY = plotBandsToY,plotBandsColorY = plotBandsColorY,tooltip = tooltip,export = export, ...)
+  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNa = dropNa,format = format,labelWrap = labelWrap,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,theme = theme,tooltip = tooltip,export = export, ...)
   h
 }

@@ -9,12 +9,11 @@ hgch_bar_stacked_CatCatNum(data, title = NULL, subtitle = NULL,
   horLineLabel = " ", verLine = NULL, verLineLabel = " ",
   agg = "sum", colors = c("#009EE3", "#F9B233"),
   colorScale = "discrete", dropNa = c(FALSE, FALSE), format = c("",
-  ""), labelWrap = c(12, 12), leyendPosition = "right",
+  ""), labelWrap = c(12, 12), legendPosition = "right",
   marks = c(".", ","), nDigits = NULL, order1 = NULL,
   order2 = NULL, orientation = "ver", percentage = FALSE,
-  showText = TRUE, theme = tma(diffColorsBar = FALSE),
-  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
-  export = FALSE, ...)
+  theme = tma(diffColorsBar = FALSE), tooltip = list(headerFormat =
+  NULL, pointFormat = NULL, shared = NULL), export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

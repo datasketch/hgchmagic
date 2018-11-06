@@ -7,13 +7,10 @@
 hgch_line_DatNum(data, title = NULL, subtitle = NULL, caption = NULL,
   horLabel = NULL, verLabel = NULL, horLine = NULL,
   horLineLabel = " ", verLine = NULL, verLineLabel = " ",
-  startAtZero = TRUE, labelWrap = 12, colors = NULL, agg = "sum",
-  spline = FALSE, marks = c(".", ","), nDigits = NULL,
-  dropNa = FALSE, percentage = FALSE, format = c("", ""),
-  order = NULL, sort = "no", sliceN = NULL, plotBandsFromX = NULL,
-  plotBandsToX = NULL, plotBandsColorX = "rgba(68, 170, 213, .2)",
-  plotBandsFromY = NULL, plotBandsToY = NULL,
-  plotBandsColorY = "rgba(68, 170, 213, .2)",
+  orientation = "ver", startAtZero = TRUE, labelWrap = 12,
+  colors = NULL, agg = "sum", spline = FALSE, marks = c(".", ","),
+  nDigits = NULL, dropNa = FALSE, percentage = FALSE,
+  format = c("", ""), order = NULL, sort = "no", sliceN = NULL,
   tooltip = list(headerFormat = NULL, pointFormat = NULL),
   export = FALSE, theme = tma(), ...)
 }

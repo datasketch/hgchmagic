@@ -199,6 +199,17 @@ tma <- function(background = 'transparent',
       ),
 
       series = list(
+        dataLabels = list (
+          enabled = showText,
+          style = list (
+            color = labsData$colLabel,
+            fontFamily = labsData$familyLabel,
+            fontSize = labsData$sizeLabel,
+            textDecoration= labsData$textDecoration,
+            textShadow = labsData$textShadow,
+            textOutline = labsData$textOutline
+          )
+        ),
         lineWidth = lineWidth,
         negativeColor = negativeColor,
         pointStart = linePointStart,

@@ -245,10 +245,12 @@ hgch_bar_Cat <-  function(data,
                           export = FALSE,
                           theme = tma(), ...) {
 
-
+  nameD <- paste0('Count ', names(data))
   data <- data  %>%
     dplyr::group_by_(names(data)) %>%
     dplyr::summarise(Conteo = n())
+
+  data <- plyr::rename(data, c('Conteo' = nameD))
 
   h <- hgch_bar_CatNum(data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel, verLabel = verLabel, horLine = horLine, horLineLabel = horLineLabel, verLine = verLine, verLineLabel = verLineLabel, labelWrap = labelWrap, orientation = orientation, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN, tooltip = tooltip, export = export, theme = theme, ...)
   h
@@ -319,7 +321,6 @@ hgch_bar_grouped_CatCatNum <- function(data,
                                        order2 = NULL,
                                        orientation = "ver",
                                        percentage = FALSE,
-                                       showText = TRUE,
                                        theme = tma(diffColorsBar = FALSE),
                                        tooltip = list("headerFormat" = NULL,
                                                       "pointFormat" = NULL,
@@ -348,11 +349,8 @@ hgch_bar_grouped_CatCatNum <- function(data,
                                verLineLabel)
 
 
-  if (colorScale == 'discrete') {
-    colorDefault <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
-  } else {
-    colorDefault <- leaflet::colorNumeric(c("#2E0F35", "#A6CEDE"), 1:length(unique(d$a)))(1:length(unique(d$a)))
-  }
+  if (colorScale == 'discrete') colorDefault <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
+
 
   if (is.null(theme$colors)) {
     if (!is.null(colors)) {
@@ -537,7 +535,6 @@ hgch_bar_grouped_CatCat <-function(data,
                                    order2 = NULL,
                                    orientation = "ver",
                                    percentage = FALSE,
-                                   showText = TRUE,
                                    theme = tma(diffColorsBar = FALSE),
                                    tooltip = list("headerFormat" = NULL,
                                                   "pointFormat" = NULL,
@@ -549,7 +546,7 @@ hgch_bar_grouped_CatCat <-function(data,
     dplyr::group_by_(datN[1], datN[2]) %>%
     dplyr::summarise(Conteo = n())
 
-  hgch_bar_grouped_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,agg,colors,colorScale,dropNa,format,labelWrap,legendPosition, marks, nDigits,order1,order2,orientation,percentage,showText,theme,tooltip,export, ...)
+  hgch_bar_grouped_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,agg,colors,colorScale,dropNa,format,labelWrap,legendPosition, marks, nDigits,order1,order2,orientation,percentage,theme,tooltip,export, ...)
 }
 
 #' Grouped bar (categories, years, numbers)
@@ -611,7 +608,6 @@ hgch_bar_stacked_CatCatNum <- function(data,
                                        order2 = NULL,
                                        orientation = "ver",
                                        percentage = FALSE,
-                                       showText = TRUE,
                                        theme = tma(diffColorsBar = FALSE),
                                        tooltip = list("headerFormat" = NULL,
                                                       "pointFormat" = NULL,
@@ -829,7 +825,6 @@ hgch_bar_stacked_CatCat <-function(data,
                                    order2 = NULL,
                                    orientation = "ver",
                                    percentage = FALSE,
-                                   showText = TRUE,
                                    theme = tma(diffColorsBar = FALSE),
                                    tooltip = list("headerFormat" = NULL,
                                                   "pointFormat" = NULL,
@@ -841,7 +836,7 @@ hgch_bar_stacked_CatCat <-function(data,
     dplyr::group_by_(datN[1], datN[2]) %>%
     dplyr::summarise(Conteo = n())
 
-  hgch_bar_stacked_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,agg,colors,colorScale,dropNa,format,labelWrap,legendPosition, marks, nDigits,order1,order2,orientation,percentage,showText,theme,tooltip,export, ...)
+  hgch_bar_stacked_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,agg,colors,colorScale,dropNa,format,labelWrap,legendPosition, marks, nDigits,order1,order2,orientation,percentage,theme,tooltip,export, ...)
 }
 
 
@@ -908,7 +903,6 @@ hgch_bar_grouped_CatNumP <- function(data,
                                    order2 = NULL,
                                    orientation = "ver",
                                    percentage = FALSE,
-                                   showText = TRUE,
                                    theme = tma(diffColorsBar = FALSE),
                                    tooltip = list("headerFormat" = NULL,
                                                   "pointFormat" = NULL,
@@ -916,5 +910,5 @@ hgch_bar_grouped_CatNumP <- function(data,
                                    export = FALSE, ...) {
 
   data <- data %>% gather("Categories", "Conteo", names(data)[-1])
-  hgch_bar_grouped_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,agg,colors,colorScale,dropNa,format,labelWrap,legendPosition, marks, nDigits,order1,order2,orientation,percentage,showText,theme,tooltip,export, ...)
+  hgch_bar_grouped_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,agg,colors,colorScale,dropNa,format,labelWrap,legendPosition, marks, nDigits,order1,order2,orientation,percentage,theme,tooltip,export, ...)
 }
