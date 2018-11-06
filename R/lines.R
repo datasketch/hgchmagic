@@ -311,7 +311,7 @@ hgch_line_CatCatNum <- function(data,
                                 dropNa = c(FALSE, FALSE),
                                 format = c("", ""),
                                 labelWrap = c(12, 12),
-                                leyendPosition = "right",
+                                legendPosition = "right",
                                 marks = c(".", ","),
                                 nDigits = NULL,
                                 order1 = NULL,
@@ -496,7 +496,7 @@ hgch_line_CatCatNum <- function(data,
     hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
     hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
-    hc_legend(enabled = TRUE)
+    hc_legend(enabled = TRUE, align = legendPosition)
   if (export) hc <- hc %>%
     hc_exporting(enabled = TRUE)
 
@@ -531,7 +531,7 @@ hgch_line_CatCat <- function(data,
                              dropNa = c(FALSE, FALSE),
                              format = c("", ""),
                              labelWrap = c(12, 12),
-                             leyendPosition = "right",
+                             legendPosition = "right",
                              marks = c(".", ","),
                              nDigits = NULL,
                              order1 = NULL,
@@ -554,7 +554,7 @@ hgch_line_CatCat <- function(data,
   data <- data %>%
     dplyr::group_by_(datN[1], datN[2]) %>%
     dplyr::summarise(Conteo = n())
-  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNa = dropNa,format = format,labelWrap = labelWrap,leyendPosition = leyendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,plotBandsFromX = plotBandsFromX,plotBandsToX = plotBandsToX,plotBandsColorX = plotBandsColorX,plotBandsFromY = plotBandsFromY,plotBandsToY = plotBandsToY,plotBandsColorY = plotBandsColorY,tooltip = tooltip,export = export, ...)
+  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNa = dropNa,format = format,labelWrap = labelWrap,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,plotBandsFromX = plotBandsFromX,plotBandsToX = plotBandsToX,plotBandsColorX = plotBandsColorX,plotBandsFromY = plotBandsFromY,plotBandsToY = plotBandsToY,plotBandsColorY = plotBandsColorY,tooltip = tooltip,export = export, ...)
   h
 }
 
@@ -617,7 +617,7 @@ hgch_line_CatNumP <- function(data,
                               dropNa = c(FALSE, FALSE),
                               format = c("", ""),
                               labelWrap = c(12, 12),
-                              leyendPosition = "right",
+                              legendPosition = "right",
                               marks = c(".", ","),
                               nDigits = NULL,
                               order1 = NULL,
@@ -637,6 +637,6 @@ hgch_line_CatNumP <- function(data,
                               export = FALSE, ...) {
 
   data <- data %>% gather("Categories", "Conteo", names(data)[-1])
-  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNa = dropNa,format = format,labelWrap = labelWrap,leyendPosition = leyendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,plotBandsFromX = plotBandsFromX,plotBandsToX = plotBandsToX,plotBandsColorX = plotBandsColorX,plotBandsFromY = plotBandsFromY,plotBandsToY = plotBandsToY,plotBandsColorY = plotBandsColorY,tooltip = tooltip,export = export, ...)
+  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNa = dropNa,format = format,labelWrap = labelWrap,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,plotBandsFromX = plotBandsFromX,plotBandsToX = plotBandsToX,plotBandsColorX = plotBandsColorX,plotBandsFromY = plotBandsFromY,plotBandsToY = plotBandsToY,plotBandsColorY = plotBandsColorY,tooltip = tooltip,export = export, ...)
   h
 }
