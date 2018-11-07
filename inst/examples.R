@@ -48,17 +48,19 @@ hgch_bar_YeaNum(datYeaNum, agg = 'mean')
 
 # Categoricos - categoricos
 dfCC <- sampleData('Cat-Cat', 999)
-hgch_bar_grouped_CatCat(dfCC)
-hgch_bar_grouped_CatCat(dfCC, percentage = TRUE)
-hgch_bar_stacked_CatCat(dfCC)
-hgch_bar_stacked_CatCat(dfCC, percentage = T)
 
+hgch_bar_CatCat(dfCC)
+hgch_bar_CatCat(dfCC, percentage = TRUE)
+hgch_bar_CatCat(dfCC, graphType = "stack")
+hgch_bar_CatCat(dfCC, percentage = T, graphType = "stack")
+hgch_bar_CatCat(dfCC, percentage = T, graphType = "stack", order1 = c("TypeA", "TypeB", "TypeE"))
+hgch_bar_CatCat(dfCC, percentage = T, graphType = "stack", order2 = "X_B")
 # Categoricos - categoricos - Numericos
 dfCCN <- sampleData('Cat-Cat-Num', 500)
-hgch_bar_grouped_CatCatNum(dfCCN)
-hgch_bar_grouped_CatCatNum(dfCCN, colorScale = "no")
-hgch_bar_stacked_CatCatNum(dfCCN, percentage = T)
-hgch_bar_stacked_CatCatNum(dfCCN, percentage = T,
+hgch_bar_CatCatNum(dfCCN)
+hgch_bar_CatCatNum(dfCCN, colorScale = "no")
+hgch_bar_CatCatNum(dfCCN, percentage = T, graphType = "stack")
+hgch_bar_CatCatNum(dfCCN, percentage = T,
                            orientation = "ver", horLine = 60,
                            horLineLabel  = 'anaperra',
                            verLine = 3)
@@ -66,19 +68,23 @@ hgch_bar_stacked_CatCatNum(dfCCN, percentage = T,
 
 # Categoricos - Fecha - numericos
 dfCDN <- sampleData('Cat-Dat-Num')
-hgch_bar_grouped_CatDatNum(dfCDN)
-hgch_bar_stacked_CatDatNum(dfCDN)
+hgch_bar_CatDatNum(dfCDN)
+hgch_bar_CatDatNum(dfCDN,graphType = "stack")
+hgch_bar_CatDatNum(dfCDN,graphType = "stack", dropNa = c(TRUE, FALSE))
+hgch_bar_CatDatNum(dfCDN,graphType = "stack", dropNa = c(TRUE, TRUE))
+hgch_bar_CatDatNum(dfCDN,graphType = "stack", percentage = T)
+hgch_bar_CatDatNum(dfCDN)
 
 # Categoricos - Años - Numericos
 dfCAN <- sampleData('Cat-Yea-Num')
-hgch_bar_grouped_CatYeaNum(dfCAN)
-hgch_bar_stacked_CatYeaNum(dfCAN, percentage = TRUE)
-
+hgch_bar_CatYeaNum(dfCAN)
+hgch_bar_CatYeaNum(dfCAN, percentage = TRUE)
+hgch_bar_CatYeaNum(dfCAN, percentage = TRUE, graphType = "stack")
 
 # Categoricos y P columnas numericas
 dfCNp <- sampleData('Cat-NumP')
-hgch_bar_grouped_CatNumP(dfCNp)
-
+hgch_bar_CatNumP(dfCNp)
+hgch_bar_CatNumP(dfCNp, graphType = "stack")
 # Líneas ------------------------------------------------------------------
 # Categoricas
 
