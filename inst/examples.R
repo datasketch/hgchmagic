@@ -76,15 +76,18 @@ hgch_bar_CatDatNum(dfCDN,graphType = "stack", percentage = T)
 hgch_bar_CatDatNum(dfCDN)
 
 # Categoricos - Años - Numericos
-dfCAN <- sampleData('Cat-Yea-Num')
+dfCAN <- sampleData('Cat-Yea-Num', 100)
 hgch_bar_CatYeaNum(dfCAN)
 hgch_bar_CatYeaNum(dfCAN, percentage = TRUE)
 hgch_bar_CatYeaNum(dfCAN, percentage = TRUE, graphType = "stack")
+hgch_bar_CatYeaNum(dfCAN, percentage = TRUE, graphType = "stack", orientation = "hor")
 
 # Categoricos y P columnas numericas
 dfCNp <- sampleData('Cat-NumP')
 hgch_bar_CatNumP(dfCNp)
+hgch_bar_CatNumP(dfCNp, orientation = "hor")
 hgch_bar_CatNumP(dfCNp, graphType = "stack")
+hgch_bar_CatNumP(dfCNp, graphType = "stack", orientation = "hor", percentage = T)
 # Líneas ------------------------------------------------------------------
 # Categoricas
 
@@ -144,32 +147,45 @@ hgch_line_CatYeaNum(dfCAN, startAtZero = F)
 dfCNp <- sampleData('Cat-NumP')
 hgch_line_CatNumP(dfCNp)
 
-# # Available
-#
-# dir <- find.package("hgchmagic", lib.loc = NULL)
-# list.files(dir)
-# file.info(system.file("meta.csv",package = "hgchmagic"))
-#
-# funsMeta <- hgchMeta()
-#
-#
-#
-#
+
+# Pie ---------------------------------------------------------------------
+
+# Categorico
+dfC <- sampleData("Cat", nrow = 10)
+hgch_pie_Cat(dfC, title = "TITLE", subtitle = "Subtitle")
+
+
+# Categorico - Numerico
+data <- sampleData("Cat-Num", nrow = 100)
+hgch_pie_CatNum(data)
+hgch_pie_CatNum(data, colors = c("darkred", "#FFFDDD"))
+hgch_pie_CatNum(data, colors = c("darkred"), colorScale = "no", highlightValue = "CatD", highlightValueColor = "orange")
+hgch_pie_CatNum(data,
+                title = "esto es un título",
+                subtitle = "Subtitulo",
+                caption = "estos son los creditos")
+hgch_pie_CatNum(data, percentage = TRUE, nDigits = 3, marks = c(",", "x"))
+hgch_pie_CatNum(data, export = TRUE, theme = tma(showText = F, showLegend = T))
+hgch_pie_CatNum(data, percentage = TRUE, nDigits = 2,
+                legendPosition = c("left", "top"),
+                theme = tma(showText = F, showLegend = T))
+
+
+# Donut -------------------------------------------------------------------
+
+hgch_donut_CatNum(data)
+
 # # Pie and Donut
 #
 # availableCtypeIds()
 #
-# data <- sampleData("Cat", nrow = 10)
-# hgch_pie_Cat(data, title = "TITLE", subtitle = "Subtitle")
-#
+
 #
 #
 # hgch_donut_Cat(data)
 # hgch_donut_Cat(data, title = "TITLE", subtitle = "Subtitle")
 #
-# data <- sampleData("Cat-Num", nrow = 10)
-# hgch_pie_CatNum(data, export = TRUE, font_size = '17px')
-# hgch_donut_CatNum(data)
+
 #
 #
 # # Lines

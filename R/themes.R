@@ -128,6 +128,7 @@ tma <- function(background = 'transparent',
                 plotBorderWidth = 1,
                 showText = TRUE,
                 symbLine = TRUE,
+                showLegend = FALSE,
                 lineWidth = 2,
                 negativeColor = FALSE,
                 linePointStart = 0,
@@ -197,7 +198,20 @@ tma <- function(background = 'transparent',
           )
         )
       ),
-
+      pie = list(
+        showInLegend = showLegend,
+        dataLabels = list (
+          enabled = showText,
+          style = list (
+            color = labsData$colLabel,
+            fontFamily = labsData$familyLabel,
+            fontSize = labsData$sizeLabel,
+            textDecoration= labsData$textDecoration,
+            textShadow = labsData$textShadow,
+            textOutline = labsData$textOutline
+          )
+        )
+      ),
       series = list(
         dataLabels = list (
           enabled = showText,

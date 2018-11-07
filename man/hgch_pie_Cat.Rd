@@ -2,11 +2,16 @@
 % Please edit documentation in R/proportions.R
 \name{hgch_pie_Cat}
 \alias{hgch_pie_Cat}
-\title{Pie (categories)}
+\title{pie (categories)}
 \usage{
 hgch_pie_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
-  dropNa = FALSE, order = NULL, sort = "no", sliceN = NULL,
-  theme = NULL, export = FALSE, ...)
+  labelWrap = 12, colors = NULL, colorScale = "discrete",
+  agg = "sum", marks = c(".", ","), nDigits = NULL, dropNa = FALSE,
+  highlightValueColor = "#F9B233", percentage = FALSE, format = c("",
+  ""), highlightValue = NULL, order = NULL, sort = "no",
+  sliceN = NULL, legendPosition = c("right", "bottom"),
+  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  export = FALSE, theme = tma(), ...)
 }
 \arguments{
 \item{data}{A data.frame}
@@ -15,11 +20,11 @@ hgch_pie_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
 Highcharts visualization
 }
 \description{
-Comparing counts of categories
+Compare category's levels
 }
 \section{ctypes}{
 
-Cat
+Cat, Yea, Dat
 }
 
 \examples{
