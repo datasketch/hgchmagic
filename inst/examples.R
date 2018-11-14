@@ -148,6 +148,60 @@ dfCNp <- sampleData('Cat-NumP')
 hgch_line_CatNumP(dfCNp)
 
 
+# Areas -------------------------------------------------------------------
+
+# Categorico
+dfC <- sampleData('Cat')
+hgch_area_Cat(dfC)
+hgch_area_Cat(dfC, horLabel = 'titulo horizontal', verLabel = 'titulo vertical')
+hgch_area_Cat(dfC, horLabel = 'titulo horizontal', verLabel = 'titulo vertical', spline = TRUE, orientation = 'hor')
+hgch_area_Cat(dfC, spline = TRUE, tooltip = list(pointFormat = 'Acá se personaliza el tooltip'))
+
+dfCN <- sampleData('Cat-Num')
+hgch_area_CatNum(dfCN, colors = 'orange', agg = 'mean')
+hgch_area_CatNum(dfCN, colors = 'orange', agg = 'median', spline = TRUE)
+
+dfCCN <- sampleData('Cat-Cat-Num', 1000)
+hgch_area_CatCatNum(dfCCN)
+hgch_area_CatCatNum(dfCCN, horLabel = 'titulo horizonal',
+                    verLabel = 'titulo vertical', spline = TRUE,
+                    percentage = TRUE)
+hgch_area_CatCatNum(dfCCN, horLabel = 'titulo horizonal',
+                    verLabel = 'titulo vertical', spline = TRUE,
+                    percentage = TRUE, graphType = 'stack')
+hgch_area_CatCatNum(dfCCN, horLabel = 'titulo horizonal',
+                    verLabel = 'titulo vertical', spline = TRUE,
+                    graphType = 'stack')
+hgch_area_CatCatNum(dfCCN, horLabel = 'titulo horizonal',
+                    verLabel = 'titulo vertical', spline = TRUE,
+                    graphType = 'stack', theme = tma(showText = F))
+hgch_area_CatCatNum(dfCCN, horLabel = 'titulo horizonal',
+                    verLabel = 'titulo vertical', spline = TRUE,
+                    graphType = 'stack', theme = tma(showText = F),
+                    horLine = 100000, horLineLabel = 'linea horizontal')
+hgch_area_CatCatNum(dfCCN, horLabel = 'titulo horizonal',
+                    verLabel = 'titulo vertical', spline = TRUE,
+                    graphType = 'stack', theme = tma(showText = F),
+                    verLine = 3, verLineLabel = 'linea vertical')
+hgch_area_CatCatNum(dfCCN, horLabel = 'titulo horizonal',
+                    verLabel = 'titulo vertical', spline = TRUE,
+                    graphType = 'stack', theme = tma(showText = F),
+                    verLine = 3, verLineLabel = 'linea vertical',
+                    horLine = 100000, horLineLabel = 'linea horizontal')
+
+hgch_area_CatCatNum(dfCCN, horLabel = 'titulo horizonal',
+                    orientation = 'hor',
+                    format = c('$', ' en cositas'),
+                    marks = c(',', '.'),
+                    verLabel = 'titulo vertical', spline = TRUE,
+                    graphType = 'stack', theme = tma(showText = F),
+                    verLine = 100000, verLineLabel = 'linea vertical',
+                    horLine = 3, horLineLabel = 'linea horizontal')
+
+dfCNp <- sampleData('Cat-Num-Num-Num-Num')
+hgch_area_CatNumP(dfCNp)
+
+
 # Pie ---------------------------------------------------------------------
 
 # Categorico

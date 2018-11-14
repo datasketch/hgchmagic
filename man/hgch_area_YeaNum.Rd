@@ -2,12 +2,17 @@
 % Please edit documentation in R/area.R
 \name{hgch_area_YeaNum}
 \alias{hgch_area_YeaNum}
-\title{Vertical area (years, numbers)}
+\title{Area (years, numbers)}
 \usage{
 hgch_area_YeaNum(data, title = NULL, subtitle = NULL, caption = NULL,
-  horLabel = NULL, verLabel = NULL, yLine = NULL,
-  yLineLabel = NULL, agg = "sum", dropNa = FALSE, order = NULL,
-  percentage = FALSE, theme = NULL, export = FALSE, ...)
+  horLabel = NULL, verLabel = NULL, horLine = NULL,
+  horLineLabel = " ", verLine = NULL, verLineLabel = " ",
+  orientation = "ver", startAtZero = TRUE, labelWrap = 12,
+  colors = NULL, agg = "sum", spline = FALSE, marks = c(".", ","),
+  nDigits = NULL, dropNa = FALSE, percentage = FALSE,
+  format = c("", ""), order = NULL, sort = "no", sliceN = NULL,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  export = FALSE, theme = tma(), ...)
 }
 \arguments{
 \item{data}{A data.frame}

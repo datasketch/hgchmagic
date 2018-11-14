@@ -2,12 +2,18 @@
 % Please edit documentation in R/area.R
 \name{hgch_area_CatDatNum}
 \alias{hgch_area_CatDatNum}
-\title{Vertical area (categories, dates, numbers)}
+\title{Area (categories, years, numbers)}
 \usage{
 hgch_area_CatDatNum(data, title = NULL, subtitle = NULL,
-  caption = NULL, horLabel = NULL, verLabel = NULL, yLine = NULL,
-  yLineLabel = NULL, agg = "sum", dropNa = FALSE, order = NULL,
-  percentage = FALSE, theme = NULL, export = FALSE, ...)
+  caption = NULL, horLabel = NULL, verLabel = NULL, horLine = NULL,
+  horLineLabel = " ", verLine = NULL, verLineLabel = " ",
+  orientation = "ver", graphType = "grouped", startAtZero = TRUE,
+  agg = "sum", spline = FALSE, colors = NULL, dropNa = c(FALSE,
+  FALSE), format = c("", ""), labelWrap = c(12, 12),
+  legendPosition = "right", marks = c(".", ","), nDigits = NULL,
+  order1 = NULL, order2 = NULL, percentage = FALSE, theme = tma(),
+  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
+  export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}
@@ -16,13 +22,13 @@ hgch_area_CatDatNum(data, title = NULL, subtitle = NULL,
 Highcharts visualization
 }
 \description{
-Compare quantities among categories over dates
+Compare quantities among categories over years
 }
 \section{ctypes}{
 
-Cat-Dat-Num
+Cat-Yea-Num
 }
 
 \examples{
-hgch_area_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
+hgch_area_CatDatNum(sampleData("Cat-Dat-Num", nrow = 70))
 }
