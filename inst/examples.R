@@ -153,19 +153,20 @@ hgch_line_CatNumP(dfCNp)
 # Categorico
 dfC <- sampleData('Cat')
 hgch_area_Cat(dfC)
+hgch_area_Cat(dfC, colorOpacity = 1)
 hgch_area_Cat(dfC, horLabel = 'titulo horizontal', verLabel = 'titulo vertical')
 hgch_area_Cat(dfC, horLabel = 'titulo horizontal', verLabel = 'titulo vertical', spline = TRUE, orientation = 'hor')
 hgch_area_Cat(dfC, spline = TRUE, tooltip = list(pointFormat = 'Acá se personaliza el tooltip'))
 
 dfCN <- sampleData('Cat-Num')
-hgch_area_CatNum(dfCN, colors = 'orange', agg = 'mean')
+hgch_area_CatNum(dfCN, colors = 'orange', agg = 'mean', colorOpacity = 0.7)
 hgch_area_CatNum(dfCN, colors = 'orange', agg = 'median', spline = TRUE)
 
 dfCCN <- sampleData('Cat-Cat-Num', 1000)
 hgch_area_CatCatNum(dfCCN)
 hgch_area_CatCatNum(dfCCN, horLabel = 'titulo horizonal',
                     verLabel = 'titulo vertical', spline = TRUE,
-                    percentage = TRUE)
+                    percentage = TRUE, colorOpacity = 0.1)
 hgch_area_CatCatNum(dfCCN, horLabel = 'titulo horizonal',
                     verLabel = 'titulo vertical', spline = TRUE,
                     percentage = TRUE, graphType = 'stack')
@@ -200,6 +201,7 @@ hgch_area_CatCatNum(dfCCN, horLabel = 'titulo horizonal',
 
 dfCNp <- sampleData('Cat-Num-Num-Num-Num')
 hgch_area_CatNumP(dfCNp)
+hgch_area_CatNumP(dfCNp, colorOpacity = 0.3)
 
 
 # Pie ---------------------------------------------------------------------

@@ -23,6 +23,7 @@ hgch_area_CatNum <-  function(data,
                               startAtZero = TRUE,
                               labelWrap = 12,
                               colors = NULL,
+                              colorOpacity = 0.5,
                               agg = "sum",
                               spline = FALSE,
                               marks = c(".", ","),
@@ -142,6 +143,11 @@ hgch_area_CatNum <-  function(data,
   hc <- highchart() %>%
     hc_chart(type = ifelse(spline, "areaspline", "area"),
              inverted = ifelse(orientation == 'ver', FALSE, TRUE)) %>%
+    hc_plotOptions(
+      series = list(
+        fillOpacity = colorOpacity
+      )
+    ) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
@@ -221,6 +227,7 @@ hgch_area_Cat <-  function(data,
                            startAtZero = TRUE,
                            labelWrap = 12,
                            colors = NULL,
+                           colorOpacity = 0.5,
                            agg = "sum",
                            spline = FALSE,
                            marks = c(".", ","),
@@ -241,7 +248,7 @@ hgch_area_Cat <-  function(data,
     dplyr::summarise(Conteo = n())
   data <- plyr::rename(data, c("Conteo" = nameD))
 
-  h <- hgch_area_CatNum(data = data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine, verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,labelWrap = labelWrap,colors ,agg = agg,spline = spline,marks = marks,nDigits = nDigits,dropNa = dropNa,percentage = percentage,format = format,order = order,sort = sort,sliceN = sliceN, tooltip = tooltip,export = export,theme = theme, ...)
+  h <- hgch_area_CatNum(data = data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine, verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,labelWrap = labelWrap,colors = colors,colorOpacity=colorOpacity ,agg = agg,spline = spline,marks = marks,nDigits = nDigits,dropNa = dropNa,percentage = percentage,format = format,order = order,sort = sort,sliceN = sliceN, tooltip = tooltip,export = export,theme = theme, ...)
   h
 }
 
@@ -300,6 +307,7 @@ hgch_area_CatCatNum <- function(data,
                                 agg = "sum",
                                 spline = FALSE,
                                 colors = NULL,
+                                colorOpacity = 0.5,
                                 dropNa = c(FALSE, FALSE),
                                 format = c("", ""),
                                 labelWrap = c(12, 12),
@@ -433,9 +441,14 @@ hgch_area_CatCatNum <- function(data,
 
   hc <- highchart() %>%
     hc_chart(type = ifelse(spline, "areaspline", "area"),
-             inverted = ifelse(orientation == 'ver', FALSE, TRUE))
+             inverted = ifelse(orientation == 'ver', FALSE, TRUE)) %>%
+    hc_plotOptions(
+      series = list(
+        fillOpacity = colorOpacity
+      )
+    )
   if (graphType == "stack"){
-    hc <- hc %>% hc_plotOptions(area = list(stacking = 'normal', fillOpacity = 0.5), areaspline = list(stacking = 'normal', fillOpacity = 0.5))
+    hc <- hc %>% hc_plotOptions(area = list(stacking = 'normal', fillOpacity = colorOpacity), areaspline = list(stacking = 'normal', fillOpacity = colorOpacity))
     if (percentage) {
       hc <- hc %>% hc_yAxis(maxRange = 100,
                             max = 100)
@@ -522,6 +535,7 @@ hgch_area_CatCat <- function(data,
                              agg = "sum",
                              spline = FALSE,
                              colors = NULL,
+                             colorOpacity = 0.5,
                              dropNa = c(FALSE, FALSE),
                              format = c("", ""),
                              labelWrap = c(12, 12),
@@ -543,7 +557,7 @@ hgch_area_CatCat <- function(data,
     dplyr::group_by_(datN[1], datN[2]) %>%
     dplyr::summarise(Conteo = n())
   data <- plyr::rename(data, c("Conteo" = nameD))
-  h <- hgch_area_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,graphType = graphType,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNa = dropNa,format = format,labelWrap = labelWrap,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,theme = theme,tooltip = tooltip,export = export, ...)
+  h <- hgch_area_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,graphType = graphType,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,colorOpacity=colorOpacity,dropNa = dropNa,format = format,labelWrap = labelWrap,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,theme = theme,tooltip = tooltip,export = export, ...)
   h
 }
 
@@ -605,6 +619,7 @@ hgch_area_CatNumP <- function(data,
                               agg = "sum",
                               spline = FALSE,
                               colors = NULL,
+                              colorOpacity = 0.5,
                               dropNa = c(FALSE, FALSE),
                               format = c("", ""),
                               labelWrap = c(12, 12),
@@ -621,6 +636,6 @@ hgch_area_CatNumP <- function(data,
                               export = FALSE, ...) {
 
   data <- data %>% gather("Categories", "Conteo", names(data)[-1])
-  h <- hgch_area_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,graphType = graphType, startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNa = dropNa,format = format,labelWrap = labelWrap,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,theme = theme,tooltip = tooltip,export = export, ...)
+  h <- hgch_area_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,graphType = graphType, startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,colorOpacity=colorOpacity,dropNa = dropNa,format = format,labelWrap = labelWrap,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,theme = theme,tooltip = tooltip,export = export, ...)
   h
 }

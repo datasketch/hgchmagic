@@ -8,11 +8,11 @@ hgch_area_YeaNum(data, title = NULL, subtitle = NULL, caption = NULL,
   horLabel = NULL, verLabel = NULL, horLine = NULL,
   horLineLabel = " ", verLine = NULL, verLineLabel = " ",
   orientation = "ver", startAtZero = TRUE, labelWrap = 12,
-  colors = NULL, agg = "sum", spline = FALSE, marks = c(".", ","),
-  nDigits = NULL, dropNa = FALSE, percentage = FALSE,
-  format = c("", ""), order = NULL, sort = "no", sliceN = NULL,
-  tooltip = list(headerFormat = NULL, pointFormat = NULL),
-  export = FALSE, theme = tma(), ...)
+  colors = NULL, colorOpacity = 0.5, agg = "sum", spline = FALSE,
+  marks = c(".", ","), nDigits = NULL, dropNa = FALSE,
+  percentage = FALSE, format = c("", ""), order = NULL,
+  sort = "no", sliceN = NULL, tooltip = list(headerFormat = NULL,
+  pointFormat = NULL), export = FALSE, theme = tma(), ...)
 }
 \arguments{
 \item{data}{A data.frame}
