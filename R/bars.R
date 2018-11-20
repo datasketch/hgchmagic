@@ -338,8 +338,10 @@ hgch_bar_CatCatNum <- function(data,
   caption <- caption %||% ""
 
   labelsXY <- orientationXY(orientation,
-                            x = nms[1],
-                            y = ifelse(nrow(d) == dplyr::n_distinct(d$b), nms[3], paste(agg, nms[3])),
+                            x = nms[2],
+                            y = ifelse(nrow(d) == dplyr::n_distinct(d$a) & nrow(d) == dplyr::n_distinct(d$b),
+                                       nms[3],
+                                       paste(agg, nms[3])),
                             hor = horLabel,
                             ver = verLabel)
 
@@ -349,8 +351,9 @@ hgch_bar_CatCatNum <- function(data,
                                horLineLabel,
                                verLineLabel)
 
-
-  if (colorScale == 'discrete') colorDefault <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
+  theme$plotOptions$bar$colorByPoint <- FALSE
+  theme$plotOptions$column$colorByPoint <- FALSE
+  if (colorScale == 'discrete') colorDefault <- unname(fillColors(d, "a", c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2"), colorScale))
 
 
   if (is.null(theme$colors)) {
