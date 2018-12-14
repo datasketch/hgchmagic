@@ -34,6 +34,7 @@ hgch_bar_CatNum <-  function(data,
                              order = NULL,
                              sort = "no",
                              sliceN = NULL,
+                             legendPosition = c("right", "bottom"),
                              tooltip = list(headerFormat = NULL, pointFormat = NULL),
                              export = FALSE,
                              theme = tma(), ...) {
@@ -198,7 +199,9 @@ hgch_bar_CatNum <-  function(data,
     ) %>%
     hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
-    hc_legend(enabled = FALSE)
+    hc_legend(enabled = FALSE,
+              align= legendPosition[1],
+              verticalAlign= legendPosition[2])
   if (export) hc <- hc %>%
     hc_exporting(enabled = TRUE)
   hc
@@ -241,6 +244,7 @@ hgch_bar_Cat <-  function(data,
                           order = NULL,
                           sort = "no",
                           sliceN = NULL,
+                          legendPosition = c("right", "bottom"),
                           tooltip = list(headerFormat = NULL, pointFormat = NULL),
                           export = FALSE,
                           theme = tma(), ...) {
@@ -252,39 +256,10 @@ hgch_bar_Cat <-  function(data,
 
   data <- plyr::rename(data, c('Conteo' = nameD))
 
-  h <- hgch_bar_CatNum(data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel, verLabel = verLabel, horLine = horLine, horLineLabel = horLineLabel, verLine = verLine, verLineLabel = verLineLabel, labelWrap = labelWrap, orientation = orientation, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN, tooltip = tooltip, export = export, theme = theme, ...)
+  h <- hgch_bar_CatNum(data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel, verLabel = verLabel, horLine = horLine, horLineLabel = horLineLabel, verLine = verLine, verLineLabel = verLineLabel, labelWrap = labelWrap, orientation = orientation, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN,legendPosition = legendPosition, tooltip = tooltip, export = export, theme = theme, ...)
   h
 }
 
-
-
-
-#' Bar (years, numbers)
-#'
-#' Compare quantities over years
-#'
-#' @param data A data.frame
-#' @return Highcharts visualization
-#' @section ctypes:
-#' Yea-Num
-#' @examples
-#' hgch_bar_YeaNum(sampleData("Yea-Num", nrow = 10))
-#' @export hgch_bar_YeaNum
-hgch_bar_YeaNum <- hgch_bar_CatNum
-
-
-#' Bar (dates, numbers)
-#'
-#' Compare quantities over dates
-#'
-#' @param data A data.frame
-#' @return Highcharts visualization
-#' @section ctypes:
-#' Dat-Num
-#' @examples
-#' hgch_bar_DatNum(sampleData("Dat-Num", nrow = 10))
-#' @export hgch_bar_DatNum
-hgch_bar_DatNum <- hgch_bar_CatNum
 
 
 #' Grouped bar by first category (categories, ordered categories, numbers)
@@ -315,13 +290,13 @@ hgch_bar_CatCatNum <- function(data,
                                dropNa = c(FALSE, FALSE),
                                format = c("", ""),
                                labelWrap = c(12, 12),
-                               legendPosition = "right",
                                marks = c(".", ","),
                                nDigits = NULL,
                                order1 = NULL,
                                order2 = NULL,
                                orientation = "ver",
                                percentage = FALSE,
+                               legendPosition = c("right", "bottom"),
                                theme = tma(diffColorsBar = FALSE),
                                tooltip = list("headerFormat" = NULL,
                                               "pointFormat" = NULL,
@@ -497,7 +472,9 @@ hgch_bar_CatCatNum <- function(data,
     hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
     hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
-    hc_legend(enabled = TRUE, align = legendPosition)
+    hc_legend(enabled = TRUE,
+              align = legendPosition[1],
+              verticalAlign = legendPosition[2])
 
   if (graphType == "stack"){
     hc <- hc %>% hc_plotOptions(bar = list(stacking = "normal"), column = list(stacking = "normal"))
@@ -541,13 +518,13 @@ hgch_bar_CatCat <-function(data,
                            dropNa = c(FALSE, FALSE),
                            format = c("", ""),
                            labelWrap = c(12, 12),
-                           legendPosition = "right",
                            marks = c(".", ","),
                            nDigits = NULL,
                            order1 = NULL,
                            order2 = NULL,
                            orientation = "ver",
                            percentage = FALSE,
+                           legendPosition = c("right", "bottom"),
                            theme = tma(diffColorsBar = FALSE),
                            tooltip = list("headerFormat" = NULL,
                                           "pointFormat" = NULL,
@@ -559,7 +536,7 @@ hgch_bar_CatCat <-function(data,
     dplyr::group_by_(datN[1], datN[2]) %>%
     dplyr::summarise(Conteo = n())
 
-  hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNa,format,labelWrap,legendPosition, marks, nDigits,order1,order2,orientation,percentage,theme,tooltip,export, ...)
+  hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNa,format,labelWrap, marks, nDigits,order1,order2,orientation,percentage,legendPosition,theme,tooltip,export, ...)
 }
 
 #' Grouped bar (categories, years, numbers)
@@ -620,13 +597,13 @@ hgch_bar_CatNumP <- function(data,
                              dropNa = c(FALSE, FALSE),
                              format = c("", ""),
                              labelWrap = c(12, 12),
-                             legendPosition = "right",
                              marks = c(".", ","),
                              nDigits = NULL,
                              order1 = NULL,
                              order2 = NULL,
                              orientation = "ver",
                              percentage = FALSE,
+                             legendPosition = c("right", "bottom"),
                              theme = tma(diffColorsBar = FALSE),
                              tooltip = list("headerFormat" = NULL,
                                             "pointFormat" = NULL,
@@ -634,5 +611,5 @@ hgch_bar_CatNumP <- function(data,
                              export = FALSE, ...) {
 
   data <- data %>% gather("Categories", "Conteo", names(data)[-1])
-  hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNa,format,labelWrap,legendPosition, marks, nDigits,order1,order2,orientation,percentage,theme,tooltip,export, ...)
+  hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNa,format,labelWrap, marks, nDigits,order1,order2,orientation,percentage,legendPosition,theme,tooltip,export, ...)
 }
