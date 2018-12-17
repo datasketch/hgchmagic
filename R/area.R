@@ -252,32 +252,6 @@ hgch_area_Cat <-  function(data,
   h
 }
 
-#' Area (years, numbers)
-#'
-#' Compare quantities over years
-#'
-#' @param data A data.frame
-#' @return Highcharts visualization
-#' @section ctypes:
-#' Yea-Num
-#' @examples
-#' hgch_area_YeaNum(sampleData("Yea-Num", nrow = 10))
-#' @export hgch_area_YeaNum
-hgch_area_YeaNum <- hgch_area_CatNum
-
-
-#' Area (dates, numbers)
-#'
-#' Compare a quantities over time (Year-month-day)
-#'
-#' @param data A data.frame
-#' @return Highcharts visualization
-#' @section ctypes:
-#' Dat-Num
-#' @examples
-#' hgch_area_DatNum(sampleData("Dat-Num", nrow = 10))
-#' @export hgch_area_DatNum
-hgch_area_DatNum <- hgch_area_CatNum
 
 
 #' Area (categories, ordered categories, numbers)

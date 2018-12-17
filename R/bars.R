@@ -476,7 +476,7 @@ hgch_bar_CatCatNum <- function(data,
               align = legendPosition[1],
               verticalAlign = legendPosition[2])
 
-  if (graphType == "stack"){
+  if (graphType == "stacked"){
     hc <- hc %>% hc_plotOptions(bar = list(stacking = "normal"), column = list(stacking = "normal"))
     if (percentage) {
       hc <- hc %>% hc_yAxis(maxRange = 100,
@@ -538,34 +538,6 @@ hgch_bar_CatCat <-function(data,
 
   hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNa,format,labelWrap, marks, nDigits,order1,order2,orientation,percentage,legendPosition,theme,tooltip,export, ...)
 }
-
-#' Grouped bar (categories, years, numbers)
-#'
-#' Compare quantities among categories over years
-#'
-#' @param data A data.frame
-#' @return Highcharts visualization
-#' @section ctypes:
-#' Cat-Yea-Num
-#' @examples
-#' hgch_bar_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
-#' @export hgch_bar_CatYeaNum
-hgch_bar_CatYeaNum <- hgch_bar_CatCatNum
-
-
-#' Grouped bar (categories, years, numbers)
-#'
-#' Compare quantities among categories over years
-#'
-#' @param data A data.frame
-#' @return Highcharts visualization
-#' @section ctypes:
-#' Cat-Dat-Num
-#' @examples
-#' hgch_bar_CatDatNum(sampleData("Cat-Yea-Num", nrow = 10))
-#' @export hgch_bar_CatDatNum
-hgch_bar_CatDatNum <- hgch_bar_CatCatNum
-
 
 
 #' Bar (ordered category, n numbers)
