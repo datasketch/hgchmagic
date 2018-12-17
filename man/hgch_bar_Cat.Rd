@@ -12,8 +12,8 @@ hgch_bar_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
   dropNa = FALSE, highlightValueColor = "#F9B233",
   percentage = FALSE, format = c("", ""), highlightValue = NULL,
   order = NULL, sort = "no", sliceN = NULL,
-  tooltip = list(headerFormat = NULL, pointFormat = NULL),
-  export = FALSE, theme = tma(), ...)
+  legendPosition = c("right", "bottom"), tooltip = list(headerFormat =
+  NULL, pointFormat = NULL), export = FALSE, theme = tma(), ...)
 }
 \arguments{
 \item{data}{A data.frame}

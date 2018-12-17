@@ -9,12 +9,12 @@ hgch_bar_CatCat(data, title = NULL, subtitle = NULL, caption = NULL,
   horLineLabel = " ", verLine = NULL, verLineLabel = " ",
   graphType = "grouped", agg = "sum", colors = c("#009EE3",
   "#F9B233"), colorScale = "discrete", dropNa = c(FALSE, FALSE),
-  format = c("", ""), labelWrap = c(12, 12),
-  legendPosition = "right", marks = c(".", ","), nDigits = NULL,
-  order1 = NULL, order2 = NULL, orientation = "ver",
-  percentage = FALSE, theme = tma(diffColorsBar = FALSE),
-  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
-  export = FALSE, ...)
+  format = c("", ""), labelWrap = c(12, 12), marks = c(".", ","),
+  nDigits = NULL, order1 = NULL, order2 = NULL,
+  orientation = "ver", percentage = FALSE,
+  legendPosition = c("right", "bottom"), theme = tma(diffColorsBar =
+  FALSE), tooltip = list(headerFormat = NULL, pointFormat = NULL, shared
+  = NULL), export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}
