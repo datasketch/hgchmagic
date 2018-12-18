@@ -246,7 +246,7 @@ save_viz <- function(file,
   htmltools::save_html(viz, tmp)
   tmpSave <- file
   if (ext == '.html') {
-    htmlwidgets::saveWidget(plotInput(), file)
+    htmlwidgets::saveWidget(viz, file)
   } else {
     webshot(tmp, file, vwidth = width, vheight = height)
   }
