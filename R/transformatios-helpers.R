@@ -42,8 +42,8 @@ linesOrientation <- function(orientation, horLine = NULL, verLine = NULL) {
   if (orientation  == 'hor') {
     if (!is.null(horLine)) {
       lineY <- horLine - 1
-      } else {
-    lineY <- 'NULL' }
+    } else {
+      lineY <- 'NULL' }
     if (!is.null(verLine)) {
       lineX <- verLine
     } else {
@@ -124,7 +124,7 @@ fillColors <- function(data, col, colors, colorScale) {
   }
   if (length(colors) == 1 & colorScale != 'no') {
     colors <- c(colors, sample(dc, 1))
-   }
+  }
   print(colors)
   if (colorScale == "no") {
     if (is.null(colors)) {
@@ -162,9 +162,9 @@ orderCategory <- function(data, col, order, labelWrap) {
     data <- data[order(match(data[[col]], order)), ]
   }
   if (is.null(labelWrap)) {
-  data <- data
+    data <- data
   } else {
-  data[[col]] <- gsub("\\\n", "<br/>", str_wrap(data[[col]], labelWrap))
+    data[[col]] <- gsub("\\\n", "<br/>", str_wrap(data[[col]], labelWrap))
   }
   data
 }
@@ -232,4 +232,23 @@ count_pl <- function(x) {
   } else {
     return(0)
   }
+}
+
+
+#' save
+#' @export
+save_viz <- function(file,
+                     viz,
+                     ext,
+                     width = 660,
+                     height = 500, ...) {
+  tmp <- paste(tempdir(), 'html', sep ='.')
+  htmltools::save_html(viz, tmp)
+  tmpSave <- file
+  if (ext == '.html') {
+    htmlwidgets::saveWidget(plotInput(), file)
+  } else {
+    webshot(tmp, file, vwidth = width, vheight = height)
+  }
+  file.copy(file, file)
 }
