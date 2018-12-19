@@ -363,8 +363,8 @@ hgch_area_CatCatNum <- function(data,
   }
 
 
-  d <- orderCategory(d, "a", order = order1, labelWrapV = labelWrapV[1])
-  d <- orderCategory(d, "b", order = order2, labelWrapV = labelWrapV[2])
+  d <- orderCategory(d, "a", order = order1, labelWrap = labelWrapV[1])
+  d <- orderCategory(d, "b", order = order2, labelWrap = labelWrapV[2])
   d$c <- round(d$c, nDig)
 
 
