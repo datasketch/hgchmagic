@@ -287,9 +287,9 @@ hgch_bar_CatCatNum <- function(data,
                                agg = "sum",
                                colors = c("#009EE3", "#F9B233"),
                                colorScale = 'discrete',
-                               dropNa = c(FALSE, FALSE),
+                               dropNaV = c(FALSE, FALSE),
                                format = c("", ""),
-                               labelWrap = c(12, 12),
+                               labelWrapV = c(12, 12),
                                marks = c(".", ","),
                                nDigits = NULL,
                                order1 = NULL,
@@ -344,11 +344,11 @@ hgch_bar_CatCatNum <- function(data,
     }
   }
 
-  if (dropNa[1])
+  if (dropNaV[1])
     d <- d %>%
     tidyr::drop_na(a)
 
-  if(dropNa[2])
+  if(dropNaV[2])
     d <- d %>%
     tidyr::drop_na(b)
 
@@ -378,8 +378,8 @@ hgch_bar_CatCatNum <- function(data,
   }
 
 
-  d <- orderCategory(d, "a", order = order1, labelWrap = labelWrap[1])
-  d <- orderCategory(d, "b", order = order2, labelWrap = labelWrap[2])
+  d <- orderCategory(d, "a", order = order1, labelWrapV = labelWrapV[1])
+  d <- orderCategory(d, "b", order = order2, labelWrapV = labelWrapV[2])
   d$c <- round(d$c, nDig)
 
 
@@ -515,9 +515,9 @@ hgch_bar_CatCat <-function(data,
                            agg = "sum",
                            colors = c("#009EE3", "#F9B233"),
                            colorScale = 'discrete',
-                           dropNa = c(FALSE, FALSE),
+                           dropNaV = c(FALSE, FALSE),
                            format = c("", ""),
-                           labelWrap = c(12, 12),
+                           labelWrapV = c(12, 12),
                            marks = c(".", ","),
                            nDigits = NULL,
                            order1 = NULL,
@@ -536,7 +536,7 @@ hgch_bar_CatCat <-function(data,
     dplyr::group_by_(datN[1], datN[2]) %>%
     dplyr::summarise(Conteo = n())
 
-  hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNa,format,labelWrap, marks, nDigits,order1,order2,orientation,percentage,legendPosition,theme,tooltip,export, ...)
+  hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNaV,format,labelWrapV, marks, nDigits,order1,order2,orientation,percentage,legendPosition,theme,tooltip,export, ...)
 }
 
 
@@ -566,9 +566,9 @@ hgch_bar_CatNumP <- function(data,
                              agg = "sum",
                              colors = c("#009EE3", "#F9B233"),
                              colorScale = 'discrete',
-                             dropNa = c(FALSE, FALSE),
+                             dropNaV = c(FALSE, FALSE),
                              format = c("", ""),
-                             labelWrap = c(12, 12),
+                             labelWrapV = c(12, 12),
                              marks = c(".", ","),
                              nDigits = NULL,
                              order1 = NULL,
@@ -583,5 +583,5 @@ hgch_bar_CatNumP <- function(data,
                              export = FALSE, ...) {
 
   data <- data %>% gather("Categories", "Conteo", names(data)[-1])
-  hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNa,format,labelWrap, marks, nDigits,order1,order2,orientation,percentage,legendPosition,theme,tooltip,export, ...)
+  hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNaV,format,labelWrapV, marks, nDigits,order1,order2,orientation,percentage,legendPosition,theme,tooltip,export, ...)
 }

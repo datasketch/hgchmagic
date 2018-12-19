@@ -282,9 +282,9 @@ hgch_area_CatCatNum <- function(data,
                                 spline = FALSE,
                                 colors = NULL,
                                 colorOpacity = 0.5,
-                                dropNa = c(FALSE, FALSE),
+                                dropNaV = c(FALSE, FALSE),
                                 format = c("", ""),
-                                labelWrap = c(12, 12),
+                                labelWrapV = c(12, 12),
                                 legendPosition = "right",
                                 marks = c(".", ","),
                                 nDigits = NULL,
@@ -328,11 +328,11 @@ hgch_area_CatCatNum <- function(data,
     }
   }
 
-  if (dropNa[1])
+  if (dropNaV[1])
     d <- d %>%
     tidyr::drop_na(a)
 
-  if(dropNa[2])
+  if(dropNaV[2])
     d <- d %>%
     tidyr::drop_na(b)
 
@@ -363,8 +363,8 @@ hgch_area_CatCatNum <- function(data,
   }
 
 
-  d <- orderCategory(d, "a", order = order1, labelWrap = labelWrap[1])
-  d <- orderCategory(d, "b", order = order2, labelWrap = labelWrap[2])
+  d <- orderCategory(d, "a", order = order1, labelWrapV = labelWrapV[1])
+  d <- orderCategory(d, "b", order = order2, labelWrapV = labelWrapV[2])
   d$c <- round(d$c, nDig)
 
 
@@ -510,9 +510,9 @@ hgch_area_CatCat <- function(data,
                              spline = FALSE,
                              colors = NULL,
                              colorOpacity = 0.5,
-                             dropNa = c(FALSE, FALSE),
+                             dropNaV = c(FALSE, FALSE),
                              format = c("", ""),
-                             labelWrap = c(12, 12),
+                             labelWrapV = c(12, 12),
                              legendPosition = "right",
                              marks = c(".", ","),
                              nDigits = NULL,
@@ -531,38 +531,10 @@ hgch_area_CatCat <- function(data,
     dplyr::group_by_(datN[1], datN[2]) %>%
     dplyr::summarise(Conteo = n())
   data <- plyr::rename(data, c("Conteo" = nameD))
-  h <- hgch_area_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,graphType = graphType,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,colorOpacity=colorOpacity,dropNa = dropNa,format = format,labelWrap = labelWrap,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,theme = theme,tooltip = tooltip,export = export, ...)
+  h <- hgch_area_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,graphType = graphType,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,colorOpacity=colorOpacity,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,theme = theme,tooltip = tooltip,export = export, ...)
   h
 }
 
-#' Area (categories, years, numbers)
-#'
-#' Compare quantities among categories over years
-#'
-#' @param data A data.frame
-#' @return Highcharts visualization
-#' @section ctypes:
-#' Cat-Yea-Num
-#' @examples
-#' hgch_area_CatYeaNum(sampleData("Cat-Yea-Num", nrow = 10))
-#' @export hgch_area_CatYeaNum
-
-hgch_area_CatYeaNum <- hgch_area_CatCatNum
-
-
-#' Area (categories, years, numbers)
-#'
-#' Compare quantities among categories over years
-#'
-#' @param data A data.frame
-#' @return Highcharts visualization
-#' @section ctypes:
-#' Cat-Yea-Num
-#' @examples
-#' hgch_area_CatDatNum(sampleData("Cat-Dat-Num", nrow = 70))
-#' @export hgch_area_CatDatNum
-
-hgch_area_CatDatNum <- hgch_area_CatCatNum
 
 
 #' Area (ordered category, n numbers)
@@ -594,9 +566,9 @@ hgch_area_CatNumP <- function(data,
                               spline = FALSE,
                               colors = NULL,
                               colorOpacity = 0.5,
-                              dropNa = c(FALSE, FALSE),
+                              dropNaV = c(FALSE, FALSE),
                               format = c("", ""),
-                              labelWrap = c(12, 12),
+                              labelWrapV = c(12, 12),
                               legendPosition = "right",
                               marks = c(".", ","),
                               nDigits = NULL,
@@ -610,6 +582,6 @@ hgch_area_CatNumP <- function(data,
                               export = FALSE, ...) {
 
   data <- data %>% gather("Categories", "Conteo", names(data)[-1])
-  h <- hgch_area_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,graphType = graphType, startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,colorOpacity=colorOpacity,dropNa = dropNa,format = format,labelWrap = labelWrap,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,theme = theme,tooltip = tooltip,export = export, ...)
+  h <- hgch_area_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,graphType = graphType, startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,colorOpacity=colorOpacity,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,theme = theme,tooltip = tooltip,export = export, ...)
   h
 }
