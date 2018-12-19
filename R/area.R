@@ -421,7 +421,7 @@ hgch_area_CatCatNum <- function(data,
         fillOpacity = colorOpacity
       )
     )
-  if (graphType == "stack"){
+  if (graphType == "stacked"){
     hc <- hc %>% hc_plotOptions(area = list(stacking = 'normal', fillOpacity = colorOpacity), areaspline = list(stacking = 'normal', fillOpacity = colorOpacity))
     if (percentage) {
       hc <- hc %>% hc_yAxis(maxRange = 100,
