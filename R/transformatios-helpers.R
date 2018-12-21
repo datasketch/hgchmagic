@@ -110,6 +110,7 @@ dsColorsHex <- function(hex = FALSE) {
 # colores
 #' @export
 fillColors <- function(data, col, colors, colorScale) {
+  #set.seed(321)
   cat <- unique(data[[col]])
   ds <- dsColorsHex(TRUE)
   dc <- dsColorsHex()
@@ -125,7 +126,7 @@ fillColors <- function(data, col, colors, colorScale) {
   if (length(colors) == 1 & colorScale != 'no') {
     colors <- c(colors, sample(dc, 1))
   }
-  print(colors)
+  #print(colors)
   if (colorScale == "no") {
     if (is.null(colors)) {
       colors <- dsColorsHex()[2]
