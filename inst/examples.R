@@ -30,6 +30,9 @@ hgch_bar_Cat(datCat, colorScale = 'discrete', theme = tma(showText = FALSE))
 
 datCatNum <- sampleData('Cat-Num')
 hgch_bar_CatNum(datCatNum)
+hgch_bar_CatNum(datCatNum, export = TRUE)
+hgch_bar_CatNum(datCatNum, export = TRUE, lang = 'en')
+hgch_bar_CatNum(datCatNum, export = TRUE, lang = 'pt')
 hgch_bar_CatNum(datCatNum, sort = 'asc', showText = FALSE)
 hgch_bar_CatNum(datCatNum, sort = 'desc', colorScale = 'discrete')
 hgch_bar_CatNum(datCatNum, export = TRUE, nDigits = 2, theme = tma(colores = c('#FDC123'),showText = F),

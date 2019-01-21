@@ -253,3 +253,37 @@ save_viz <- function(file,
   }
   file.copy(file, file)
 }
+
+
+#' translate
+
+#' @export
+exportLang <- function(language = 'es') {
+  if (language == 'en') {
+    langOpt <- getOption("highcharter.lang")
+    langOpt$contextButtonTitle <- "Download options"
+    langOpt$printChart <- "Print chart"
+    langOpt$downloadJPEG <- 'Download JPEG image'
+    langOpt$downloadPNG <- 'Download PNG image'
+    langOpt$downloadSVG <- 'Download SVG image'
+    langOpt$downloadPDF <- 'Download PDF image'
+    }
+  if (language == 'es') {
+    langOpt <- getOption("highcharter.lang")
+    langOpt$contextButtonTitle <- 'Opciones de descarga'
+    langOpt$printChart <- 'Imprimir Grafico'
+    langOpt$downloadJPEG <- 'Descarga en JPEG'
+    langOpt$downloadPNG <- 'Descarga en PNG'
+    langOpt$downloadSVG <- 'Descarga en SVG'
+    langOpt$downloadPDF <- 'Descarga en PDF' }
+  if (language == 'pt') {
+    langOpt <- getOption("highcharter.lang")
+    langOpt$contextButtonTitle <- 'Opcoes de baixar'
+    langOpt$printChart <- 'Impressao visualizacao'
+    langOpt$downloadJPEG <- 'Baixar em JPEG'
+    langOpt$downloadPNG <- 'Baixar em PNG'
+    langOpt$downloadSVG <- 'Baixar em SVG'
+    langOpt$downloadPDF <- 'Baixar em PDF'
+  }
+  options(highcharter.lang = langOpt)
+}

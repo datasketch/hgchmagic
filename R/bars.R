@@ -38,7 +38,9 @@ hgch_bar_CatNum <-  function(data,
                              legendPosition = c("right", "bottom"),
                              tooltip = list(headerFormat = NULL, pointFormat = NULL),
                              export = FALSE,
-                             theme = NULL, ...) {
+                             theme = NULL,
+                             lang = 'es',
+                             ...) {
 
 
   f <- fringe(data)
@@ -153,7 +155,7 @@ hgch_bar_CatNum <-  function(data,
   }
 
   global_options(marks[1], marks[2])
-
+  exportLang(language = lang)
   hc <- highchart() %>%
     hc_chart(type = ifelse(orientation == "hor", "bar", "column")) %>%
     hc_title(text = title) %>%
@@ -202,8 +204,13 @@ hgch_bar_CatNum <-  function(data,
     hc_legend(enabled = FALSE,
               align= legendPosition[1],
               verticalAlign= legendPosition[2])
-  if (export) hc <- hc %>%
-    hc_exporting(enabled = TRUE)
+  if (export){
+    hc <- hc %>%
+    hc_exporting(enabled = TRUE, buttons= list(
+      contextButton= list(
+        menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
+      )
+    ))}
 
   if (is.null(theme)) {
     hc <- hc %>% hc_add_theme(custom_theme(custom = tma(showText = showText, colores = colors)))
@@ -253,7 +260,8 @@ hgch_bar_Cat <-  function(data,
                           legendPosition = c("right", "bottom"),
                           tooltip = list(headerFormat = NULL, pointFormat = NULL),
                           export = FALSE,
-                          theme = tma(), ...) {
+                          theme = NULL,
+                          lang = 'es', ...) {
 
   nameD <- paste0('Count ', names(data))
   data <- data  %>%
@@ -262,7 +270,7 @@ hgch_bar_Cat <-  function(data,
 
   data <- plyr::rename(data, c('Conteo' = nameD))
 
-  h <- hgch_bar_CatNum(data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel, verLabel = verLabel, horLine = horLine, horLineLabel = horLineLabel, verLine = verLine, verLineLabel = verLineLabel, labelWrap = labelWrap, orientation = orientation, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN,showText=showText,legendPosition = legendPosition, tooltip = tooltip, export = export, theme = theme, ...)
+  h <- hgch_bar_CatNum(data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel, verLabel = verLabel, horLine = horLine, horLineLabel = horLineLabel, verLine = verLine, verLineLabel = verLineLabel, labelWrap = labelWrap, orientation = orientation, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN,showText=showText,legendPosition = legendPosition, tooltip = tooltip, export = export, theme = theme, lang = lang, ...)
   h
 }
 
@@ -308,7 +316,8 @@ hgch_bar_CatCatNum <- function(data,
                                tooltip = list("headerFormat" = NULL,
                                               "pointFormat" = NULL,
                                               "shared" = NULL),
-                               export = FALSE, ...) {
+                               export = FALSE,
+                               lang = 'es', ...) {
 
 
   f <- fringe(data)

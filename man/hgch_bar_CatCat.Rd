@@ -12,9 +12,9 @@ hgch_bar_CatCat(data, title = NULL, subtitle = NULL, caption = NULL,
   format = c("", ""), labelWrapV = c(12, 12), marks = c(".", ","),
   nDigits = NULL, order1 = NULL, order2 = NULL,
   orientation = "ver", percentage = FALSE, showText = TRUE,
-  legendPosition = c("right", "bottom"), theme = tma(diffColorsBar =
-  FALSE), tooltip = list(headerFormat = NULL, pointFormat = NULL, shared
-  = NULL), export = FALSE, ...)
+  legendPosition = c("right", "bottom"), theme = NULL,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
+  export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}
