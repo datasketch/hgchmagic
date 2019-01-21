@@ -9,8 +9,8 @@ hgch_donut_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
   agg = "sum", marks = c(".", ","), nDigits = NULL, dropNa = FALSE,
   highlightValueColor = "#F9B233", percentage = FALSE, format = c("",
   ""), highlightValue = NULL, order = NULL, sort = "no",
-  sliceN = NULL, legendPosition = c("right", "bottom"),
-  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  sliceN = NULL, showText = TRUE, legendPosition = c("right",
+  "bottom"), tooltip = list(headerFormat = NULL, pointFormat = NULL),
   export = FALSE, theme = tma(), ...)
 }
 \arguments{

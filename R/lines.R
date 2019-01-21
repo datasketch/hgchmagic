@@ -33,9 +33,10 @@ hgch_line_CatNum <-  function(data,
                               order = NULL,
                               sort = "no",
                               sliceN = NULL,
+                              showText = TRUE,
                               tooltip = list(headerFormat = NULL, pointFormat = NULL),
                               export = FALSE,
-                              theme = tma(), ...) {
+                              theme = NULL, ...) {
 
 
   f <- fringe(data)
@@ -58,14 +59,11 @@ hgch_line_CatNum <-  function(data,
 
   colorDefault <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
 
-
-  if (is.null(theme$colors)) {
     if (!is.null(colors)) {
-      theme$colors <- unname(fillColors(d, "a", colors, colorScale = 'no'))
+      colors <- unname(fillColors(d, "a", colors, colorScale = 'no'))
     } else {
-      theme$colors <- colorDefault
+      colors <- colorDefault
     }
-  }
 
   if (dropNa)
     d <- d %>%
@@ -187,11 +185,15 @@ hgch_line_CatNum <-  function(data,
       )
     ) %>%
     hc_add_series_list(series) %>%
-    hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(enabled = FALSE)
   if (export) hc <- hc %>%
     hc_exporting(enabled = TRUE)
+  if (is.null(theme)) {
+    hc <- hc %>% hc_add_theme(custom_theme(custom = tma(showText = showText, colores = colors)))
+  } else {
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+  }
   hc
 
 }
@@ -232,9 +234,10 @@ hgch_line_Cat <-  function(data,
                            order = NULL,
                            sort = "no",
                            sliceN = NULL,
+                           showText = TRUE,
                            tooltip = list(headerFormat = NULL, pointFormat = NULL),
                            export = FALSE,
-                           theme = tma(), ...) {
+                           theme = NULL, ...) {
 
   nameD <- paste('count', names(data))
   data <- data  %>%
@@ -242,7 +245,7 @@ hgch_line_Cat <-  function(data,
     dplyr::summarise(Conteo = n())
   data <- plyr::rename(data, c("Conteo" = nameD))
 
-  h <- hgch_line_CatNum(data = data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine, verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,labelWrap = labelWrap,colors ,agg = agg,spline = spline,marks = marks,nDigits = nDigits,dropNa = dropNa,percentage = percentage,format = format,order = order,sort = sort,sliceN = sliceN, tooltip = tooltip,export = export,theme = theme, ...)
+  h <- hgch_line_CatNum(data = data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine, verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,labelWrap = labelWrap,colors ,agg = agg,spline = spline,marks = marks,nDigits = nDigits,dropNa = dropNa,percentage = percentage,format = format,order = order,sort = sort,sliceN = sliceN, showText = showText, tooltip = tooltip,export = export,theme = theme, ...)
   h
 }
 
@@ -283,7 +286,8 @@ hgch_line_CatCatNum <- function(data,
                                 order1 = NULL,
                                 order2 = NULL,
                                 percentage = FALSE,
-                                theme = tma(),
+                                showText = TRUE,
+                                theme = NULL,
                                 tooltip = list("headerFormat" = NULL,
                                                "pointFormat" = NULL,
                                                "shared" = NULL),
@@ -311,14 +315,11 @@ hgch_line_CatCatNum <- function(data,
 
   colorDefault <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
 
-
-  if (is.null(theme$colors)) {
     if (!is.null(colors)) {
-      theme$colors <- unname(fillColors(d, "a", colors, 'discrete'))
+      colors <- unname(fillColors(d, "a", colors, 'discrete'))
     } else {
-      theme$colors <- colorDefault
+      colors <- colorDefault
     }
-  }
 
   if (dropNaV[1])
     d <- d %>%
@@ -452,12 +453,15 @@ hgch_line_CatCatNum <- function(data,
       )) %>%
     hc_add_series_list(series) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
-    hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(enabled = TRUE, align = legendPosition)
   if (export) hc <- hc %>%
     hc_exporting(enabled = TRUE)
-
+  if (is.null(theme)) {
+    hc <- hc %>% hc_add_theme(custom_theme(custom = tma(showText = showText, colores = colors)))
+  } else {
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+  }
   hc
 }
 
@@ -496,7 +500,8 @@ hgch_line_CatCat <- function(data,
                              order1 = NULL,
                              order2 = NULL,
                              percentage = FALSE,
-                             theme = tma(),
+                             showText = TRUE,
+                             theme = NULL,
                              tooltip = list("headerFormat" = NULL,
                                             "pointFormat" = NULL,
                                             "shared" = NULL),
@@ -508,7 +513,7 @@ hgch_line_CatCat <- function(data,
     dplyr::group_by_(datN[1], datN[2]) %>%
     dplyr::summarise(Conteo = n())
   data <- plyr::rename(data, c("Conteo" = nameD))
-  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,theme = theme,tooltip = tooltip,export = export, ...)
+  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,tooltip = tooltip,export = export, ...)
   h
 }
 
@@ -551,13 +556,14 @@ hgch_line_CatNumP <- function(data,
                               order1 = NULL,
                               order2 = NULL,
                               percentage = FALSE,
-                              theme = tma(),
+                              showText = TRUE,
+                              theme = NULL,
                               tooltip = list("headerFormat" = NULL,
                                              "pointFormat" = NULL,
                                              "shared" = NULL),
                               export = FALSE, ...) {
 
   data <- data %>% gather("Categories", "Conteo", names(data)[-1])
-  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,theme = theme,tooltip = tooltip,export = export, ...)
+  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText ,theme = theme,tooltip = tooltip,export = export, ...)
   h
 }

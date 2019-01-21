@@ -11,9 +11,9 @@ hgch_line_CatCat(data, title = NULL, subtitle = NULL, caption = NULL,
   spline = FALSE, colors = NULL, dropNaV = c(FALSE, FALSE),
   format = c("", ""), labelWrapV = c(12, 12),
   legendPosition = "right", marks = c(".", ","), nDigits = NULL,
-  order1 = NULL, order2 = NULL, percentage = FALSE, theme = tma(),
-  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
-  export = FALSE, ...)
+  order1 = NULL, order2 = NULL, percentage = FALSE,
+  showText = TRUE, theme = NULL, tooltip = list(headerFormat = NULL,
+  pointFormat = NULL, shared = NULL), export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

@@ -11,8 +11,9 @@ hgch_area_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
   colors = NULL, colorOpacity = 0.5, agg = "sum", spline = FALSE,
   marks = c(".", ","), nDigits = NULL, dropNa = FALSE,
   percentage = FALSE, format = c("", ""), order = NULL,
-  sort = "no", sliceN = NULL, tooltip = list(headerFormat = NULL,
-  pointFormat = NULL), export = FALSE, theme = tma(), ...)
+  sort = "no", sliceN = NULL, showText = TRUE,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  export = FALSE, theme = tma(), ...)
 }
 \arguments{
 \item{data}{A data.frame}

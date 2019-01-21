@@ -143,6 +143,8 @@ tma <- function(background = 'transparent',
                 stylesLabelX = list(color = '#666666', fontSize = '11px', fontWeight = NULL, enabled =TRUE),
                 stylesTitleX = list(color = '#666666', fontSize = '13px')) {
 
+  if (is.null(colores)) colores <-  c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
+
   if (length(colores) == 1) {
     colores <- c(colores, colores)
   }

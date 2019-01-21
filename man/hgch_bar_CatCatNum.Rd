@@ -11,10 +11,10 @@ hgch_bar_CatCatNum(data, title = NULL, subtitle = NULL,
   "#F9B233"), colorScale = "discrete", dropNaV = c(FALSE, FALSE),
   format = c("", ""), labelWrapV = c(12, 12), marks = c(".", ","),
   nDigits = NULL, order1 = NULL, order2 = NULL,
-  orientation = "ver", percentage = FALSE,
-  legendPosition = c("right", "bottom"), theme = tma(diffColorsBar =
-  FALSE), tooltip = list(headerFormat = NULL, pointFormat = NULL, shared
-  = NULL), export = FALSE, ...)
+  orientation = "ver", percentage = FALSE, showText = TRUE,
+  legendPosition = c("right", "bottom"), theme = NULL,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
+  export = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame}

@@ -11,7 +11,7 @@ hgch_bar_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
   orientation = "ver", marks = c(".", ","), nDigits = NULL,
   dropNa = FALSE, highlightValueColor = "#F9B233",
   percentage = FALSE, format = c("", ""), highlightValue = NULL,
-  order = NULL, sort = "no", sliceN = NULL,
+  order = NULL, sort = "no", sliceN = NULL, showText = TRUE,
   legendPosition = c("right", "bottom"), tooltip = list(headerFormat =
   NULL, pointFormat = NULL), export = FALSE, theme = tma(), ...)
 }

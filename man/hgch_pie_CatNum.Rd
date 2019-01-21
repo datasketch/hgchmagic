@@ -9,9 +9,9 @@ hgch_pie_CatNum(data, title = NULL, subtitle = NULL, caption = NULL,
   agg = "sum", marks = c(".", ","), nDigits = NULL, dropNa = FALSE,
   highlightValueColor = "#F9B233", percentage = FALSE, format = c("",
   ""), highlightValue = NULL, order = NULL, sort = "no",
-  sliceN = NULL, legendPosition = c("right", "bottom"),
-  tooltip = list(headerFormat = NULL, pointFormat = NULL),
-  export = FALSE, theme = tma(), ...)
+  sliceN = NULL, showText = TRUE, legendPosition = c("right",
+  "bottom"), tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  export = FALSE, theme = NULL, ...)
 }
 \arguments{
 \item{data}{A data.frame}

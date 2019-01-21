@@ -27,10 +27,11 @@ hgch_pie_CatNum <-  function(data,
                              order = NULL,
                              sort = "no",
                              sliceN = NULL,
+                             showText = TRUE,
                              legendPosition = c("right", "bottom"),
                              tooltip = list(headerFormat = NULL, pointFormat = NULL),
                              export = FALSE,
-                             theme = tma(), ...) {
+                             theme = NULL, ...) {
 
 
   f <- fringe(data)
@@ -47,17 +48,15 @@ hgch_pie_CatNum <-  function(data,
     colorDefault <- leaflet::colorNumeric(c("#2E0F35", "#A6CEDE"), 1:length(unique(d$a)))(1:length(unique(d$a)))
   }
 
-  if (is.null(theme$colors)) {
+
     if (!is.null(colors)) {
-      theme$colors <- unname(fillColors(d, "a", colors, colorScale))
+      colors <- unname(fillColors(d, "a", colors, colorScale))
     } else {
       if (colorScale == 'no') {
-        theme$colors <- c("#74D1F7", "#74D1F7")
+      colors <- c("#74D1F7", "#74D1F7")
       } else {
-        theme$colors <- colorDefault
+        colors <- colorDefault
       }
-
-    }
   }
 
   if (dropNa)
@@ -136,12 +135,16 @@ hgch_pie_CatNum <-  function(data,
     hc_series(
       data
     ) %>%
-    hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(align= legendPosition[1],
               verticalAlign= legendPosition[2])
   if (export) hc <- hc %>%
     hc_exporting(enabled = TRUE)
+  if (is.null(theme)) {
+    hc <- hc %>% hc_add_theme(custom_theme(custom = tma(showText = showText, colores = colors)))
+  } else {
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+  }
   hc
 
 }
@@ -175,10 +178,11 @@ hgch_pie_Cat <-  function(data,
                           order = NULL,
                           sort = "no",
                           sliceN = NULL,
+                          showText = TRUE,
                           legendPosition = c("right", "bottom"),
                           tooltip = list(headerFormat = NULL, pointFormat = NULL),
                           export = FALSE,
-                          theme = tma(), ...) {
+                          theme = NULL, ...) {
 
   nameD <- paste0('Count ', names(data))
   data <- data  %>%
@@ -187,7 +191,7 @@ hgch_pie_Cat <-  function(data,
 
   data <- plyr::rename(data, c('Conteo' = nameD))
 
-  h <- hgch_pie_CatNum(data, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN, legendPosition = legendPosition, tooltip = tooltip, export = export, theme = theme, ...)
+  h <- hgch_pie_CatNum(data, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN, showText = showText, legendPosition = legendPosition, tooltip = tooltip, export = export, theme = theme, ...)
   h
 }
 
@@ -221,10 +225,11 @@ hgch_donut_CatNum <-  function(data,
                                order = NULL,
                                sort = "no",
                                sliceN = NULL,
+                               showText = TRUE,
                                legendPosition = c("right", "bottom"),
                                tooltip = list(headerFormat = NULL, pointFormat = NULL),
                                export = FALSE,
-                               theme = tma(), ...) {
+                               theme = NULL, ...) {
 
 
   f <- fringe(data)
@@ -241,18 +246,16 @@ hgch_donut_CatNum <-  function(data,
     colorDefault <- leaflet::colorNumeric(c("#2E0F35", "#A6CEDE"), 1:length(unique(d$a)))(1:length(unique(d$a)))
   }
 
-  if (is.null(theme$colors)) {
+
     if (!is.null(colors)) {
-      theme$colors <- unname(fillColors(d, "a", colors, colorScale))
+      colors <- unname(fillColors(d, "a", colors, colorScale))
     } else {
       if (colorScale == 'no') {
-        theme$colors <- c("#74D1F7", "#74D1F7")
+       colors <- c("#74D1F7", "#74D1F7")
       } else {
-        theme$colors <- colorDefault
+        colors <- colorDefault
       }
-
     }
-  }
 
   if (dropNa)
     d <- d %>%
@@ -330,12 +333,16 @@ hgch_donut_CatNum <-  function(data,
     hc_series(
       data
     ) %>%
-    hc_add_theme(custom_theme(custom = theme)) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(align= legendPosition[1],
               verticalAlign= legendPosition[2])
   if (export) hc <- hc %>%
     hc_exporting(enabled = TRUE)
+  if (is.null(theme)) {
+    hc <- hc %>% hc_add_theme(custom_theme(custom = tma(showText = showText, colores = colors)))
+  } else {
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+  }
   hc
 
 }
@@ -370,10 +377,11 @@ hgch_donut_Cat <-  function(data,
                             order = NULL,
                             sort = "no",
                             sliceN = NULL,
+                            showText = TRUE,
                             legendPosition = c("right", "bottom"),
                             tooltip = list(headerFormat = NULL, pointFormat = NULL),
                             export = FALSE,
-                            theme = tma(), ...) {
+                            theme = NULL, ...) {
 
   nameD <- paste0('Count ', names(data))
   data <- data  %>%
@@ -382,6 +390,6 @@ hgch_donut_Cat <-  function(data,
 
   data <- plyr::rename(data, c('Conteo' = nameD))
 
-  h <- hgch_donut_CatNum(data, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN, legendPosition = legendPosition, tooltip = tooltip, export = export, theme = theme, ...)
+  h <- hgch_donut_CatNum(data, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN,showText = showText, legendPosition = legendPosition, tooltip = tooltip, export = export, theme = theme, ...)
   h
 }

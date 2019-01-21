@@ -11,8 +11,8 @@ hgch_line_CatNum(data, title = NULL, subtitle = NULL, caption = NULL,
   colors = NULL, agg = "sum", spline = FALSE, marks = c(".", ","),
   nDigits = NULL, dropNa = FALSE, percentage = FALSE,
   format = c("", ""), order = NULL, sort = "no", sliceN = NULL,
-  tooltip = list(headerFormat = NULL, pointFormat = NULL),
-  export = FALSE, theme = tma(), ...)
+  showText = TRUE, tooltip = list(headerFormat = NULL, pointFormat =
+  NULL), export = FALSE, theme = NULL, ...)
 }
 \arguments{
 \item{data}{A data.frame}
