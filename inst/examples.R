@@ -16,7 +16,7 @@ datCat <- sampleData('Cat', nrow = 300)
 hgch_bar_Cat(datCat, theme = tma(diffColorsBar = F), colorScale = 'discrete')
 hgch_bar_Cat(datCat, title = 'Esto es un título',
              subtitle = 'Esto es un subtitulo',
-             caption = 'Esto es un caption'
+             caption = 'Esto es un caption', export = TRUE, lang = 'en'
             )
 hgch_bar_Cat(datCat, orientation = 'hor', verLabel = 'Texto vertical',
              horLabel = 'Texto horizontal')
@@ -52,7 +52,7 @@ hgch_bar_CatNum(datYeaNum, agg = 'mean', showText = F)
 # Categoricos - hgch_bar_CatCat(dfCC, theme = tma(background = '#ccc'), colors = c('orange', 'darkred'))
 dfCC <- sampleData('Cat-Cat', 999)
 
-hgch_bar_CatCat(dfCC)
+hgch_bar_CatCat(dfCC, export = TRUE)
 hgch_bar_CatCat(dfCC, percentage = TRUE)
 hgch_bar_CatCat(dfCC, graphType = "stacked")
 hgch_bar_CatCat(dfCC, theme = tma(background = '#FDCFFF', diffColorsBar = F))
@@ -97,7 +97,7 @@ hgch_bar_CatNumP(dfCNp, graphType = "stack", orientation = "hor", percentage = T
 
 datCat <- sampleData('Cat', nrow = 300)
 hgch_line_Cat(datCat, horLine = 40, theme = tma(showText = FALSE))
-hgch_line_Cat(datCat, orientation = 'hor', horLine = 5)
+hgch_line_Cat(datCat, orientation = 'hor', horLine = 5, export = TRUE)
 hgch_line_Cat(datCat, spline = T, showText = F)
 hgch_line_Cat(datCat, startAtZero = F,  sort = 'desc', order = c('IlkD'))
 hgch_line_Cat(datCat, title = 'Esto es un título',
@@ -109,7 +109,7 @@ hgch_line_Cat(datCat, spline = TRUE, orientation = "hor")
 # Categorica-Numerica
 
 datCatNum <- sampleData('Cat-Num')
-hgch_line_CatNum(datCatNum)
+hgch_line_CatNum(datCatNum, export = T, lang = 'en')
 hgch_line_CatNum(datCatNum, sort = 'asc', dropNa = TRUE, showText = F)
 hgch_line_CatNum(datCatNum, sort = 'desc', colors = c('orange'), order = 'FormE', showText = F)
 hgch_line_CatNum(datCatNum, export = TRUE, nDigits = 2, theme = tma(showText = F),
@@ -128,13 +128,13 @@ hgch_line_CatNum(datYeaNum, agg = 'mean', startAtZero = F, dropNa = T)
 
 # Categoricos - categoricos
 dfCC <- sampleData('Cat-Cat', 999)
-hgch_line_CatCat(dfCC)
+hgch_line_CatCat(dfCC, export = T)
 hgch_line_CatCat(dfCC, showText = F)
 hgch_line_CatCat(dfCC, percentage = TRUE, horLine = 15, verLine = 3)
 
 # Categoricos - categoricos - Numericos
 dfCCN <- sampleData('Cat-Cat-Num', 500)
-hgch_line_CatCatNum(dfCCN, spline = T)
+hgch_line_CatCatNum(dfCCN, spline = T, export = T, lang = 'en')
 hgch_line_CatCatNum(dfCCN, spline = T, orientation = "hor", agg = "mean", startAtZero = F)
 hgch_line_CatCatNum(dfCCN, spline = T,  theme = tma(symbLine = F, showText = F))
 hgch_line_CatCatNum(dfCCN, colors = c('#FF0AC2', '#FFCDDD', '#FDFD0D', '#FDACDC'))
@@ -157,18 +157,22 @@ hgch_line_CatNumP(dfCNp, showText = F)
 
 # Categorico
 dfC <- sampleData('Cat')
-hgch_area_Cat(dfC)
+hgch_area_Cat(dfC, export = T)
 hgch_area_Cat(dfC, colorOpacity = 1, showText = F)
 hgch_area_Cat(dfC, horLabel = 'titulo horizontal', verLabel = 'titulo vertical')
 hgch_area_Cat(dfC, horLabel = 'titulo horizontal', verLabel = 'titulo vertical', spline = TRUE, orientation = 'hor')
 hgch_area_Cat(dfC, spline = TRUE, tooltip = list(pointFormat = 'Acá se personaliza el tooltip'))
 
 dfCN <- sampleData('Cat-Num')
+hgch_area_CatNum(dfCN, export = T)
+hgch_area_CatNum(dfCN, export = T, lang = 'en')
+hgch_area_CatNum(dfCN, export = T, lang = 'pt')
 hgch_area_CatNum(dfCN, colors = 'orange', agg = 'mean', colorOpacity = 0.7)
 hgch_area_CatNum(dfCN, colors = 'orange', agg = 'median', spline = TRUE)
 
 dfCCN <- sampleData('Cat-Cat-Num', 1000)
-hgch_area_CatCatNum(dfCCN)
+hgch_area_CatCatNum(dfCCN, export = T)
+hgch_area_CatCatNum(dfCCN, export = T, lang = 'pt')
 hgch_area_CatCatNum(dfCCN, showText = F)
 hgch_area_CatCatNum(dfCCN, horLabel = 'titulo horizonal',
                     verLabel = 'titulo vertical', spline = TRUE,
@@ -221,6 +225,7 @@ hgch_pie_Cat(dfC, title = "TITLE", subtitle = "Subtitle")
 # Categorico - Numerico
 data <- sampleData("Cat-Num", nrow = 100)
 hgch_pie_CatNum(data)
+hgch_pie_CatNum(data, export = TRUE)
 hgch_pie_CatNum(data, colors = c("darkred", "#FFFDDD"))
 hgch_pie_CatNum(data, colors = c("darkred"), colorScale = "no", highlightValue = "CatD", highlightValueColor = "orange")
 hgch_pie_CatNum(data,
@@ -237,6 +242,7 @@ hgch_pie_CatNum(data, percentage = TRUE, nDigits = 2,
 # Donut -------------------------------------------------------------------
 
 hgch_donut_CatNum(data)
+hgch_donut_CatNum(data, export = T, lang = 'en')
 
 # # Pie and Donut
 #

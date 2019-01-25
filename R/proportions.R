@@ -31,6 +31,7 @@ hgch_pie_CatNum <-  function(data,
                              legendPosition = c("right", "bottom"),
                              tooltip = list(headerFormat = NULL, pointFormat = NULL),
                              export = FALSE,
+                             lang = 'es',
                              theme = NULL, ...) {
 
 
@@ -122,6 +123,7 @@ hgch_pie_CatNum <-  function(data,
   }
 
   global_options(marks[1], marks[2])
+  exportLang(language = lang)
 
   hc <- highchart() %>%
     hc_chart(type = "pie",
@@ -138,8 +140,13 @@ hgch_pie_CatNum <-  function(data,
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(align= legendPosition[1],
               verticalAlign= legendPosition[2])
-  if (export) hc <- hc %>%
-    hc_exporting(enabled = TRUE)
+  if (export){
+    hc <- hc %>%
+      hc_exporting(enabled = TRUE, buttons= list(
+        contextButton= list(
+          menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
+        )
+      ))}
   if (is.null(theme)) {
     hc <- hc %>% hc_add_theme(custom_theme(custom = tma(showText = showText, colores = colors)))
   } else {
@@ -182,6 +189,7 @@ hgch_pie_Cat <-  function(data,
                           legendPosition = c("right", "bottom"),
                           tooltip = list(headerFormat = NULL, pointFormat = NULL),
                           export = FALSE,
+                          lang = 'es',
                           theme = NULL, ...) {
 
   nameD <- paste0('Count ', names(data))
@@ -191,7 +199,7 @@ hgch_pie_Cat <-  function(data,
 
   data <- plyr::rename(data, c('Conteo' = nameD))
 
-  h <- hgch_pie_CatNum(data, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN, showText = showText, legendPosition = legendPosition, tooltip = tooltip, export = export, theme = theme, ...)
+  h <- hgch_pie_CatNum(data, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN, showText = showText, legendPosition = legendPosition, tooltip = tooltip, export = export, lang = lang, theme = theme, ...)
   h
 }
 
@@ -229,6 +237,7 @@ hgch_donut_CatNum <-  function(data,
                                legendPosition = c("right", "bottom"),
                                tooltip = list(headerFormat = NULL, pointFormat = NULL),
                                export = FALSE,
+                               lang = 'es',
                                theme = NULL, ...) {
 
 
@@ -320,6 +329,7 @@ hgch_donut_CatNum <-  function(data,
   }
 
   global_options(marks[1], marks[2])
+  exportLang(language = lang)
 
   hc <- highchart() %>%
     hc_chart(type = "pie",
@@ -336,8 +346,13 @@ hgch_donut_CatNum <-  function(data,
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(align= legendPosition[1],
               verticalAlign= legendPosition[2])
-  if (export) hc <- hc %>%
-    hc_exporting(enabled = TRUE)
+  if (export){
+    hc <- hc %>%
+      hc_exporting(enabled = TRUE, buttons= list(
+        contextButton= list(
+          menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
+        )
+      ))}
   if (is.null(theme)) {
     hc <- hc %>% hc_add_theme(custom_theme(custom = tma(showText = showText, colores = colors)))
   } else {
@@ -381,6 +396,7 @@ hgch_donut_Cat <-  function(data,
                             legendPosition = c("right", "bottom"),
                             tooltip = list(headerFormat = NULL, pointFormat = NULL),
                             export = FALSE,
+                            lang = 'es',
                             theme = NULL, ...) {
 
   nameD <- paste0('Count ', names(data))
@@ -390,6 +406,6 @@ hgch_donut_Cat <-  function(data,
 
   data <- plyr::rename(data, c('Conteo' = nameD))
 
-  h <- hgch_donut_CatNum(data, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN,showText = showText, legendPosition = legendPosition, tooltip = tooltip, export = export, theme = theme, ...)
+  h <- hgch_donut_CatNum(data, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN,showText = showText, legendPosition = legendPosition, tooltip = tooltip, export = export, lang = lang, theme = theme, ...)
   h
 }

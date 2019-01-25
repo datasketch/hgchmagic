@@ -37,6 +37,7 @@ hgch_area_CatNum <-  function(data,
                               showText = TRUE,
                               tooltip = list(headerFormat = NULL, pointFormat = NULL),
                               export = FALSE,
+                              lang = 'es',
                               theme = NULL, ...) {
 
 
@@ -139,6 +140,7 @@ hgch_area_CatNum <-  function(data,
   }
 
   global_options(marks[1], marks[2])
+  exportLang(language = lang)
 
   hc <- highchart() %>%
     hc_chart(type = ifelse(spline, "areaspline", "area"),
@@ -195,8 +197,13 @@ hgch_area_CatNum <-  function(data,
     hc_add_series_list(series) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(enabled = FALSE)
-  if (export) hc <- hc %>%
-    hc_exporting(enabled = TRUE)
+  if (export){
+    hc <- hc %>%
+      hc_exporting(enabled = TRUE, buttons= list(
+        contextButton= list(
+          menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
+        )
+      ))}
   if (is.null(theme)) {
     hc <- hc %>% hc_add_theme(custom_theme(custom = tma(showText = showText, colores = colors)))
   } else {
@@ -245,6 +252,7 @@ hgch_area_Cat <-  function(data,
                            showText = TRUE,
                            tooltip = list(headerFormat = NULL, pointFormat = NULL),
                            export = FALSE,
+                           lang = 'es',
                            theme = NULL, ...) {
 
   nameD <- paste('count', names(data))
@@ -253,7 +261,7 @@ hgch_area_Cat <-  function(data,
     dplyr::summarise(Conteo = n())
   data <- plyr::rename(data, c("Conteo" = nameD))
 
-  h <- hgch_area_CatNum(data = data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine, verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,labelWrap = labelWrap,colors = colors,colorOpacity=colorOpacity ,agg = agg,spline = spline,marks = marks,nDigits = nDigits,dropNa = dropNa,percentage = percentage,format = format,order = order,sort = sort,sliceN = sliceN,showText = showText, tooltip = tooltip,export = export,theme = theme, ...)
+  h <- hgch_area_CatNum(data = data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine, verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,labelWrap = labelWrap,colors = colors,colorOpacity=colorOpacity ,agg = agg,spline = spline,marks = marks,nDigits = nDigits,dropNa = dropNa,percentage = percentage,format = format,order = order,sort = sort,sliceN = sliceN,showText = showText, tooltip = tooltip,export = export,lang = lang,theme = theme, ...)
   h
 }
 
@@ -301,7 +309,7 @@ hgch_area_CatCatNum <- function(data,
                                 tooltip = list("headerFormat" = NULL,
                                                "pointFormat" = NULL,
                                                "shared" = NULL),
-                                export = FALSE, ...) {
+                                export = FALSE, lang = 'es',...) {
 
 
   f <- fringe(data)
@@ -414,7 +422,7 @@ hgch_area_CatCatNum <- function(data,
 
 
   global_options(marks[1], marks[2])
-
+  exportLang(language = lang)
 
 
   hc <- highchart() %>%
@@ -478,8 +486,13 @@ hgch_area_CatCatNum <- function(data,
     hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(enabled = TRUE, align = legendPosition)
-  if (export) hc <- hc %>%
-    hc_exporting(enabled = TRUE)
+  if (export){
+    hc <- hc %>%
+      hc_exporting(enabled = TRUE, buttons= list(
+        contextButton= list(
+          menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
+        )
+      ))}
   if (is.null(theme)) {
     hc <- hc %>% hc_add_theme(custom_theme(custom = tma(showText = showText, colores = colors)))
   } else {
@@ -531,7 +544,7 @@ hgch_area_CatCat <- function(data,
                              tooltip = list("headerFormat" = NULL,
                                             "pointFormat" = NULL,
                                             "shared" = NULL),
-                             export = FALSE, ...) {
+                             export = FALSE, lang = 'es',...) {
 
   datN <- names(data)
   nameD <- paste('count', datN[1])
@@ -539,7 +552,7 @@ hgch_area_CatCat <- function(data,
     dplyr::group_by_(datN[1], datN[2]) %>%
     dplyr::summarise(Conteo = n())
   data <- plyr::rename(data, c("Conteo" = nameD))
-  h <- hgch_area_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,graphType = graphType,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,colorOpacity=colorOpacity,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,tooltip = tooltip,export = export, ...)
+  h <- hgch_area_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,graphType = graphType,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,colorOpacity=colorOpacity,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,tooltip = tooltip,export = export,lang = lang, ...)
   h
 }
 
@@ -588,9 +601,9 @@ hgch_area_CatNumP <- function(data,
                               tooltip = list("headerFormat" = NULL,
                                              "pointFormat" = NULL,
                                              "shared" = NULL),
-                              export = FALSE, ...) {
+                              export = FALSE, lang = 'es', ...) {
 
   data <- data %>% gather("Categories", "Conteo", names(data)[-1])
-  h <- hgch_area_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,graphType = graphType, startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,colorOpacity=colorOpacity,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage, showText = showText,theme = theme,tooltip = tooltip,export = export, ...)
+  h <- hgch_area_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,graphType = graphType, startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,colorOpacity=colorOpacity,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage, showText = showText,theme = theme,tooltip = tooltip,export = export, lang = lang,...)
   h
 }

@@ -13,7 +13,7 @@ hgch_area_CatCat(data, title = NULL, subtitle = NULL, caption = NULL,
   12), legendPosition = "right", marks = c(".", ","), nDigits = NULL,
   order1 = NULL, order2 = NULL, percentage = FALSE,
   showText = TRUE, theme = NULL, tooltip = list(headerFormat = NULL,
-  pointFormat = NULL, shared = NULL), export = FALSE, ...)
+  pointFormat = NULL, shared = NULL), export = FALSE, lang = "es", ...)
 }
 \arguments{
 \item{data}{A data.frame}

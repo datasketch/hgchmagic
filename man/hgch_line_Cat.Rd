@@ -12,7 +12,7 @@ hgch_line_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
   nDigits = NULL, dropNa = FALSE, percentage = FALSE,
   format = c("", ""), order = NULL, sort = "no", sliceN = NULL,
   showText = TRUE, tooltip = list(headerFormat = NULL, pointFormat =
-  NULL), export = FALSE, theme = NULL, ...)
+  NULL), export = FALSE, lang = "es", theme = NULL, ...)
 }
 \arguments{
 \item{data}{A data.frame}

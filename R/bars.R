@@ -436,6 +436,7 @@ hgch_bar_CatCatNum <- function(data,
 
 
   global_options(marks[1], marks[2])
+  exportLang(language = lang)
 
   hc <- highchart() %>%
     hc_chart(type = ifelse(orientation == "hor", "bar", "column")) %>%
@@ -493,8 +494,13 @@ hgch_bar_CatCatNum <- function(data,
                             max = 100)
     }
   }
-  if (export) hc <- hc %>%
-    hc_exporting(enabled = TRUE)
+  if (export){
+      hc <- hc %>%
+        hc_exporting(enabled = TRUE, buttons= list(
+          contextButton= list(
+            menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
+          )
+        ))}
   if (is.null(theme)) {
     hc <- hc %>% hc_add_theme(custom_theme(custom = tma(showText = showText, colores = colors, diffColorsBar = FALSE)))
   } else {
@@ -544,14 +550,15 @@ hgch_bar_CatCat <-function(data,
                            tooltip = list("headerFormat" = NULL,
                                           "pointFormat" = NULL,
                                           "shared" = NULL),
-                           export = FALSE, ...) {
+                           export = FALSE,
+                           lang = 'es', ...) {
 
   datN <- names(data)
   data <- data %>%
     dplyr::group_by_(datN[1], datN[2]) %>%
     dplyr::summarise(Conteo = n())
 
-  hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNaV,format,labelWrapV, marks, nDigits,order1,order2,orientation,percentage,showText,legendPosition,theme,tooltip,export, ...)
+  hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNaV,format,labelWrapV, marks, nDigits,order1,order2,orientation,percentage,showText,legendPosition,theme,tooltip,export,lang, ...)
 }
 
 
@@ -596,8 +603,9 @@ hgch_bar_CatNumP <- function(data,
                              tooltip = list("headerFormat" = NULL,
                                             "pointFormat" = NULL,
                                             "shared" = NULL),
-                             export = FALSE, ...) {
+                             export = FALSE,
+                             lang = 'es', ...) {
 
   data <- data %>% gather("Categories", "Conteo", names(data)[-1])
-  hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNaV,format,labelWrapV, marks, nDigits,order1,order2,orientation,percentage, showText,legendPosition,theme,tooltip,export, ...)
+  hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNaV,format,labelWrapV, marks, nDigits,order1,order2,orientation,percentage, showText,legendPosition,theme,tooltip,export,lang, ...)
 }

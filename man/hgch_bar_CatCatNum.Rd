@@ -14,7 +14,7 @@ hgch_bar_CatCatNum(data, title = NULL, subtitle = NULL,
   orientation = "ver", percentage = FALSE, showText = TRUE,
   legendPosition = c("right", "bottom"), theme = NULL,
   tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
-  export = FALSE, ...)
+  export = FALSE, lang = "es", ...)
 }
 \arguments{
 \item{data}{A data.frame}

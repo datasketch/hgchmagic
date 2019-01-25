@@ -11,7 +11,8 @@ hgch_donut_CatNum(data, title = NULL, subtitle = NULL,
   percentage = FALSE, format = c("", ""), highlightValue = NULL,
   order = NULL, sort = "no", sliceN = NULL, showText = TRUE,
   legendPosition = c("right", "bottom"), tooltip = list(headerFormat =
-  NULL, pointFormat = NULL), export = FALSE, theme = NULL, ...)
+  NULL, pointFormat = NULL), export = FALSE, lang = "es",
+  theme = NULL, ...)
 }
 \arguments{
 \item{data}{A data.frame}
