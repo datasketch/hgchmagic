@@ -236,23 +236,6 @@ count_pl <- function(x) {
 }
 
 
-#' save
-#' @export
-save_viz <- function(file,
-                     viz,
-                     ext,
-                     width = 660,
-                     height = 500, ...) {
-  tmp <- paste(tempdir(), 'html', sep ='.')
-  htmltools::save_html(viz, tmp)
-  tmpSave <- file
-  if (ext == '.html') {
-    htmlwidgets::saveWidget(viz, file)
-  } else {
-    webshot(tmp, file, vwidth = width, vheight = height)
-  }
-  file.copy(file, file)
-}
 
 
 #' translate
