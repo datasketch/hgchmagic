@@ -13,7 +13,7 @@ library(hgchmagic)
 # Categoricas
 
 datCat <- sampleData('Cat', nrow = 300)
-hgch_bar_Cat(datCat, theme = tma(diffColorsBar = F), colorScale = 'discrete')
+hgch_bar_Cat(datCat, theme = tma(diffColorsBar = T), colorScale = 'discrete')
 hgch_bar_Cat(datCat, title = 'Esto es un título',
              subtitle = 'Esto es un subtitulo',
              caption = 'Esto es un caption', export = TRUE, lang = 'en'
@@ -244,60 +244,35 @@ hgch_pie_CatNum(data, percentage = TRUE, nDigits = 2,
 hgch_donut_CatNum(data)
 hgch_donut_CatNum(data, export = T, lang = 'en')
 
-# # Pie and Donut
-#
-# availableCtypeIds()
-#
+# treemap
+dataC <- sampleData('Cat')
+hgch_treemap_Cat(dataC)
 
-#
-#
-# hgch_donut_Cat(data)
-# hgch_donut_Cat(data, title = "TITLE", subtitle = "Subtitle")
-#
+dataCN <- sampleData('Cat-Num')
 
-#
-#
-# # Lines
-#
-# data <- sampleData("Dat-Num",gt0 = FALSE)
-# hgch_line_DatNum(data)
-# hgch_line_DatNum(data, export = TRUE)
-#
-# dc <- sampleData('Cat', nrow = 1000)
-# hgch_line_Cat(dc)
-# d <- sampleData("Cat-Num",gt0 = FALSE)
-# hgch_line_CatNum(d, theme = tma(), percentage = T, startAtZero = F, plotBandsFromX = 1, plotBandsToX = 2)
-# hgch_line_CatNum(d, theme = tma(), verLine = 5, horLine = 3000, spline = T, colors = c('orange'), sort = 'asc')
-# data <- sampleData("Cat-Yea-Num",nrow = 40)
-# hgch_line_CatYeaNum(data)
-# hgch_line_CatYeaNum(data, symbol = "square")
-#
-# data <- sampleData("Cat-Yea-Num",nrow = 40, asFringe = TRUE)
-# hgch_line_CatYeaNum(data)
-# hgch_line_CatYeaNum(data, symbol = "square")
-#
-# data <- sampleData("Cat-Dat-Num", nrow = 100)
-# hgch_line_CatDatNum(data)
-# hgch_line_CatDatNum(data, symbol = "square")
-#
-# data <- read_csv("inst/data/trends.csv")
-# data$start <- as.Date(data$start)
-# hgch_line_CatDatNum(data)
-#
-# data <- sampleData("Cat-Cat-Num", nrow = 100)
-# hgch_line_CatCatNum(data, horLine = 300, horLineLabel = 'hola',
-#                     agg = 'mean', colors = c('red'), dropNa = c(F, T))
-#
-#
-#
-# data <- sampleData("Yea-Num", nrow = 20)
-# hgch_line_YeaNum(data, symbol = "square")
-#
-# data <- sampleData("Yea-Num", nrow = 20)
-# data <- sample_n(data,size = 20)
-# hgch_line_YeaNum(data, symbol = "square")
-#
-#
+#discrete color
+hgch_treemap_CatNum(data = dataCN, colorScale = 'discrete')
+hgch_treemap_CatNum(data = dataCN,
+                    colorScale = 'discrete',
+                    title = 'Esto es un título',
+                    subtitle = 'Esto es un subtitulo',
+                    caption = 'Esto es un caption',
+                    export = TRUE, lang = 'en',
+                    showText = F)
+hgch_treemap_CatNum(data = dataCN,
+                    agg = "mean",
+                    marks = c(".", ","),
+                    format = c("$"))
+hgch_treemap_CatNum(data = dataCN,
+                    percentage = TRUE,
+                    nDigits = 2,
+                    dropNa = T,
+                    colors = c("black", "black", "black"),
+                    highlightValueColor = "red",
+                    highlightValue = "FormA",
+                    showLegend = F,
+                    theme = tma(labsData = list(colLabel = "#ffffff")))
+
 # # Two axis lines
 #
 # data <- sampleData("Yea-Num-Num",nrow = 10)

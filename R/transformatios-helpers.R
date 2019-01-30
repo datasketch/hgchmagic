@@ -250,7 +250,7 @@ exportLang <- function(language = 'es') {
     langOpt$downloadPNG <- 'Download PNG image'
     langOpt$downloadSVG <- 'Download SVG image'
     langOpt$downloadPDF <- 'Download PDF image'
-    }
+  }
   if (language == 'es') {
     langOpt <- getOption("highcharter.lang")
     langOpt$contextButtonTitle <- 'Opciones de descarga'
@@ -270,3 +270,20 @@ exportLang <- function(language = 'es') {
   }
   options(highcharter.lang = langOpt)
 }
+
+#' select discrete default color
+#' @export
+
+discreteColorSelect <- function (colorDefault, d) {
+  lengData <- length(unique(d$a))
+  lengColor <- length(colorDefault)
+  if (lengData == lengColor) {
+    colorDefault <- colorDefault
+  } else if (lengData > lengColor) {
+    colorDefault <- c(colorDefault, sample(colorDefault, lengData-lengColor))
+  } else {
+    colorDefault <- colorDefault[1:lengData]
+  }
+  colorDefault
+}
+

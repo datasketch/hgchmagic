@@ -65,6 +65,7 @@ hgch_bar_CatNum <-  function(data,
 
   if (colorScale == 'discrete') {
     colorDefault <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
+    colorDefault <- discreteColorSelect(colorDefault, d)
   } else {
     colorDefault <- leaflet::colorNumeric(c("#2E0F35", "#A6CEDE"), 1:length(unique(d$a)))(1:length(unique(d$a)))
   }

@@ -2,29 +2,31 @@
 % Please edit documentation in R/treemap.R
 \name{hgch_treemap_CatNum}
 \alias{hgch_treemap_CatNum}
-\title{Treemap density by numeric variable}
+\title{Treemap (categories, numbers)}
 \usage{
 hgch_treemap_CatNum(data, title = NULL, subtitle = NULL,
-  caption = NULL, minColor = "#E63917", maxColor = "#18941E",
-  back_color = "white", color_title = "black", reverse = TRUE,
-  export = FALSE, ...)
+  caption = NULL, labelWrap = 12, colors = NULL,
+  colorScale = "continuous", agg = "sum", marks = c(".", ","),
+  nDigits = NULL, dropNa = FALSE, highlightValueColor = "#F9B233",
+  percentage = FALSE, format = c("", ""), highlightValue = NULL,
+  sliceN = NULL, showText = TRUE, legendPosition = c("right",
+  "bottom"), tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  export = FALSE, theme = NULL, lang = "es", ...)
 }
 \arguments{
-\item{x}{A data.frame}
+\item{data}{A data.frame}
 }
 \value{
-highcharts viz
+Highcharts visualization
 }
 \description{
-Treemap density by numeric variable
+Compare aggregations among category's levels
 }
 \section{ctypes}{
 
-Cat-Num
+Cat-Num, Yea-Num, Dat-Num,
 }
 
 \examples{
-
 hgch_treemap_CatNum(sampleData("Cat-Num", nrow = 10))
-
 }
