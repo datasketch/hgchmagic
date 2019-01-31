@@ -273,8 +273,28 @@ hgch_treemap_CatNum(data = dataCN,
                     showLegend = F,
                     theme = tma(labsData = list(colLabel = "#ffffff")))
 
+
+# Treemap CatCatNum
+dCCN <- sampleData('Cat-Cat-Num')
+hgchc_treemap_CatCatNum(dCCN)
+hgchc_treemap_CatCatNum(dCCN,
+                        colorScale = "continuous",
+                        nDigits = 2, format = c("$"),
+                        marks = c("<", ">"))
+hgchc_treemap_CatCatNum(dCCN, showText = F)
+
+
+dfCC <- sampleData('Cat-Cat', 999)
+hgchc_treemap_CatCat(dfCC, export = T)
+hgchc_treemap_CatCat(dfCC, showText = F)
+
+
+dfCC <- sampleData('Cat-NumP', 999)
+hgchc_treemap_CatNumP(dfCC, export = T)
+hgchc_treemap_CatNumP(dfCC, showText = F)
+
+
 # # Two axis lines
-#
 # data <- sampleData("Yea-Num-Num",nrow = 10)
 # data <- sample_n(data,size = 10)
 # hgch_2yline_YeaNumNum(data)

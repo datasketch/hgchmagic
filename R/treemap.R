@@ -138,19 +138,19 @@ hgch_treemap_CatNum<-  function(data,
   if (colorScale == 'continuous') {
     hc <- hc %>%
       hc_colorAxis(
-      minColor = colors[1],
-      maxColor = colors[length(d$a)]
-    )
+        minColor = colors[1],
+        maxColor = colors[length(d$a)]
+      )
   }
 
   if (showText) {
     hc <- hc %>%
-           hc_plotOptions(
-             treemap = list(
-             dataLabels = list(
-               formatter = formatText
-             ))
-           )
+      hc_plotOptions(
+        treemap = list(
+          dataLabels = list(
+            formatter = formatText
+          ))
+      )
   }
   hc <- hc %>% hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(enabled = showLegend,
@@ -230,7 +230,7 @@ hgch_treemap_Cat <-  function(data,
 #' Cat-Cat-Num, Cat-Yea-Num, Cat-Dat-Num,
 #' @examples
 #' hgch_treemap_CatNum(sampleData("Cat-Cat-Num", nrow = 10))
-#' @export hgch_treemap_CatCatNum
+#' @export hgchc_treemap_CatCatNum
 
 hgchc_treemap_CatCatNum <- function(data,
                                     title = NULL,
@@ -246,6 +246,7 @@ hgchc_treemap_CatCatNum <- function(data,
                                     nDigits = NULL,
                                     percentage = FALSE,
                                     showText = TRUE,
+                                    showLegend = TRUE,
                                     legendPosition = c("right", "bottom"),
                                     theme = NULL,
                                     tooltip = list("headerFormat" = NULL,
@@ -253,8 +254,6 @@ hgchc_treemap_CatCatNum <- function(data,
                                                    "shared" = NULL),
                                     export = FALSE,
                                     lang = 'es', ...) {
-
- data <- sampleData('Cat-Cat-Num')
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
@@ -271,6 +270,15 @@ hgchc_treemap_CatCatNum <- function(data,
     d <- d %>%
     tidyr::drop_na(b)
 
+  d <- d %>%
+    tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
+                           b = ifelse(is.character(d$b), "NA", NA),
+                           c = NA)) %>%
+    dplyr::group_by(a, b) %>%
+    dplyr::summarise(c = agg(agg, c))
+
+  d <- d %>% drop_na(c)
+
   if (colorScale == 'discrete') {
     colorDefault <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
     colorDefault <- discreteColorSelect(colorDefault, d)
@@ -285,20 +293,6 @@ hgchc_treemap_CatCatNum <- function(data,
     colors <- colorDefault
   }
 
-
-  d <- d %>%
-    tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
-                           b = ifelse(is.character(d$b), "NA", NA),
-                           c = NA)) %>%
-    dplyr::group_by(a, b) %>%
-    dplyr::summarise(c = agg(agg, c)) %>%
-    tidyr::spread(b, c) %>%
-    tidyr::gather(b, c, -a)
-  d$c[is.na(d$c)] <- NA
-  d$a[is.na(d$a)] <- "NA"
-  d$b[is.na(d$b)] <- "NA"
-
-
   if (is.null(nDigits)) {
     nDig <- 0
   } else {
@@ -310,29 +304,202 @@ hgchc_treemap_CatCatNum <- function(data,
       dplyr::mutate(c = (c / sum(c, na.rm = TRUE)) * 100)
   }
 
-
   d <- orderCategory(d, "a", order = unique(d$a), labelWrap = labelWrapV[1])
   d <- orderCategory(d, "b", order = unique(d$b), labelWrap = labelWrapV[2])
   d$c <- round(d$c, nDig)
 
-  data <- map(1:nrow(d), function(z){
-    list("name" = d$a[z],
-          "id" = d$b[z],
-         "value" = d$c[z],
-         "color" = as.character(d$color[z]),
-         "colorValue" = d$c[z])
+  colors <- data.frame(a = unique(d$a), colorDefault)
+
+    listaId <- map(1:length(colors$a), function(i) {
+    list(
+      id = as.character(colors$a[i]),
+      name = as.character(colors$a[i]),
+      color = as.character(colors$colorDefault[i])
+    )
   })
 
+    print(listaId)
 
-  highchart() %>%
+  listaMg <- map(1:nrow(d), function(z) {
+    list(
+      name = d$b[z],
+      parent = d$a[z],
+      value = d$c[z],
+      colorValue = d$c[z]
+    )
+
+  })
+
+  data <- c(listaId, listaMg)
+
+  if (is.null(format)) {
+    format[1] = ""
+    format[2] = ""
+  }
+
+  if (percentage && format[2] == "") {
+    format[2] <- "%"
+  }
+
+
+  formatText <- JS(paste0("function () {
+                return this.point.name + '<br/>' + '",format[1],"' + Highcharts.numberFormat(this.point.value, ", nDig,", '", marks[2], "','", marks[1], "'", ") + '", format[2],"';}"))
+
+  if (is.null(tooltip$pointFormat)) {
+    tooltip$pointFormat <-paste0('<b>', nms[2], ': </b>{point.name}</br>',
+                                # '<b>', nms[1], ': </b>{point.node.name}</br>',
+                                 paste0(agg, ' ' ,nms[3], ': '), format[1],'{point.value}', format[2])
+  }
+  if (is.null(tooltip$headerFormat)) {
+    tooltip$headerFormat <- " "
+  }
+
+
+  global_options(marks[1], marks[2])
+  exportLang(language = lang)
+  hc <- highchart() %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    #hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
     hc_series(
       list(
-        type = 'treemap',
+        type = "treemap",
         layoutAlgorithm = 'squarified',
-        data = data))
+        alternateStartingDirection = TRUE,
+        levels = list(list(
+          level = 1,
+          layoutAlgorithm = 'sliceAndDice',
+          dataLabels = list(
+            enabled = TRUE,
+            align = 'left',
+            verticalAlign = 'top',
+            style = list(
+              fontSize = '15px',
+              fontWeight = 'bold'
+            )
+          )
+        )),
+        data = data
+      ))
+
+
+  if (colorScale == 'continuous') {
+    hc <- hc %>%
+      hc_colorAxis(
+        maxColor = as.character(colors$colorDefault[1]),
+        minColor = as.character(colors$colorDefault[length(colors$a)])
+      )
+  }
+
+  if (showText) {
+    hc <- hc %>%
+      hc_plotOptions(
+        treemap = list(
+          dataLabels = list(
+            formatter = formatText
+          ))
+      )
+  }
+  hc <- hc %>% hc_credits(enabled = TRUE, text = caption) %>%
+    hc_legend(enabled = showLegend,
+              align= legendPosition[1],
+              verticalAlign= legendPosition[2])
+  if (export){
+    hc <- hc %>%
+      hc_exporting(enabled = TRUE, buttons= list(
+        contextButton= list(
+          menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
+        )
+      ))}
+
+  if (is.null(theme)) {
+    hc <- hc %>% hc_add_theme(custom_theme(custom = tma(colores = colors)))
+  } else {
+    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+  }
+  hc
+}
+
+#' Treemap (categories, categories)
+#'
+#' Compare aggregations among category's levels
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Cat-Cat, Cat-Yea, Cat-Dat,
+#' @examples
+#' hgch_treemap_CatCat(sampleData("Cat-Cat", nrow = 10))
+#' @export hgchc_treemap_CatCat
+
+hgchc_treemap_CatCat <- function(data,
+                                 title = NULL,
+                                 subtitle = NULL,
+                                 caption = NULL,
+                                 agg = "sum",
+                                 colors = NULL,
+                                 colorScale = 'discrete',
+                                 dropNaV = c(FALSE, FALSE),
+                                 format = c("", ""),
+                                 labelWrapV = c(12, 12),
+                                 marks = c(".", ","),
+                                 nDigits = NULL,
+                                 percentage = FALSE,
+                                 showText = TRUE,
+                                 showLegend = TRUE,
+                                 legendPosition = c("right", "bottom"),
+                                 theme = NULL,
+                                 tooltip = list("headerFormat" = NULL,
+                                                "pointFormat" = NULL,
+                                                "shared" = NULL),
+                                 export = FALSE,
+                                 lang = 'es', ...) {
+  datN <- names(data)
+  data <- data %>%
+    dplyr::group_by_(datN[1], datN[2]) %>%
+    dplyr::summarise(Conteo = n())
+
+  hgchc_treemap_CatCatNum(data = data,title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,showLegend = showLegend,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
 
 }
 
+
+#' Treemap (categories, categories)
+#'
+#' Compare aggregations among category's levels
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Cat-NumP, Yea-NumP, Dat-NumP
+#' @examples
+#' hgch_treemap_CatNum(sampleData("Cat-NumP", nrow = 10))
+#' @export hgchc_treemap_CatNumP
+
+hgchc_treemap_CatNumP <- function(data,
+                                 title = NULL,
+                                 subtitle = NULL,
+                                 caption = NULL,
+                                 agg = "sum",
+                                 colors = NULL,
+                                 colorScale = 'discrete',
+                                 dropNaV = c(FALSE, FALSE),
+                                 format = c("", ""),
+                                 labelWrapV = c(12, 12),
+                                 marks = c(".", ","),
+                                 nDigits = NULL,
+                                 percentage = FALSE,
+                                 showText = TRUE,
+                                 showLegend = TRUE,
+                                 legendPosition = c("right", "bottom"),
+                                 theme = NULL,
+                                 tooltip = list("headerFormat" = NULL,
+                                                "pointFormat" = NULL,
+                                                "shared" = NULL),
+                                 export = FALSE,
+                                 lang = 'es', ...) {
+
+  data <- data %>% gather("Categories", "Conteo", names(data)[-1])
+  hgchc_treemap_CatCatNum(data = data,title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,showLegend = showLegend,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
+
+}
