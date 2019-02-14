@@ -192,13 +192,16 @@ hgch_pie_Cat <-  function(data,
                           lang = 'es',
                           theme = NULL, ...) {
 
-  nameD <- paste0('Count ', names(data))
-  data <- data  %>%
-    dplyr::group_by_(names(data)) %>%
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+
+  d <- d  %>%
+    dplyr::group_by_(names(d)) %>%
     dplyr::summarise(Conteo = n())
+  names(d) <- c(nms[1], 'Conteo')
 
-  data <- plyr::rename(data, c('Conteo' = nameD))
-
+  data <- fringe(d)
   h <- hgch_pie_CatNum(data, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN, showText = showText, legendPosition = legendPosition, tooltip = tooltip, export = export, lang = lang, theme = theme, ...)
   h
 }
@@ -399,13 +402,16 @@ hgch_donut_Cat <-  function(data,
                             lang = 'es',
                             theme = NULL, ...) {
 
-  nameD <- paste0('Count ', names(data))
-  data <- data  %>%
-    dplyr::group_by_(names(data)) %>%
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+
+  d <- d  %>%
+    dplyr::group_by_(names(d)) %>%
     dplyr::summarise(Conteo = n())
+  names(d) <- c(nms[1], 'Conteo')
 
-  data <- plyr::rename(data, c('Conteo' = nameD))
-
+  data <- fringe(d)
   h <- hgch_donut_CatNum(data, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN,showText = showText, legendPosition = legendPosition, tooltip = tooltip, export = export, lang = lang, theme = theme, ...)
   h
 }

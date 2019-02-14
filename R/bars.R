@@ -264,13 +264,16 @@ hgch_bar_Cat <-  function(data,
                           theme = NULL,
                           lang = 'es', ...) {
 
-  nameD <- paste0('Count ', names(data))
-  data <- data  %>%
-    dplyr::group_by_(names(data)) %>%
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+
+  d <- d  %>%
+    dplyr::group_by_(names(d)) %>%
     dplyr::summarise(Conteo = n())
+  names(d) <- c(nms[1], 'Conteo')
 
-  data <- plyr::rename(data, c('Conteo' = nameD))
-
+  data <- fringe(d)
   h <- hgch_bar_CatNum(data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel, verLabel = verLabel, horLine = horLine, horLineLabel = horLineLabel, verLine = verLine, verLineLabel = verLineLabel, labelWrap = labelWrap, orientation = orientation, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN,showText=showText,legendPosition = legendPosition, tooltip = tooltip, export = export, theme = theme, lang = lang, ...)
   h
 }
@@ -554,11 +557,16 @@ hgch_bar_CatCat <-function(data,
                            export = FALSE,
                            lang = 'es', ...) {
 
-  datN <- names(data)
-  data <- data %>%
-    dplyr::group_by_(datN[1], datN[2]) %>%
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+
+  d <- d %>%
+    dplyr::group_by_('a', 'b') %>%
     dplyr::summarise(Conteo = n())
 
+  names(d) <- c(f$dic_$d$id, 'Conteo')
+  data <- fringe(d)
   hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNaV,format,labelWrapV, marks, nDigits,order1,order2,orientation,percentage,showText,legendPosition,theme,tooltip,export,lang, ...)
 }
 
@@ -607,6 +615,14 @@ hgch_bar_CatNumP <- function(data,
                              export = FALSE,
                              lang = 'es', ...) {
 
-  data <- data %>% gather("Categories", "Conteo", names(data)[-1])
-  hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNaV,format,labelWrapV, marks, nDigits,order1,order2,orientation,percentage, showText,legendPosition,theme,tooltip,export,lang, ...)
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+  names(d) <- f$dic_$d$id
+  d <- d %>%
+       gather("Categorias", "Conteo", names(d)[-1])
+  data <- fringe(d)
+  h <- hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNaV,format,labelWrapV, marks, nDigits,order1,order2,orientation,percentage, showText,legendPosition,theme,tooltip,export,lang, ...)
+  h
 }

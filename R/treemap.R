@@ -208,12 +208,17 @@ hgch_treemap_Cat <-  function(data,
                               export = FALSE,
                               theme = NULL,
                               lang = 'es',...) {
-  nameD <- paste0('Count ', names(data))
-  data <- data  %>%
-    dplyr::group_by_(names(data)) %>%
-    dplyr::summarise(Conteo = n())
 
-  data <- plyr::rename(data, c('Conteo' = nameD))
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+
+  d <- d  %>%
+    dplyr::group_by_(names(d)) %>%
+    dplyr::summarise(Conteo = n())
+  names(d) <- c(nms[1], 'Conteo')
+
+  data <- fringe(d)
 
   h <- hgch_treemap_CatNum(data = data, title = title,subtitle = subtitle, caption = caption, labelWrap = labelWrap,colors = colors,colorScale = colorScale, agg = agg,marks = marks, nDigits = nDigits,dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, format = format, highlightValue = highlightValue,sliceN = sliceN,showText = showText,showLegend = showLegend, legendPosition = legendPosition,tooltip = tooltip,export = export,theme = theme, lang = lang,...)
   h
@@ -310,7 +315,7 @@ hgchc_treemap_CatCatNum <- function(data,
 
   colors <- data.frame(a = unique(d$a), colorDefault)
 
-    listaId <- map(1:length(colors$a), function(i) {
+  listaId <- map(1:length(colors$a), function(i) {
     list(
       id = as.character(colors$a[i]),
       name = as.character(colors$a[i]),
@@ -318,7 +323,7 @@ hgchc_treemap_CatCatNum <- function(data,
     )
   })
 
-    print(listaId)
+  print(listaId)
 
   listaMg <- map(1:nrow(d), function(z) {
     list(
@@ -347,7 +352,7 @@ hgchc_treemap_CatCatNum <- function(data,
 
   if (is.null(tooltip$pointFormat)) {
     tooltip$pointFormat <-paste0('<b>', nms[2], ': </b>{point.name}</br>',
-                                # '<b>', nms[1], ': </b>{point.node.name}</br>',
+                                 # '<b>', nms[1], ': </b>{point.node.name}</br>',
                                  paste0(agg, ' ' ,nms[3], ': '), format[1],'{point.value}', format[2])
   }
   if (is.null(tooltip$headerFormat)) {
@@ -454,13 +459,19 @@ hgchc_treemap_CatCat <- function(data,
                                                 "shared" = NULL),
                                  export = FALSE,
                                  lang = 'es', ...) {
-  datN <- names(data)
-  data <- data %>%
-    dplyr::group_by_(datN[1], datN[2]) %>%
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+
+  d <- d %>%
+    dplyr::group_by_('a', 'b') %>%
     dplyr::summarise(Conteo = n())
 
-  hgchc_treemap_CatCatNum(data = data,title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,showLegend = showLegend,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
-
+  names(d) <- c(f$dic_$d$id, 'Conteo')
+  data <- fringe(d)
+  h <- hgchc_treemap_CatCatNum(data = data,title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,showLegend = showLegend,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
+  h
 }
 
 
@@ -477,29 +488,37 @@ hgchc_treemap_CatCat <- function(data,
 #' @export hgchc_treemap_CatNumP
 
 hgchc_treemap_CatNumP <- function(data,
-                                 title = NULL,
-                                 subtitle = NULL,
-                                 caption = NULL,
-                                 agg = "sum",
-                                 colors = NULL,
-                                 colorScale = 'discrete',
-                                 dropNaV = c(FALSE, FALSE),
-                                 format = c("", ""),
-                                 labelWrapV = c(12, 12),
-                                 marks = c(".", ","),
-                                 nDigits = NULL,
-                                 percentage = FALSE,
-                                 showText = TRUE,
-                                 showLegend = TRUE,
-                                 legendPosition = c("right", "bottom"),
-                                 theme = NULL,
-                                 tooltip = list("headerFormat" = NULL,
-                                                "pointFormat" = NULL,
-                                                "shared" = NULL),
-                                 export = FALSE,
-                                 lang = 'es', ...) {
+                                  title = NULL,
+                                  subtitle = NULL,
+                                  caption = NULL,
+                                  agg = "sum",
+                                  colors = NULL,
+                                  colorScale = 'discrete',
+                                  dropNaV = c(FALSE, FALSE),
+                                  format = c("", ""),
+                                  labelWrapV = c(12, 12),
+                                  marks = c(".", ","),
+                                  nDigits = NULL,
+                                  percentage = FALSE,
+                                  showText = TRUE,
+                                  showLegend = TRUE,
+                                  legendPosition = c("right", "bottom"),
+                                  theme = NULL,
+                                  tooltip = list("headerFormat" = NULL,
+                                                 "pointFormat" = NULL,
+                                                 "shared" = NULL),
+                                  export = FALSE,
+                                  lang = 'es', ...) {
 
-  data <- data %>% gather("Categories", "Conteo", names(data)[-1])
-  hgchc_treemap_CatCatNum(data = data,title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,showLegend = showLegend,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
 
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+  names(d) <- f$dic_$d$id
+  d <- d %>%
+    gather("Categorias", "Conteo", names(d)[-1])
+  data <- fringe(d)
+  h <-  hgchc_treemap_CatCatNum(data = data,title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,showLegend = showLegend,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
+  h
 }

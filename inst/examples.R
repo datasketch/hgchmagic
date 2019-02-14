@@ -90,8 +90,8 @@ hgch_bar_CatCatNum(dfCAN, percentage = TRUE, graphType = "stack", orientation = 
 dfCNp <- sampleData('Cat-NumP')
 hgch_bar_CatNumP(dfCNp)
 hgch_bar_CatNumP(dfCNp, orientation = "hor")
-hgch_bar_CatNumP(dfCNp, graphType = "stack")
-hgch_bar_CatNumP(dfCNp, graphType = "stack", orientation = "hor", percentage = T)
+hgch_bar_CatNumP(dfCNp, graphType = "stacked")
+hgch_bar_CatNumP(dfCNp, graphType = "stacked", orientation = "hor", percentage = T)
 # Líneas ------------------------------------------------------------------
 # Categoricas
 

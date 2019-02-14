@@ -255,12 +255,15 @@ hgch_area_Cat <-  function(data,
                            lang = 'es',
                            theme = NULL, ...) {
 
-  nameD <- paste('count', names(data))
-  data <- data  %>%
-    dplyr::group_by_(names(data)) %>%
-    dplyr::summarise(Conteo = n())
-  data <- plyr::rename(data, c("Conteo" = nameD))
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
 
+  d <- d  %>%
+    dplyr::group_by_(names(d)) %>%
+    dplyr::summarise(Conteo = n())
+  names(d) <- c(nms[1], 'Conteo')
+  data <- fringe(d)
   h <- hgch_area_CatNum(data = data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine, verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,labelWrap = labelWrap,colors = colors,colorOpacity=colorOpacity ,agg = agg,spline = spline,marks = marks,nDigits = nDigits,dropNa = dropNa,percentage = percentage,format = format,order = order,sort = sort,sliceN = sliceN,showText = showText, tooltip = tooltip,export = export,lang = lang,theme = theme, ...)
   h
 }
@@ -546,12 +549,16 @@ hgch_area_CatCat <- function(data,
                                             "shared" = NULL),
                              export = FALSE, lang = 'es',...) {
 
-  datN <- names(data)
-  nameD <- paste('count', datN[1])
-  data <- data %>%
-    dplyr::group_by_(datN[1], datN[2]) %>%
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+
+  d <- d %>%
+    dplyr::group_by_('a', 'b') %>%
     dplyr::summarise(Conteo = n())
-  data <- plyr::rename(data, c("Conteo" = nameD))
+
+  names(d) <- c(f$dic_$d$id, 'Conteo')
+  data <- fringe(d)
   h <- hgch_area_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,graphType = graphType,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,colorOpacity=colorOpacity,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,tooltip = tooltip,export = export,lang = lang, ...)
   h
 }
@@ -603,7 +610,13 @@ hgch_area_CatNumP <- function(data,
                                              "shared" = NULL),
                               export = FALSE, lang = 'es', ...) {
 
-  data <- data %>% gather("Categories", "Conteo", names(data)[-1])
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+  names(d) <- f$dic_$d$id
+  d <- d %>%
+    gather("Categorias", "Conteo", names(d)[-1])
+  data <- fringe(d)
   h <- hgch_area_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,graphType = graphType, startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,colorOpacity=colorOpacity,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage, showText = showText,theme = theme,tooltip = tooltip,export = export, lang = lang,...)
   h
 }
