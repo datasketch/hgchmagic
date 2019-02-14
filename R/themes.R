@@ -141,7 +141,7 @@ tma <- function(background = 'transparent',
                 stylesX = list(gridLineWidth = 0, lineColor = '#ccd6eb', tickColor = '#ccd6eb', gridLineColor = '#e6e6e6',
                                tickLength = 10, lineWidth = 1),
                 stylesLabelX = list(color = '#666666', fontSize = '11px', fontWeight = NULL, enabled =TRUE),
-                stylesTitleX = list(color = '#666666', fontSize = '13px')) {
+                stylesTitleX = list(color = '#666666', fontSize = '13px'), ...) {
 
   if (is.null(colores)) colores <-  c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
 

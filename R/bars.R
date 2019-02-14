@@ -123,7 +123,7 @@ hgch_bar_CatNum <-  function(data,
                             "y" = d$y[z],
                             "color" = as.character(d$color[z]))
   })
-
+print(bla)
   formatLabAxis <- paste0('{value:', marks[1], marks[2], 'f}')
   if (!is.null(nDigits)) {
     formatLabAxis <- paste0('{value:', marks[1], marks[2], nDigits, 'f}')

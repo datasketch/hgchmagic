@@ -297,6 +297,7 @@ hgch_treemap_CatCatNum <- function(data,
     colors <- colorDefault
   }
 
+
   if (is.null(nDigits)) {
     nDig <- 0
   } else {
@@ -312,17 +313,16 @@ hgch_treemap_CatCatNum <- function(data,
   d <- orderCategory(d, "b", order = unique(d$b), labelWrap = labelWrapV[2])
   d$c <- round(d$c, nDig)
 
-  colors <- data.frame(a = unique(d$a), colorDefault)
+  paleta <- data.frame(a = unique(d$a), colors)
 
-  listaId <- map(1:length(colors$a), function(i) {
+  listaId <- map(1:length(paleta$a), function(i) {
     list(
-      id = as.character(colors$a[i]),
-      name = as.character(colors$a[i]),
-      color = as.character(colors$colorDefault[i])
+      id = as.character(paleta$a[i]),
+      name = as.character(paleta$a[i]),
+      color = as.character(paleta$color[i])
     )
   })
 
-  print(listaId)
 
   listaMg <- map(1:nrow(d), function(z) {
     list(
@@ -385,7 +385,6 @@ hgch_treemap_CatCatNum <- function(data,
         )),
         data = data
       ))
-
 
   if (colorScale == 'continuous') {
     hc <- hc %>%
