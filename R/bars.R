@@ -264,17 +264,18 @@ hgch_bar_Cat <-  function(data,
                           theme = NULL,
                           lang = 'es', ...) {
 
+
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
 
-  d <- d  %>%
-    dplyr::group_by_(names(d)) %>%
-    dplyr::summarise(Conteo = n())
-  names(d) <- c(nms[1], 'Conteo')
+  d <- d %>%
+    dplyr::group_by_all() %>%
+    dplyr::summarise(b = n())
 
-  data <- fringe(d)
-  h <- hgch_bar_CatNum(data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel, verLabel = verLabel, horLine = horLine, horLineLabel = horLineLabel, verLine = verLine, verLineLabel = verLineLabel, labelWrap = labelWrap, orientation = orientation, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN,showText=showText,legendPosition = legendPosition, tooltip = tooltip, export = export, theme = theme, lang = lang, ...)
+  names(d) <- c(f$dic_$d$label, paste0("count ", f$dic_$d$label))
+
+  h <- hgch_bar_CatNum(data = d, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel, verLabel = verLabel, horLine = horLine, horLineLabel = horLineLabel, verLine = verLine, verLineLabel = verLineLabel, labelWrap = labelWrap, orientation = orientation, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN,showText=showText,legendPosition = legendPosition, tooltip = tooltip, export = export, theme = theme, lang = lang, ...)
   h
 }
 
@@ -487,6 +488,12 @@ hgch_bar_CatCatNum <- function(data,
     hc_add_series_list(series) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
+    hc_plotOptions(
+      bar = list(
+        colorByPoint = FALSE),
+      column = list(
+        colorByPoint = FALSE)
+    ) %>%
     hc_legend(enabled = TRUE,
               align = legendPosition[1],
               verticalAlign = legendPosition[2])
@@ -562,12 +569,12 @@ hgch_bar_CatCat <-function(data,
   d <- f$d
 
   d <- d %>%
-    dplyr::group_by_('a', 'b') %>%
-    dplyr::summarise(Conteo = n())
+    dplyr::group_by_all() %>%
+    dplyr::summarise(c = n())
 
-  names(d) <- c(f$dic_$d$id, 'Conteo')
-  data <- fringe(d)
-  hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNaV,format,labelWrapV, marks, nDigits,order1,order2,orientation,percentage,showText,legendPosition,theme,tooltip,export,lang, ...)
+  names(d) <- c(f$dic_$d$label, paste0("count", f$dic_$d$label[1]))
+
+  hgch_bar_CatCatNum(data = d,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNaV,format,labelWrapV, marks, nDigits,order1,order2,orientation,percentage,showText,legendPosition,theme,tooltip,export,lang, ...)
 }
 
 
@@ -615,14 +622,13 @@ hgch_bar_CatNumP <- function(data,
                              export = FALSE,
                              lang = 'es', ...) {
 
-
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
-  names(d) <- f$dic_$d$id
-  d <- d %>%
-       gather("Categorias", "Conteo", names(d)[-1])
-  data <- fringe(d)
+  names(d) <- f$dic_$d$label
+
+  data <- d %>%
+    gather("categories", "count", names(d)[-1])
   h <- hgch_bar_CatCatNum(data,title,subtitle,caption,horLabel,verLabel,horLine,horLineLabel,verLine,verLineLabel,graphType,agg,colors,colorScale,dropNaV,format,labelWrapV, marks, nDigits,order1,order2,orientation,percentage, showText,legendPosition,theme,tooltip,export,lang, ...)
   h
 }

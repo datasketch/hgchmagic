@@ -251,13 +251,13 @@ hgch_line_Cat <-  function(data,
   nms <- getClabels(f)
   d <- f$d
 
-  d <- d  %>%
-    dplyr::group_by_(names(d)) %>%
-    dplyr::summarise(Conteo = n())
-  names(d) <- c(nms[1], 'Conteo')
+  d <- d %>%
+    dplyr::group_by_all() %>%
+    dplyr::summarise(b = n())
 
-  data <- fringe(d)
-  h <- hgch_line_CatNum(data = data, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine, verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,labelWrap = labelWrap,colors ,agg = agg,spline = spline,marks = marks,nDigits = nDigits,dropNa = dropNa,percentage = percentage,format = format,order = order,sort = sort,sliceN = sliceN, showText = showText, tooltip = tooltip,export = export,lang = lang,theme = theme, ...)
+  names(d) <- c(f$dic_$d$label, paste0("count ", f$dic_$d$label))
+
+  h <- hgch_line_CatNum(data = d, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine, verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,labelWrap = labelWrap,colors ,agg = agg,spline = spline,marks = marks,nDigits = nDigits,dropNa = dropNa,percentage = percentage,format = format,order = order,sort = sort,sliceN = sliceN, showText = showText, tooltip = tooltip,export = export,lang = lang,theme = theme, ...)
   h
 }
 
@@ -530,12 +530,12 @@ hgch_line_CatCat <- function(data,
   d <- f$d
 
   d <- d %>%
-    dplyr::group_by_('a', 'b') %>%
-    dplyr::summarise(Conteo = n())
+    dplyr::group_by_all() %>%
+    dplyr::summarise(c = n())
 
-  names(d) <- c(f$dic_$d$id, 'Conteo')
-  data <- fringe(d)
-  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,tooltip = tooltip,export = export, lang = lang,...)
+  names(d) <- c(f$dic_$d$label, paste0("count", f$dic_$d$label[1]))
+
+  h <- hgch_line_CatCatNum(data = d, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,tooltip = tooltip,export = export, lang = lang,...)
   h
 }
 
@@ -589,10 +589,10 @@ hgch_line_CatNumP <- function(data,
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
-  names(d) <- f$dic_$d$id
-  d <- d %>%
-    gather("Categorias", "Conteo", names(d)[-1])
-  data <- fringe(d)
+  names(d) <- f$dic_$d$label
+
+  data <- d %>%
+    gather("categories", "count", names(d)[-1])
   h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText ,theme = theme,tooltip = tooltip,export = export,lang = lang, ...)
   h
 }

@@ -196,13 +196,13 @@ hgch_pie_Cat <-  function(data,
   nms <- getClabels(f)
   d <- f$d
 
-  d <- d  %>%
-    dplyr::group_by_(names(d)) %>%
-    dplyr::summarise(Conteo = n())
-  names(d) <- c(nms[1], 'Conteo')
+  d <- d %>%
+    dplyr::group_by_all() %>%
+    dplyr::summarise(b = n())
 
-  data <- fringe(d)
-  h <- hgch_pie_CatNum(data, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN, showText = showText, legendPosition = legendPosition, tooltip = tooltip, export = export, lang = lang, theme = theme, ...)
+  names(d) <- c(f$dic_$d$label, paste0("count ", f$dic_$d$label))
+
+  h <- hgch_pie_CatNum(data = d, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN, showText = showText, legendPosition = legendPosition, tooltip = tooltip, export = export, lang = lang, theme = theme, ...)
   h
 }
 
@@ -406,12 +406,12 @@ hgch_donut_Cat <-  function(data,
   nms <- getClabels(f)
   d <- f$d
 
-  d <- d  %>%
-    dplyr::group_by_(names(d)) %>%
-    dplyr::summarise(Conteo = n())
-  names(d) <- c(nms[1], 'Conteo')
+  d <- d %>%
+    dplyr::group_by_all() %>%
+    dplyr::summarise(b = n())
 
-  data <- fringe(d)
-  h <- hgch_donut_CatNum(data, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN,showText = showText, legendPosition = legendPosition, tooltip = tooltip, export = export, lang = lang, theme = theme, ...)
+  names(d) <- c(f$dic_$d$label, paste0("count ", f$dic_$d$label))
+
+  h <- hgch_donut_CatNum(data = d, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, format = format, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN,showText = showText, legendPosition = legendPosition, tooltip = tooltip, export = export, lang = lang, theme = theme, ...)
   h
 }

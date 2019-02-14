@@ -13,7 +13,7 @@ library(hgchmagic)
 # Categoricas
 
 datCat <- sampleData('Cat', nrow = 300)
-hgch_bar_Cat(datCat, theme = tma(diffColorsBar = T), colorScale = 'discrete')
+hgch_bar_Cat(datCat, theme = tma(diffColorsBar = F), colorScale = 'discrete')
 hgch_bar_Cat(datCat, title = 'Esto es un título',
              subtitle = 'Esto es un subtitulo',
              caption = 'Esto es un caption', export = TRUE, lang = 'en'
@@ -53,7 +53,7 @@ hgch_bar_CatNum(datYeaNum, agg = 'mean', showText = F)
 dfCC <- sampleData('Cat-Cat', 999)
 
 hgch_bar_CatCat(dfCC, export = TRUE)
-hgch_bar_CatCat(dfCC, percentage = TRUE)
+hgch_bar_CatCat(dfCC, percentage = TRUE, theme = tma(diffColorsBar = TRUE))
 hgch_bar_CatCat(dfCC, graphType = "stacked")
 hgch_bar_CatCat(dfCC, theme = tma(background = '#FDCFFF', diffColorsBar = F))
 hgch_bar_CatCat(dfCC, percentage = T, graphType = "stacked")

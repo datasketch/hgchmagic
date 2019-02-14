@@ -213,14 +213,13 @@ hgch_treemap_Cat <-  function(data,
   nms <- getClabels(f)
   d <- f$d
 
-  d <- d  %>%
-    dplyr::group_by_(names(d)) %>%
-    dplyr::summarise(Conteo = n())
-  names(d) <- c(nms[1], 'Conteo')
+  d <- d %>%
+    dplyr::group_by_all() %>%
+    dplyr::summarise(c = n())
 
-  data <- fringe(d)
+  names(d) <- c(f$dic_$d$label, paste0("count", f$dic_$d$label[1]))
 
-  h <- hgch_treemap_CatNum(data = data, title = title,subtitle = subtitle, caption = caption, labelWrap = labelWrap,colors = colors,colorScale = colorScale, agg = agg,marks = marks, nDigits = nDigits,dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, format = format, highlightValue = highlightValue,sliceN = sliceN,showText = showText,showLegend = showLegend, legendPosition = legendPosition,tooltip = tooltip,export = export,theme = theme, lang = lang,...)
+  h <- hgch_treemap_CatNum(data = d, title = title,subtitle = subtitle, caption = caption, labelWrap = labelWrap,colors = colors,colorScale = colorScale, agg = agg,marks = marks, nDigits = nDigits,dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, format = format, highlightValue = highlightValue,sliceN = sliceN,showText = showText,showLegend = showLegend, legendPosition = legendPosition,tooltip = tooltip,export = export,theme = theme, lang = lang,...)
   h
 }
 
@@ -235,9 +234,9 @@ hgch_treemap_Cat <-  function(data,
 #' Cat-Cat-Num, Cat-Yea-Num, Cat-Dat-Num,
 #' @examples
 #' hgch_treemap_CatNum(sampleData("Cat-Cat-Num", nrow = 10))
-#' @export hgchc_treemap_CatCatNum
+#' @export hgch_treemap_CatCatNum
 
-hgchc_treemap_CatCatNum <- function(data,
+hgch_treemap_CatCatNum <- function(data,
                                     title = NULL,
                                     subtitle = NULL,
                                     caption = NULL,
@@ -435,9 +434,9 @@ hgchc_treemap_CatCatNum <- function(data,
 #' Cat-Cat, Cat-Yea, Cat-Dat,
 #' @examples
 #' hgch_treemap_CatCat(sampleData("Cat-Cat", nrow = 10))
-#' @export hgchc_treemap_CatCat
+#' @export hgch_treemap_CatCat
 
-hgchc_treemap_CatCat <- function(data,
+hgch_treemap_CatCat <- function(data,
                                  title = NULL,
                                  subtitle = NULL,
                                  caption = NULL,
@@ -465,12 +464,12 @@ hgchc_treemap_CatCat <- function(data,
   d <- f$d
 
   d <- d %>%
-    dplyr::group_by_('a', 'b') %>%
-    dplyr::summarise(Conteo = n())
+    dplyr::group_by_all() %>%
+    dplyr::summarise(c = n())
 
-  names(d) <- c(f$dic_$d$id, 'Conteo')
-  data <- fringe(d)
-  h <- hgchc_treemap_CatCatNum(data = data,title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,showLegend = showLegend,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
+  names(d) <- c(f$dic_$d$label, paste0("count", f$dic_$d$label[1]))
+
+  h <- hgch_treemap_CatCatNum(data = d, title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,showLegend = showLegend,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
   h
 }
 
@@ -484,10 +483,10 @@ hgchc_treemap_CatCat <- function(data,
 #' @section ctypes:
 #' Cat-NumP, Yea-NumP, Dat-NumP
 #' @examples
-#' hgch_treemap_CatNum(sampleData("Cat-NumP", nrow = 10))
-#' @export hgchc_treemap_CatNumP
+#' hgch_treemap_CatNumP(sampleData("Cat-NumP", nrow = 10))
+#' @export hgch_treemap_CatNumP
 
-hgchc_treemap_CatNumP <- function(data,
+hgch_treemap_CatNumP <- function(data,
                                   title = NULL,
                                   subtitle = NULL,
                                   caption = NULL,
@@ -515,10 +514,10 @@ hgchc_treemap_CatNumP <- function(data,
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
-  names(d) <- f$dic_$d$id
-  d <- d %>%
-    gather("Categorias", "Conteo", names(d)[-1])
-  data <- fringe(d)
-  h <-  hgchc_treemap_CatCatNum(data = data,title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,showLegend = showLegend,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
+  names(d) <- f$dic_$d$label
+
+  data <- d %>%
+    gather("categories", "count", names(d)[-1])
+  h <-  hgch_treemap_CatCatNum(data = data,title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,showLegend = showLegend,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
   h
 }
