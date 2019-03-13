@@ -13,6 +13,7 @@ library(hgchmagic)
 # Categoricas
 
 datCat <- sampleData('Cat', nrow = 300)
+
 hgch_bar_Cat(datCat, theme = tma(diffColorsBar = F), colorScale = 'discrete')
 hgch_bar_Cat(datCat, title = 'Esto es un título',
              subtitle = 'Esto es un subtitulo',

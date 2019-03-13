@@ -148,9 +148,9 @@ hgch_pie_CatNum <-  function(data,
         )
       ))}
   if (is.null(theme)) {
-    hc <- hc %>% hc_add_theme(custom_theme(custom = tma(showText = showText, colores = colors)))
+    hc <- hc %>% hc_add_theme(tma(showText = showText, colores = colors))
   } else {
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(theme)
   }
   hc
 
@@ -357,9 +357,9 @@ hgch_donut_CatNum <-  function(data,
         )
       ))}
   if (is.null(theme)) {
-    hc <- hc %>% hc_add_theme(custom_theme(custom = tma(showText = showText, colores = colors)))
+    hc <- hc %>% hc_add_theme(tma(showText = showText, colores = colors))
   } else {
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(theme)
   }
   hc
 

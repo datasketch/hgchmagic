@@ -165,9 +165,9 @@ hgch_treemap_CatNum<-  function(data,
       ))}
 
   if (is.null(theme)) {
-    hc <- hc %>% hc_add_theme(custom_theme(custom = tma(colores = colors)))
+    hc <- hc %>% hc_add_theme(tma(colores = colors))
   } else {
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(theme)
   }
   hc
 }
@@ -416,9 +416,9 @@ hgch_treemap_CatCatNum <- function(data,
       ))}
 
   if (is.null(theme)) {
-    hc <- hc %>% hc_add_theme(custom_theme(custom = tma(colores = colors)))
+    hc <- hc %>% hc_add_theme(tma(colores = colors))
   } else {
-    hc <- hc %>% hc_add_theme(custom_theme(custom = theme))
+    hc <- hc %>% hc_add_theme(theme)
   }
   hc
 }

@@ -1,104 +1,3 @@
-
-#' @export
-getPalette <- function(type = "qualitative", rev = FALSE){
-  dsGreen <- "#95C11E"
-  dsYellow <- "#FFED00"
-  dsMagenta <- "#E5007D"
-  dsBlue <- "#009EE3"
-  dsOrange <- "#F9B233"
-  dsPink <- "#EF8998"
-  dsLightBlue <- "#16C5E0"
-  dsPurple <- "#A839B0"
-  dsRed <- "#C92F2F"
-  dsGray <- "#A9A9A9"
-  dsLila <- "#9B71AF"
-  dsPalette <- c(dsBlue,dsMagenta,dsGreen,dsOrange,dsYellow,dsPink,
-                 dsLightBlue,dsPurple,dsRed,dsGray, dsLila)
-  p <- c(dsPalette,dsPalette,dsPalette)
-  if(type == "sequential") {
-    p <-  c(dsMagenta,dsBlue)
-  }
-  if(rev) p <- rev(p)
-  p
-}
-
-#' @export
-custom_theme  <- function(custom = NULL,...){
-  ds_theme <-
-    hc_theme(
-      colors = getPalette(11),
-      chart = list(
-        style = list(
-          fontFamily = "Roboto"
-        )
-      ),
-      title = list(
-        align = "left",
-        style = list(
-          fontFamily = "Roboto Condensed",
-          fontWeight = "bold"
-        )
-      ),
-      subtitle = list(
-        align = "left",
-        style = list(
-          fontFamily = "Roboto Condensed"
-        )
-      ),
-      legend = list(
-        align = "right",
-        verticalAlign = "bottom"
-      ),
-      xAxis = list(
-        gridLineWidth = 1,
-        gridLineColor = "#F3F3F3",
-        lineColor = "#F3F3F3",
-        minorGridLineColor = "#F3F3F3",
-        tickColor = "#F3F3F3",
-        tickWidth = 1
-      ),
-      yAxis = list(
-        gridLineColor = "#F3F3F3",
-        lineColor = "#F3F3F3",
-        minorGridLineColor = "#F3F3F3",
-        tickColor = "#F3F3F3",
-        tickWidth = 1
-      ),
-      plotOptions = list(
-        line = list(
-          marker = list(enabled = FALSE),
-          states = list(hover = list(lineWidthPlus = 1))
-        ),
-        spline = list(
-          marker = list(enabled = FALSE),
-          states = list(hover = list(lineWidthPlus = 1))
-        ),
-        area = list(
-          marker = list(enabled = FALSE),
-          states = list(hover = list(lineWidthPlus = 1))
-        ),
-        areaspline = list(
-          marker = list(enabled = FALSE),
-          states = list(hover = list(lineWidthPlus = 1))
-        )
-      )
-    )
-
-  theme <- structure(ds_theme, class = "hc_theme")
-
-  if (!is.null(custom)) {
-    # str(custom)
-    # custom <- structure(custom, class = "hc_theme")
-    # theme <- hc_theme_merge(
-    #   theme,
-    #   hc_theme(custom)
-    # )
-    theme <- custom
-  }
-  theme
-}
-
-
 #' @export
 global_options <- function(marksMil, marksDec){
 
@@ -108,174 +7,191 @@ global_options <- function(marksMil, marksDec){
   options(highcharter.lang = hcoptslang)
 }
 
-#' @export
-tma <- function(background = 'transparent',
-                bordercolor = 'transparent',
-                colores = NULL,#c("#2E0F35", "#74D1F7", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2"),
-                width = NULL,
-                height = NULL,
-                fontFamily = 'Ubuntu',
-                fontSize = '11px',
-                marginBottom = NULL,
-                marginLeft = NULL,
-                marginRight = NULL,
-                marginTop = NULL,
-                diffColorsBar = TRUE,
-                borderRadius = 0,
-                borderWidth = 0,
-                plotBackgroundColor = "transparent",
-                plotBorderColor = "#cccccc",
-                plotBorderWidth = 1,
-                showText = TRUE,
-                symbLine = TRUE,
-                showLegend = FALSE,
-                lineWidth = 2,
-                negativeColor = FALSE,
-                linePointStart = 0,
-                labsData = list(colLabel = '#0E0329', familyLabel = 'Ubuntu',sizeLabel = NULL,
-                                textDecoration = 'none', textShadow = 'none', textOutline = 'none'),
-                stylesY = list(gridLineWidth = 1, lineColor = '#ccd6eb', tickColor = '#ccd6eb', gridLineColor = '#e6e6e6',
-                               tickLength = 10, lineWidth = 1),
-                stylesLabelY = list(color = '#666666', fontSize = '11px', fontWeight = NULL, enabled =TRUE),
-                stylesTitleY = list(color = '#666666', fontSize = '13px'),
-                stylesX = list(gridLineWidth = 0, lineColor = '#ccd6eb', tickColor = '#ccd6eb', gridLineColor = '#e6e6e6',
-                               tickLength = 10, lineWidth = 1),
-                stylesLabelX = list(color = '#666666', fontSize = '11px', fontWeight = NULL, enabled =TRUE),
-                stylesTitleX = list(color = '#666666', fontSize = '13px'), ...) {
 
-  if (is.null(colores)) colores <-  c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
+getDefaultTheme <- list(
+  background = "#ffffff",
+  fontFamily = "Ubuntu",
+  bordercolor = 'transparent',
+  colors = NULL,
+  width = NULL,
+  height = NULL,
+  fontSize = '11px',
+  marginBottom = NULL,
+  marginLeft = NULL,
+  marginRight = NULL,
+  marginTop = NULL,
+  diffColorsBar = TRUE,
+  borderRadius = 0,
+  borderWidth = 0,
+  plotBackgroundColor = "transparent",
+  plotBorderColor = "#cccccc",
+  plotBorderWidth = 1,
+  showText = TRUE,
+  symbLine = TRUE,
+  showLegend = FALSE,
+  lineWidth = 2,
+  negativeColor = FALSE,
+  linePointStart = 0,
+  labsData = list(colLabel = '#0E0329', familyLabel = 'Ubuntu',sizeLabel = NULL,
+                  textDecoration = 'none', textShadow = 'none', textOutline = 'none'),
+  stylesY = list(gridLineWidth = 1, lineColor = '#ccd6eb', tickColor = '#ccd6eb', gridLineColor = '#e6e6e6',
+                 tickLength = 10, lineWidth = 1),
+  stylesLabelY = list(color = '#666666', fontSize = '11px', fontWeight = NULL, enabled =TRUE),
+  stylesTitleY = list(color = '#666666', fontSize = '13px'),
+  stylesX = list(gridLineWidth = 0, lineColor = '#ccd6eb', tickColor = '#ccd6eb', gridLineColor = '#e6e6e6',
+                 tickLength = 10, lineWidth = 1),
+  stylesLabelX = list(color = '#666666', fontSize = '11px', fontWeight = NULL, enabled =TRUE),
+  stylesTitleX = list(color = '#666666', fontSize = '13px')
+)
 
-  if (length(colores) == 1) {
-    colores <- c(colores, colores)
+getTheme <- function(theme = NULL){
+
+  userTheme <- theme
+  defaultTheme <- getDefaultTheme
+
+  if(!is.null(theme)){
+    theme <- modifyList(defaultTheme, userTheme)
+  }else{
+    theme <- defaultTheme
   }
 
+  theme
+}
+
+
+#' @export
+tma <- function(custom = NULL, ...) {
+
+  custom <- getTheme(theme = custom)
+
+  if (is.null(custom$colors)) custom$colors <-  c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
+
+  if (length(custom$colors)) custom$colors <- c(custom$colors, custom$colors)
 
   hc_theme(
-    colors = colores,
+    colors = custom$colors,
     chart = list(
-      backgroundColor = background,
-      borderColor = bordercolor,
-      borderRadius = borderRadius,
-      borderWidth = borderWidth,
-      width = width,
-      height = height,
-      marginBottom = marginBottom,
-      marginLeft = marginLeft,
-      marginRight = marginRight,
-      marginTop = marginRight,
-      plotBackgroundColor = plotBackgroundColor,
-      plotBorderColor = plotBorderColor,
-      plotBorderWidth = plotBorderWidth,
+      backgroundColor = custom$background,
+      borderColor = custom$bordercolor,
+      borderRadius = custom$borderRadius,
+      borderWidth = custom$borderWidth,
+      width = custom$width,
+      height = custom$height,
+      marginBottom = custom$marginBottom,
+      marginLeft = custom$marginLeft,
+      marginRight = custom$marginRight,
+      marginTop = custom$marginRight,
+      plotBackgroundColor = custom$plotBackgroundColor,
+      plotBorderColor = custom$plotBorderColor,
+      plotBorderWidth = custom$plotBorderWidth,
       style = list (
-        fontFamily = fontFamily,
-        fontSize = fontSize
-      )
-    ),
+        fontFamily = custom$fontFamily,
+        fontSize = custom$fontSize
+      )),
     plotOptions = list (
       bar = list(
-        colorByPoint = diffColorsBar,
+        colorByPoint = custom$diffColorsBar,
         dataLabels = list (
-          enabled = showText,
+          enabled = custom$showText,
           style = list (
-            color = labsData$colLabel,
-            fontFamily = labsData$familyLabel,
-            fontSize = labsData$sizeLabel,
-            textDecoration= labsData$textDecoration,
-            textShadow = labsData$textShadow,
-            textOutline = labsData$textOutline
+            color = custom$labsData$colLabel,
+            fontFamily = custom$labsData$familyLabel,
+            fontSize = custom$labsData$sizeLabel,
+            textDecoration= custom$labsData$textDecoration,
+            textShadow = custom$labsData$textShadow,
+            textOutline = custom$labsData$textOutline
           )
         )
       ),
       column = list(
-        colorByPoint = diffColorsBar,
+        colorByPoint = custom$diffColorsBar,
         dataLabels = list (
-          enabled = showText,
+          enabled = custom$showText,
           style = list (
-            color = labsData$colLabel,
-            fontFamily = labsData$familyLabel,
-            fontSize = labsData$sizeLabel,
-            textDecoration= labsData$textDecoration,
-            textShadow = labsData$textShadow,
-            textOutline = labsData$textOutline
+            color = custom$labsData$colLabel,
+            fontFamily = custom$labsData$familyLabel,
+            fontSize = custom$labsData$sizeLabel,
+            textDecoration= custom$labsData$textDecoration,
+            textShadow = custom$labsData$textShadow,
+            textOutline = custom$labsData$textOutline
           )
         )
       ),
       pie = list(
-        showInLegend = showLegend,
+        showInLegend = custom$showLegend,
         dataLabels = list (
-          enabled = showText,
+          enabled = custom$showText,
           style = list (
-            color = labsData$colLabel,
-            fontFamily = labsData$familyLabel,
-            fontSize = labsData$sizeLabel,
-            textDecoration= labsData$textDecoration,
-            textShadow = labsData$textShadow,
-            textOutline = labsData$textOutline
+            color = custom$labsData$colLabel,
+            fontFamily = custom$labsData$familyLabel,
+            fontSize = custom$labsData$sizeLabel,
+            textDecoration= custom$labsData$textDecoration,
+            textShadow = custom$labsData$textShadow,
+            textOutline = custom$labsData$textOutline
           )
         )
       ),
       series = list(
         dataLabels = list (
-          enabled = showText,
+          enabled = custom$showText,
           style = list (
-            color = labsData$colLabel,
-            fontFamily = labsData$familyLabel,
-            fontSize = labsData$sizeLabel,
-            textDecoration= labsData$textDecoration,
-            textShadow = labsData$textShadow,
-            textOutline = labsData$textOutline
+            color = custom$labsData$colLabel,
+            fontFamily = custom$labsData$familyLabel,
+            fontSize = custom$labsData$sizeLabel,
+            textDecoration= custom$labsData$textDecoration,
+            textShadow = custom$labsData$textShadow,
+            textOutline = custom$labsData$textOutline
           )
         ),
-        lineWidth = lineWidth,
-        negativeColor = negativeColor,
-        pointStart = linePointStart,
+        lineWidth = custom$lineWidth,
+        negativeColor = custom$negativeColor,
+        pointStart = custom$linePointStart,
         marker = list(
-          enabled = symbLine
+          enabled = custom$symbLine
         )
-      )
-    ),
-    xAxis = list (
-      gridLineWidth = stylesX$gridLineWidth,
-      lineColor = stylesX$lineColor, #color del eje x
-      tickColor = stylesX$tickColor, #color de las divisiones del eje x
-      gridLineColor = stylesX$gridLineColor,
-      tickLength = stylesX$tickLength,
-      lineWidth= stylesX$lineWidth,
-      labels = list(
-        style = list(
-          color = stylesLabelX$color, #color nombre de las etiquetas
-          fontSize = stylesLabelX$fontSize,
-          fontWeight = stylesLabelX$fontWeight
-        ),
-        enabled = stylesLabelX$enabled
       ),
-      title = list(
-        style = list(
-          color = stylesTitleX$color,# color del titulo del eje
-          fontSize = stylesTitleX$fontSize
+      xAxis = list (
+        gridLineWidth = custom$stylesX$gridLineWidth,
+        lineColor = custom$stylesX$lineColor, #color del eje x
+        tickColor = custom$stylesX$tickColor, #color de las divisiones del eje x
+        gridLineColor = custom$custom$stylesX$gridLineColor,
+        tickLength = custom$stylesX$tickLength,
+        lineWidth= custom$stylesX$lineWidth,
+        labels = list(
+          style = list(
+            color = custom$stylesLabelX$color, #color nombre de las etiquetas
+            fontSize = custom$stylesLabelX$fontSize,
+            fontWeight = custom$stylesLabelX$fontWeight
+          ),
+          enabled = custom$stylesLabelX$enabled
+        ),
+        title = list(
+          style = list(
+            color = custom$stylesTitleX$color,# color del titulo del eje
+            fontSize = custom$stylesTitleX$fontSize
+          )
         )
-      )
-    ),
-    yAxis = list(
-
-      gridLineWidth = stylesY$gridLineWidth,
-      lineColor = stylesY$lineColor,
-      tickColor = stylesY$tickColor,
-      gridLineColor = stylesY$gridLineColor,
-      tickLength = stylesY$tickLength,
-      lineWidth= stylesY$lineWidth,
-      labels = list(
-        style = list(
-          color = stylesLabelY$color,
-          fontSize = stylesLabelY$fontSize,
-          fontWeight = stylesLabelY$fontWeight
-        ),
-        enabled = stylesLabelY$enabled
       ),
-      title = list(
-        style = list(
-          color = stylesTitleY$color,
-          fontSize = stylesTitleY$fontSize
+      yAxis = list(
+        gridLineWidth = custom$stylesY$gridLineWidth,
+        lineColor = custom$stylesY$lineColor,
+        tickColor = custom$stylesY$tickColor,
+        gridLineColor = custom$stylesY$gridLineColor,
+        tickLength = custom$stylesY$tickLength,
+        lineWidth= custom$stylesY$lineWidth,
+        labels = list(
+          style = list(
+            color = custom$stylesLabelY$color,
+            fontSize = custom$stylesLabelY$fontSize,
+            fontWeight = custom$stylesLabelY$fontWeight
+          ),
+          enabled = custom$stylesLabelY$enabled
+        ),
+        title = list(
+          style = list(
+            color = custom$stylesTitleY$color,
+            fontSize = custom$stylesTitleY$fontSize
+          )
         )
       )
     )

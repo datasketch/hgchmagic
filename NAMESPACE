@@ -2,12 +2,10 @@
 
 export(agg)
 export(count_pl)
-export(custom_theme)
 export(discreteColorSelect)
 export(dsColorsHex)
 export(exportLang)
 export(fillColors)
-export(getPalette)
 export(global_options)
 export(hgchCtypes)
 export(hgchMeta)
