@@ -71,6 +71,7 @@ tma <- function(custom = NULL, ...) {
   hc_theme(
     colors = custom$colors,
     chart = list(
+      reflow = TRUE,
       backgroundColor = custom$background,
       borderColor = custom$bordercolor,
       borderRadius = custom$borderRadius,
