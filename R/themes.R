@@ -72,6 +72,7 @@ tma <- function(custom = NULL, ...) {
     colors = custom$colors,
     chart = list(
       reflow = TRUE,
+      renderTo = 'container',
       backgroundColor = custom$background,
       borderColor = custom$bordercolor,
       borderRadius = custom$borderRadius,
