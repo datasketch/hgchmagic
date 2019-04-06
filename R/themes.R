@@ -27,7 +27,7 @@ getDefaultTheme <- list(
   plotBackgroundColor = "transparent",
   plotBorderColor = "#cccccc",
   plotBorderWidth = 0,
-  showText = FALSE,
+  showText = TRUE,
   symbLine = TRUE,
   showLegend = TRUE,
   lineWidth = 2,

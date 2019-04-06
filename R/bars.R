@@ -37,7 +37,6 @@ hgch_bar_CatNum <-  function(data,
                              sort = "no",
                              sliceN = NULL,
                              showText = TRUE,
-                             legendPosition = "center",
                              tooltip = list(headerFormat = NULL, pointFormat = NULL),
                              export = FALSE,
                              theme = NULL,
@@ -203,9 +202,7 @@ hgch_bar_CatNum <-  function(data,
       data
     ) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
-    hc_legend(enabled = FALSE,
-              align= legendPosition[1],
-              verticalAlign= legendPosition[2])
+    hc_legend(enabled = FALSE)
   if (export){
     hc <- hc %>%
     hc_exporting(enabled = TRUE, buttons= list(
@@ -278,7 +275,6 @@ hgch_bar_Cat <-  function(data,
                           sort = "no",
                           sliceN = NULL,
                           showText = TRUE,
-                          legendPosition = c("right", "bottom"),
                           tooltip = list(headerFormat = NULL, pointFormat = NULL),
                           export = FALSE,
                           theme = NULL,
@@ -297,7 +293,7 @@ hgch_bar_Cat <-  function(data,
 
   names(d) <- c(f$dic_$d$label, paste(prefix_agg, f$dic_$d$label))
 
-  h <- hgch_bar_CatNum(data = d, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel, verLabel = verLabel, horLine = horLine, horLineLabel = horLineLabel, verLine = verLine, verLineLabel = verLineLabel, labelWrap = labelWrap, orientation = orientation, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = "sum", agg_text = " ", prefix = prefix, suffix = suffix, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN,showText=showText,legendPosition = legendPosition, tooltip = tooltip, export = export, theme = theme, lang = lang, ...)
+  h <- hgch_bar_CatNum(data = d, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel, verLabel = verLabel, horLine = horLine, horLineLabel = horLineLabel, verLine = verLine, verLineLabel = verLineLabel, labelWrap = labelWrap, orientation = orientation, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = "sum", agg_text = " ", prefix = prefix, suffix = suffix, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN, showText=showText, tooltip = tooltip, export = export, theme = theme, lang = lang, ...)
   h
 }
 
@@ -340,7 +336,7 @@ hgch_bar_CatCatNum <- function(data,
                                orientation = "ver",
                                percentage = FALSE,
                                showText = TRUE,
-                               legendPosition = c("right", "bottom"),
+                               legendPosition = "center",
                                theme = NULL,
                                tooltip = list("headerFormat" = NULL,
                                               "pointFormat" = NULL,
@@ -520,8 +516,7 @@ hgch_bar_CatCatNum <- function(data,
         colorByPoint = FALSE)
     ) %>%
     hc_legend(enabled = TRUE,
-              align = legendPosition[1],
-              verticalAlign = legendPosition[2])
+              align = legendPosition)
 
   if (graphType == "stacked"){
     hc <- hc %>% hc_plotOptions(bar = list(stacking = "normal"), column = list(stacking = "normal"))
@@ -661,7 +656,7 @@ hgch_bar_CatNumP <- function(data,
                              orientation = "ver",
                              percentage = FALSE,
                              showText = TRUE,
-                             legendPosition = c("right", "bottom"),
+                             legendPosition = "center",
                              theme = tma(diffColorsBar = FALSE),
                              tooltip = list("headerFormat" = NULL,
                                             "pointFormat" = NULL,

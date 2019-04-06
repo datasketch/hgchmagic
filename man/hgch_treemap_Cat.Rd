@@ -9,8 +9,8 @@ hgch_treemap_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
   agg = "sum", marks = c(".", ","), nDigits = NULL, dropNa = FALSE,
   highlightValueColor = "#F9B233", percentage = FALSE, prefix = NULL,
   suffix = NULL, highlightValue = NULL, sliceN = NULL,
-  showText = TRUE, showLegend = TRUE, legendPosition = c("right",
-  "bottom"), tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  showText = TRUE, showLegend = TRUE, legendPosition = "center",
+  tooltip = list(headerFormat = NULL, pointFormat = NULL),
   export = FALSE, theme = NULL, lang = "es", ...)
 }
 \arguments{

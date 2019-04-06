@@ -12,10 +12,10 @@ hgch_bar_CatNumP(data, title = NULL, subtitle = NULL, caption = NULL,
   dropNaV = c(FALSE, FALSE), prefix = NULL, suffix = NULL,
   labelWrapV = c(12, 12), marks = c(".", ","), nDigits = NULL,
   order1 = NULL, order2 = NULL, orientation = "ver",
-  percentage = FALSE, showText = TRUE, legendPosition = c("right",
-  "bottom"), theme = tma(diffColorsBar = FALSE),
-  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
-  export = FALSE, lang = "es", ...)
+  percentage = FALSE, showText = TRUE, legendPosition = "center",
+  theme = tma(diffColorsBar = FALSE), tooltip = list(headerFormat =
+  NULL, pointFormat = NULL, shared = NULL), export = FALSE,
+  lang = "es", ...)
 }
 \arguments{
 \item{data}{A data.frame}

@@ -12,9 +12,8 @@ hgch_bar_CatNum(data, title = NULL, subtitle = NULL, caption = NULL,
   nDigits = NULL, dropNa = FALSE, highlightValueColor = "#F9B233",
   percentage = FALSE, prefix = NULL, suffix = NULL,
   highlightValue = NULL, order = NULL, sort = "no", sliceN = NULL,
-  showText = TRUE, legendPosition = "center",
-  tooltip = list(headerFormat = NULL, pointFormat = NULL),
-  export = FALSE, theme = NULL, lang = "es", ...)
+  showText = TRUE, tooltip = list(headerFormat = NULL, pointFormat =
+  NULL), export = FALSE, theme = NULL, lang = "es", ...)
 }
 \arguments{
 \item{data}{A data.frame}

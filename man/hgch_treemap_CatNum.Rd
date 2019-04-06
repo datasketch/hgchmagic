@@ -10,7 +10,7 @@ hgch_treemap_CatNum(data, title = NULL, subtitle = NULL,
   nDigits = NULL, dropNa = FALSE, highlightValueColor = "#F9B233",
   percentage = FALSE, prefix = NULL, suffix = NULL,
   highlightValue = NULL, sliceN = NULL, showText = TRUE,
-  showLegend = TRUE, legendPosition = c("right", "bottom"),
+  showLegend = TRUE, legendPosition = "center",
   tooltip = list(headerFormat = NULL, pointFormat = NULL),
   export = FALSE, theme = NULL, lang = "es", ...)
 }

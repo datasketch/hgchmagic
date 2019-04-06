@@ -10,7 +10,7 @@ hgch_donut_CatNum(data, title = NULL, subtitle = NULL,
   nDigits = NULL, dropNa = FALSE, highlightValueColor = "#F9B233",
   percentage = FALSE, prefix = NULL, suffix = NULL,
   highlightValue = NULL, order = NULL, sort = "no", sliceN = NULL,
-  showText = TRUE, legendPosition = c("right", "bottom"),
+  showText = FALSE, legendPosition = "center",
   tooltip = list(headerFormat = NULL, pointFormat = NULL),
   export = FALSE, lang = "es", theme = NULL, ...)
 }
