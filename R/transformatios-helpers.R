@@ -102,8 +102,7 @@ dsColorsHex <- function(hex = FALSE) {
     c <- c(0:9, "A", "B", "C", "D", "E")
 
   } else {
-    c <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4",  "#A6CEDE", "#801549",
-           "#FECA84", "#ACD9C2", "#EEF1F2")
+    c <- c("#FECA84", "#3DB26F", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1")
   }
 }
 

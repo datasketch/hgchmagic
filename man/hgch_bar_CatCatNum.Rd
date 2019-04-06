@@ -7,14 +7,14 @@
 hgch_bar_CatCatNum(data, title = NULL, subtitle = NULL,
   caption = NULL, horLabel = NULL, verLabel = NULL, horLine = NULL,
   horLineLabel = " ", verLine = NULL, verLineLabel = " ",
-  graphType = "grouped", agg = "sum", colors = c("#009EE3",
-  "#F9B233"), colorScale = "discrete", dropNaV = c(FALSE, FALSE),
-  format = c("", ""), labelWrapV = c(12, 12), marks = c(".", ","),
-  nDigits = NULL, order1 = NULL, order2 = NULL,
-  orientation = "ver", percentage = FALSE, showText = TRUE,
-  legendPosition = c("right", "bottom"), theme = NULL,
-  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
-  export = FALSE, lang = "es", ...)
+  graphType = "grouped", agg = "sum", agg_text = NULL,
+  colors = c("#009EE3", "#F9B233"), colorScale = "discrete",
+  dropNaV = c(FALSE, FALSE), prefix = NULL, suffix = NULL,
+  labelWrapV = c(12, 12), marks = c(".", ","), nDigits = NULL,
+  order1 = NULL, order2 = NULL, orientation = "ver",
+  percentage = FALSE, showText = TRUE, legendPosition = c("right",
+  "bottom"), theme = NULL, tooltip = list(headerFormat = NULL,
+  pointFormat = NULL, shared = NULL), export = FALSE, lang = "es", ...)
 }
 \arguments{
 \item{data}{A data.frame}

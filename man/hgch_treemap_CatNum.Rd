@@ -8,11 +8,11 @@ hgch_treemap_CatNum(data, title = NULL, subtitle = NULL,
   caption = NULL, labelWrap = 12, colors = NULL,
   colorScale = "continuous", agg = "sum", marks = c(".", ","),
   nDigits = NULL, dropNa = FALSE, highlightValueColor = "#F9B233",
-  percentage = FALSE, format = c("", ""), highlightValue = NULL,
-  sliceN = NULL, showText = TRUE, showLegend = TRUE,
-  legendPosition = c("right", "bottom"), tooltip = list(headerFormat =
-  NULL, pointFormat = NULL), export = FALSE, theme = NULL,
-  lang = "es", ...)
+  percentage = FALSE, prefix = NULL, suffix = NULL,
+  highlightValue = NULL, sliceN = NULL, showText = TRUE,
+  showLegend = TRUE, legendPosition = c("right", "bottom"),
+  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  export = FALSE, theme = NULL, lang = "es", ...)
 }
 \arguments{
 \item{data}{A data.frame}

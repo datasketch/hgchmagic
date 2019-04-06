@@ -14,7 +14,7 @@ library(hgchmagic)
 
 datCat <- sampleData('Cat', nrow = 300)
 
-hgch_bar_Cat(datCat, theme = tma(diffColorsBar = F), colorScale = 'discrete')
+hgch_bar_Cat(datCat, theme = tma(custom = list(diffColorsBar = F)), colorScale = 'no')
 hgch_bar_Cat(datCat, title = 'Esto es un título',
              subtitle = 'Esto es un subtitulo',
              caption = 'Esto es un caption', export = TRUE, lang = 'en'
@@ -37,7 +37,7 @@ hgch_bar_CatNum(datCatNum, export = TRUE, lang = 'pt')
 hgch_bar_CatNum(datCatNum, sort = 'asc', showText = FALSE)
 hgch_bar_CatNum(datCatNum, sort = 'desc', colorScale = 'discrete')
 hgch_bar_CatNum(datCatNum, export = TRUE, nDigits = 2, theme = tma(colores = c('#FDC123'),showText = F),
-                marks = c(',', '.'), format = c('$', ''))
+                marks = c(',', '.'), prefix = "$")
 
 # Data-Numerica
 datDatNum <- sampleData('Dat-Num')
@@ -56,7 +56,7 @@ dfCC <- sampleData('Cat-Cat', 999)
 hgch_bar_CatCat(dfCC, export = TRUE)
 hgch_bar_CatCat(dfCC, percentage = TRUE, theme = tma(diffColorsBar = TRUE))
 hgch_bar_CatCat(dfCC, graphType = "stacked")
-hgch_bar_CatCat(dfCC, theme = tma(background = '#FDCFFF', diffColorsBar = F))
+hgch_bar_CatCat(dfCC, theme = tma(custom = list(background = '#FDCFFF', diffColorsBar = F)))
 hgch_bar_CatCat(dfCC, percentage = T, graphType = "stacked")
 hgch_bar_CatCat(dfCC, percentage = T, graphType = "stacked", order1 = c("TypeA", "TypeB", "TypeE"), showText = F)
 hgch_bar_CatCat(dfCC, percentage = T, graphType = "stacked", order2 = "X_B")
@@ -97,7 +97,7 @@ hgch_bar_CatNumP(dfCNp, graphType = "stacked", orientation = "hor", percentage =
 # Categoricas
 
 datCat <- sampleData('Cat', nrow = 300)
-hgch_line_Cat(datCat, horLine = 40, theme = tma(showText = FALSE))
+hgch_line_Cat(datCat, horLine = 40, theme = tma(list(showText = FALSE)))
 hgch_line_Cat(datCat, orientation = 'hor', horLine = 5, export = TRUE)
 hgch_line_Cat(datCat, spline = T, showText = F)
 hgch_line_Cat(datCat, startAtZero = F,  sort = 'desc', order = c('IlkD'))

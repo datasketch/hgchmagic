@@ -24,12 +24,14 @@ hgch_line_CatNum <-  function(data,
                               labelWrap = 12,
                               colors = NULL,
                               agg = "sum",
+                              agg_text = NULL,
                               spline = FALSE,
                               marks = c(".", ","),
                               nDigits = NULL,
                               dropNa = FALSE,
                               percentage = FALSE,
-                              format = c('', ''),
+                              prefix = NULL,
+                              suffix = NULL,
                               order = NULL,
                               sort = "no",
                               sliceN = NULL,
@@ -47,9 +49,11 @@ hgch_line_CatNum <-  function(data,
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
+
+  prefix_agg <- ifelse(is.null(agg_text), agg, agg_text)
   labelsXY <- orientationXY(orientation,
                             x = nms[1],
-                            y = ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste(agg, nms[2])),
+                            y = ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste(prefix_agg, nms[2])),
                             hor = horLabel,
                             ver = verLabel)
   lineXY <- linesOrientation(orientation, horLine, verLine)
@@ -58,7 +62,7 @@ hgch_line_CatNum <-  function(data,
                                horLineLabel,
                                verLineLabel)
 
-  colorDefault <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
+  colorDefault <- c("#FECA84", "#3DB26F", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1")
 
     if (!is.null(colors)) {
       colors <- unname(fillColors(d, "a", colors, colorScale = 'no'))
@@ -112,8 +116,8 @@ hgch_line_CatNum <-  function(data,
 
 
   if (is.null(format)) {
-    format[1] = ""
-    format[2] = ""
+    prefix = ""
+    suffix = ""
   }
 
   aggFormAxis <- 'function() {return this.value+"";}'
@@ -121,16 +125,16 @@ hgch_line_CatNum <-  function(data,
 
   if (percentage) {
     aggFormAxis <- 'function() {return this.value+"%";}'
-    format[2] <- "%"
+    suffix <- "%"
   }
 
 
-  aggFormAxis <- paste0("function() { return '", format[1] , "' + Highcharts.numberFormat(this.value, ", nDig, ", '", marks[2], "', '", marks[1], "') + '", format[2], "'}"
+  aggFormAxis <- paste0("function() { return '", prefix , "' + Highcharts.numberFormat(this.value, ", nDig, ", '", marks[2], "', '", marks[1], "') + '", suffix, "'}"
   )
 
 
   if (is.null(tooltip$pointFormat)) {
-    tooltip$pointFormat <- paste0('<b>{point.category}</b><br/>', paste0(agg, ' ' ,nms[2], ': '), format[1],'{point.y}', format[2])
+    tooltip$pointFormat <- paste0('<b>{point.category}</b><br/>', paste0(agg, ' ' ,nms[2], ': '), prefix,'{point.y}', suffix)
   }
   if (is.null(tooltip$headerFormat)) {
     tooltip$headerFormat <- ""
@@ -197,10 +201,26 @@ hgch_line_CatNum <-  function(data,
         )
       ))}
   if (is.null(theme)) {
-    hc <- hc %>% hc_add_theme(tma(showText = showText, colores = colors))
+    hc <- hc %>% hc_add_theme(tma(custom = list(showText = showText, colores = colors)))
   } else {
     hc <- hc %>% hc_add_theme(theme)
   }
+
+  if (showText) {
+    hc <- hc %>%
+      hc_plotOptions(
+        bar = list(
+          dataLabels = list(
+            format = paste0(prefix, "{y}", suffix)
+          )),
+        column = list(
+          dataLabels = list(
+            format = paste0(prefix, "{y}", suffix)
+          )
+        )
+      )
+  }
+
   hc
 
 }
@@ -232,12 +252,14 @@ hgch_line_Cat <-  function(data,
                            labelWrap = 12,
                            colors = NULL,
                            agg = "sum",
+                           agg_text = NULL,
                            spline = FALSE,
                            marks = c(".", ","),
                            nDigits = NULL,
                            dropNa = FALSE,
                            percentage = FALSE,
-                           format = c('', ''),
+                           prefix = NULL,
+                           suffix = NULL,
                            order = NULL,
                            sort = "no",
                            sliceN = NULL,
@@ -257,7 +279,7 @@ hgch_line_Cat <-  function(data,
 
   names(d) <- c(f$dic_$d$label, paste0("count ", f$dic_$d$label))
 
-  h <- hgch_line_CatNum(data = d, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine, verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,labelWrap = labelWrap,colors ,agg = agg,spline = spline,marks = marks,nDigits = nDigits,dropNa = dropNa,percentage = percentage,format = format,order = order,sort = sort,sliceN = sliceN, showText = showText, tooltip = tooltip,export = export,lang = lang,theme = theme, ...)
+  h <- hgch_line_CatNum(data = d, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine, verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,labelWrap = labelWrap,colors ,agg = agg, agg_text = agg_text,spline = spline,marks = marks,nDigits = nDigits,dropNa = dropNa,percentage = percentage,prefix = prefix, suffix = suffix, order = order,sort = sort,sliceN = sliceN, showText = showText, tooltip = tooltip,export = export, lang = lang,theme = theme, ...)
   h
 }
 
@@ -287,12 +309,14 @@ hgch_line_CatCatNum <- function(data,
                                 orientation = "ver",
                                 startAtZero = TRUE,
                                 agg = "sum",
+                                agg_text = NULL,
                                 spline = FALSE,
                                 colors = NULL,
                                 dropNaV = c(FALSE, FALSE),
-                                format = c("", ""),
+                                prefix = NULL,
+                                suffix = NULL,
                                 labelWrapV = c(12, 12),
-                                legendPosition = "right",
+                                legendPosition = "center",
                                 marks = c(".", ","),
                                 nDigits = NULL,
                                 order1 = NULL,
@@ -313,9 +337,11 @@ hgch_line_CatCatNum <- function(data,
   title <-  title %||% ""
   subtitle <- subtitle %||% ""
   caption <- caption %||% ""
+
+  prefix_agg <- ifelse(is.null(agg_text), agg, agg_text)
   labelsXY <- orientationXY(orientation,
                             x = nms[1],
-                            y = ifelse(nrow(d) == dplyr::n_distinct(d$b), nms[3], paste(agg, nms[3])),
+                            y = ifelse(nrow(d) == dplyr::n_distinct(d$b), nms[3], paste(prefix_agg, nms[3])),
                             hor = horLabel,
                             ver = verLabel)
 
@@ -325,7 +351,7 @@ hgch_line_CatCatNum <- function(data,
                                horLineLabel,
                                verLineLabel)
 
-  colorDefault <- c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
+  colorDefault <- c("#FECA84", "#3DB26F", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1")
 
     if (!is.null(colors)) {
       colors <- unname(fillColors(d, "a", colors, 'discrete'))
@@ -381,9 +407,9 @@ hgch_line_CatCatNum <- function(data,
   })
 
 
-  if (percentage & nchar(format[2]) == 0) {
+  if (percentage & is.null(suffix)) {
     aggFormAxis <- 'function() {return this.value+"%";}'
-    format[2] <- "%"
+    suffix <- "%"
   }
 
   formatLabAxis <- paste0('{value:', marks[1], marks[2], 'f}')
@@ -393,21 +419,21 @@ hgch_line_CatCatNum <- function(data,
 
 
   if (is.null(format)) {
-    format[1] = ""
-    format[2] = ""
+    prefix = ""
+    suffix = ""
   }
 
   aggFormAxis <- 'function() {return this.value+"";}'
 
 
-  aggFormAxis <- paste0("function() { return '", format[1] , "' + Highcharts.numberFormat(this.value, ", nDig, ", '", marks[2], "', '", marks[1], "') + '", format[2], "'}"
+  aggFormAxis <- paste0("function() { return '", prefix , "' + Highcharts.numberFormat(this.value, ", nDig, ", '", marks[2], "', '", marks[1], "') + '", suffix, "'}"
   )
 
 
   if (is.null(tooltip$pointFormat)) {
     tooltip$pointFormat <-paste0('<b>', nms[2], ': </b>{point.category}</br>',
                                  '<b>', nms[1], ': </b>{series.name}</br>',
-                                 paste0(agg, ' ' ,nms[3], ': '), format[1],'{point.y}', format[2])
+                                 paste0(agg, ' ' ,nms[3], ': '), prefix,'{point.y}', suffix)
   }
   if (is.null(tooltip$headerFormat)) {
     tooltip$headerFormat <- " "
@@ -475,10 +501,26 @@ hgch_line_CatCatNum <- function(data,
         )
       ))}
   if (is.null(theme)) {
-    hc <- hc %>% hc_add_theme(tma(showText = showText, colores = colors))
+    hc <- hc %>% hc_add_theme(tma(custom = list(showText = showText, colores = colors)))
   } else {
     hc <- hc %>% hc_add_theme(theme)
   }
+
+  if (showText) {
+    hc <- hc %>%
+      hc_plotOptions(
+        bar = list(
+          dataLabels = list(
+            format = paste0(prefix, "{y}", suffix)
+          )),
+        column = list(
+          dataLabels = list(
+            format = paste0(prefix, "{y}", suffix)
+          )
+        )
+      )
+  }
+
   hc
 }
 
@@ -506,12 +548,14 @@ hgch_line_CatCat <- function(data,
                              orientation = "ver",
                              startAtZero = TRUE,
                              agg = "sum",
+                             agg_text = NULL,
                              spline = FALSE,
                              colors = NULL,
                              dropNaV = c(FALSE, FALSE),
-                             format = c("", ""),
+                             prefix = NULL,
+                             suffix = NULL,
                              labelWrapV = c(12, 12),
-                             legendPosition = "right",
+                             legendPosition = "center",
                              marks = c(".", ","),
                              nDigits = NULL,
                              order1 = NULL,
@@ -535,7 +579,7 @@ hgch_line_CatCat <- function(data,
 
   names(d) <- c(f$dic_$d$label, paste0("count", f$dic_$d$label[1]))
 
-  h <- hgch_line_CatCatNum(data = d, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,tooltip = tooltip,export = export, lang = lang,...)
+  h <- hgch_line_CatCatNum(data = d, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,agg = agg, agg_text = agg_text,spline = spline,colors = colors,dropNaV = dropNaV,prefix = prefix, suffix = suffix,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText,theme = theme,tooltip = tooltip,export = export, lang = lang,...)
   h
 }
 
@@ -567,12 +611,14 @@ hgch_line_CatNumP <- function(data,
                               orientation = "ver",
                               startAtZero = TRUE,
                               agg = "sum",
+                              agg_text = NULL,
                               spline = FALSE,
                               colors = NULL,
                               dropNaV = c(FALSE, FALSE),
-                              format = c("", ""),
+                              prefix = NULL,
+                              suffix = NULL,
                               labelWrapV = c(12, 12),
-                              legendPosition = "right",
+                              legendPosition = "center",
                               marks = c(".", ","),
                               nDigits = NULL,
                               order1 = NULL,
@@ -593,6 +639,6 @@ hgch_line_CatNumP <- function(data,
 
   data <- d %>%
     gather("categories", "count", names(d)[-1])
-  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,agg = agg,spline = spline,colors = colors,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText ,theme = theme,tooltip = tooltip,export = export,lang = lang, ...)
+  h <- hgch_line_CatCatNum(data = data, title = title,subtitle = subtitle,caption = caption,horLabel = horLabel,verLabel = verLabel,horLine = horLine,horLineLabel = horLineLabel,verLine = verLine,verLineLabel = verLineLabel,orientation = orientation,startAtZero = startAtZero,agg = agg, agg_text = agg_text,spline = spline,colors = colors,dropNaV = dropNaV, prefix = prefix, suffix = suffix,labelWrapV = labelWrapV,legendPosition = legendPosition,marks = marks,nDigits = nDigits,order1 = order1,order2 = order2,percentage = percentage,showText = showText ,theme = theme,tooltip = tooltip,export = export,lang = lang, ...)
   h
 }

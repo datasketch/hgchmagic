@@ -23,25 +23,27 @@ getDefaultTheme <- list(
   diffColorsBar = TRUE,
   borderRadius = 0,
   borderWidth = 0,
+  borderWidthBar = 0,
   plotBackgroundColor = "transparent",
   plotBorderColor = "#cccccc",
-  plotBorderWidth = 1,
-  showText = TRUE,
+  plotBorderWidth = 0,
+  showText = FALSE,
   symbLine = TRUE,
-  showLegend = FALSE,
+  showLegend = TRUE,
   lineWidth = 2,
   negativeColor = FALSE,
   linePointStart = 0,
-  labsData = list(colLabel = '#0E0329', familyLabel = 'Ubuntu',sizeLabel = NULL,
+  labsData = list(colLabel = 'contrast', familyLabel = 'Ubuntu',sizeLabel = NULL,
                   textDecoration = 'none', textShadow = 'none', textOutline = 'none'),
-  stylesY = list(gridLineWidth = 1, lineColor = '#ccd6eb', tickColor = '#ccd6eb', gridLineColor = '#e6e6e6',
-                 tickLength = 10, lineWidth = 1),
-  stylesLabelY = list(color = '#666666', fontSize = '11px', fontWeight = NULL, enabled =TRUE),
-  stylesTitleY = list(color = '#666666', fontSize = '13px'),
-  stylesX = list(gridLineWidth = 0, lineColor = '#ccd6eb', tickColor = '#ccd6eb', gridLineColor = '#e6e6e6',
-                 tickLength = 10, lineWidth = 1),
-  stylesLabelX = list(color = '#666666', fontSize = '11px', fontWeight = NULL, enabled =TRUE),
-  stylesTitleX = list(color = '#666666', fontSize = '13px')
+  stylesY = list(gridLineWidth = 1, lineColor = '#5A6B72', tickColor = 'transparent', gridLineColor = '#5A6B72',
+                 tickLength = 10, lineWidth = 0, gridLineDashStyle = 'dot'),
+  stylesLabelY = list(color = '#5A6B72', fontSize = '11px', fontWeight = NULL, enabled =TRUE),
+  stylesTitleY = list(color = '#5A6B72', fontSize = '13px'),
+  stylesX = list(gridLineWidth = 0, lineColor = '#5A6B72', tickColor = '#5A6B72', gridLineColor = '#5A6B72',
+                 tickLength = 0, lineWidth = 1),
+  stylesLabelX = list(color = '#5A6B72', fontSize = '11px', fontWeight = NULL, enabled =TRUE),
+  stylesTitleX = list(color = '#5A6B72', fontSize = '13px'),
+  legend = list(background = "transparent", backgroundBorderColor = "#5A6B72", backgroundWidth = 1)
 )
 
 getTheme <- function(theme = NULL){
@@ -64,8 +66,7 @@ tma <- function(custom = NULL, ...) {
 
   custom <- getTheme(theme = custom)
 
-  if (is.null(custom$colors)) custom$colors <-  c("#74D1F7", "#2E0F35", "#B70F7F", "#C2C4C4", "#8097A4", "#A6CEDE", "#801549", "#FECA84", "#ACD9C2")
-
+  if (is.null(custom$colors)) custom$colors <-  c("#FECA84", "#3DB26F", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1")
   if (length(custom$colors)) custom$colors <- c(custom$colors, custom$colors)
 
   hc_theme(
@@ -134,6 +135,7 @@ tma <- function(custom = NULL, ...) {
         )
       ),
       series = list(
+        borderWidth = custom$borderWidthBar,
         dataLabels = list (
           enabled = custom$showText,
           style = list (
@@ -151,51 +153,57 @@ tma <- function(custom = NULL, ...) {
         marker = list(
           enabled = custom$symbLine
         )
+      )
       ),
-      xAxis = list (
-        gridLineWidth = custom$stylesX$gridLineWidth,
-        lineColor = custom$stylesX$lineColor, #color del eje x
-        tickColor = custom$stylesX$tickColor, #color de las divisiones del eje x
-        gridLineColor = custom$custom$stylesX$gridLineColor,
-        tickLength = custom$stylesX$tickLength,
-        lineWidth= custom$stylesX$lineWidth,
-        labels = list(
-          style = list(
-            color = custom$stylesLabelX$color, #color nombre de las etiquetas
-            fontSize = custom$stylesLabelX$fontSize,
-            fontWeight = custom$stylesLabelX$fontWeight
-          ),
-          enabled = custom$stylesLabelX$enabled
+    xAxis = list (
+      gridLineWidth = custom$stylesX$gridLineWidth,
+      lineColor = custom$stylesX$lineColor, #color del eje x
+      tickColor = custom$stylesX$tickColor, #color de las divisiones del eje x
+      gridLineColor = custom$custom$stylesX$gridLineColor,
+      tickLength = custom$stylesX$tickLength,
+      lineWidth= custom$stylesX$lineWidth,
+      labels = list(
+        style = list(
+          color = custom$stylesLabelX$color, #color nombre de las etiquetas
+          fontSize = custom$stylesLabelX$fontSize,
+          fontWeight = custom$stylesLabelX$fontWeight
         ),
-        title = list(
-          style = list(
-            color = custom$stylesTitleX$color,# color del titulo del eje
-            fontSize = custom$stylesTitleX$fontSize
-          )
-        )
+        enabled = custom$stylesLabelX$enabled
       ),
-      yAxis = list(
-        gridLineWidth = custom$stylesY$gridLineWidth,
-        lineColor = custom$stylesY$lineColor,
-        tickColor = custom$stylesY$tickColor,
-        gridLineColor = custom$stylesY$gridLineColor,
-        tickLength = custom$stylesY$tickLength,
-        lineWidth= custom$stylesY$lineWidth,
-        labels = list(
-          style = list(
-            color = custom$stylesLabelY$color,
-            fontSize = custom$stylesLabelY$fontSize,
-            fontWeight = custom$stylesLabelY$fontWeight
-          ),
-          enabled = custom$stylesLabelY$enabled
-        ),
-        title = list(
-          style = list(
-            color = custom$stylesTitleY$color,
-            fontSize = custom$stylesTitleY$fontSize
-          )
+      title = list(
+        style = list(
+          color = custom$stylesTitleX$color,# color del titulo del eje
+          fontSize = custom$stylesTitleX$fontSize
         )
       )
-    )
+    ),
+    yAxis = list(
+      gridLineDashStyle = custom$stylesY$gridLineDashStyle,
+      gridLineWidth = custom$stylesY$gridLineWidth,
+      lineColor = custom$stylesY$lineColor,
+      tickColor = custom$stylesY$tickColor,
+      gridLineColor = custom$stylesY$gridLineColor,
+      tickLength = custom$stylesY$tickLength,
+      lineWidth= custom$stylesY$lineWidth,
+      labels = list(
+        style = list(
+          color = custom$stylesLabelY$color,
+          fontSize = custom$stylesLabelY$fontSize,
+          fontWeight = custom$stylesLabelY$fontWeight
+        ),
+        enabled = custom$stylesLabelY$enabled
+      ),
+      title = list(
+        style = list(
+          color = custom$stylesTitleY$color,
+          fontSize = custom$stylesTitleY$fontSize
+        )
+      )
+    ),
+    legend = list(
+    backgroundColor = custom$legend$background,
+    borderColor = custom$legend$backgroundBorderColor,
+    borderWidth = custom$legend$backgroundWidth
+  )
   )
 }

@@ -6,12 +6,12 @@
 \usage{
 hgch_treemap_CatCatNum(data, title = NULL, subtitle = NULL,
   caption = NULL, agg = "sum", colors = NULL,
-  colorScale = "discrete", dropNaV = c(FALSE, FALSE), format = c("",
-  ""), labelWrapV = c(12, 12), marks = c(".", ","), nDigits = NULL,
-  percentage = FALSE, showText = TRUE, showLegend = TRUE,
-  legendPosition = c("right", "bottom"), theme = NULL,
-  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
-  export = FALSE, lang = "es", ...)
+  colorScale = "discrete", dropNaV = c(FALSE, FALSE), prefix = NULL,
+  suffix = NULL, labelWrapV = c(12, 12), marks = c(".", ","),
+  nDigits = NULL, percentage = FALSE, showText = TRUE,
+  showLegend = TRUE, legendPosition = c("right", "bottom"),
+  theme = NULL, tooltip = list(headerFormat = NULL, pointFormat = NULL,
+  shared = NULL), export = FALSE, lang = "es", ...)
 }
 \arguments{
 \item{data}{A data.frame}

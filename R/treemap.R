@@ -23,12 +23,13 @@ hgch_treemap_CatNum<-  function(data,
                                 dropNa = FALSE,
                                 highlightValueColor = '#F9B233',
                                 percentage = FALSE,
-                                format = c('', ''),
+                                prefix = NULL,
+                                suffix = NULL,
                                 highlightValue = NULL,
                                 sliceN = NULL,
                                 showText = TRUE,
                                 showLegend = TRUE,
-                                legendPosition = c("right", "bottom"),
+                                legendPosition = "center",
                                 tooltip = list(headerFormat = NULL, pointFormat = NULL),
                                 export = FALSE,
                                 theme = NULL,
@@ -104,20 +105,20 @@ hgch_treemap_CatNum<-  function(data,
 
 
   if (is.null(format)) {
-    format[1] = ""
-    format[2] = ""
+    prefix = ""
+    suffix = ""
   }
 
-  if (percentage && format[2] == "") {
-    format[2] <- "%"
+  if (percentage && suffix == "") {
+    suffix <- "%"
   }
 
 
   formatText <- JS(paste0("function () {
-                return this.point.name + '<br/>' + '",format[1],"' + Highcharts.numberFormat(this.point.value, ", nDig,", '", marks[2], "','", marks[1], "'", ") + '", format[2],"';}"))
+                return this.point.name + '<br/>' + '",prefix,"' + Highcharts.numberFormat(this.point.value, ", nDig,", '", marks[2], "','", marks[1], "'", ") + '", suffix,"';}"))
 
   if (is.null(tooltip$pointFormat)) {
-    tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(agg, ' ' ,nms[2], ': '), format[1],'{point.value}', format[2])
+    tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(agg, ' ' ,nms[2], ': '), prefix,'{point.value}', suffix)
   }
   if (is.null(tooltip$headerFormat)) {
     tooltip$headerFormat <- ""
@@ -154,8 +155,7 @@ hgch_treemap_CatNum<-  function(data,
   }
   hc <- hc %>% hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(enabled = showLegend,
-              align= legendPosition[1],
-              verticalAlign= legendPosition[2])
+              align= legendPosition)
   if (export){
     hc <- hc %>%
       hc_exporting(enabled = TRUE, buttons= list(
@@ -198,12 +198,13 @@ hgch_treemap_Cat <-  function(data,
                               dropNa = FALSE,
                               highlightValueColor = '#F9B233',
                               percentage = FALSE,
-                              format = c('', ''),
+                              prefix = NULL,
+                              suffix = NULL,
                               highlightValue = NULL,
                               sliceN = NULL,
                               showText = TRUE,
                               showLegend = TRUE,
-                              legendPosition = c("right", "bottom"),
+                              legendPosition = "center",
                               tooltip = list(headerFormat = NULL, pointFormat = NULL),
                               export = FALSE,
                               theme = NULL,
@@ -219,7 +220,7 @@ hgch_treemap_Cat <-  function(data,
 
   names(d) <- c(f$dic_$d$label, paste0("count", f$dic_$d$label[1]))
 
-  h <- hgch_treemap_CatNum(data = d, title = title,subtitle = subtitle, caption = caption, labelWrap = labelWrap,colors = colors,colorScale = colorScale, agg = agg,marks = marks, nDigits = nDigits,dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, format = format, highlightValue = highlightValue,sliceN = sliceN,showText = showText,showLegend = showLegend, legendPosition = legendPosition,tooltip = tooltip,export = export,theme = theme, lang = lang,...)
+  h <- hgch_treemap_CatNum(data = d, title = title,subtitle = subtitle, caption = caption, labelWrap = labelWrap,colors = colors,colorScale = colorScale, agg = agg,marks = marks, nDigits = nDigits,dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, prefix = prefix, suffix = suffix, highlightValue = highlightValue,sliceN = sliceN,showText = showText,showLegend = showLegend, legendPosition = legendPosition,tooltip = tooltip,export = export,theme = theme, lang = lang,...)
   h
 }
 
@@ -244,14 +245,15 @@ hgch_treemap_CatCatNum <- function(data,
                                     colors = NULL,
                                     colorScale = 'discrete',
                                     dropNaV = c(FALSE, FALSE),
-                                    format = c("", ""),
+                                    prefix = NULL,
+                                    suffix = NULL,
                                     labelWrapV = c(12, 12),
                                     marks = c(".", ","),
                                     nDigits = NULL,
                                     percentage = FALSE,
                                     showText = TRUE,
                                     showLegend = TRUE,
-                                    legendPosition = c("right", "bottom"),
+                                    legendPosition = "center",
                                     theme = NULL,
                                     tooltip = list("headerFormat" = NULL,
                                                    "pointFormat" = NULL,
@@ -337,22 +339,22 @@ hgch_treemap_CatCatNum <- function(data,
   data <- c(listaId, listaMg)
 
   if (is.null(format)) {
-    format[1] = ""
-    format[2] = ""
+    prefix = ""
+    suffix = ""
   }
 
-  if (percentage && format[2] == "") {
-    format[2] <- "%"
+  if (percentage && suffix == "") {
+    suffix <- "%"
   }
 
 
   formatText <- JS(paste0("function () {
-                return this.point.name + '<br/>' + '",format[1],"' + Highcharts.numberFormat(this.point.value, ", nDig,", '", marks[2], "','", marks[1], "'", ") + '", format[2],"';}"))
+                return this.point.name + '<br/>' + '",prefix,"' + Highcharts.numberFormat(this.point.value, ", nDig,", '", marks[2], "','", marks[1], "'", ") + '", suffix,"';}"))
 
   if (is.null(tooltip$pointFormat)) {
     tooltip$pointFormat <-paste0('<b>', nms[2], ': </b>{point.name}</br>',
                                  # '<b>', nms[1], ': </b>{point.node.name}</br>',
-                                 paste0(agg, ' ' ,nms[3], ': '), format[1],'{point.value}', format[2])
+                                 paste0(agg, ' ' ,nms[3], ': '), prefix,'{point.value}', suffix)
   }
   if (is.null(tooltip$headerFormat)) {
     tooltip$headerFormat <- " "
@@ -405,8 +407,7 @@ hgch_treemap_CatCatNum <- function(data,
   }
   hc <- hc %>% hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(enabled = showLegend,
-              align= legendPosition[1],
-              verticalAlign= legendPosition[2])
+              align= legendPosition)
   if (export){
     hc <- hc %>%
       hc_exporting(enabled = TRUE, buttons= list(
@@ -443,14 +444,15 @@ hgch_treemap_CatCat <- function(data,
                                  colors = NULL,
                                  colorScale = 'discrete',
                                  dropNaV = c(FALSE, FALSE),
-                                 format = c("", ""),
+                                 prefix = NULL,
+                                 suffix = NULL,
                                  labelWrapV = c(12, 12),
                                  marks = c(".", ","),
                                  nDigits = NULL,
                                  percentage = FALSE,
                                  showText = TRUE,
                                  showLegend = TRUE,
-                                 legendPosition = c("right", "bottom"),
+                                 legendPosition = "center",
                                  theme = NULL,
                                  tooltip = list("headerFormat" = NULL,
                                                 "pointFormat" = NULL,
@@ -468,7 +470,7 @@ hgch_treemap_CatCat <- function(data,
 
   names(d) <- c(f$dic_$d$label, paste0("count", f$dic_$d$label[1]))
 
-  h <- hgch_treemap_CatCatNum(data = d, title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,showLegend = showLegend,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
+  h <- hgch_treemap_CatCatNum(data = d, title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,prefix = prefix, suffix = suffix,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,showLegend = showLegend,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
   h
 }
 
@@ -493,14 +495,15 @@ hgch_treemap_CatNumP <- function(data,
                                   colors = NULL,
                                   colorScale = 'discrete',
                                   dropNaV = c(FALSE, FALSE),
-                                  format = c("", ""),
+                                  prefix = NULL,
+                                  suffix = NULL,
                                   labelWrapV = c(12, 12),
                                   marks = c(".", ","),
                                   nDigits = NULL,
                                   percentage = FALSE,
                                   showText = TRUE,
                                   showLegend = TRUE,
-                                  legendPosition = c("right", "bottom"),
+                                  legendPosition = "center",
                                   theme = NULL,
                                   tooltip = list("headerFormat" = NULL,
                                                  "pointFormat" = NULL,
@@ -517,6 +520,6 @@ hgch_treemap_CatNumP <- function(data,
 
   data <- d %>%
     gather("categories", "count", names(d)[-1])
-  h <-  hgch_treemap_CatCatNum(data = data,title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,format = format,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,showLegend = showLegend,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
+  h <-  hgch_treemap_CatCatNum(data = data,title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,prefix = prefix, suffix = suffix,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,showLegend = showLegend,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
   h
 }
