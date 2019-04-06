@@ -12,7 +12,7 @@ save_hgchmagic <- function(viz,
   if (format == '.html') {
     htmlwidgets::saveWidget(viz, filename)
   } else {
-    webshot(tmp, filename, vwidth = width, vheight = height)
+    webshot::webshot(tmp, filename, vwidth = width, vheight = height)
   }
   file.copy(filename, filename)
 
