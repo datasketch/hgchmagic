@@ -9,7 +9,7 @@ save_hgchmagic <- function(viz,
   tmp <- paste(tempdir(), 'html', sep ='.')
   htmltools::save_html(viz, tmp)
   tmpSave <- filename
-  if (format == '.html') {
+  if (format == 'html') {
     htmlwidgets::saveWidget(viz, filename)
   } else {
     webshot::webshot(tmp, filename, vwidth = width, vheight = height)
