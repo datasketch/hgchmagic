@@ -209,15 +209,10 @@ hgch_line_CatNum <-  function(data,
   if (showText) {
     hc <- hc %>%
       hc_plotOptions(
-        bar = list(
+        series = list(
           dataLabels = list(
             format = paste0(prefix, "{y}", suffix)
-          )),
-        column = list(
-          dataLabels = list(
-            format = paste0(prefix, "{y}", suffix)
-          )
-        )
+          ))
       )
   }
 

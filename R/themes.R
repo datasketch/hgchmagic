@@ -13,6 +13,7 @@ getDefaultTheme <- list(
   fontFamily = "Ubuntu",
   bordercolor = 'transparent',
   colors = NULL,
+  color = '#5A6B72',
   width = NULL,
   height = NULL,
   fontSize = '11px',
@@ -37,12 +38,12 @@ getDefaultTheme <- list(
                   textDecoration = 'none', textShadow = 'none', textOutline = 'none'),
   stylesY = list(gridLineWidth = 1, lineColor = '#5A6B72', tickColor = 'transparent', gridLineColor = '#5A6B72',
                  tickLength = 10, lineWidth = 0, gridLineDashStyle = 'dot'),
-  stylesLabelY = list(color = '#5A6B72', fontSize = '11px', fontWeight = NULL, enabled =TRUE),
-  stylesTitleY = list(color = '#5A6B72', fontSize = '13px'),
+  stylesLabelY = list(fontSize = '11px', fontWeight = NULL, enabled =TRUE),
+  stylesTitleY = list(fontSize = '13px'),
   stylesX = list(gridLineWidth = 0, lineColor = '#5A6B72', tickColor = '#5A6B72', gridLineColor = '#5A6B72',
                  tickLength = 0, lineWidth = 1),
-  stylesLabelX = list(color = '#5A6B72', fontSize = '11px', fontWeight = NULL, enabled =TRUE),
-  stylesTitleX = list(color = '#5A6B72', fontSize = '13px'),
+  stylesLabelX = list(fontSize = '11px', fontWeight = NULL, enabled =TRUE),
+  stylesTitleX = list(fontSize = '13px'),
   legend = list(background = "transparent", backgroundBorderColor = "#5A6B72", backgroundWidth = 1)
 )
 
@@ -164,7 +165,7 @@ tma <- function(custom = NULL, ...) {
       lineWidth= custom$stylesX$lineWidth,
       labels = list(
         style = list(
-          color = custom$stylesLabelX$color, #color nombre de las etiquetas
+          color = custom$color, #color nombre de las etiquetas
           fontSize = custom$stylesLabelX$fontSize,
           fontWeight = custom$stylesLabelX$fontWeight
         ),
@@ -172,7 +173,7 @@ tma <- function(custom = NULL, ...) {
       ),
       title = list(
         style = list(
-          color = custom$stylesTitleX$color,# color del titulo del eje
+          color = custom$color,# color del titulo del eje
           fontSize = custom$stylesTitleX$fontSize
         )
       )
@@ -187,7 +188,7 @@ tma <- function(custom = NULL, ...) {
       lineWidth= custom$stylesY$lineWidth,
       labels = list(
         style = list(
-          color = custom$stylesLabelY$color,
+          color = custom$color,
           fontSize = custom$stylesLabelY$fontSize,
           fontWeight = custom$stylesLabelY$fontWeight
         ),
@@ -195,7 +196,7 @@ tma <- function(custom = NULL, ...) {
       ),
       title = list(
         style = list(
-          color = custom$stylesTitleY$color,
+          color = custom$color,
           fontSize = custom$stylesTitleY$fontSize
         )
       )
@@ -203,7 +204,10 @@ tma <- function(custom = NULL, ...) {
     legend = list(
     backgroundColor = custom$legend$background,
     borderColor = custom$legend$backgroundBorderColor,
-    borderWidth = custom$legend$backgroundWidth
+    borderWidth = custom$legend$backgroundWidth,
+    itemStyle = list(
+      color = custom$color
+  )
   )
   )
 }
