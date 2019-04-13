@@ -204,7 +204,7 @@ tma <- function(custom = NULL, ...) {
     legend = list(
     backgroundColor = custom$legend$background,
     borderColor = custom$legend$backgroundBorderColor,
-    borderWidth = custom$legend$backgroundWidth,
+    #borderWidth = custom$legend$backgroundWidth,
     itemStyle = list(
       color = custom$color
   )
