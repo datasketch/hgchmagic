@@ -9,81 +9,52 @@
 #' @examples
 #' hgch_bar_CatNum(sampleData("Cat-Num", nrow = 10))
 #' @export hgch_bar_CatNum
-hgch_bar_CatNum <-  function(data,
-                             title = NULL,
-                             subtitle = NULL,
-                             caption = NULL,
-                             horLabel = NULL,
-                             verLabel = NULL,
-                             horLine = NULL,
-                             horLineLabel = " ",
-                             verLine = NULL,
-                             verLineLabel = " ",
-                             labelWrap = 12,
-                             colors = NULL,
-                             colorScale = 'no',
-                             agg = "sum",
-                             agg_text = NULL,
-                             orientation = "ver",
-                             marks = c(".", ","),
-                             nDigits = NULL,
-                             dropNa = FALSE,
-                             highlightValueColor = '#F9B233',
-                             percentage = FALSE,
-                             prefix = NULL,
-                             suffix = NULL,
-                             highlightValue = NULL,
-                             order = NULL,
-                             sort = "no",
-                             sliceN = NULL,
-                             showText = TRUE,
-                             tooltip = list(headerFormat = NULL, pointFormat = NULL),
-                             export = FALSE,
-                             theme = NULL,
-                             lang = 'es',
-                             ...) {
+hgch_bar_CatNum <-  function(data = NULL, opts = NULL, ...) {
 
+  if (is.null(data) | nrow(data) == 0) {
+  stop("Load an available dataset")
+  }
+
+  opts <- getOptions(opts = opts)
 
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
 
-  title <-  title %||% ""
-  subtitle <- subtitle %||% ""
-  caption <- caption %||% ""
+  title <-  opts$title %||% ""
+  subtitle <- opts$subtitle %||% ""
+  caption <- opts$caption %||% ""
 
-  prefix_agg <- ifelse(is.null(agg_text), agg, agg_text)
-  labelsXY <- orientationXY(orientation,
+  prefix_agg <- ifelse(is.null(opts$agg_text), opts$agg, opts$agg_text)
+  labelsXY <- orientationXY(opts$orientation,
                             x = nms[1],
                             y = ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste(prefix_agg, nms[2])),
-                            hor = horLabel,
-                            ver = verLabel)
-  lineXY <- linesOrientation(orientation, horLine, verLine)
+                            hor = opts$horLabel,
+                            ver = opts$verLabel)
+  lineXY <- linesOrientation(opts$orientation, opts$horLine, opts$verLine)
 
-  lineLabelsXY <- linesOrLabel(orientation,
-                               horLineLabel,
-                               verLineLabel)
+  lineLabelsXY <- linesOrLabel(opts$orientation,
+                               opts$horLine_label,
+                               opts$verLine_label)
 
-  if (colorScale == 'discrete') {
-    colorDefault <- c("#FECA84", "#3DB26F", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1")
+
+  if (opts$color_scale == 'discrete') {
+    colorDefault <- c("#3DB26F", "#FECA84", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1")
     colorDefault <- discreteColorSelect(colorDefault, d)
+  } else if (opts$color_scale == "no"){
+    colorDefault <- rep("#3DB26F", length(unique(d$a)))
   } else {
     colorDefault <- leaflet::colorNumeric(c("#53255E", "#ff4097"), 1:length(unique(d$a)))(1:length(unique(d$a)))
   }
 
 
-    if (!is.null(colors)) {
-      colors <- unname(fillColors(d, "a", colors, colorScale))
-    } else {
-      if (colorScale == 'no') {
-      colors <- c("#FECA84", "#FECA84")
-      } else {
-      colors <- colorDefault
-      }
-    }
+  if (!is.null(opts$colors)) {
+    opts$colors <- unname(fillColors(d, "a", opts$colors, opts$color_scale))
+  } else {
+    opts$colors <- colorDefault
+  }
 
-
-  if (dropNa)
+  if (opts$dropNa)
     d <- d %>%
     tidyr::drop_na()
 
@@ -91,31 +62,31 @@ hgch_bar_CatNum <-  function(data,
     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
                            b = NA)) %>%
     dplyr::group_by(a) %>%
-    dplyr::summarise(b = agg(agg, b))
+    dplyr::summarise(b = agg(opts$agg, b))
   d$a <- as.character(d$a)
   d$a[is.na(d$a)] <- 'NA'
 
-  if (is.null(nDigits)) {
+  if (is.null(opts$nDigits)) {
     nDig <- 0
   } else {
-    nDig <- nDigits
+    nDig <- opts$nDigits
   }
 
-  if (percentage) {
+  if (opts$percentage) {
     d$b <- (d[['b']] * 100) / sum(d[['b']], na.rm = TRUE)
   }
 
   d$b <- round(d$b, nDig)
-  d <- orderCategory(d, "a", order, labelWrap)
-  d <- sortSlice(d, "b", sort, sliceN)
+  d <- orderCategory(d, "a", opts$order, opts$labelWrap)
+  d <- sortSlice(d, "b", opts$sort, opts$sliceN)
 
 
   d <- d %>% plyr::rename(c('b' = 'y'))
   d$color <- NA
 
-  if (!is.null(highlightValue)) {
-    w <- which(d$a %in% highlightValue)
-    d$color[w] <- highlightValueColor
+  if (!is.null(opts$highlight_value)) {
+    w <- which(d$a %in% opts$highlight_value)
+    d$color[w] <- opts$highlight_valueColor
   }
 
   data <- list()
@@ -124,44 +95,42 @@ hgch_bar_CatNum <-  function(data,
                             "y" = d$y[z],
                             "color" = as.character(d$color[z]))
   })
-  formatLabAxis <- paste0('{value:', marks[1], marks[2], 'f}')
-  if (!is.null(nDigits)) {
-    formatLabAxis <- paste0('{value:', marks[1], marks[2], nDigits, 'f}')
+
+  formatLabAxis <- paste0('{value:', opts$marks[1], opts$marks[2], 'f}')
+  if (!is.null(opts$nDigits)) {
+    formatLabAxis <- paste0('{value:', opts$marks[1], opts$marks[2], opts$nDigits, 'f}')
   }
 
 
-  if (is.null(format)) {
-    prefix = ""
-    suffix = ""
-  }
+  if (is.null(opts$prefix)) opts$prefix <- ""
+  if (is.null(opts$suffix)) opts$suffix <- ""
 
   aggFormAxis <- 'function() {return this.value+"";}'
 
 
-  if (percentage) {
+  if (opts$percentage & opts$suffix == "") {
     aggFormAxis <- 'function() {return this.value+"%";}'
-    suffix <- "%"
+    opts$suffix <- "%"
   }
 
-
-  aggFormAxis <- paste0("function() { return '", prefix , "' + Highcharts.numberFormat(this.value, ", nDig, ", '", marks[2], "', '", marks[1], "') + '", suffix, "'}"
+  aggFormAxis <- paste0("function() { return '", opts$prefix , "' + Highcharts.numberFormat(this.value, ", nDig, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffix, "'}"
   )
 
 
-  if (is.null(tooltip$pointFormat)) {
-    tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(agg, ' ' ,nms[2], ': '), prefix,'{point.y}', suffix)
+  if (is.null(opts$tooltip$pointFormat)) {
+    opts$tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(prefix_agg, ' ' ,nms[2], ': '), opts$prefix,'{point.y}', opts$suffix)
   }
-  if (is.null(tooltip$headerFormat)) {
-    tooltip$headerFormat <- ""
+  if (is.null(opts$tooltip$headerFormat)) {
+    opts$tooltip$headerFormat <- ""
   }
 
-  global_options(marks[1], marks[2])
-  exportLang(language = lang)
+  global_options(opts$marks[1], opts$marks[2])
+  exportLang(language = opts$lang)
   hc <- highchart() %>%
-    hc_chart(type = ifelse(orientation == "hor", "bar", "column")) %>%
+    hc_chart(type = ifelse(opts$orientation == "hor", "bar", "column")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
     hc_xAxis(
       title =  list(text = labelsXY[1]),
       plotLines = list(
@@ -203,34 +172,35 @@ hgch_bar_CatNum <-  function(data,
     ) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(enabled = FALSE)
-  if (export){
-    hc <- hc %>%
-    hc_exporting(enabled = TRUE, buttons= list(
-      contextButton= list(
-        menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
-      )
-    ))}
 
-  if (is.null(theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = showText, colores = colors)))
+  if (opts$export){
+    hc <- hc %>%
+      hc_exporting(enabled = TRUE, buttons= list(
+        contextButton= list(
+          menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
+        )
+      ))}
+
+  if (is.null(opts$theme)) {
+    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$showText, colors = opts$colors)))
   } else {
-    hc <- hc %>% hc_add_theme(theme)
+    hc <- hc %>% hc_add_theme(opts$theme)
   }
 
 
-  if (showText) {
+  if (opts$showText) {
     hc <- hc %>%
       hc_plotOptions(
-      bar = list(
-        dataLabels = list(
-          format = paste0(prefix, "{y}", suffix)
-        )),
-      column = list(
-        dataLabels = list(
-          format = paste0(prefix, "{y}", suffix)
+        bar = list(
+          dataLabels = list(
+            format = paste0(opts$prefix, "{y}", opts$suffix)
+          )),
+        column = list(
+          dataLabels = list(
+            format = paste0(opts$prefix, "{y}", opts$suffix)
+          )
         )
-    )
-  )
+      )
   }
 
   hc
@@ -248,38 +218,11 @@ hgch_bar_CatNum <-  function(data,
 #' hgch_bar_Cat(sampleData("Cat", nrow = 10))
 #' @export hgch_bar_Cat
 hgch_bar_Cat <-  function(data,
-                          title = NULL,
-                          subtitle = NULL,
-                          caption = NULL,
-                          horLabel = NULL,
-                          verLabel = NULL,
-                          horLine = NULL,
-                          horLineLabel = " ",
-                          verLine = NULL,
-                          verLineLabel = " ",
-                          labelWrap = 12,
-                          colors = NULL,
-                          colorScale = 'no',
-                          agg = "sum",
-                          agg_text = NULL,
-                          orientation = "ver",
-                          marks = c(".", ","),
-                          nDigits = NULL,
-                          dropNa = FALSE,
-                          highlightValueColor = '#F9B233',
-                          percentage = FALSE,
-                          prefix = NULL,
-                          suffix = NULL,
-                          highlightValue = NULL,
-                          order = NULL,
-                          sort = "no",
-                          sliceN = NULL,
-                          showText = TRUE,
-                          tooltip = list(headerFormat = NULL, pointFormat = NULL),
-                          export = FALSE,
-                          theme = NULL,
-                          lang = 'es', ...) {
+                          opts = NULL, ...) {
 
+  if (is.null(data) | nrow(data) == 0) {
+    stop("Load an available dataset")
+  }
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -289,11 +232,11 @@ hgch_bar_Cat <-  function(data,
     dplyr::group_by_all() %>%
     dplyr::summarise(b = n())
 
-  prefix_agg <- ifelse(is.null(agg_text), "count", agg_text)
+  prefix_agg <- ifelse(is.null(opts$agg_text), "count", opts$agg_text)
 
   names(d) <- c(f$dic_$d$label, paste(prefix_agg, f$dic_$d$label))
 
-  h <- hgch_bar_CatNum(data = d, title = title, subtitle = subtitle, caption = caption, horLabel = horLabel, verLabel = verLabel, horLine = horLine, horLineLabel = horLineLabel, verLine = verLine, verLineLabel = verLineLabel, labelWrap = labelWrap, orientation = orientation, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = "sum", agg_text = " ", prefix = prefix, suffix = suffix, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN, showText=showText, tooltip = tooltip, export = export, theme = theme, lang = lang, ...)
+  h <- hgch_bar_CatNum(data = d, opts = opts, ...)
   h
 }
 

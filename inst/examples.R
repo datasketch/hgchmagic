@@ -14,30 +14,68 @@ library(hgchmagic)
 
 datCat <- sampleData('Cat', nrow = 300)
 
-hgch_bar_Cat(datCat, theme = tma(custom = list(diffColorsBar = F)), colorScale = 'no')
-hgch_bar_Cat(datCat, title = 'Esto es un título',
-             subtitle = 'Esto es un subtitulo',
-             caption = 'Esto es un caption', export = TRUE, lang = 'en'
-            )
-hgch_bar_Cat(datCat, orientation = 'hor', verLabel = 'Texto vertical',
-             horLabel = 'Texto horizontal')
-hgch_bar_Cat(datCat, orientation = 'ver', verLabel = 'Texto vertical',
-             horLabel = 'Texto horizontal')
-hgch_bar_Cat(datCat, horLine = 40, percentage = TRUE)
-hgch_bar_Cat(datCat, orientation = 'hor', horLine = 3)
-hgch_bar_Cat(datCat, colorScale = 'discrete', theme = tma(showText = FALSE))
+hgch_bar_Cat(datCat,
+             opts = list(color_scale = 'no'))
+
+
+opts <- list (
+  title = 'Esto es un título',
+  subtitle = 'Esto es un subtitulo',
+  caption = 'Esto es un caption',
+  export = TRUE,
+  lang = 'en'
+)
+
+hgch_bar_Cat(datCat, opts = opts)
+
+opts <- list(
+  orientation = 'hor',
+  verLabel = 'Texto vertical',
+  horLabel = 'Texto horizontal'
+)
+hgch_bar_Cat(datCat, opts = opts)
+
+opts <- list(
+  horLine = 40,
+  percentage = TRUE
+)
+hgch_bar_Cat(datCat, opts = opts)
+
+opts <- list(
+  color_scale = "no",
+  highlight_valueColor = '#FDAACC',
+  highlight_value = 'X_A',
+  order = c("X_A", "X_D")
+)
+
+hgch_bar_Cat(datCat, opts = opts)
 
 # Categorica-Numerica
 
 datCatNum <- sampleData('Cat-Num')
 hgch_bar_CatNum(datCatNum)
-hgch_bar_CatNum(datCatNum, export = TRUE)
-hgch_bar_CatNum(datCatNum, export = TRUE, lang = 'en')
-hgch_bar_CatNum(datCatNum, export = TRUE, lang = 'pt')
-hgch_bar_CatNum(datCatNum, sort = 'asc', showText = FALSE)
-hgch_bar_CatNum(datCatNum, sort = 'desc', colorScale = 'discrete')
-hgch_bar_CatNum(datCatNum, export = TRUE, nDigits = 2, theme = tma(colores = c('#FDC123'),showText = F),
-                marks = c(',', '.'), prefix = "$")
+opts <- list(export = TRUE)
+hgch_bar_CatNum(datCatNum, opts = opts)
+
+opts <- list(export = TRUE,
+             lang = 'en')
+hgch_bar_CatNum(datCatNum,
+                opts = opts)
+
+opts <- list(sort = 'asc',
+             showText = FALSE)
+hgch_bar_CatNum(datCatNum, opts = opts)
+
+opts <- list(
+  export = TRUE,
+  nDigits = 2,
+  theme = tma(custom = list(colors = c('#FDC123'), showText = F)),
+  marks = c(',', '.'),
+  prefix = "$"
+)
+
+hgch_bar_CatNum(datCatNum, opts = opts)
+
 
 # Data-Numerica
 datDatNum <- sampleData('Dat-Num')
