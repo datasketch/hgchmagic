@@ -9,7 +9,8 @@
 #' @examples
 #' hgch_bar_CatNum(sampleData("Cat-Num", nrow = 10))
 #' @export hgch_bar_CatNum
-hgch_bar_CatNum <-  function(data = NULL, opts = NULL, ...) {
+hgch_bar_CatNum <-  function(data = NULL,
+                             opts = NULL, ...) {
 
   if (is.null(data) | nrow(data) == 0) {
   stop("Load an available dataset")
@@ -170,6 +171,13 @@ hgch_bar_CatNum <-  function(data = NULL, opts = NULL, ...) {
     hc_series(
       data
     ) %>%
+    hc_plotOptions(
+      series = list(
+        cursor =  opts$cursor,
+        events = list(
+         click = opts$clickFunction
+        )
+      )) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(enabled = FALSE)
 
@@ -476,7 +484,7 @@ hgch_bar_CatCatNum <- function(data,
           )
         ))}
   if (is.null(theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = showText, colores = colors, diffColorsBar = FALSE)))
+    hc <- hc %>% hc_add_theme(tma(custom = list(showText = showText, colors = colors, colors_diff= FALSE)))
   } else {
     hc <- hc %>% hc_add_theme(theme)
   }
@@ -600,7 +608,7 @@ hgch_bar_CatNumP <- function(data,
                              percentage = FALSE,
                              showText = TRUE,
                              legendPosition = "center",
-                             theme = tma(diffColorsBar = FALSE),
+                             theme = tma(colors_diff= FALSE),
                              tooltip = list("headerFormat" = NULL,
                                             "pointFormat" = NULL,
                                             "shared" = NULL),

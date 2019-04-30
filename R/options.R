@@ -29,7 +29,10 @@ default_options <- list(
   tooltip = list(headerFormat = NULL, pointFormat = NULL),
   export = FALSE,
   theme = NULL,
-  lang = 'es'
+  lang = 'es',
+  cursor =  NULL,
+  clickFunction = NULL#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+
 )
 
 

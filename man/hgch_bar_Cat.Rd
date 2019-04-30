@@ -4,16 +4,7 @@
 \alias{hgch_bar_Cat}
 \title{Bar (categories)}
 \usage{
-hgch_bar_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
-  horLabel = NULL, verLabel = NULL, horLine = NULL,
-  horLineLabel = " ", verLine = NULL, verLineLabel = " ",
-  labelWrap = 12, colors = NULL, colorScale = "no", agg = "sum",
-  agg_text = NULL, orientation = "ver", marks = c(".", ","),
-  nDigits = NULL, dropNa = FALSE, highlightValueColor = "#F9B233",
-  percentage = FALSE, prefix = NULL, suffix = NULL,
-  highlightValue = NULL, order = NULL, sort = "no", sliceN = NULL,
-  showText = TRUE, tooltip = list(headerFormat = NULL, pointFormat =
-  NULL), export = FALSE, theme = NULL, lang = "es", ...)
+hgch_bar_Cat(data, opts = NULL, ...)
 }
 \arguments{
 \item{data}{A data.frame}

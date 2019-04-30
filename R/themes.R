@@ -10,28 +10,40 @@ global_options <- function(marksMil, marksDec){
 
 getDefaultTheme <- list(
   background = "#ffffff",
-  fontFamily = "Ubuntu",
-  colors = NULL,
-  color = '#5A6B72',
-  width = NULL,
-  height = NULL,
-  fontSize = '11px',
-  margin_bottom = NULL,
-  margin_left = NULL,
-  margin_right = NULL,
-  margin_top = NULL,
-  diffColorsBar = TRUE,
+
   border_color = 'transparent',
   border_radius = 0,
   border_width = 0,
   border_widthBar = 0,
+
+  colors = NULL,
+  colors_diff= TRUE,
+
+  font_family = "Ubuntu",
+  font_size = '11px',
+  font_color = '#5A6B72',
+
+  height = NULL,
+
+  margin_bottom = NULL,
+  margin_left = NULL,
+  margin_right = NULL,
+  margin_top = NULL,
+
+  width = NULL,
+
+
   plot_backgroundColor = "transparent",
   plot_borderColor = "#cccccc",
   plot_borderWidth = 0,
+
   showText = TRUE,
   symbLine = TRUE,
+
   lineWidth = 2,
+
   negativeColor = FALSE,
+
   linePointStart = 0,
   labsData_colLabel = 'contrast',
   labsData_familyLabel = 'Ubuntu',
@@ -39,6 +51,13 @@ getDefaultTheme <- list(
   labsData_textDecoration = 'none',
   labsData_textShadow = 'none',
   labsData_textOutline = 'none',
+
+
+  legend_show = TRUE,
+  legend_background = "transparent",
+  legend_backgroundBorderColor = "#5A6B72",
+  legend_backgroundWidth = 0,
+
   stylesY_gridLineWidth = 1,
   stylesY_lineColor = '#5A6B72',
   stylesY_tickColor = 'transparent',
@@ -59,11 +78,7 @@ getDefaultTheme <- list(
   stylesLabelX_fontSize = '11px',
   stylesLabelX_fontWeight = NULL,
   stylesLabelX_enabled =TRUE,
-  stylesTitleX_fontSize = '13px',
-  legend_show = TRUE,
-  legend_background = "transparent",
-  legend_backgroundBorderColor = "#5A6B72",
-  legend_backgroundWidth = 0
+  stylesTitleX_fontSize = '13px'
 )
 
 getTheme <- function(theme = NULL){
@@ -95,137 +110,137 @@ tma <- function(custom = NULL, ...) {
       reflow = TRUE,
       renderTo = 'container',
       backgroundColor = custom$background,
-      borderColor = custom$bordercolor,
-      border_radius = custom$border_radius,
-      borderWidth = custom$borderWidth,
+      borderColor = custom$border_color,
+      borderRadius = custom$border_radius,
+      borderWidth = custom$border_width,
       width = custom$width,
       height = custom$height,
-      marginBottom = custom$marginBottom,
-      marginLeft = custom$marginLeft,
-      marginRight = custom$marginRight,
-      marginTop = custom$marginRight,
-      plotBackgroundColor = custom$plotBackgroundColor,
-      plotBorderColor = custom$plotBorderColor,
-      plotBorderWidth = custom$plotBorderWidth,
+      marginBottom = custom$margin_bottom,
+      marginLeft = custom$margin_left,
+      marginRight = custom$margin_right,
+      marginTop = custom$margin_top,
+      plotBackgroundColor = custom$plot_backgroundColor,
+      plotBorderColor = custom$plot_borderColor,
+      plotBorderWidth = custom$plot_borderWidth,
       style = list (
-        fontFamily = custom$fontFamily,
-        fontSize = custom$fontSize
+        fontFamily = custom$font_family,
+        fontSize = custom$font_size
       )),
     plotOptions = list (
       bar = list(
-        colorByPoint = custom$diffColorsBar,
+        colorByPoint = custom$colors_diff,
         dataLabels = list (
           enabled = custom$showText,
           style = list (
-            color = custom$labsData$colLabel,
-            fontFamily = custom$labsData$familyLabel,
-            fontSize = custom$labsData$sizeLabel,
-            textDecoration= custom$labsData$textDecoration,
-            textShadow = custom$labsData$textShadow,
-            textOutline = custom$labsData$textOutline
+            color = custom$labsData_colLabel,
+            fontFamily = custom$labsData_familyLabel,
+            fontSize = custom$labsData_sizeLabel,
+            textDecoration= custom$labsData_textDecoration,
+            textShadow = custom$labsData_textShadow,
+            textOutline = custom$labsData_textOutline
           )
         )
       ),
       column = list(
-        colorByPoint = custom$diffColorsBar,
+        colorByPoint = custom$colors_diff,
         dataLabels = list (
           enabled = custom$showText,
           style = list (
-            color = custom$labsData$colLabel,
-            fontFamily = custom$labsData$familyLabel,
-            fontSize = custom$labsData$sizeLabel,
-            textDecoration= custom$labsData$textDecoration,
-            textShadow = custom$labsData$textShadow,
-            textOutline = custom$labsData$textOutline
+            color = custom$labsData_colLabel,
+            fontFamily = custom$labsData_familyLabel,
+            fontSize = custom$labsData_sizeLabel,
+            textDecoration= custom$labsData_textDecoration,
+            textShadow = custom$labsData_textShadow,
+            textOutline = custom$labsData_textOutline
           )
         )
       ),
       pie = list(
-        showInLegend = custom$showLegend,
+        showInLegend = custom$legend_show,
         dataLabels = list (
           enabled = custom$showText,
           style = list (
-            color = custom$labsData$colLabel,
-            fontFamily = custom$labsData$familyLabel,
-            fontSize = custom$labsData$sizeLabel,
-            textDecoration= custom$labsData$textDecoration,
-            textShadow = custom$labsData$textShadow,
-            textOutline = custom$labsData$textOutline
+            color = custom$labsData_colLabel,
+            fontFamily = custom$labsData_familyLabel,
+            fontSize = custom$labsData_sizeLabel,
+            textDecoration= custom$labsData_textDecoration,
+            textShadow = custom$labsData_textShadow,
+            textOutline = custom$labsData_textOutline
           )
         )
       ),
       series = list(
-        borderWidth = custom$borderWidthBar,
+        borderWidth = custom$border_widthBar,
         dataLabels = list (
           enabled = custom$showText,
           style = list (
-            color = custom$labsData$colLabel,
-            fontFamily = custom$labsData$familyLabel,
-            fontSize = custom$labsData$sizeLabel,
-            textDecoration= custom$labsData$textDecoration,
-            textShadow = custom$labsData$textShadow,
-            textOutline = custom$labsData$textOutline
+            color = custom$labsData_colLabel,
+            fontFamily = custom$labsData_familyLabel,
+            fontSize = custom$labsData_sizeLabel,
+            textDecoration= custom$labsData_textDecoration,
+            textShadow = custom$labsData_textShadow,
+            textOutline = custom$labsData_textOutline
           )
         ),
-        lineWidth = custom$lineWidth,
+        lineWidth = custom$line_width,
         negativeColor = custom$negativeColor,
-        pointStart = custom$linePointStart,
+        pointStart = custom$line_pointStart,
         marker = list(
           enabled = custom$symbLine
         )
       )
       ),
     xAxis = list (
-      gridLineWidth = custom$stylesX$gridLineWidth,
-      lineColor = custom$stylesX$lineColor, #color del eje x
-      tickColor = custom$stylesX$tickColor, #color de las divisiones del eje x
-      gridLineColor = custom$custom$stylesX$gridLineColor,
-      tickLength = custom$stylesX$tickLength,
-      lineWidth= custom$stylesX$lineWidth,
+      gridLineWidth = custom$stylesX_gridLineWidth,
+      lineColor = custom$stylesX_lineColor, #color del eje x
+      tickColor = custom$stylesX_tickColor, #color de las divisiones del eje x
+      gridLineColor = custom$stylesX_gridLineColor,
+      tickLength = custom$stylesX_tickLength,
+      lineWidth= custom$stylesX_lineWidth,
       labels = list(
         style = list(
-          color = custom$color, #color nombre de las etiquetas
-          fontSize = custom$stylesLabelX$fontSize,
-          fontWeight = custom$stylesLabelX$fontWeight
+          color = custom$font_color, #color nombre de las etiquetas
+          fontSize = custom$stylesLabelX_fontSize,
+          fontWeight = custom$stylesLabelX_fontWeight
         ),
-        enabled = custom$stylesLabelX$enabled
+        enabled = custom$stylesLabelX_enabled
       ),
       title = list(
         style = list(
           color = custom$color,# color del titulo del eje
-          fontSize = custom$stylesTitleX$fontSize
+          fontSize = custom$stylesTitleX_fontSize
         )
       )
     ),
     yAxis = list(
-      gridLineDashStyle = custom$stylesY$gridLineDashStyle,
-      gridLineWidth = custom$stylesY$gridLineWidth,
-      lineColor = custom$stylesY$lineColor,
-      tickColor = custom$stylesY$tickColor,
-      gridLineColor = custom$stylesY$gridLineColor,
-      tickLength = custom$stylesY$tickLength,
-      lineWidth= custom$stylesY$lineWidth,
+      gridLineDashStyle = custom$stylesY_gridLineDashStyle,
+      gridLineWidth = custom$stylesY_gridLineWidth,
+      lineColor = custom$stylesY_lineColor,
+      tickColor = custom$stylesY_tickColor,
+      gridLineColor = custom$stylesY_gridLineColor,
+      tickLength = custom$stylesY_tickLength,
+      lineWidth= custom$stylesY_lineWidth,
       labels = list(
         style = list(
-          color = custom$color,
-          fontSize = custom$stylesLabelY$fontSize,
-          fontWeight = custom$stylesLabelY$fontWeight
+          color = custom$font_color,
+          fontSize = custom$stylesLabelY_fontSize,
+          fontWeight = custom$stylesLabelY_fontWeight
         ),
-        enabled = custom$stylesLabelY$enabled
+        enabled = custom$stylesLabelY_enabled
       ),
       title = list(
         style = list(
-          color = custom$color,
-          fontSize = custom$stylesTitleY$fontSize
+          color = custom$font_color,
+          fontSize = custom$stylesTitleY_fontSize
         )
       )
     ),
     legend = list(
-    backgroundColor = custom$legend$background,
-    borderColor = custom$legend$backgroundBorderColor,
+    backgroundColor = custom$legend_background,
+    borderColor = custom$legend_backgroundBorderColor,
     #borderWidth = custom$legend$backgroundWidth,
     itemStyle = list(
-      color = custom$color
+      color = custom$font_color
   )
   )
   )

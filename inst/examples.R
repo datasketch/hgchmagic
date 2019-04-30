@@ -33,6 +33,7 @@ opts <- list(
   verLabel = 'Texto vertical',
   horLabel = 'Texto horizontal'
 )
+
 hgch_bar_Cat(datCat, opts = opts)
 
 opts <- list(
@@ -53,7 +54,11 @@ hgch_bar_Cat(datCat, opts = opts)
 # Categorica-Numerica
 
 datCatNum <- sampleData('Cat-Num')
-hgch_bar_CatNum(datCatNum)
+hgch_bar_CatNum(datCatNum) %>%
+  hc_plotOptions(
+      series = list(
+        cursor =  'pointer'
+        ))
 opts <- list(export = TRUE)
 hgch_bar_CatNum(datCatNum, opts = opts)
 
@@ -69,7 +74,10 @@ hgch_bar_CatNum(datCatNum, opts = opts)
 opts <- list(
   export = TRUE,
   nDigits = 2,
-  theme = tma(custom = list(colors = c('#FDC123'), showText = F)),
+  #color_scale = "discrete",
+  theme = tma(custom = list(#colors = c('#FDC123'),
+                            showText = T,
+                            colors_diff = F)),
   marks = c(',', '.'),
   prefix = "$"
 )
@@ -92,9 +100,9 @@ hgch_bar_CatNum(datYeaNum, agg = 'mean', showText = F)
 dfCC <- sampleData('Cat-Cat', 999)
 
 hgch_bar_CatCat(dfCC, export = TRUE)
-hgch_bar_CatCat(dfCC, percentage = TRUE, theme = tma(diffColorsBar = TRUE))
+hgch_bar_CatCat(dfCC, percentage = TRUE, theme = tma(colors_diff= TRUE))
 hgch_bar_CatCat(dfCC, graphType = "stacked")
-hgch_bar_CatCat(dfCC, theme = tma(custom = list(background = '#FDCFFF', diffColorsBar = F)))
+hgch_bar_CatCat(dfCC, theme = tma(custom = list(background = '#FDCFFF', colors_diff= F)))
 hgch_bar_CatCat(dfCC, percentage = T, graphType = "stacked")
 hgch_bar_CatCat(dfCC, percentage = T, graphType = "stacked", order1 = c("TypeA", "TypeB", "TypeE"), showText = F)
 hgch_bar_CatCat(dfCC, percentage = T, graphType = "stacked", order2 = "X_B")
