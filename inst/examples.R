@@ -23,6 +23,7 @@ opts <- list (
   subtitle = 'Esto es un subtitulo',
   caption = 'Esto es un caption',
   export = TRUE,
+  agg_text = "hola",
   lang = 'en'
 )
 
@@ -54,11 +55,8 @@ hgch_bar_Cat(datCat, opts = opts)
 # Categorica-Numerica
 
 datCatNum <- sampleData('Cat-Num')
-hgch_bar_CatNum(datCatNum) %>%
-  hc_plotOptions(
-      series = list(
-        cursor =  'pointer'
-        ))
+hgch_bar_CatNum(datCatNum)
+
 opts <- list(export = TRUE)
 hgch_bar_CatNum(datCatNum, opts = opts)
 
@@ -98,23 +96,45 @@ hgch_bar_CatNum(datYeaNum, agg = 'mean', showText = F)
 
 # Categoricos - hgch_bar_CatCat(dfCC, theme = tma(background = '#ccc'), colors = c('orange', 'darkred'))
 dfCC <- sampleData('Cat-Cat', 999)
+arg <- list(
+  export = TRUE
+)
+hgch_bar_CatCat(dfCC, opts = arg)
 
-hgch_bar_CatCat(dfCC, export = TRUE)
-hgch_bar_CatCat(dfCC, percentage = TRUE, theme = tma(colors_diff= TRUE))
-hgch_bar_CatCat(dfCC, graphType = "stacked")
-hgch_bar_CatCat(dfCC, theme = tma(custom = list(background = '#FDCFFF', colors_diff= F)))
-hgch_bar_CatCat(dfCC, percentage = T, graphType = "stacked")
-hgch_bar_CatCat(dfCC, percentage = T, graphType = "stacked", order1 = c("TypeA", "TypeB", "TypeE"), showText = F)
-hgch_bar_CatCat(dfCC, percentage = T, graphType = "stacked", order2 = "X_B")
+arg <- list(
+  percentage = TRUE,
+  theme = tma(colors_diff= TRUE)
+)
+hgch_bar_CatCat(dfCC, opts = arg)
+hgch_bar_CatCat(dfCC, opts = list(graphType = "stacked"))
+hgch_bar_CatCat(dfCC, opts = list(theme = tma(custom = list(background = '#FDCFFF', colors_diff= F))))
+hgch_bar_CatCat(dfCC, opts = list(percentage = T, graphType = "stacked"))
+hgch_bar_CatCat(dfCC, opts = list(percentage = T, graphType = "stacked", order1 = c("TypeA", "TypeB", "TypeE"), showText = F))
+hgch_bar_CatCat(dfCC, opts = list(percentage = T, graphType = "stacked", order2 = "X_B"))
 # Categoricos - categoricos - Numericos
 dfCCN <- sampleData('Cat-Cat-Num', 500)
 hgch_bar_CatCatNum(dfCCN)
-hgch_bar_CatCatNum(dfCCN, colorScale = "no")
-hgch_bar_CatCatNum(dfCCN, percentage = T, graphType = "stack")
-hgch_bar_CatCatNum(dfCCN, percentage = T,
-                           orientation = "ver", horLine = 60,
-                           horLineLabel  = 'anaperra',
-                           verLine = 3)
+opts = list(
+  color_scale = "countinuos"
+)
+hgch_bar_CatCatNum(dfCCN, opts = opts)
+
+opts = list(
+  percentage = T,
+  graphType = "stack",
+  order1 = c("CatB", "CatC")
+)
+hgch_bar_CatCatNum(dfCCN, opts = opts)
+
+opts <- list(
+  percentage = T,
+  orientation = "ver",
+  horLine = 20,
+  verLine_label  = 'linea',
+  verLine = 3,
+  allow_point = T
+)
+hgch_bar_CatCatNum(dfCCN, opts = opts)
 
 
 # Categoricos - Fecha - numericos
