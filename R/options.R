@@ -33,13 +33,16 @@ default_options <- list(
   allow_point = FALSE,
   cursor =  NULL,
   clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
-  # opciones que falta en barras CatCatNum
+  # opciones que faltan en barras CatCatNum
   graphType = "grouped",
   dropNaV = c(FALSE, FALSE),
   labelWrapV = c(12, 12),
   order1 = NULL,
   order2 = NULL,
-  legend_position  = "center"
+  legend_position  = "center",
+  # opciones que faltan en lineas
+  startAtZero = TRUE,
+  spline = FALSE
 )
 
 

@@ -40,7 +40,7 @@ getDefaultTheme <- list(
   showText = TRUE,
   symbLine = TRUE,
 
-  lineWidth = 2,
+  line_width = 2,
 
   negativeColor = FALSE,
 
@@ -207,7 +207,7 @@ tma <- function(custom = NULL, ...) {
       ),
       title = list(
         style = list(
-          color = custom$color,# color del titulo del eje
+          color = custom$font_color,# color del titulo del eje
           fontSize = custom$stylesTitleX_fontSize
         )
       )

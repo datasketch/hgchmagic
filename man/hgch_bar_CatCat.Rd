@@ -4,17 +4,7 @@
 \alias{hgch_bar_CatCat}
 \title{Grouped bar by first category (categories, categories)}
 \usage{
-hgch_bar_CatCat(data, title = NULL, subtitle = NULL, caption = NULL,
-  horLabel = NULL, verLabel = NULL, horLine = NULL,
-  horLineLabel = " ", verLine = NULL, verLineLabel = " ",
-  graphType = "grouped", agg = "sum", agg_text = NULL,
-  colors = c("#009EE3", "#F9B233"), colorScale = "discrete",
-  dropNaV = c(FALSE, FALSE), prefix = NULL, suffix = NULL,
-  labelWrapV = c(12, 12), marks = c(".", ","), nDigits = NULL,
-  order1 = NULL, order2 = NULL, orientation = "ver",
-  percentage = FALSE, showText = TRUE, legendPosition = "center",
-  theme = NULL, tooltip = list(headerFormat = NULL, pointFormat = NULL,
-  shared = NULL), export = FALSE, lang = "es", ...)
+hgch_bar_CatCat(data, opts = NULL, ...)
 }
 \arguments{
 \item{data}{A data.frame}

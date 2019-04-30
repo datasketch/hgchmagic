@@ -163,48 +163,75 @@ hgch_bar_CatNumP(dfCNp, graphType = "stacked", orientation = "hor", percentage =
 # Categoricas
 
 datCat <- sampleData('Cat', nrow = 300)
-hgch_line_Cat(datCat, horLine = 40, theme = tma(list(showText = FALSE)))
-hgch_line_Cat(datCat, orientation = 'hor', horLine = 5, export = TRUE)
-hgch_line_Cat(datCat, spline = T, showText = F)
-hgch_line_Cat(datCat, startAtZero = F,  sort = 'desc', order = c('IlkD'))
-hgch_line_Cat(datCat, title = 'Esto es un título',
-             subtitle = 'Esto es un subtitulo',
-             caption = 'Esto es un caption'
+opts <- list(
+  horLine = 40,
+  theme = tma(list(showText = FALSE))
 )
-hgch_line_Cat(datCat, spline = TRUE, orientation = "hor")
+hgch_line_Cat(datCat, opts = opts)
+hgch_line_Cat(datCat, opts = list(orientation = 'hor', horLine = 5, export = TRUE))
+hgch_line_Cat(datCat,
+              opts = list(spline = T,
+                          showText = F))
+hgch_line_Cat(datCat,
+              opts = list(startAtZero = F,
+                          sort = 'desc',
+                          order = c('IlkD'),
+                          theme = tma(list(colors = "darkred")))
+)
+hgch_line_Cat(datCat,
+              opts = list(title = 'Esto es un título',
+             subtitle = 'Esto es un subtitulo',
+             caption = 'Esto es un caption')
+)
+hgch_line_Cat(datCat,
+              opts = list(spline = TRUE,
+                          orientation = "hor")
+)
 
 # Categorica-Numerica
 
 datCatNum <- sampleData('Cat-Num')
-hgch_line_CatNum(datCatNum, export = T, lang = 'en')
-hgch_line_CatNum(datCatNum, sort = 'asc', dropNa = TRUE, showText = F)
-hgch_line_CatNum(datCatNum, sort = 'desc', colors = c('orange'), order = 'FormE', showText = F)
-hgch_line_CatNum(datCatNum, export = TRUE, nDigits = 2, theme = tma(showText = F),
-                marks = c(',', '.'), format = c('', ' <b>cosas</b>'), order = c('FormE'))
+hgch_line_CatNum(datCatNum,
+                 opts = list(export = T,
+                             lang = 'en'))
+hgch_line_CatNum(datCatNum, opts = list(sort = 'asc', dropNa = TRUE, showText = F))
+hgch_line_CatNum(datCatNum, opts = list(sort = 'desc', colors = c('orange'), order = 'TypeB', showText = F))
+hgch_line_CatNum(datCatNum,
+                 opts = list(export = TRUE,
+                             nDigits = 2,
+                             theme = tma(showText = F),
+                             marks = c(',', '.'),
+                             suffix =  '<b>cosas</b>',
+                             order = c('FormE')))
 
 # Data-Numerica
 datDatNum <- sampleData('Dat-Num', 100)
 hgch_line_CatNum(datDatNum)
-hgch_line_CatNum(datDatNum, dropNa = TRUE, colors = '#8B0000')
+hgch_line_CatNum(datDatNum,
+                 opts = list(dropNa = TRUE,
+                             colors = '#8B0000'))
 
 
 #Años - Númerico
 datYeaNum <- sampleData('Yea-Num', 250)
-hgch_line_CatNum(datYeaNum, agg = 'mean', startAtZero = F)
-hgch_line_CatNum(datYeaNum, agg = 'mean', startAtZero = F, dropNa = T)
+hgch_line_CatNum(datYeaNum, opts = list(agg = 'mean', startAtZero = F))
+hgch_line_CatNum(datYeaNum, opts = list(agg = 'mean', startAtZero = T, dropNa = T))
 
 # Categoricos - categoricos
 dfCC <- sampleData('Cat-Cat', 999)
-hgch_line_CatCat(dfCC, export = T)
-hgch_line_CatCat(dfCC, showText = F)
-hgch_line_CatCat(dfCC, percentage = TRUE, horLine = 15, verLine = 3)
+hgch_line_CatCat(dfCC, opts = list(export = T))
+hgch_line_CatCat(dfCC, opts = list(showText = F))
+hgch_line_CatCat(dfCC, opts = list(percentage = TRUE, horLine = 15, verLine = 3))
 
 # Categoricos - categoricos - Numericos
 dfCCN <- sampleData('Cat-Cat-Num', 500)
-hgch_line_CatCatNum(dfCCN, spline = T, export = T, lang = 'en')
-hgch_line_CatCatNum(dfCCN, spline = T, orientation = "hor", agg = "mean", startAtZero = F)
-hgch_line_CatCatNum(dfCCN, spline = T,  theme = tma(symbLine = F, showText = F))
-hgch_line_CatCatNum(dfCCN, colors = c('#FF0AC2', '#FFCDDD', '#FDFD0D', '#FDACDC'))
+hgch_line_CatCatNum(dfCCN,
+                    opts = list(spline = T,
+                                export = T,
+                                lang = 'en'))
+hgch_line_CatCatNum(dfCCN, opts = list(spline = T, orientation = "hor", agg = "mean", startAtZero = F))
+hgch_line_CatCatNum(dfCCN, opts = list(spline = T,  theme = tma(symbLine = F, showText = F)))
+hgch_line_CatCatNum(dfCCN, opts = list(colors = c('#FF0AC2', '#FFCDDD', '#FDFD0D', '#FDACDC')))
 
 
 # Categoricos - Fecha - numericos

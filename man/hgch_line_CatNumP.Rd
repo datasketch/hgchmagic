@@ -4,17 +4,7 @@
 \alias{hgch_line_CatNumP}
 \title{Line (ordered category, n numbers)}
 \usage{
-hgch_line_CatNumP(data, title = NULL, subtitle = NULL,
-  caption = NULL, horLabel = NULL, verLabel = NULL, horLine = NULL,
-  horLineLabel = " ", verLine = NULL, verLineLabel = " ",
-  orientation = "ver", startAtZero = TRUE, agg = "sum",
-  agg_text = NULL, spline = FALSE, colors = NULL,
-  dropNaV = c(FALSE, FALSE), prefix = NULL, suffix = NULL,
-  labelWrapV = c(12, 12), legendPosition = "center", marks = c(".",
-  ","), nDigits = NULL, order1 = NULL, order2 = NULL,
-  percentage = FALSE, showText = TRUE, theme = NULL,
-  tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
-  export = FALSE, lang = "es", ...)
+hgch_line_CatNumP(data, opts = NULL, ...)
 }
 \arguments{
 \item{data}{A data.frame}

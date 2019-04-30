@@ -13,7 +13,7 @@ hgch_bar_CatNum <-  function(data = NULL,
                              opts = NULL, ...) {
 
   if (is.null(data) | nrow(data) == 0) {
-  stop("Load an available dataset")
+    stop("Load an available dataset")
   }
 
   opts <- getOptions(opts = opts)
@@ -176,7 +176,7 @@ hgch_bar_CatNum <-  function(data = NULL,
         allowPointSelect= opts$allow_point,
         cursor =  opts$cursor,
         events = list(
-         click = opts$clickFunction
+          click = opts$clickFunction
         )
       )) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
@@ -241,7 +241,7 @@ hgch_bar_Cat <-  function(data,
     dplyr::group_by_all() %>%
     dplyr::summarise(b = n())
 
-  prefix_agg <- ifelse(is.null(opts$agg_text), "count", opts$agg_text)
+  prefix_agg <- ifelse(is.null(opts$agg_text), "count ", opts$agg_text)
 
   names(d) <- c(f$dic_$d$label, paste(prefix_agg, f$dic_$d$label))
 
@@ -379,8 +379,8 @@ hgch_bar_CatCatNum <- function(data,
 
   if (is.null(opts$tooltip$pointFormat)) {
     opts$tooltip$pointFormat <-paste0('<b>', nms[2], ': </b>{point.category}</br>',
-                                 '<b>', nms[1], ': </b>{series.name}</br>',
-                                 paste0(opts$agg, ' ' ,nms[3], ': '), opts$prefix,'{point.y}', opts$suffix)
+                                      '<b>', nms[1], ': </b>{series.name}</br>',
+                                      paste0(prefix_agg, ' ' ,nms[3], ': '), opts$prefix,'{point.y}', opts$suffix)
   }
   if (is.null(opts$tooltip$headerFormat)) {
     opts$tooltip$headerFormat <- " "
@@ -441,12 +441,12 @@ hgch_bar_CatCatNum <- function(data,
       column = list(
         colorByPoint = FALSE),
       series = list(
-            allowPointSelect= opts$allow_point,
-            cursor =  opts$cursor,
-            events = list(
-              click = opts$clickFunction
-            )
-          )
+        allowPointSelect= opts$allow_point,
+        cursor =  opts$cursor,
+        events = list(
+          click = opts$clickFunction
+        )
+      )
     ) %>%
     hc_legend(enabled = TRUE,
               align = opts$legend_position)
@@ -459,12 +459,12 @@ hgch_bar_CatCatNum <- function(data,
     }
   }
   if (opts$export){
-      hc <- hc %>%
-        hc_exporting(enabled = TRUE, buttons= list(
-          contextButton= list(
-            menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
-          )
-        ))}
+    hc <- hc %>%
+      hc_exporting(enabled = TRUE, buttons= list(
+        contextButton= list(
+          menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
+        )
+      ))}
   if (is.null(opts$theme)) {
     hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$showText, colors = opts$colors, colors_diff= FALSE)))
   } else {
@@ -550,7 +550,7 @@ hgch_bar_CatNumP <- function(data,
   names(d) <- f$dic_$d$label
 
   data <- d %>%
-           gather("categories", "count", names(d)[-1])
+    gather("categories", "count", names(d)[-1])
   h <- hgch_bar_CatCatNum(data,opts = opts, ...)
   h
 }
