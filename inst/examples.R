@@ -319,7 +319,7 @@ hgch_pie_Cat(dfC, title = "TITLE", subtitle = "Subtitle")
 # Categorico - Numerico
 data <- sampleData("Cat-Num", nrow = 100)
 hgch_pie_CatNum(data)
-hgch_pie_CatNum(data, export = TRUE)
+hgch_pie_CatNum(data, opts = list(export = TRUE, allow_point = TRUE, cursor = "pointer"))
 hgch_pie_CatNum(data, colors = c("darkred", "#FFFDDD"))
 hgch_pie_CatNum(data, colors = c("darkred"), colorScale = "no", highlightValue = "CatD", highlightValueColor = "orange")
 hgch_pie_CatNum(data,

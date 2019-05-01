@@ -10,58 +10,42 @@
 #' hgch_pie_CatNum(sampleData("Cat-Num", nrow = 10))
 #' @export hgch_pie_CatNum
 hgch_pie_CatNum <-  function(data,
-                             title = NULL,
-                             subtitle = NULL,
-                             caption = NULL,
-                             labelWrap = 12,
-                             colors = NULL,
-                             colorScale = 'discrete',
-                             agg = "sum",
-                             marks = c(".", ","),
-                             nDigits = NULL,
-                             dropNa = FALSE,
-                             highlightValueColor = '#F9B233',
-                             percentage = FALSE,
-                             prefix = NULL,
-                             suffix = NULL,
-                             highlightValue = NULL,
-                             order = NULL,
-                             sort = "no",
-                             sliceN = NULL,
-                             showText = FALSE,
-                             legendPosition = "center",
-                             tooltip = list(headerFormat = NULL, pointFormat = NULL),
-                             export = FALSE,
-                             lang = 'es',
-                             theme = NULL, ...) {
+                             opts = NULL, ...) {
 
+  if (is.null(data) | nrow(data) == 0) {
+    stop("Load an available dataset")
+  }
+
+  opts <- getOptions(opts = opts)
 
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
 
-  title <-  title %||% ""
-  subtitle <- subtitle %||% ""
-  caption <- caption %||% ""
+  title <-  opts$title %||% ""
+  subtitle <- opts$subtitle %||% ""
+  caption <- opts$caption %||% ""
 
-  if (colorScale == 'discrete') {
+  prefix_agg <- ifelse(is.null(opts$agg_text), opts$agg, opts$agg_text)
+
+  if (opts$color_scale == 'discrete') {
     colorDefault <- c("#FECA84", "#3DB26F", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1")
   } else {
     colorDefault <- leaflet::colorNumeric(c("#53255E", "#ff4097"), 1:length(unique(d$a)))(1:length(unique(d$a)))
   }
 
 
-    if (!is.null(colors)) {
-      colors <- unname(fillColors(d, "a", colors, colorScale))
+    if (!is.null(opts$colors)) {
+      opts$colors <- unname(fillColors(d, "a", opts$colors, opts$color_scale))
     } else {
-      if (colorScale == 'no') {
-      colors <- c("#FECA84", "#FECA84")
+      if (opts$color_scale == 'no') {
+        opts$colors <- c("#FECA84", "#FECA84")
       } else {
-        colors <- colorDefault
+        opts$colors <- colorDefault
       }
   }
 
-  if (dropNa)
+  if (opts$dropNa)
     d <- d %>%
     tidyr::drop_na()
 
@@ -69,31 +53,31 @@ hgch_pie_CatNum <-  function(data,
     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
                            b = NA)) %>%
     dplyr::group_by(a) %>%
-    dplyr::summarise(b = agg(agg, b))
+    dplyr::summarise(b = agg(opts$agg, b))
   d$a <- as.character(d$a)
   d$a[is.na(d$a)] <- 'NA'
 
-  if (is.null(nDigits)) {
+  if (is.null(opts$nDigits)) {
     nDig <- 0
   } else {
-    nDig <- nDigits
+    nDig <- opts$nDigits
   }
 
-  if (percentage) {
+  if (opts$percentage) {
     d$b <- (d[['b']] * 100) / sum(d[['b']], na.rm = TRUE)
   }
 
   d$b <- round(d$b, nDig)
-  d <- orderCategory(d, "a", order, labelWrap)
-  d <- sortSlice(d, "b", sort, sliceN)
+  d <- orderCategory(d, "a", opts$order, opts$labelWrap)
+  d <- sortSlice(d, "b", opts$sort, opts$sliceN)
 
 
   d <- d %>% plyr::rename(c('b' = 'y'))
   d$color <- NA
 
-  if (!is.null(highlightValue)) {
-    w <- which(d$a %in% highlightValue)
-    d$color[w] <- highlightValueColor
+  if (!is.null(opts$highlight_value)) {
+    w <- which(d$a %in% opts$highlight_vValue)
+    d$color[w] <- opts$highlight_valueColor
   }
 
   data <- list()
@@ -105,26 +89,25 @@ hgch_pie_CatNum <-  function(data,
 
   legFormat <- "<b>{point.name}</b>: {point.y} ({point.percentage:.1f}%)"
 
-    if (is.null(format)) {
-    prefix = ""
-    suffix = ""
-  }
-
-  if (percentage) {
-    suffix <- "%"
-    legFormat <- paste0("<b>{point.name}</b>: {point.y:",marks[2], nDig,"f}%")
-  }
+  if (is.null(opts$prefix)) opts$prefix <- ""
+  if (is.null(opts$suffix)) opts$suffix <- ""
 
 
-  if (is.null(tooltip$pointFormat)) {
-    tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(agg, ' ' ,nms[2], ': '), prefix,'{point.y}', suffix)
-  }
-  if (is.null(tooltip$headerFormat)) {
-    tooltip$headerFormat <- ""
+  if (opts$percentage & opts$suffix == "") {
+    opts$suffix <- "%"
+    legFormat <- paste0("<b>{point.name}</b>: {point.y:",opts$marks[2], opts$nDig,"f}%")
   }
 
-  global_options(marks[1], marks[2])
-  exportLang(language = lang)
+
+  if (is.null(opts$tooltip$pointFormat)) {
+    opts$tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(prefix_agg, ' ' ,nms[2], ': '), opts$prefix,'{point.y}', opts$suffix)
+  }
+  if (is.null(opts$tooltip$headerFormat)) {
+    opts$tooltip$headerFormat <- ""
+  }
+
+  global_options(opts$marks[1], opts$marks[2])
+  exportLang(language = opts$lang)
 
   hc <- highchart() %>%
     hc_chart(type = "pie",
@@ -134,34 +117,42 @@ hgch_pie_CatNum <-  function(data,
     #hc_plotOptions(series = list(dataLabels = list( format = legFormat))) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
     hc_series(
       data
     ) %>%
+    hc_plotOptions(
+      pie = list(
+        allowPointSelect= opts$allow_point,
+        cursor =  opts$cursor,
+        events = list(
+          click = opts$clickFunction
+        )
+      )) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
-    hc_legend(align= legendPosition)#,
+    hc_legend(align= opts$legend_position)#,
               #verticalAlign= legendPosition[2])
-  if (export){
+  if (opts$export){
     hc <- hc %>%
       hc_exporting(enabled = TRUE, buttons= list(
         contextButton= list(
           menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
         )
       ))}
-  if (is.null(theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = showText, colores = colors)))
+  if (is.null(opts$theme)) {
+    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$showText, colors = opts$colors)))
   } else {
     hc <- hc %>% hc_add_theme(theme)
   }
 
 
-  if (showText) {
+  if (opts$showText) {
     hc <- hc %>%
       hc_plotOptions(
         pie = list(
           dataLabels = list(
             distance = -30,
-            format = paste0(prefix, "{y}", suffix)
+            format = paste0(opts$prefix, "{y}", opts$suffix)
           ))
       )
   }
@@ -181,30 +172,7 @@ hgch_pie_CatNum <-  function(data,
 #' hgch_pie_Cat(sampleData("Cat", nrow = 10))
 #' @export hgch_pie_Cat
 hgch_pie_Cat <-  function(data,
-                          title = NULL,
-                          subtitle = NULL,
-                          caption = NULL,
-                          labelWrap = 12,
-                          colors = NULL,
-                          colorScale = 'discrete',
-                          agg = "sum",
-                          marks = c(".", ","),
-                          nDigits = NULL,
-                          dropNa = FALSE,
-                          highlightValueColor = '#F9B233',
-                          percentage = FALSE,
-                          prefix = NULL,
-                          suffix = NULL,
-                          highlightValue = NULL,
-                          order = NULL,
-                          sort = "no",
-                          sliceN = NULL,
-                          showText = FALSE,
-                          legendPosition = "center",
-                          tooltip = list(headerFormat = NULL, pointFormat = NULL),
-                          export = FALSE,
-                          lang = 'es',
-                          theme = NULL, ...) {
+                          opts = opts, ...) {
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -214,9 +182,10 @@ hgch_pie_Cat <-  function(data,
     dplyr::group_by_all() %>%
     dplyr::summarise(b = n())
 
-  names(d) <- c(f$dic_$d$label, paste0("count ", f$dic_$d$label))
+  prefix_agg <- ifelse(is.null(opts$agg_text), "count ", opts$agg_text)
+  names(d) <- c(f$dic_$d$label, paste0(prefix_agg, f$dic_$d$label))
 
-  h <- hgch_pie_CatNum(data = d, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, prefix = prefix, suffix = suffix, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN, showText = showText, legendPosition = legendPosition, tooltip = tooltip, export = export, lang = lang, theme = theme, ...)
+  h <- hgch_pie_CatNum(data = d, opts = opts, ...)
   h
 }
 
@@ -233,90 +202,74 @@ hgch_pie_Cat <-  function(data,
 #' hgch_donut_CatNum(sampleData("Cat-Num", nrow = 10))
 #' @export hgch_donut_CatNum
 hgch_donut_CatNum <-  function(data,
-                               title = NULL,
-                               subtitle = NULL,
-                               caption = NULL,
-                               labelWrap = 12,
-                               colors = NULL,
-                               colorScale = 'discrete',
-                               agg = "sum",
-                               marks = c(".", ","),
-                               nDigits = NULL,
-                               dropNa = FALSE,
-                               highlightValueColor = '#F9B233',
-                               percentage = FALSE,
-                               prefix = NULL,
-                               suffix = NULL,
-                               highlightValue = NULL,
-                               order = NULL,
-                               sort = "no",
-                               sliceN = NULL,
-                               showText = FALSE,
-                               legendPosition = "center",
-                               tooltip = list(headerFormat = NULL, pointFormat = NULL),
-                               export = FALSE,
-                               lang = 'es',
-                               theme = NULL, ...) {
+                               opts = NULL, ...) {
 
+  if (is.null(data) | nrow(data) == 0) {
+    stop("Load an available dataset")
+  }
+
+  opts <- getOptions(opts = opts)
 
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
 
-  title <-  title %||% ""
-  subtitle <- subtitle %||% ""
-  caption <- caption %||% ""
+  title <- opts$title %||% ""
+  subtitle <- opts$subtitle %||% ""
+  caption <- opts$caption %||% ""
 
-  if (colorScale == 'discrete') {
+  prefix_agg <- ifelse(is.null(opts$agg_text), opts$agg, opts$agg_text)
+
+  if (opts$color_scale == 'discrete') {
     colorDefault <- c("#FECA84", "#3DB26F", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1")
   } else {
     colorDefault <- leaflet::colorNumeric(c("#53255E", "#ff4097"), 1:length(unique(d$a)))(1:length(unique(d$a)))
   }
 
 
-    if (!is.null(colors)) {
-      colors <- unname(fillColors(d, "a", colors, colorScale))
+    if (!is.null(opts$colors)) {
+      opts$colors <- unname(fillColors(d, "a", opts$colors, opts$color_scale))
     } else {
-      if (colorScale == 'no') {
-       colors <- c("#FECA84", "#FECA84")
+      if (opts$color_scale == 'no') {
+        opts$colors <- c("#FECA84", "#FECA84")
       } else {
-        colors <- colorDefault
+        opts$colors <- colorDefault
       }
     }
 
-  if (dropNa)
+  if (opts$dropNa)
     d <- d %>%
     tidyr::drop_na()
 
-  d <- d  %>%
+  d <- d %>%
     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
                            b = NA)) %>%
     dplyr::group_by(a) %>%
-    dplyr::summarise(b = agg(agg, b))
+    dplyr::summarise(b = agg(opts$agg, b))
   d$a <- as.character(d$a)
   d$a[is.na(d$a)] <- 'NA'
 
-  if (is.null(nDigits)) {
+  if (is.null(opts$nDigits)) {
     nDig <- 0
   } else {
-    nDig <- nDigits
+    nDig <- opts$nDigits
   }
 
-  if (percentage) {
+  if (opts$percentage) {
     d$b <- (d[['b']] * 100) / sum(d[['b']], na.rm = TRUE)
   }
 
   d$b <- round(d$b, nDig)
-  d <- orderCategory(d, "a", order, labelWrap)
-  d <- sortSlice(d, "b", sort, sliceN)
+  d <- orderCategory(d, "a", opts$order, opts$labelWrap)
+  d <- sortSlice(d, "b", opts$sort, opts$sliceN)
 
 
   d <- d %>% plyr::rename(c('b' = 'y'))
   d$color <- NA
 
-  if (!is.null(highlightValue)) {
-    w <- which(d$a %in% highlightValue)
-    d$color[w] <- highlightValueColor
+  if (!is.null(opts$highlight_value)) {
+    w <- which(d$a %in% opts$highlight_value)
+    d$color[w] <- opts$highlight_valueColor
   }
 
   data <- list()
@@ -328,26 +281,24 @@ hgch_donut_CatNum <-  function(data,
 
   legFormat <- "<b>{point.name}</b>: {point.y} ({point.percentage:.1f}%)"
 
-  if (is.null(format)) {
-    prefix = ""
-    suffix = ""
-  }
+  if (is.null(opts$prefix)) opts$prefix <- ""
+  if (is.null(opts$suffix)) opts$suffix <- ""
 
-  if (percentage) {
-    suffix <- "%"
-    legFormat <- paste0("<b>{point.name}</b>: {point.y:",marks[2], nDig,"f}%")
+  if (opts$percentage & opts$suffix == "") {
+    opts$suffix <- "%"
+    legFormat <- paste0("<b>{point.name}</b>: {point.y:", opts$marks[2], nDig,"f}%")
   }
 
 
-  if (is.null(tooltip$pointFormat)) {
-    tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(agg, ' ' ,nms[2], ': '), prefix,'{point.y}', suffix)
+  if (is.null(opts$tooltip$pointFormat)) {
+    opts$tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(prefix_agg, ' ' ,nms[2], ': '), opts$prefix,'{point.y}', opts$suffix)
   }
-  if (is.null(tooltip$headerFormat)) {
-    tooltip$headerFormat <- ""
+  if (is.null(opts$tooltip$headerFormat)) {
+    opts$tooltip$headerFormat <- ""
   }
 
-  global_options(marks[1], marks[2])
-  exportLang(language = lang)
+  global_options(opts$marks[1], opts$marks[2])
+  exportLang(language = opts$lang)
 #, dataLabels = list( format = legFormat)
   hc <- highchart() %>%
     hc_chart(type = "pie",
@@ -357,33 +308,33 @@ hgch_donut_CatNum <-  function(data,
     hc_plotOptions(series = list(innerSize = "60%")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = tooltip$pointFormat, headerFormat = tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
     hc_series(
       data
     ) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
-    hc_legend(align= legendPosition)#[1],
+    hc_legend(align= opts$legend_position)#[1],
               #verticalAlign= legendPosition[2])
-  if (export){
+  if (opts$export){
     hc <- hc %>%
       hc_exporting(enabled = TRUE, buttons= list(
         contextButton= list(
           menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
         )
       ))}
-  if (is.null(theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = showText, colores = colors)))
+  if (is.null(opts$theme)) {
+    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$showText, colores = opts$colors)))
   } else {
-    hc <- hc %>% hc_add_theme(theme)
+    hc <- hc %>% hc_add_theme(opts$theme)
   }
 
-  if (showText) {
+  if (opts$showText) {
     hc <- hc %>%
       hc_plotOptions(
         pie = list(
           dataLabels = list(
             distance = -30,
-            format = paste0(prefix, "{y}", suffix)
+            format = paste0(opts$prefix, "{y}", opts$suffix)
           ))
       )
   }
@@ -405,30 +356,11 @@ hgch_donut_CatNum <-  function(data,
 #' hgch_donut_Cat(sampleData("Cat", nrow = 10))
 #' @export hgch_donut_Cat
 hgch_donut_Cat <-  function(data,
-                            title = NULL,
-                            subtitle = NULL,
-                            caption = NULL,
-                            labelWrap = 12,
-                            colors = NULL,
-                            colorScale = 'discrete',
-                            agg = "sum",
-                            marks = c(".", ","),
-                            nDigits = NULL,
-                            dropNa = FALSE,
-                            highlightValueColor = '#F9B233',
-                            percentage = FALSE,
-                            prefix = NULL,
-                            suffix = NULL,
-                            highlightValue = NULL,
-                            order = NULL,
-                            sort = "no",
-                            sliceN = NULL,
-                            showText = FALSE,
-                            legendPosition = "center",
-                            tooltip = list(headerFormat = NULL, pointFormat = NULL),
-                            export = FALSE,
-                            lang = 'es',
-                            theme = NULL, ...) {
+                            opts = NULL, ...) {
+
+  if (is.null(data) | nrow(data) == 0) {
+    stop("Load an available dataset")
+  }
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -438,8 +370,8 @@ hgch_donut_Cat <-  function(data,
     dplyr::group_by_all() %>%
     dplyr::summarise(b = n())
 
-  names(d) <- c(f$dic_$d$label, paste0("count ", f$dic_$d$label))
+  prefix_agg <- ifelse(is.null(opts$agg_text), "count ", opts$agg_text)
+  names(d) <- c(f$dic_$d$label, paste0(prefix_agg, f$dic_$d$label))
 
-  h <- hgch_donut_CatNum(data = d, title = title, subtitle = subtitle, caption = caption,labelWrap = labelWrap, marks = marks, nDigits = nDigits, dropNa = dropNa, highlightValueColor = highlightValueColor, percentage = percentage, colors = colors, colorScale = colorScale, agg = agg, prefix = prefix, suffix = suffix, highlightValue = highlightValue, order = order, sort = sort, sliceN = sliceN,showText = showText, legendPosition = legendPosition, tooltip = tooltip, export = export, lang = lang, theme = theme, ...)
-  h
+  h <- hgch_donut_CatNum(data = d, opts = opts, ...)
 }

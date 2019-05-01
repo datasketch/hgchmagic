@@ -4,14 +4,7 @@
 \alias{hgch_pie_CatNum}
 \title{Pie (categories, numbers)}
 \usage{
-hgch_pie_CatNum(data, title = NULL, subtitle = NULL, caption = NULL,
-  labelWrap = 12, colors = NULL, colorScale = "discrete",
-  agg = "sum", marks = c(".", ","), nDigits = NULL, dropNa = FALSE,
-  highlightValueColor = "#F9B233", percentage = FALSE, prefix = NULL,
-  suffix = NULL, highlightValue = NULL, order = NULL, sort = "no",
-  sliceN = NULL, showText = FALSE, legendPosition = "center",
-  tooltip = list(headerFormat = NULL, pointFormat = NULL),
-  export = FALSE, lang = "es", theme = NULL, ...)
+hgch_pie_CatNum(data, opts = NULL, ...)
 }
 \arguments{
 \item{data}{A data.frame}
