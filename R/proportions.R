@@ -142,7 +142,7 @@ hgch_pie_CatNum <-  function(data,
   if (is.null(opts$theme)) {
     hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$showText, colors = opts$colors)))
   } else {
-    hc <- hc %>% hc_add_theme(theme)
+    hc <- hc %>% hc_add_theme(opts$theme)
   }
 
 
@@ -172,7 +172,7 @@ hgch_pie_CatNum <-  function(data,
 #' hgch_pie_Cat(sampleData("Cat", nrow = 10))
 #' @export hgch_pie_Cat
 hgch_pie_Cat <-  function(data,
-                          opts = opts, ...) {
+                          opts = NULL, ...) {
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -305,7 +305,15 @@ hgch_donut_CatNum <-  function(data,
              plotBackgroundColor = NULL,
              plotBorderWidth = NULL,
              plotShadow = FALSE) %>%
-    hc_plotOptions(series = list(innerSize = "60%")) %>%
+    hc_plotOptions(
+      series = list(innerSize = "60%"),
+      pie = list(
+            allowPointSelect= opts$allow_point,
+            cursor =  opts$cursor,
+            events = list(
+              click = opts$clickFunction
+            )
+          )) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%

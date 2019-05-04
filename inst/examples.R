@@ -328,15 +328,17 @@ hgch_pie_CatNum(data,
                 caption = "estos son los creditos")
 hgch_pie_CatNum(data, percentage = TRUE, nDigits = 3, marks = c(",", "x"))
 hgch_pie_CatNum(data, export = TRUE, theme = tma(showText = F, showLegend = T))
-hgch_pie_CatNum(data, percentage = TRUE, nDigits = 2,
-                legendPosition = c("left", "top"),
-                theme = tma(showText = F, showLegend = T))
+hgch_pie_CatNum(data,
+                opts = list(percentage = TRUE,
+                            nDigits = 2,
+                            theme = tma(custom = list(showText = F, legend_show = T))
+                ))
 
 
 # Donut -------------------------------------------------------------------
 
 hgch_donut_CatNum(data)
-hgch_donut_CatNum(data, export = T, lang = 'en')
+hgch_donut_CatNum(data, opts = list(export = T, lang = 'en'))
 
 # treemap
 dataC <- sampleData('Cat')

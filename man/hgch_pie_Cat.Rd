@@ -4,7 +4,7 @@
 \alias{hgch_pie_Cat}
 \title{pie (categories)}
 \usage{
-hgch_pie_Cat(data, opts = opts, ...)
+hgch_pie_Cat(data, opts = NULL, ...)
 }
 \arguments{
 \item{data}{A data.frame}
