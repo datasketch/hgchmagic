@@ -11,6 +11,8 @@ default_options <- list(
   labelWrap = 12,
   colors = NULL,
   color_scale = 'discrete',
+  color_hover = NULL,
+  color_click = NULL,
   agg = "sum",
   agg_text = NULL,
   orientation = "ver",
@@ -33,6 +35,7 @@ default_options <- list(
   allow_point = FALSE,
   cursor =  NULL,
   clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+
   # opciones que faltan en barras CatCatNum
   graphType = "grouped",
   dropNaV = c(FALSE, FALSE),

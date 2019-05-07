@@ -115,7 +115,7 @@ fillColors <- function(data, col, colors, colorScale) {
   dc <- dsColorsHex()
   if (!is.null(colors)) {
     cl <- col2rgb(colors)
-    colors <- map_chr(1:ncol(cl), function(s) {
+    colors <- purrr::map_chr(1:ncol(cl), function(s) {
       rgb(cl[1, s],
           cl[2, s],
           cl[3, s],
@@ -195,7 +195,7 @@ tooltipHc <- function(data, names, tooltip, agg, colAgg, percentage,  nDt, stack
     if (sum(names(data) %in% letters) == length(names)) {
       n0 <- length(names) - 1
     }
-    pf <- map_chr(1:n0, ~paste0(names[.x], ": <b>{point.", letters[.x], "}</b>"))
+    pf <- purrr::map_chr(1:n0, ~paste0(names[.x], ": <b>{point.", letters[.x], "}</b>"))
     pf <- paste(pf, collapse = "<br>")
     if (!is.null(colAgg) & !is.null(agg)) {
       pf <- paste(pf,

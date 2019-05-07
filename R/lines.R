@@ -13,7 +13,7 @@ hgch_line_CatNum <-  function(data,
                               opts = NULL, ...
                               ) {
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 
@@ -80,7 +80,7 @@ hgch_line_CatNum <-  function(data,
 
 
   series <- list(list(
-    data = map(1:nrow(d), function(x) {
+    data = purrr::map(1:nrow(d), function(x) {
       d$y[x]
     })
   ))
@@ -127,7 +127,7 @@ hgch_line_CatNum <-  function(data,
     hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
     hc_xAxis(
       title =  list(text = labelsXY[1]),
-      categories = map(as.character(unique(d$a)), function(z) z),
+      categories = purrr::map(as.character(unique(d$a)), function(z) z),
 
       plotLines = list(
         list(value = lineXY[2],
@@ -169,6 +169,15 @@ hgch_line_CatNum <-  function(data,
     hc_add_series_list(series) %>%
     hc_plotOptions(
       series = list(
+        states = list(
+          hover = list(
+            #//brightness: -0.5,
+            color = opts$color_hover
+          ),
+          select = list(
+            color = opts$color_click
+          )
+        ),
         allowPointSelect= opts$allow_point,
         cursor =  opts$cursor,
         events = list(
@@ -221,7 +230,7 @@ hgch_line_CatNum <-  function(data,
 hgch_line_Cat <-  function(data,
                            opts = NULL, ...) {
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 
@@ -258,7 +267,7 @@ hgch_line_CatCatNum <- function(data,
                                 opts = NULL, ...) {
 
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 
@@ -342,9 +351,9 @@ hgch_line_CatCatNum <- function(data,
   d$c <- round(d$c, nDig)
 
 
-  series <- map(unique(d[[1]]), function(i) {
+  series <- purrr::map(unique(d[[1]]), function(i) {
     d0 <- d %>%
-      filter(a %in% i)
+      dplyr::filter(a %in% i)
     l0 <- list("name" = i,
                "data" = d0$c)
   })
@@ -391,7 +400,7 @@ hgch_line_CatCatNum <- function(data,
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(
-      categories = map(as.character(unique(d$b)), function(z) z),
+      categories = purrr::map(as.character(unique(d$b)), function(z) z),
       title = list(text = labelsXY[1]),
       plotLines = list(
         list(value = lineXY[2],
@@ -433,6 +442,16 @@ hgch_line_CatCatNum <- function(data,
     hc_add_series_list(series) %>%
     hc_plotOptions(
       series = list(
+        marker = list(
+        states = list(
+          hover = list(
+            #//brightness: -0.5,
+            color = opts$color_hover
+          ),
+          select = list(
+            color = opts$color_click
+          )
+        )),
         allowPointSelect= opts$allow_point,
         cursor =  opts$cursor,
         events = list(
@@ -482,7 +501,7 @@ hgch_line_CatCatNum <- function(data,
 hgch_line_CatCat <- function(data,
                              opts = NULL, ...) {
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 
@@ -519,7 +538,7 @@ hgch_line_CatCat <- function(data,
 hgch_line_CatNumP <- function(data,
                               opts = NULL, ...) {
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 

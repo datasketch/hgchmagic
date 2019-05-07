@@ -66,9 +66,11 @@ getDefaultTheme <- list(
   stylesY_lineWidth = 0,
   stylesY_gridLineDashStyle = 'dot',
   stylesLabelY_fontSize = '11px',
+  stylesTitleY_fontWeight = 'normal',
   stylesLabelY_fontWeight = NULL,
   stylesLabelY_enabled =TRUE,
   stylesTitleY_fontSize = '13px',
+  stylesTitleX_fontWeight = 'normal',
   stylesX_gridLineWidth = 0,
   stylesX_lineColor = '#5A6B72',
   stylesX_tickColor = '#5A6B72',
@@ -208,7 +210,8 @@ tma <- function(custom = NULL, ...) {
       title = list(
         style = list(
           color = custom$font_color,# color del titulo del eje
-          fontSize = custom$stylesTitleX_fontSize
+          fontSize = custom$stylesTitleX_fontSize,
+          fontWeight = custom$stylesTitleX_fontWeight
         )
       )
     ),
@@ -231,7 +234,8 @@ tma <- function(custom = NULL, ...) {
       title = list(
         style = list(
           color = custom$font_color,
-          fontSize = custom$stylesTitleY_fontSize
+          fontSize = custom$stylesTitleY_fontSize,
+          fontWeight = custom$stylesTitleY_fontWeight
         )
       )
     ),

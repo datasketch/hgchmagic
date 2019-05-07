@@ -12,7 +12,7 @@
 hgch_pie_CatNum <-  function(data,
                              opts = NULL, ...) {
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 
@@ -81,7 +81,7 @@ hgch_pie_CatNum <-  function(data,
   }
 
   data <- list()
-  bla <- map(1:nrow(d), function(z){
+  bla <- purrr::map(1:nrow(d), function(z){
     data$data[[z]] <<- list("name" = d$a[z],
                             "y" = d$y[z],
                             "color" = as.character(d$color[z]))
@@ -123,6 +123,15 @@ hgch_pie_CatNum <-  function(data,
     ) %>%
     hc_plotOptions(
       pie = list(
+        states = list(
+          hover = list(
+            #//brightness: -0.5,
+            color = opts$color_hover
+          ),
+          select = list(
+            color = opts$color_click
+          )
+        ),
         allowPointSelect= opts$allow_point,
         cursor =  opts$cursor,
         events = list(
@@ -204,7 +213,7 @@ hgch_pie_Cat <-  function(data,
 hgch_donut_CatNum <-  function(data,
                                opts = NULL, ...) {
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 
@@ -273,7 +282,7 @@ hgch_donut_CatNum <-  function(data,
   }
 
   data <- list()
-  bla <- map(1:nrow(d), function(z){
+  bla <- purrr::map(1:nrow(d), function(z){
     data$data[[z]] <<- list("name" = d$a[z],
                             "y" = d$y[z],
                             "color" = as.character(d$color[z]))
@@ -308,6 +317,15 @@ hgch_donut_CatNum <-  function(data,
     hc_plotOptions(
       series = list(innerSize = "60%"),
       pie = list(
+        states = list(
+          hover = list(
+            #//brightness: -0.5,
+            color = opts$color_hover
+          ),
+          select = list(
+            color = opts$color_click
+          )
+        ),
             allowPointSelect= opts$allow_point,
             cursor =  opts$cursor,
             events = list(
@@ -366,7 +384,7 @@ hgch_donut_CatNum <-  function(data,
 hgch_donut_Cat <-  function(data,
                             opts = NULL, ...) {
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 

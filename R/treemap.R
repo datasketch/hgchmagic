@@ -14,7 +14,7 @@ hgch_treemap_CatNum <-  function(data,
                                 opts = NULL, ...) {
 
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 
@@ -75,7 +75,7 @@ hgch_treemap_CatNum <-  function(data,
 
 
   d <- d %>% plyr::rename(c('b' = 'value'))
-  d$color <- colors
+  d$color <- opts$colors
 
   if (!is.null(opts$highlight_value)) {
     w <- which(d$a %in% opts$highlight_value)
@@ -83,7 +83,7 @@ hgch_treemap_CatNum <-  function(data,
   }
 
 
-  data <- map(1:nrow(d), function(z){
+  data <- purrr::map(1:nrow(d), function(z){
     list("name" = d$a[z],
          "value" = d$value[z],
          "color" = as.character(d$color[z]),
@@ -95,7 +95,7 @@ hgch_treemap_CatNum <-  function(data,
   if (is.null(opts$suffix)) opts$suffix <- ""
 
 
-  if (percentage && opts$suffix == "") {
+  if (opts$percentage && opts$suffix == "") {
     opts$suffix <- "%"
   }
 
@@ -120,9 +120,25 @@ hgch_treemap_CatNum <-  function(data,
       list(
         type = 'treemap',
         layoutAlgorithm = 'squarified',
-        data = data))
+        data = data)) %>%
+    hc_plotOptions(
+      series = list(
+        states = list(
+          hover = list(
+            color = opts$color_hover
+          ),
+          select = list(
+            color = opts$color_click
+          )
+        ),
+        allowPointSelect= opts$allow_point,
+        cursor =  opts$cursor,
+        events = list(
+          click = opts$clickFunction
+        ))
+    )
 
-  if (colorScale == 'continuous') {
+  if (opts$color_scale == 'continuous') {
     hc <- hc %>%
       hc_colorAxis(
         minColor = colors[1],
@@ -174,7 +190,7 @@ hgch_treemap_CatNum <-  function(data,
 hgch_treemap_Cat <-  function(data,
                               opts = NULL,...) {
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 
@@ -209,7 +225,7 @@ hgch_treemap_Cat <-  function(data,
 hgch_treemap_CatCatNum <- function(data,
                                    opts = NULL, ...) {
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 
@@ -297,7 +313,7 @@ hgch_treemap_CatCatNum <- function(data,
   if (is.null(opts$suffix)) opts$suffix <- ""
 
 
-  if (percentage && opts$suffix == "") {
+  if (opts$percentage && opts$suffix == "") {
     opts$suffix <- "%"
   }
 

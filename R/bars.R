@@ -12,7 +12,7 @@
 hgch_bar_CatNum <-  function(data = NULL,
                              opts = NULL, ...) {
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 
@@ -91,7 +91,7 @@ hgch_bar_CatNum <-  function(data = NULL,
   }
 
   data <- list()
-  bla <- map(1:nrow(d), function(z){
+  bla <- purrr::map(1:nrow(d), function(z){
     data$data[[z]] <<- list("name" = d$a[z],
                             "y" = d$y[z],
                             "color" = as.character(d$color[z]))
@@ -173,6 +173,15 @@ hgch_bar_CatNum <-  function(data = NULL,
     ) %>%
     hc_plotOptions(
       series = list(
+        states = list(
+          hover = list(
+            #//brightness: -0.5,
+            color = opts$color_hover
+          ),
+          select = list(
+            color = opts$color_click
+          )
+        ),
         allowPointSelect= opts$allow_point,
         cursor =  opts$cursor,
         events = list(
@@ -229,7 +238,7 @@ hgch_bar_CatNum <-  function(data = NULL,
 hgch_bar_Cat <-  function(data,
                           opts = NULL, ...) {
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 
@@ -265,7 +274,7 @@ hgch_bar_Cat <-  function(data,
 hgch_bar_CatCatNum <- function(data,
                                opts = NULL, ...) {
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 
@@ -348,9 +357,9 @@ hgch_bar_CatCatNum <- function(data,
   d$c <- round(d$c, nDig)
 
 
-  series <- map(unique(d[[1]]), function(i) {
+  series <- purrr::map(unique(d[[1]]), function(i) {
     d0 <- d %>%
-      filter(a %in% i)
+      dplyr::filter(a %in% i)
     l0 <- list("name" = i,
                "data" = d0$c)
   })
@@ -395,7 +404,7 @@ hgch_bar_CatCatNum <- function(data,
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_xAxis(
-      categories = map(as.character(unique(d$b)), function(z) z),
+      categories = purrr::map(as.character(unique(d$b)), function(z) z),
       title = list(text = labelsXY[1]),
       allowDecimals = FALSE,
       plotLines = list(
@@ -441,6 +450,15 @@ hgch_bar_CatCatNum <- function(data,
       column = list(
         colorByPoint = FALSE),
       series = list(
+        states = list(
+          hover = list(
+            #//brightness: -0.5,
+            color = opts$color_hover
+          ),
+          select = list(
+            color = opts$color_click
+          )
+        ),
         allowPointSelect= opts$allow_point,
         cursor =  opts$cursor,
         events = list(
@@ -505,7 +523,7 @@ hgch_bar_CatCatNum <- function(data,
 hgch_bar_CatCat <-function(data,
                            opts = NULL, ...) {
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 
@@ -540,7 +558,7 @@ hgch_bar_CatCat <-function(data,
 hgch_bar_CatNumP <- function(data,
                              opts = NULL, ...) {
 
-  if (is.null(data) | nrow(data) == 0) {
+  if (is.null(data)) {
     stop("Load an available dataset")
   }
 
