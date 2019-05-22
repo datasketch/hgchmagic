@@ -372,7 +372,7 @@ hgch_bar_CatCatNum <- function(data,
 
   formatLabAxis <- paste0('{value:', opts$marks[1], opts$marks[2], 'f}')
   if (!is.null(opts$nDigits)) {
-    formatLabAxis <- paste0('{value:', opts$marks[1], opts$marks[2], nDigits, 'f}')
+    formatLabAxis <- paste0('{value:', opts$marks[1], opts$marks[2], opts$nDigits, 'f}')
   }
 
 

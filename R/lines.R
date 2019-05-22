@@ -283,7 +283,7 @@ hgch_line_CatCatNum <- function(data,
 
   prefix_agg <- ifelse(is.null(opts$agg_text), opts$agg, opts$agg_text)
   labelsXY <- orientationXY(opts$orientation,
-                            x = nms[1],
+                            x = nms[2],
                             y = ifelse(nrow(d) == dplyr::n_distinct(d$b), nms[3], paste(prefix_agg, nms[3])),
                             hor = opts$horLabel,
                             ver = opts$verLabel)
