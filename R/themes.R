@@ -129,6 +129,19 @@ tma <- function(custom = NULL, ...) {
         fontSize = custom$font_size
       )),
     plotOptions = list (
+      packedbubble = list(
+        dataLabels = list (
+          enabled = custom$showText,
+          style = list (
+            color = custom$labsData_colLabel,
+            fontFamily = custom$labsData_familyLabel,
+            fontSize = custom$labsData_sizeLabel,
+            textDecoration= custom$labsData_textDecoration,
+            textShadow = custom$labsData_textShadow,
+            textOutline = custom$labsData_textOutline
+          )
+        )
+      ),
       bar = list(
         colorByPoint = custom$colors_diff,
         dataLabels = list (
