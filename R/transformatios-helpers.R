@@ -279,7 +279,7 @@ discreteColorSelect <- function (colorDefault, d) {
   if (lengData == lengColor) {
     colorDefault <- colorDefault
   } else if (lengData > lengColor) {
-    colorDefault <- c(colorDefault, sample(colorDefault, lengData-lengColor))
+    colorDefault <- c(colorDefault, sample(colorDefault, lengData-lengColor,replace = TRUE))
   } else {
     colorDefault <- colorDefault[1:lengData]
   }
