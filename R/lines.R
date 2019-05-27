@@ -169,15 +169,15 @@ hgch_line_CatNum <-  function(data,
     hc_add_series_list(series) %>%
     hc_plotOptions(
       series = list(
+        marker= list(
         states = list(
           hover = list(
-            #//brightness: -0.5,
-            color = opts$color_hover
+            fillColor = opts$color_hover
           ),
           select = list(
-            color = opts$color_click
+            fillColor = opts$color_click
           )
-        ),
+        )),
         allowPointSelect= opts$allow_point,
         cursor =  opts$cursor,
         events = list(
@@ -445,11 +445,10 @@ hgch_line_CatCatNum <- function(data,
         marker = list(
         states = list(
           hover = list(
-            #//brightness: -0.5,
-            color = opts$color_hover
+            fillColor = opts$color_hover
           ),
           select = list(
-            color = opts$color_click
+            fillColor = opts$color_click
           )
         )),
         allowPointSelect= opts$allow_point,

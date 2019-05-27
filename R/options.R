@@ -45,7 +45,8 @@ default_options <- list(
   legend_position  = "center",
   # opciones que faltan en lineas
   startAtZero = TRUE,
-  spline = FALSE
+  spline = FALSE,
+  fill_opacity = 0.5
 )
 
 

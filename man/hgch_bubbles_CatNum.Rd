@@ -2,7 +2,7 @@
 % Please edit documentation in R/bubbles.R
 \name{hgch_bubbles_CatNum}
 \alias{hgch_bubbles_CatNum}
-\title{Hi, I'm exported!}
+\title{Bubbles Cat Num}
 \usage{
 hgch_bubbles_CatNum(data = NULL, opts = NULL, ...)
 }
@@ -10,5 +10,5 @@ hgch_bubbles_CatNum(data = NULL, opts = NULL, ...)
 \item{data}{}
 }
 \description{
-Hi, I'm exported!
+Bubbles Cat Num
 }
