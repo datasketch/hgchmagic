@@ -43,10 +43,19 @@ default_options <- list(
   order1 = NULL,
   order2 = NULL,
   legend_position  = "center",
+  legend_show = TRUE,
   # opciones que faltan en lineas
   startAtZero = TRUE,
   spline = FALSE,
-  fill_opacity = 0.5
+  fill_opacity = 0.5,
+
+  bubble_min = '3%',
+  bubble_max = '12%',
+
+  border_color = "#CCCCCC",
+  border_width = 1,
+  null_color = "#f7f7f7",
+  map_navigation = TRUE
 )
 
 

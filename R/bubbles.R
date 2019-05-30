@@ -108,6 +108,7 @@ hgch_bubbles_CatNum <- function(data = NULL,
     ) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
+    hc_credits(enabled = TRUE, text = caption) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
     hc_plotOptions(
       packedbubble = list(
@@ -298,6 +299,7 @@ hgch_bubbles_CatCatNum <- function(data = NULL,
     ) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
+    hc_credits(enabled = TRUE, text = caption) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
     hc_plotOptions(
       packedbubble = list(
