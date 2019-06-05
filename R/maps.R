@@ -215,10 +215,10 @@ hgch_map_bubbles_CatGltGlnNum <-  function(data = NULL,
   }
 
   if (opts$percentage) {
-    d$b <- (d[['d']] * 100) / sum(d[['d']], na.rm = TRUE)
+    d$d <- (d[['d']] * 100) / sum(d[['d']], na.rm = TRUE)
   }
 
-  d$b <- round(d$b, nDig)
+  d$d <- round(d$d, nDig)
 
   if (is.null(opts$prefix)) opts$prefix <- ""
   if (is.null(opts$suffix)) opts$suffix <- ""
