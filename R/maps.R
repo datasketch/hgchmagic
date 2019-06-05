@@ -215,7 +215,7 @@ hgch_map_bubbles_CatGltGlnNum <-  function(data = NULL,
   }
 
   if (opts$percentage) {
-    d$b <- (d[['b']] * 100) / sum(d[['b']], na.rm = TRUE)
+    d$b <- (d[['d']] * 100) / sum(d[['d']], na.rm = TRUE)
   }
 
   d$b <- round(d$b, nDig)
@@ -245,7 +245,8 @@ hgch_map_bubbles_CatGltGlnNum <-  function(data = NULL,
   }
 
   h <- hcmap(mapName,
-             showInLegend = F) %>%
+             showInLegend = F,
+             borderColor = opts$border_color) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
