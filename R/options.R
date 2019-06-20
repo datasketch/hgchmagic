@@ -55,7 +55,21 @@ default_options <- list(
   border_color = "#CCCCCC",
   border_width = 1,
   null_color = "#f7f7f7",
-  map_navigation = TRUE
+  map_navigation = TRUE,
+
+
+  nDigitsY = NULL,
+  nDigitsX = NULL,
+  prefixX = NULL,
+  prefixY = NULL,
+  prefixSize = NULL,
+  suffixX = NULL,
+  suffixY = NULL,
+  suffixSize = NULL,
+  regression = FALSE,
+  regression_color = '#d35400',
+  regression_equation = TRUE,
+  nDigitsSize = NULL
 )
 
 
