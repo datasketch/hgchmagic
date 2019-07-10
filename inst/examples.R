@@ -392,6 +392,23 @@ dfCC <- sampleData('Cat-NumP', 999)
 hgch_treemap_CatNumP(dfCC, export = T)
 hgch_treemap_CatNumP(dfCC, showText = F)
 
+
+
+# scatter -----------------------------------------------------------------
+
+dataNumNum <- sampleData('Num-Num')
+hgch_scatter_NumNum(dataNumNum)
+opts_s <- list(
+  marks  = c('*', '.')
+)
+hgch_scatter_NumNum(dataNumNum, opts = opts_s)
+#
+
+
+
+
+
+
 # # Two axis lines
 # data <- sampleData("Yea-Num-Num",nrow = 10)
 # data <- sample_n(data,size = 10)

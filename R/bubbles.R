@@ -61,7 +61,7 @@ hgch_bubbles_CatNum <- function(data = NULL,
   }
 
   d$b <- round(d$b, nDig)
-  d <- orderCategory(d, "a", opts$order, opts$labelWrap)
+  d <- orderCategory(d, "a", opts$order, opts$label_wrap)
   d <- sortSlice(d, "b", opts$sort, opts$sliceN)
 
 
