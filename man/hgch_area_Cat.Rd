@@ -4,16 +4,7 @@
 \alias{hgch_area_Cat}
 \title{Area (categories)}
 \usage{
-hgch_area_Cat(data, title = NULL, subtitle = NULL, caption = NULL,
-  horLabel = NULL, verLabel = NULL, horLine = NULL,
-  horLineLabel = " ", verLine = NULL, verLineLabel = " ",
-  orientation = "ver", startAtZero = TRUE, labelWrap = 12,
-  colors = NULL, colorOpacity = 0.5, agg = "sum", agg_text = NULL,
-  spline = FALSE, marks = c(".", ","), nDigits = NULL,
-  dropNa = FALSE, percentage = FALSE, prefix = NULL, suffix = NULL,
-  order = NULL, sort = "no", sliceN = NULL, showText = TRUE,
-  tooltip = list(headerFormat = NULL, pointFormat = NULL),
-  export = FALSE, lang = "es", theme = NULL, ...)
+hgch_area_Cat(data = NULL, opts = NULL, ...)
 }
 \arguments{
 \item{data}{A data.frame}

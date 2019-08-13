@@ -11,6 +11,7 @@ default_options <- list(
   colors = NULL,
   color_click = NULL,
   color_hover = NULL,
+  color_opacity = 0.7,
   color_scale = 'discrete',
   cursor =  NULL,
   dropNa = FALSE,
