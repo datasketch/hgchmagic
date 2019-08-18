@@ -55,7 +55,7 @@ hgch_bar_CatNum <-  function(data = NULL,
     opts$colors <- colorDefault
   }
 
-  if (opts$dropNa)
+  if (opts$drop_na)
     d <- d %>%
     tidyr::drop_na()
 
@@ -200,13 +200,13 @@ hgch_bar_CatNum <-  function(data = NULL,
       ))}
 
   if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$showText, colors = opts$colors)))
+    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$text_show, colors = opts$colors, background = opts$background)))
   } else {
     hc <- hc %>% hc_add_theme(opts$theme)
   }
 
 
-  if (opts$showText) {
+  if (opts$text_show) {
     hc <- hc %>%
       hc_plotOptions(
         bar = list(
@@ -253,7 +253,7 @@ hgch_bar_Cat <-  function(data,
   prefix_agg <- ifelse(is.null(opts$agg_text), "count ", opts$agg_text)
 
   names(d) <- c(f$dic_$d$label, paste(prefix_agg, f$dic_$d$label))
-
+  opts$agg_text <- ''
   h <- hgch_bar_CatNum(data = d, opts = opts, ...)
   h
 }
@@ -318,11 +318,11 @@ hgch_bar_CatCatNum <- function(data,
     opts$colors <- colorDefault
   }
 
-  if (opts$dropNaV[1])
+  if (opts$drop_naV[1])
     d <- d %>%
     tidyr::drop_na(a)
 
-  if(opts$dropNaV[2])
+  if(opts$drop_naV[2])
     d <- d %>%
     tidyr::drop_na(b)
 
@@ -469,7 +469,7 @@ hgch_bar_CatCatNum <- function(data,
     hc_legend(enabled = TRUE,
               align = opts$legend_position)
 
-  if (opts$graphType == "stacked"){
+  if (opts$graph_type == "stacked"){
     hc <- hc %>% hc_plotOptions(bar = list(stacking = "normal"), column = list(stacking = "normal"))
     if (opts$percentage) {
       hc <- hc %>% hc_yAxis(maxRange = 100,
@@ -484,13 +484,13 @@ hgch_bar_CatCatNum <- function(data,
         )
       ))}
   if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$showText, colors = opts$colors, colors_diff= FALSE)))
+    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$text_show, colors = opts$colors, colors_diff= FALSE, background = opts$background)))
   } else {
     hc <- hc %>% hc_add_theme(opts$theme)
   }
 
 
-  if (opts$showText) {
+  if (opts$text_show) {
     hc <- hc %>%
       hc_plotOptions(
         bar = list(
@@ -537,7 +537,7 @@ hgch_bar_CatCat <-function(data,
 
   prefix_agg <- ifelse(is.null(opts$agg_text), "Count", opts$agg_text)
   names(d) <- c(f$dic_$d$label, paste(prefix_agg, f$dic_$d$label[1]))
-
+  opts$agg_text <- ''
   h <- hgch_bar_CatCatNum(data = d, opts = opts, ...)
   h
 }

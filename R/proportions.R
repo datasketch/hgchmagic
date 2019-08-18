@@ -149,13 +149,13 @@ hgch_pie_CatNum <-  function(data,
         )
       ))}
   if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$showText, colors = opts$colors)))
+    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$text_show, colors = opts$colors)))
   } else {
     hc <- hc %>% hc_add_theme(opts$theme)
   }
 
 
-  if (opts$showText) {
+  if (opts$text_show) {
     hc <- hc %>%
       hc_plotOptions(
         pie = list(
@@ -349,12 +349,12 @@ hgch_donut_CatNum <-  function(data,
         )
       ))}
   if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$showText, colores = opts$colors)))
+    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$text_show, colores = opts$colors)))
   } else {
     hc <- hc %>% hc_add_theme(opts$theme)
   }
 
-  if (opts$showText) {
+  if (opts$text_show) {
     hc <- hc %>%
       hc_plotOptions(
         pie = list(

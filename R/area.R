@@ -200,12 +200,12 @@ hgch_area_CatNum <-  function(data = NULL,
         )
       ))}
   if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$showText, colors = opts$colors)))
+    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$text_show, colors = opts$colors)))
   } else {
     hc <- hc %>% hc_add_theme(opts$theme)
   }
 
-  if (opts$showText) {
+  if (opts$text_show) {
     hc <- hc %>%
       hc_plotOptions(
         series = list(
@@ -400,7 +400,7 @@ hgch_area_CatCatNum <- function(data = NULL,
   hc <- highchart() %>%
     hc_chart(type = ifelse(opts$spline, "areaspline", "area"),
              inverted = ifelse(opts$orientation == 'ver', FALSE, TRUE))
-  if (opts$graphType == "stacked"){
+  if (opts$graph_type == "stacked"){
     hc <- hc %>% hc_plotOptions(area = list(stacking = 'normal', fillOpacity = opts$color_opacity), areaspline = list(stacking = 'normal', fillOpacity = opts$color_opacity))
     if (opts$percentage) {
       hc <- hc %>% hc_yAxis(maxRange = 100,
@@ -478,12 +478,12 @@ hgch_area_CatCatNum <- function(data = NULL,
         )
       ))}
   if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$showText, colors = opts$colors)))
+    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$text_show, colors = opts$colors)))
   } else {
     hc <- hc %>% hc_add_theme(opts$theme)
   }
 
-  if (opts$showText) {
+  if (opts$text_show) {
     hc <- hc %>%
       hc_plotOptions(
         series = list(
