@@ -196,7 +196,7 @@ hgch_line_CatNum <-  function(data,
       ))}
 
   if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$text_show, colors = opts$colors)))
+    hc <- hc %>% hc_add_theme(tma(custom = list(background = opts$background, showText = opts$text_show, colors = opts$colors)))
   } else {
     hc <- hc %>% hc_add_theme(opts$theme)
   }
@@ -468,7 +468,7 @@ hgch_line_CatCatNum <- function(data,
         )
       ))}
   if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$text_show, colors = opts$colors)))
+    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$text_show, colors = opts$colors, background = opts$background)))
   } else {
     hc <- hc %>% hc_add_theme(opts$theme)
   }

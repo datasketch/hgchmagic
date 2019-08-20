@@ -167,7 +167,7 @@ hgch_treemap_CatNum <-  function(data,
       ))}
 
   if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(colors = opts$colors))
+    hc <- hc %>% hc_add_theme(tma(colors = opts$colors, background = opts$background))
   } else {
     hc <- hc %>% hc_add_theme(opts$theme)
   }
@@ -388,7 +388,7 @@ hgch_treemap_CatCatNum <- function(data,
       ))}
 
   if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(colores = opts$colors))
+    hc <- hc %>% hc_add_theme(tma(colores = opts$colors, background = opts$background))
   } else {
     hc <- hc %>% hc_add_theme(opts$theme)
   }

@@ -154,7 +154,7 @@ hgch_bubbles_CatNum <- function(data = NULL,
       ))}
 
   if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(list(line_width = 0, showText = opts$text_show, colors = opts$colors)))
+    hc <- hc %>% hc_add_theme(tma(list(line_width = 0, showText = opts$text_show, colors = opts$colors, background = opts$background)))
   } else {
     hc <- hc %>% hc_add_theme(opts$theme)
   }
@@ -348,7 +348,7 @@ hgch_bubbles_CatCatNum <- function(data = NULL,
       ))}
 
   if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(list(line_width = 0, showText = opts$text_show, colors = opts$colors)))
+    hc <- hc %>% hc_add_theme(tma(list(line_width = 0, showText = opts$text_show, colors = opts$colors, background = opts$background)))
   } else {
     hc <- hc %>% hc_add_theme(opts$theme)
   }
