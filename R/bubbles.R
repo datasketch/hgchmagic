@@ -103,8 +103,8 @@ hgch_bubbles_CatNum <- function(data = NULL,
   exportLang(language = opts$lang)
   hc <- highchart() %>%
     hc_chart(
-      type = 'packedbubble',
-      height = '100%'
+      type = 'packedbubble'#,
+      #height = '100%'
     ) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
@@ -112,8 +112,8 @@ hgch_bubbles_CatNum <- function(data = NULL,
     hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
     hc_plotOptions(
       packedbubble = list(
-        minSize = '30%',
-        maxSize = '120%',
+        minSize = opts$bubble_min,#'30%',
+        maxSize = opts$bubble_max,
         zMin = 0,
         zMax = 1000,
         layoutAlgorithm = list(
@@ -294,8 +294,8 @@ hgch_bubbles_CatCatNum <- function(data = NULL,
   exportLang(language = opts$lang)
   hc <- highchart() %>%
     hc_chart(
-      type = 'packedbubble',
-      height = '100%'
+      type = 'packedbubble'#,
+      #height = '100%'
     ) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
@@ -303,8 +303,10 @@ hgch_bubbles_CatCatNum <- function(data = NULL,
     hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
     hc_plotOptions(
       packedbubble = list(
-        minSize = '30%',
-        maxSize = '120%',
+        minSize = opts$bubble_min,#'30%',
+        maxSize = opts$bubble_max,
+        # minSize = '30%',
+        # maxSize = '120%',
         zMin = 0,
         zMax = 1000,
         layoutAlgorithm = list(
