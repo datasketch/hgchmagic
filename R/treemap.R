@@ -299,8 +299,9 @@ hgch_treemap_CatCatNum <- function(data,
 
 
   listaMg <- map(1:nrow(d), function(z) {
+    nm <- ifelse(is.na(d$b[z]), "NA", d$b[z])
     list(
-      name = d$b[z],
+      name = nm,
       parent = d$a[z],
       value = d$c[z],
       colorValue = d$c[z]
