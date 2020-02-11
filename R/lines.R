@@ -10,6 +10,51 @@
 #' hgch_line_CatNum(sampleData("Cat-Num", nrow = 10))
 #' @export hgch_line_CatNum
 hgch_line_CatNum <-  function(data,
+                              agg = "sum",
+                              agg_text = NULL,
+                              allow_point = FALSE,
+                              background = "#ffffff",
+                              border_color = "#CCCCCC",
+                              border_width = 1,
+                              caption = NULL,
+                              clickFunction = NULL,
+                              colors = NULL,
+                              color_click = NULL,
+                              color_hover = NULL,
+                              color_opacity = 0.7,
+                              color_scale = 'discrete',
+                              cursor =  NULL,
+                              drop_na = FALSE,
+                              export = FALSE,
+                              highlight_value = NULL,
+                              highlight_valueColor = '#F9B233',
+                              horLabel = NULL,
+                              horLine = NULL,
+                              horLine_label = " ",
+                              labelWrap = 12,
+                              lang = 'es',
+                              legend_position  = "center",
+                              legend_show = TRUE,
+                              marks = c(".", ","),
+                              nDigits = NULL,
+                              null_color = "#f7f7f7",
+                              order = NULL,
+                              orientation = "ver",
+                              percentage = FALSE,
+                              prefix = NULL,
+                              text_show = TRUE,
+                              sliceN = NULL,
+                              sort = "no",
+                              spline = FALSE,
+                              startAtZero = TRUE,
+                              subtitle = NULL,
+                              suffix = NULL,
+                              title = NULL,
+                              theme = NULL,
+                              tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                              verLabel = NULL,
+                              verLine = NULL,
+                              verLine_label = " ",
                               opts = NULL, ...
                               ) {
 
@@ -17,7 +62,57 @@ hgch_line_CatNum <-  function(data,
     stop("Load an available dataset")
   }
 
-  opts <- getOptions(opts = opts)
+  defaultOptions <- list(
+    agg = agg,
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    border_color = border_color,
+    border_width = border_width,
+    caption = caption,
+    clickFunction = clickFunction,
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_opacity = color_opacity,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_na = drop_na,
+    export = export,
+    fill_opacity = fill_opacity,
+    highlight_value = highlight_value,
+    highlight_valueColor = highlight_valueColor,
+    horLabel = horLabel,
+    horLine = horLine,
+    horLine_label = horLine_label,
+    labelWrap = labelWrap,
+    lang = lang,
+    legend_position  = legend_position,
+    legend_show = legend_show,
+    map_navigation = map_navigation,
+    marks = marks,
+    nDigits = nDigits,
+    null_color = null_color,
+    order = order,
+    orientation = orientation,
+    percentage = percentage,
+    prefix = prefix,
+    text_show = text_show,
+    sliceN = sliceN,
+    sort = sort,
+    spline = spline,
+    startAtZero = startAtZero,
+    subtitle = subtitle,
+    suffix = suffix,
+    title = title,
+    theme = theme,
+    tooltip = tooltip,
+    verLabel = verLabel,
+    verLine = verLine,
+    verLine_label = verLine_label
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -228,11 +323,103 @@ hgch_line_CatNum <-  function(data,
 #' hgch_line_Cat(sampleData("Cat", nrow = 10))
 #' @export hgch_line_Cat
 hgch_line_Cat <-  function(data,
+                           allow_point = FALSE,
+                           background = "#ffffff",
+                           border_color = "#CCCCCC",
+                           border_width = 1,
+                           caption = NULL,
+                           clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                           colors = NULL,
+                           color_click = NULL,
+                           color_hover = NULL,
+                           color_opacity = 0.7,
+                           color_scale = 'discrete',
+                           cursor =  NULL,
+                           drop_na = FALSE,
+                           export = FALSE,
+                           fill_opacity = 0.5,
+                           highlight_value = NULL,
+                           highlight_valueColor = '#F9B233',
+                           horLabel = NULL,
+                           horLine = NULL,
+                           horLine_label = " ",
+                           labelWrap = 12,
+                           lang = 'es',
+                           legend_position  = "center",
+                           legend_show = TRUE,
+                           marks = c(".", ","),
+                           nDigits = NULL,
+                           null_color = "#f7f7f7",
+                           order = NULL,
+                           orientation = "ver",
+                           percentage = FALSE,
+                           prefix = NULL,
+                           text_show = TRUE,
+                           sliceN = NULL,
+                           sort = "no",
+                           spline = FALSE,
+                           startAtZero = TRUE,
+                           subtitle = NULL,
+                           suffix = NULL,
+                           title = NULL,
+                           theme = NULL,
+                           tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                           verLabel = NULL,
+                           verLine = NULL,
+                           verLine_label = " ",
                            opts = NULL, ...) {
 
   if (is.null(data)) {
     stop("Load an available dataset")
   }
+
+  defaultOptions <- list(
+    allow_point = allow_point,
+    background = background,
+    border_color = border_color,
+    border_width = border_width,
+    caption = caption,
+    clickFunction = clickFunction,
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_opacity = color_opacity,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_na = drop_na,
+    export = export,
+    fill_opacity = fill_opacity,
+    highlight_value = highlight_value,
+    highlight_valueColor = highlight_valueColor,
+    horLabel = horLabel,
+    horLine = horLine,
+    horLine_label = horLine_label,
+    labelWrap = labelWrap,
+    lang = lang,
+    legend_position  = legend_position,
+    legend_show = legend_show,
+    marks = marks,
+    nDigits = nDigits,
+    null_color = null_color,
+    order = order,
+    orientation = orientation,
+    percentage = percentage,
+    prefix = prefix,
+    text_show = text_show,
+    sliceN = sliceN,
+    sort = sort,
+    spline = spline,
+    startAtZero = startAtZero,
+    subtitle = subtitle,
+    title = title,
+    theme = theme,
+    tooltip = tooltip,
+    verLabel = verLabel,
+    verLine = verLine,
+    verLine_label = verLine_label
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -264,6 +451,53 @@ hgch_line_Cat <-  function(data,
 #' hgch_line_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
 #' @export hgch_line_CatCatNum
 hgch_line_CatCatNum <- function(data,
+                                agg = "sum",
+                                agg_text = NULL,
+                                allow_point = FALSE,
+                                background = "#ffffff",
+                                border_color = "#CCCCCC",
+                                border_width = 1,
+                                caption = NULL,
+                                clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                colors = NULL,
+                                color_click = NULL,
+                                color_hover = NULL,
+                                color_opacity = 0.7,
+                                color_scale = 'discrete',
+                                cursor =  NULL,
+                                drop_naV = c(FALSE, FALSE),
+                                export = FALSE,
+                                graph_type = "grouped",
+                                highlight_value = NULL,
+                                highlight_valueColor = '#F9B233',
+                                horLabel = NULL,
+                                horLine = NULL,
+                                horLine_label = " ",
+                                labelWrapV = c(12, 12),
+                                lang = 'es',
+                                legend_position  = "center",
+                                legend_show = TRUE,
+                                marks = c(".", ","),
+                                nDigits = NULL,
+                                null_color = "#f7f7f7",
+                                order1 = NULL,
+                                order2 = NULL,
+                                orientation = "ver",
+                                percentage = FALSE,
+                                prefix = NULL,
+                                text_show = TRUE,
+                                sliceN = NULL,
+                                sort = "no",
+                                spline = FALSE,
+                                startAtZero = TRUE,
+                                subtitle = NULL,
+                                suffix = NULL,
+                                title = NULL,
+                                theme = NULL,
+                                tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                verLabel = NULL,
+                                verLine = NULL,
+                                verLine_label = " ",
                                 opts = NULL, ...) {
 
 
@@ -271,7 +505,57 @@ hgch_line_CatCatNum <- function(data,
     stop("Load an available dataset")
   }
 
-  opts <- getOptions(opts = opts)
+  defaultOptions <- list(
+    agg = agg,
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    border_color = border_color,
+    border_width = border_width,
+    caption = caption,
+    clickFunction = clickFunction,
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_opacity = color_opacity,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_naV = drop_naV,
+    export = export,
+    graph_type = graph_type,
+    highlight_value = highlight_value,
+    highlight_valueColor = highlight_valueColor,
+    horLabel = horLabel,
+    horLine = horLine,
+    horLine_label = horLine_label,
+    labelWrapV = labelWrapV,
+    lang = lang,
+    legend_position  = legend_position,
+    legend_show = legend_show,
+    marks = marks,
+    nDigits = nDigits,
+    null_color = null_color,
+    order1 = order1,
+    order2 = order2,
+    orientation = orientation,
+    percentage = percentage,
+    prefix = prefix,
+    text_show = text_show,
+    sliceN = sliceN,
+    sort = sort,
+    spline = spline,
+    startAtZero = startAtZero,
+    subtitle = subtitle,
+    suffix = suffix,
+    title = title,
+    theme = theme,
+    tooltip = tooltip,
+    verLabel = verLabel,
+    verLine = verLine,
+    verLine_label = verLine_label
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -498,11 +782,111 @@ hgch_line_CatCatNum <- function(data,
 #' hgch_line_CatCat(sampleData("Cat-Cat-Num", nrow = 10))
 #' @export hgch_line_CatCat
 hgch_line_CatCat <- function(data,
+                             agg_text = NULL,
+                             allow_point = FALSE,
+                             background = "#ffffff",
+                             border_color = "#CCCCCC",
+                             border_width = 1,
+                             caption = NULL,
+                             clickFunction = NULL,
+                             colors = NULL,
+                             color_click = NULL,
+                             color_hover = NULL,
+                             color_opacity = 0.7,
+                             color_scale = 'discrete',
+                             cursor =  NULL,
+                             drop_naV = c(FALSE, FALSE),
+                             export = FALSE,
+                             fill_opacity = 0.5,
+                             highlight_value = NULL,
+                             highlight_valueColor = '#F9B233',
+                             horLabel = NULL,
+                             horLine = NULL,
+                             horLine_label = " ",
+                             labelWrapV = c(12, 12),
+                             lang = 'es',
+                             legend_position  = "center",
+                             legend_show = TRUE,
+                             marks = c(".", ","),
+                             nDigits = NULL,
+                             null_color = "#f7f7f7",
+                             order1 = NULL,
+                             order2 = NULL,
+                             orientation = "ver",
+                             percentage = FALSE,
+                             prefix = NULL,
+                             text_show = TRUE,
+                             sliceN = NULL,
+                             sort = "no",
+                             spline = FALSE,
+                             startAtZero = TRUE,
+                             subtitle = NULL,
+                             suffix = NULL,
+                             title = NULL,
+                             theme = NULL,
+                             tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                             verLabel = NULL,
+                             verLine = NULL,
+                             verLine_label = " ",
                              opts = NULL, ...) {
 
   if (is.null(data)) {
     stop("Load an available dataset")
   }
+
+  defaultOptions <- list(
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    border_color = border_color,
+    border_width = border_width,
+    caption = caption,
+    clickFunction = clickFunction,
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_opacity = color_opacity,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_na = drop_na,
+    drop_naV = drop_naV,
+    dropNaV = dropNaV,
+    export = export,
+    fill_opacity = fill_opacity,
+    graph_type = graph_type,
+    highlight_value = highlight_value,
+    highlight_valueColor = highlight_valueColor,
+    horLabel = horLabel,
+    horLine = horLine,
+    horLine_label = horLine_label,
+    labelWrapV = labelWrapV,
+    lang = lang,
+    legend_position  = legend_position,
+    legend_show = legend_show,
+    marks = marks,
+    nDigits = nDigits,
+    null_color = null_color,
+    order1 = order1,
+    order2 = order2,
+    orientation = orientation,
+    percentage = percentage,
+    prefix = prefix,
+    text_show = text_show,
+    sliceN = sliceN,
+    sort = sort,
+    spline = spline,
+    startAtZero = startAtZero,
+    subtitle = subtitle,
+    suffix = suffix,
+    title = title,
+    theme = theme,
+    tooltip = tooltip,
+    verLabel = verLabel,
+    verLine = verLine,
+    verLine_label = verLine_label
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -520,34 +904,3 @@ hgch_line_CatCat <- function(data,
 }
 
 
-
-
-#' Line (ordered category, n numbers)
-#'
-#' Compare n quantities among category's levels
-#'
-#' @param data A data.frame
-#' @return Highcharts visualization
-#' @section ctypes:
-#' Cat-NumP
-#' @examples
-#' hgch_line_CatNumP(sampleData("Cat-NumP", nrow = 10))
-#' @export hgch_line_CatNumP
-
-hgch_line_CatNumP <- function(data,
-                              opts = NULL, ...) {
-
-  if (is.null(data)) {
-    stop("Load an available dataset")
-  }
-
-  f <- fringe(data)
-  nms <- getClabels(f)
-  d <- f$d
-  names(d) <- f$dic_$d$label
-
-  data <- d %>%
-    gather("categories", "count", names(d)[-1])
-  h <- hgch_line_CatCatNum(data = data, opts = opts, ...)
-  h
-}
