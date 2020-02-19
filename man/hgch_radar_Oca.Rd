@@ -4,9 +4,20 @@
 \alias{hgch_radar_Oca}
 \title{Radar (ordered categories)}
 \usage{
-hgch_radar_Oca(data, title = NULL, subtitle = NULL, caption = NULL,
-  yLine = NULL, dropNa = FALSE, order = NULL, sort = "no",
-  sliceN = NULL, theme = NULL, export = FALSE, ...)
+hgch_radar_Oca(
+  data,
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  yLine = NULL,
+  dropNa = FALSE,
+  order = NULL,
+  sort = "no",
+  sliceN = NULL,
+  theme = NULL,
+  export = FALSE,
+  ...
+)
 }
 \arguments{
 \item{data}{A data.frame}

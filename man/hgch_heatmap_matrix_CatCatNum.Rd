@@ -4,9 +4,18 @@
 \alias{hgch_heatmap_matrix_CatCatNum}
 \title{Heatmap matrix}
 \usage{
-hgch_heatmap_matrix_CatCatNum(data, title = NULL, subtitle = NULL,
-  caption = NULL, xAxisTitle = NULL, yAxisTitle = NULL,
-  sort = "no", theme = NULL, export = FALSE, ...)
+hgch_heatmap_matrix_CatCatNum(
+  data,
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  xAxisTitle = NULL,
+  yAxisTitle = NULL,
+  sort = "no",
+  theme = NULL,
+  export = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{A data.frame}

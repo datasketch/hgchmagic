@@ -4,14 +4,30 @@
 \alias{hgch_treemap_CatCat}
 \title{Treemap (categories, categories)}
 \usage{
-hgch_treemap_CatCat(data, title = NULL, subtitle = NULL,
-  caption = NULL, agg = "sum", colors = NULL,
-  colorScale = "discrete", dropNaV = c(FALSE, FALSE), prefix = NULL,
-  suffix = NULL, labelWrapV = c(12, 12), marks = c(".", ","),
-  nDigits = NULL, percentage = FALSE, showText = TRUE,
-  legend_show = TRUE, legendPosition = "center", theme = NULL,
+hgch_treemap_CatCat(
+  data,
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  agg = "sum",
+  colors = NULL,
+  colorScale = "discrete",
+  dropNaV = c(FALSE, FALSE),
+  prefix = NULL,
+  suffix = NULL,
+  labelWrapV = c(12, 12),
+  marks = c(".", ","),
+  nDigits = NULL,
+  percentage = FALSE,
+  showText = TRUE,
+  legend_show = TRUE,
+  legendPosition = "center",
+  theme = NULL,
   tooltip = list(headerFormat = NULL, pointFormat = NULL, shared = NULL),
-  export = FALSE, lang = "es", ...)
+  export = FALSE,
+  lang = "es",
+  ...
+)
 }
 \arguments{
 \item{data}{A data.frame}

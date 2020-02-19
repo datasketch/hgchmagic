@@ -4,7 +4,56 @@
 \alias{hgch_line_CatNum}
 \title{Lines (categories, numbers)}
 \usage{
-hgch_line_CatNum(data, opts = NULL, ...)
+hgch_line_CatNum(
+  data,
+  agg = "sum",
+  agg_text = NULL,
+  allow_point = FALSE,
+  background = "#ffffff",
+  border_color = "#CCCCCC",
+  border_width = 1,
+  caption = NULL,
+  clickFunction = NULL,
+  colors = NULL,
+  color_click = NULL,
+  color_hover = NULL,
+  color_opacity = 0.7,
+  color_scale = "discrete",
+  cursor = NULL,
+  drop_na = FALSE,
+  export = FALSE,
+  highlight_value = NULL,
+  highlight_valueColor = "#F9B233",
+  horLabel = NULL,
+  horLine = NULL,
+  horLine_label = " ",
+  labelWrap = 12,
+  lang = "es",
+  legend_position = "center",
+  legend_show = TRUE,
+  marks = c(".", ","),
+  nDigits = NULL,
+  null_color = "#f7f7f7",
+  order = NULL,
+  orientation = "ver",
+  percentage = FALSE,
+  prefix = NULL,
+  text_show = TRUE,
+  sliceN = NULL,
+  sort = "no",
+  spline = FALSE,
+  startAtZero = TRUE,
+  subtitle = NULL,
+  suffix = NULL,
+  title = NULL,
+  theme = NULL,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  verLabel = NULL,
+  verLine = NULL,
+  verLine_label = " ",
+  opts = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{A data.frame}
