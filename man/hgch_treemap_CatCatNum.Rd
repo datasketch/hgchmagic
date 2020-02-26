@@ -4,7 +4,21 @@
 \alias{hgch_treemap_CatCatNum}
 \title{Treemap (categories, categories, numbers)}
 \usage{
-hgch_treemap_CatCatNum(data, opts = NULL, ...)
+hgch_treemap_CatCatNum(data, agg = "sum", agg_text = NULL,
+  allow_point = FALSE, background = "#ffffff",
+  border_color = "#CCCCCC", border_width = 1, caption = NULL,
+  clickFunction = NULL, colors = NULL, color_click = NULL,
+  color_hover = NULL, color_opacity = 0.7, color_scale = "discrete",
+  cursor = NULL, drop_na = FALSE, drop_naV = c(FALSE, FALSE),
+  export = FALSE, highlight_value = NULL,
+  highlight_valueColor = "#F9B233", labelWrapV = c(12, 12),
+  lang = "es", legend_position = "center", legend_show = TRUE,
+  marks = c(".", ","), nDigits = NULL, null_color = "#f7f7f7",
+  order1 = NULL, order2 = NULL, percentage = FALSE, prefix = NULL,
+  text_show = TRUE, sliceN = NULL, sort = "no", subtitle = NULL,
+  suffix = NULL, title = NULL, theme = NULL,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL), opts = NULL,
+  ...)
 }
 \arguments{
 \item{data}{A data.frame}

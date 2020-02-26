@@ -14,30 +14,21 @@ hgch_line_CatNum <-  function(data,
                               agg_text = NULL,
                               allow_point = FALSE,
                               background = "#ffffff",
-                              border_color = "#CCCCCC",
-                              border_width = 1,
                               caption = NULL,
                               clickFunction = NULL,
                               colors = NULL,
                               color_click = NULL,
                               color_hover = NULL,
-                              color_opacity = 0.7,
-                              color_scale = 'discrete',
                               cursor =  NULL,
                               drop_na = FALSE,
                               export = FALSE,
-                              highlight_value = NULL,
-                              highlight_valueColor = '#F9B233',
                               horLabel = NULL,
                               horLine = NULL,
                               horLine_label = " ",
                               labelWrap = 12,
                               lang = 'es',
-                              legend_position  = "center",
-                              legend_show = TRUE,
                               marks = c(".", ","),
                               nDigits = NULL,
-                              null_color = "#f7f7f7",
                               order = NULL,
                               orientation = "ver",
                               percentage = FALSE,
@@ -67,32 +58,21 @@ hgch_line_CatNum <-  function(data,
     agg_text = agg_text,
     allow_point = allow_point,
     background = background,
-    border_color = border_color,
-    border_width = border_width,
     caption = caption,
     clickFunction = clickFunction,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
-    color_opacity = color_opacity,
-    color_scale = color_scale,
     cursor =  cursor,
     drop_na = drop_na,
     export = export,
-    fill_opacity = fill_opacity,
-    highlight_value = highlight_value,
-    highlight_valueColor = highlight_valueColor,
     horLabel = horLabel,
     horLine = horLine,
     horLine_label = horLine_label,
     labelWrap = labelWrap,
     lang = lang,
-    legend_position  = legend_position,
-    legend_show = legend_show,
-    map_navigation = map_navigation,
     marks = marks,
     nDigits = nDigits,
-    null_color = null_color,
     order = order,
     orientation = orientation,
     percentage = percentage,
@@ -128,7 +108,11 @@ hgch_line_CatNum <-  function(data,
                             y = ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste(prefix_agg, nms[2])),
                             hor = opts$horLabel,
                             ver = opts$verLabel)
-  lineXY <- linesOrientation(opts$orientation, opts$horLine, opts$verLine)
+  line_h <- opts$horLine
+  if (line_h == " ") line_h <- NULL
+  line_v <- opts$verLine
+  if (line_v == " ") line_v <- NULL
+  lineXY <- linesOrientation(opts$orientation, line_h, line_v)
 
   lineLabelsXY <- linesOrLabel(opts$orientation,
                                opts$horLine_label,
@@ -142,7 +126,7 @@ hgch_line_CatNum <-  function(data,
       opts$colors <- rep(colorDefault, length(unique(d$a)))
     }
 
-  if (opts$dropNa)
+  if (opts$drop_na)
     d <- d %>%
     tidyr::drop_na()
 
@@ -323,33 +307,24 @@ hgch_line_CatNum <-  function(data,
 #' hgch_line_Cat(sampleData("Cat", nrow = 10))
 #' @export hgch_line_Cat
 hgch_line_Cat <-  function(data,
+                           agg_text = NULL,
                            allow_point = FALSE,
                            background = "#ffffff",
-                           border_color = "#CCCCCC",
-                           border_width = 1,
                            caption = NULL,
-                           clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                           clickFunction = NULL,
                            colors = NULL,
                            color_click = NULL,
                            color_hover = NULL,
-                           color_opacity = 0.7,
-                           color_scale = 'discrete',
                            cursor =  NULL,
                            drop_na = FALSE,
                            export = FALSE,
-                           fill_opacity = 0.5,
-                           highlight_value = NULL,
-                           highlight_valueColor = '#F9B233',
                            horLabel = NULL,
                            horLine = NULL,
                            horLine_label = " ",
                            labelWrap = 12,
                            lang = 'es',
-                           legend_position  = "center",
-                           legend_show = TRUE,
                            marks = c(".", ","),
                            nDigits = NULL,
-                           null_color = "#f7f7f7",
                            order = NULL,
                            orientation = "ver",
                            percentage = FALSE,
@@ -372,35 +347,34 @@ hgch_line_Cat <-  function(data,
   if (is.null(data)) {
     stop("Load an available dataset")
   }
+data <- sampleData("Cat")
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+
+  d <- d %>%
+    dplyr::group_by_all() %>%
+    dplyr::summarise(b = n())
 
   defaultOptions <- list(
+    agg_text = agg_text,
     allow_point = allow_point,
     background = background,
-    border_color = border_color,
-    border_width = border_width,
     caption = caption,
     clickFunction = clickFunction,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
-    color_opacity = color_opacity,
-    color_scale = color_scale,
     cursor =  cursor,
     drop_na = drop_na,
     export = export,
-    fill_opacity = fill_opacity,
-    highlight_value = highlight_value,
-    highlight_valueColor = highlight_valueColor,
     horLabel = horLabel,
     horLine = horLine,
     horLine_label = horLine_label,
     labelWrap = labelWrap,
     lang = lang,
-    legend_position  = legend_position,
-    legend_show = legend_show,
     marks = marks,
     nDigits = nDigits,
-    null_color = null_color,
     order = order,
     orientation = orientation,
     percentage = percentage,
@@ -411,6 +385,7 @@ hgch_line_Cat <-  function(data,
     spline = spline,
     startAtZero = startAtZero,
     subtitle = subtitle,
+    suffix = suffix,
     title = title,
     theme = theme,
     tooltip = tooltip,
@@ -421,17 +396,10 @@ hgch_line_Cat <-  function(data,
 
   opts <- modifyList(defaultOptions, opts %||% list())
 
-  f <- fringe(data)
-  nms <- getClabels(f)
-  d <- f$d
-
-  d <- d %>%
-    dplyr::group_by_all() %>%
-    dplyr::summarise(b = n())
-
   prefix_agg <- ifelse(is.null(opts$agg_text), "count ", opts$agg_text)
 
-  names(d) <- c(f$dic_$d$label, paste0(prefix_agg, f$dic_$d$label))
+  names(d) <- c(f$dic_$d$label, paste(prefix_agg, f$dic_$d$label))
+  opts$agg_text <- ''
 
   h <- hgch_line_CatNum(data = d, opts = opts, ...)
   h
@@ -595,11 +563,11 @@ hgch_line_CatCatNum <- function(data,
   }
 
 
-  if (opts$dropNaV[1])
+  if (opts$drop_naV[1])
     d <- d %>%
     tidyr::drop_na(a)
 
-  if(opts$dropNaV[2])
+  if(opts$drop_naV[2])
     d <- d %>%
     tidyr::drop_na(b)
 
@@ -850,7 +818,7 @@ hgch_line_CatCat <- function(data,
     cursor =  cursor,
     drop_na = drop_na,
     drop_naV = drop_naV,
-    dropNaV = dropNaV,
+    drop_naV = drop_naV,
     export = export,
     fill_opacity = fill_opacity,
     graph_type = graph_type,

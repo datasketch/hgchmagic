@@ -4,7 +4,18 @@
 \alias{hgch_treemap_Cat}
 \title{Treemap (categories)}
 \usage{
-hgch_treemap_Cat(data, opts = NULL, ...)
+hgch_treemap_Cat(data, agg_text = NULL, allow_point = FALSE,
+  background = "#ffffff", border_color = "#CCCCCC", border_width = 1,
+  caption = NULL, clickFunction = NULL, colors = NULL,
+  color_click = NULL, color_hover = NULL, color_opacity = 0.7,
+  color_scale = "discrete", cursor = NULL, drop_na = FALSE,
+  export = FALSE, highlight_value = NULL,
+  highlight_valueColor = "#F9B233", labelWrap = 12, lang = "es",
+  marks = c(".", ","), nDigits = NULL, null_color = "#f7f7f7",
+  order = NULL, percentage = FALSE, prefix = NULL, sliceN = NULL,
+  sort = "no", subtitle = NULL, suffix = NULL, title = NULL,
+  theme = NULL, tooltip = list(headerFormat = NULL, pointFormat =
+  NULL), opts = NULL, ...)
 }
 \arguments{
 \item{data}{A data.frame}

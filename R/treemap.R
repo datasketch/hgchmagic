@@ -11,6 +11,39 @@
 #' @export hgch_treemap_CatNum
 
 hgch_treemap_CatNum <-  function(data,
+                                 agg = "sum",
+                                 agg_text = NULL,
+                                 allow_point = FALSE,
+                                 background = "#ffffff",
+                                 border_color = "#CCCCCC",
+                                 border_width = 1,
+                                 caption = NULL,
+                                 clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                 colors = NULL,
+                                 color_click = NULL,
+                                 color_hover = NULL,
+                                 color_opacity = 0.7,
+                                 color_scale = 'discrete',
+                                 cursor =  NULL,
+                                 drop_na = FALSE,
+                                 export = FALSE,
+                                 highlight_value = NULL,
+                                 highlight_valueColor = '#F9B233',
+                                 labelWrap = 12,
+                                 lang = 'es',
+                                 marks = c(".", ","),
+                                 nDigits = NULL,
+                                 null_color = "#f7f7f7",
+                                 order = NULL,
+                                 percentage = FALSE,
+                                 prefix = NULL,
+                                 sliceN = NULL,
+                                 sort = "no",
+                                 subtitle = NULL,
+                                 suffix = NULL,
+                                 title = NULL,
+                                 theme = NULL,
+                                 tooltip = list(headerFormat = NULL, pointFormat = NULL),
                                 opts = NULL, ...) {
 
 
@@ -18,7 +51,46 @@ hgch_treemap_CatNum <-  function(data,
     stop("Load an available dataset")
   }
 
-  opts <- getOptions(opts = opts)
+  defaultOptions <- list(
+    agg = agg,
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    border_color = border_color,
+    border_width = border_width,
+    caption = caption,
+    clickFunction = clickFunction,
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_opacity = color_opacity,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_na = drop_na,
+    export = export,
+    fill_opacity = fill_opacity,
+    highlight_value = highlight_value,
+    highlight_valueColor = highlight_valueColor,
+    labelWrap = labelWrap,
+    lang = lang,
+    marks = marks,
+    nDigits = nDigits,
+    null_color = null_color,
+    order = order,
+    orientation = orientation,
+    percentage = percentage,
+    prefix = prefix,
+    text_show = text_show,
+    sliceN = sliceN,
+    sort = sort,
+    subtitle = subtitle,
+    suffix = suffix,
+    title = title,
+    theme = theme,
+    tooltip = tooltip
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -188,11 +260,82 @@ hgch_treemap_CatNum <-  function(data,
 #' @export hgch_treemap_Cat
 
 hgch_treemap_Cat <-  function(data,
+                              agg_text = NULL,
+                              allow_point = FALSE,
+                              background = "#ffffff",
+                              border_color = "#CCCCCC",
+                              border_width = 1,
+                              caption = NULL,
+                              clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                              colors = NULL,
+                              color_click = NULL,
+                              color_hover = NULL,
+                              color_opacity = 0.7,
+                              color_scale = 'discrete',
+                              cursor =  NULL,
+                              drop_na = FALSE,
+                              export = FALSE,
+                              highlight_value = NULL,
+                              highlight_valueColor = '#F9B233',
+                              labelWrap = 12,
+                              lang = 'es',
+                              marks = c(".", ","),
+                              nDigits = NULL,
+                              null_color = "#f7f7f7",
+                              order = NULL,
+                              percentage = FALSE,
+                              prefix = NULL,
+                              sliceN = NULL,
+                              sort = "no",
+                              subtitle = NULL,
+                              suffix = NULL,
+                              title = NULL,
+                              theme = NULL,
+                              tooltip = list(headerFormat = NULL, pointFormat = NULL),
                               opts = NULL,...) {
 
   if (is.null(data)) {
     stop("Load an available dataset")
   }
+  defaultOptions <- list(
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    border_color = border_color,
+    border_width = border_width,
+    caption = caption,
+    clickFunction = clickFunction,
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_opacity = color_opacity,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_na = drop_na,
+    export = export,
+    fill_opacity = fill_opacity,
+    highlight_value = highlight_value,
+    highlight_valueColor = highlight_valueColor,
+    labelWrap = labelWrap,
+    lang = lang,
+    marks = marks,
+    nDigits = nDigits,
+    null_color = null_color,
+    order = order,
+    orientation = orientation,
+    percentage = percentage,
+    prefix = prefix,
+    text_show = text_show,
+    sliceN = sliceN,
+    sort = sort,
+    subtitle = subtitle,
+    suffix = suffix,
+    title = title,
+    theme = theme,
+    tooltip = tooltip
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -223,14 +366,93 @@ hgch_treemap_Cat <-  function(data,
 #' @export hgch_treemap_CatCatNum
 
 hgch_treemap_CatCatNum <- function(data,
+                                   agg = "sum",
+                                   agg_text = NULL,
+                                   allow_point = FALSE,
+                                   background = "#ffffff",
+                                   border_color = "#CCCCCC",
+                                   border_width = 1,
+                                   caption = NULL,
+                                   clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                   colors = NULL,
+                                   color_click = NULL,
+                                   color_hover = NULL,
+                                   color_opacity = 0.7,
+                                   color_scale = 'discrete',
+                                   cursor =  NULL,
+                                   drop_na = FALSE,
+                                   drop_naV = c(FALSE, FALSE),
+                                   export = FALSE,
+                                   highlight_value = NULL,
+                                   highlight_valueColor = '#F9B233',
+                                   labelWrapV = c(12, 12),
+                                   lang = 'es',
+                                   legend_position  = "center",
+                                   legend_show = TRUE,
+                                   marks = c(".", ","),
+                                   nDigits = NULL,
+                                   null_color = "#f7f7f7",
+                                   order1 = NULL,
+                                   order2 = NULL,
+                                   percentage = FALSE,
+                                   prefix = NULL,
+                                   text_show = TRUE,
+                                   sliceN = NULL,
+                                   sort = "no",
+                                   subtitle = NULL,
+                                   suffix = NULL,
+                                   title = NULL,
+                                   theme = NULL,
+                                   tooltip = list(headerFormat = NULL, pointFormat = NULL),
                                    opts = NULL, ...) {
 
   if (is.null(data)) {
     stop("Load an available dataset")
   }
 
-  opts <- getOptions(opts = opts)
+  defaultOptions <- list(
+    agg = agg,
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    border_color = border_color,
+    border_width = border_width,
+    caption = caption,
+    clickFunction = clickFunction,
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_opacity = color_opacity,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_naV = drop_naV,
+    export = export,
+    fill_opacity = fill_opacity,
+    graph_type = graph_type,
+    highlight_value = highlight_value,
+    highlight_valueColor = highlight_valueColor,
+    labelWrapV = labelWrapV,
+    lang = lang,
+    legend_position  = legend_position,
+    legend_show = legend_show,
+    marks = marks,
+    nDigits = nDigits,
+    null_color = null_color,
+    order1 = order1,
+    order2 = order2,
+    percentage = percentage,
+    prefix = prefix,
+    text_show = text_show,
+    sliceN = sliceN,
+    sort = sort,
+    subtitle = subtitle,
+    suffix = suffix,
+    title = title,
+    theme = theme,
+    tooltip = tooltip
+  )
 
+  opts <- modifyList(defaultOptions, opts %||% list())
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
@@ -409,28 +631,89 @@ hgch_treemap_CatCatNum <- function(data,
 #' @export hgch_treemap_CatCat
 
 hgch_treemap_CatCat <- function(data,
-                                 title = NULL,
-                                 subtitle = NULL,
-                                 caption = NULL,
-                                 agg = "sum",
-                                 colors = NULL,
-                                 colorScale = 'discrete',
-                                 dropNaV = c(FALSE, FALSE),
-                                 prefix = NULL,
-                                 suffix = NULL,
-                                 labelWrapV = c(12, 12),
-                                 marks = c(".", ","),
-                                 nDigits = NULL,
-                                 percentage = FALSE,
-                                 showText = TRUE,
-                                 legend_show = TRUE,
-                                 legendPosition = "center",
-                                 theme = NULL,
-                                 tooltip = list("headerFormat" = NULL,
-                                                "pointFormat" = NULL,
-                                                "shared" = NULL),
-                                 export = FALSE,
-                                 lang = 'es', ...) {
+                                agg_text = NULL,
+                                allow_point = FALSE,
+                                background = "#ffffff",
+                                border_color = "#CCCCCC",
+                                border_width = 1,
+                                caption = NULL,
+                                clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                colors = NULL,
+                                color_click = NULL,
+                                color_hover = NULL,
+                                color_opacity = 0.7,
+                                color_scale = 'discrete',
+                                cursor =  NULL,
+                                drop_na = FALSE,
+                                drop_naV = c(FALSE, FALSE),
+                                export = FALSE,
+                                highlight_value = NULL,
+                                highlight_valueColor = '#F9B233',
+                                labelWrapV = c(12, 12),
+                                lang = 'es',
+                                legend_position  = "center",
+                                legend_show = TRUE,
+                                marks = c(".", ","),
+                                nDigits = NULL,
+                                null_color = "#f7f7f7",
+                                order1 = NULL,
+                                order2 = NULL,
+                                percentage = FALSE,
+                                prefix = NULL,
+                                text_show = TRUE,
+                                sliceN = NULL,
+                                sort = "no",
+                                subtitle = NULL,
+                                suffix = NULL,
+                                title = NULL,
+                                theme = NULL,
+                                tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                opts = NULL, ...) {
+
+
+  defaultOptions <- list(
+    agg = agg,
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    border_color = border_color,
+    border_width = border_width,
+    caption = caption,
+    clickFunction = clickFunction,
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_opacity = color_opacity,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_naV = drop_naV,
+    export = export,
+    fill_opacity = fill_opacity,
+    graph_type = graph_type,
+    highlight_value = highlight_value,
+    highlight_valueColor = highlight_valueColor,
+    labelWrapV = labelWrapV,
+    lang = lang,
+    legend_position  = legend_position,
+    legend_show = legend_show,
+    marks = marks,
+    nDigits = nDigits,
+    null_color = null_color,
+    order1 = order1,
+    order2 = order2,
+    percentage = percentage,
+    prefix = prefix,
+    text_show = text_show,
+    sliceN = sliceN,
+    sort = sort,
+    subtitle = subtitle,
+    suffix = suffix,
+    title = title,
+    theme = theme,
+    tooltip = tooltip
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -442,56 +725,7 @@ hgch_treemap_CatCat <- function(data,
 
   names(d) <- c(f$dic_$d$label, paste0("count", f$dic_$d$label[1]))
 
-  h <- hgch_treemap_CatCatNum(data = d, title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,prefix = prefix, suffix = suffix,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,legend_show = legend_show,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
-  h
+  h <- hgch_treemap_CatCatNum(data = d, opts = opts)
 }
 
 
-#' Treemap (categories, categories)
-#'
-#' Compare aggregations among category's levels
-#'
-#' @param data A data.frame
-#' @return Highcharts visualization
-#' @section ctypes:
-#' Cat-NumP, Yea-NumP, Dat-NumP
-#' @examples
-#' hgch_treemap_CatNumP(sampleData("Cat-NumP", nrow = 10))
-#' @export hgch_treemap_CatNumP
-
-hgch_treemap_CatNumP <- function(data,
-                                  title = NULL,
-                                  subtitle = NULL,
-                                  caption = NULL,
-                                  agg = "sum",
-                                  colors = NULL,
-                                  colorScale = 'discrete',
-                                  dropNaV = c(FALSE, FALSE),
-                                  prefix = NULL,
-                                  suffix = NULL,
-                                  labelWrapV = c(12, 12),
-                                  marks = c(".", ","),
-                                  nDigits = NULL,
-                                  percentage = FALSE,
-                                  showText = TRUE,
-                                  legend_show = TRUE,
-                                  legendPosition = "center",
-                                  theme = NULL,
-                                  tooltip = list("headerFormat" = NULL,
-                                                 "pointFormat" = NULL,
-                                                 "shared" = NULL),
-                                  export = FALSE,
-                                  lang = 'es', ...) {
-
-
-
-  f <- fringe(data)
-  nms <- getClabels(f)
-  d <- f$d
-  names(d) <- f$dic_$d$label
-
-  data <- d %>%
-    gather("categories", "count", names(d)[-1])
-  h <-  hgch_treemap_CatCatNum(data = data,title = title, subtitle = subtitle,caption = caption,agg = agg,colors = colors,colorScale = colorScale,dropNaV = dropNaV,prefix = prefix, suffix = suffix,labelWrapV = labelWrapV,marks = marks,nDigits = nDigits,percentage = percentage,showText = showText,legend_show = legend_show,legendPosition = legendPosition,theme = theme, tooltip = tooltip, export = export,lang = lang, ...)
-  h
-}
