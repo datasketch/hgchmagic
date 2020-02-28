@@ -4,13 +4,86 @@
 #'
 #' @export
 hgch_bubbles_CatNum <- function(data = NULL,
+                                agg = "sum",
+                                agg_text = NULL,
+                                allow_point = TRUE,
+                                background = "#ffffff",
+                                bubble_min = 3,
+                                bubble_max = 10,
+                                caption = NULL,
+                                clickFunction = NULL,
+                                colors = NULL,
+                                color_click = NULL,
+                                color_hover = NULL,
+                                color_scale = 'discrete',
+                                cursor =  NULL,
+                                drop_na = FALSE,
+                                export = FALSE,
+                                fill_opacity = 0.7,
+                                highlight_value = NULL,
+                                highlight_value_color = '#F9B233',
+                                label_wrap = 12,
+                                lang = 'es',
+                                marks = c(".", ","),
+                                n_digits = NULL,
+                                order = NULL,
+                                percentage = FALSE,
+                                prefix = NULL,
+                                text_show = TRUE,
+                                slice_n = NULL,
+                                sort = "no",
+                                subtitle = NULL,
+                                suffix = NULL,
+                                title = NULL,
+                                theme = NULL,
+                                tooltip = list(headerFormat = NULL, pointFormat = NULL),
                                 opts = NULL, ...) {
+
 
   if (is.null(data)) {
     stop("Load an available dataset")
   }
 
-  opts <- getOptions(opts = opts)
+  defaultOptions <- list(
+    agg = agg,
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    bubble_min = bubble_min,
+    bubble_max = bubble_max,
+    caption = caption,
+    clickFunction = clickFunction,
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_na = drop_na,
+    export = export,
+    fill_opacity = fill_opacity,
+    highlight_value = highlight_value,
+    highlight_value_color = highlight_value_color,
+    label_wrap = label_wrap,
+    lang = lang,
+    marks = marks,
+    n_digits = n_digits,
+    order = order,
+    percentage = percentage,
+    prefix = prefix,
+    text_show = text_show,
+    slice_n = slice_n,
+    sort = sort,
+    subtitle = subtitle,
+    suffix = suffix,
+    title = title,
+    theme = theme,
+    tooltip = tooltip
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
+
+
+
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -38,7 +111,7 @@ hgch_bubbles_CatNum <- function(data = NULL,
     opts$colors <- colorDefault
   }
 
-  if (opts$dropNa)
+  if (opts$drop_na)
     d <- d %>%
     tidyr::drop_na()
 
@@ -50,10 +123,10 @@ hgch_bubbles_CatNum <- function(data = NULL,
   d$a <- as.character(d$a)
   d$a[is.na(d$a)] <- 'NA'
 
-  if (is.null(opts$nDigits)) {
+  if (is.null(opts$n_digits)) {
     nDig <- 0
   } else {
-    nDig <- opts$nDigits
+    nDig <- opts$n_digits
   }
 
   if (opts$percentage) {
@@ -62,15 +135,15 @@ hgch_bubbles_CatNum <- function(data = NULL,
 
   d$b <- round(d$b, nDig)
   d <- orderCategory(d, "a", opts$order, opts$label_wrap)
-  d <- sortSlice(d, "b", opts$sort, opts$sliceN)
+  d <- sortSlice(d, "b", opts$sort, opts$slice_n)
 
 
   d <- d %>% plyr::rename(c('b' = 'y'))
-  d$color <- NA#colorDefault[1:nrow(d)]
+  d$color <-colorDefault[1:nrow(d)]
 
   if (!is.null(opts$highlight_value)) {
     w <- which(d$a %in% opts$highlight_value)
-    d$color[w] <- opts$highlight_valueColor
+    d$color[w] <- opts$highlight_value_color
   }
 
 
@@ -177,10 +250,80 @@ hgch_bubbles_CatNum <- function(data = NULL,
 #' hgch_bubbles_Cat(sampleData("Cat", nrow = 10))
 #' @export hgch_bubbles_Cat
 hgch_bubbles_Cat <-  function(data = NULL,
+                              agg_text = NULL,
+                              allow_point = TRUE,
+                              background = "#ffffff",
+                              bubble_min = 3,
+                              bubble_max = 10,
+                              caption = NULL,
+                              clickFunction = NULL,
+                              colors = NULL,
+                              color_click = NULL,
+                              color_hover = NULL,
+                              color_scale = 'discrete',
+                              cursor =  NULL,
+                              drop_na = FALSE,
+                              export = FALSE,
+                              fill_opacity = 0.7,
+                              highlight_value = NULL,
+                              highlight_value_color = '#F9B233',
+                              label_wrap = 12,
+                              lang = 'es',
+                              marks = c(".", ","),
+                              n_digits = NULL,
+                              order = NULL,
+                              percentage = FALSE,
+                              prefix = NULL,
+                              text_show = TRUE,
+                              slice_n = NULL,
+                              sort = "no",
+                              subtitle = NULL,
+                              suffix = NULL,
+                              title = NULL,
+                              theme = NULL,
+                              tooltip = list(headerFormat = NULL, pointFormat = NULL),
                               opts = NULL, ...) {
   if (is.null(data)) {
     stop("Load an available dataset")
   }
+
+  defaultOptions <- list(
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    bubble_min = bubble_min,
+    bubble_max = bubble_max,
+    caption = caption,
+    clickFunction = clickFunction,
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_na = drop_na,
+    export = export,
+    fill_opacity = fill_opacity,
+    highlight_value = highlight_value,
+    highlight_value_color = highlight_value_color,
+    label_wrap = label_wrap,
+    lang = lang,
+    marks = marks,
+    n_digits = n_digits,
+    order = order,
+    percentage = percentage,
+    prefix = prefix,
+    text_show = text_show,
+    slice_n = slice_n,
+    sort = sort,
+    subtitle = subtitle,
+    suffix = suffix,
+    title = title,
+    theme = theme,
+    tooltip = tooltip
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
+
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -205,12 +348,83 @@ hgch_bubbles_Cat <-  function(data = NULL,
 #'
 #' @export
 hgch_bubbles_CatCatNum <- function(data = NULL,
+                                   agg = "sum",
+                                   agg_text = NULL,
+                                   allow_point = TRUE,
+                                   background = "#ffffff",
+                                   bubble_min = 3,
+                                   bubble_max = 10,
+                                   caption = NULL,
+                                   clickFunction = NULL,
+                                   colors = NULL,
+                                   color_click = NULL,
+                                   color_hover = NULL,
+                                   color_scale = 'discrete',
+                                   cursor =  NULL,
+                                   drop_na_v = c(FALSE, FALSE),
+                                   export = FALSE,
+                                   fill_opacity = 0.7,
+                                   highlight_value = NULL,
+                                   highlight_value_color = '#F9B233',
+                                   label_wrap_v = c(12, 12),
+                                   lang = 'es',
+                                   marks = c(".", ","),
+                                   n_digits = NULL,
+                                   order = NULL,
+                                   percentage = FALSE,
+                                   prefix = NULL,
+                                   text_show = TRUE,
+                                   slice_n = NULL,
+                                   sort = "no",
+                                   subtitle = NULL,
+                                   suffix = NULL,
+                                   title = NULL,
+                                   theme = NULL,
+                                   tooltip = list(headerFormat = NULL, pointFormat = NULL),
                                    opts = NULL, ...) {
   if (is.null(data)) {
     stop("Load an available dataset")
   }
 
-  opts <- getOptions(opts = opts)
+  defaultOptions <- list(
+    agg = agg,
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    bubble_min = bubble_min,
+    bubble_max = bubble_max,
+    caption = caption,
+    clickFunction = clickFunction,
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_na_v = drop_na_v,
+    export = export,
+    fill_opacity = fill_opacity,
+    highlight_value = highlight_value,
+    highlight_value_color = highlight_value_color,
+    label_wrap_v = label_wrap_v,
+    lang = lang,
+    marks = marks,
+    n_digits = n_digits,
+    order = order,
+    percentage = percentage,
+    prefix = prefix,
+    text_show = text_show,
+    slice_n = slice_n,
+    sort = sort,
+    subtitle = subtitle,
+    suffix = suffix,
+    title = title,
+    theme = theme,
+    tooltip = tooltip
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
+
+
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -225,8 +439,6 @@ hgch_bubbles_CatCatNum <- function(data = NULL,
   if (opts$color_scale == 'discrete') {
     colorDefault <- c("#3DB26F", "#FECA84", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1")
     colorDefault <- discreteColorSelect(colorDefault, d)
-  } else if (opts$color_scale == "no"){
-    colorDefault <- rep("#3DB26F", length(unique(d$a)))
   } else {
     colorDefault <- leaflet::colorNumeric(c("#53255E", "#ff4097"), 1:length(unique(d$a)))(1:length(unique(d$a)))
   }
@@ -237,11 +449,11 @@ hgch_bubbles_CatCatNum <- function(data = NULL,
   } else {
     opts$colors <- colorDefault
   }
-  if (opts$dropNaV[1])
+  if (opts$drop_na_v[1])
     d <- d %>%
     tidyr::drop_na(a)
 
-  if(opts$dropNaV[2])
+  if(opts$drop_na_v[2])
     d <- d %>%
     tidyr::drop_na(b)
 
@@ -367,11 +579,80 @@ hgch_bubbles_CatCatNum <- function(data = NULL,
 #' hgch_bubbles_CatCat(sampleData("Cat-Cat", nrow = 10))
 #' @export hgch_bubbles_CatCat
 hgch_bubbles_CatCat <-function(data,
+                               agg_text = NULL,
+                               allow_point = TRUE,
+                               background = "#ffffff",
+                               bubble_min = 3,
+                               bubble_max = 10,
+                               caption = NULL,
+                               clickFunction = NULL,
+                               colors = NULL,
+                               color_click = NULL,
+                               color_hover = NULL,
+                               color_scale = 'discrete',
+                               cursor =  NULL,
+                               drop_na_v = c(FALSE, FALSE),
+                               export = FALSE,
+                               fill_opacity = 0.7,
+                               highlight_value = NULL,
+                               highlight_value_color = '#F9B233',
+                               label_wrap_v = c(12, 12),
+                               lang = 'es',
+                               marks = c(".", ","),
+                               n_digits = NULL,
+                               order = NULL,
+                               percentage = FALSE,
+                               prefix = NULL,
+                               text_show = TRUE,
+                               slice_n = NULL,
+                               sort = "no",
+                               subtitle = NULL,
+                               suffix = NULL,
+                               title = NULL,
+                               theme = NULL,
+                               tooltip = list(headerFormat = NULL, pointFormat = NULL),
                                opts = NULL, ...) {
 
   if (is.null(data)) {
     stop("Load an available dataset")
   }
+
+  defaultOptions <- list(
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    bubble_min = bubble_min,
+    bubble_max = bubble_max,
+    caption = caption,
+    clickFunction = clickFunction,
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_na_v = drop_na_v,
+    export = export,
+    fill_opacity = fill_opacity,
+    highlight_value = highlight_value,
+    highlight_value_color = highlight_value_color,
+    label_wrap_v = label_wrap_v,
+    lang = lang,
+    marks = marks,
+    n_digits = n_digits,
+    order = order,
+    percentage = percentage,
+    prefix = prefix,
+    text_show = text_show,
+    slice_n = slice_n,
+    sort = sort,
+    subtitle = subtitle,
+    suffix = suffix,
+    title = title,
+    theme = theme,
+    tooltip = tooltip
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
 
   f <- fringe(data)
   nms <- getClabels(f)

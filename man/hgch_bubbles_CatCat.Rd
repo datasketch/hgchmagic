@@ -4,7 +4,43 @@
 \alias{hgch_bubbles_CatCat}
 \title{Grouped bubbles by first category (categories, categories)}
 \usage{
-hgch_bubbles_CatCat(data, opts = NULL, ...)
+hgch_bubbles_CatCat(
+  data,
+  agg_text = NULL,
+  allow_point = TRUE,
+  background = "#ffffff",
+  bubble_min = 3,
+  bubble_max = 10,
+  caption = NULL,
+  clickFunction = NULL,
+  colors = NULL,
+  color_click = NULL,
+  color_hover = NULL,
+  color_scale = "discrete",
+  cursor = NULL,
+  drop_na_v = c(FALSE, FALSE),
+  export = FALSE,
+  fill_opacity = 0.7,
+  highlight_value = NULL,
+  highlight_value_color = "#F9B233",
+  label_wrap_v = c(12, 12),
+  lang = "es",
+  marks = c(".", ","),
+  n_digits = NULL,
+  order = NULL,
+  percentage = FALSE,
+  prefix = NULL,
+  text_show = TRUE,
+  slice_n = NULL,
+  sort = "no",
+  subtitle = NULL,
+  suffix = NULL,
+  title = NULL,
+  theme = NULL,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  opts = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{A data.frame}

@@ -15,45 +15,42 @@ hgch_area_CatNum <-  function(data = NULL,
                               agg_text = NULL,
                               allow_point = FALSE,
                               background = "#ffffff",
-                              border_color = "#CCCCCC",
-                              border_width = 1,
                               caption = NULL,
-                              clickFunction = NULL,
+                              click_function = NULL,
                               colors = NULL,
                               color_click = NULL,
                               color_hover = NULL,
-                              color_opacity = 0.7,
+                              color_scale = "discrete",
                               cursor =  NULL,
                               drop_na = FALSE,
                               export = FALSE,
                               fill_opacity = 0.5,
                               highlight_value = NULL,
-                              highlight_valueColor = '#F9B233',
-                              horLabel = NULL,
-                              horLine = NULL,
-                              horLine_label = " ",
-                              labelWrap = 12,
+                              highlight_value_color = '#F9B233',
+                              hor_label = NULL,
+                              hor_line = NULL,
+                              hor_line_label = " ",
+                              label_wrap = 12,
                               lang = 'es',
                               marks = c(".", ","),
-                              nDigits = NULL,
-                              null_color = "#f7f7f7",
+                              n_digits = NULL,
                               order = NULL,
                               orientation = "ver",
                               percentage = FALSE,
                               prefix = NULL,
                               text_show = TRUE,
-                              sliceN = NULL,
+                              slice_n = NULL,
                               sort = "no",
                               spline = FALSE,
-                              startAtZero = TRUE,
+                              start_zero = TRUE,
                               subtitle = NULL,
                               suffix = NULL,
                               title = NULL,
                               theme = NULL,
                               tooltip = list(headerFormat = NULL, pointFormat = NULL),
-                              verLabel = NULL,
-                              verLine = NULL,
-                              verLine_label = " ",
+                              ver_label = NULL,
+                              ver_line = NULL,
+                              ver_line_label = " ",
                               opts = NULL, ...){
 
 
@@ -66,45 +63,42 @@ hgch_area_CatNum <-  function(data = NULL,
     agg_text = agg_text,
     allow_point = allow_point,
     background = background,
-    border_color = border_color,
-    border_width = border_width,
     caption = caption,
-    clickFunction = clickFunction,
+    click_function = click_function,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
-    color_opacity = color_opacity,
+    color_scale = color_scale,
     cursor =  cursor,
     drop_na = drop_na,
     export = export,
     fill_opacity = fill_opacity,
     highlight_value = highlight_value,
-    highlight_valueColor = highlight_valueColor,
-    horLabel = horLabel,
-    horLine = horLine,
-    horLine_label = horLine_label,
-    labelWrap = labelWrap,
+    highlight_value_color = highlight_value_color,
+    hor_label = hor_label,
+    hor_line = hor_line,
+    hor_line_label = hor_line_label,
+    label_wrap = label_wrap,
     lang = lang,
     marks = marks,
-    nDigits = nDigits,
-    null_color = null_color,
+    n_digits = n_digits,
     order = order,
     orientation = orientation,
     percentage = percentage,
     prefix = prefix,
     text_show = text_show,
-    sliceN = sliceN,
+    slice_n = slice_n,
     sort = sort,
     spline = spline,
-    startAtZero = startAtZero,
+    start_zero = start_zero,
     subtitle = subtitle,
     suffix = suffix,
     title = title,
     theme = theme,
     tooltip = tooltip,
-    verLabel = verLabel,
-    verLine = verLine,
-    verLine_label = verLine_label
+    ver_label = ver_label,
+    ver_line = ver_line,
+    ver_line_label = ver_line_label
   )
 
   opts <- modifyList(defaultOptions, opts %||% list())
@@ -121,13 +115,16 @@ hgch_area_CatNum <-  function(data = NULL,
   labelsXY <- orientationXY(opts$orientation,
                             x = nms[1],
                             y = ifelse(nrow(d) == dplyr::n_distinct(d$a), nms[2], paste(prefix_agg, nms[2])),
-                            hor = opts$horLabel,
-                            ver = opts$verLabel)
-  lineXY <- linesOrientation(opts$orientation, opts$horLine, opts$verLine)
+                            hor = opts$hor_label,
+                            ver = opts$ver_label)
+
+  line_h <- ifelse(as.character(opts$hor_line), NULL, opts$hor_line)
+  line_v <- ifelse(as.character(opts$ver_line), NULL, opts$ver_line)
+  lineXY <- linesOrientation(opts$orientation, line_h, line_v)
 
   lineLabelsXY <- linesOrLabel(opts$orientation,
-                               opts$horLineLabel,
-                               opts$verLineLabel)
+                               opts$hor_line_label,
+                               opts$ver_line_label)
 
   if (opts$color_scale == 'discrete') {
     colorDefault <- c("#3DB26F", "#FECA84", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1")
@@ -145,7 +142,7 @@ hgch_area_CatNum <-  function(data = NULL,
     opts$colors <- colorDefault
   }
 
-  if (opts$dropNa)
+  if (opts$drop_na)
     d <- d %>%
     tidyr::drop_na()
 
@@ -157,10 +154,10 @@ hgch_area_CatNum <-  function(data = NULL,
   d$a <- as.character(d$a)
   d$a[is.na(d$a)] <- 'NA'
 
-  if (is.null(opts$nDigits)) {
+  if (is.null(opts$n_digits)) {
     nDig <- 0
   } else {
-    nDig <- opts$nDigits
+    nDig <- opts$n_digits
   }
 
   if (opts$percentage) {
@@ -168,8 +165,8 @@ hgch_area_CatNum <-  function(data = NULL,
   }
 
   d$b <- round(d$b, nDig)
-  d <- orderCategory(d, "a", opts$order, opts$labelWrap)
-  d <- sortSlice(d, "b", opts$sort, opts$sliceN)
+  d <- orderCategory(d, "a", opts$order, opts$label_wrap)
+  d <- sortSlice(d, "b", opts$sort, opts$slice_n)
 
 
   d <- d %>% plyr::rename(c('b' = 'y'))
@@ -177,7 +174,7 @@ hgch_area_CatNum <-  function(data = NULL,
 
   if (!is.null(opts$highlight_value)) {
     w <- which(d$a %in% opts$highlight_value)
-    d$color[w] <- opts$highlight_valueColor
+    d$color[w] <- opts$highlight_value_color
   }
 
   data <- list()
@@ -188,8 +185,8 @@ hgch_area_CatNum <-  function(data = NULL,
   })
 
   formatLabAxis <- paste0('{value:', opts$marks[1], opts$marks[2], 'f}')
-  if (!is.null(opts$nDigits)) {
-    formatLabAxis <- paste0('{value:', opts$marks[1], opts$marks[2], opts$nDigits, 'f}')
+  if (!is.null(opts$n_digits)) {
+    formatLabAxis <- paste0('{value:', opts$marks[1], opts$marks[2], opts$n_digits, 'f}')
   }
 
 
@@ -264,6 +261,7 @@ hgch_area_CatNum <-  function(data = NULL,
     ) %>%
     hc_plotOptions(
       series = list(
+        fillOpacity = opts$fill_opacity,
         marker = list(
           states = list(
             hover = list(
@@ -276,7 +274,7 @@ hgch_area_CatNum <-  function(data = NULL,
         allowPointSelect= opts$allow_point,
         cursor =  opts$cursor,
         events = list(
-          click = opts$clickFunction
+          click = opts$click_function
         )
       )) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
@@ -329,90 +327,85 @@ hgch_area_Cat <-  function(data = NULL,
                            border_color = "#CCCCCC",
                            border_width = 1,
                            caption = NULL,
-                           clickFunction = NULL,
+                           click_function = NULL,
                            colors = NULL,
                            color_click = NULL,
                            color_hover = NULL,
-                           color_opacity = 0.7,
                            cursor =  NULL,
                            drop_na = FALSE,
                            export = FALSE,
                            fill_opacity = 0.5,
                            highlight_value = NULL,
-                           highlight_valueColor = '#F9B233',
-                           horLabel = NULL,
-                           horLine = NULL,
-                           horLine_label = " ",
-                           labelWrap = 12,
+                           highlight_value_color = '#F9B233',
+                           hor_label = NULL,
+                           hor_line = NULL,
+                           hor_line_label = " ",
+                           label_wrap = 12,
                            lang = 'es',
                            marks = c(".", ","),
-                           nDigits = NULL,
-                           null_color = "#f7f7f7",
+                           n_digits = NULL,
                            order = NULL,
                            orientation = "ver",
                            percentage = FALSE,
                            prefix = NULL,
                            text_show = TRUE,
-                           sliceN = NULL,
+                           slice_n = NULL,
                            sort = "no",
                            spline = FALSE,
-                           startAtZero = TRUE,
+                           start_zero = TRUE,
                            subtitle = NULL,
                            suffix = NULL,
                            title = NULL,
                            theme = NULL,
                            tooltip = list(headerFormat = NULL, pointFormat = NULL),
-                           verLabel = NULL,
-                           verLine = NULL,
-                           verLine_label = " ",
+                           ver_label = NULL,
+                           ver_line = NULL,
+                           ver_line_label = " ",
                            opts = NULL, ...) {
   if (is.null(data)) {
     stop("Load an available dataset")
   }
   defaultOptions <- list(
-    agg = agg,
     agg_text = agg_text,
     allow_point = allow_point,
     background = background,
     border_color = border_color,
     border_width = border_width,
     caption = caption,
-    clickFunction = clickFunction,
+    click_function = click_function,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
-    color_opacity = color_opacity,
     cursor =  cursor,
     drop_na = drop_na,
     export = export,
     fill_opacity = fill_opacity,
     highlight_value = highlight_value,
-    highlight_valueColor = highlight_valueColor,
-    horLabel = horLabel,
-    horLine = horLine,
-    horLine_label = horLine_label,
-    labelWrap = labelWrap,
+    highlight_value_color = highlight_value_color,
+    hor_label = hor_label,
+    hor_line = hor_line,
+    hor_line_label = hor_line_label,
+    label_wrap = label_wrap,
     lang = lang,
     marks = marks,
-    nDigits = nDigits,
-    null_color = null_color,
+    n_digits = n_digits,
     order = order,
     orientation = orientation,
     percentage = percentage,
     prefix = prefix,
     text_show = text_show,
-    sliceN = sliceN,
+    slice_n = slice_n,
     sort = sort,
     spline = spline,
-    startAtZero = startAtZero,
+    start_zero = start_zero,
     subtitle = subtitle,
     suffix = suffix,
     title = title,
     theme = theme,
     tooltip = tooltip,
-    verLabel = verLabel,
-    verLine = verLine,
-    verLine_label = verLine_label
+    ver_label = ver_label,
+    ver_line = ver_line,
+    ver_line_label = ver_line_label
   )
 
   opts <- modifyList(defaultOptions, opts %||% list())
@@ -450,50 +443,46 @@ hgch_area_CatCatNum <- function(data = NULL,
                                 agg_text = NULL,
                                 allow_point = FALSE,
                                 background = "#ffffff",
-                                border_color = "#CCCCCC",
-                                border_width = 1,
                                 caption = NULL,
-                                clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                click_function = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
                                 colors = NULL,
                                 color_click = NULL,
                                 color_hover = NULL,
-                                color_opacity = 0.7,
                                 color_scale = 'discrete',
                                 cursor =  NULL,
-                                drop_naV = c(FALSE, FALSE),
+                                drop_na_v = c(FALSE, FALSE),
                                 export = FALSE,
                                 fill_opacity = 0.5,
                                 graph_type = "grouped",
                                 highlight_value = NULL,
-                                highlight_valueColor = '#F9B233',
-                                horLabel = NULL,
-                                horLine = NULL,
-                                horLine_label = " ",
-                                labelWrapV = c(12, 12),
+                                highlight_value_color = '#F9B233',
+                                hor_label = NULL,
+                                hor_line = NULL,
+                                hor_line_label = " ",
+                                label_wrap_v = c(12, 12),
                                 lang = 'es',
                                 legend_position  = "center",
                                 legend_show = TRUE,
                                 marks = c(".", ","),
-                                nDigits = NULL,
-                                null_color = "#f7f7f7",
+                                n_digits = NULL,
                                 order1 = NULL,
                                 order2 = NULL,
                                 orientation = "ver",
                                 percentage = FALSE,
                                 prefix = NULL,
                                 text_show = TRUE,
-                                sliceN = NULL,
+                                slice_n = NULL,
                                 sort = "no",
                                 spline = FALSE,
-                                startAtZero = TRUE,
+                                start_zero = TRUE,
                                 subtitle = NULL,
                                 suffix = NULL,
                                 title = NULL,
                                 theme = NULL,
                                 tooltip = list(headerFormat = NULL, pointFormat = NULL),
-                                verLabel = NULL,
-                                verLine = NULL,
-                                verLine_label = " ",
+                                ver_label = NULL,
+                                ver_line = NULL,
+                                ver_line_label = " ",
                                 opts = NULL, ...) {
 
 
@@ -501,66 +490,64 @@ hgch_area_CatCatNum <- function(data = NULL,
     stop("Load an available dataset")
   }
 
-  f <- fringe(data)
-  nms <- getClabels(f)
-  d <- f$d
-
   defaultOptions <- list(
     agg = agg,
     agg_text = agg_text,
     allow_point = allow_point,
     background = background,
-    border_color = border_color,
-    border_width = border_width,
     caption = caption,
-    clickFunction = clickFunction,
+    click_function = click_function,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
-    color_opacity = color_opacity,
     color_scale = color_scale,
     cursor =  cursor,
-    drop_naV = drop_naV,
+    drop_na_v = drop_na_v,
     export = export,
     fill_opacity = fill_opacity,
     graph_type = graph_type,
     highlight_value = highlight_value,
-    highlight_valueColor = highlight_valueColor,
-    horLabel = horLabel,
-    horLine = horLine,
-    horLine_label = horLine_label,
-    labelWrapV = labelWrapV,
+    highlight_value_color = highlight_value_color,
+    hor_label = hor_label,
+    hor_line = hor_line,
+    hor_line_label = hor_line_label,
+    label_wrap_v = label_wrap_v,
     lang = lang,
     legend_position  = legend_position,
     legend_show = legend_show,
     marks = marks,
-    nDigits = nDigits,
-    null_color = null_color,
+    n_digits = n_digits,
     order1 = order1,
     order2 = order2,
     orientation = orientation,
     percentage = percentage,
     prefix = prefix,
     text_show = text_show,
-    sliceN = sliceN,
+    slice_n = slice_n,
     sort = sort,
     spline = spline,
-    startAtZero = startAtZero,
+    start_zero = start_zero,
     subtitle = subtitle,
     suffix = suffix,
     title = title,
     theme = theme,
     tooltip = tooltip,
-    verLabel = verLabel,
-    verLine = verLine,
-    verLine_label = verLine_label
+    ver_label = ver_label,
+    ver_line = ver_line,
+    ver_line_label = ver_line_label
   )
 
   opts <- modifyList(defaultOptions, opts %||% list())
 
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+
   title <-  opts$title %||% ""
   subtitle <- opts$subtitle %||% ""
   caption <- opts$caption %||% ""
+  #print(opts$ver_line)
 
   prefix_agg <- ifelse(is.null(opts$agg_text), opts$agg, opts$agg_text)
   labelsXY <- orientationXY(opts$orientation,
@@ -568,14 +555,17 @@ hgch_area_CatCatNum <- function(data = NULL,
                             y = ifelse(nrow(d) == dplyr::n_distinct(d$a) & nrow(d) == dplyr::n_distinct(d$b),
                                        nms[3],
                                        paste(prefix_agg, nms[3])),
-                            hor = opts$horLabel,
-                            ver = opts$verLabel)
+                            hor = opts$hor_label,
+                            ver = opts$ver_label)
 
-  lineXY <- linesOrientation(opts$orientation, opts$horLine, opts$verLine)
+
+  line_h <- ifelse(as.character(opts$hor_line), NULL, opts$hor_line)
+  line_v <- ifelse(as.character(opts$ver_line), NULL, opts$ver_line)
+  lineXY <- linesOrientation(opts$orientation, line_h, line_v)
 
   lineLabelsXY <- linesOrLabel(opts$orientation,
-                               opts$horLine_label,
-                               opts$verLine_label)
+                               opts$hor_line_label,
+                               opts$ver_line_label)
   if (opts$color_scale == 'discrete') {
     colorDefault <- c("#3DB26F", "#FECA84", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1")
     colorDefault <- discreteColorSelect(colorDefault, d)
@@ -592,11 +582,11 @@ hgch_area_CatCatNum <- function(data = NULL,
     opts$colors <- colorDefault
   }
 
-  if (opts$dropNaV[1])
+  if (opts$drop_na_v[1])
     d <- d %>%
     tidyr::drop_na(a)
 
-  if(opts$dropNaV[2])
+  if(opts$drop_na_v[2])
     d <- d %>%
     tidyr::drop_na(b)
 
@@ -615,10 +605,10 @@ hgch_area_CatCatNum <- function(data = NULL,
   d$b <- as.character(d$b)
   d$b[is.na(d$b)] <- NA
 
-  if (is.null(opts$nDigits)) {
+  if (is.null(opts$n_digits)) {
     nDig <- 0
   } else {
-    nDig <- opts$nDigits
+    nDig <- opts$n_digits
   }
 
   if (opts$percentage) {
@@ -627,8 +617,8 @@ hgch_area_CatCatNum <- function(data = NULL,
   }
 
 
-  d <- orderCategory(d, "a", order = opts$order1, labelWrap = opts$labelWrapV[1])
-  d <- orderCategory(d, "b", order = opts$order2, labelWrap = opts$labelWrapV[2])
+  d <- orderCategory(d, "a", order = opts$order1, label_wrap = opts$label_wrap_v[1])
+  d <- orderCategory(d, "b", order = opts$order2, label_wrap = opts$label_wrap_v[2])
   d$c <- round(d$c, nDig)
 
 
@@ -646,8 +636,8 @@ hgch_area_CatCatNum <- function(data = NULL,
   }
 
   formatLabAxis <- paste0('{value:', opts$marks[1], opts$marks[2], 'f}')
-  if (!is.null(opts$nDigits)) {
-    formatLabAxis <- paste0('{value:', opts$marks[1], opts$marks[2], opts$nDigits, 'f}')
+  if (!is.null(opts$n_digits)) {
+    formatLabAxis <- paste0('{value:', opts$marks[1], opts$marks[2], opts$n_digits, 'f}')
   }
 
 
@@ -678,7 +668,7 @@ hgch_area_CatCatNum <- function(data = NULL,
     hc_chart(type = ifelse(opts$spline, "areaspline", "area"),
              inverted = ifelse(opts$orientation == 'ver', FALSE, TRUE))
   if (opts$graph_type == "stacked"){
-    hc <- hc %>% hc_plotOptions(area = list(stacking = 'normal', fillOpacity = opts$color_opacity), areaspline = list(stacking = 'normal', fillOpacity = opts$color_opacity))
+    hc <- hc %>% hc_plotOptions(area = list(stacking = 'normal', fillOpacity = opts$fill_opacity), areaspline = list(stacking = 'normal', fillOpacity = opts$color_opacity))
     if (opts$percentage) {
       hc <- hc %>% hc_yAxis(maxRange = 100,
                             max = 100)
@@ -729,6 +719,7 @@ hgch_area_CatCatNum <- function(data = NULL,
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_plotOptions(
       series = list(
+        fillOpacity = opts$fill_opacity,
         marker = list(
           states = list(
             hover = list(
@@ -741,7 +732,7 @@ hgch_area_CatCatNum <- function(data = NULL,
         allowPointSelect= opts$allow_point,
         cursor =  opts$cursor,
         events = list(
-          click = opts$clickFunction
+          click = opts$click_function
         )
       )) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
@@ -788,103 +779,98 @@ hgch_area_CatCat <- function(data = NULL,
                              agg_text = NULL,
                              allow_point = FALSE,
                              background = "#ffffff",
-                             border_color = "#CCCCCC",
-                             border_width = 1,
                              caption = NULL,
-                             clickFunction = NULL,
+                             click_function = NULL,
                              colors = NULL,
                              color_click = NULL,
                              color_hover = NULL,
                              color_opacity = 0.7,
                              color_scale = 'discrete',
                              cursor =  NULL,
-                             drop_naV = c(FALSE, FALSE),
+                             drop_na_v = c(FALSE, FALSE),
                              export = FALSE,
                              fill_opacity = 0.5,
                              graph_type = "grouped",
                              highlight_value = NULL,
-                             highlight_valueColor = '#F9B233',
-                             horLabel = NULL,
-                             horLine = NULL,
-                             horLine_label = " ",
-                             labelWrapV = c(12, 12),
+                             highlight_value_color = '#F9B233',
+                             hor_label = NULL,
+                             hor_line = NULL,
+                             hor_line_label = " ",
+                             label_wrap_v = c(12, 12),
                              lang = 'es',
                              legend_position  = "center",
                              legend_show = TRUE,
                              marks = c(".", ","),
-                             nDigits = NULL,
-                             null_color = "#f7f7f7",
+                             n_digits = NULL,
                              order1 = NULL,
                              order2 = NULL,
                              orientation = "ver",
                              percentage = FALSE,
                              prefix = NULL,
                              text_show = TRUE,
-                             sliceN = NULL,
+                             slice_n = NULL,
                              sort = "no",
                              spline = FALSE,
-                             startAtZero = TRUE,
+                             start_zero = TRUE,
                              subtitle = NULL,
                              suffix = NULL,
                              title = NULL,
                              theme = NULL,
                              tooltip = list(headerFormat = NULL, pointFormat = NULL),
-                             verLabel = NULL,
-                             verLine = NULL,
-                             verLine_label = " ",
+                             ver_label = NULL,
+                             ver_line = NULL,
+                             ver_line_label = " ",
                              opts = NULL, ...) {
 
   if (is.null(data)) {
     stop("Load an available dataset")
   }
+
   defaultOptions <- list(
     agg_text = agg_text,
     allow_point = allow_point,
     background = background,
-    border_color = border_color,
-    border_width = border_width,
     caption = caption,
-    clickFunction = clickFunction,
+    click_function = click_function,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
     color_opacity = color_opacity,
     color_scale = color_scale,
     cursor =  cursor,
-    drop_naV = drop_naV,
+    drop_na_v = drop_na_v,
     export = export,
     fill_opacity = fill_opacity,
     graph_type = graph_type,
     highlight_value = highlight_value,
-    highlight_valueColor = highlight_valueColor,
-    horLabel = horLabel,
-    horLine = horLine,
-    horLine_label = horLine_label,
-    labelWrapV = labelWrapV,
+    highlight_value_color = highlight_value_color,
+    hor_label = hor_label,
+    hor_line = hor_line,
+    hor_line_label = hor_line_label,
+    label_wrap_v = label_wrap_v,
     lang = lang,
     legend_position  = legend_position,
     legend_show = legend_show,
     marks = marks,
-    nDigits = nDigits,
-    null_color = null_color,
+    n_digits = n_digits,
     order1 = order1,
     order2 = order2,
     orientation = orientation,
     percentage = percentage,
     prefix = prefix,
     text_show = text_show,
-    sliceN = sliceN,
+    slice_n = slice_n,
     sort = sort,
     spline = spline,
-    startAtZero = startAtZero,
+    start_zero = start_zero,
     subtitle = subtitle,
     suffix = suffix,
     title = title,
     theme = theme,
     tooltip = tooltip,
-    verLabel = verLabel,
-    verLine = verLine,
-    verLine_label = verLine_label
+    ver_label = ver_label,
+    ver_line = ver_line,
+    ver_line_label = ver_line_label
   )
 
   opts <- modifyList(defaultOptions, opts %||% list())

@@ -12,35 +12,29 @@
 hgch_pie_CatNum <-  function(data,
                              agg = "sum",
                              agg_text = NULL,
-                             allow_point = FALSE,
                              background = "#ffffff",
-                             border_color = "#CCCCCC",
-                             border_width = 1,
                              caption = NULL,
                              clickFunction = NULL,
                              colors = NULL,
                              color_click = NULL,
                              color_hover = NULL,
-                             color_opacity = 0.7,
                              color_scale = 'discrete',
                              cursor =  NULL,
                              drop_na = FALSE,
                              export = FALSE,
                              highlight_value = NULL,
-                             highlight_valueColor = '#F9B233',
-                             labelWrap = 12,
+                             highlight_value_color = '#F9B233',
+                             label_wrap = 12,
                              lang = 'es',
                              legend_position  = "center",
                              legend_show = TRUE,
                              marks = c(".", ","),
-                             nDigits = NULL,
-                             null_color = "#f7f7f7",
+                             n_digits = NULL,
                              order = NULL,
-                             orientation = "ver",
                              percentage = FALSE,
                              prefix = NULL,
                              text_show = TRUE,
-                             sliceN = NULL,
+                             slice_n = NULL,
                              sort = "no",
                              subtitle = NULL,
                              suffix = NULL,
@@ -56,36 +50,29 @@ hgch_pie_CatNum <-  function(data,
   defaultOptions <- list(
     agg = agg,
     agg_text = agg_text,
-    allow_point = allow_point,
     background = background,
-    border_color = border_color,
-    border_width = border_width,
     caption = caption,
     clickFunction = clickFunction,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
-    color_opacity = color_opacity,
     color_scale = color_scale,
     cursor =  cursor,
     drop_na = drop_na,
     export = export,
     highlight_value = highlight_value,
-    highlight_valueColor = highlight_valueColor,
-    labelWrap = labelWrap,
+    highlight_value_color = highlight_value_color,
+    label_wrap = label_wrap,
     lang = lang,
     legend_position  = legend_position,
     legend_show = legend_show,
-    map_navigation = map_navigation,
     marks = marks,
-    nDigits = nDigits,
-    null_color = null_color,
+    n_digits = n_digits,
     order = order,
-    orientation = orientation,
     percentage = percentage,
     prefix = prefix,
     text_show = text_show,
-    sliceN = sliceN,
+    slice_n = slice_n,
     sort = sort,
     subtitle = subtitle,
     suffix = suffix,
@@ -123,7 +110,7 @@ hgch_pie_CatNum <-  function(data,
       }
   }
 
-  if (opts$dropNa)
+  if (opts$drop_na)
     d <- d %>%
     tidyr::drop_na()
 
@@ -135,10 +122,10 @@ hgch_pie_CatNum <-  function(data,
   d$a <- as.character(d$a)
   d$a[is.na(d$a)] <- 'NA'
 
-  if (is.null(opts$nDigits)) {
+  if (is.null(opts$n_digits)) {
     nDig <- 0
   } else {
-    nDig <- opts$nDigits
+    nDig <- opts$n_digits
   }
 
   if (opts$percentage) {
@@ -146,8 +133,8 @@ hgch_pie_CatNum <-  function(data,
   }
 
   d$b <- round(d$b, nDig)
-  d <- orderCategory(d, "a", opts$order, opts$labelWrap)
-  d <- sortSlice(d, "b", opts$sort, opts$sliceN)
+  d <- orderCategory(d, "a", opts$order, opts$label_wrap)
+  d <- sortSlice(d, "b", opts$sort, opts$slice_n)
 
 
   d <- d %>% plyr::rename(c('b' = 'y'))
@@ -155,7 +142,7 @@ hgch_pie_CatNum <-  function(data,
 
   if (!is.null(opts$highlight_value)) {
     w <- which(d$a %in% opts$highlight_vValue)
-    d$color[w] <- opts$highlight_valueColor
+    d$color[w] <- opts$highlight_value_color
   }
 
   data <- list()
@@ -260,35 +247,29 @@ hgch_pie_CatNum <-  function(data,
 #' @export hgch_pie_Cat
 hgch_pie_Cat <-  function(data,
                           agg_text = NULL,
-                          allow_point = FALSE,
                           background = "#ffffff",
-                          border_color = "#CCCCCC",
-                          border_width = 1,
                           caption = NULL,
                           clickFunction = NULL,
                           colors = NULL,
                           color_click = NULL,
                           color_hover = NULL,
-                          color_opacity = 0.7,
                           color_scale = 'discrete',
                           cursor =  NULL,
                           drop_na = FALSE,
                           export = FALSE,
                           highlight_value = NULL,
-                          highlight_valueColor = '#F9B233',
-                          labelWrap = 12,
+                          highlight_value_color = '#F9B233',
+                          label_wrap = 12,
                           lang = 'es',
                           legend_position  = "center",
                           legend_show = TRUE,
                           marks = c(".", ","),
-                          nDigits = NULL,
-                          null_color = "#f7f7f7",
+                          n_digits = NULL,
                           order = NULL,
-                          orientation = "ver",
                           percentage = FALSE,
                           prefix = NULL,
                           text_show = TRUE,
-                          sliceN = NULL,
+                          slice_n = NULL,
                           sort = "no",
                           subtitle = NULL,
                           suffix = NULL,
@@ -300,36 +281,29 @@ hgch_pie_Cat <-  function(data,
 
   defaultOptions <- list(
     agg_text = agg_text,
-    allow_point = allow_point,
     background = background,
-    border_color = border_color,
-    border_width = border_width,
     caption = caption,
     clickFunction = clickFunction,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
-    color_opacity = color_opacity,
     color_scale = color_scale,
     cursor =  cursor,
     drop_na = drop_na,
     export = export,
     highlight_value = highlight_value,
-    highlight_valueColor = highlight_valueColor,
-    labelWrap = labelWrap,
+    highlight_value_color = highlight_value_color,
+    label_wrap = label_wrap,
     lang = lang,
     legend_position  = legend_position,
     legend_show = legend_show,
-    map_navigation = map_navigation,
     marks = marks,
-    nDigits = nDigits,
-    null_color = null_color,
+    n_digits = n_digits,
     order = order,
-    orientation = orientation,
     percentage = percentage,
     prefix = prefix,
     text_show = text_show,
-    sliceN = sliceN,
+    slice_n = slice_n,
     sort = sort,
     subtitle = subtitle,
     suffix = suffix,
@@ -370,35 +344,29 @@ hgch_pie_Cat <-  function(data,
 hgch_donut_CatNum <-  function(data,
                                agg = "sum",
                                agg_text = NULL,
-                               allow_point = FALSE,
                                background = "#ffffff",
-                               border_color = "#CCCCCC",
-                               border_width = 1,
                                caption = NULL,
                                clickFunction = NULL,
                                colors = NULL,
                                color_click = NULL,
                                color_hover = NULL,
-                               color_opacity = 0.7,
                                color_scale = 'discrete',
                                cursor =  NULL,
                                drop_na = FALSE,
                                export = FALSE,
                                highlight_value = NULL,
-                               highlight_valueColor = '#F9B233',
-                               labelWrap = 12,
+                               highlight_value_color = '#F9B233',
+                               label_wrap = 12,
                                lang = 'es',
                                legend_position  = "center",
                                legend_show = TRUE,
                                marks = c(".", ","),
-                               nDigits = NULL,
-                               null_color = "#f7f7f7",
+                               n_digits = NULL,
                                order = NULL,
-                               orientation = "ver",
                                percentage = FALSE,
                                prefix = NULL,
                                text_show = TRUE,
-                               sliceN = NULL,
+                               slice_n = NULL,
                                sort = "no",
                                subtitle = NULL,
                                suffix = NULL,
@@ -414,36 +382,29 @@ hgch_donut_CatNum <-  function(data,
   defaultOptions <- list(
     agg = agg,
     agg_text = agg_text,
-    allow_point = allow_point,
     background = background,
-    border_color = border_color,
-    border_width = border_width,
     caption = caption,
     clickFunction = clickFunction,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
-    color_opacity = color_opacity,
     color_scale = color_scale,
     cursor =  cursor,
     drop_na = drop_na,
     export = export,
     highlight_value = highlight_value,
-    highlight_valueColor = highlight_valueColor,
-    labelWrap = labelWrap,
+    highlight_value_color = highlight_value_color,
+    label_wrap = label_wrap,
     lang = lang,
     legend_position  = legend_position,
     legend_show = legend_show,
-    map_navigation = map_navigation,
     marks = marks,
-    nDigits = nDigits,
-    null_color = null_color,
+    n_digits = n_digits,
     order = order,
-    orientation = orientation,
     percentage = percentage,
     prefix = prefix,
     text_show = text_show,
-    sliceN = sliceN,
+    slice_n = slice_n,
     sort = sort,
     subtitle = subtitle,
     suffix = suffix,
@@ -481,7 +442,7 @@ hgch_donut_CatNum <-  function(data,
       }
     }
 
-  if (opts$dropNa)
+  if (opts$drop_na)
     d <- d %>%
     tidyr::drop_na()
 
@@ -493,10 +454,10 @@ hgch_donut_CatNum <-  function(data,
   d$a <- as.character(d$a)
   d$a[is.na(d$a)] <- 'NA'
 
-  if (is.null(opts$nDigits)) {
+  if (is.null(opts$n_digits)) {
     nDig <- 0
   } else {
-    nDig <- opts$nDigits
+    nDig <- opts$n_digits
   }
 
   if (opts$percentage) {
@@ -504,8 +465,8 @@ hgch_donut_CatNum <-  function(data,
   }
 
   d$b <- round(d$b, nDig)
-  d <- orderCategory(d, "a", opts$order, opts$labelWrap)
-  d <- sortSlice(d, "b", opts$sort, opts$sliceN)
+  d <- orderCategory(d, "a", opts$order, opts$label_wrap)
+  d <- sortSlice(d, "b", opts$sort, opts$slice_n)
 
 
   d <- d %>% plyr::rename(c('b' = 'y'))
@@ -513,7 +474,7 @@ hgch_donut_CatNum <-  function(data,
 
   if (!is.null(opts$highlight_value)) {
     w <- which(d$a %in% opts$highlight_value)
-    d$color[w] <- opts$highlight_valueColor
+    d$color[w] <- opts$highlight_value_color
   }
 
   data <- list()
@@ -618,35 +579,29 @@ hgch_donut_CatNum <-  function(data,
 #' @export hgch_donut_Cat
 hgch_donut_Cat <-  function(data,
                             agg_text = NULL,
-                            allow_point = FALSE,
                             background = "#ffffff",
-                            border_color = "#CCCCCC",
-                            border_width = 1,
                             caption = NULL,
                             clickFunction = NULL,
                             colors = NULL,
                             color_click = NULL,
                             color_hover = NULL,
-                            color_opacity = 0.7,
                             color_scale = 'discrete',
                             cursor =  NULL,
                             drop_na = FALSE,
                             export = FALSE,
                             highlight_value = NULL,
-                            highlight_valueColor = '#F9B233',
-                            labelWrap = 12,
+                            highlight_value_color = '#F9B233',
+                            label_wrap = 12,
                             lang = 'es',
                             legend_position  = "center",
                             legend_show = TRUE,
                             marks = c(".", ","),
-                            nDigits = NULL,
-                            null_color = "#f7f7f7",
+                            n_digits = NULL,
                             order = NULL,
-                            orientation = "ver",
                             percentage = FALSE,
                             prefix = NULL,
                             text_show = TRUE,
-                            sliceN = NULL,
+                            slice_n = NULL,
                             sort = "no",
                             subtitle = NULL,
                             suffix = NULL,
@@ -660,36 +615,29 @@ hgch_donut_Cat <-  function(data,
   }
   defaultOptions <- list(
     agg_text = agg_text,
-    allow_point = allow_point,
     background = background,
-    border_color = border_color,
-    border_width = border_width,
     caption = caption,
     clickFunction = clickFunction,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
-    color_opacity = color_opacity,
     color_scale = color_scale,
     cursor =  cursor,
     drop_na = drop_na,
     export = export,
     highlight_value = highlight_value,
-    highlight_valueColor = highlight_valueColor,
-    labelWrap = labelWrap,
+    highlight_value_color = highlight_value_color,
+    label_wrap = label_wrap,
     lang = lang,
     legend_position  = legend_position,
     legend_show = legend_show,
-    map_navigation = map_navigation,
     marks = marks,
-    nDigits = nDigits,
-    null_color = null_color,
+    n_digits = n_digits,
     order = order,
-    orientation = orientation,
     percentage = percentage,
     prefix = prefix,
     text_show = text_show,
-    sliceN = sliceN,
+    slice_n = slice_n,
     sort = sort,
     subtitle = subtitle,
     suffix = suffix,
@@ -711,4 +659,5 @@ hgch_donut_Cat <-  function(data,
   names(d) <- c(f$dic_$d$label, paste0(prefix_agg, f$dic_$d$label))
 
   h <- hgch_donut_CatNum(data = d, opts = opts, ...)
+  h
 }

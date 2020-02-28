@@ -13,7 +13,6 @@
 hgch_treemap_CatNum <-  function(data,
                                  agg = "sum",
                                  agg_text = NULL,
-                                 allow_point = FALSE,
                                  background = "#ffffff",
                                  border_color = "#CCCCCC",
                                  border_width = 1,
@@ -22,25 +21,24 @@ hgch_treemap_CatNum <-  function(data,
                                  colors = NULL,
                                  color_click = NULL,
                                  color_hover = NULL,
-                                 color_opacity = 0.7,
                                  color_scale = 'discrete',
                                  cursor =  NULL,
                                  drop_na = FALSE,
                                  export = FALSE,
                                  highlight_value = NULL,
-                                 highlight_valueColor = '#F9B233',
-                                 labelWrap = 12,
+                                 highlight_value_color = '#F9B233',
+                                 label_wrap = 12,
                                  lang = 'es',
                                  marks = c(".", ","),
-                                 nDigits = NULL,
-                                 null_color = "#f7f7f7",
+                                 n_digits = NULL,
                                  order = NULL,
                                  percentage = FALSE,
                                  prefix = NULL,
-                                 sliceN = NULL,
+                                 slice_n = NULL,
                                  sort = "no",
                                  subtitle = NULL,
                                  suffix = NULL,
+                                 text_show = TRUE,
                                  title = NULL,
                                  theme = NULL,
                                  tooltip = list(headerFormat = NULL, pointFormat = NULL),
@@ -54,7 +52,6 @@ hgch_treemap_CatNum <-  function(data,
   defaultOptions <- list(
     agg = agg,
     agg_text = agg_text,
-    allow_point = allow_point,
     background = background,
     border_color = border_color,
     border_width = border_width,
@@ -63,25 +60,21 @@ hgch_treemap_CatNum <-  function(data,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
-    color_opacity = color_opacity,
     color_scale = color_scale,
     cursor =  cursor,
     drop_na = drop_na,
     export = export,
-    fill_opacity = fill_opacity,
     highlight_value = highlight_value,
-    highlight_valueColor = highlight_valueColor,
-    labelWrap = labelWrap,
+    highlight_value_color = highlight_value_color,
+    label_wrap = label_wrap,
     lang = lang,
     marks = marks,
-    nDigits = nDigits,
-    null_color = null_color,
+    n_digits = n_digits,
     order = order,
-    orientation = orientation,
     percentage = percentage,
     prefix = prefix,
     text_show = text_show,
-    sliceN = sliceN,
+    slice_n = slice_n,
     sort = sort,
     subtitle = subtitle,
     suffix = suffix,
@@ -104,7 +97,7 @@ hgch_treemap_CatNum <-  function(data,
 
   prefix_agg <- ifelse(is.null(opts$agg_text), opts$agg, opts$agg_text)
 
-  if (opts$dropNa)
+  if (opts$drop_na)
     d <- d %>%
     tidyr::drop_na()
 
@@ -131,10 +124,10 @@ hgch_treemap_CatNum <-  function(data,
   d$a <- as.character(d$a)
   d$a[is.na(d$a)] <- 'NA'
 
-  if (is.null(opts$nDigits)) {
+  if (is.null(opts$n_digits)) {
     nDig <- 0
   } else {
-    nDig <- opts$nDigits
+    nDig <- opts$n_digits
   }
 
   if (opts$percentage) {
@@ -142,8 +135,8 @@ hgch_treemap_CatNum <-  function(data,
   }
 
   d$b <- round(d$b, nDig)
-  d <- orderCategory(d, "a", unique(d$a), labelWrap = opts$labelWrap)
-  d <- sortSlice(d, "b", "asc", opts$sliceN)
+  d <- orderCategory(d, "a", unique(d$a), label_wrap = opts$label_wrap)
+  d <- sortSlice(d, "b", "asc", opts$slice_n)
 
 
   d <- d %>% plyr::rename(c('b' = 'value'))
@@ -151,7 +144,7 @@ hgch_treemap_CatNum <-  function(data,
 
   if (!is.null(opts$highlight_value)) {
     w <- which(d$a %in% opts$highlight_value)
-    d$color[w] <- opts$highlight_valueColor
+    d$color[w] <- opts$highlight_value_color
   }
 
 
@@ -261,35 +254,31 @@ hgch_treemap_CatNum <-  function(data,
 
 hgch_treemap_Cat <-  function(data,
                               agg_text = NULL,
-                              allow_point = FALSE,
                               background = "#ffffff",
-                              border_color = "#CCCCCC",
-                              border_width = 1,
                               caption = NULL,
                               clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
                               colors = NULL,
                               color_click = NULL,
                               color_hover = NULL,
-                              color_opacity = 0.7,
                               color_scale = 'discrete',
                               cursor =  NULL,
                               drop_na = FALSE,
                               export = FALSE,
                               highlight_value = NULL,
-                              highlight_valueColor = '#F9B233',
-                              labelWrap = 12,
+                              highlight_value_color = '#F9B233',
+                              label_wrap = 12,
                               lang = 'es',
                               marks = c(".", ","),
-                              nDigits = NULL,
-                              null_color = "#f7f7f7",
+                              n_digits = NULL,
                               order = NULL,
                               percentage = FALSE,
                               prefix = NULL,
-                              sliceN = NULL,
+                              slice_n = NULL,
                               sort = "no",
                               subtitle = NULL,
                               suffix = NULL,
                               title = NULL,
+                              text_show = TRUE,
                               theme = NULL,
                               tooltip = list(headerFormat = NULL, pointFormat = NULL),
                               opts = NULL,...) {
@@ -299,37 +288,31 @@ hgch_treemap_Cat <-  function(data,
   }
   defaultOptions <- list(
     agg_text = agg_text,
-    allow_point = allow_point,
     background = background,
-    border_color = border_color,
-    border_width = border_width,
     caption = caption,
     clickFunction = clickFunction,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
-    color_opacity = color_opacity,
     color_scale = color_scale,
     cursor =  cursor,
     drop_na = drop_na,
     export = export,
-    fill_opacity = fill_opacity,
     highlight_value = highlight_value,
-    highlight_valueColor = highlight_valueColor,
-    labelWrap = labelWrap,
+    highlight_value_color = highlight_value_color,
+    label_wrap = label_wrap,
     lang = lang,
     marks = marks,
-    nDigits = nDigits,
-    null_color = null_color,
+    n_digits = n_digits,
     order = order,
-    orientation = orientation,
     percentage = percentage,
     prefix = prefix,
     text_show = text_show,
-    sliceN = sliceN,
+    slice_n = slice_n,
     sort = sort,
     subtitle = subtitle,
     suffix = suffix,
+    text_show = text_show,
     title = title,
     theme = theme,
     tooltip = tooltip
@@ -368,36 +351,31 @@ hgch_treemap_Cat <-  function(data,
 hgch_treemap_CatCatNum <- function(data,
                                    agg = "sum",
                                    agg_text = NULL,
-                                   allow_point = FALSE,
                                    background = "#ffffff",
-                                   border_color = "#CCCCCC",
-                                   border_width = 1,
                                    caption = NULL,
                                    clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
                                    colors = NULL,
                                    color_click = NULL,
                                    color_hover = NULL,
-                                   color_opacity = 0.7,
                                    color_scale = 'discrete',
                                    cursor =  NULL,
                                    drop_na = FALSE,
-                                   drop_naV = c(FALSE, FALSE),
+                                   drop_na_v = c(FALSE, FALSE),
                                    export = FALSE,
                                    highlight_value = NULL,
-                                   highlight_valueColor = '#F9B233',
-                                   labelWrapV = c(12, 12),
+                                   highlight_value_color = '#F9B233',
+                                   label_wrap_v = c(12, 12),
                                    lang = 'es',
                                    legend_position  = "center",
                                    legend_show = TRUE,
                                    marks = c(".", ","),
-                                   nDigits = NULL,
-                                   null_color = "#f7f7f7",
+                                   n_digits = NULL,
                                    order1 = NULL,
                                    order2 = NULL,
                                    percentage = FALSE,
                                    prefix = NULL,
                                    text_show = TRUE,
-                                   sliceN = NULL,
+                                   slice_n = NULL,
                                    sort = "no",
                                    subtitle = NULL,
                                    suffix = NULL,
@@ -413,37 +391,30 @@ hgch_treemap_CatCatNum <- function(data,
   defaultOptions <- list(
     agg = agg,
     agg_text = agg_text,
-    allow_point = allow_point,
     background = background,
-    border_color = border_color,
-    border_width = border_width,
     caption = caption,
     clickFunction = clickFunction,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
-    color_opacity = color_opacity,
     color_scale = color_scale,
     cursor =  cursor,
-    drop_naV = drop_naV,
+    drop_na_v = drop_na_v,
     export = export,
-    fill_opacity = fill_opacity,
-    graph_type = graph_type,
     highlight_value = highlight_value,
-    highlight_valueColor = highlight_valueColor,
-    labelWrapV = labelWrapV,
+    highlight_value_color = highlight_value_color,
+    label_wrap_v = label_wrap_v,
     lang = lang,
     legend_position  = legend_position,
     legend_show = legend_show,
     marks = marks,
-    nDigits = nDigits,
-    null_color = null_color,
+    n_digits = n_digits,
     order1 = order1,
     order2 = order2,
     percentage = percentage,
     prefix = prefix,
     text_show = text_show,
-    sliceN = sliceN,
+    slice_n = slice_n,
     sort = sort,
     subtitle = subtitle,
     suffix = suffix,
@@ -461,11 +432,11 @@ hgch_treemap_CatCatNum <- function(data,
   subtitle <- opts$subtitle %||% ""
   caption <- opts$caption %||% ""
 
-  if (opts$dropNaV[1])
+  if (opts$drop_na_v[1])
     d <- d %>%
     tidyr::drop_na(a)
 
-  if(opts$dropNaV[2])
+  if(opts$drop_na_v[2])
     d <- d %>%
     tidyr::drop_na(b)
 
@@ -494,10 +465,10 @@ hgch_treemap_CatCatNum <- function(data,
   }
 
 
-  if (is.null(opts$nDigits)) {
+  if (is.null(opts$n_digits)) {
     nDig <- 0
   } else {
-    nDig <- opts$nDigits
+    nDig <- opts$n_digits
   }
 
   if (opts$percentage) {
@@ -505,8 +476,8 @@ hgch_treemap_CatCatNum <- function(data,
       dplyr::mutate(c = (c / sum(c, na.rm = TRUE)) * 100)
   }
 
-  d <- orderCategory(d, "a", order = unique(d$a), labelWrap = opts$labelWrapV[1])
-  d <- orderCategory(d, "b", order = unique(d$b), labelWrap = opts$labelWrapV[2])
+  d <- orderCategory(d, "a", order = unique(d$a), label_wrap = opts$label_wrap_v[1])
+  d <- orderCategory(d, "b", order = unique(d$b), label_wrap = opts$label_wrap_v[2])
   d$c <- round(d$c, nDig)
 
   paleta <- data.frame(a = unique(d$a), color = opts$colors)
@@ -634,34 +605,30 @@ hgch_treemap_CatCat <- function(data,
                                 agg_text = NULL,
                                 allow_point = FALSE,
                                 background = "#ffffff",
-                                border_color = "#CCCCCC",
-                                border_width = 1,
                                 caption = NULL,
                                 clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
                                 colors = NULL,
                                 color_click = NULL,
                                 color_hover = NULL,
-                                color_opacity = 0.7,
                                 color_scale = 'discrete',
                                 cursor =  NULL,
                                 drop_na = FALSE,
-                                drop_naV = c(FALSE, FALSE),
+                                drop_na_v = c(FALSE, FALSE),
                                 export = FALSE,
                                 highlight_value = NULL,
-                                highlight_valueColor = '#F9B233',
-                                labelWrapV = c(12, 12),
+                                highlight_value_color = '#F9B233',
+                                label_wrap_v = c(12, 12),
                                 lang = 'es',
                                 legend_position  = "center",
                                 legend_show = TRUE,
                                 marks = c(".", ","),
-                                nDigits = NULL,
-                                null_color = "#f7f7f7",
+                                n_digits = NULL,
                                 order1 = NULL,
                                 order2 = NULL,
                                 percentage = FALSE,
                                 prefix = NULL,
                                 text_show = TRUE,
-                                sliceN = NULL,
+                                slice_n = NULL,
                                 sort = "no",
                                 subtitle = NULL,
                                 suffix = NULL,
@@ -672,39 +639,32 @@ hgch_treemap_CatCat <- function(data,
 
 
   defaultOptions <- list(
-    agg = agg,
     agg_text = agg_text,
     allow_point = allow_point,
     background = background,
-    border_color = border_color,
-    border_width = border_width,
     caption = caption,
     clickFunction = clickFunction,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
-    color_opacity = color_opacity,
     color_scale = color_scale,
     cursor =  cursor,
-    drop_naV = drop_naV,
+    drop_na_v = drop_na_v,
     export = export,
-    fill_opacity = fill_opacity,
-    graph_type = graph_type,
     highlight_value = highlight_value,
-    highlight_valueColor = highlight_valueColor,
-    labelWrapV = labelWrapV,
+    highlight_value_color = highlight_value_color,
+    label_wrap_v = label_wrap_v,
     lang = lang,
     legend_position  = legend_position,
     legend_show = legend_show,
     marks = marks,
-    nDigits = nDigits,
-    null_color = null_color,
+    n_digits = n_digits,
     order1 = order1,
     order2 = order2,
     percentage = percentage,
     prefix = prefix,
     text_show = text_show,
-    sliceN = sliceN,
+    slice_n = slice_n,
     sort = sort,
     subtitle = subtitle,
     suffix = suffix,

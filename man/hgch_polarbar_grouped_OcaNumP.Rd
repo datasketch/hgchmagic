@@ -4,10 +4,20 @@
 \alias{hgch_polarbar_grouped_OcaNumP}
 \title{Polar bar (ordered categories, n numbers)}
 \usage{
-hgch_polarbar_grouped_OcaNumP(data, title = NULL, subtitle = NULL,
-  caption = NULL, yLine = NULL, dropNa = FALSE, agg = "sum",
-  order = NULL, percentage = FALSE, theme = NULL, export = FALSE,
-  ...)
+hgch_polarbar_grouped_OcaNumP(
+  data,
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  yLine = NULL,
+  dropNa = FALSE,
+  agg = "sum",
+  order = NULL,
+  percentage = FALSE,
+  theme = NULL,
+  export = FALSE,
+  ...
+)
 }
 \arguments{
 \item{data}{A data.frame}

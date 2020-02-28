@@ -4,8 +4,12 @@
 \alias{hgch_map_choropleth_Gnm}
 \title{map (gnm)}
 \usage{
-hgch_map_choropleth_Gnm(data = NULL, mapName = "countries/co/co-all",
-  opts = NULL, ...)
+hgch_map_choropleth_Gnm(
+  data = NULL,
+  mapName = "countries/co/co-all",
+  opts = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{A data.frame}

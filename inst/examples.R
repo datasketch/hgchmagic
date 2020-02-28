@@ -13,6 +13,13 @@ library(hgchmagic)
 # Categoricas
 
 datCat <- sampleData('Cat', nrow = 300)
+hgch_bar_Cat(datCat,
+             agg_text = "mean",
+             allow_point = FALSE,
+             theme = tma(list(stylesY_gridLineWidth = 0,
+                              colors = "black",
+                              color_scale = "no",
+                              background = "#FEAFEA")))
 
 hgch_bar_Cat(datCat,
              opts = list(color_scale = 'no'))
