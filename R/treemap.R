@@ -360,11 +360,12 @@ hgch_treemap_CatCatNum <- function(data,
                                    color_scale = 'discrete',
                                    cursor =  NULL,
                                    drop_na = FALSE,
-                                   drop_na_v = c(FALSE, FALSE),
+                                   drop_na_legend = FALSE,
                                    export = FALSE,
                                    highlight_value = NULL,
                                    highlight_value_color = '#F9B233',
-                                   label_wrap_v = c(12, 12),
+                                   label_wrap = 12,
+                                   label_wrap_legend = 12,
                                    lang = 'es',
                                    legend_position  = "center",
                                    legend_show = TRUE,
@@ -399,11 +400,13 @@ hgch_treemap_CatCatNum <- function(data,
     color_hover = color_hover,
     color_scale = color_scale,
     cursor =  cursor,
-    drop_na_v = drop_na_v,
+    drop_na = drop_na,
+    drop_na_legend = drop_na_legend,
     export = export,
     highlight_value = highlight_value,
     highlight_value_color = highlight_value_color,
-    label_wrap_v = label_wrap_v,
+    label_wrap = label_wrap,
+    label_wrap_legend = label_wrap_legend,
     lang = lang,
     legend_position  = legend_position,
     legend_show = legend_show,
@@ -432,13 +435,13 @@ hgch_treemap_CatCatNum <- function(data,
   subtitle <- opts$subtitle %||% ""
   caption <- opts$caption %||% ""
 
-  if (opts$drop_na_v[1])
-    d <- d %>%
-    tidyr::drop_na(a)
-
-  if(opts$drop_na_v[2])
+  if (opts$drop_na)
     d <- d %>%
     tidyr::drop_na(b)
+
+  if(opts$drop_na_legend)
+    d <- d %>%
+    tidyr::drop_na(a)
 
   d <- d %>%
     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
@@ -476,8 +479,8 @@ hgch_treemap_CatCatNum <- function(data,
       dplyr::mutate(c = (c / sum(c, na.rm = TRUE)) * 100)
   }
 
-  d <- orderCategory(d, "a", order = unique(d$a), label_wrap = opts$label_wrap_v[1])
-  d <- orderCategory(d, "b", order = unique(d$b), label_wrap = opts$label_wrap_v[2])
+  d <- orderCategory(d, "a", order = unique(d$a), label_wrap = opts$label_wrap_legend)
+  d <- orderCategory(d, "b", order = unique(d$b), label_wrap = opts$label_wrap)
   d$c <- round(d$c, nDig)
 
   paleta <- data.frame(a = unique(d$a), color = opts$colors)
@@ -613,11 +616,12 @@ hgch_treemap_CatCat <- function(data,
                                 color_scale = 'discrete',
                                 cursor =  NULL,
                                 drop_na = FALSE,
-                                drop_na_v = c(FALSE, FALSE),
+                                drop_na_legend = FALSE,
                                 export = FALSE,
                                 highlight_value = NULL,
                                 highlight_value_color = '#F9B233',
-                                label_wrap_v = c(12, 12),
+                                label_wrap = 12,
+                                label_wrap_legend = 12,
                                 lang = 'es',
                                 legend_position  = "center",
                                 legend_show = TRUE,
@@ -649,11 +653,13 @@ hgch_treemap_CatCat <- function(data,
     color_hover = color_hover,
     color_scale = color_scale,
     cursor =  cursor,
-    drop_na_v = drop_na_v,
+    drop_na = drop_na,
+    drop_na_legend = drop_na_legend,
     export = export,
     highlight_value = highlight_value,
     highlight_value_color = highlight_value_color,
-    label_wrap_v = label_wrap_v,
+    label_wrap = label_wrap,
+    label_wrap_legend = label_wrap_legend,
     lang = lang,
     legend_position  = legend_position,
     legend_show = legend_show,
@@ -686,6 +692,7 @@ hgch_treemap_CatCat <- function(data,
   names(d) <- c(f$dic_$d$label, paste0("count", f$dic_$d$label[1]))
 
   h <- hgch_treemap_CatCatNum(data = d, opts = opts)
+  h
 }
 
 

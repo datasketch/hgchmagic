@@ -4,7 +4,51 @@
 \alias{hgch_scatter_NumNum}
 \title{Scatter Num Num}
 \usage{
-hgch_scatter_NumNum(data = NULL, opts = NULL, ...)
+hgch_scatter_NumNum(
+  data = NULL,
+  agg_text = NULL,
+  allow_point = FALSE,
+  background = "#ffffff",
+  border_color = "#CCCCCC",
+  border_width = 1,
+  bubble_min = "3\%",
+  bubble_max = "12\%",
+  caption = NULL,
+  clickFunction = NULL,
+  colors = NULL,
+  color_click = NULL,
+  color_hover = NULL,
+  cursor = NULL,
+  drop_na = FALSE,
+  export = FALSE,
+  fill_opacity = 0.5,
+  hor_label = NULL,
+  hor_line = NULL,
+  hor_line_label = " ",
+  lang = "es",
+  marks = c(".", ","),
+  n_digits_y = NULL,
+  n_digits_x = NULL,
+  percentage = FALSE,
+  prefix_x = NULL,
+  prefix_y = NULL,
+  regression = FALSE,
+  regression_color = "#d35400",
+  regression_equation = TRUE,
+  text_show = TRUE,
+  subtitle = NULL,
+  suffix = NULL,
+  suffix_x = NULL,
+  suffix_y = NULL,
+  title = NULL,
+  theme = NULL,
+  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  ver_label = NULL,
+  ver_line = NULL,
+  ver_line_label = " ",
+  opts = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{}

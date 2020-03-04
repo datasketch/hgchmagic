@@ -4,13 +4,92 @@
 #'
 #' @export
 hgch_scatter_NumNum <- function(data = NULL,
+                                agg_text = NULL,
+                                allow_point = FALSE,
+                                background = "#ffffff",
+                                border_color = "#CCCCCC",
+                                border_width = 1,
+                                bubble_min = '3%',
+                                bubble_max = '12%',
+                                caption = NULL,
+                                clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                colors = NULL,
+                                color_click = NULL,
+                                color_hover = NULL,
+                                cursor =  NULL,
+                                drop_na = FALSE,
+                                export = FALSE,
+                                fill_opacity = 0.5,
+                                hor_label = NULL,
+                                hor_line = NULL,
+                                hor_line_label = " ",
+                                lang = 'es',
+                                marks = c(".", ","),
+                                n_digits_y = NULL,
+                                n_digits_x = NULL,
+                                percentage = FALSE,
+                                prefix_x = NULL,
+                                prefix_y = NULL,
+                                regression = FALSE,
+                                regression_color = '#d35400',
+                                regression_equation = TRUE,
+                                text_show = TRUE,
+                                subtitle = NULL,
+                                suffix = NULL,
+                                suffix_x = NULL,
+                                suffix_y = NULL,
+                                title = NULL,
+                                theme = NULL,
+                                tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                ver_label = NULL,
+                                ver_line = NULL,
+                                ver_line_label = " ",
                                 opts = NULL, ...) {
 
   if (is.null(data)) {
     stop("Load an available dataset")
   }
 
-opts <- getOptions(opts = opts)
+  defaultOptions <- list(
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    caption = caption,
+    clickFunction = clickFunction,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    cursor =  cursor,
+    drop_na = drop_na,
+    export = export,
+    fill_opacity = fill_opacity,
+    hor_label = hor_label,
+    hor_line = hor_line,
+    hor_line_label = hor_line_label,
+    lang = lang,
+    marks = marks,
+    n_digits_y = n_digits_y,
+    n_digits_x = n_digits_x,
+    percentage = percentage,
+    prefix_x = prefix_x,
+    prefix_y = prefix_y,
+    regression = regression,
+    regression_color = regression_color,
+    regression_equation = regression_equation,
+    text_show = text_show,
+    spline = spline,
+    subtitle = subtitle,
+    suffix_x = suffix_x,
+    suffix_y = suffix_y,
+    title = title,
+    theme = theme,
+    tooltip = tooltip,
+    ver_label = ver_label,
+    ver_line = ver_line,
+    ver_line_label = ver_line_label
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
 
 f <- fringe(data)
 nms <- getClabels(f)
@@ -23,29 +102,29 @@ caption <- opts$caption %||% ""
 labelsXY <- orientationXY('ver',
                           x = nms[1],
                           y = nms[2],
-                          hor = opts$horLabel,
-                          ver = opts$verLabel)
-lineXY <- linesOrientation('ver', opts$horLine, opts$verLine)
+                          hor = opts$hor_label,
+                          ver = opts$ver_label)
+lineXY <- linesOrientation('ver', opts$hor_line, opts$ver_line)
 
 lineLabelsXY <- linesOrLabel('ver',
-                             opts$horLine_label,
-                             opts$verLine_label)
+                             opts$hor_line_label,
+                             opts$ver_line_label)
 
 
 if (is.null(opts$colors)) opts$colors <- '#3DB26F'
 
 d <- d %>% drop_na()
 
-if (is.null(opts$nDigitsY)) {
+if (is.null(opts$n_digits_y)) {
   nDigY <- 0
 } else {
-  nDigY <- opts$nDigitsY
+  nDigY <- opts$n_digits_y
 }
 
-if (is.null(opts$nDigitsX)) {
+if (is.null(opts$n_digits_x)) {
   nDigX <- 0
 } else {
-  nDigX <- opts$nDigitsX
+  nDigX <- opts$n_digits_x
 }
 
 
@@ -55,25 +134,25 @@ d$b <- round(d$b, nDigY)
 
 
 formatLabAxisX <- paste0('{value:', opts$marks[1], opts$marks[2], 'f}')
-if (!is.null(opts$nDigitsX)) {
-  formatLabAxisX <- paste0('{value:', opts$marks[1], opts$marks[2], opts$nDigitsX, 'f}')
+if (!is.null(opts$n_digits_x)) {
+  formatLabAxisX <- paste0('{value:', opts$marks[1], opts$marks[2], opts$n_digits_x, 'f}')
 }
 
 
 formatLabAxisY <- paste0('{value:', opts$marks[1], opts$marks[2], 'f}')
-if (!is.null(opts$nDigitsY)) {
-  formatLabAxisY <- paste0('{value:', opts$marks[1], opts$marks[2], opts$nDigitsY, 'f}')
+if (!is.null(opts$n_digits_y)) {
+  formatLabAxisY <- paste0('{value:', opts$marks[1], opts$marks[2], opts$n_digits_y, 'f}')
 }
 
-if (is.null(opts$prefixX)) opts$prefixX <- ""
-if (is.null(opts$prefixY)) opts$prefixY <- ""
-if (is.null(opts$suffixX)) opts$suffixX <- ""
-if (is.null(opts$suffixY)) opts$suffixY <- ""
+if (is.null(opts$prefix_x)) opts$prefix_x <- ""
+if (is.null(opts$prefix_y)) opts$prefix_y <- ""
+if (is.null(opts$suffix_x)) opts$suffix_x <- ""
+if (is.null(opts$suffix_y)) opts$suffix_y <- ""
 
 
-aggFormAxisX <- paste0("function() { return '", opts$prefixX , "' + Highcharts.numberFormat(this.value, ", nDigX, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffixX, "'}"
+aggFormAxisX <- paste0("function() { return '", opts$prefix_x , "' + Highcharts.numberFormat(this.value, ", nDigX, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffix_x, "'}"
 )
-aggFormAxisY <- paste0("function() { return '", opts$prefixY , "' + Highcharts.numberFormat(this.value, ", nDigY, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffixY, "'}"
+aggFormAxisY <- paste0("function() { return '", opts$prefix_y , "' + Highcharts.numberFormat(this.value, ", nDigY, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffix_y, "'}"
 )
 
 
@@ -82,7 +161,7 @@ aggFormAxisY <- paste0("function() { return '", opts$prefixY , "' + Highcharts.n
 global_options(opts$marks[1], opts$marks[2])
 exportLang(language = opts$lang)
 if (is.null(opts$tooltip$pointFormat)) {
-  opts$tooltip$pointFormat <- paste0('<b>', nms[1], ':</b> ', paste0(opts$prefixX,'{point.x}', opts$suffixX), '<br/>','<b>', nms[2], ':</b> ', paste0(opts$prefixY,'{point.y}', opts$suffixY))
+  opts$tooltip$pointFormat <- paste0('<b>', nms[1], ':</b> ', paste0(opts$prefix_x,'{point.x}', opts$suffix_x), '<br/>','<b>', nms[2], ':</b> ', paste0(opts$prefix_y,'{point.y}', opts$suffix_y))
 }
 if (is.null(opts$tooltip$headerFormat)) {
   opts$tooltip$headerFormat <- ""
@@ -215,13 +294,119 @@ if (is.null(opts$theme)) {
 #'
 #' @export
 hgch_scatter_NumNumNum <- function(data = NULL,
+                                   agg = "sum",
+                                   agg_text = NULL,
+                                   allow_point = FALSE,
+                                   background = "#ffffff",
+                                   caption = NULL,
+                                   clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                   colors = NULL,
+                                   color_click = NULL,
+                                   color_hover = NULL,
+                                   color_opacity = 0.7,
+                                   color_scale = 'discrete',
+                                   cursor =  NULL,
+                                   drop_na = FALSE,
+                                   export = FALSE,
+                                   fill_opacity = 0.5,
+                                   highlight_value = NULL,
+                                   highlight_value_color = '#F9B233',
+                                   hor_label = NULL,
+                                   hor_line = NULL,
+                                   hor_line_label = " ",
+                                   label_wrap = 12,
+                                   lang = 'es',
+                                   legend_position  = "center",
+                                   legend_show = TRUE,
+                                   marks = c(".", ","),
+                                   n_digits = NULL,
+                                   n_digits_size = NULL,
+                                   n_digits_y = NULL,
+                                   n_digits_x = NULL,
+                                   orientation = "ver",
+                                   percentage = FALSE,
+                                   prefix = NULL,
+                                   prefix_size = NULL,
+                                   prefix_x = NULL,
+                                   prefix_y = NULL,
+                                   regression = FALSE,
+                                   regression_color = '#d35400',
+                                   regression_equation = TRUE,
+                                   text_show = TRUE,
+                                   slice_n = NULL,
+                                   sort = "no",
+                                   spline = FALSE,
+                                   subtitle = NULL,
+                                   suffix = NULL,
+                                   suffix_x = NULL,
+                                   suffix_y = NULL,
+                                   suffix_size = NULL,
+                                   title = NULL,
+                                   theme = NULL,
+                                   tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                   ver_label = NULL,
+                                   ver_line = NULL,
+                                   ver_line_label = " ",
                                    opts = NULL, ...) {
 
   if (is.null(data)) {
     stop("Load an available dataset")
   }
 
-  opts <- getOptions(opts = opts)
+  defaultOptions <- list(
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    caption = caption,
+    clickFunction = clickFunction,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_opacity = color_opacity,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_na = drop_na,
+    export = export,
+    fill_opacity = fill_opacity,
+    highlight_value = highlight_value,
+    highlight_value_color = highlight_value_color,
+    hor_label = hor_label,
+    hor_line = hor_line,
+    hor_line_label = hor_line_label,
+    label_wrap = label_wrap,
+    lang = lang,
+    legend_position  = legend_position,
+    legend_show = legend_show,
+    marks = marks,
+    n_digits = n_digits,
+    n_digits_size = n_digits_size,
+    n_digits_y = n_digits_y,
+    n_digits_x = n_digits_x,
+    orientation = orientation,
+    percentage = percentage,
+    prefix = prefix,
+    prefix_size = prefix_size,
+    prefix_x = prefix_x,
+    prefix_y = prefix_y,
+    regression = regression,
+    regression_color = regression_color,
+    regression_equation = regression_equation,
+    text_show = text_show,
+    spline = spline,
+    subtitle = subtitle,
+    suffix = suffix,
+    suffix_x = suffix_x,
+    suffix_y = suffix_y,
+    suffix_size = suffix_size,
+    title = title,
+    theme = theme,
+    tooltip = tooltip,
+    ver_label = ver_label,
+    ver_line = ver_line,
+    ver_line_label = ver_line_label
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -234,13 +419,13 @@ hgch_scatter_NumNumNum <- function(data = NULL,
   labelsXY <- orientationXY('ver',
                             x = nms[1],
                             y = nms[2],
-                            hor = opts$horLabel,
-                            ver = opts$verLabel)
-  lineXY <- linesOrientation('ver', opts$horLine, opts$verLine)
+                            hor = opts$hor_label,
+                            ver = opts$ver_label)
+  lineXY <- linesOrientation('ver', opts$hor_line, opts$ver_line)
 
   lineLabelsXY <- linesOrLabel('ver',
-                               opts$horLine_label,
-                               opts$verLine_label)
+                               opts$hor_line_label,
+                               opts$ver_line_label)
 
 
   if (opts$color_scale == 'discrete') {
@@ -262,22 +447,22 @@ hgch_scatter_NumNumNum <- function(data = NULL,
 
   d <- d %>% drop_na()
 
-  if (is.null(opts$nDigitsY)) {
+  if (is.null(opts$n_digits_y)) {
     nDigY <- 0
   } else {
-    nDigY <- opts$nDigitsY
+    nDigY <- opts$n_digits_y
   }
 
-  if (is.null(opts$nDigitsX)) {
+  if (is.null(opts$n_digits_x)) {
     nDigX <- 0
   } else {
-    nDigX <- opts$nDigitsX
+    nDigX <- opts$n_digits_x
   }
 
-  if (is.null(opts$nDigitsSize)) {
+  if (is.null(opts$n_digits_size)) {
     nDigS <- 0
   } else {
-    nDigS <- opts$nDigitsSize
+    nDigS <- opts$n_digits_size
   }
 
   d$a <- round(d$a, nDigX)
@@ -286,32 +471,32 @@ hgch_scatter_NumNumNum <- function(data = NULL,
 
 
   formatLabAxisX <- paste0('{value:', opts$marks[1], opts$marks[2], 'f}')
-  if (!is.null(opts$nDigitsX)) {
-    formatLabAxisX <- paste0('{value:', opts$marks[1], opts$marks[2], opts$nDigitsX, 'f}')
+  if (!is.null(opts$n_digits_x)) {
+    formatLabAxisX <- paste0('{value:', opts$marks[1], opts$marks[2], opts$n_digits_x, 'f}')
   }
 
 
   formatLabAxisY <- paste0('{value:', opts$marks[1], opts$marks[2], 'f}')
-  if (!is.null(opts$nDigitsY)) {
-    formatLabAxisY <- paste0('{value:', opts$marks[1], opts$marks[2], opts$nDigitsY, 'f}')
+  if (!is.null(opts$n_digits_y)) {
+    formatLabAxisY <- paste0('{value:', opts$marks[1], opts$marks[2], opts$n_digits_y, 'f}')
   }
 
-  if (is.null(opts$prefixX)) opts$prefixX <- ""
-  if (is.null(opts$prefixY)) opts$prefixY <- ""
-  if (is.null(opts$prefixSize)) opts$prefixSize <- ""
-  if (is.null(opts$suffixX)) opts$suffixX <- ""
-  if (is.null(opts$suffixY)) opts$suffixY <- ""
-  if (is.null(opts$suffixSize)) opts$suffixSize <- ""
+  if (is.null(opts$prefix_x)) opts$prefix_x <- ""
+  if (is.null(opts$prefix_y)) opts$prefix_y <- ""
+  if (is.null(opts$prefix_size)) opts$prefix_size <- ""
+  if (is.null(opts$suffix_x)) opts$suffix_x <- ""
+  if (is.null(opts$suffix_y)) opts$suffix_y <- ""
+  if (is.null(opts$suffix_size)) opts$suffix_size <- ""
 
 
-  aggFormAxisX <- paste0("function() { return '", opts$prefixX , "' + Highcharts.numberFormat(this.value, ", nDigX, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffixX, "'}"
+  aggFormAxisX <- paste0("function() { return '", opts$prefix_x , "' + Highcharts.numberFormat(this.value, ", nDigX, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffix_x, "'}"
   )
-  aggFormAxisY <- paste0("function() { return '", opts$prefixY , "' + Highcharts.numberFormat(this.value, ", nDigY, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffixY, "'}"
+  aggFormAxisY <- paste0("function() { return '", opts$prefix_y , "' + Highcharts.numberFormat(this.value, ", nDigY, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffix_y, "'}"
   )
 
 
   if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <- paste0('<b>',nms[1], ': </b>', opts$prefixX,'{point.x}', opts$suffixX, '<br/>','<b>', nms[2], ':</b> ', opts$prefixY,'{point.y}', opts$suffixY, '<br/><b>', nms[3], ':</b> ', opts$prefixSize,'{point.z}', opts$suffixSize, '(size)')
+    opts$tooltip$pointFormat <- paste0('<b>',nms[1], ': </b>', opts$prefix_x,'{point.x}', opts$suffix_x, '<br/>','<b>', nms[2], ':</b> ', opts$prefix_y,'{point.y}', opts$suffix_y, '<br/><b>', nms[3], ':</b> ', opts$prefix_size,'{point.z}', opts$suffix_size, '(size)')
   }
   if (is.null(opts$tooltip$headerFormat)) {
     opts$tooltip$headerFormat <- ""
@@ -429,14 +614,119 @@ hgch_scatter_NumNumNum <- function(data = NULL,
 #' @param data
 #'
 #' @export
-hgch_scatter_CatNumNum <- function(data = NULL,
+hgch_scatter_CatNumNum <- function(data = NULL,    agg = "sum",
+                                   agg_text = NULL,
+                                   allow_point = FALSE,
+                                   background = "#ffffff",
+                                   caption = NULL,
+                                   clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                   colors = NULL,
+                                   color_click = NULL,
+                                   color_hover = NULL,
+                                   color_opacity = 0.7,
+                                   color_scale = 'discrete',
+                                   cursor =  NULL,
+                                   drop_na = FALSE,
+                                   export = FALSE,
+                                   fill_opacity = 0.5,
+                                   highlight_value = NULL,
+                                   highlight_value_color = '#F9B233',
+                                   hor_label = NULL,
+                                   hor_line = NULL,
+                                   hor_line_label = " ",
+                                   label_wrap = 12,
+                                   lang = 'es',
+                                   legend_position  = "center",
+                                   legend_show = TRUE,
+                                   marks = c(".", ","),
+                                   n_digits = NULL,
+                                   n_digits_size = NULL,
+                                   n_digits_y = NULL,
+                                   n_digits_x = NULL,
+                                   orientation = "ver",
+                                   percentage = FALSE,
+                                   prefix = NULL,
+                                   prefix_size = NULL,
+                                   prefix_x = NULL,
+                                   prefix_y = NULL,
+                                   regression = FALSE,
+                                   regression_color = '#d35400',
+                                   regression_equation = TRUE,
+                                   text_show = TRUE,
+                                   slice_n = NULL,
+                                   sort = "no",
+                                   spline = FALSE,
+                                   subtitle = NULL,
+                                   suffix = NULL,
+                                   suffix_x = NULL,
+                                   suffix_y = NULL,
+                                   suffix_size = NULL,
+                                   title = NULL,
+                                   theme = NULL,
+                                   tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                   ver_label = NULL,
+                                   ver_line = NULL,
+                                   ver_line_label = " ",
                                    opts = NULL, ...) {
 
   if (is.null(data)) {
     stop("Load an available dataset")
   }
 
-  opts <- getOptions(opts = opts)
+  defaultOptions <- list(
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    caption = caption,
+    clickFunction = clickFunction,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_opacity = color_opacity,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_na = drop_na,
+    export = export,
+    fill_opacity = fill_opacity,
+    highlight_value = highlight_value,
+    highlight_value_color = highlight_value_color,
+    hor_label = hor_label,
+    hor_line = hor_line,
+    hor_line_label = hor_line_label,
+    label_wrap = label_wrap,
+    lang = lang,
+    legend_position  = legend_position,
+    legend_show = legend_show,
+    marks = marks,
+    n_digits = n_digits,
+    n_digits_size = n_digits_size,
+    n_digits_y = n_digits_y,
+    n_digits_x = n_digits_x,
+    orientation = orientation,
+    percentage = percentage,
+    prefix = prefix,
+    prefix_size = prefix_size,
+    prefix_x = prefix_x,
+    prefix_y = prefix_y,
+    regression = regression,
+    regression_color = regression_color,
+    regression_equation = regression_equation,
+    text_show = text_show,
+    spline = spline,
+    subtitle = subtitle,
+    suffix = suffix,
+    suffix_x = suffix_x,
+    suffix_y = suffix_y,
+    suffix_size = suffix_size,
+    title = title,
+    theme = theme,
+    tooltip = tooltip,
+    ver_label = ver_label,
+    ver_line = ver_line,
+    ver_line_label = ver_line_label
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
 
   f <- fringe(data)
   nms <- getClabels(f)
@@ -449,13 +739,13 @@ hgch_scatter_CatNumNum <- function(data = NULL,
   labelsXY <- orientationXY('ver',
                             x = nms[1],
                             y = nms[2],
-                            hor = opts$horLabel,
-                            ver = opts$verLabel)
-  lineXY <- linesOrientation('ver', opts$horLine, opts$verLine)
+                            hor = opts$hor_label,
+                            ver = opts$ver_label)
+  lineXY <- linesOrientation('ver', opts$hor_line, opts$ver_line)
 
   lineLabelsXY <- linesOrLabel('ver',
-                               opts$horLine_label,
-                               opts$verLine_label)
+                               opts$hor_line_label,
+                               opts$ver_line_label)
 
 
   if (opts$color_scale == 'discrete') {
@@ -481,16 +771,16 @@ hgch_scatter_CatNumNum <- function(data = NULL,
 
   d <- d %>% drop_na()
 
-  if (is.null(opts$nDigitsY)) {
+  if (is.null(opts$n_digits_y)) {
     nDigY <- 0
   } else {
-    nDigY <- opts$nDigitsY
+    nDigY <- opts$n_digits_y
   }
 
-  if (is.null(opts$nDigitsX)) {
+  if (is.null(opts$n_digits_x)) {
     nDigX <- 0
   } else {
-    nDigX <- opts$nDigitsX
+    nDigX <- opts$n_digits_x
   }
 
 
@@ -500,30 +790,30 @@ hgch_scatter_CatNumNum <- function(data = NULL,
 
 
   formatLabAxisX <- paste0('{value:', opts$marks[1], opts$marks[2], 'f}')
-  if (!is.null(opts$nDigitsX)) {
-    formatLabAxisX <- paste0('{value:', opts$marks[1], opts$marks[2], opts$nDigitsX, 'f}')
+  if (!is.null(opts$n_digits_x)) {
+    formatLabAxisX <- paste0('{value:', opts$marks[1], opts$marks[2], opts$n_digits_x, 'f}')
   }
 
 
   formatLabAxisY <- paste0('{value:', opts$marks[1], opts$marks[2], 'f}')
-  if (!is.null(opts$nDigitsY)) {
-    formatLabAxisY <- paste0('{value:', opts$marks[1], opts$marks[2], opts$nDigitsY, 'f}')
+  if (!is.null(opts$n_digits_y)) {
+    formatLabAxisY <- paste0('{value:', opts$marks[1], opts$marks[2], opts$n_digits_y, 'f}')
   }
 
-  if (is.null(opts$prefixX)) opts$prefixX <- ""
-  if (is.null(opts$prefixY)) opts$prefixY <- ""
-  if (is.null(opts$suffixX)) opts$suffixX <- ""
-  if (is.null(opts$suffixY)) opts$suffixY <- ""
+  if (is.null(opts$prefix_x)) opts$prefix_x <- ""
+  if (is.null(opts$prefix_y)) opts$prefix_y <- ""
+  if (is.null(opts$suffix_x)) opts$suffix_x <- ""
+  if (is.null(opts$suffix_y)) opts$suffix_y <- ""
 
 
-  aggFormAxisX <- paste0("function() { return '", opts$prefixX , "' + Highcharts.numberFormat(this.value, ", nDigX, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffixX, "'}"
+  aggFormAxisX <- paste0("function() { return '", opts$prefix_x , "' + Highcharts.numberFormat(this.value, ", nDigX, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffix_x, "'}"
   )
-  aggFormAxisY <- paste0("function() { return '", opts$prefixY , "' + Highcharts.numberFormat(this.value, ", nDigY, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffixY, "'}"
+  aggFormAxisY <- paste0("function() { return '", opts$prefix_y , "' + Highcharts.numberFormat(this.value, ", nDigY, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffix_y, "'}"
   )
 
 
   if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <- paste0('<b>{series.name}</b><br/>','<b>', nms[1], ':</b> ', paste0(opts$prefixX,'{point.x}', opts$suffixX), '<br/>','<b>', nms[2], ':</b> ', paste0(opts$prefixY,'{point.y}', opts$suffixY))
+    opts$tooltip$pointFormat <- paste0('<b>{series.name}</b><br/>','<b>', nms[1], ':</b> ', paste0(opts$prefix_x,'{point.x}', opts$suffix_x), '<br/>','<b>', nms[2], ':</b> ', paste0(opts$prefix_y,'{point.y}', opts$suffix_y))
   }
   if (is.null(opts$tooltip$headerFormat)) {
     opts$tooltip$headerFormat <- ""
@@ -669,13 +959,13 @@ hgch_scatter_CatNumNumNum <- function(data = NULL,
   labelsXY <- orientationXY('ver',
                             x = nms[1],
                             y = nms[2],
-                            hor = opts$horLabel,
-                            ver = opts$verLabel)
-  lineXY <- linesOrientation('ver', opts$horLine, opts$verLine)
+                            hor = opts$hor_label,
+                            ver = opts$ver_label)
+  lineXY <- linesOrientation('ver', opts$hor_line, opts$ver_line)
 
   lineLabelsXY <- linesOrLabel('ver',
-                               opts$horLine_label,
-                               opts$verLine_label)
+                               opts$hor_line_label,
+                               opts$ver_line_label)
 
 
   if (opts$color_scale == 'discrete') {
@@ -701,22 +991,22 @@ hgch_scatter_CatNumNumNum <- function(data = NULL,
 
   d <- d %>% drop_na()
 
-  if (is.null(opts$nDigitsY)) {
+  if (is.null(opts$n_digits_y)) {
     nDigY <- 0
   } else {
-    nDigY <- opts$nDigitsY
+    nDigY <- opts$n_digits_y
   }
 
-  if (is.null(opts$nDigitsX)) {
+  if (is.null(opts$n_digits_x)) {
     nDigX <- 0
   } else {
-    nDigX <- opts$nDigitsX
+    nDigX <- opts$n_digits_x
   }
 
-  if (is.null(opts$nDigitsSize)) {
+  if (is.null(opts$n_digits_size)) {
     nDigS <- 0
   } else {
-    nDigS <- opts$nDigitsSize
+    nDigS <- opts$n_digits_size
   }
 
   d$b <- round(d$b, nDigX)
@@ -725,32 +1015,32 @@ hgch_scatter_CatNumNumNum <- function(data = NULL,
 
 
   formatLabAxisX <- paste0('{value:', opts$marks[1], opts$marks[2], 'f}')
-  if (!is.null(opts$nDigitsX)) {
-    formatLabAxisX <- paste0('{value:', opts$marks[1], opts$marks[2], opts$nDigitsX, 'f}')
+  if (!is.null(opts$n_digits_x)) {
+    formatLabAxisX <- paste0('{value:', opts$marks[1], opts$marks[2], opts$n_digits_x, 'f}')
   }
 
 
   formatLabAxisY <- paste0('{value:', opts$marks[1], opts$marks[2], 'f}')
-  if (!is.null(opts$nDigitsY)) {
-    formatLabAxisY <- paste0('{value:', opts$marks[1], opts$marks[2], opts$nDigitsY, 'f}')
+  if (!is.null(opts$n_digits_y)) {
+    formatLabAxisY <- paste0('{value:', opts$marks[1], opts$marks[2], opts$n_digits_y, 'f}')
   }
 
-  if (is.null(opts$prefixX)) opts$prefixX <- ""
-  if (is.null(opts$prefixY)) opts$prefixY <- ""
-  if (is.null(opts$prefixSize)) opts$prefixSize <- ""
-  if (is.null(opts$suffixX)) opts$suffixX <- ""
-  if (is.null(opts$suffixY)) opts$suffixY <- ""
-  if (is.null(opts$suffixSize)) opts$suffixSize <- ""
+  if (is.null(opts$prefix_x)) opts$prefix_x <- ""
+  if (is.null(opts$prefix_y)) opts$prefix_y <- ""
+  if (is.null(opts$prefix_size)) opts$prefix_size <- ""
+  if (is.null(opts$suffix_x)) opts$suffix_x <- ""
+  if (is.null(opts$suffix_y)) opts$suffix_y <- ""
+  if (is.null(opts$suffix_size)) opts$suffix_size <- ""
 
 
-  aggFormAxisX <- paste0("function() { return '", opts$prefixX , "' + Highcharts.numberFormat(this.value, ", nDigX, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffixX, "'}"
+  aggFormAxisX <- paste0("function() { return '", opts$prefix_x , "' + Highcharts.numberFormat(this.value, ", nDigX, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffix_x, "'}"
   )
-  aggFormAxisY <- paste0("function() { return '", opts$prefixY , "' + Highcharts.numberFormat(this.value, ", nDigY, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffixY, "'}"
+  aggFormAxisY <- paste0("function() { return '", opts$prefix_y , "' + Highcharts.numberFormat(this.value, ", nDigY, ", '", opts$marks[2], "', '", opts$marks[1], "') + '", opts$suffix_y, "'}"
   )
 
 
   if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <- paste0('<b>{series.name}</b><br/><b>', nms[2], ':</b> ', opts$prefixX,'{point.x}', opts$suffixX, '<br/>','<b>', nms[3], ':</b> ', opts$prefixY,'{point.y}', opts$suffixY, '<br/><b>', nms[4], ':</b> ', opts$prefixSize,'{point.z}', opts$suffixSize, '(size)')
+    opts$tooltip$pointFormat <- paste0('<b>{series.name}</b><br/><b>', nms[2], ':</b> ', opts$prefix_x,'{point.x}', opts$suffix_x, '<br/>','<b>', nms[3], ':</b> ', opts$prefix_y,'{point.y}', opts$suffix_y, '<br/><b>', nms[4], ':</b> ', opts$prefix_size,'{point.z}', opts$suffix_size, '(size)')
   }
   if (is.null(opts$tooltip$headerFormat)) {
     opts$tooltip$headerFormat <- ""

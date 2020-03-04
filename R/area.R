@@ -450,7 +450,8 @@ hgch_area_CatCatNum <- function(data = NULL,
                                 color_hover = NULL,
                                 color_scale = 'discrete',
                                 cursor =  NULL,
-                                drop_na_v = c(FALSE, FALSE),
+                                drop_na =  FALSE,
+                                drop_na_legend = FALSE,
                                 export = FALSE,
                                 fill_opacity = 0.5,
                                 graph_type = "grouped",
@@ -459,7 +460,8 @@ hgch_area_CatCatNum <- function(data = NULL,
                                 hor_label = NULL,
                                 hor_line = NULL,
                                 hor_line_label = " ",
-                                label_wrap_v = c(12, 12),
+                                label_wrap = 12,
+                                label_wrap_legend = 12,
                                 lang = 'es',
                                 legend_position  = "center",
                                 legend_show = TRUE,
@@ -502,7 +504,8 @@ hgch_area_CatCatNum <- function(data = NULL,
     color_hover = color_hover,
     color_scale = color_scale,
     cursor =  cursor,
-    drop_na_v = drop_na_v,
+    drop_na = drop_na,
+    drop_na_legend = drop_na_legend,
     export = export,
     fill_opacity = fill_opacity,
     graph_type = graph_type,
@@ -511,7 +514,8 @@ hgch_area_CatCatNum <- function(data = NULL,
     hor_label = hor_label,
     hor_line = hor_line,
     hor_line_label = hor_line_label,
-    label_wrap_v = label_wrap_v,
+    label_wrap = label_wrap,
+    label_wrap_legend = label_wrap_legend,
     lang = lang,
     legend_position  = legend_position,
     legend_show = legend_show,
@@ -582,13 +586,13 @@ hgch_area_CatCatNum <- function(data = NULL,
     opts$colors <- colorDefault
   }
 
-  if (opts$drop_na_v[1])
-    d <- d %>%
-    tidyr::drop_na(a)
-
-  if(opts$drop_na_v[2])
+  if (opts$drop_na)
     d <- d %>%
     tidyr::drop_na(b)
+
+  if(opts$drop_na_legend)
+    d <- d %>%
+    tidyr::drop_na(a)
 
 
   d <- d %>%
@@ -617,8 +621,8 @@ hgch_area_CatCatNum <- function(data = NULL,
   }
 
 
-  d <- orderCategory(d, "a", order = opts$order1, label_wrap = opts$label_wrap_v[1])
-  d <- orderCategory(d, "b", order = opts$order2, label_wrap = opts$label_wrap_v[2])
+  d <- orderCategory(d, "a", order = opts$order1, label_wrap = opts$label_wrap_legend)
+  d <- orderCategory(d, "b", order = opts$order2, label_wrap = opts$label_wrap)
   d$c <- round(d$c, nDig)
 
 
@@ -787,7 +791,8 @@ hgch_area_CatCat <- function(data = NULL,
                              color_opacity = 0.7,
                              color_scale = 'discrete',
                              cursor =  NULL,
-                             drop_na_v = c(FALSE, FALSE),
+                             drop_na = FALSE,
+                             drop_na_legend = FALSE,
                              export = FALSE,
                              fill_opacity = 0.5,
                              graph_type = "grouped",
@@ -796,7 +801,8 @@ hgch_area_CatCat <- function(data = NULL,
                              hor_label = NULL,
                              hor_line = NULL,
                              hor_line_label = " ",
-                             label_wrap_v = c(12, 12),
+                             label_wrap = 12,
+                             label_wrap_legend = 12,
                              lang = 'es',
                              legend_position  = "center",
                              legend_show = TRUE,
@@ -838,7 +844,8 @@ hgch_area_CatCat <- function(data = NULL,
     color_opacity = color_opacity,
     color_scale = color_scale,
     cursor =  cursor,
-    drop_na_v = drop_na_v,
+    drop_na = drop_na,
+    drop_na_legend = drop_na_legend,
     export = export,
     fill_opacity = fill_opacity,
     graph_type = graph_type,
@@ -847,7 +854,8 @@ hgch_area_CatCat <- function(data = NULL,
     hor_label = hor_label,
     hor_line = hor_line,
     hor_line_label = hor_line_label,
-    label_wrap_v = label_wrap_v,
+    label_wrap = label_wrap,
+    label_wrap_legend = label_wrap_legend,
     lang = lang,
     legend_position  = legend_position,
     legend_show = legend_show,
