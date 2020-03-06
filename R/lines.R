@@ -274,11 +274,11 @@ hgch_line_CatNum <-  function(data,
         )
       ))}
 
-  if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(background = opts$background, showText = opts$text_show, colors = opts$colors)))
-  } else {
-    hc <- hc %>% hc_add_theme(opts$theme)
-  }
+
+  theme_user <- opts$theme
+  optsTheme <- list(showText = opts$text_show, colors = opts$colors, background = opts$background)
+  themeCustom <- modifyList(optsTheme, theme_user %||% list())
+  hc <- hc %>% hc_add_theme(tma(custom = themeCustom))
 
   if (opts$text_show) {
     hc <- hc %>%
@@ -347,13 +347,13 @@ hgch_line_Cat <-  function(data,
   if (is.null(data)) {
     stop("Load an available dataset")
   }
-data <- sampleData("Cat")
+
   f <- fringe(data)
   nms <- getClabels(f)
   d <- f$d
 
   d <- d %>%
-    dplyr::group_by_all() %>%
+    dplyr::group_by(a) %>%
     dplyr::summarise(b = n())
 
   defaultOptions <- list(
@@ -724,11 +724,12 @@ hgch_line_CatCatNum <- function(data,
           menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
         )
       ))}
-  if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$text_show, colors = opts$colors, background = opts$background)))
-  } else {
-    hc <- hc %>% hc_add_theme(opts$theme)
-  }
+
+  theme_user <- opts$theme
+  optsTheme <- list(showText = opts$text_show, colors = opts$colors, background = opts$background)
+  themeCustom <- modifyList(optsTheme, theme_user %||% list())
+  hc <- hc %>% hc_add_theme(tma(custom = themeCustom))
+
 
   if (opts$text_show) {
     hc <- hc %>%

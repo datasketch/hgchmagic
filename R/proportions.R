@@ -213,11 +213,10 @@ hgch_pie_CatNum <-  function(data,
           menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
         )
       ))}
-  if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$text_show, colors = opts$colors, background = opts$background)))
-  } else {
-    hc <- hc %>% hc_add_theme(opts$theme)
-  }
+  theme_user <- opts$theme
+  optsTheme <- list( colors = opts$colors, background = opts$background)
+  themeCustom <- modifyList(optsTheme, theme_user %||% list())
+  hc <- hc %>% hc_add_theme(tma(custom = themeCustom))
 
 
   if (opts$text_show) {
@@ -544,11 +543,11 @@ hgch_donut_CatNum <-  function(data,
           menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
         )
       ))}
-  if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$text_show, colores = opts$colors, background = opts$background)))
-  } else {
-    hc <- hc %>% hc_add_theme(opts$theme)
-  }
+
+  theme_user <- opts$theme
+  optsTheme <- list(colors = opts$colors, background = opts$background)
+  themeCustom <- modifyList(optsTheme, theme_user %||% list())
+  hc <- hc %>% hc_add_theme(tma(custom = themeCustom))
 
   if (opts$text_show) {
     hc <- hc %>%

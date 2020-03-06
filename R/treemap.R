@@ -108,14 +108,14 @@ hgch_treemap_CatNum <-  function(data,
     colorDefault <- leaflet::colorNumeric(c("#2E0F35", "#A6CEDE"), 1:length(unique(d$a)))(1:length(unique(d$a)))
   }
 
+  colores_treemap <- opts$colors
+  if (!is.null(opts$theme$colors)) colores_treemap <- opts$theme$colors
 
-  if (!is.null(opts$colors)) {
-    opts$colors <- unname(fillColors(d, "a", opts$colors, opts$color_scale))
+  if (!is.null(colores_treemap)) {
+    opts$colors <- unname(fillColors(d, "a",colores_treemap, opts$color_scale))
   } else {
     opts$colors <- colorDefault
   }
-
-
   d <- d  %>%
     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
                            b = NA)) %>%
@@ -231,11 +231,13 @@ hgch_treemap_CatNum <-  function(data,
         )
       ))}
 
-  if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(colors = opts$colors, background = opts$background))
-  } else {
-    hc <- hc %>% hc_add_theme(opts$theme)
-  }
+
+  theme_user <- opts$theme
+  optsTheme <- list(background = opts$background)
+  themeCustom <- modifyList(optsTheme, theme_user %||% list())
+  hc <- hc %>% hc_add_theme(tma(custom = themeCustom ))
+
+
   hc
 }
 
@@ -460,9 +462,11 @@ hgch_treemap_CatCatNum <- function(data,
     colorDefault <- leaflet::colorNumeric(c("#2E0F35", "#A6CEDE"), 1:length(unique(d$a)))(1:length(unique(d$a)))
   }
 
+  colores_treemap <- opts$colors
+  if (!is.null(opts$theme$colors)) colores_treemap <- opts$theme$colors
 
-  if (!is.null(opts$colors)) {
-    opts$colors <- unname(fillColors(d, "a",opts$colors, opts$color_scale))
+  if (!is.null(colores_treemap)) {
+    opts$colors <- unname(fillColors(d, "a",colores_treemap, opts$color_scale))
   } else {
     opts$colors <- colorDefault
   }
@@ -584,11 +588,11 @@ hgch_treemap_CatCatNum <- function(data,
         )
       ))}
 
-  if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(colores = opts$colors, background = opts$background))
-  } else {
-    hc <- hc %>% hc_add_theme(opts$theme)
-  }
+  theme_user <- opts$theme
+  optsTheme <- list( background = opts$background)
+  themeCustom <- modifyList(optsTheme, theme_user %||% list())
+  hc <- hc %>% hc_add_theme(tma(custom = themeCustom ))
+
   hc
 }
 

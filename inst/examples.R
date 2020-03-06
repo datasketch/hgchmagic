@@ -169,10 +169,10 @@ hgch_bar_CatNumP(dfCNp, graphType = "stacked", orientation = "hor", percentage =
 # Líneas ------------------------------------------------------------------
 # Categoricas
 
-datCat <- sampleData('Cat', nrow = 300)
+datCat <- sampleData('Cat', nrow = 1300)
 opts <- list(
   horLine = 40,
-  theme = tma(list(showText = FALSE))
+  theme = tma(list(showText = FALSE, background = '#FEAFEA'))
 )
 hgch_line_Cat(datCat, opts = opts)
 hgch_line_Cat(datCat, opts = list(orientation = 'hor', horLine = 5, export = TRUE))

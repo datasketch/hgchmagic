@@ -286,11 +286,11 @@ hgch_area_CatNum <-  function(data = NULL,
           menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
         )
       ))}
-  if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$text_show, colors = opts$colors, background = opts$background)))
-  } else {
-    hc <- hc %>% hc_add_theme(opts$theme)
-  }
+
+  theme_user <- opts$theme
+  optsTheme <- list(showText = opts$text_show, colors = opts$colors,  background = opts$background)
+  themeCustom <- modifyList(optsTheme, theme_user %||% list())
+  hc <- hc %>% hc_add_theme(tma(custom = themeCustom))
 
   if (opts$text_show) {
     hc <- hc %>%
@@ -749,11 +749,11 @@ hgch_area_CatCatNum <- function(data = NULL,
           menuItems = list('printChart', 'downloadJPEG', 'downloadPNG', 'downloadSVG', 'downloadPDF')
         )
       ))}
-  if (is.null(opts$theme)) {
-    hc <- hc %>% hc_add_theme(tma(custom = list(showText = opts$text_show, colors = opts$colors, background = opts$background)))
-  } else {
-    hc <- hc %>% hc_add_theme(opts$theme)
-  }
+
+  theme_user <- opts$theme
+  optsTheme <- list(showText = opts$text_show, colors = opts$colors,  background = opts$background)
+  themeCustom <- modifyList(optsTheme, theme_user %||% list())
+  hc <- hc %>% hc_add_theme(tma(custom = themeCustom))
 
   if (opts$text_show) {
     hc <- hc %>%

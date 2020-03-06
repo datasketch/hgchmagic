@@ -8,92 +8,88 @@ global_options <- function(marksMil, marksDec){
 }
 
 
-getDefaultTheme <- list(
-  background = "#ffffff",
 
-  border_color = 'transparent',
-  border_radius = 0,
-  border_width = 0,
-  border_widthBar = 0,
-
-  colors = NULL,
-  colors_diff= TRUE,
-
-  font_family = "Ubuntu",
-  font_size = '11px',
-  font_color = '#5A6B72',
-
-  height = NULL,
-
-  margin_bottom = NULL,
-  margin_left = NULL,
-  margin_right = NULL,
-  margin_top = NULL,
-
-  width = NULL,
-
-
-  plot_backgroundColor = "transparent",
-  plot_borderColor = "#cccccc",
-  plot_borderWidth = 0,
-
-  showText = TRUE,
-  symbLine = TRUE,
-
-  line_width = 2,
-
-  negativeColor = FALSE,
-
-  linePointStart = 0,
-  labsData_colLabel = 'contrast',
-  labsData_familyLabel = 'Ubuntu',
-  labsData_size = NULL,
-  labsData_textDecoration = 'none',
-  labsData_textShadow = 'none',
-  labsData_textOutline = 'none',
-
-
-  legend_show = TRUE,
-  legend_background = "transparent",
-  legend_backgroundBorderColor = "#5A6B72",
-  legend_backgroundWidth = 0,
-
-  stylesY_gridLineWidth = 1,
-  stylesY_lineColor = '#5A6B72',
-  stylesY_tickColor = 'transparent',
-  stylesY_gridLineColor = '#5A6B72',
-  stylesY_tickLength = 10,
-  stylesY_lineWidth = 0,
-  stylesY_gridLineDashStyle = 'dot',
-  stylesLabelY_fontSize = '11px',
-  stylesTitleY_fontWeight = 'normal',
-  stylesLabelY_fontWeight = NULL,
-  stylesLabelY_enabled =TRUE,
-  stylesTitleY_fontSize = '13px',
-  stylesTitleX_fontWeight = 'normal',
-  stylesX_gridLineWidth = 0,
-  stylesX_lineColor = '#5A6B72',
-  stylesX_tickColor = '#5A6B72',
-  stylesX_gridLineColor = '#5A6B72',
-  stylesX_tickLength = 0,
-  stylesX_lineWidth = 1,
-  stylesLabelX_fontSize = '11px',
-  stylesLabelX_fontWeight = NULL,
-  stylesLabelX_enabled =TRUE,
-  stylesTitleX_fontSize = '13px'
-)
 
 getTheme <- function(theme = NULL){
 
-  userTheme <- theme
-  defaultTheme <- getDefaultTheme
 
-  if(!is.null(theme)){
-    theme <- modifyList(defaultTheme, userTheme)
-  }else{
-    theme <- defaultTheme
-  }
+  getDefaultTheme <- list(
+    background = "#ffffff",
 
+    border_color = 'transparent',
+    border_radius = 0,
+    border_width = 0,
+    border_widthBar = 0,
+
+    colors = c("#3DB26F", "#FECA84", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1"),
+    colors_diff= TRUE,
+
+    font_family = "Ubuntu",
+    font_size = '11px',
+    font_color = '#5A6B72',
+    font_size_title = '23px',
+    font_size_subtitle = '17px',
+    font_size_caption = '13px',
+    height = NULL,
+
+    margin_bottom = NULL,
+    margin_left = NULL,
+    margin_right = NULL,
+    margin_top = NULL,
+
+    width = NULL,
+
+
+    plot_backgroundColor = "transparent",
+    plot_borderColor = "#cccccc",
+    plot_borderWidth = 0,
+
+    showText = TRUE,
+    symbLine = TRUE,
+
+    line_width = 2,
+
+    negativeColor = FALSE,
+
+    linePointStart = 0,
+    labsData_colLabel = 'contrast',
+    labsData_familyLabel = 'Ubuntu',
+    labsData_size = NULL,
+    labsData_textDecoration = 'none',
+    labsData_textShadow = 'none',
+    labsData_textOutline = 'none',
+
+
+    legend_show = TRUE,
+    legend_background = "transparent",
+    legend_backgroundBorderColor = "#5A6B72",
+    legend_backgroundWidth = 0,
+
+    stylesY_gridLineWidth = 1,
+    stylesY_lineColor = '#5A6B72',
+    stylesY_tickColor = 'transparent',
+    stylesY_gridLineColor = '#5A6B72',
+    stylesY_tickLength = 10,
+    stylesY_lineWidth = 0,
+    stylesY_gridLineDashStyle = 'dot',
+    stylesLabelY_fontSize = '11px',
+    stylesTitleY_fontWeight = 'normal',
+    stylesLabelY_fontWeight = NULL,
+    stylesLabelY_enabled =TRUE,
+    stylesTitleY_fontSize = '13px',
+    stylesTitleX_fontWeight = 'normal',
+    stylesX_gridLineWidth = 0,
+    stylesX_lineColor = '#5A6B72',
+    stylesX_tickColor = '#5A6B72',
+    stylesX_gridLineColor = '#5A6B72',
+    stylesX_tickLength = 0,
+    stylesX_lineWidth = 1,
+    stylesLabelX_fontSize = '11px',
+    stylesLabelX_fontWeight = NULL,
+    stylesLabelX_enabled =TRUE,
+    stylesTitleX_fontSize = '13px'
+  )
+  theme <-  modifyList(getDefaultTheme, theme %||% list())
   theme
 }
 
@@ -103,8 +99,8 @@ tma <- function(custom = NULL, ...) {
 
   custom <- getTheme(theme = custom)
 
-  if (is.null(custom$colors)) custom$colors <-  c("#3DB26F", "#FECA84", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1")
-  if (length(custom$colors)) custom$colors <- c(custom$colors, custom$colors)
+  #if (is.null(custom$colors)) custom$colors <-
+  if (length(custom$colors) == 1) custom$colors <- c(custom$colors, custom$colors)
 
   hc_theme(
     colors = custom$colors,
@@ -128,6 +124,27 @@ tma <- function(custom = NULL, ...) {
         fontFamily = custom$font_family,
         fontSize = custom$font_size
       )),
+    title = list(
+      style = list(
+        fontFamily = custom$font_family,
+        fontSize = custom$font_size_title,
+        color = custom$font_color
+      )
+    ),
+    subtitle = list(
+      style = list(
+        fontFamily = custom$font_family,
+        fontSize = custom$font_size_subtitle,
+        color = custom$font_color
+      )
+    ),
+    credits = list(
+      style = list(
+        fontFamily = custom$font_family,
+        fontSize = custom$font_size_caption,
+        color = custom$font_color
+      )
+    ),
     plotOptions = list (
       packedbubble = list(
         dataLabels = list (
@@ -204,7 +221,7 @@ tma <- function(custom = NULL, ...) {
           enabled = custom$symbLine
         )
       )
-      ),
+    ),
     xAxis = list (
       gridLineWidth = custom$stylesX_gridLineWidth,
       lineColor = custom$stylesX_lineColor, #color del eje x
@@ -253,12 +270,12 @@ tma <- function(custom = NULL, ...) {
       )
     ),
     legend = list(
-    backgroundColor = custom$legend_background,
-    borderColor = custom$legend_backgroundBorderColor,
-    #borderWidth = custom$legend$backgroundWidth,
-    itemStyle = list(
-      color = custom$font_color
-  )
-  )
+      backgroundColor = custom$legend_background,
+      borderColor = custom$legend_backgroundBorderColor,
+      #borderWidth = custom$legend$backgroundWidth,
+      itemStyle = list(
+        color = custom$font_color
+      )
+    )
   )
 }
