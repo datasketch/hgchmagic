@@ -17,4 +17,4 @@ Depends:
     highcharter (>= 0.4.0.9999)
 License: MIT
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0

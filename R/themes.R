@@ -29,7 +29,9 @@ getTheme <- function(theme = NULL){
     font_color = '#5A6B72',
     font_size_title = '23px',
     font_size_subtitle = '17px',
+    font_color_caption = '#5A6B72',
     font_size_caption = '13px',
+    font_weight = "bold",
     height = NULL,
 
     margin_bottom = NULL,
@@ -81,6 +83,7 @@ getTheme <- function(theme = NULL){
     stylesX_gridLineWidth = 0,
     stylesX_lineColor = '#5A6B72',
     stylesX_tickColor = '#5A6B72',
+    stylesX_tickWidth = 0,
     stylesX_gridLineColor = '#5A6B72',
     stylesX_tickLength = 0,
     stylesX_lineWidth = 1,
@@ -128,7 +131,8 @@ tma <- function(custom = NULL, ...) {
       style = list(
         fontFamily = custom$font_family,
         fontSize = custom$font_size_title,
-        color = custom$font_color
+        color = custom$font_color,
+        fontWeight = custom$font_weight
       )
     ),
     subtitle = list(
@@ -142,7 +146,7 @@ tma <- function(custom = NULL, ...) {
       style = list(
         fontFamily = custom$font_family,
         fontSize = custom$font_size_caption,
-        color = custom$font_color
+        color = custom$font_color_caption
       )
     ),
     plotOptions = list (
@@ -229,6 +233,7 @@ tma <- function(custom = NULL, ...) {
       gridLineColor = custom$stylesX_gridLineColor,
       tickLength = custom$stylesX_tickLength,
       lineWidth= custom$stylesX_lineWidth,
+      tickWidth = custom$stylesX_tickWidth,
       labels = list(
         style = list(
           color = custom$font_color, #color nombre de las etiquetas

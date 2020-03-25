@@ -896,3 +896,140 @@ hgch_area_CatCat <- function(data = NULL,
   h <- hgch_area_CatCatNum(data = d, opts = opts, ...)
   h
 }
+
+#' @export
+hgch_area_CatDatNum <- function(data = NULL,
+                                agg = "sum",
+                                agg_text = NULL,
+                                allow_point = FALSE,
+                                background = "#ffffff",
+                                caption = NULL,
+                                click_function = NULL,
+                                colors = NULL,
+                                color_click = NULL,
+                                color_hover = NULL,
+                                color_scale = 'discrete',
+                                cursor =  NULL,
+                                drop_na =  FALSE,
+                                drop_na_legend = FALSE,
+                                export = FALSE,
+                                fill_opacity = 0.5,
+                                graph_type = "grouped",
+                                highlight_value = NULL,
+                                highlight_value_color = '#F9B233',
+                                hor_label = NULL,
+                                hor_line = NULL,
+                                hor_line_label = " ",
+                                label_wrap = 12,
+                                label_wrap_legend = 12,
+                                lang = 'es',
+                                legend_position  = "center",
+                                legend_show = TRUE,
+                                marks = c(".", ","),
+                                n_digits = NULL,
+                                order1 = NULL,
+                                order2 = NULL,
+                                orientation = "ver",
+                                percentage = FALSE,
+                                prefix = NULL,
+                                text_show = TRUE,
+                                slice_n = NULL,
+                                sort = "no",
+                                spline = FALSE,
+                                start_zero = TRUE,
+                                subtitle = NULL,
+                                suffix = NULL,
+                                title = NULL,
+                                theme = NULL,
+                                tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                ver_label = NULL,
+                                ver_line = NULL,
+                                ver_line_label = " ",
+                                opts = NULL, ...) {
+
+  if (is.null(data)) {
+    stop("Load an available dataset")
+  }
+
+  defaultOptions <- list(
+    agg = agg,
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    caption = caption,
+    click_function = click_function,
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_na = drop_na,
+    drop_na_legend = drop_na_legend,
+    export = export,
+    fill_opacity = fill_opacity,
+    graph_type = graph_type,
+    highlight_value = highlight_value,
+    highlight_value_color = highlight_value_color,
+    hor_label = hor_label,
+    hor_line = hor_line,
+    hor_line_label = hor_line_label,
+    label_wrap = label_wrap,
+    label_wrap_legend = label_wrap_legend,
+    lang = lang,
+    legend_position  = legend_position,
+    legend_show = legend_show,
+    marks = marks,
+    n_digits = n_digits,
+    order1 = order1,
+    order2 = order2,
+    orientation = orientation,
+    percentage = percentage,
+    prefix = prefix,
+    text_show = text_show,
+    slice_n = slice_n,
+    sort = sort,
+    spline = spline,
+    start_zero = start_zero,
+    subtitle = subtitle,
+    suffix = suffix,
+    title = title,
+    theme = theme,
+    tooltip = tooltip,
+    ver_label = ver_label,
+    ver_line = ver_line,
+    ver_line_label = ver_line_label
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
+
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+
+  d <- d %>% drop_na(b)
+
+  dates <- full_seq(d$b, 1)
+
+  d <- d %>% group_by(a, b) %>%
+    summarise(cases = sum(c)) %>%
+    ungroup()
+
+  d <- d %>%
+    group_by(a) %>%
+    mutate(cumcases = cumsum(cases)) %>% ungroup() %>%
+    select(-cases)
+
+
+  d <- d %>%
+    complete(b = dates, a, fill = list(cumcases = NA)) %>%
+    group_by(a) %>%
+    fill(cumcases) %>%
+    ungroup() %>%
+    mutate(cumcases = ifelse(is.na(cumcases), 0, cumcases)) %>%
+    select(2,1,Casos = cumcases)
+
+
+  names(d) <- names(data)
+  hgch_area_CatCatNum(d, opts = opts, ...)
+
+}
