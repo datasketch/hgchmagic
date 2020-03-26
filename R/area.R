@@ -1033,3 +1033,135 @@ hgch_area_CatDatNum <- function(data = NULL,
   hgch_area_CatCatNum(d, opts = opts, ...)
 
 }
+
+
+
+
+#' Area (categories, date, numbers)
+#'
+#' Compare quantities among two categories
+#'
+#' @param data A data.frame
+#' @return Highcharts visualization
+#' @section ctypes:
+#' Cat-Dat
+#' @examples
+#' hgch_area_CatDat(sampleData("Cat-Cat-Num", nrow = 10))
+#' @export hgch_area_CatDat
+hgch_area_CatDat <- function(data = NULL,
+                             agg_text = NULL,
+                             allow_point = FALSE,
+                             background = "#ffffff",
+                             caption = NULL,
+                             click_function = NULL,
+                             colors = NULL,
+                             color_click = NULL,
+                             color_hover = NULL,
+                             color_opacity = 0.7,
+                             color_scale = 'discrete',
+                             cursor =  NULL,
+                             drop_na = FALSE,
+                             drop_na_legend = FALSE,
+                             export = FALSE,
+                             fill_opacity = 0.5,
+                             graph_type = "grouped",
+                             highlight_value = NULL,
+                             highlight_value_color = '#F9B233',
+                             hor_label = NULL,
+                             hor_line = NULL,
+                             hor_line_label = " ",
+                             label_wrap = 12,
+                             label_wrap_legend = 12,
+                             lang = 'es',
+                             legend_position  = "center",
+                             legend_show = TRUE,
+                             marks = c(".", ","),
+                             n_digits = NULL,
+                             order1 = NULL,
+                             order2 = NULL,
+                             orientation = "ver",
+                             percentage = FALSE,
+                             prefix = NULL,
+                             text_show = TRUE,
+                             slice_n = NULL,
+                             sort = "no",
+                             spline = FALSE,
+                             start_zero = TRUE,
+                             subtitle = NULL,
+                             suffix = NULL,
+                             title = NULL,
+                             theme = NULL,
+                             tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                             ver_label = NULL,
+                             ver_line = NULL,
+                             ver_line_label = " ",
+                             opts = NULL, ...) {
+
+  if (is.null(data)) {
+    stop("Load an available dataset")
+  }
+
+  defaultOptions <- list(
+    agg_text = agg_text,
+    allow_point = allow_point,
+    background = background,
+    caption = caption,
+    click_function = click_function,
+    colors = colors,
+    color_click = color_click,
+    color_hover = color_hover,
+    color_opacity = color_opacity,
+    color_scale = color_scale,
+    cursor =  cursor,
+    drop_na = drop_na,
+    drop_na_legend = drop_na_legend,
+    export = export,
+    fill_opacity = fill_opacity,
+    graph_type = graph_type,
+    highlight_value = highlight_value,
+    highlight_value_color = highlight_value_color,
+    hor_label = hor_label,
+    hor_line = hor_line,
+    hor_line_label = hor_line_label,
+    label_wrap = label_wrap,
+    label_wrap_legend = label_wrap_legend,
+    lang = lang,
+    legend_position  = legend_position,
+    legend_show = legend_show,
+    marks = marks,
+    n_digits = n_digits,
+    order1 = order1,
+    order2 = order2,
+    orientation = orientation,
+    percentage = percentage,
+    prefix = prefix,
+    text_show = text_show,
+    slice_n = slice_n,
+    sort = sort,
+    spline = spline,
+    start_zero = start_zero,
+    subtitle = subtitle,
+    suffix = suffix,
+    title = title,
+    theme = theme,
+    tooltip = tooltip,
+    ver_label = ver_label,
+    ver_line = ver_line,
+    ver_line_label = ver_line_label
+  )
+
+  opts <- modifyList(defaultOptions, opts %||% list())
+  f <- fringe(data)
+  nms <- getClabels(f)
+  d <- f$d
+
+  d <- d %>%
+    dplyr::group_by_all() %>%
+    dplyr::summarise(c = n())
+
+  prefix_agg <- ifelse(is.null(opts$agg_text), "count ", opts$agg_text)
+  names(d) <- c(f$dic_$d$label, paste0(prefix_agg, f$dic_$d$label[1]))
+
+  h <- hgch_area_CatDatNum(data = d, opts = opts, ...)
+  h
+}
