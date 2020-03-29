@@ -8,6 +8,10 @@ agg <- function(aggregation,...){
     f <- mean(..., na.rm = TRUE)
   if(aggregation == "median")
     f <- median(..., na.rm = TRUE)
+  if(aggregation == "max")
+    f <- max(..., na.rm = TRUE)
+  if(aggregation == "min")
+    f <- min(..., na.rm = TRUE)
   f
 }
 

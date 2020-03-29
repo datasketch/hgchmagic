@@ -1,6 +1,8 @@
 #' save
 #' @export
-save_hgchmagic <- function (viz, filename, format = NULL, width = 660, height = 500, ...) {
+save_hgchmagic <- function (viz, filename, format = NULL,
+                            delay = 0.5,
+                            width = 660, height = 500, ...) {
   if (is.null(format)) {
     format <- file_ext(filename) %||% "png"
   }
@@ -13,6 +15,7 @@ save_hgchmagic <- function (viz, filename, format = NULL, width = 660, height = 
   }
   else {
     webshot::webshot(tmp, paste0(filename, ".", format),
+                     delay = delay,
                      vwidth = width, vheight = height)
   }
   file.copy(filename, filename)

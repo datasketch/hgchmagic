@@ -4,7 +4,15 @@
 \alias{save_hgchmagic}
 \title{save}
 \usage{
-save_hgchmagic(viz, filename, format = NULL, width = 660, height = 500, ...)
+save_hgchmagic(
+  viz,
+  filename,
+  format = NULL,
+  delay = 0.5,
+  width = 660,
+  height = 500,
+  ...
+)
 }
 \description{
 save
