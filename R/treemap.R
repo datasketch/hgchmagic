@@ -332,7 +332,7 @@ hgch_treemap_Cat <-  function(data,
 
   prefix_agg <- ifelse(is.null(opts$agg_text), "count ", opts$agg_text)
   names(d) <- c(f$dic_$d$label, paste0(prefix_agg, f$dic_$d$label[1]))
-
+  opts$agg_text <- " "
   h <- hgch_treemap_CatNum(data = d, opts = opts, ...)
   h
 }
