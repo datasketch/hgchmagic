@@ -15,7 +15,7 @@ hgch_bar_CatNum <-  function(data = NULL,
                              allow_point = FALSE,
                              background = "#ffffff",
                              caption = NULL,
-                             clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                             clickFunction = NULL,
                              colors = NULL,
                              color_click = NULL,
                              color_hover = NULL,
@@ -43,7 +43,7 @@ hgch_bar_CatNum <-  function(data = NULL,
                              suffix = NULL,
                              title = NULL,
                              theme = NULL,
-                             tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                             tooltip = NULL,
                              ver_label = NULL,
                              ver_line = NULL,
                              ver_line_label = " ",
@@ -59,7 +59,7 @@ hgch_bar_CatNum <-  function(data = NULL,
     allow_point = allow_point,
     background = background,
     caption = caption,
-    clickFunction = clickFunction,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+    clickFunction = clickFunction,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
@@ -200,12 +200,10 @@ hgch_bar_CatNum <-  function(data = NULL,
   )
 
 
-  if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(prefix_agg, ' ' ,nms[2], ': '), opts$prefix,'{point.y}', opts$suffix)
-  }
-  if (is.null(opts$tooltip$headerFormat)) {
-    opts$tooltip$headerFormat <- ""
-  }
+  if (is.null(opts$tooltip)) opts$tooltip <- paste0('<b>{point.name}</b><br/>',
+                                                    paste0(prefix_agg, ' ' ,nms[2], ': '),
+                                                    opts$prefix,'{point.y}', opts$suffix)
+
 
   global_options(opts$marks[1], opts$marks[2])
   exportLang(language = opts$lang)
@@ -213,7 +211,7 @@ hgch_bar_CatNum <-  function(data = NULL,
     hc_chart(type = ifelse(opts$orientation == "hor", "bar", "column")) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_xAxis(
       title =  list(text = labelsXY[1]),
       plotLines = list(
@@ -322,7 +320,7 @@ hgch_bar_Cat <-  function(data,
                           allow_point = FALSE,
                           background = "#ffffff",
                           caption = NULL,
-                          clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                          clickFunction = NULL,
                           colors = NULL,
                           color_click = NULL,
                           color_hover = NULL,
@@ -350,7 +348,7 @@ hgch_bar_Cat <-  function(data,
                           suffix = NULL,
                           title = NULL,
                           theme = NULL,
-                          tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                          tooltip = NULL,
                           ver_label = NULL,
                           ver_line = NULL,
                           ver_line_label = " ",
@@ -374,7 +372,7 @@ hgch_bar_Cat <-  function(data,
     allow_point = allow_point,
     background = background,
     caption = caption,
-    clickFunction = clickFunction,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+    clickFunction = clickFunction,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
@@ -474,7 +472,7 @@ hgch_bar_CatCatNum <- function(data,
                                suffix = NULL,
                                title = NULL,
                                theme = NULL,
-                               tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                               tooltip = NULL,
                                ver_label = NULL,
                                ver_line = NULL,
                                ver_line_label = NULL,
@@ -642,15 +640,12 @@ hgch_bar_CatCatNum <- function(data,
   )
 
 
-  if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <-paste0('<b>', nms[2], ': </b>{point.category}</br>',
-                                      '<b>', nms[1], ': </b>{series.name}</br>',
-                                      paste0(prefix_agg, ' ' ,nms[3], ': '), opts$prefix,'{point.y}', opts$suffix)
+  if (is.null(opts$tooltip)) {
+    opts$tooltip <- paste0('<b>', nms[2], ': </b>{point.category}</br>',
+                           '<b>', nms[1], ': </b>{series.name}</br>',
+                           paste0(prefix_agg, ' ' ,nms[3], ': '),
+                           opts$prefix,'{point.y}', opts$suffix)
   }
-  if (is.null(opts$tooltip$headerFormat)) {
-    opts$tooltip$headerFormat <- " "
-  }
-
 
   global_options(opts$marks[1], opts$marks[2])
   exportLang(language = opts$lang)
@@ -698,7 +693,7 @@ hgch_bar_CatCatNum <- function(data,
         formatter = JS(aggFormAxis)
       )) %>%
     hc_add_series_list(series) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_plotOptions(
       bar = list(
@@ -818,7 +813,7 @@ hgch_bar_CatCat <-function(data,
                            suffix = NULL,
                            title = NULL,
                            theme = NULL,
-                           tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                           tooltip = NULL,
                            ver_label = NULL,
                            ver_line = NULL,
                            ver_line_label = NULL,

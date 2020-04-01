@@ -12,7 +12,7 @@ hgch_scatter_NumNum <- function(data = NULL,
                                 bubble_min = '3%',
                                 bubble_max = '12%',
                                 caption = NULL,
-                                clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                clickFunction = NULL,
                                 colors = NULL,
                                 color_click = NULL,
                                 color_hover = NULL,
@@ -40,7 +40,7 @@ hgch_scatter_NumNum <- function(data = NULL,
                                 suffix_y = NULL,
                                 title = NULL,
                                 theme = NULL,
-                                tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                tooltip = NULL,
                                 ver_label = NULL,
                                 ver_line = NULL,
                                 ver_line_label = " ",
@@ -55,7 +55,7 @@ hgch_scatter_NumNum <- function(data = NULL,
     allow_point = allow_point,
     background = background,
     caption = caption,
-    clickFunction = clickFunction,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+    clickFunction = clickFunction,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
@@ -160,12 +160,10 @@ aggFormAxisY <- paste0("function() { return '", opts$prefix_y , "' + Highcharts.
 
 global_options(opts$marks[1], opts$marks[2])
 exportLang(language = opts$lang)
-if (is.null(opts$tooltip$pointFormat)) {
-  opts$tooltip$pointFormat <- paste0('<b>', nms[1], ':</b> ', paste0(opts$prefix_x,'{point.x}', opts$suffix_x), '<br/>','<b>', nms[2], ':</b> ', paste0(opts$prefix_y,'{point.y}', opts$suffix_y))
+if (is.null(opts$tooltip)) {
+  opts$tooltip <- paste0('<b>', nms[1], ':</b> ', paste0(opts$prefix_x,'{point.x}', opts$suffix_x), '<br/>','<b>', nms[2], ':</b> ', paste0(opts$prefix_y,'{point.y}', opts$suffix_y))
 }
-if (is.null(opts$tooltip$headerFormat)) {
-  opts$tooltip$headerFormat <- ""
-}
+
 data_list <- map(1:nrow(d), function(z) {
   list(d$a[z], d$b[z])
 })
@@ -179,7 +177,7 @@ hc <- highchart() %>%
   hc_title(text = title) %>%
   hc_subtitle(text = subtitle) %>%
   hc_tooltip(useHTML=TRUE,
-             pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
+             pointFormat = opts$tooltip, headerFormat = NULL) %>%
   hc_xAxis(
     title =  list(text = labelsXY[1]),
     labels = list (
@@ -299,7 +297,7 @@ hgch_scatter_NumNumNum <- function(data = NULL,
                                    allow_point = FALSE,
                                    background = "#ffffff",
                                    caption = NULL,
-                                   clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                   clickFunction = NULL,
                                    colors = NULL,
                                    color_click = NULL,
                                    color_hover = NULL,
@@ -343,7 +341,7 @@ hgch_scatter_NumNumNum <- function(data = NULL,
                                    suffix_size = NULL,
                                    title = NULL,
                                    theme = NULL,
-                                   tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                   tooltip = NULL,
                                    ver_label = NULL,
                                    ver_line = NULL,
                                    ver_line_label = " ",
@@ -358,7 +356,7 @@ hgch_scatter_NumNumNum <- function(data = NULL,
     allow_point = allow_point,
     background = background,
     caption = caption,
-    clickFunction = clickFunction,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+    clickFunction = clickFunction,
     colors = colors,
     color_click = color_click,
     color_hover = color_hover,
@@ -495,11 +493,8 @@ hgch_scatter_NumNumNum <- function(data = NULL,
   )
 
 
-  if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <- paste0('<b>',nms[1], ': </b>', opts$prefix_x,'{point.x}', opts$suffix_x, '<br/>','<b>', nms[2], ':</b> ', opts$prefix_y,'{point.y}', opts$suffix_y, '<br/><b>', nms[3], ':</b> ', opts$prefix_size,'{point.z}', opts$suffix_size, '(size)')
-  }
-  if (is.null(opts$tooltip$headerFormat)) {
-    opts$tooltip$headerFormat <- ""
+  if (is.null(opts$tooltip)) {
+    opts$tooltip <- paste0('<b>',nms[1], ': </b>', opts$prefix_x,'{point.x}', opts$suffix_x, '<br/>','<b>', nms[2], ':</b> ', opts$prefix_y,'{point.y}', opts$suffix_y, '<br/><b>', nms[3], ':</b> ', opts$prefix_size,'{point.z}', opts$suffix_size, '(size)')
   }
 
   global_options(opts$marks[1], opts$marks[2])
@@ -522,7 +517,7 @@ hgch_scatter_NumNumNum <- function(data = NULL,
     hc_add_dependency("plugins/highcharts-regression.js") %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_xAxis(
       title =  list(text = labelsXY[1]),
       labels = list (
@@ -619,7 +614,7 @@ hgch_scatter_CatNumNum <- function(data = NULL,    agg = "sum",
                                    allow_point = FALSE,
                                    background = "#ffffff",
                                    caption = NULL,
-                                   clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                   clickFunction = NULL,
                                    colors = NULL,
                                    color_click = NULL,
                                    color_hover = NULL,
@@ -663,7 +658,7 @@ hgch_scatter_CatNumNum <- function(data = NULL,    agg = "sum",
                                    suffix_size = NULL,
                                    title = NULL,
                                    theme = NULL,
-                                   tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                   tooltip = NULL,
                                    ver_label = NULL,
                                    ver_line = NULL,
                                    ver_line_label = " ",
@@ -812,11 +807,8 @@ hgch_scatter_CatNumNum <- function(data = NULL,    agg = "sum",
   )
 
 
-  if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <- paste0('<b>{series.name}</b><br/>','<b>', nms[1], ':</b> ', paste0(opts$prefix_x,'{point.x}', opts$suffix_x), '<br/>','<b>', nms[2], ':</b> ', paste0(opts$prefix_y,'{point.y}', opts$suffix_y))
-  }
-  if (is.null(opts$tooltip$headerFormat)) {
-    opts$tooltip$headerFormat <- ""
+  if (is.null(opts$tooltip)) {
+    opts$tooltip <- paste0('<b>{series.name}</b><br/>','<b>', nms[1], ':</b> ', paste0(opts$prefix_x,'{point.x}', opts$suffix_x), '<br/>','<b>', nms[2], ':</b> ', paste0(opts$prefix_y,'{point.y}', opts$suffix_y))
   }
 
   global_options(opts$marks[1], opts$marks[2])
@@ -851,7 +843,7 @@ hgch_scatter_CatNumNum <- function(data = NULL,    agg = "sum",
     hc_add_dependency("plugins/highcharts-regression.js") %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_xAxis(
       title =  list(text = labelsXY[1]),
       labels = list (

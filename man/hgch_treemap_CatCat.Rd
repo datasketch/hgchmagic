@@ -39,7 +39,7 @@ hgch_treemap_CatCat(
   suffix = NULL,
   title = NULL,
   theme = NULL,
-  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  tooltip = NULL,
   opts = NULL,
   ...
 )

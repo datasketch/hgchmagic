@@ -36,7 +36,7 @@ hgch_treemap_CatNum(
   text_show = TRUE,
   title = NULL,
   theme = NULL,
-  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  tooltip = NULL,
   opts = NULL,
   ...
 )

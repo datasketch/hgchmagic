@@ -42,12 +42,12 @@ hgch_line_CatNum <-  function(data,
                               suffix = NULL,
                               title = NULL,
                               theme = NULL,
-                              tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                              tooltip = NULL,
                               ver_label = NULL,
                               ver_line = NULL,
                               ver_line_label = " ",
                               opts = NULL, ...
-                              ) {
+) {
 
   if (is.null(data)) {
     stop("Load an available dataset")
@@ -120,11 +120,11 @@ hgch_line_CatNum <-  function(data,
 
   colorDefault <- "#3DB26F"
 
-    if (!is.null(opts$colors)) {
-      opts$colors <- rep(opts$colors[1], length(unique(d$a)))
-    } else {
-      opts$colors <- rep(colorDefault, length(unique(d$a)))
-    }
+  if (!is.null(opts$colors)) {
+    opts$colors <- rep(opts$colors[1], length(unique(d$a)))
+  } else {
+    opts$colors <- rep(colorDefault, length(unique(d$a)))
+  }
 
   if (opts$drop_na)
     d <- d %>%
@@ -188,11 +188,8 @@ hgch_line_CatNum <-  function(data,
   )
 
 
-  if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <- paste0('<b>{point.category}</b><br/>', paste0(prefix_agg, ' ' ,nms[2], ': '), opts$prefix,'{point.y}', opts$suffix)
-  }
-  if (is.null(opts$tooltip$headerFormat)) {
-    opts$tooltip$headerFormat <- ""
+  if (is.null(opts$tooltip)) {
+    opts$tooltip <- paste0('<b>{point.category}</b><br/>', paste0(prefix_agg, ' ' ,nms[2], ': '), opts$prefix,'{point.y}', opts$suffix)
   }
 
   global_options(opts$marks[1], opts$marks[2])
@@ -203,7 +200,7 @@ hgch_line_CatNum <-  function(data,
              inverted = ifelse(opts$orientation == 'ver', FALSE, TRUE)) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_xAxis(
       title =  list(text = labelsXY[1]),
       categories = purrr::map(as.character(unique(d$a)), function(z) z),
@@ -249,14 +246,14 @@ hgch_line_CatNum <-  function(data,
     hc_plotOptions(
       series = list(
         marker= list(
-        states = list(
-          hover = list(
-            fillColor = opts$color_hover
-          ),
-          select = list(
-            fillColor = opts$color_click
-          )
-        )),
+          states = list(
+            hover = list(
+              fillColor = opts$color_hover
+            ),
+            select = list(
+              fillColor = opts$color_click
+            )
+          )),
         allowPointSelect= opts$allow_point,
         cursor =  opts$cursor,
         events = list(
@@ -338,7 +335,7 @@ hgch_line_Cat <-  function(data,
                            suffix = NULL,
                            title = NULL,
                            theme = NULL,
-                           tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                           tooltip = NULL,
                            ver_label = NULL,
                            ver_line = NULL,
                            ver_line_label = " ",
@@ -426,7 +423,7 @@ hgch_line_CatCatNum <- function(data,
                                 border_color = "#CCCCCC",
                                 border_width = 1,
                                 caption = NULL,
-                                click_function = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                click_function = NULL,
                                 colors = NULL,
                                 color_click = NULL,
                                 color_hover = NULL,
@@ -463,7 +460,7 @@ hgch_line_CatCatNum <- function(data,
                                 suffix = NULL,
                                 title = NULL,
                                 theme = NULL,
-                                tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                tooltip = NULL,
                                 ver_label = NULL,
                                 ver_line = NULL,
                                 ver_line_label = " ",
@@ -637,13 +634,10 @@ hgch_line_CatCatNum <- function(data,
   )
 
 
-  if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <-paste0('<b>', nms[2], ': </b>{point.category}</br>',
-                                 '<b>', nms[1], ': </b>{series.name}</br>',
-                                 paste0(prefix_agg, ' ' ,nms[3], ': '), opts$prefix,'{point.y}', opts$suffix)
-  }
-  if (is.null(opts$tooltip$headerFormat)) {
-    opts$tooltip$headerFormat <- " "
+  if (is.null(opts$tooltip)) {
+    opts$tooltip <- paste0('<b>', nms[2], ': </b>{point.category}</br>',
+                           '<b>', nms[1], ': </b>{series.name}</br>',
+                           paste0(prefix_agg, ' ' ,nms[3], ': '), opts$prefix,'{point.y}', opts$suffix)
   }
 
 
@@ -700,21 +694,21 @@ hgch_line_CatCatNum <- function(data,
     hc_plotOptions(
       series = list(
         marker = list(
-        states = list(
-          hover = list(
-            fillColor = opts$color_hover
-          ),
-          select = list(
-            fillColor = opts$color_click
-          )
-        )),
+          states = list(
+            hover = list(
+              fillColor = opts$color_hover
+            ),
+            select = list(
+              fillColor = opts$color_click
+            )
+          )),
         allowPointSelect= opts$allow_point,
         cursor =  opts$cursor,
         events = list(
           click = opts$click_function
         )
       )) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(enabled = TRUE, align = opts$legend_position)
   if (opts$export){
@@ -800,7 +794,7 @@ hgch_line_CatCat <- function(data,
                              suffix = NULL,
                              title = NULL,
                              theme = NULL,
-                             tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                             tooltip = NULL,
                              ver_label = NULL,
                              ver_line = NULL,
                              ver_line_label = " ",

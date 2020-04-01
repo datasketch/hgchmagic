@@ -45,7 +45,7 @@ hgch_bar_CatCat(
   suffix = NULL,
   title = NULL,
   theme = NULL,
-  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  tooltip = NULL,
   ver_label = NULL,
   ver_line = NULL,
   ver_line_label = NULL,

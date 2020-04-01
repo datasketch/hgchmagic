@@ -36,7 +36,7 @@ hgch_pie_CatNum(
   suffix = NULL,
   title = NULL,
   theme = NULL,
-  tooltip = list(headerFormat = NULL, pointFormat = NULL),
+  tooltip = NULL,
   opts = NULL,
   ...
 )

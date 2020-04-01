@@ -17,7 +17,7 @@ hgch_treemap_CatNum <-  function(data,
                                  border_color = "#CCCCCC",
                                  border_width = 1,
                                  caption = NULL,
-                                 clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                 clickFunction = NULL,
                                  colors = NULL,
                                  color_click = NULL,
                                  color_hover = NULL,
@@ -41,7 +41,7 @@ hgch_treemap_CatNum <-  function(data,
                                  text_show = TRUE,
                                  title = NULL,
                                  theme = NULL,
-                                 tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                 tooltip = NULL,
                                 opts = NULL, ...) {
 
 
@@ -168,11 +168,8 @@ hgch_treemap_CatNum <-  function(data,
   formatText <- JS(paste0("function () {
                 return this.point.name + '<br/>' + '", opts$prefix,"' + Highcharts.numberFormat(this.point.value, ", nDig,", '", opts$marks[2], "','", opts$marks[1], "'", ") + '", opts$suffix,"';}"))
 
-  if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(prefix_agg, ' ' ,nms[2], ': '), opts$prefix,'{point.value}', opts$suffix)
-  }
-  if (is.null(opts$tooltip$headerFormat)) {
-    opts$tooltip$headerFormat <- ""
+  if (is.null(opts$tooltip)) {
+    opts$tooltip <- paste0('<b>{point.name}</b><br/>', paste0(prefix_agg, ' ' ,nms[2], ': '), opts$prefix,'{point.value}', opts$suffix)
   }
 
   global_options(opts$marks[1], opts$marks[2])
@@ -180,7 +177,7 @@ hgch_treemap_CatNum <-  function(data,
   hc <- highchart() %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_series(
       list(
         type = 'treemap',
@@ -233,7 +230,7 @@ hgch_treemap_CatNum <-  function(data,
 
 
   theme_user <- opts$theme
-  optsTheme <- list(background = opts$background)
+  optsTheme <- list(background = opts$background, border_widthBar = opts$border_width)
   themeCustom <- modifyList(optsTheme, theme_user %||% list())
   hc <- hc %>% hc_add_theme(tma(custom = themeCustom ))
 
@@ -257,8 +254,9 @@ hgch_treemap_CatNum <-  function(data,
 hgch_treemap_Cat <-  function(data,
                               agg_text = NULL,
                               background = "#ffffff",
+                              border_width = 1,
                               caption = NULL,
-                              clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                              clickFunction = NULL,
                               colors = NULL,
                               color_click = NULL,
                               color_hover = NULL,
@@ -282,7 +280,7 @@ hgch_treemap_Cat <-  function(data,
                               title = NULL,
                               text_show = TRUE,
                               theme = NULL,
-                              tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                              tooltip = NULL,
                               opts = NULL,...) {
 
   if (is.null(data)) {
@@ -291,6 +289,7 @@ hgch_treemap_Cat <-  function(data,
   defaultOptions <- list(
     agg_text = agg_text,
     background = background,
+    border_width = border_width,
     caption = caption,
     clickFunction = clickFunction,
     colors = colors,
@@ -354,8 +353,9 @@ hgch_treemap_CatCatNum <- function(data,
                                    agg = "sum",
                                    agg_text = NULL,
                                    background = "#ffffff",
+                                   border_width = 1,
                                    caption = NULL,
-                                   clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                   clickFunction = NULL,
                                    colors = NULL,
                                    color_click = NULL,
                                    color_hover = NULL,
@@ -384,7 +384,7 @@ hgch_treemap_CatCatNum <- function(data,
                                    suffix = NULL,
                                    title = NULL,
                                    theme = NULL,
-                                   tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                   tooltip = NULL,
                                    opts = NULL, ...) {
 
   if (is.null(data)) {
@@ -395,6 +395,7 @@ hgch_treemap_CatCatNum <- function(data,
     agg = agg,
     agg_text = agg_text,
     background = background,
+    border_width = border_width,
     caption = caption,
     clickFunction = clickFunction,
     colors = colors,
@@ -523,22 +524,18 @@ hgch_treemap_CatCatNum <- function(data,
   formatText <- JS(paste0("function () {
                 return this.point.name + '<br/>' + '", opts$prefix,"' + Highcharts.numberFormat(this.point.value, ", nDig,", '", opts$marks[2], "','", opts$marks[1], "'", ") + '", opts$suffix,"';}"))
 
-  if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <-paste0('<b>', nms[2], ': </b>{point.name}</br>',
+  if (is.null(opts$tooltip)) {
+    opts$tooltip <-paste0('<b>', nms[2], ': </b>{point.name}</br>',
                                  # '<b>', nms[1], ': </b>{point.node.name}</br>',
                                  paste0(prefix_agg, ' ' ,nms[3], ': '), opts$prefix,'{point.value}', opts$suffix)
   }
-  if (is.null(opts$tooltip$headerFormat)) {
-    opts$tooltip$headerFormat <- " "
-  }
-
 
   global_options(opts$marks[1], opts$marks[2])
   exportLang(language = opts$lang)
   hc <- highchart() %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_series(
       list(
         type = "treemap",
@@ -589,7 +586,7 @@ hgch_treemap_CatCatNum <- function(data,
       ))}
 
   theme_user <- opts$theme
-  optsTheme <- list( background = opts$background)
+  optsTheme <- list( background = opts$background, border_widthBar = opts$border_width)
   themeCustom <- modifyList(optsTheme, theme_user %||% list())
   hc <- hc %>% hc_add_theme(tma(custom = themeCustom ))
 
@@ -612,8 +609,9 @@ hgch_treemap_CatCat <- function(data,
                                 agg_text = NULL,
                                 allow_point = FALSE,
                                 background = "#ffffff",
+                                border_width = 1,
                                 caption = NULL,
-                                clickFunction = NULL,#JS("function(event) {Shiny.onInputChange('hcClicked',  {id:event.point.category.name, timestamp: new Date().getTime()});}")
+                                clickFunction = NULL,
                                 colors = NULL,
                                 color_click = NULL,
                                 color_hover = NULL,
@@ -642,7 +640,7 @@ hgch_treemap_CatCat <- function(data,
                                 suffix = NULL,
                                 title = NULL,
                                 theme = NULL,
-                                tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                tooltip = NULL,
                                 opts = NULL, ...) {
 
 
@@ -650,6 +648,7 @@ hgch_treemap_CatCat <- function(data,
     agg_text = agg_text,
     allow_point = allow_point,
     background = background,
+    border_width = border_width,
     caption = caption,
     clickFunction = clickFunction,
     colors = colors,

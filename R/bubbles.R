@@ -36,7 +36,7 @@ hgch_bubbles_CatNum <- function(data = NULL,
                                 suffix = NULL,
                                 title = NULL,
                                 theme = NULL,
-                                tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                tooltip = NULL,
                                 opts = NULL, ...) {
 
 
@@ -165,11 +165,8 @@ hgch_bubbles_CatNum <- function(data = NULL,
 
 
 
-  if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(prefix_agg, ' ' ,nms[2], ': '), opts$prefix,'{point.y}', opts$suffix)
-  }
-  if (is.null(opts$tooltip$headerFormat)) {
-    opts$tooltip$headerFormat <- ""
+  if (is.null(opts$tooltip)) {
+    opts$tooltip <- paste0('<b>{point.name}</b><br/>', paste0(prefix_agg, ' ' ,nms[2], ': '), opts$prefix,'{point.y}', opts$suffix)
   }
 
   global_options(opts$marks[1], opts$marks[2])
@@ -182,7 +179,7 @@ hgch_bubbles_CatNum <- function(data = NULL,
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_plotOptions(
       packedbubble = list(
         minSize = opts$bubble_min,#'30%',
@@ -282,7 +279,7 @@ hgch_bubbles_Cat <-  function(data = NULL,
                               suffix = NULL,
                               title = NULL,
                               theme = NULL,
-                              tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                              tooltip = NULL,
                               opts = NULL, ...) {
   if (is.null(data)) {
     stop("Load an available dataset")
@@ -381,7 +378,7 @@ hgch_bubbles_CatCatNum <- function(data = NULL,
                                    suffix = NULL,
                                    title = NULL,
                                    theme = NULL,
-                                   tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                                   tooltip = NULL,
                                    opts = NULL, ...) {
   if (is.null(data)) {
     stop("Load an available dataset")
@@ -494,13 +491,10 @@ hgch_bubbles_CatCatNum <- function(data = NULL,
     )
   })
 
-  if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <-paste0('<b>', nms[2], ': </b>{point.name}</br>',
+  if (is.null(opts$tooltip)) {
+    opts$tooltip <-paste0('<b>', nms[2], ': </b>{point.name}</br>',
                                       '<b>', nms[1], ': </b>{series.name}</br>',
                                       paste0(prefix_agg, ' ' ,nms[3], ': '), opts$prefix,'{point.y}', opts$suffix)
-  }
-  if (is.null(opts$tooltip$headerFormat)) {
-    opts$tooltip$headerFormat <- " "
   }
 
   global_options(opts$marks[1], opts$marks[2])
@@ -513,7 +507,7 @@ hgch_bubbles_CatCatNum <- function(data = NULL,
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_plotOptions(
       packedbubble = list(
         minSize = opts$bubble_min,#'30%',
@@ -613,7 +607,7 @@ hgch_bubbles_CatCat <-function(data,
                                suffix = NULL,
                                title = NULL,
                                theme = NULL,
-                               tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                               tooltip = NULL,
                                opts = NULL, ...) {
 
   if (is.null(data)) {

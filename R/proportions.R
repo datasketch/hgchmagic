@@ -40,7 +40,7 @@ hgch_pie_CatNum <-  function(data,
                              suffix = NULL,
                              title = NULL,
                              theme = NULL,
-                             tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                             tooltip = NULL,
                              opts = NULL, ...) {
 
   if (is.null(data)) {
@@ -164,11 +164,8 @@ hgch_pie_CatNum <-  function(data,
   }
 
 
-  if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(prefix_agg, ' ' ,nms[2], ': '), opts$prefix,'{point.y}', opts$suffix)
-  }
-  if (is.null(opts$tooltip$headerFormat)) {
-    opts$tooltip$headerFormat <- ""
+  if (is.null(opts$tooltip)) {
+    opts$tooltip<- paste0('<b>{point.name}</b><br/>', paste0(prefix_agg, ' ' ,nms[2], ': '), opts$prefix,'{point.y}', opts$suffix)
   }
 
   global_options(opts$marks[1], opts$marks[2])
@@ -182,7 +179,7 @@ hgch_pie_CatNum <-  function(data,
     #hc_plotOptions(series = list(dataLabels = list( format = legFormat))) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_series(
       data
     ) %>%
@@ -274,7 +271,7 @@ hgch_pie_Cat <-  function(data,
                           suffix = NULL,
                           title = NULL,
                           theme = NULL,
-                          tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                          tooltip = NULL,
                           opts = NULL, ...) {
 
 
@@ -371,7 +368,7 @@ hgch_donut_CatNum <-  function(data,
                                suffix = NULL,
                                title = NULL,
                                theme = NULL,
-                               tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                               tooltip = NULL,
                                opts = NULL, ...) {
 
   if (is.null(data)) {
@@ -494,11 +491,8 @@ hgch_donut_CatNum <-  function(data,
   }
 
 
-  if (is.null(opts$tooltip$pointFormat)) {
-    opts$tooltip$pointFormat <- paste0('<b>{point.name}</b><br/>', paste0(prefix_agg, ' ' ,nms[2], ': '), opts$prefix,'{point.y}', opts$suffix)
-  }
-  if (is.null(opts$tooltip$headerFormat)) {
-    opts$tooltip$headerFormat <- ""
+  if (is.null(opts$tooltip)) {
+    opts$tooltip <- paste0('<b>{point.name}</b><br/>', paste0(prefix_agg, ' ' ,nms[2], ': '), opts$prefix,'{point.y}', opts$suffix)
   }
 
   global_options(opts$marks[1], opts$marks[2])
@@ -529,7 +523,7 @@ hgch_donut_CatNum <-  function(data,
           )) %>%
     hc_title(text = title) %>%
     hc_subtitle(text = subtitle) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_series(
       data
     ) %>%
@@ -606,7 +600,7 @@ hgch_donut_Cat <-  function(data,
                             suffix = NULL,
                             title = NULL,
                             theme = NULL,
-                            tooltip = list(headerFormat = NULL, pointFormat = NULL),
+                            tooltip = NULL,
                             opts = NULL, ...) {
 
   if (is.null(data)) {
