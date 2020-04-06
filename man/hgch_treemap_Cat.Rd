@@ -8,6 +8,7 @@ hgch_treemap_Cat(
   data,
   agg_text = NULL,
   background = "#ffffff",
+  border_width = 1,
   caption = NULL,
   clickFunction = NULL,
   colors = NULL,

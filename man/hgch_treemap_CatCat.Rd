@@ -9,6 +9,7 @@ hgch_treemap_CatCat(
   agg_text = NULL,
   allow_point = FALSE,
   background = "#ffffff",
+  border_width = 1,
   caption = NULL,
   clickFunction = NULL,
   colors = NULL,

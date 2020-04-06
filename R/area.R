@@ -713,7 +713,7 @@ hgch_area_CatCatNum <- function(data = NULL,
         formatter = JS(aggFormAxis)
       )) %>%
     hc_add_series_list(series) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = NULL) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_plotOptions(
       series = list(
@@ -733,7 +733,7 @@ hgch_area_CatCatNum <- function(data = NULL,
           click = opts$click_function
         )
       )) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip$pointFormat, headerFormat = opts$tooltip$headerFormat) %>%
+    hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = caption) %>%
     hc_legend(enabled = TRUE, align = opts$legend_position)
   if (opts$export){
