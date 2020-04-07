@@ -141,7 +141,7 @@ fillColors <- function(data, col, colors, colorScale) {
   if (colorScale == "discrete") {
     dom <- factor(sample.int(length(cat), length(cat), FALSE))
     p <- colorFactor(colors, domain = NULL, dom)
-    fillCol <- p(1:length(cat))
+    fillCol <- discreteColorSelect(c(colors, p(1:length(cat))), data)
   }
 
   if (colorScale == "continuous") {

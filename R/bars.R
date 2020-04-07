@@ -121,6 +121,8 @@ hgch_bar_CatNum <-  function(data = NULL,
                                opts$ver_line_label)
 
 
+  if (is.null(opts$colors)) opts$colors <- c("#3DB26F", "#FECA84", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1")
+
   if (opts$color_scale == 'discrete') {
     colorDefault <- c("#3DB26F", "#FECA84", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1")
     colorDefault <- discreteColorSelect(colorDefault, d)
@@ -130,12 +132,11 @@ hgch_bar_CatNum <-  function(data = NULL,
     colorDefault <- leaflet::colorNumeric(c("#53255E", "#ff4097"), 1:length(unique(d$a)))(1:length(unique(d$a)))
   }
 
-
-  if (!is.null(opts$colors)) {
-    opts$colors <- unname(fillColors(d, "a", opts$colors, opts$color_scale))
-  } else {
-    opts$colors <- colorDefault
-  }
+  # if (!is.null(opts$colors)) {
+  #   opts$colors <- unname(fillColors(d, "a", opts$colors, opts$color_scale))
+  # } else {
+  #   opts$colors <- colorDefault
+  # }
 
   if (opts$drop_na)
     d <- d %>%
