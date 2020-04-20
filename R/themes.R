@@ -1,286 +1,70 @@
 #' @export
-global_options <- function(marksMil, marksDec){
-
+global_options <- function(sample){
+  params <- makeup::which_num_format(sample)
   hcoptslang <- getOption("highcharter.lang")
-  hcoptslang$thousandsSep <- marksMil
-  hcoptslang$decimalPoint <- marksDec
+  hcoptslang$thousandsSep <- params$separators$thousands
+  hcoptslang$decimalPoint <- params$separators$decimal
   options(highcharter.lang = hcoptslang)
 }
 
+url_logo <- function(logo, background_color) {
 
+  if (grepl("http", logo)) logo_url <- logo
 
+  logo_path <- local_logo_path(logo, background_color)
+  logo_url <- knitr::image_uri(f = logo_path)
+  logo_url
+}
 
-getTheme <- function(theme = NULL){
-
-
-  getDefaultTheme <- list(
-    background = "#ffffff",
-
-    border_color = 'transparent',
-    border_radius = 0,
-    border_width = 0,
-    border_widthBar = 0,
-
-    colors = c("#3DB26F", "#FECA84", "#74D1F7", "#F75E64", "#8097A4", "#B70F7F", "#5D6AE9", "#53255E", "#BDCAD1"),
-    colors_diff= TRUE,
-
-    font_family = "Ubuntu",
-    font_size = '11px',
-    font_color = '#5A6B72',
-    font_size_title = '23px',
-    font_size_subtitle = '17px',
-    font_color_caption = '#5A6B72',
-    font_size_caption = '13px',
-    font_weight = "bold",
-    height = NULL,
-
-    margin_bottom = NULL,
-    margin_left = NULL,
-    margin_right = NULL,
-    margin_top = NULL,
-
-    width = NULL,
-
-
-    plot_backgroundColor = "transparent",
-    plot_borderColor = "#cccccc",
-    plot_borderWidth = 0,
-
-    showText = TRUE,
-    symbLine = TRUE,
-
-    line_width = 2,
-
-    negativeColor = FALSE,
-
-    linePointStart = 0,
-    labsData_colLabel = 'contrast',
-    labsData_familyLabel = 'Ubuntu',
-    labsData_size = NULL,
-    labsData_textDecoration = 'none',
-    labsData_textShadow = 'none',
-    labsData_textOutline = 'none',
-
-
-    legend_show = TRUE,
-    legend_background = "transparent",
-    legend_backgroundBorderColor = "#5A6B72",
-    legend_backgroundWidth = 0,
-
-    stylesY_gridLineWidth = 1,
-    stylesY_lineColor = '#5A6B72',
-    stylesY_tickColor = 'transparent',
-    stylesY_gridLineColor = '#5A6B72',
-    stylesY_tickLength = 10,
-    stylesY_lineWidth = 0,
-    stylesY_gridLineDashStyle = 'dot',
-    stylesLabelY_fontSize = '11px',
-    stylesTitleY_fontWeight = 'normal',
-    stylesLabelY_fontWeight = NULL,
-    stylesLabelY_enabled =TRUE,
-    stylesTitleY_fontSize = '13px',
-    stylesTitleX_fontWeight = 'normal',
-    stylesX_gridLineWidth = 0,
-    stylesX_lineColor = '#5A6B72',
-    stylesX_tickColor = '#5A6B72',
-    stylesX_tickWidth = 0,
-    stylesX_gridLineColor = '#5A6B72',
-    stylesX_tickLength = 0,
-    stylesX_lineWidth = 1,
-    stylesLabelX_fontSize = '11px',
-    stylesLabelX_fontWeight = NULL,
-    stylesLabelX_enabled =TRUE,
-    stylesTitleX_fontSize = '13px'
-  )
-  theme <-  modifyList(getDefaultTheme, theme %||% list())
-  theme
+#' @export
+add_branding <- function(branding_include = TRUE, logo, background_color = "#FFFFFF") {
+  if (!branding_include) return()
+  logo_path <- url_logo(logo, background_color)
+  JS(
+    paste0(
+    "function() {this.renderer.image('",logo_path,"', this.chartWidth - 135, this.chartHeight - 40 , 130, 35).addClass('logo').add();}"
+    ))
 }
 
 
-#' @export
-tma <- function(custom = NULL, ...) {
+theme <- function(opts = NULL){
+  message("in theme_datasketch")
 
-  custom <- getTheme(theme = custom)
-
-  #if (is.null(custom$colors)) custom$colors <-
-  if (length(custom$colors) == 1) custom$colors <- c(custom$colors, custom$colors)
+  opts <- modifyList(opts$theme, opts)
+  print(opts)
+  # getDefaultTheme <- dsvizopts:::theme_datasketch
+  # opts <- modifyList(getDefaultTheme, default_opts)
+  #print(opts)
+  # opts$plot_margin_bottom <- NULL
+  # if(opts$branding_include) opts$plot_margin_bottom <- 100
 
   hc_theme(
-    colors = custom$colors,
+    colors = opts$palette_colors,
     chart = list(
       reflow = TRUE,
       renderTo = 'container',
-      backgroundColor = custom$background,
-      borderColor = custom$border_color,
-      borderRadius = custom$border_radius,
-      borderWidth = custom$border_width,
-      width = custom$width,
-      height = custom$height,
-      marginBottom = custom$margin_bottom,
-      marginLeft = custom$margin_left,
-      marginRight = custom$margin_right,
-      marginTop = custom$margin_top,
-      plotBackgroundColor = custom$plot_backgroundColor,
-      plotBorderColor = custom$plot_borderColor,
-      plotBorderWidth = custom$plot_borderWidth,
+      backgroundColor = opts$background_color,
+      # borderColor = opts$border_color,
+      # borderRadius = opts$border_radius,
+      # borderWidth = opts$border_width,
+      # width = opts$width,
+      # height = opts$height,
+      # marginBottom = opts$plot_margin_bottom,
+      # marginLeft = opts$margin_left,
+      # marginRight = opts$margin_right,
+      # marginTop = opts$margin_top,
+      # plotBackgroundColor = opts$plot_backgroundColor,
+      # plotBorderColor = opts$plot_borderColor,
+      # plotBorderWidth = opts$plot_borderWidth,
       style = list (
-        fontFamily = custom$font_family,
-        fontSize = custom$font_size
-      )),
-    title = list(
-      style = list(
-        fontFamily = custom$font_family,
-        fontSize = custom$font_size_title,
-        color = custom$font_color,
-        fontWeight = custom$font_weight
-      )
-    ),
-    subtitle = list(
-      style = list(
-        fontFamily = custom$font_family,
-        fontSize = custom$font_size_subtitle,
-        color = custom$font_color
-      )
-    ),
-    credits = list(
-      style = list(
-        fontFamily = custom$font_family,
-        fontSize = custom$font_size_caption,
-        color = custom$font_color_caption
-      )
-    ),
-    plotOptions = list (
-      packedbubble = list(
-        dataLabels = list (
-          enabled = custom$showText,
-          style = list (
-            color = custom$labsData_colLabel,
-            fontFamily = custom$labsData_familyLabel,
-            fontSize = custom$labsData_sizeLabel,
-            textDecoration= custom$labsData_textDecoration,
-            textShadow = custom$labsData_textShadow,
-            textOutline = custom$labsData_textOutline
-          )
-        )
-      ),
-      bar = list(
-        colorByPoint = custom$colors_diff,
-        dataLabels = list (
-          enabled = custom$showText,
-          style = list (
-            color = custom$labsData_colLabel,
-            fontFamily = custom$labsData_familyLabel,
-            fontSize = custom$labsData_sizeLabel,
-            textDecoration= custom$labsData_textDecoration,
-            textShadow = custom$labsData_textShadow,
-            textOutline = custom$labsData_textOutline
-          )
-        )
-      ),
-      column = list(
-        colorByPoint = custom$colors_diff,
-        dataLabels = list (
-          enabled = custom$showText,
-          style = list (
-            color = custom$labsData_colLabel,
-            fontFamily = custom$labsData_familyLabel,
-            fontSize = custom$labsData_sizeLabel,
-            textDecoration= custom$labsData_textDecoration,
-            textShadow = custom$labsData_textShadow,
-            textOutline = custom$labsData_textOutline
-          )
-        )
-      ),
-      pie = list(
-        showInLegend = custom$legend_show,
-        dataLabels = list (
-          enabled = custom$showText,
-          style = list (
-            color = custom$labsData_colLabel,
-            fontFamily = custom$labsData_familyLabel,
-            fontSize = custom$labsData_sizeLabel,
-            textDecoration= custom$labsData_textDecoration,
-            textShadow = custom$labsData_textShadow,
-            textOutline = custom$labsData_textOutline
-          )
-        )
-      ),
-      series = list(
-        borderWidth = custom$border_widthBar,
-        dataLabels = list (
-          enabled = custom$showText,
-          style = list (
-            color = custom$labsData_colLabel,
-            fontFamily = custom$labsData_familyLabel,
-            fontSize = custom$labsData_sizeLabel,
-            textDecoration= custom$labsData_textDecoration,
-            textShadow = custom$labsData_textShadow,
-            textOutline = custom$labsData_textOutline
-          )
-        ),
-        lineWidth = custom$line_width,
-        negativeColor = custom$negativeColor,
-        pointStart = custom$line_pointStart,
-        marker = list(
-          enabled = custom$symbLine
-        )
-      )
-    ),
-    xAxis = list (
-      gridLineWidth = custom$stylesX_gridLineWidth,
-      lineColor = custom$stylesX_lineColor, #color del eje x
-      tickColor = custom$stylesX_tickColor, #color de las divisiones del eje x
-      gridLineColor = custom$stylesX_gridLineColor,
-      tickLength = custom$stylesX_tickLength,
-      lineWidth= custom$stylesX_lineWidth,
-      tickWidth = custom$stylesX_tickWidth,
-      labels = list(
-        style = list(
-          color = custom$font_color, #color nombre de las etiquetas
-          fontSize = custom$stylesLabelX_fontSize,
-          fontWeight = custom$stylesLabelX_fontWeight
-        ),
-        enabled = custom$stylesLabelX_enabled
-      ),
-      title = list(
-        style = list(
-          color = custom$font_color,# color del titulo del eje
-          fontSize = custom$stylesTitleX_fontSize,
-          fontWeight = custom$stylesTitleX_fontWeight
-        )
-      )
-    ),
-    yAxis = list(
-      gridLineDashStyle = custom$stylesY_gridLineDashStyle,
-      gridLineWidth = custom$stylesY_gridLineWidth,
-      lineColor = custom$stylesY_lineColor,
-      tickColor = custom$stylesY_tickColor,
-      gridLineColor = custom$stylesY_gridLineColor,
-      tickLength = custom$stylesY_tickLength,
-      lineWidth= custom$stylesY_lineWidth,
-      labels = list(
-        style = list(
-          color = custom$font_color,
-          fontSize = custom$stylesLabelY_fontSize,
-          fontWeight = custom$stylesLabelY_fontWeight
-        ),
-        enabled = custom$stylesLabelY_enabled
-      ),
-      title = list(
-        style = list(
-          color = custom$font_color,
-          fontSize = custom$stylesTitleY_fontSize,
-          fontWeight = custom$stylesTitleY_fontWeight
-        )
-      )
-    ),
-    legend = list(
-      backgroundColor = custom$legend_background,
-      borderColor = custom$legend_backgroundBorderColor,
-      #borderWidth = custom$legend$backgroundWidth,
-      itemStyle = list(
-        color = custom$font_color
-      )
-    )
+        fontFamily = opts$text_family,
+        fontSize = opts$text_size
+      ))
   )
+
 }
+
+
+
+
+

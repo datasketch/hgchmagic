@@ -11,6 +11,8 @@ Depends:
     tools,
     Rd2roxygen,
     datafringe,
+    d3.format,
+    dsvizopts,
     tidyverse,
     jsonlite,
     leaflet,
