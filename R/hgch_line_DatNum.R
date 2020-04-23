@@ -1,4 +1,4 @@
-#' Bar Chart Cat Numeric
+#' line Chart Dat Numeric
 #'
 #' This chart does not allow for chaning orientation
 #'
@@ -8,9 +8,9 @@
 #' @section ctypes:
 #' Cat-Num, Yea-Num
 #' @examples
-#' gg_bar_CatNum(sampleData("Cat-Num", nrow = 10))
+#' gg_line_CatNum(sampleData("Dat-Num", nrow = 10))
 #' @export
-hgch_bar_CatNum <- function(data, ...){
+hgch_line_DatNum <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
 
@@ -28,7 +28,8 @@ hgch_bar_CatNum <- function(data, ...){
   ver_title <- as.character(labelsXY[2])
 
   d <- preprocessData(d, opts$preprocess$drop_na)
-  d$a[is.na(d$a)] <- 'NA'
+
+
   # Summarize
   d <- summarizeData(d, opts$summarize$agg, to_agg = b, a)
 
@@ -36,18 +37,18 @@ hgch_bar_CatNum <- function(data, ...){
   d <- postprocess(d, "b", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
   d <- order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
 
-  # Styles
-  # Handle colors
-  color_by <- names(nms[match(opts$style$color_by, nms)])
-  palette <- opts$theme$palette_colors
-  d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
+  print(d)
 
+  d$a <- makeup::makeup_dat(d$a,  locale = opts$style$locale)
+  d$a <- as.character(d$a)
+  d$a[is.na(d$a)] <- 'NA'
+  print(d)
 
-  l <- purrr::map(1:nrow(d), function(z){
-    data$data[[z]] <<- list("name" = d$a[z],
-                            "y" = as.numeric(d$b[z]),
-                            "color" = as.character(d$..colors[z]))
-  })
+  series <- list(list(
+    data = purrr::map(1:nrow(d), function(x) {
+      d$b[x]
+    })
+  ))
 
   if (is.null(opts$tooltip)) opts$tooltip <- paste0('<b>{point.name}</b><br/>',
                                                     nms[2], ': ',
@@ -57,21 +58,21 @@ hgch_bar_CatNum <- function(data, ...){
   hc <- highchart() %>%
     hc_title(text = opts$title$title) %>%
     hc_subtitle(text = opts$title$subtitle) %>%
-    hc_chart(type = ifelse(opts$chart$orientation == "hor","bar","column"),
+    hc_chart(type = ifelse(opts$style$spline, "spline","line"),
              events = list(
                load = add_branding(opts$theme)
              )) %>%
-    hc_series(
-      data
-    ) %>%
+    hc_add_series_list(series) %>%
     hc_xAxis(title = list(text = hor_title),
-             type = "category") %>%
+             categories = purrr::map(as.character(unique(d$a)), function(z) z)) %>%
     hc_yAxis(title = list(text = ver_title),
              labels = list(
                formatter = makeup::makeup_format_js(sample = opts$style$format_num_sample,
                                                     locale = opts$style$locale,
                                                     prefix = opts$style$prefix,
-                                                    suffix = opts$style$suffix))
+                                                    suffix = opts$style$suffix)),
+             minRange = min(d$b, na.rm = TRUE),
+             min = min(d$b, na.rm = TRUE)
     ) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = opts$title$caption %||% "") %>%

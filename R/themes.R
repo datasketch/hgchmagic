@@ -8,18 +8,22 @@ global_options <- function(sample){
 }
 
 url_logo <- function(logo, background_color) {
-
   if (grepl("http", logo)) logo_url <- logo
-
   logo_path <- local_logo_path(logo, background_color)
   logo_url <- knitr::image_uri(f = logo_path)
   logo_url
 }
 
 #' @export
-add_branding <- function(branding_include = TRUE, logo, background_color = "#FFFFFF") {
-  if (!branding_include) return()
-  logo_path <- url_logo(logo, background_color)
+add_branding <- function(opts) {
+
+  getDefaultTheme <- dsvizopts:::theme_datasketch
+  opts <- modifyList(getDefaultTheme, opts)
+
+  if (!opts$branding_include) return()
+
+  logo_path <- url_logo(logo = opts$logo,background_color = opts$background_color)
+
   JS(
     paste0(
     "function() {this.renderer.image('",logo_path,"', this.chartWidth - 135, this.chartHeight - 40 , 130, 35).addClass('logo').add();}"
@@ -30,13 +34,13 @@ add_branding <- function(branding_include = TRUE, logo, background_color = "#FFF
 theme <- function(opts = NULL){
   message("in theme_datasketch")
 
-  opts <- modifyList(opts$theme, opts)
-  print(opts)
-  # getDefaultTheme <- dsvizopts:::theme_datasketch
-  # opts <- modifyList(getDefaultTheme, default_opts)
+
+  getDefaultTheme <- dsvizopts:::theme_datasketch
+  opts <- modifyList(getDefaultTheme, opts)
   #print(opts)
-  # opts$plot_margin_bottom <- NULL
-  # if(opts$branding_include) opts$plot_margin_bottom <- 100
+
+  opts$plot_margin_bottom <- NULL
+  if(opts$branding_include) opts$plot_margin_bottom <- 100
 
   hc_theme(
     colors = opts$palette_colors,
@@ -49,7 +53,7 @@ theme <- function(opts = NULL){
       # borderWidth = opts$border_width,
       # width = opts$width,
       # height = opts$height,
-      # marginBottom = opts$plot_margin_bottom,
+      marginBottom = opts$plot_margin_bottom,
       # marginLeft = opts$margin_left,
       # marginRight = opts$margin_right,
       # marginTop = opts$margin_top,

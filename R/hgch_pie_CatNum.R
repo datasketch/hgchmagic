@@ -1,4 +1,4 @@
-#' Bar Chart Cat Numeric
+#' Pie Chart Cat Numeric
 #'
 #' This chart does not allow for chaning orientation
 #'
@@ -8,9 +8,9 @@
 #' @section ctypes:
 #' Cat-Num, Yea-Num
 #' @examples
-#' gg_bar_CatNum(sampleData("Cat-Num", nrow = 10))
+#' gg_pie_CatNum(sampleData("Cat-Num", nrow = 10))
 #' @export
-hgch_bar_CatNum <- function(data, ...){
+hgch_pie_CatNum <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
 
@@ -43,9 +43,11 @@ hgch_bar_CatNum <- function(data, ...){
   d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
 
 
+
+  data <- list()
   l <- purrr::map(1:nrow(d), function(z){
     data$data[[z]] <<- list("name" = d$a[z],
-                            "y" = as.numeric(d$b[z]),
+                            "y" = d$b[z],
                             "color" = as.character(d$..colors[z]))
   })
 
@@ -57,7 +59,7 @@ hgch_bar_CatNum <- function(data, ...){
   hc <- highchart() %>%
     hc_title(text = opts$title$title) %>%
     hc_subtitle(text = opts$title$subtitle) %>%
-    hc_chart(type = ifelse(opts$chart$orientation == "hor","bar","column"),
+    hc_chart(type = "pie",
              events = list(
                load = add_branding(opts$theme)
              )) %>%
@@ -75,7 +77,7 @@ hgch_bar_CatNum <- function(data, ...){
     ) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = opts$title$caption %||% "") %>%
-    hc_legend(enabled = FALSE) %>%
+    hc_legend(enabled = TRUE) %>%
     hc_add_theme(theme(opts = opts$theme))
 
   hc

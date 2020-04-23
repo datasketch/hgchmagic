@@ -1,4 +1,4 @@
-#' Bar Chart Cat Numeric
+#' Bubbles Chart Cat Numeric
 #'
 #' This chart does not allow for chaning orientation
 #'
@@ -8,9 +8,9 @@
 #' @section ctypes:
 #' Cat-Num, Yea-Num
 #' @examples
-#' gg_bar_CatNum(sampleData("Cat-Num", nrow = 10))
+#' gg_bubbles_CatNum(sampleData("Cat-Num", nrow = 10))
 #' @export
-hgch_bar_CatNum <- function(data, ...){
+hgch_bubbles_CatNum <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
 
@@ -43,10 +43,10 @@ hgch_bar_CatNum <- function(data, ...){
   d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
 
 
-  l <- purrr::map(1:nrow(d), function(z){
-    data$data[[z]] <<- list("name" = d$a[z],
-                            "y" = as.numeric(d$b[z]),
-                            "color" = as.character(d$..colors[z]))
+  data <- purrr::map(1:nrow(d), function(z){
+    list("name" = d$a[z],
+         "value" = d$b[z],
+         "color" = as.character(d$..colors[z]))
   })
 
   if (is.null(opts$tooltip)) opts$tooltip <- paste0('<b>{point.name}</b><br/>',
@@ -57,12 +57,12 @@ hgch_bar_CatNum <- function(data, ...){
   hc <- highchart() %>%
     hc_title(text = opts$title$title) %>%
     hc_subtitle(text = opts$title$subtitle) %>%
-    hc_chart(type = ifelse(opts$chart$orientation == "hor","bar","column"),
+    hc_chart(type = 'packedbubble',
              events = list(
                load = add_branding(opts$theme)
              )) %>%
-    hc_series(
-      data
+    hc_add_series(
+      data = data
     ) %>%
     hc_xAxis(title = list(text = hor_title),
              type = "category") %>%

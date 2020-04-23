@@ -1,4 +1,4 @@
-#' Bar Chart Cat Numeric
+#' Bar Chart Dat Numeric
 #'
 #' This chart does not allow for chaning orientation
 #'
@@ -8,9 +8,9 @@
 #' @section ctypes:
 #' Cat-Num, Yea-Num
 #' @examples
-#' gg_bar_CatNum(sampleData("Cat-Num", nrow = 10))
+#' gg_bar_DatNum(sampleData("Cat-Num", nrow = 10))
 #' @export
-hgch_bar_CatNum <- function(data, ...){
+hgch_bar_DatNum <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
 
@@ -27,6 +27,9 @@ hgch_bar_CatNum <- function(data, ...){
   hor_title <- as.character(labelsXY[1])
   ver_title <- as.character(labelsXY[2])
 
+
+  d$a <- makeup::makeup_dat(d$a,  locale = opts$style$locale)
+
   d <- preprocessData(d, opts$preprocess$drop_na)
   d$a[is.na(d$a)] <- 'NA'
   # Summarize
@@ -42,6 +45,7 @@ hgch_bar_CatNum <- function(data, ...){
   palette <- opts$theme$palette_colors
   d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
 
+  print(d)
 
   l <- purrr::map(1:nrow(d), function(z){
     data$data[[z]] <<- list("name" = d$a[z],
