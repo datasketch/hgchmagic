@@ -3,12 +3,10 @@
 #' This chart does not allow for chaning orientation
 #'
 #' @param data A data.frame
-#' @inherit hgchmagic_default_opts
-#' @inheritDotParams hgchmagic_default_opts
 #' @section ctypes:
 #' Cat-Dat-Num
 #' @examples
-#' gg_line_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
+#' hgch_line_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
 #' @export
 hgch_line_CatDatNum <- function(data, ...){
 

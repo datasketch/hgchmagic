@@ -3,12 +3,10 @@
 #' This chart does not allow for chaning orientation
 #'
 #' @param data A data.frame
-#' @inherit hgchmagic_default_opts
-#' @inheritDotParams hgchmagic_default_opts
 #' @section ctypes:
 #' Cat-Num, Yea-Num
 #' @examples
-#' gg_line_CatNum(sampleData("Dat-Num", nrow = 10))
+#' hgch_line_CatNum(sampleData("Dat-Num", nrow = 10))
 #' @export
 hgch_line_DatNum <- function(data, ...){
 
@@ -37,9 +35,7 @@ hgch_line_DatNum <- function(data, ...){
   d <- postprocess(d, "b", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
   d <- order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
 
-  print(d)
-
-  d$a <- makeup::makeup_dat(d$a,  locale = opts$style$locale)
+  #d$a <- makeup::makeup_dat(d$a,  locale = opts$style$locale)
   d$a <- as.character(d$a)
   d$a[is.na(d$a)] <- 'NA'
   print(d)

@@ -3,12 +3,10 @@
 #' This chart does not allow for chaning orientation
 #'
 #' @param data A data.frame
-#' @inherit hgchmagic_default_opts
-#' @inheritDotParams hgchmagic_default_opts
 #' @section ctypes:
 #' Cat-Num, Yea-Num
 #' @examples
-#' gg_pie_CatNum(sampleData("Cat-Num", nrow = 10))
+#' hgch_pie_CatNum(sampleData("Cat-Num", nrow = 10))
 #' @export
 hgch_pie_CatNum <- function(data, ...){
 
@@ -34,7 +32,6 @@ hgch_pie_CatNum <- function(data, ...){
 
   # Postprocess
   d <- postprocess(d, "b", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
-  d <- order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
 
   # Styles
   # Handle colors
@@ -42,7 +39,12 @@ hgch_pie_CatNum <- function(data, ...){
   palette <- opts$theme$palette_colors
   d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
 
+  if (!is.null(opts$chart$highlight_value)) {
+    w <- which(d$a %in% opts$chart$highlight_value)
+    d$..colors[w] <- opts$chart$highlight_value_color
+  }
 
+  d <- order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
 
   data <- list()
   l <- purrr::map(1:nrow(d), function(z){
@@ -51,9 +53,14 @@ hgch_pie_CatNum <- function(data, ...){
                             "color" = as.character(d$..colors[z]))
   })
 
-  if (is.null(opts$tooltip)) opts$tooltip <- paste0('<b>{point.name}</b><br/>',
-                                                    nms[2], ': ',
-                                                    opts$prefix,'{point.y}', opts$suffix)
+
+  format_num <- format_hgch(opts$style$format_num_sample, "y")
+
+  if (is.null(opts$tooltip)) {
+    opts$tooltip <- paste0('<b>{point.name}</b><br/>',
+                           nms[2], ': ',
+                           opts$style$prefix,'{point.',format_num ,'}', opts$style$suffix)
+  }
 
   global_options(opts$style$format_num_sample)
   hc <- highchart() %>%
@@ -78,7 +85,11 @@ hgch_pie_CatNum <- function(data, ...){
     hc_tooltip(useHTML=TRUE, pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = opts$title$caption %||% "") %>%
     hc_legend(enabled = TRUE) %>%
-    hc_add_theme(theme(opts = opts$theme))
+    hc_add_theme(theme(opts =  c(opts$theme,
+                                 cats = "{point.name} <br/>",
+                                 suffix = opts$style$suffix,
+                                 prefix = opts$style$prefix,
+                                 format_num = format_num)))
 
   hc
 }

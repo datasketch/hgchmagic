@@ -3,12 +3,10 @@
 #' This chart does not allow for chaning orientation
 #'
 #' @param data A data.frame
-#' @inherit hgchmagic_default_opts
-#' @inheritDotParams hgchmagic_default_opts
 #' @section ctypes:
 #' Cat-Cat-Num, Cat-Yea-Num
 #' @examples
-#' gg_treemap_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
+#' hgch_treemap_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
 #' @export
 hgch_treemap_CatCatNum <- function(data, ...){
 

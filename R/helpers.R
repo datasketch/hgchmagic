@@ -11,3 +11,13 @@ completevalues <- function(d) {
   d$b[is.na(d$b)] <- "NA"
   d
 }
+
+#' @export
+format_hgch <- function(sample, value = "value") {
+  params <- makeup::which_num_format(sample)
+  thousandsSep <- params$separators$thousands
+  decimalPoint <- params$separators$decimal
+  n_decimal <- params$separators$n_decimal
+  f <- paste0(value,':', thousandsSep, decimalPoint, n_decimal, "f")
+  f
+}

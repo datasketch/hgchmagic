@@ -16,30 +16,28 @@ url_logo <- function(logo, background_color) {
 
 #' @export
 add_branding <- function(opts) {
-
-  getDefaultTheme <- dsvizopts:::theme_datasketch
-  opts <- modifyList(getDefaultTheme, opts)
-
   if (!opts$branding_include) return()
-
   logo_path <- url_logo(logo = opts$logo,background_color = opts$background_color)
-
   JS(
     paste0(
-    "function() {this.renderer.image('",logo_path,"', this.chartWidth - 135, this.chartHeight - 40 , 130, 35).addClass('logo').add();}"
+      "function() {this.renderer.image('",logo_path,"', this.chartWidth - 160, this.chartHeight - 40 , 150, 30).addClass('logo').add();}"
     ))
 }
 
-
+#' @export
 theme <- function(opts = NULL){
   message("in theme_datasketch")
 
+  labels_style <- list (
+    color = opts$label_color,
+    fontFamily = opts$text_family,
+    fontSize = paste0(opts$label_size, "px"),
+    textDecoration= "none",
+    textShadow = "none",
+    textOutline = opts$label_text_outline
+  )
 
-  getDefaultTheme <- dsvizopts:::theme_datasketch
-  opts <- modifyList(getDefaultTheme, opts)
-  #print(opts)
 
-  opts$plot_margin_bottom <- NULL
   if(opts$branding_include) opts$plot_margin_bottom <- 100
 
   hc_theme(
@@ -48,24 +46,123 @@ theme <- function(opts = NULL){
       reflow = TRUE,
       renderTo = 'container',
       backgroundColor = opts$background_color,
-      # borderColor = opts$border_color,
-      # borderRadius = opts$border_radius,
-      # borderWidth = opts$border_width,
-      # width = opts$width,
-      # height = opts$height,
+
       marginBottom = opts$plot_margin_bottom,
-      # marginLeft = opts$margin_left,
-      # marginRight = opts$margin_right,
-      # marginTop = opts$margin_top,
-      # plotBackgroundColor = opts$plot_backgroundColor,
-      # plotBorderColor = opts$plot_borderColor,
-      # plotBorderWidth = opts$plot_borderWidth,
+      marginLeft = opts$plot_margin_left,
+      marginRight = opts$plot_margin_right,
+      marginTop = opts$plot_margin_top,
+
+      plotBackgroundColor = opts$plot_background_color,
+      plotBorderColor = opts$plot_border_color,
+      plotBorderWidth = opts$plot_border_width,
       style = list (
         fontFamily = opts$text_family,
-        fontSize = opts$text_size
-      ))
+        fontSize = paste0(opts$text_size, 'px')
+      )),
+    title = list(
+      align = opts$title_align,
+      style = list(
+        fontFamily = opts$title_family,
+        fontSize = paste0(opts$title_size, 'px'),
+        color = opts$title_color,
+        fontWeight = opts$title_weight
+      )
+    ),
+    subtitle = list(
+      align = opts$subtitle_align,
+      style = list(
+        fontFamily = opts$title_family,
+        fontSize = paste0(opts$subtitle_size, 'px'),
+        color = opts$subtitle_color,
+        fontWeight = opts$subtitle_weight
+      )
+    ),
+    credits = list(
+      position = list(
+        align = "left",
+        x = 10),
+      style = list(
+        fontFamily = opts$title_family,
+        fontSize = paste0(opts$caption_size, 'px'),
+        color = opts$caption_color
+      )
+    ),
+    xAxis = list(
+      visible = opts$grid_x_enabled,
+      gridLineWidth = opts$grid_x_width,
+      lineColor = opts$axis_line_color, #color del eje x
+      tickColor = opts$axis_ticks_color,#color de las divisiones del eje x
+      gridLineColor = opts$grid_x_color,
+      tickLength = opts$axis_tick_length,
+      lineWidth= opts$axis_line_width,
+      labels = list(
+        style = list(
+          color = opts$axis_title_color, #opts$font_color, #color nombre de las etiquetas
+          fontFamily = opts$text_family,
+          fontSize = paste0(opts$text_size, 'px')
+        )),
+      title = list(
+        style = list(
+          color = opts$axis_title_color,# color del titulo del eje
+          fontSize = paste0(opts$axis_title_size, 'px')
+        )
+      )
+    ),
+    yAxis = list(
+      visible = opts$grid_y_enabled,
+      gridLineWidth = opts$grid_y_width,
+      lineColor = opts$axis_line_color, #color del eje x
+      tickColor = opts$axis_ticks_color,#color de las divisiones del eje x
+      gridLineColor = opts$grid_y_color,
+      gridLineDashStyle = opts$grid_y_dash,
+      tickLength = opts$axis_tick_length,
+      lineWidth= opts$axis_line_width,
+      labels = list(
+        style = list(
+          color = opts$axis_title_color, #opts$font_color, #color nombre de las etiquetas
+          fontFamily = opts$text_family,
+          fontSize = paste0(opts$text_size, 'px')
+        )),
+      title = list(
+        style = list(
+          color = opts$axis_title_color,# color del titulo del eje
+          fontSize = paste0(opts$axis_title_size, 'px')
+        )
+      )
+    ),
+    plotOptions = list (
+      packedbubble = list(
+        minSize = opts$bubble_min,
+        maxSize = opts$bubble_max,
+        zMin = 0,
+        zMax = 1000,
+        layoutAlgorithm = list(
+          splitSeries = FALSE,
+          gravitationalConstant = 0.02
+        ),
+        marker= list(
+          fillOpacity = opts$bubble_opacity)
+      ),
+      series = list(
+        colorByPoint = FALSE,
+        dataLabels = list (
+          enabled = opts$text_show,
+          style = labels_style,
+          format = paste0(opts$cats, opts$prefix, "{point.", opts$format_num, "}", opts$suffix)
+          )
+        ),
+      legend = list(
+        #backgroundColor = custom$legend_background,
+        #borderColor = custom$legend_backgroundBorderColor,
+        #borderWidth = custom$legend$backgroundWidth,
+        itemStyle = list(
+          fontFamily = opts$legend_family,
+          fontSize = paste0(opts$legend_size, 'px'),
+          color = opts$legend_color
+        )
+      )
+    )
   )
-
 }
 
 
