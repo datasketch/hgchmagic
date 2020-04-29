@@ -16,11 +16,11 @@ hgch_bar_CatNum(sampleData("Cat-Num"),
 d <- data.frame(cosas = c("Piedra", "Papel", "Tijera"), total = c(23, 45, -1))
 hgch_bar_CatNum(d)
 hgch_bar_CatNum(d,
-                text_show = FALSE, highlight_value = "papel")
+                text_show = FALSE, highlight_value = "Papel")
 hgch_bar_CatNum(d,
-                text_show = FALSE, order = c("piedra"))
+                text_show = FALSE, order = c("Piedra"))
 hgch_bar_CatNum(d,
-                opts = list(label_color = "red",
+                theme = list(label_color = "red",
                             label_text_outline = "none",
                             background_color = "00C0C0"))
 
