@@ -9,8 +9,8 @@ Imports:
 Depends:
     R (>= 3.0.0),
     tools,
-    Rd2roxygen,
-    datafringe,
+    homodatum,
+    makeup,
     d3.format,
     dsvizopts,
     tidyverse,
