@@ -29,14 +29,13 @@ theme <- function(opts = NULL){
   message("in theme_datasketch")
 
   labels_style <- list (
-    color = opts$label_color,
+    color = opts$dataLabels_color,
     fontFamily = opts$text_family,
-    fontSize = paste0(opts$label_size, "px"),
+    fontSize = paste0(opts$dataLabels_size, "px"),
     textDecoration= "none",
     textShadow = "none",
-    textOutline = opts$label_text_outline
+    textOutline = opts$dataLabels_text_outline
   )
-
 
   if(opts$branding_include) opts$plot_margin_bottom <- 100
 
@@ -146,21 +145,31 @@ theme <- function(opts = NULL){
       series = list(
         colorByPoint = FALSE,
         dataLabels = list (
-          enabled = opts$text_show,
+          enabled = opts$dataLabels_show,
           style = labels_style,
-          format = paste0(opts$cats, opts$prefix, "{point.", opts$format_num, "}", opts$suffix)
+          format = paste0(opts$cats, opts$prefix, "{point.", opts$format_dataLabels, "}", opts$suffix)
           )
         ),
+      pie = list(
+        dataLabels = list(distance = ifelse(opts$inner_dataLabels,-100, 30)),
+        showInLegend = opts$legend_show
+        )
+    ),
       legend = list(
         #backgroundColor = custom$legend_background,
         #borderColor = custom$legend_backgroundBorderColor,
         #borderWidth = custom$legend$backgroundWidth,
+        layout = opts$legend_layout,
+        align = opts$legend_align,
+        verticalAlign = opts$legend_verticalAlign,
+        itemMarginTop = opts$legend_itemMarginTop,
+        itemMarginBottom = opts$legend_itemMarginBottom,
+        reversed = opts$legend_reversed,
         itemStyle = list(
           fontFamily = opts$legend_family,
           fontSize = paste0(opts$legend_size, 'px'),
           color = opts$legend_color
         )
-      )
     )
   )
 }

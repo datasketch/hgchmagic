@@ -14,6 +14,7 @@ completevalues <- function(d) {
 
 #' @export
 format_hgch <- function(sample, value = "value") {
+  if (is.null(sample)) return()
   params <- makeup::which_num_format(sample)
   thousandsSep <- params$separators$thousands
   decimalPoint <- params$separators$decimal
