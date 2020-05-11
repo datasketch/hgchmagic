@@ -48,3 +48,15 @@ hgch_bubbles_CatNum <- function(data, ...){
 
   hc
 }
+
+
+#' Bubbles Chart Cat
+#'
+#'
+#' @param data A data.frame
+#' @section ctypes:
+#' Cat
+#' @examples
+#' hgch_bubbles_Cat(sampleData("Cat", nrow = 10))
+#' @export
+hgch_bubbles_Cat <- hgch_bubbles_CatNum

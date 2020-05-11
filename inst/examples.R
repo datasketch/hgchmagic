@@ -1,4 +1,12 @@
 
+# test cat plots ----------------------------------------------------------
+
+hgch_bar_Cat(sampleData("Cat"))
+hgch_bubbles_Cat(sampleData("Cat", 100), dataLabels_show = TRUE)
+hgch_donut_Cat(sampleData("Cat", nrow = 10), dataLabels_show = TRUE)
+hgch_pie_Cat(sampleData("Cat", nrow = 10), dataLabels_show = TRUE, inner_dataLabels = TRUE)
+hgch_treemap_Cat(sampleData("Cat", nrow = 10), dataLabels_show = TRUE)
+
 # bar cat num examples ----------------------------------------------------
 
 hgch_bar_CatNum(sampleData("Cat-Num"))

@@ -1,18 +1,29 @@
 #' @export
 hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y"){
 
+
   # Handle homodatum
   f <- homodatum::fringe(data)
-
-  needs_CatNum_agg <- f$frtype == "Cat"
-
   nms <- fringe_labels(f)
   d <- fringe_data(f)
 
-  if(needs_CatNum_agg){
-    d <- d %>%
-      dplyr::group_by_all() %>%
-      dplyr::summarise(b = n())
+  frtype_d <- f$frtype
+  d_frtype <- strsplit(frtype_d, split = "-") %>% unlist()
+  var_cats <- grep("Cat", d_frtype)
+  var_date <- grep("Dat", d_frtype)
+  var_num <- grep("Num", d_frtype)
+
+  if (identical(var_num, integer())) {
+    if (length(d_frtype) == 1) {
+        d <- d %>%
+          dplyr::group_by_all() %>%
+          dplyr::summarise(b = n())
+        nms[2] <- opts$summarize$agg_text %||% "Count"}
+    if (length(d_frtype) == 2) {
+      d <- d %>%
+        dplyr::group_by_all() %>%
+        dplyr::summarise(c = n())
+      nms[3] <-  opts$summarize$agg_text %||% "Count"}
   }
 
   labelsXY <- labelsXY(hor_title = opts$title$hor_title %||% nms[1],
@@ -20,6 +31,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
                        nms = nms, orientation = opts$chart$orientation)
   hor_title <- as.character(labelsXY[1])
   ver_title <- as.character(labelsXY[2])
+
+
+
+
   # Drop NAs
   # TODO: Add NAs as categories or dates when it makes sense
   d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
@@ -46,9 +61,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
 
   # Handle number/strings/dates formats
 
-  d_frtype <- strsplit(f$frtype, split = "-") %>% unlist()
-  var_cats <- grep("Cat", d_frtype)
-  var_date <- grep("Dat", d_frtype)
+
 
   if (!identical(var_cats, integer())) {
     l_cats <- map(var_cats, function(f_cats){

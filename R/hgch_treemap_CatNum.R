@@ -44,3 +44,14 @@ hgch_treemap_CatNum <- function(data, ...){
 
   hc
 }
+
+
+#' Treemap Chart Cat
+#'
+#' @param data A data.frame
+#' @section ctypes:
+#' Cat, Yea
+#' @examples
+#' hgch_treemap_Cat(sampleData("Cat", nrow = 10))
+#' @export
+hgch_treemap_Cat <-  hgch_treemap_CatNum

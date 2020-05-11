@@ -47,3 +47,17 @@ hgch_bar_CatNum <- function(data, ...){
 
   hc
 }
+
+
+
+#' Bar Chart Cat
+#'
+#' This chart does not allow for chaning orientation
+#'
+#' @param data A data.frame
+#' @section ctypes:
+#' Cat
+#' @examples
+#' hg_bar_Cat(sampleData("Cat", nrow = 10))
+#' @export
+hgch_bar_Cat <- hgch_bar_CatNum

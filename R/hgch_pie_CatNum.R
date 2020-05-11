@@ -42,3 +42,17 @@ hgch_pie_CatNum <- function(data, ...) {
 
   hc
 }
+
+
+
+#' Pie Chart Cat
+#'
+#' This chart does not allow for chaning orientation
+#'
+#' @param data A data.frame
+#' @section ctypes:
+#' Cat, Yea
+#' @examples
+#' hgch_pie_Cat(sampleData("Cat", nrow = 10))
+#' @export
+hgch_pie_Cat <- hgch_pie_CatNum
