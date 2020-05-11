@@ -15,10 +15,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
 
   if (identical(var_num, integer())) {
     if (length(d_frtype) == 1) {
-        d <- d %>%
-          dplyr::group_by_all() %>%
-          dplyr::summarise(b = n())
-        nms[2] <- opts$summarize$agg_text %||% "Count"}
+      d <- d %>%
+        dplyr::group_by_all() %>%
+        dplyr::summarise(b = n())
+      nms[2] <- opts$summarize$agg_text %||% "Count"}
     if (length(d_frtype) == 2) {
       d <- d %>%
         dplyr::group_by_all() %>%
@@ -32,18 +32,36 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
   hor_title <- as.character(labelsXY[1])
   ver_title <- as.character(labelsXY[2])
 
-
-
-
   # Drop NAs
   # TODO: Add NAs as categories or dates when it makes sense
-  d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
-                      na_label = opts$preprocess$na_label, na_label_cols = "a")
-  # Summarize
-  d <- summarizeData(d, opts$summarize$agg, to_agg = b, a)
 
-  # Postprocess
-  d <- postprocess(d, "b", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+  if (length(var_cats) > 1) {
+    d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
+                        na_label = opts$preprocess$na_label, na_label_cols = "b")
+    d <- preprocessData(d, drop_na = opts$preprocess$drop_na_legend,
+                        na_label = opts$preprocess$na_label, na_label_cols = "a")
+    d <- summarizeData(d, opts$summarize$agg, to_agg = c, a, b)
+    d <- completevalues(d)
+    if (opts$postprocess$percentage) {
+      d <- d %>% group_by(b) %>%
+        dplyr::mutate(c = (c / sum(c, na.rm = TRUE)) * 100)
+    }
+    d <- postprocess(d, "c", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+    #d <- order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
+
+    if (is.null(opts$style$color_by)) opts$style$color_by <- nms[1]
+  } else {
+    d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
+                        na_label = opts$preprocess$na_label, na_label_cols = "a")
+    d <- summarizeData(d, opts$summarize$agg, to_agg = b, a)
+    # Postprocess
+    d <- postprocess(d, "b", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+
+  }
+  #print(d)
+  # Summarize
+
+
 
   # Styles
   # Handle colors
@@ -102,7 +120,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
     orientation = opts$chart$orientation,
     formats = f_nums,
     tooltip = tooltip,
-      extra = get_extra_opts(opts, extra_pattern),
+    extra = get_extra_opts(opts, extra_pattern),
     theme = c(opts$theme,
               dataLabels_show = opts$dataLabels$dataLabels_show,
               dataLabels_color = opts$dataLabels$dataLabels_color %||% "constrast",
