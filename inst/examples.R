@@ -67,9 +67,11 @@ hgch_treemap_CatNum(d, color_by = "cosas")
 
 # bubbles cat nun example -------------------------------------------------
 
-
+hgch_bubbles_CatNum(d)
+hgch_bubbles_CatNum(d, dataLabels_show = TRUE)
 hgch_bubbles_CatNum(d, prefix = "$",
                     color_by = "cosas",
+                    dataLabels_show = TRUE,
                     theme = list(label_text_outline = "none"))
 
 

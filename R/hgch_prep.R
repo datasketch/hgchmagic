@@ -94,6 +94,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
               dataLabels_show = opts$dataLabels$dataLabels_show,
               dataLabels_color = opts$dataLabels$dataLabels_color %||% "constrast",
               dataLabels_size = opts$dataLabels$dataLabels_size %||% "11",
+              dataLabels_text_outline = opts$dataLabels$dataLabels_text_outline,
               format_dataLabels = format_dataLabels %||% format_num,
               suffix = opts$style$suffix,
               prefix = opts$style$prefix,
