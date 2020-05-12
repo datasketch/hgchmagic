@@ -32,8 +32,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
   hor_title <- as.character(labelsXY[1])
   ver_title <- as.character(labelsXY[2])
 
-  # Drop NAs
-  # TODO: Add NAs as categories or dates when it makes sense
+  format_num <- format_hgch(opts$style$format_num_sample, value)
 
   if (length(var_cats) > 1) {
     d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
@@ -42,44 +41,54 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
                         na_label = opts$preprocess$na_label, na_label_cols = "a")
     d <- summarizeData(d, opts$summarize$agg, to_agg = c, a, b)
     d <- completevalues(d)
+
     if (opts$postprocess$percentage) {
+      opts$style$suffix <- "%"
       d <- d %>% group_by(b) %>%
         dplyr::mutate(c = (c / sum(c, na.rm = TRUE)) * 100)
     }
     d <- postprocess(d, "c", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
-    #d <- order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
 
     if (is.null(opts$style$color_by)) opts$style$color_by <- nms[1]
+
+    if (is.null(opts$tooltip)) {
+      tooltip <- paste0('<b>', nms[2], ': </b>{point.category}</br>',
+                             '<b>', nms[1], ': </b>{series.name}</br>',
+                             nms[3], ': ',
+                             opts$style$prefix,'{point.', format_num,'}', opts$style$suffix)
+    }
   } else {
     d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
                         na_label = opts$preprocess$na_label, na_label_cols = "a")
     d <- summarizeData(d, opts$summarize$agg, to_agg = b, a)
     # Postprocess
     d <- postprocess(d, "b", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
-
+    if (is.null(opts$tooltip)) {
+      tooltip <- paste0('<b>{point.name}</b><br/>',
+                        nms[2], ': ',
+                        opts$style$prefix,'{point.',format_num ,'}', opts$style$suffix)
+    }
   }
-  #print(d)
-  # Summarize
-
-
 
   # Styles
   # Handle colors
   color_by <- names(nms[match(opts$style$color_by, nms)])
-  # color_by <- "a" pie
+
   palette <- opts$theme$palette_colors
   d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
 
-  if (!is.null(opts$chart$highlight_value)) {
-    w <- which(d$a %in% opts$chart$highlight_value)
-    d$..colors[w] <- opts$chart$highlight_value_color
-  }
-
-  d <- order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
+  if (length(var_cats) > 1) {
+    d <- order_category(d, col = "a", order = opts$postprocess$order_legend, label_wrap = opts$style$label_wrap_legend)
+    d <- order_category(d, col = "b", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
+  } else {
+    if (!is.null(opts$chart$highlight_value)) {
+      w <- which(d$a %in% opts$chart$highlight_value)
+      d$..colors[w] <- opts$chart$highlight_value_color
+    }
+    d <- order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
+}
 
   # Handle number/strings/dates formats
-
-
 
   if (!identical(var_cats, integer())) {
     l_cats <- map(var_cats, function(f_cats){
@@ -95,15 +104,9 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
                                      prefix = opts$style$prefix,
                                      suffix = opts$style$suffix)
 
-
-  format_num <- format_hgch(opts$style$format_num_sample, value)
   format_dataLabels <- format_hgch(opts$dataLabels$dataLabels_format_sample, value)
 
-  if (is.null(opts$tooltip)) {
-    tooltip <- paste0('<b>{point.name}</b><br/>',
-                      nms[2], ': ',
-                      opts$style$prefix,'{point.',format_num ,'}', opts$style$suffix)
-  }
+
   fmt_dataLabel <- opts$dataLabels$dataLabels_format_sample %||% opts$style$format_num_sample
   # f_nums_dataLabel <- makeup::makeup_format(sample = fmt_dataLabel)
   #print(tooltip)
@@ -118,8 +121,11 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
       y = ver_title
     ),
     orientation = opts$chart$orientation,
+    percentage = opts$postprocess$percentage,
     formats = f_nums,
     tooltip = tooltip,
+    color_by = color_by,
+    graph_type = opts$chart$graph_type,
     extra = get_extra_opts(opts, extra_pattern),
     theme = c(opts$theme,
               dataLabels_show = opts$dataLabels$dataLabels_show,

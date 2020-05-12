@@ -87,16 +87,31 @@ hgch_line_DatNum(sampleData("Dat-Num"), background_color = "#000000")
 
 
 
+# Bar cat cat num examples ------------------------------------------------
+data <- sampleData("Cat-Cat-Num")
+hgch_bar_CatCatNum(data)
+hgch_bar_CatCatNum(data, drop_na_legend = TRUE)
+hgch_bar_CatCatNum(data, drop_na = TRUE)
 
-# Cat-Cat-Num -------------------------------------------------------------
-
-hgch_bar_CatCatNum(sampleData("Cat-Cat-Num"))
-hgch_bar_CatCatNum(sampleData("Cat-Cat-Num"), graph_type = "stacked")
-hgch_bar_CatCatNum(sampleData("Cat-Cat-Num"), graph_type = "stacked", percentage = TRUE)
-
-
+data <- data.frame(Cosas = c("Piedra", "Piedra", "Hoja", "Hoja", NA, "Tijera", "Tijera", "Hoja", "Piedra"),
+                   Seres = c("Elfo", "Enano", "Elfo", "Gigante", "Golondrina", "Mago", "Enano", "Mago", "Mago"),
+                   Poder = runif(9, 1, 1000))
+hgch_bar_CatCatNum(data, order = c("Gigante"), order_legend = c("Piedra", "Hoja"))
+hgch_bar_CatCatNum(data, graph_type = "stacked", percentage = TRUE)
 
 
+# Bubble cat cat num examples ---------------------------------------------
+
+hgch_bubbles_CatCatNum(sampleData("Cat-Cat-Num"))
+hgch_bubbles_CatCatNum(sampleData("Cat-Cat-Num"), dataLabels_show = TRUE)
+hgch_bubbles_CatCatNum(sampleData("Cat-Cat-Num"), percentage = TRUE, dataLabels_show = TRUE)
+
+
+
+# Treemap cat cat num examples --------------------------------------------
+
+hgch_treemap_CatCatNum(sampleData("Cat-Cat-Num"))
+hgch_treemap_CatCatNum(sampleData("Cat-Cat-Num"), dataLabels_show = TRUE)
 
 
 
