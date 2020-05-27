@@ -13,9 +13,13 @@ Depends:
     makeup,
     d3.format,
     dsvizopts,
-    tidyverse,
+    readr,
+    dplyr,
+    tidyr,
+    purrr,
+    stringr,
     jsonlite,
-    leaflet,
+    paletero,
     highcharter (>= 0.4.0.9999)
 License: MIT
 LazyData: true

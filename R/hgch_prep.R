@@ -5,7 +5,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
   # Handle homodatum
   f <- homodatum::fringe(data)
   nms <- fringe_labels(f)
-  d <- fringe_data(f)
+  d <- fringe_d(f)
 
   frtype_d <- f$frtype
   d_frtype <- strsplit(frtype_d, split = "-") %>% unlist()
@@ -57,6 +57,11 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
                              nms[3], ': ',
                              opts$style$prefix,'{point.', format_num,'}', opts$style$suffix)
     }
+  } else if (length(var_date) == 1) {
+    d <- preprocessData(d, drop_na = TRUE, na_label_cols = "a")
+    d <- summarizeData(d, opts$summarize$agg, to_agg = b, a)
+    d <- postprocess(d, "b", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+    tooltip <- NULL
   } else {
     d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
                         na_label = opts$preprocess$na_label, na_label_cols = "a")
@@ -96,9 +101,12 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
     })}
   if (!identical(var_date, integer())) {
     l_date <- map(var_date, function(f_date){
-      d[[f_date]] <<- lubridate::as_date(d[[f_date]])#makeup_dat(d[[f_date]], sample = opts$style$format_dat_sample, locale = opts$style$locale)
-    })}
+      #print( list(d[[f_date]], sample = "2000-12-31"))
+      d[[f_date]] <<- makeup_dat(d[[f_date]], sample = opts$style$format_dat_sample,
+                                 locale = opts$style$locale)
 
+    })}
+  print(d)
   f_nums <- makeup::makeup_format_js(sample = opts$style$format_num_sample,
                                      locale = opts$style$locale,
                                      prefix = opts$style$prefix,
@@ -124,6 +132,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
     percentage = opts$postprocess$percentage,
     formats = f_nums,
     tooltip = tooltip,
+    spline = opts$style$spline,
     color_by = color_by,
     graph_type = opts$chart$graph_type,
     extra = get_extra_opts(opts, extra_pattern),

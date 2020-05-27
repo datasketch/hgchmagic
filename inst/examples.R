@@ -1,22 +1,22 @@
 
 # test cat plots ----------------------------------------------------------
 
-hgch_bar_Cat(sampleData("Cat"))
-hgch_bubbles_Cat(sampleData("Cat", 100), dataLabels_show = TRUE)
-hgch_donut_Cat(sampleData("Cat", nrow = 10), dataLabels_show = TRUE)
-hgch_pie_Cat(sampleData("Cat", nrow = 10), dataLabels_show = TRUE, inner_dataLabels = TRUE)
-hgch_treemap_Cat(sampleData("Cat", nrow = 10), dataLabels_show = TRUE)
+hgch_bar_Cat(sample_data("Cat"))
+hgch_bubbles_Cat(sample_data("Cat", 100), dataLabels_show = TRUE)
+hgch_donut_Cat(sample_data("Cat", nrow = 10), dataLabels_show = TRUE)
+hgch_pie_Cat(sample_data("Cat", nrow = 10), dataLabels_show = TRUE, inner_dataLabels = TRUE)
+hgch_treemap_Cat(sample_data("Cat", nrow = 10), dataLabels_show = TRUE)
 
 # bar cat num examples ----------------------------------------------------
 
-hgch_bar_CatNum(sampleData("Cat-Num"))
-hgch_bar_CatNum(sampleData("Cat-Num"),
+hgch_bar_CatNum(sample_data("Cat-Num"))
+hgch_bar_CatNum(sample_data("Cat-Num"),
                 opts = list(title = "titulo"))
 
-hgch_bar_CatNum(sampleData("Cat-Num"),
+hgch_bar_CatNum(sample_data("Cat-Num"),
                 opts = list(title = "titulo"))
 
-hgch_bar_CatNum(sampleData("Cat-Num"),
+hgch_bar_CatNum(sample_data("Cat-Num"),
                 title = "esto es un titulo",
                 subtitle = "esto es un subitu",
                 caption = "esto es un caption",
@@ -39,16 +39,17 @@ hgch_bar_CatNum(d, branding_include = TRUE, background_color = "#000000")
 
 # Pie and donut cat num examples ------------------------------------------
 
-hgch_pie_CatNum(sampleData("Cat-Num"), branding_include = TRUE)
-hgch_pie_CatNum(sampleData("Cat-Num"), dataLabels_show = TRUE)
-hgch_pie_CatNum(sampleData("Cat-Num"), dataLabels_show = TRUE, inner_dataLabels = TRUE)
-hgch_pie_CatNum(sampleData("Cat-Num"),
+hgch_pie_CatNum(sample_data("Cat-Num"), branding_include = TRUE)
+hgch_pie_CatNum(sample_data("Cat-Num"), dataLabels_show = TRUE)
+hgch_pie_CatNum(sample_data("Cat-Num"), dataLabels_show = TRUE, inner_dataLabels = TRUE)
+hgch_pie_CatNum(sample_data("Cat-Num"),
                 background_color = "#000000",
                 legend_show = TRUE,
                 legend_color = "#feafea",
                 dataLabels_show = TRUE,
                 dataLabels_color = "#feafea")
 
+d <- data.frame(cosas = c("Piedra", "Papel", "Tijera"), total = c(23, 45, 111))
 hgch_pie_CatNum(d)
 hgch_donut_CatNum(d, color_by = "cosas")
 
@@ -66,9 +67,8 @@ d <- l$d
 
 # treemap cat num example -------------------------------------------------
 
-hgch_treemap_CatNum(sampleData('Cat-Num'), dataLabels_show = TRUE)
+hgch_treemap_CatNum(sample_data('Cat-Num'), dataLabels_show = TRUE)
 
-d <- data.frame(cosas = c("Piedra", "Papel", "Tijera"), total = c(23, 45, 111))
 hgch_treemap_CatNum(d, color_by = "cosas")
 
 
@@ -83,12 +83,12 @@ hgch_bubbles_CatNum(d, prefix = "$",
                     theme = list(label_text_outline = "none"))
 
 
-hgch_line_DatNum(sampleData("Dat-Num"), background_color = "#000000")
+hgch_line_DatNum(sample_data("Dat-Num"), background_color = "#000000")
 
 
 
 # Bar cat cat num examples ------------------------------------------------
-data <- sampleData("Cat-Cat-Num")
+data <- sample_data("Cat-Cat-Num")
 hgch_bar_CatCatNum(data)
 hgch_bar_CatCatNum(data, drop_na_legend = TRUE)
 hgch_bar_CatCatNum(data, drop_na = TRUE)
@@ -102,17 +102,20 @@ hgch_bar_CatCatNum(data, graph_type = "stacked", percentage = TRUE)
 
 # Bubble cat cat num examples ---------------------------------------------
 
-hgch_bubbles_CatCatNum(sampleData("Cat-Cat-Num"))
-hgch_bubbles_CatCatNum(sampleData("Cat-Cat-Num"), dataLabels_show = TRUE)
-hgch_bubbles_CatCatNum(sampleData("Cat-Cat-Num"), percentage = TRUE, dataLabels_show = TRUE)
+hgch_bubbles_CatCatNum(sample_data("Cat-Cat-Num"))
+hgch_bubbles_CatCatNum(sample_data("Cat-Cat-Num"), dataLabels_show = TRUE)
+hgch_bubbles_CatCatNum(sample_data("Cat-Cat-Num"), percentage = TRUE, dataLabels_show = TRUE)
 
 
 
 # Treemap cat cat num examples --------------------------------------------
 
-hgch_treemap_CatCatNum(sampleData("Cat-Cat-Num"))
-hgch_treemap_CatCatNum(sampleData("Cat-Cat-Num"), dataLabels_show = TRUE)
+hgch_treemap_CatCatNum(sample_data("Cat-Cat-Num"))
+hgch_treemap_CatCatNum(sample_data("Cat-Cat-Num"), dataLabels_show = TRUE)
 
 
 
+# Line dat num examples ---------------------------------------------------
+data <- sample_data("Dat-Num")
+hgch_line_DatNum(data)
 
