@@ -147,7 +147,7 @@ theme <- function(opts = NULL){
         dataLabels = list (
           enabled = opts$dataLabels_show,
           style = labels_style,
-          format = paste0(opts$cats, opts$prefix, "{point.", opts$format_dataLabels, "}", opts$suffix)
+          format = paste0(opts$cats, opts$format_dataLabels)
           )
         ),
       pie = list(

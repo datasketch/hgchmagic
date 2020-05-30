@@ -14,7 +14,7 @@ hgch_bubbles_CatNum <- function(data, ...){
 
   opts <- dsvizopts::merge_dsviz_options(...)
 
-  l <- hgchmagic_prep(data, opts = opts)
+  l <- hgchmagic_prep(data, opts = opts, plot = "bubbles")
 
   d <- l$d
 

@@ -13,7 +13,7 @@ hgch_treemap_CatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, value = "value")
+  l <- hgchmagic_prep(data, opts = opts, plot = "treemap")
 
   d <- l$d
 

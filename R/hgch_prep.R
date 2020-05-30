@@ -1,14 +1,13 @@
 #' @export
-hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y"){
-
+hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"){
 
   # Handle homodatum
   f <- homodatum::fringe(data)
   nms <- fringe_labels(f)
   d <- fringe_d(f)
 
-  frtype_d <- f$frtype
-  d_frtype <- strsplit(frtype_d, split = "-") %>% unlist()
+  frtype <- f$frtype
+  d_frtype <- strsplit(frtype, split = "-") %>% unlist()
   var_cats <- grep("Cat", d_frtype)
   var_date <- grep("Dat", d_frtype)
   var_num <- grep("Num", d_frtype)
@@ -18,12 +17,16 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
       d <- d %>%
         dplyr::group_by_all() %>%
         dplyr::summarise(b = n())
-      nms[2] <- opts$summarize$agg_text %||% "Count"}
+      frtype <- "Cat-Num"
+      nms[2] <- opts$summarize$agg_text %||% "Count"
+      names(nms) <- c("a", "b")}
     if (length(d_frtype) == 2) {
       d <- d %>%
         dplyr::group_by_all() %>%
         dplyr::summarise(c = n())
-      nms[3] <-  opts$summarize$agg_text %||% "Count"}
+      frtype <- "Cat-Cat-Num"
+      nms[3] <-  opts$summarize$agg_text %||% "Count"
+      names(nms) <- c("a", "b", "c")}
   }
 
   labelsXY <- labelsXY(hor_title = opts$title$hor_title %||% nms[1],
@@ -32,7 +35,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
   hor_title <- as.character(labelsXY[1])
   ver_title <- as.character(labelsXY[2])
 
-  format_num <- format_hgch(opts$style$format_num_sample, value)
 
   if (length(var_cats) > 1) {
     d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
@@ -51,28 +53,17 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
 
     if (is.null(opts$style$color_by)) opts$style$color_by <- nms[1]
 
-    if (is.null(opts$tooltip)) {
-      tooltip <- paste0('<b>', nms[2], ': </b>{point.category}</br>',
-                             '<b>', nms[1], ': </b>{series.name}</br>',
-                             nms[3], ': ',
-                             opts$style$prefix,'{point.', format_num,'}', opts$style$suffix)
-    }
+
   } else if (length(var_date) == 1) {
     d <- preprocessData(d, drop_na = TRUE, na_label_cols = "a")
     d <- summarizeData(d, opts$summarize$agg, to_agg = b, a)
     d <- postprocess(d, "b", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
-    tooltip <- NULL
   } else {
     d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
                         na_label = opts$preprocess$na_label, na_label_cols = "a")
     d <- summarizeData(d, opts$summarize$agg, to_agg = b, a)
     # Postprocess
     d <- postprocess(d, "b", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
-    if (is.null(opts$tooltip)) {
-      tooltip <- paste0('<b>{point.name}</b><br/>',
-                        nms[2], ': ',
-                        opts$style$prefix,'{point.',format_num ,'}', opts$style$suffix)
-    }
   }
 
   # Styles
@@ -106,18 +97,26 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
                                  locale = opts$style$locale)
 
     })}
-  print(d)
+  #print(d)
   f_nums <- makeup::makeup_format_js(sample = opts$style$format_num_sample,
                                      locale = opts$style$locale,
                                      prefix = opts$style$prefix,
                                      suffix = opts$style$suffix)
 
-  format_dataLabels <- format_hgch(opts$dataLabels$dataLabels_format_sample, value)
-
+ sample_labels <- opts$dataLabels$dataLabels_format_sample %||% opts$style$format_num_sample
+  format_dataLabels <- format_hgch(plot = plot,
+                            frtype = frtype,
+                            sample = sample_labels,
+                            prefix = opts$style$prefix,
+                            suffix = opts$style$suffix)
 
   fmt_dataLabel <- opts$dataLabels$dataLabels_format_sample %||% opts$style$format_num_sample
   # f_nums_dataLabel <- makeup::makeup_format(sample = fmt_dataLabel)
-  #print(tooltip)
+  tooltip <- tooltip_hgch(plot, tooltip = opts$chart$tooltip,
+                          nms = nms, frtype = frtype,
+                          prefix = opts$style$prefix,
+                          suffix = opts$style$suffix,
+                          sample = opts$style$format_num_sample)  #print(tooltip)
 
   list(
     d = d,
@@ -141,10 +140,9 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", value =  "y")
               dataLabels_color = opts$dataLabels$dataLabels_color %||% "constrast",
               dataLabels_size = opts$dataLabels$dataLabels_size %||% "11",
               dataLabels_text_outline = opts$dataLabels$dataLabels_text_outline,
-              format_dataLabels = format_dataLabels %||% format_num,
+              format_dataLabels = format_dataLabels,
               suffix = opts$style$suffix,
-              prefix = opts$style$prefix,
-              format_num = format_num)
+              prefix = opts$style$prefix)
   )
 
 
