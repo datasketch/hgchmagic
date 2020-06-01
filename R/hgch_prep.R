@@ -52,8 +52,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
 
   if (length(var_cats) > 1) {
-    print(nms)
-    print('hola')
+    # print(nms)
+    # print('hola')
     labelsXY <- opts$title$hor_title %||% nms[2]
     labelsXY[2] <- opts$title$ver_title %||% nms[3]
     if (opts$chart$orientation == "hor")  labelsXY <- rev(labelsXY)
