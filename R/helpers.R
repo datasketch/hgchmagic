@@ -22,6 +22,17 @@ tooltip_codes <- function(sample, prefix, suffix) {
   n_decimal <- params$n_decimal
 
   l <- list(
+    line = list(
+      `Cat-Num` = list(
+        a = "{point.category}",
+        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Cat-Num` = list(
+        a = "{series.name}",
+        b = "{point.category}",
+        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      )
+    ),
     bar = list(
       `Cat-Num` = list(
         a = "{point.name}",

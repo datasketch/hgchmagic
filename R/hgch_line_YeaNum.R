@@ -17,11 +17,12 @@ hgch_line_YeaNum <- function(data, ...){
 
   d <- l$d
 
-  h <- purrr::map(1:nrow(d), function(z){
-    data$data[[z]] <<- list("name" = d$a[z],
-                            "y" = as.numeric(d$b[z]),
-                            "color" = as.character(d$..colors[z]))
-  })
+  series <- list(list(
+    data = purrr::map(1:nrow(d), function(x) {
+      list(y = d$b[x],
+           name = d$a[x])
+    })
+  ))
 
   global_options(opts$style$format_num_sample)
   hc <- highchart() %>%
@@ -31,18 +32,16 @@ hgch_line_YeaNum <- function(data, ...){
              events = list(
                load = add_branding(opts$theme)
              )) %>%
-    hc_series(
-      data
-    ) %>%
-    hc_xAxis(title = list(text = l$title$x),
-             type = "category") %>%
+    hc_add_series_list(series) %>%
+     hc_xAxis(title = list(text = l$title$x),
+              type = "category") %>%
     hc_yAxis(title = list(text = l$title$y),
              labels = list(
                formatter = l$formats)
     ) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = l$titles$caption) %>%
-    hc_legend(enabled = FALSE) #%>%
+    hc_legend(enabled = FALSE) %>%
     hc_add_theme(theme(opts = l$theme))
 
   hc
