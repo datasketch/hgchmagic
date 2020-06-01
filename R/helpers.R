@@ -75,7 +75,7 @@ tooltip_codes <- function(sample, prefix, suffix) {
       `Cat-Cat-Num` = list(
         a = "{point.parent}",
         b = "{point.node.name}",
-        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+        c = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
       )
     ),
     scatter = list(
