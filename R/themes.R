@@ -96,13 +96,13 @@ theme <- function(opts = NULL){
       lineWidth= opts$axis_line_width,
       labels = list(
         style = list(
-          color = opts$axis_title_color, #opts$font_color, #color nombre de las etiquetas
-          fontFamily = opts$text_family,
+          color = opts$axis_title_color %||% opts$text_color, #opts$font_color, #color nombre de las etiquetas
+          fontFamily = opts$text_family %||% opts$text_color,
           fontSize = paste0(opts$text_size, 'px')
         )),
       title = list(
         style = list(
-          color = opts$axis_title_color,# color del titulo del eje
+          color = opts$axis_title_color %||% opts$text_color,# color del titulo del eje
           fontSize = paste0(opts$axis_title_size, 'px')
         )
       )
@@ -118,13 +118,13 @@ theme <- function(opts = NULL){
       lineWidth= opts$axis_line_width,
       labels = list(
         style = list(
-          color = opts$axis_title_color, #opts$font_color, #color nombre de las etiquetas
-          fontFamily = opts$text_family,
+          color = opts$axis_title_color %||% opts$text_color, #opts$font_color, #color nombre de las etiquetas
+          fontFamily = opts$text_family  %||% opts$text_family,
           fontSize = paste0(opts$text_size, 'px')
         )),
       title = list(
         style = list(
-          color = opts$axis_title_color,# color del titulo del eje
+          color = opts$axis_title_color %||% opts$text_color,# color del titulo del eje
           fontSize = paste0(opts$axis_title_size, 'px')
         )
       )
@@ -168,7 +168,7 @@ theme <- function(opts = NULL){
         itemStyle = list(
           fontFamily = opts$legend_family,
           fontSize = paste0(opts$legend_size, 'px'),
-          color = opts$legend_color
+          color = opts$legend_color %||% opts$text_color
         )
     )
   )
