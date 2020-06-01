@@ -6,7 +6,7 @@
 #' @section ctypes:
 #' Cat-Num, Yea-Num
 #' @examples
-#' hgch_donut_CatNum(sampleData("Cat-Num", nrow = 10))
+#' hgch_donut_CatNum(sample_data("Cat-Num", nrow = 10))
 #' @export
 hgch_donut_CatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
@@ -54,6 +54,30 @@ hgch_donut_CatNum <- function(data, ...){
 #' @section ctypes:
 #' Cat, Yea
 #' @examples
-#' hgch_donut_Cat(sampleData("Cat", nrow = 10))
+#' hgch_donut_Cat(sample_data("Cat", nrow = 10))
 #' @export
 hgch_donut_Cat <- hgch_donut_CatNum
+
+
+
+#' donut Chart Yea
+#'
+#'
+#' @param data A data.frame
+#' @section ctypes:
+#' Yea, Yea
+#' @examples
+#' hgch_donut_Yea(sample_data("Yea", nrow = 10))
+#' @export
+hgch_donut_Yea <- hgch_donut_CatNum
+
+#' donut Chart Yea Num
+#'
+#'
+#' @param data A data.frame
+#' @section ctypes:
+#' Yea, Yea
+#' @examples
+#' hgch_donut_YeaNum(sample_data("Yea-Num", nrow = 10))
+#' @export
+hgch_donut_YeaNum <- hgch_donut_CatNum

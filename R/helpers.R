@@ -62,8 +62,8 @@ tooltip_codes <- function(sample, prefix, suffix) {
         b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
       ),
       `Cat-Cat-Num` = list(
-        a = "{point.node.name}",
-        b = "{point.name}",
+        a = "{point.parent}",
+        b = "{point.node.name}",
         c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
       )
     ),

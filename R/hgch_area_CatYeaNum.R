@@ -1,4 +1,4 @@
-#' Bar Chart Cat Cat Numeric
+#' area Chart Cat Cat Numeric
 #'
 #' This chart does not allow for chaning orientation
 #'
@@ -6,9 +6,9 @@
 #' @section ctypes:
 #' Cat-Cat-Num, Cat-Yea-Num
 #' @examples
-#' hgch_bar_CatCatNum(sample_data("Cat-Cat-Num", nrow = 10))
+#' hgch_area_CatYeaNum(sample_data("Cat-Yea-Num", nrow = 100))
 #' @export
-hgch_bar_CatCatNum <- function(data, ...){
+hgch_area_CatYeaNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
@@ -28,7 +28,7 @@ hgch_bar_CatCatNum <- function(data, ...){
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%
-    hc_chart(type = ifelse(l$orientation == "hor","bar","column"),
+    hc_chart(type = 'area',
              events = list(
                load = add_branding(l$theme)
              )) %>%
@@ -43,77 +43,45 @@ hgch_bar_CatCatNum <- function(data, ...){
     hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled = TRUE) %>%
-    hc_add_theme(theme(opts = l$theme))
-
-  if (l$graph_type == "stacked"){
-    hc <- hc %>% hc_plotOptions(bar = list(stacking = "normal"), column = list(stacking = "normal"))
-    if (l$percentage) {
-      hc <- hc %>% hc_yAxis(maxRange = 100,
-                            max = 100)
-    }
-  }
+    hc_add_theme(theme(opts = l$theme)) %>%
+    hc_plotOptions(
+      area = list(
+        stacking= 'percent',
+        lineColor= '#ffffff',
+        lineWidth= 1,
+        marker = list(
+          lineWidth = 1,
+          lineColor = '#ffffff'
+        )
+      )
+)
 
   hc
 }
 
 
 
-#' bar Chart Cat Cat Num
+
+
+#' area Chart Cat Yea
 #'
 #'
 #' @param data A data.frame
 #' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
-#' hgch_bar_CatCat(sample_data("Cat-Cat", nrow = 10))
+#' hgch_area_CatYea(sample_data("Cat-Yea", nrow = 10))
 #' @export
-hgch_bar_CatCat <- hgch_bar_CatCatNum
+hgch_area_CatYea <- hgch_area_CatYeaNum
 
-
-#' bar Chart Yea Cat
+#' area Chart Yea Cat Num
 #'
 #'
 #' @param data A data.frame
 #' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
-#' hgch_bar_YeaCat(sample_data("Yea-Cat", nrow = 10))
+#' hgch_area_YeaCatNum(sample_data("Yea-Cat-Num", nrow = 10))
 #' @export
-hgch_bar_YeaCat <- hgch_bar_CatCatNum
-
-
-#' bar Chart Cat Yea
-#'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
-#' @examples
-#' hgch_bar_CatYea(sample_data("Cat-Yea", nrow = 10))
-#' @export
-hgch_bar_CatYea <- hgch_bar_CatCatNum
-
-
-#' bar Chart Cat Yea Num
-#'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
-#' @examples
-#' hgch_bar_CatYeaNum(sample_data("Cat-Yea-Num", nrow = 10))
-#' @export
-hgch_bar_CatYeaNum <- hgch_bar_CatCatNum
-
-
-#' bar Chart Yea Cat Num
-#'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
-#' @examples
-#' hgch_bar_YeaCatNum(sample_data("Yea-Cat-Num", nrow = 10))
-#' @export
-hgch_bar_YeaCatNum <- hgch_bar_CatCatNum
+hgch_area_YeaCatNum <- hgch_area_CatYeaNum
 

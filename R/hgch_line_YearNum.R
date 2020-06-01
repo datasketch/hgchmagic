@@ -1,14 +1,14 @@
-#' Bar Chart Cat Numeric
+#' line Chart Yea Numeric
 #'
 #' This chart does not allow for chaning orientation
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Cat-Num, Yea-Num
+#' Yea-Num, Yea-Num
 #' @examples
-#' hgch_bar_CatNum(sample_data("Cat-Num", nrow = 10))
+#' hgch_line_YeaNum(sample_data("Yea-Num", nrow = 10))
 #' @export
-hgch_bar_CatNum <- function(data, ...){
+hgch_line_YeaNum <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
 
@@ -27,7 +27,7 @@ hgch_bar_CatNum <- function(data, ...){
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%
-    hc_chart(type = ifelse(l$orientation == "hor","bar","column"),
+    hc_chart(type = 'line',
              events = list(
                load = add_branding(opts$theme)
              )) %>%
@@ -41,8 +41,8 @@ hgch_bar_CatNum <- function(data, ...){
                formatter = l$formats)
     ) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
-    hc_credits(enabled = TRUE, text = l$title$caption) %>%
-    hc_legend(enabled = FALSE) %>%
+    hc_credits(enabled = TRUE, text = l$titles$caption) %>%
+    hc_legend(enabled = FALSE) #%>%
     hc_add_theme(theme(opts = l$theme))
 
   hc
@@ -50,21 +50,7 @@ hgch_bar_CatNum <- function(data, ...){
 
 
 
-#' Bar Chart Cat
-#'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat
-#' @examples
-#' hgch_bar_Cat(sample_data("Cat", nrow = 10))
-#' @export
-hgch_bar_Cat <- hgch_bar_CatNum
-
-
-
-#' Bar Chart Yea
+#' line Chart Yea
 #'
 #' This chart does not allow for chaning orientation
 #'
@@ -72,19 +58,9 @@ hgch_bar_Cat <- hgch_bar_CatNum
 #' @section ctypes:
 #' Yea
 #' @examples
-#' hgch_bar_Yea(sample_data("Yea", nrow = 10))
+#' hgch_line_Yea(sample_data("Yea", nrow = 10))
 #' @export
-hgch_bar_Yea <- hgch_bar_CatNum
+hgch_line_Yea <- hgch_line_YeaNum
 
 
-#' Bar Chart Yea Num
-#'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Yea
-#' @examples
-#' hgch_bar_YeaNum(sample_data("Yea-Num", nrow = 10))
-#' @export
-hgch_bar_YeaNum <- hgch_bar_CatNum
+

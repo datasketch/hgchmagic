@@ -18,5 +18,5 @@ Cat-Num, Yea-Num
 }
 
 \examples{
-hgch_treemap_CatNum(sampleData("Cat-Num", nrow = 10))
+hgch_treemap_CatNum(sample_data("Cat-Num", nrow = 10))
 }

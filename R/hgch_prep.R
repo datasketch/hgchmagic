@@ -7,13 +7,26 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   d <- fringe_d(f)
 
   frtype <- f$frtype
+
+
+  frtype <- gsub("Yea", "Cat", frtype)
   d_frtype <- strsplit(frtype, split = "-") %>% unlist()
   var_cats <- grep("Cat", d_frtype)
   var_date <- grep("Dat", d_frtype)
   var_num <- grep("Num", d_frtype)
 
+  if (!is.null(opts$title$hor_title)) {
+  if (opts$title$hor_title == "") opts$title$hor_title <- NULL
+  }
+  if (!is.null(opts$title$ver_title)) {
+  if (opts$title$ver_title == "") opts$title$ver_title <- NULL
+  }
+
+  if (opts$chart$tooltip == "") opts$chart$tooltip <- NULL
+
   if (identical(var_num, integer())) {
     if (length(d_frtype) == 1) {
+      d$a <- as.character(d$a)
       d <- d %>%
         dplyr::group_by_all() %>%
         dplyr::summarise(b = n())
@@ -21,6 +34,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       nms[2] <- opts$summarize$agg_text %||% "Count"
       names(nms) <- c("a", "b")}
     if (length(d_frtype) == 2) {
+      d$a <- as.character(d$a)
+      d$b <- as.character(d$b)
       d <- d %>%
         dplyr::group_by_all() %>%
         dplyr::summarise(c = n())
@@ -37,11 +52,25 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
 
   if (length(var_cats) > 1) {
+    print(nms)
+    print('hola')
+    labelsXY <- opts$title$hor_title %||% nms[2]
+    labelsXY[2] <- opts$title$ver_title %||% nms[3]
+    if (opts$chart$orientation == "hor")  labelsXY <- rev(labelsXY)
+
+    hor_title <- as.character(labelsXY[1])
+    ver_title <- as.character(labelsXY[2])
+
+    d$a <- as.character(d$a)
+    d$b <- as.character(d$b)
+
     d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
                         na_label = opts$preprocess$na_label, na_label_cols = "b")
     d <- preprocessData(d, drop_na = opts$preprocess$drop_na_legend,
                         na_label = opts$preprocess$na_label, na_label_cols = "a")
+
     d <- summarizeData(d, opts$summarize$agg, to_agg = c, a, b)
+
     d <- completevalues(d)
 
     if (opts$postprocess$percentage) {
@@ -59,6 +88,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     d <- summarizeData(d, opts$summarize$agg, to_agg = b, a)
     d <- postprocess(d, "b", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
   } else {
+    d$a <- as.character(d$a)
     d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
                         na_label = opts$preprocess$na_label, na_label_cols = "a")
     d <- summarizeData(d, opts$summarize$agg, to_agg = b, a)
@@ -69,8 +99,9 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   # Styles
   # Handle colors
   color_by <- names(nms[match(opts$style$color_by, nms)])
-
+ #print(color_by)
   palette <- opts$theme$palette_colors
+  #print(d)
   d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
 
   if (length(var_cats) > 1) {

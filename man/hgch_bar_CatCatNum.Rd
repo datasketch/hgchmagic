@@ -18,5 +18,5 @@ Cat-Cat-Num, Cat-Yea-Num
 }
 
 \examples{
-hgch_bar_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
+hgch_bar_CatCatNum(sample_data("Cat-Cat-Num", nrow = 10))
 }

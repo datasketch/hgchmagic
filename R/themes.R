@@ -34,11 +34,11 @@ theme <- function(opts = NULL){
     fontSize = paste0(opts$dataLabels_size, "px"),
     textDecoration= "none",
     textShadow = "none",
-    textOutline = opts$dataLabels_text_outline
+    textOutline = ifelse(opts$dataLabels_text_outline, "1px contrast", "none")
   )
 
   if(opts$branding_include) opts$plot_margin_bottom <- 100
-
+  if (opts$text_size == "") opts$text_size <- 13
   hc_theme(
     colors = opts$palette_colors,
     chart = list(

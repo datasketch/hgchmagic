@@ -6,7 +6,7 @@
 #' @section ctypes:
 #' Cat-Num, Yea-Num
 #' @examples
-#' hgch_bubbles_CatNum(sampleData("Cat-Num", nrow = 10))
+#' hgch_bubbles_CatNum(sample_data("Cat-Num", nrow = 10))
 #' @export
 hgch_bubbles_CatNum <- function(data, ...){
 
@@ -57,6 +57,30 @@ hgch_bubbles_CatNum <- function(data, ...){
 #' @section ctypes:
 #' Cat
 #' @examples
-#' hgch_bubbles_Cat(sampleData("Cat", nrow = 10))
+#' hgch_bubbles_Cat(sample_data("Cat", nrow = 10))
 #' @export
 hgch_bubbles_Cat <- hgch_bubbles_CatNum
+
+
+
+#' bubbles Chart Yea
+#'
+#'
+#' @param data A data.frame
+#' @section ctypes:
+#' Yea, Yea
+#' @examples
+#' hgch_bubbles_Yea(sample_data("Yea", nrow = 10))
+#' @export
+hgch_bubbles_Yea <- hgch_bubbles_CatNum
+
+#' bubbles Chart Yea Num
+#'
+#'
+#' @param data A data.frame
+#' @section ctypes:
+#' Yea, Yea
+#' @examples
+#' hgch_bubbles_YeaNum(sample_data("Yea-Num", nrow = 10))
+#' @export
+hgch_bubbles_YeaNum <- hgch_bubbles_CatNum

@@ -18,5 +18,5 @@ Cat-Num, Yea-Num
 }
 
 \examples{
-hgch_donut_CatNum(sampleData("Cat-Num", nrow = 10))
+hgch_donut_CatNum(sample_data("Cat-Num", nrow = 10))
 }

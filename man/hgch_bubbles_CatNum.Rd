@@ -18,5 +18,5 @@ Cat-Num, Yea-Num
 }
 
 \examples{
-hgch_bubbles_CatNum(sampleData("Cat-Num", nrow = 10))
+hgch_bubbles_CatNum(sample_data("Cat-Num", nrow = 10))
 }

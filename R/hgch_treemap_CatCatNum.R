@@ -65,3 +65,64 @@ hgch_treemap_CatCatNum <- function(data, ...){
   hc
 
 }
+
+
+#' treemap Chart Cat Cat Num
+#'
+#'
+#' @param data A data.frame
+#' @section ctypes:
+#' Cat-Cat-Num
+#' @examples
+#' hgch_treemap_CatCat(sample_data("Cat-Cat", nrow = 10))
+#' @export
+hgch_treemap_CatCat <- hgch_treemap_CatCatNum
+
+
+#' treemap Chart Yea Cat
+#'
+#'
+#' @param data A data.frame
+#' @section ctypes:
+#' Cat-Cat-Num
+#' @examples
+#' hgch_treemap_YeaCat(sample_data("Yea-Cat", nrow = 10))
+#' @export
+hgch_treemap_YeaCat <- hgch_treemap_CatCatNum
+
+
+#' treemap Chart Cat Yea
+#'
+#'
+#' @param data A data.frame
+#' @section ctypes:
+#' Cat-Cat-Num
+#' @examples
+#' hgch_treemap_CatYea(sample_data("Cat-Yea", nrow = 10))
+#' @export
+hgch_treemap_CatYea <- hgch_treemap_CatCatNum
+
+
+#' treemap Chart Cat Yea Num
+#'
+#'
+#' @param data A data.frame
+#' @section ctypes:
+#' Cat-Cat-Num
+#' @examples
+#' hgch_treemap_CatYeaNum(sample_data("Cat-Yea-Num", nrow = 10))
+#' @export
+hgch_treemap_CatYeaNum <- hgch_treemap_CatCatNum
+
+
+#' treemap Chart Yea Cat Num
+#'
+#'
+#' @param data A data.frame
+#' @section ctypes:
+#' Cat-Cat-Num
+#' @examples
+#' hgch_treemap_YeaCatNum(sample_data("Yea-Cat-Num", nrow = 10))
+#' @export
+hgch_treemap_YeaCatNum <- hgch_treemap_CatCatNum
+
