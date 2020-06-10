@@ -173,7 +173,12 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
               dataLabels_text_outline = opts$dataLabels$dataLabels_text_outline,
               format_dataLabels = format_dataLabels,
               suffix = opts$style$suffix,
-              prefix = opts$style$prefix)
+              prefix = opts$style$prefix),
+    color_hover = opts$shiny$color_hover,
+    color_click = opts$shiny$color_click,
+    allow_point = opts$shiny$allow_point,
+    cursor = opts$shiny$cursor,
+    clickFunction = opts$shiny$clickFunction
   )
 
 

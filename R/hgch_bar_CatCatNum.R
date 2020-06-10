@@ -40,6 +40,23 @@ hgch_bar_CatCatNum <- function(data, ...){
              labels = list(
                formatter = l$formats)
     ) %>%
+    hc_plotOptions(
+      series = list(
+        states = list(
+          hover = list(
+            #//brightness: -0.5,
+            color = l$color_hover
+          ),
+          select = list(
+            color = l$color_click
+          )
+        ),
+        allowPointSelect= l$allow_point,
+        cursor =  l$cursor,
+        events = list(
+          click = l$clickFunction
+        )
+      )) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled = TRUE) %>%

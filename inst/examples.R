@@ -24,7 +24,7 @@ hgch_bar_CatNum(sample_data("Cat-Num"),
                 plot_margin_top = 10)
 
 d <- data.frame(cosas = c("Piedra", "Papel", "Tijera"), total = c(23, 45, -1))
-hgch_bar_CatNum(d)
+hgch_bar_CatNum(d, tooltip = "<b>{cosas}</b>")
 hgch_bar_CatNum(d, dataLabels_show = TRUE, highlight_value = "Papel")
 hgch_bar_CatNum(d,
                 dataLabels_show = FALSE, order = c("Piedra"))

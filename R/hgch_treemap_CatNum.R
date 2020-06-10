@@ -32,6 +32,23 @@ hgch_treemap_CatNum <- function(data, ...){
              events = list(
                load = add_branding(l$theme)
              )) %>%
+    hc_plotOptions(
+      series = list(
+        states = list(
+          hover = list(
+            brightness= 0.1,
+            color = l$color_hover
+          ),
+          select = list(
+            color = l$color_click
+          )
+        ),
+        allowPointSelect= l$allow_point,
+        cursor =  l$cursor,
+        events = list(
+          click = l$clickFunction
+        )
+      )) %>%
     hc_series(
       list(
         type = 'treemap',
