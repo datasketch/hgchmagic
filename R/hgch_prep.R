@@ -78,7 +78,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d <- d %>% group_by(b) %>%
         dplyr::mutate(c = (c / sum(c, na.rm = TRUE)) * 100)
     }
-    d <- postprocess(d, "c", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+    #d <- postprocess(d, "c", sort = 'no', slice_n = opts$postprocess$slice_n)
 
     if (is.null(opts$style$color_by)) opts$style$color_by <- nms[1]
 
