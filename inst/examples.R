@@ -10,6 +10,11 @@ hgch_treemap_Cat(sample_data("Cat", nrow = 10), dataLabels_show = TRUE)
 # bar cat num examples ----------------------------------------------------
 
 hgch_bar_CatNum(sample_data("Cat-Num"))
+
+hgch_bar_CatNum(sample_data("Cat-Num"))
+
+
+
 hgch_bar_CatNum(sample_data("Cat-Num"),
                 opts = list(title = "titulo"))
 
@@ -118,4 +123,11 @@ hgch_treemap_CatCatNum(sample_data("Cat-Cat-Num"), dataLabels_show = TRUE)
 # Line dat num examples ---------------------------------------------------
 data <- sample_data("Dat-Num")
 hgch_line_DatNum(data)
+AAA <- data.frame(g = sample(seq(as.Date('1999/01/01'), as.Date('2000/01/01'), by="day"), 1200, replace = TRUE))
+hgch_line_DatNum(AAA)
 
+
+
+# Line Cat Dat Num examples -----------------------------------------------
+
+hgch_line_CatDatNum(sample_data("Cat-Dat-Num"))

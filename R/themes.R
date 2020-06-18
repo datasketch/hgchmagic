@@ -170,7 +170,13 @@ theme <- function(opts = NULL){
           fontSize = paste0(opts$legend_size, 'px'),
           color = opts$legend_color %||% opts$text_color
         )
-    )
+    ),
+tooltip = list(
+  style = list(
+    width = '350px',
+    whiteSpace = 'normal'
+  )
+)
   )
 }
 

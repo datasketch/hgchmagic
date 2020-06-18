@@ -112,10 +112,11 @@ format_hgch <- function(plot, frtype, sample, suffix, prefix) {
 tooltip_hgch <- function(plot, tooltip, nms, frtype, prefix,  suffix, sample) {
 
   l_tool <- tooltip_codes(sample, prefix, suffix)
+  frtype <- gsub("Yea", "Cat", frtype)
   d_frtype <- strsplit(frtype, split = "-") %>% unlist()
   nms_names <- names(nms)
 
-  if (is.null(tooltip)) {
+  if (is.null(tooltip) | tooltip == "") {
     points <- l_tool[[plot]][[frtype]]
     l <- map(seq_along(nms), function(i) {
       paste0('<b>', nms[i], ': </b>', points[names(points) == nms_names[i]][[nms_names[i]]])

@@ -15,31 +15,42 @@ hgch_line_DatNum <- function(data, ...){
   l <- hgchmagic_prep(data, opts = opts)
 
   d <- l$d
-#print(d)
-  series <- list(list(
-    data = purrr::map(1:nrow(d), function(x) {
-      d$b[x]
-    })
-  ))
-#print(series)
-  global_options(opts$style$format_num_sample)
-  hc <- highchart() %>%
-    hc_title(text = l$title$title) %>%
-    hc_subtitle(text = l$title$subtitle) %>%
-    hc_chart(type = ifelse(l$spline, "spline","line"),
-             events = list(
-               load = add_branding(l$theme)
-             )) %>%
-    hc_add_series_list(series) %>%
-    hc_xAxis(
-      #categories = purrr::map(as.character(unique(d$a)), function(z) z),
-      #type = 'category',
-      crosshair = list(
-        snap = TRUE
-      )#,
-      # labels = list(
-      #   formatter = JS("function() {return Highcharts.dateFormat('%y-%b-%d', (this.value));}")
-      # )
+  ds <- NULL
+  series <- lapply(unique(d$group), function(s){
+    ds <<- d %>% filter(group == s)
+    dss <- ds %>% select(a, b, ..a_label)
+    dss <- ds %>%
+      mutate(x = as.numeric(as.POSIXct(as.Date(ds$a, origin = l$min_date)))*1000,
+             y = ds$b,
+             color = ds$..colors,
+             label = ..a_label)
+    list(
+      name = s,
+      color = ds$..colors[1],
+      data = transpose(dss)
     )
-  hc
+  })
+
+
+  h <- highchart() %>%
+    hc_chart(type = "line"#,
+             # events = list(
+             #   load =   JS(
+             #     paste0(
+             #       "function() {this.renderer.image('",logo_path,"', this.chartWidth - 160, this.chartHeight - 60 , 150, 50).addClass('logo').add();}"
+             #     )))
+             ) %>%
+    hc_xAxis(
+      type = 'datetime',
+      tickInterval= 7 * 24 * 3600 * 1000 * 4,
+      labels = list(
+        formatter= JS(l$formatter_date)
+      )
+    ) %>%
+    hc_add_series_list(series) %>%
+    hc_tooltip(useHTML=TRUE,
+               formatter = l$formatter_date_tooltip
+    ) %>%
+    hc_legend(enabled = FALSE)
+  h
 }
