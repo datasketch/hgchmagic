@@ -17,7 +17,7 @@ hgch_treemap_CatCatNum <- function(data, ...){
 
   d <- l$d
 
-  color_by <- l$color_by
+  color_by <- "a"#l$color_by
   paleta <- d[,c(color_by, "..colors")]
   paleta <- paleta %>% distinct(..colors, .keep_all = TRUE)
 
@@ -42,13 +42,13 @@ hgch_treemap_CatCatNum <- function(data, ...){
 
   data <- c(listaId, listaMg)
 
-  global_options(opts$style$format_num_sample)
+
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%
-    hc_chart(events = list(
-               load = add_branding(l$theme)
-             )) %>%
+    # hc_chart(events = list(
+    #            load = add_branding(l$theme)
+    #          )) %>%
     hc_series(
       list(
         type = "treemap",
@@ -57,10 +57,10 @@ hgch_treemap_CatCatNum <- function(data, ...){
         )),
         data = data
       )) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
-    hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
-  hc_add_theme(theme(opts =  c(l$theme,
-                               cats = "{point.name} <br/>")))
+     hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
+    hc_credits(enabled = TRUE, text = l$title$caption %||% "") #%>%
+  # hc_add_theme(theme(opts =  c(l$theme,
+  #                              cats = "{point.name} <br/>")))
 
   hc
 

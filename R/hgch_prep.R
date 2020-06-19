@@ -43,6 +43,12 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     d <- summarizeData(d, opts$summarize$agg, to_agg = b, a)
     d <- postprocess(d, "b", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
 
+    labelsXY <- labelsXY(hor_title = opts$title$hor_title %||% nms[1],
+                         ver_title = opts$title$ver_title %||% nms[2],
+                         nms = nms, orientation = opts$chart$orientation)
+    hor_title <- as.character(labelsXY[1])
+    ver_title <- as.character(labelsXY[2])
+
     if (grepl("Dat", frtype)) {
       d$..colors <- opts$theme$palette_colors[1]
       min_date <- min(d$a)
@@ -85,8 +91,16 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     d <- preprocessData(d, drop_na = opts$preprocess$drop_na_legend,
                         na_label = opts$preprocess$na_label, na_label_cols = "a")
     d <- summarizeData(d, opts$summarize$agg, to_agg = c, a, b)
-    d <- postprocess(d, "c", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
 
+    labelsXY <- opts$title$hor_title %||% nms[2]
+    labelsXY[2] <- opts$title$ver_title %||% nms[3]
+    if (opts$chart$orientation == "hor")  labelsXY <- rev(labelsXY)
+    hor_title <- as.character(labelsXY[1])
+    ver_title <- as.character(labelsXY[2])
+
+    if (!grepl("Dat", frtype)) {
+      d <- completevalues(d)
+    }
     palette <- opts$theme$palette_colors
     d$..colors <- paletero::map_colors(d, 'a', palette, colors_df = NULL)
 
@@ -133,13 +147,30 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     l_cats <- map(var_cats, function(f_cats){
       d[[f_cats]] <<- makeup_chr(d[[f_cats]], opts$style$format_cat_sample)
     })}
+  f_nums <- makeup::makeup_format_js(sample = opts$style$format_num_sample,
+                                     locale = opts$style$locale,
+                                     prefix = opts$style$prefix,
+                                     suffix = opts$style$suffix)
 
-
+  tooltip <- tooltip_hgch(plot, tooltip = opts$chart$tooltip,
+                          nms = nms, frtype = frtype,
+                          prefix = opts$style$prefix,
+                          suffix = opts$style$suffix,
+                          sample = opts$style$format_num_sample)
 
   list(
     d = d,
+    titles = list(
+      title = opts$title$title,
+      subtitle = opts$title$subtitle,
+      caption = opts$title$caption %||% "",
+      x = hor_title,
+      y = ver_title
+    ),
     min_date = min_date,
     formatter_date = formatter,
-    formatter_date_tooltip = formatter_tooltip
+    formatter_date_tooltip = formatter_tooltip,
+    tooltip = tooltip,
+    formats = f_nums
   )
 }

@@ -29,20 +29,29 @@ hgch_line_CatDatNum <- function(data, ...){
     )
   })
 
+
   h <- highchart() %>%
+    hc_title(text = l$title$title) %>%
+    hc_subtitle(text = l$title$subtitle) %>%
     hc_chart(type = "line"
     ) %>%
     hc_xAxis(
       type = 'datetime',
+      title = list(text = l$title$y),
       tickInterval= 7 * 24 * 3600 * 1000, #* 4,
       labels = list(
         formatter= JS(l$formatter_date)
       )
     ) %>%
+    hc_yAxis(title = list(text = l$title$y),
+             labels = list(
+               formatter = l$formats)
+    ) %>%
     hc_add_series_list(series) %>%
     hc_tooltip(useHTML=TRUE,
                formatter = l$formatter_date_tooltip
-    )
+    ) %>%
+    hc_credits(enabled = TRUE, text = l$title$caption %||% "")
     # hc_plotOptions(
     #   series = list(
     #     connectNulls = TRUE
