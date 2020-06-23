@@ -139,3 +139,23 @@ tooltip_hgch <- function(plot, tooltip, nms, frtype, prefix,  suffix, sample) {
   tooltip
 
 }
+
+
+# date intervals
+
+date_intervals <- function(date_intervals) {
+  if (is.null(date_intervals)) return()
+
+  if (date_intervals == "day") {
+    t_d <- 60 * 60 * 24 * 30
+  } else if (date_intervals == "month") {
+    t_d <- 30 * 24 * 3600 * 1000
+  } else if (date_intervals == "year") {
+    t_d <- 1000 * 60 * 60 * 24 * 365
+  }
+  else {
+    t_d <-  7 * 24 * 3600 * 1000
+  }
+  t_d
+}
+

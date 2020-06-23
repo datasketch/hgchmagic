@@ -1,13 +1,13 @@
-#' line Chart Cat Dat Numeric
+#' scatter Chart Cat Dat Numeric
 #'
 #'
 #' @param data A data.frame
 #' @section ctypes:
 #' Cat-Dat-Num
 #' @examples
-#' hgch_line_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
+#' hgch_scatter_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
 #' @export
-hgch_line_CatDatNum <- function(data, ...){
+hgch_scatter_CatDatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
@@ -19,7 +19,7 @@ hgch_line_CatDatNum <- function(data, ...){
     ds <<- d %>% filter(a == s)
     dss <- ds %>% select(a,b, ..b_label)
     dss <- dss %>%
-      mutate(x = as.numeric(as.POSIXct(as.Date(ds$b, origin = "2000-01-01")))*1000,
+      mutate(x = as.numeric(as.POSIXct(as.Date(ds$b, origin = l$min_date)))*1000,
              y = ds$c,
              label = ..b_label)
     list(
@@ -33,7 +33,7 @@ hgch_line_CatDatNum <- function(data, ...){
   h <- highchart() %>%
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%
-    hc_chart(type = "line",
+    hc_chart(type = "scatter",
              events = list(
                load = add_branding(l$theme)
              )
@@ -61,13 +61,14 @@ hgch_line_CatDatNum <- function(data, ...){
 }
 
 
-#' line Chart Cat Dat
+
+#' scatter Chart Cat Dat
 #'
 #'
 #' @param data A data.frame
 #' @section ctypes:
 #' Cat-Dat
 #' @examples
-#' hgch_line_CatDat(sampleData("Cat-Dat", nrow = 10))
+#' hgch_scatter_CatDat(sampleData("Cat-Dat", nrow = 10))
 #' @export
-hgch_line_CatDat <- hgch_line_CatDatNum
+hgch_scatter_CatDat <- hgch_scatter_CatDatNum

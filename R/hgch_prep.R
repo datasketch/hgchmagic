@@ -30,7 +30,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d <- d %>%
         dplyr::group_by_all() %>%
         dplyr::summarise(b = n())
-      frtype <- paste(frtype, "-Num")
+      frtype <- paste0(frtype, "-Num")
       nms[2] <- opts$summarize$agg_text %||% "Count"
       names(nms) <- c("a", "b") }
 
@@ -158,6 +158,24 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
                           suffix = opts$style$suffix,
                           sample = opts$style$format_num_sample)
 
+  sample_labels <- opts$dataLabels$dataLabels_format_sample %||% opts$style$format_num_sample
+  format_dataLabels <- format_hgch(plot = plot,
+                                   frtype = frtype,
+                                   sample = sample_labels,
+                                   prefix = opts$style$prefix,
+                                   suffix = opts$style$suffix)
+
+ show_caption  <- opts$title$caption %||% ""
+ y_caption <- -10
+ if (show_caption == "") {
+   show_caption <- FALSE
+ } else {
+   show_caption <- TRUE
+   lines <- length(strsplit(opts$title$caption, split = "<br/>")%>% unlist())
+   y_caption <- ifelse(lines == 0, y_caption, (lines+2) * -10)
+ }
+
+
   list(
     d = d,
     titles = list(
@@ -171,6 +189,25 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     formatter_date = formatter,
     formatter_date_tooltip = formatter_tooltip,
     tooltip = tooltip,
-    formats = f_nums
+    formats = f_nums,
+    date_intervals = date_intervals(opts$extra$date_intervals),
+    orientation = opts$chart$orientation,
+    theme = c(opts$theme,
+              credits = show_caption,
+              y_credits = y_caption,
+              dataLabels_show = opts$dataLabels$dataLabels_show,
+              dataLabels_color = opts$dataLabels$dataLabels_color %||% "constrast",
+              dataLabels_size = opts$dataLabels$dataLabels_size %||% "11",
+              dataLabels_text_outline = opts$dataLabels$dataLabels_text_outline,
+              format_dataLabels = format_dataLabels,
+              suffix = opts$style$suffix,
+              prefix = opts$style$prefix),
+    color_hover = opts$shiny$color_hover,
+    color_click = opts$shiny$color_click,
+    allow_point = opts$shiny$allow_point,
+    cursor = opts$shiny$cursor,
+    clickFunction = opts$shiny$clickFunction,
+    graph_type = opts$chart$graph_type,
+    extra = get_extra_opts(opts, extra_pattern)
   )
 }

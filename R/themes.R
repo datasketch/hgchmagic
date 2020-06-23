@@ -18,9 +18,13 @@ url_logo <- function(logo, background_color) {
 add_branding <- function(opts) {
   if (!opts$branding_include) return()
   logo_path <- url_logo(logo = opts$logo,background_color = opts$background_color)
+  logo_width <- 150#opts$logo_width
+  logo_height <- 30#opts$logo_height
+  chartWidth <-  logo_width + 10
+  chartHeight <- logo_height + 10
   JS(
     paste0(
-      "function() {this.renderer.image('",logo_path,"', this.chartWidth - 160, this.chartHeight - 40 , 150, 30).addClass('logo').add();}"
+      "function() {this.renderer.image('",logo_path,"', this.chartWidth - ", chartWidth, ", this.chartHeight - ", chartHeight, ",", logo_width, ", ", logo_height,").addClass('logo').add()}"
     ))
 }
 
@@ -37,7 +41,8 @@ theme <- function(opts = NULL){
     textOutline = ifelse(opts$dataLabels_text_outline, "1px contrast", "none")
   )
 
-  if(opts$branding_include) opts$plot_margin_bottom <- 100
+  if (opts$credits) opts$plot_margin_bottom <- 100
+  if(opts$branding_include) opts$plot_margin_bottom <- 130
   if (opts$text_size == "") opts$text_size <- 13
   hc_theme(
     colors = opts$palette_colors,
@@ -79,7 +84,8 @@ theme <- function(opts = NULL){
     credits = list(
       position = list(
         align = "left",
-        x = 10),
+        x = 20,
+        y = opts$y_credits),
       style = list(
         fontFamily = opts$title_family,
         fontSize = paste0(opts$caption_size, 'px'),

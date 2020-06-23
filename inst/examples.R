@@ -22,14 +22,13 @@ hgch_bar_CatNum(sample_data("Cat-Num"),
                 opts = list(title = "titulo"))
 
 hgch_bar_CatNum(sample_data("Cat-Num"),
-                title = "esto es un titulo",
-                subtitle = "esto es un subitu",
-                caption = "esto es un caption",
-                branding_include = TRUE,
-                plot_margin_top = 10)
+                title = "Esto es un titulo <br/> muito lindo muito agradavel",
+                subtitle = "esto es un subititulo",
+                caption = "esto es un caption <br/> lalal lala saldk alskdmf<br/>sdlaksnla kamslkasnd",
+                branding_include = TRUE)
 
-d <- data.frame(cosas = c("Piedra", "Papel", "Tijera"), total = c(23, 45, -1))
-hgch_bar_CatNum(d, tooltip = "<b>{cosas}</b>")
+d <- data.frame(cosas = c("Piedra", "Papel", "Tijera"), total = c(23, 45, -10))
+hgch_bar_CatNum(d, tooltip = "<b>{cosas}</b>", caption = "esto es un caption")
 hgch_bar_CatNum(d, dataLabels_show = TRUE, highlight_value = "Papel")
 hgch_bar_CatNum(d,
                 dataLabels_show = FALSE, order = c("Piedra"))
@@ -121,12 +120,12 @@ hgch_treemap_CatCatNum(sample_data("Cat-Cat-Num"), dataLabels_show = TRUE)
 
 
 # Line dat num examples ---------------------------------------------------
-data <- sample_data("Dat-Num")
+data <- sample_data("Dat-Num",5000)
 hgch_line_DatNum(data)
-AAA <- data.frame(g = sample(seq(as.Date('1999/01/01'), as.Date('2000/01/01'), by="day"), 1200, replace = TRUE))
-hgch_line_DatNum(AAA)
-
-
+hgch_line_DatNum(data, date_intervals = "day")
+hgch_line_DatNum(data, date_intervals = "month")
+hgch_line_DatNum(data, date_intervals = "week")
+hgch_line_DatNum(data, date_intervals = "year")
 
 # Line Cat Dat Num examples -----------------------------------------------
 

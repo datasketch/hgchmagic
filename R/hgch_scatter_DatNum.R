@@ -1,4 +1,4 @@
-#' line Chart Dat Numeric
+#' scatter Chart Dat Numeric
 #'
 #' This chart does not allow for chaning orientation
 #'
@@ -6,9 +6,9 @@
 #' @section ctypes:
 #' Dat-Num
 #' @examples
-#' hgch_line_DatNum(sampleData("Dat-Num", nrow = 10))
+#' hgch_scatter_DatNum(sampleData("Dat-Num", nrow = 10))
 #' @export
-hgch_line_DatNum <- function(data, ...){
+hgch_scatter_DatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
@@ -33,11 +33,8 @@ hgch_line_DatNum <- function(data, ...){
 
 
   h <- highchart() %>%
-    hc_chart(type = "line",
-             events = list(
-               load = add_branding(l$theme)
-             )
-             ) %>%
+    hc_chart(type = "scatter"
+    ) %>%
     hc_xAxis(
       type = 'datetime',
       title = list(text = l$title$y),
@@ -59,16 +56,3 @@ hgch_line_DatNum <- function(data, ...){
     hc_add_theme(theme(opts =  c(l$theme)))
   h
 }
-
-
-#' line Chart Dat Numeric
-#'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Dat
-#' @examples
-#' hgch_line_Dat(sampleData("Dat", nrow = 10))
-#' @export
-hgch_line_Dat <- hgch_line_DatNum

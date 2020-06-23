@@ -30,7 +30,8 @@ hgch_bar_CatNum <- function(data, ...){
     hc_chart(type = ifelse(l$orientation == "hor","bar","column"),
              events = list(
                load = add_branding(opts$theme)
-             )) %>%
+             )
+             ) %>%
     hc_series(
       data
     ) %>%
