@@ -18,9 +18,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   if (grepl("Yea", frtype)) {
     has_year <- dic$id[dic$hdType == "Yea"]
-    if (any(is.na(d[has_year]))) {
+    #if (any(is.na(d[has_year]))) {
       d[[has_year]] <- as.character(d[[has_year]])
-    }}
+  }
+  #}
 
   # Una sola variable de agregacion
   one_var_group <- length(grep("Dat|Cat|Yea", dic$hdType)) == 1
@@ -88,6 +89,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
                           na_label = opts$preprocess$na_label, na_label_cols = "b")
     }
+
     d <- preprocessData(d, drop_na = opts$preprocess$drop_na_legend,
                         na_label = opts$preprocess$na_label, na_label_cols = "a")
     d <- summarizeData(d, opts$summarize$agg, to_agg = c, a, b)
@@ -101,6 +103,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     if (!grepl("Dat", frtype)) {
       d <- completevalues(d)
     }
+
     palette <- opts$theme$palette_colors
     d$..colors <- paletero::map_colors(d, 'a', palette, colors_df = NULL)
 

@@ -58,7 +58,7 @@ hgch_treemap_CatCatNum <- function(data, ...){
         data = data
       )) %>%
      hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
-    hc_credits(enabled = TRUE, text = l$title$caption %||% "") #%>%
+    hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
   hc_add_theme(theme(opts =  c(l$theme,
                                cats = "{point.name} <br/>")))
 
