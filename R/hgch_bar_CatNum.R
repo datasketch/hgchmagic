@@ -35,9 +35,9 @@ hgch_bar_CatNum <- function(data, ...){
     hc_series(
       data
     ) %>%
-    hc_xAxis(title = list(text = l$title$x),
+    hc_xAxis(title = list(text = l$titles$x),
              type = "category") %>%
-    hc_yAxis(title = list(text = l$title$y),
+    hc_yAxis(title = list(text = l$titles$y),
              labels = list(
                formatter = l$formats)
     ) %>%

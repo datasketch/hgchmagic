@@ -19,7 +19,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   if (grepl("Yea", frtype)) {
     has_year <- dic$id[dic$hdType == "Yea"]
     #if (any(is.na(d[has_year]))) {
-      d[[has_year]] <- as.character(d[[has_year]])
+    d[[has_year]] <- as.character(d[[has_year]])
   }
   #}
 
@@ -143,13 +143,32 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     formatter_tooltip <-
       JS(
         paste0("function () {return '<i>' + this.point.label +'</i><br/><b>' + this.series.name + ':</b> ' + this.point.y;}"
-               ))
+        ))
   }
 
   if (!identical(var_cats, integer())) {
     l_cats <- map(var_cats, function(f_cats){
       d[[f_cats]] <<- makeup_chr(d[[f_cats]], opts$style$format_cat_sample)
     })}
+
+
+
+  # Mas varaibles numericas sin categorias de agregacion
+
+  more_var_num <- all(grepl("Num", dic$hdType))
+
+  if (more_var_num) {
+    if (length(grepl("Num", dic$hdType)) == 1) {
+      d$index <- 1:nrow(d)
+      frtype <- paste0(frtype, "-Num")
+      nms[2] <- opts$summarize$agg_text %||% "Index"
+      names(nms) <- c("a", "b")
+    }
+    d <- d %>% drop_na()
+    hor_title <- opts$title$hor_title %||% nms[[1]]
+    ver_title <- opts$title$ver_title %||% nms[[2]]
+  }
+
   f_nums <- makeup::makeup_format_js(sample = opts$style$format_num_sample,
                                      locale = opts$style$locale,
                                      prefix = opts$style$prefix,
@@ -161,22 +180,27 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
                           suffix = opts$style$suffix,
                           sample = opts$style$format_num_sample)
 
-  sample_labels <- opts$dataLabels$dataLabels_format_sample %||% opts$style$format_num_sample
-  format_dataLabels <- format_hgch(plot = plot,
-                                   frtype = frtype,
-                                   sample = sample_labels,
-                                   prefix = opts$style$prefix,
-                                   suffix = opts$style$suffix)
+  if (plot != "scatter") {
+    sample_labels <- opts$dataLabels$dataLabels_format_sample %||% opts$style$format_num_sample
+    format_dataLabels <- format_hgch(plot = plot,
+                                     frtype = frtype,
+                                     sample = sample_labels,
+                                     prefix = opts$style$prefix,
+                                     suffix = opts$style$suffix)
+  } else {
+    format_dataLabels <- NULL
+  }
 
- show_caption  <- opts$title$caption %||% ""
- y_caption <- -10
- if (show_caption == "") {
-   show_caption <- FALSE
- } else {
-   show_caption <- TRUE
-   lines <- length(strsplit(opts$title$caption, split = "<br/>")%>% unlist())
-   y_caption <- ifelse(lines == 0, y_caption, (lines+2) * -10)
- }
+  show_caption  <- opts$title$caption %||% ""
+  y_caption <- -10
+  if (show_caption == "") {
+    show_caption <- FALSE
+  } else {
+    show_caption <- TRUE
+    lines <- length(strsplit(opts$title$caption, split = "<br/>")%>% unlist())
+    y_caption <- ifelse(lines == 0, y_caption, (lines+2) * -10)
+  }
+
 
 
   list(

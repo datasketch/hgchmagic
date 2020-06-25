@@ -14,34 +14,28 @@ hgch_scatter_NumNum <- function(data, ...){
 
   opts <- dsvizopts::merge_dsviz_options(...)
 
-  f <- homodatum::fringe(data)
-  nms <- getFringeLabels(f)
-  d <- getFringeDataFrame(f)
+  l <- hgchmagic_prep(data, opts = opts, plot = "scatter")
+print(l)
+  d <- l$d
 
-  labelsXY <- labelsXY(hor_title = opts$title$hor_title %||% nms[1],
-                       ver_title = opts$title$ver_title %||% nms[2],
-                       nms = nms, orientation = 'ver')
-
-  hor_title <- as.character(labelsXY[1])
-  ver_title <- as.character(labelsXY[2])
-  opts$theme$text_show <- FALSE
-
+  # opts$theme$text_show <- FALSE
+  #
   data_list <- map(1:nrow(d), function(z) {
     list(d$a[z], d$b[z])
   })
-
-  format_num <- format_hgch(opts$style$format_num_sample, "")
-  if (is.null(opts$tooltip)) {
-    opts$tooltip <- paste0('<b>', nms[1], ':</b> ',
-                           paste0(opts$scatter$prefix_x,'{point.x',format_num, '}', opts$scatter$suffix_x), '<br/>',
-                           '<b>', nms[2], ':</b> ',
-                           paste0(opts$scatter$prefix_y,'{point.y', format_num, '}', opts$scatter$suffix_y))
-  }
-
-  global_options(opts$style$format_num_sample)
+  #
+  # format_num <- format_hgch(opts$style$format_num_sample, "")
+  # if (is.null(opts$tooltip)) {
+  #   opts$tooltip <- paste0('<b>', nms[1], ':</b> ',
+  #                          paste0(opts$scatter$prefix_x,'{point.x',format_num, '}', opts$scatter$suffix_x), '<br/>',
+  #                          '<b>', nms[2], ':</b> ',
+  #                          paste0(opts$scatter$prefix_y,'{point.y', format_num, '}', opts$scatter$suffix_y))
+  # }
+  #
+  # global_options(opts$style$format_num_sample)
   hc <- highchart() %>%
-    hc_title(text = opts$title$title) %>%
-    hc_subtitle(text = opts$title$subtitle) %>%
+    hc_title(text = l$title$title) %>%
+    hc_subtitle(text = l$title$subtitle) %>%
     hc_chart(
       type = 'scatter',
       zoomType = 'xy',
@@ -59,10 +53,10 @@ hgch_scatter_NumNum <- function(data, ...){
       data = data_list,
       showInLegend = F
     ) %>%
-    hc_tooltip(useHTML=TRUE,
-               pointFormat = opts$tooltip, headerFormat = NULL) %>%
+  #   hc_tooltip(useHTML=TRUE,
+  #              pointFormat = opts$tooltip, headerFormat = NULL) %>%
     hc_xAxis(
-      title = list(text = hor_title),
+      title = list(text = l$titles$x),
       labels = list(
         formatter = makeup::makeup_format_js(sample = opts$style$format_num_sample,
                                              locale = opts$style$locale,
@@ -70,13 +64,14 @@ hgch_scatter_NumNum <- function(data, ...){
                                              suffix = opts$scatter$suffix_x))
     ) %>%
     hc_yAxis(
-      title = list(text = ver_title),
+      title = list(text = l$titles$y),
       labels = list(
         formatter = makeup::makeup_format_js(sample = opts$style$format_num_sample,
                                              locale = opts$style$locale,
                                              prefix = opts$scatter$prefix_y,
                                              suffix = opts$scatter$suffix_y))
     ) %>%
-    hc_add_theme(theme(opts = c(opts$theme)))
+  hc_credits(enabled = TRUE, text = l$title$caption) %>%
+     hc_add_theme(theme(opts = c(l$theme)))
   hc
 }

@@ -85,7 +85,8 @@ theme <- function(opts = NULL){
       position = list(
         align = "left",
         x = 20,
-        y = opts$y_credits),
+        y = opts$y_credits
+      ),
       style = list(
         fontFamily = opts$title_family,
         fontSize = paste0(opts$caption_size, 'px'),
