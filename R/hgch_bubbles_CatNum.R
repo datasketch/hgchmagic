@@ -35,6 +35,25 @@ hgch_bubbles_CatNum <- function(data, ...){
     hc_add_series(
       data = data
     ) %>%
+    hc_plotOptions(
+      packedbubble = list(
+        marker= list(
+          states = list(
+            hover = list(
+              brightness= 0.1,
+              fillColor = l$color_hover
+            ),
+            select = list(
+              fillColor = l$color_click
+            ))
+        ),
+        allowPointSelect= l$allow_point,
+        cursor =  l$cursor,
+        events = list(
+          click = l$clickFunction
+        )
+      )
+    ) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled = FALSE) %>%
