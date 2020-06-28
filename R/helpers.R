@@ -83,6 +83,12 @@ tooltip_codes <- function(sample, prefix, suffix) {
         a = "{point.x}",
         b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
       )
+    ),
+    map = list(
+      `Cat-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      )
     )
   )
   l

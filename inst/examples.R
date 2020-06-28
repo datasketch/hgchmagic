@@ -130,3 +130,10 @@ hgch_line_DatNum(data, date_intervals = "year")
 # Line Cat Dat Num examples -----------------------------------------------
 
 hgch_line_CatDatNum(sample_data("Cat-Dat-Num"))
+
+
+
+# Map
+data <- data.frame(pais = c( "San Andrés y Providencia", "Cauca", "Nariño","Chocó", "Tolima", "Caquetá", "Norte de Santander"),
+                   random = runif(7, 10, 1000))
+hgch_choropleth_GnmNum(data = data)
