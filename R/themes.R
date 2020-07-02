@@ -40,9 +40,12 @@ theme <- function(opts = NULL){
     textShadow = "none",
     textOutline = ifelse(opts$dataLabels_text_outline, "1px contrast", "none")
   )
-
+  y_legend <- 0
   if (opts$credits) opts$plot_margin_bottom <- 100
-  if(opts$branding_include) opts$plot_margin_bottom <- 130
+  if(opts$branding_include) {
+    opts$plot_margin_bottom <- 130
+    y_legend <- -30
+  }
   if (opts$text_size == "") opts$text_size <- 13
   hc_theme(
     colors = opts$palette_colors,
@@ -168,6 +171,7 @@ theme <- function(opts = NULL){
         #borderWidth = custom$legend$backgroundWidth,
         layout = opts$legend_layout,
         align = opts$legend_align,
+        y = y_legend,
         verticalAlign = opts$legend_verticalAlign,
         itemMarginTop = opts$legend_itemMarginTop,
         itemMarginBottom = opts$legend_itemMarginBottom,

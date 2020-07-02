@@ -94,6 +94,7 @@ hgch_line_DatNum(sample_data("Dat-Num"), background_color = "#000000")
 # Bar cat cat num examples ------------------------------------------------
 data <- sample_data("Cat-Cat-Num")
 hgch_bar_CatCatNum(data)
+hgch_bar_CatCatNum(data, branding_include = T)
 hgch_bar_CatCatNum(data, drop_na_legend = TRUE)
 hgch_bar_CatCatNum(data, drop_na = TRUE)
 
@@ -136,4 +137,7 @@ hgch_line_CatDatNum(sample_data("Cat-Dat-Num"))
 # Map
 data <- data.frame(pais = c( "San Andrés y Providencia", "Cauca", "Nariño","Chocó", "Tolima", "Caquetá", "Norte de Santander"),
                    random = runif(7, 10, 1000))
-hgch_choropleth_GnmNum(data = data)
+hgch_choropleth_GnmNum(data = data, legend_layout = "vertical")
+
+
+hgch_mapbubbles_GltGlnNum(sample_data("Num-Num-Num"))
