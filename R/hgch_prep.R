@@ -70,6 +70,11 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d <- order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
     }
 
+    if (opts$postprocess$percentage) {
+      d$b <- (d$b/sum(d$b))*100
+      opts$style$suffix <- "%"
+    }
+
   }
 
   # dos variables de agregacion
@@ -116,6 +121,12 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
     if (!grepl("Dat", frtype)) {
       d <- order_category(d, col = "b", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
+    }
+
+    if (opts$postprocess$percentage) {
+      d <- d %>% group_by(b) %>%
+        dplyr::mutate(c = (c / sum(c, na.rm = TRUE)) * 100)
+      opts$style$suffix <- "%"
     }
 
   }
