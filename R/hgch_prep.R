@@ -124,10 +124,17 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     }
 
     if (opts$postprocess$percentage) {
-      d <- d %>% group_by(b) %>%
+      by_col <- opts$postprocess$percentage_col
+      if (is.null(by_col)) {
+      } else {
+        by_col <- names(nms[match(by_col, nms)])
+      }
+      print(by_col)
+      d <- d %>% group_by_(by_col) %>%
         dplyr::mutate(c = (c / sum(c, na.rm = TRUE)) * 100)
       opts$style$suffix <- "%"
     }
+    d <- postprocess(d, "c", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
 
   }
 

@@ -94,7 +94,8 @@ hgch_line_DatNum(sample_data("Dat-Num"), background_color = "#000000")
 # Bar cat cat num examples ------------------------------------------------
 data <- sample_data("Cat-Cat-Num")
 hgch_bar_CatCatNum(data)
-hgch_bar_CatCatNum(data, branding_include = T)
+hgch_bar_CatCatNum(data, branding_include = T, percentage = T, sort = "desc")
+hgch_bar_CatCatNum(data, branding_include = T, percentage = T, percentage_col = "Elit (Cat)")
 hgch_bar_CatCatNum(data, drop_na_legend = TRUE)
 hgch_bar_CatCatNum(data, drop_na = TRUE)
 
