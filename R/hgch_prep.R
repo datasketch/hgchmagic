@@ -98,6 +98,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     d <- preprocessData(d, drop_na = opts$preprocess$drop_na_legend,
                         na_label = opts$preprocess$na_label, na_label_cols = "a")
     d <- summarizeData(d, opts$summarize$agg, to_agg = c, a, b)
+    d <- postprocess(d, "c", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
 
     labelsXY <- opts$title$hor_title %||% nms[2]
     labelsXY[2] <- opts$title$ver_title %||% nms[3]
@@ -125,16 +126,18 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
     if (opts$postprocess$percentage) {
       by_col <- opts$postprocess$percentage_col
+
       if (is.null(by_col)) {
+        by_col <- "a"
       } else {
         by_col <- names(nms[match(by_col, nms)])
       }
-      print(by_col)
+
       d <- d %>% group_by_(by_col) %>%
         dplyr::mutate(c = (c / sum(c, na.rm = TRUE)) * 100)
       opts$style$suffix <- "%"
     }
-    d <- postprocess(d, "c", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+
 
   }
 

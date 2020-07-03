@@ -18,8 +18,8 @@ url_logo <- function(logo, background_color) {
 add_branding <- function(opts) {
   if (!opts$branding_include) return()
   logo_path <- url_logo(logo = opts$logo,background_color = opts$background_color)
-  logo_width <- 150#opts$logo_width
-  logo_height <- 30#opts$logo_height
+  logo_width <- opts$logo_width
+  logo_height <- opts$logo_height
   chartWidth <-  logo_width + 10
   chartHeight <- logo_height + 10
   JS(
