@@ -186,6 +186,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       names(nms) <- c("a", "b")
     }
     d <- d %>% drop_na()
+
     hor_title <- opts$title$hor_title %||% nms[[1]]
     ver_title <- opts$title$ver_title %||% nms[[2]]
   }
@@ -241,6 +242,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     date_intervals = date_intervals(opts$extra$date_intervals),
     orientation = opts$chart$orientation,
     theme = c(opts$theme,
+              bar_pointWidth = opts$theme$bar_pointWidth,
               credits = show_caption,
               y_credits = y_caption,
               dataLabels_show = opts$dataLabels$dataLabels_show,

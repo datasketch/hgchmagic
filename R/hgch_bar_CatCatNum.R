@@ -42,6 +42,10 @@ hgch_bar_CatCatNum <- function(data, ...){
     ) %>%
     hc_plotOptions(
       series = list(
+        borderWidth = 0,
+        pointPadding = l$theme$bar_padding,
+        groupPadding = l$theme$bar_groupWidth,
+        pointWidth = l$theme$bar_pointWidth,
         states = list(
           hover = list(
             #//brightness: -0.5,

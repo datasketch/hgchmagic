@@ -18,8 +18,8 @@ url_logo <- function(logo, background_color) {
 add_branding <- function(opts) {
   if (!opts$branding_include) return()
   logo_path <- url_logo(logo = opts$logo,background_color = opts$background_color)
-  logo_width <- opts$logo_width
-  logo_height <- opts$logo_height
+  logo_width <- opts$logo_width - 30
+  logo_height <- opts$logo_height - 20
   chartWidth <-  logo_width + 10
   chartHeight <- logo_height + 10
   JS(
@@ -40,11 +40,11 @@ theme <- function(opts = NULL){
     textShadow = "none",
     textOutline = ifelse(opts$dataLabels_text_outline, "1px contrast", "none")
   )
-  y_legend <- 0
+  y_legend <- opts$legend_y_position
   if (opts$credits) opts$plot_margin_bottom <- 100
   if(opts$branding_include) {
+ #   y_legend <- y_legend - 30
     opts$plot_margin_bottom <- 130
-    y_legend <- -30
   }
   if (opts$text_size == "") opts$text_size <- 13
   hc_theme(
@@ -96,6 +96,7 @@ theme <- function(opts = NULL){
         color = opts$caption_color
       )
     ),
+
     xAxis = list(
       visible = opts$grid_x_enabled,
       gridLineWidth = opts$grid_x_width,
@@ -103,11 +104,11 @@ theme <- function(opts = NULL){
       tickColor = opts$axis_ticks_color,#color de las divisiones del eje x
       gridLineColor = opts$grid_x_color,
       tickLength = opts$axis_tick_length,
-      lineWidth= opts$axis_line_width,
+      lineWidth= opts$axis_line_size,
       labels = list(
         style = list(
           color = opts$axis_title_color %||% opts$text_color, #opts$font_color, #color nombre de las etiquetas
-          fontFamily = opts$text_family %||% opts$text_color,
+          fontFamily = opts$text_family,
           fontSize = paste0(opts$text_size, 'px')
         )),
       title = list(
@@ -120,16 +121,16 @@ theme <- function(opts = NULL){
     yAxis = list(
       visible = opts$grid_y_enabled,
       gridLineWidth = opts$grid_y_width,
-      lineColor = opts$axis_line_color, #color del eje x
-      tickColor = opts$axis_ticks_color,#color de las divisiones del eje x
+      lineWidth = opts$axis_line_size,
+      lineColor = opts$axis_line_color,
+      tickColor = opts$axis_ticks_color,
       gridLineColor = opts$grid_y_color %||% opts$grid_color,
       gridLineDashStyle = opts$grid_y_dash,
       tickLength = opts$axis_tick_length,
-      lineWidth= opts$axis_line_width,
       labels = list(
         style = list(
           color = opts$axis_title_color %||% opts$text_color, #opts$font_color, #color nombre de las etiquetas
-          fontFamily = opts$text_family  %||% opts$text_family,
+          fontFamily = opts$text_family,
           fontSize = paste0(opts$text_size, 'px')
         )),
       title = list(
@@ -185,7 +186,9 @@ theme <- function(opts = NULL){
 tooltip = list(
   style = list(
     width = '350px',
-    whiteSpace = 'normal'
+    whiteSpace = 'normal',
+    fontFamily = opts$text_family,
+    fontSize = paste0(opts$text_size, 'px')
   )
 )
   )

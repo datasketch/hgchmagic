@@ -93,7 +93,13 @@ hgch_line_DatNum(sample_data("Dat-Num"), background_color = "#000000")
 
 # Bar cat cat num examples ------------------------------------------------
 data <- sample_data("Cat-Cat-Num")
-hgch_bar_CatCatNum(data)
+hgch_bar_CatCatNum(data, hor_title = " ")
+hgch_bar_CatCatNum(data, title = "Esto es un titulo",
+                   subtitle = "Esto es un subtitulo<br/><br/>",
+                   grid_color = "red",
+                   axis_line_width = 1,
+                   grid_y_width = 1,
+                   grid_y_color = "red")
 hgch_bar_CatCatNum(data, branding_include = T, percentage = T, sort = "desc")
 hgch_bar_CatCatNum(data, branding_include = T, percentage = T, percentage_col = "Elit (Cat)")
 hgch_bar_CatCatNum(data, drop_na_legend = TRUE)
@@ -107,6 +113,9 @@ hgch_bar_CatCatNum(data, graph_type = "stacked", percentage = TRUE)
 
 
 # Bubble cat cat num examples ---------------------------------------------
+hgch_bubbles_CatNum(sample_data("Cat-Num"),
+                       plot_border_color = 'red',
+                    plot_border_width=10, branding_include = T)
 
 hgch_bubbles_CatCatNum(sample_data("Cat-Cat-Num"))
 hgch_bubbles_CatCatNum(sample_data("Cat-Cat-Num"), dataLabels_show = TRUE)
