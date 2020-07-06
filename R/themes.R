@@ -42,10 +42,8 @@ theme <- function(opts = NULL){
   )
   y_legend <- opts$legend_y_position
   if (opts$credits) opts$plot_margin_bottom <- 100
-  if(opts$branding_include) {
- #   y_legend <- y_legend - 30
-    opts$plot_margin_bottom <- 130
-  }
+  if(opts$branding_include) opts$plot_margin_bottom <- 135
+
   if (opts$text_size == "") opts$text_size <- 13
   hc_theme(
     colors = opts$palette_colors,
@@ -103,6 +101,7 @@ theme <- function(opts = NULL){
       lineColor = opts$axis_line_color, #color del eje x
       tickColor = opts$axis_ticks_color,#color de las divisiones del eje x
       gridLineColor = opts$grid_x_color,
+      gridLineDashStyle = opts$grid_line_type,
       tickLength = opts$axis_tick_length,
       lineWidth= opts$axis_line_size,
       labels = list(
@@ -125,7 +124,7 @@ theme <- function(opts = NULL){
       lineColor = opts$axis_line_color,
       tickColor = opts$axis_ticks_color,
       gridLineColor = opts$grid_y_color %||% opts$grid_color,
-      gridLineDashStyle = opts$grid_y_dash,
+      gridLineDashStyle = opts$grid_line_type,
       tickLength = opts$axis_tick_length,
       labels = list(
         style = list(
