@@ -18,10 +18,10 @@ url_logo <- function(logo, background_color) {
 add_branding <- function(opts) {
   if (!opts$branding_include) return()
   logo_path <- url_logo(logo = opts$logo,background_color = opts$background_color)
-  logo_width <- opts$logo_width - 30
-  logo_height <- opts$logo_height - 20
+  logo_width <- opts$logo_width #- 30
+  logo_height <- opts$logo_height #- 20
   chartWidth <-  logo_width + 10
-  if (opts$logo_position == "left") chartWidth <-  logo_width + opts$logo_x_position
+  if (opts$logo_position == "left") chartWidth <- 550 #logo_width + opts$logo_x_position
   chartHeight <- logo_height + 10
   JS(
     paste0(
@@ -187,7 +187,7 @@ tooltip = list(
   style = list(
     width = '350px',
     whiteSpace = 'normal',
-    fontFamily = opts$text_family,
+    fontFamily = opts$tooltip_family %||% opts$text_family,
     fontSize = paste0(opts$text_size, 'px')
   )
 )
