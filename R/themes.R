@@ -21,6 +21,7 @@ add_branding <- function(opts) {
   logo_width <- opts$logo_width - 30
   logo_height <- opts$logo_height - 20
   chartWidth <-  logo_width + 10
+  if (opts$logo_position == "left") chartWidth <-  logo_width + opts$logo_x_position
   chartHeight <- logo_height + 10
   JS(
     paste0(
@@ -84,8 +85,8 @@ theme <- function(opts = NULL){
     ),
     credits = list(
       position = list(
-        align = "left",
-        x = 20,
+        align = opts$caption_align,
+        x = ifelse(opts$caption_align == "right",-20, 20),
         y = opts$y_credits
       ),
       style = list(
