@@ -179,7 +179,7 @@ theme <- function(opts = NULL){
         reversed = opts$legend_reversed,
         itemStyle = list(
           fontFamily = opts$legend_family,
-          fontSize = paste0(opts$legend_size, 'px'),
+          fontSize = paste0(opts$legend_size %||% opts$text_size, 'px'),
           color = opts$legend_color %||% opts$text_color
         )
     ),
