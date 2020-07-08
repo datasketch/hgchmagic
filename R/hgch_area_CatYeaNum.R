@@ -42,7 +42,7 @@ hgch_area_CatYeaNum <- function(data, ...){
     ) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
-    hc_legend(enabled = TRUE) %>%
+    hc_legend(enabled = l$theme$legend_show) %>%
     hc_add_theme(theme(opts = l$theme)) %>%
     hc_plotOptions(
       area = list(
