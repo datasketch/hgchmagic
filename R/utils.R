@@ -18,3 +18,10 @@ is.empty <- function (x){
     return(TRUE)
   !as.logical(length(x))
 }
+
+#' @importFrom highcharter highchartOutput
+#' @importFrom highcharter renderHighchart
+#' @import dsvizopts
+NULL
+
+

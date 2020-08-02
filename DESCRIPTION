@@ -6,14 +6,14 @@ Maintainer: Juan Pablo Marin Diaz <jpmarindiaz@gmail.com>
 Description: A wrapper for highcharter
 Depends:
     R (>= 3.0.0),
+    highcharter (>= 0.4.0.9999),
     tidyverse
 Imports:
     homodatum,
     paletero,
-    makeup,
     dsvizopts,
-    d3.format,
-    highcharter (>= 0.4.0.9999)
+    makeup,
+    d3.format
 Suggests:
     testthat (>= 2.1.0)
 License: MIT + file LICENSE
