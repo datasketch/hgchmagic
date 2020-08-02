@@ -1,7 +1,8 @@
 #' @export
 hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"){
-  #data <- sample_data("Cat-Dat-Num")
-  # Handle homodatum
+
+  if (is.null(data)) return()
+
   f <- homodatum::fringe(data)
   nms <- fringe_labels(f)
   d <- fringe_d(f)
@@ -245,6 +246,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     formats = f_nums,
     date_intervals = date_intervals(opts$extra$date_intervals),
     orientation = opts$chart$orientation,
+    percentage = opts$postprocess$percentage,
     theme = c(opts$theme,
               bar_pointWidth = opts$theme$bar_pointWidth,
               credits = show_caption,

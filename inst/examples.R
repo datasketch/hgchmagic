@@ -93,7 +93,7 @@ hgch_line_DatNum(sample_data("Dat-Num"), background_color = "#000000")
 
 # Bar cat cat num examples ------------------------------------------------
 data <- sample_data("Cat-Cat-Num")
-hgch_bar_CatCatNum(data, hor_title = " ")
+hgch_bar_CatCatNum(data, hor_title = " ", dataLabels_show = TRUE, dataLabels_size = 11, dataLabels_format_sample = "1.234,1")
 hgch_bar_CatCatNum(data, title = "Esto es un titulo",
                    subtitle = "Esto es un subtitulo<br/><br/>",
                    grid_color = "red",
@@ -151,3 +151,16 @@ hgch_choropleth_GnmNum(data = data, legend_layout = "vertical")
 
 
 hgch_mapbubbles_GltGlnNum(sample_data("Num-Num-Num"))
+
+
+
+# Year --------------------------------------------------------------------
+
+data <- data.frame(anio = 2020:2024, vlor = c(50, 20, 30, 14, 55))
+
+hgch_bar_YeaNum(data)
+
+data <- data.frame(date = c("2020-05-03","2020-05-04","2020-05-05","2020-05-06", "2020-05-07"),
+                   vlor = c(50, 20, 30, 14, 55))
+hgch_line_DatNum(data)
+
