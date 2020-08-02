@@ -147,7 +147,11 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     labs <- NULL
     l_date <- map(var_date, function(f_date){
       d_var <- dic$id[[f_date]]
-      d[[paste0("..", d_var, "_label")]] <<- makeup_dat(d[[f_date]], sample = "Junio 4 2011")
+      d[[paste0("..", d_var, "_label")]] <<- makeup_dat(d[[f_date]],
+                                                        #sample = opts$style$format_dat_sample,
+                                                        locale = opts$style$locale,
+                                                        format = opts$style$format_dat
+                                                        )
       #opts$style$format_dat_sample,locale = opts$style$locale)
       d[[paste0("..", d_var, "_label")]] <<- makeup_chr(d[[paste0("..", d_var, "_label")]],  opts$style$format_cat_sample)
       labs <<- as.list(d[[paste0("..", d_var, "_label")]])
