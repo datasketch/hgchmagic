@@ -17,6 +17,6 @@ Imports:
 Suggests:
     testthat (>= 2.1.0)
 License: MIT + file LICENSE
-LazyData: true
+LazyData: no
 RoxygenNote: 7.1.1
 Encoding: UTF-8
