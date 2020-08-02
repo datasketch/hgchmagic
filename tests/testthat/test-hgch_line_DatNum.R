@@ -16,7 +16,9 @@ test_that("gg bar DatNum", {
   hgch_line_DatNum(data, format_dat = "%b %d %Y")
 
   hgch_line_DatNum(data, locale = "ru-RU", format_dat = "%b %d %Y")
+  hgch_line_DatNum(data, locale = "es-CO")
   hgch_line_DatNum(data, locale = "es-CO", format_dat = "%B %d %Y")
+  hgch_line_DatNum(data, locale = "de-DE")
   hgch_line_DatNum(data, locale = "de-DE", format_dat = "%B %d %Y")
 
 
