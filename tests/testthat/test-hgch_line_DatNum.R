@@ -3,7 +3,7 @@ test_that("gg bar DatNum", {
 
   data <- sample_data("Dat-Num", n = 30, rep = FALSE)
 
-  data <- data.frame(fecha = c("2020/05/03","2020/05/04"),
+  data <- data.frame(fecha = c("2020/10/03","2020/10/04"),
                    vals = 1:2)
 
   opts <- dsvizopts::dsviz_defaults()
@@ -17,6 +17,7 @@ test_that("gg bar DatNum", {
 
   hgch_line_DatNum(data, locale = "ru-RU", format_dat = "%b %d %Y")
   hgch_line_DatNum(data, locale = "es-CO", format_dat = "%B %d %Y")
+  hgch_line_DatNum(data, locale = "de-DE", format_dat = "%B %d %Y")
 
 
 })
