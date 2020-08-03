@@ -109,7 +109,7 @@ data <- data.frame(Cosas = c("Piedra", "Piedra", "Hoja", "Hoja", NA, "Tijera", "
                    Seres = c("Elfo", "Enano", "Elfo", "Gigante", "Golondrina", "Mago", "Enano", "Mago", "Mago"),
                    Poder = runif(9, 1, 1000))
 hgch_bar_CatCatNum(data, order = c("Gigante"), order_legend = c("Piedra", "Hoja"))
-hgch_bar_CatCatNum(data, graph_type = "stacked", percentage = TRUE)
+hgch_bar_CatCatNum(data, graph_type = "stacked", percentage = TRUE, dataLabels_show = TRUE)
 
 
 # Bubble cat cat num examples ---------------------------------------------

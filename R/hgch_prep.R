@@ -4,7 +4,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   if (is.null(data)) return()
 
   f <- homodatum::fringe(data)
-  nms <- fringe_labels(f)
+  nms <- homodatum::fringe_labels(f)
   d <- fringe_d(f)
   frtype <- f$frtype
   dic <- f$dic
