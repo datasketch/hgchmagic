@@ -148,9 +148,12 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     labs <- NULL
     l_date <- map(var_date, function(f_date){
       d_var <- dic$id[[f_date]]
-      d[[paste0("..", d_var, "_label")]] <<- makeup_dat(d[[f_date]], sample = "Junio 4 2011")
-      #opts$style$format_dat_sample,locale = opts$style$locale)
-      d[[paste0("..", d_var, "_label")]] <<- makeup_chr(d[[paste0("..", d_var, "_label")]],  opts$style$format_cat_sample)
+      d[[paste0("..", d_var, "_label")]] <<- makeup_dat(d[[f_date]],
+                                                        #sample = opts$style$format_sample_dat,
+                                                        locale = opts$style$locale,
+                                                        format = opts$style$format_dat
+                                                        )
+      d[[paste0("..", d_var, "_label")]] <<- makeup_chr(d[[paste0("..", d_var, "_label")]],  opts$style$format_sample_cat)
       labs <<- as.list(d[[paste0("..", d_var, "_label")]])
       options(scipen = 9999)
       names(labs) <<- as.numeric(as.POSIXct(as.Date(d[[d_var]], origin =  min_date)))*1000
@@ -170,7 +173,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   if (!identical(var_cats, integer())) {
     l_cats <- map(var_cats, function(f_cats){
-      d[[f_cats]] <<- makeup_chr(d[[f_cats]], opts$style$format_cat_sample)
+      d[[f_cats]] <<- makeup_chr(d[[f_cats]], opts$style$format_sample_cat)
     })}
 
 
@@ -192,7 +195,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     ver_title <- opts$title$ver_title %||% nms[[2]]
   }
 
-  f_nums <- makeup::makeup_format_js(sample = opts$style$format_num_sample,
+  f_nums <- makeup::makeup_format_js(sample = opts$style$format_sample_num,
                                      locale = opts$style$locale,
                                      prefix = opts$style$prefix,
                                      suffix = opts$style$suffix)
@@ -201,10 +204,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
                           nms = nms, frtype = frtype,
                           prefix = opts$style$prefix,
                           suffix = opts$style$suffix,
-                          sample = opts$style$format_num_sample)
+                          sample = opts$style$format_sample_num)
 
   if (plot != "scatter") {
-    sample_labels <- opts$dataLabels$dataLabels_format_sample %||% opts$style$format_num_sample
+    sample_labels <- opts$dataLabels$dataLabels_format_sample %||% opts$style$format_sample_num
     format_dataLabels <- format_hgch(plot = plot,
                                      frtype = frtype,
                                      sample = sample_labels,
