@@ -23,7 +23,7 @@ hgch_bar_CatNum <- function(data, ...){
                             "color" = as.character(d$..colors[z]))
   })
 
-  global_options(opts$style$format_num_sample)
+  global_options(opts$style$format_sample_num)
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%

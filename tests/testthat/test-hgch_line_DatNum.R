@@ -1,4 +1,4 @@
-test_that("gg bar DatNum", {
+test_that("hgch bar DatNum", {
 
 
   data <- sample_data("Dat-Num", n = 30, rep = FALSE)

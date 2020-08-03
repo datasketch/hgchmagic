@@ -91,6 +91,7 @@ hgch_line_DatNum(sample_data("Dat-Num"), background_color = "#000000")
 
 
 
+
 # Bar cat cat num examples ------------------------------------------------
 data <- sample_data("Cat-Cat-Num")
 hgch_bar_CatCatNum(data, hor_title = " ", dataLabels_show = TRUE, dataLabels_size = 11, dataLabels_format_sample = "1.234,1")
@@ -119,7 +120,7 @@ hgch_bubbles_CatNum(sample_data("Cat-Num"),
 
 hgch_bubbles_CatCatNum(sample_data("Cat-Cat-Num"))
 hgch_bubbles_CatCatNum(sample_data("Cat-Cat-Num"), dataLabels_show = TRUE)
-hgch_bubbles_CatCatNum(sample_data("Cat-Cat-Num"), percentage = TRUE, dataLabels_show = TRUE)
+hgch_bubbles_CatCatNum(sample_data("Cat-Cat-Num"), percentage = TRUE, dataLabels_show = TRUE, format_sample_num = "1.234,1")
 
 
 

@@ -24,6 +24,7 @@ hgch_bar_CatCatNum <- function(data, ...){
                "data" = d0$c)
   })
 
+  global_options(opts$style$format_sample_num)
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%
