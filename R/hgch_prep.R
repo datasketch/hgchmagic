@@ -15,7 +15,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   formatter_tooltip <- NULL
   formatter <- NULL
 
-
+ if (grepl("Pct", frtype)) {
+   dic$hdType[dic$hdType == "Pct"] <- "Num"
+   frtype <- gsub("Pct", "Num", frtype)
+ }
 
   if (grepl("Yea", frtype)) {
     has_year <- dic$id[dic$hdType == "Yea"]

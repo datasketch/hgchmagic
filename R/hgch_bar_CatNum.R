@@ -14,7 +14,7 @@ hgch_bar_CatNum <- function(data, ...){
 
   opts <- dsvizopts::merge_dsviz_options(...)
   l <- hgchmagic_prep(data, opts = opts)
-
+  print(l$tooltip)
   d <- l$d
 
   h <- purrr::map(1:nrow(d), function(z){

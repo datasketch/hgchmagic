@@ -11,8 +11,10 @@ hgch_treemap_Cat(sample_data("Cat", nrow = 10), dataLabels_show = TRUE)
 
 hgch_bar_CatNum(sample_data("Cat-Num"))
 
-hgch_bar_CatNum(sample_data("Cat-Num"))
+hgch_bar_CatNum(sample_data("Cat-Num"), dataLabels_show = T)
 
+data <- data.frame(cat = c("panda", "isis", "hueco"), val = runif(3, 0,1))
+hgch_bar_CatNum(data, dataLabels_show = T)
 
 
 hgch_bar_CatNum(sample_data("Cat-Num"),
