@@ -42,6 +42,11 @@ tooltip_codes <- function(sample, prefix, suffix) {
         a = "{series.name}",
         b = "{point.category}",
         c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Yea-Num` = list(
+        a = "{series.name}",
+        b = "{point.category}",
+        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
       )
     ),
     pie = list(

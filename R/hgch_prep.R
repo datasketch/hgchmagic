@@ -66,7 +66,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
     if (!is.null(opts$chart$highlight_value)) {
       w <- grep(paste0(opts$chart$highlight_value, collapse = '|'), d$a)
-      print(w)
       d$..colors[w] <- opts$chart$highlight_value_color
     }
 

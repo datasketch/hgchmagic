@@ -13,7 +13,6 @@ hgch_bar_CatCatNum <- function(data, ...){
 
   opts <- dsvizopts::merge_dsviz_options(...)
   l <- hgchmagic_prep(data, opts = opts)
-
   d <- l$d
 
   series <- purrr::map(unique(d[[1]]), function(i) {
@@ -64,8 +63,7 @@ hgch_bar_CatCatNum <- function(data, ...){
       )) %>%
      hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
      hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
-    hc_legend(enabled = l$theme$legend_show) %>%
-    hc_add_theme(theme(opts = l$theme))
+    hc_legend(enabled = l$theme$legend_show)
 
   if (l$graph_type == "stacked"){
     hc <- hc %>% hc_plotOptions(bar = list(stacking = "normal"), column = list(stacking = "normal"))
@@ -74,6 +72,9 @@ hgch_bar_CatCatNum <- function(data, ...){
                             max = 100)
     }
   }
+
+  hc <- hc %>%  hc_add_theme(theme(opts = l$theme))
+
 
   hc
 }
