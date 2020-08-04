@@ -12,8 +12,8 @@ test_that("Data Labels Format", {
   expect_equal( l$theme$format_dataLabels, "{point.y:,.2f}%")
 
 
-  data <- sample_data("Cat-Cat-Num", n = 30)
-  opts <- dsvizopts::dsviz_defaults()
-  l <- hgchmagic_prep(data, opts,  plot = "treemap")
+  # data <- sample_data("Cat-Cat-Num", n = 30)
+  # opts <- dsvizopts::dsviz_defaults()
+  # l <- hgchmagic_prep(data, opts,  plot = "treemap")
 
 })

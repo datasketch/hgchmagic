@@ -7,12 +7,12 @@ Description: A wrapper for highcharter
 Depends:
     R (>= 3.0.0),
     highcharter (>= 0.4.0.9999),
-    tidyverse,
-    homodatum,
-    makeup
+    tidyverse
 Imports:
     paletero,
     dsvizopts,
+    homodatum,
+    makeup,
     d3.format
 Suggests:
     testthat (>= 2.1.0)
