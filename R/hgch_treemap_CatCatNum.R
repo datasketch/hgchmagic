@@ -42,7 +42,7 @@ hgch_treemap_CatCatNum <- function(data, ...){
 
   data <- c(listaId, listaMg)
 
-
+  global_options(opts$style$format_sample_num)
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%

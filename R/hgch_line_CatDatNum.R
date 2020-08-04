@@ -29,7 +29,6 @@ hgch_line_CatDatNum <- function(data, ...){
     )
   })
 
-
   h <- highchart() %>%
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%
