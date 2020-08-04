@@ -63,13 +63,6 @@ hgch_donut_CatNum(d)
 hgch_donut_CatNum(d, color_by = "cosas", legend_show = TRUE)
 
 
-if (is.null(data)) stop(" dataset to visualize")
-
-opts <- dsvizopts::merge_dsviz_options(...)
-l <- hgchmagic_prep(data, opts = opts)
-
-d <- l$d
-
 
 # treemap cat num example -------------------------------------------------
 
