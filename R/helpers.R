@@ -31,6 +31,15 @@ tooltip_codes <- function(sample, prefix, suffix) {
         a = "{series.name}",
         b = "{point.category}",
         c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Yea-Num` = list(
+        a = "{point.category}",
+        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Yea-Num` = list(
+        a = "{series.name}",
+        b = "{point.category}",
+        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
       )
     ),
     bar = list(
@@ -43,6 +52,10 @@ tooltip_codes <- function(sample, prefix, suffix) {
         b = "{point.category}",
         c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
       ),
+      `Yea-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
       `Cat-Yea-Num` = list(
         a = "{series.name}",
         b = "{point.category}",
@@ -53,10 +66,18 @@ tooltip_codes <- function(sample, prefix, suffix) {
       `Cat-Num` = list(
         a = "{point.name}",
         b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Yea-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
       )
     ),
     donut = list(
       `Cat-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Yea-Num` = list(
         a = "{point.name}",
         b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
       )
@@ -70,6 +91,15 @@ tooltip_codes <- function(sample, prefix, suffix) {
         a = "{series.name}",
         b = "{point.name}",
         c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Yea-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Yea-Num` = list(
+        a = "{series.name}",
+        b = "{point.name}",
+        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
       )
     ),
     treemap = list(
@@ -78,6 +108,15 @@ tooltip_codes <- function(sample, prefix, suffix) {
         b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
       ),
       `Cat-Cat-Num` = list(
+        a = "{point.parent}",
+        b = "{point.node.name}",
+        c = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Yea-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Yea-Num` = list(
         a = "{point.parent}",
         b = "{point.node.name}",
         c = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
