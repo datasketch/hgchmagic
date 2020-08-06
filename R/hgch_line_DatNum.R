@@ -40,7 +40,7 @@ hgch_line_DatNum <- function(data, ...){
              ) %>%
     hc_xAxis(
       type = 'datetime',
-      title = list(text = l$title$y),
+      title = list(text = l$title$x),
       tickInterval= l$date_intervals,
       labels = list(
         formatter= JS(l$formatter_date)
