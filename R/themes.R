@@ -151,6 +151,9 @@ theme <- function(opts = NULL){
       packedbubble = list(
         minSize = opts$bubble_min,
         maxSize = opts$bubble_max,
+        animation = list(
+          duration = opts$animation_duration
+        ),
         # zMin = 0,
         # zMax = 1000,
         layoutAlgorithm = list(
@@ -162,6 +165,9 @@ theme <- function(opts = NULL){
       ),
       series = list(
         colorByPoint = FALSE,
+        animation = list(
+          duration = opts$animation_duration
+        ),
         dataLabels = list (
           enabled = opts$dataLabels_show,
           style = labels_style,
@@ -169,6 +175,9 @@ theme <- function(opts = NULL){
           )
         ),
       pie = list(
+        animation = list(
+          duration = opts$animation_duration
+        ),
         dataLabels = list(distance = ifelse(opts$inner_dataLabels,-100, 30)),
         showInLegend = opts$legend_show
         )
