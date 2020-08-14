@@ -89,7 +89,7 @@ hgch_line_DatNum(sample_data("Dat-Num"), background_color = "#000000")
 
 
 
-
+hgch_bar_CatCat(sample_data("Cat-Cat"))
 # Bar cat cat num examples ------------------------------------------------
 data <- sample_data("Cat-Cat-Num")
 hgch_bar_CatCatNum(data, hor_title = " ", dataLabels_show = TRUE, dataLabels_size = 11, dataLabels_format_sample = "1.234,1")

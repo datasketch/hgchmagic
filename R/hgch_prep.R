@@ -88,7 +88,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d <- d %>%
         dplyr::group_by_all() %>%
         dplyr::summarise(c = n())
-      frtype <- paste(frtype, "-Num")
+      frtype <- paste0(frtype, "-Num")
       nms[3] <-  opts$summarize$agg_text %||% "Count"
       names(nms) <- c("a", "b", "c") }
     if (grepl("Dat", frtype)) {
@@ -201,6 +201,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
                                      locale = opts$style$locale,
                                      prefix = opts$style$prefix,
                                      suffix = opts$style$suffix)
+
 
   tooltip <- tooltip_hgch(plot, tooltip = opts$chart$tooltip,
                           nms = nms, frtype = frtype,
