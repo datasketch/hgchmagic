@@ -5,7 +5,10 @@ hgch_bar_Cat(sample_data("Cat"), dataLabels_show = TRUE)
 hgch_bubbles_Cat(sample_data("Cat", 100, addNA = F), dataLabels_show = TRUE)
 hgch_donut_Cat(sample_data("Cat", nrow = 10), dataLabels_show = TRUE)
 hgch_pie_Cat(sample_data("Cat", nrow = 10), dataLabels_show = TRUE, inner_dataLabels = TRUE)
-hgch_treemap_Cat(sample_data("Cat", nrow = 10), dataLabels_show = TRUE, caption = "porque la vida es asi")
+hgch_treemap_Cat(sample_data("Cat", nrow = 10), dataLabels_show = TRUE)
+hgch_bubbles_Cat(sample_data("Cat", nrow = 10),
+                 dataLabels_show = TRUE,
+                 min_bubble = 1, max_bubble = 50)
 
 # bar cat num examples ----------------------------------------------------
 
