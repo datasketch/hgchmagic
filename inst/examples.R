@@ -5,7 +5,7 @@ hgch_bar_Cat(sample_data("Cat"), dataLabels_show = TRUE)
 hgch_bubbles_Cat(sample_data("Cat", 100, addNA = F), dataLabels_show = TRUE)
 hgch_donut_Cat(sample_data("Cat", nrow = 10), dataLabels_show = TRUE)
 hgch_pie_Cat(sample_data("Cat", nrow = 10), dataLabels_show = TRUE, inner_dataLabels = TRUE)
-hgch_treemap_Cat(sample_data("Cat", nrow = 10), dataLabels_show = TRUE)
+hgch_treemap_Cat(sample_data("Cat", nrow = 10), dataLabels_show = TRUE, caption = "porque la vida es asi")
 
 # bar cat num examples ----------------------------------------------------
 
@@ -42,6 +42,9 @@ hgch_bar_CatNum(d,
 
 hgch_bar_CatNum(d, branding_include = TRUE, background_color = "#000000")
 
+data <- data.frame(Temas = c("Una historia epica", "Dramas de la antiguedad", "Dramas de la antiguedad", "Poema epico", NA, "Alquimia, magues, brujes, poder y dragones", "Alquimia, magues, brujes, poder y dragones", "La historia más triste del mundo", "Poema epico"),
+                   Poder = runif(9, 1, 1000))
+hgch_bar_CatNum(data, label_wrap = 70, caption = "Un brave descripción de los temas mas leidos por los vivientes")
 
 # Pie and donut cat num examples ------------------------------------------
 
@@ -104,8 +107,10 @@ hgch_bar_CatCatNum(data, drop_na = TRUE)
 data <- data.frame(Cosas = c("Piedra", "Piedra", "Hoja", "Hoja", NA, "Tijera", "Tijera", "Hoja", "Piedra"),
                    Seres = c("Elfo", "Enano", "Elfo", "Gigante", "Golondrina", "Mago", "Enano", "Mago", "Mago"),
                    Poder = runif(9, 1, 1000))
-hgch_bar_CatCatNum(data, order = c("Gigante"), order_legend = c("Piedra", "Hoja"))
-hgch_bar_CatCatNum(data, graph_type = "stacked", percentage = TRUE, dataLabels_show = TRUE)
+hgch_bar_CatCatNum(data, order = c("Gigante"), order_legend = c("Piedra", "Hoja"), legend_position = "top", caption = "skadn alskdmsal")
+hgch_bar_CatCatNum(data, graph_type = "stacked", percentage = TRUE,
+                   dataLabels_show = TRUE, legend_verticalAlign = 'top',
+                   caption = "Info extraida de la fantasia")
 
 
 data <- data.frame(Cosas = c("Una historia epica", "Dramas de la antiguedad", "Dramas de la antiguedad", "Poema epico", NA, "Alquimia, magues, brujes, poder y dragones", "Alquimia, magues, brujes, poder y dragones", "La historia más triste del mundo", "Poema epico"),

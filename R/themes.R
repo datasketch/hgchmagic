@@ -46,20 +46,11 @@ theme <- function(opts = NULL){
     textShadow = "none",
     textOutline = ifelse(opts$dataLabels_text_outline, "1px contrast", "none")
   )
-  plotMarginBottom <- 100 + opts$plot_margin_bottom %||% 0
-  put_marginBottom <- !opts$isNullCaption & opts$legend_show
-
-  if (put_marginBottom) plotMarginBottom <- 180
-
-  #if ((opts$branding_include + opts$isNullCaption + opts$legend_show) == 0) plotMarginBottom <- opts$plot_margin_bottom %||% NULL
- # print(opts$branding_include)
- # print(opts$isNullCaption)
- # print(opts$legend_show)
- # print(opts$branding_include + opts$isNullCaption + opts$legend_show)
   y_legend <- opts$legend_y_position
-  if (put_marginBottom) y_legend <- -30
-  if (opts$credits) opts$plot_margin_bottom <- 100
-  if(opts$branding_include) opts$plot_margin_bottom <- 135
+
+  if (is.null(opts$plot_margin_bottom)) {
+  if(opts$branding_include || opts$credits) opts$plot_margin_bottom <- 130
+  }
 
   if (opts$text_size == "") opts$text_size <- 13
   hc_theme(
@@ -68,8 +59,8 @@ theme <- function(opts = NULL){
       reflow = TRUE,
       renderTo = 'container',
       backgroundColor = opts$background_color,
-      #height = '100%',
-      marginBottom = plotMarginBottom,
+
+      marginBottom = opts$plot_margin_bottom,
       marginLeft = opts$plot_margin_left,
       marginRight = opts$plot_margin_right,
       marginTop = opts$plot_margin_top,
@@ -77,9 +68,6 @@ theme <- function(opts = NULL){
       plotBackgroundColor = opts$plot_background_color,
       plotBorderColor = opts$plot_border_color,
       plotBorderWidth = opts$plot_border_width,
-      # borderWidth= 1,
-      # plotBorderWidth= 1,
-      #spacingBottom= 50,
       style = list (
         fontFamily = opts$text_family,
         fontSize = paste0(opts$text_size, 'px')
@@ -106,7 +94,7 @@ theme <- function(opts = NULL){
       position = list(
         align = opts$caption_align,
         x = ifelse(opts$caption_align == "right",-20, 20),
-        y = opts$y_credits + 10
+        y = opts$y_credits
       ),
       style = list(
         fontFamily = opts$title_family,
@@ -189,7 +177,6 @@ theme <- function(opts = NULL){
         #backgroundColor = custom$legend_background,
         #borderColor = custom$legend_backgroundBorderColor,
         #borderWidth = custom$legend$backgroundWidth,
-        margin = 20,
         layout = opts$legend_layout,
         align = opts$legend_align,
         y = y_legend,

@@ -14,7 +14,7 @@ hgch_treemap_CatNum <- function(data, ...){
 
   opts <- dsvizopts::merge_dsviz_options(...)
   l <- hgchmagic_prep(data, opts = opts, plot = "treemap")
-
+  l$theme$legend_show <- FALSE
   d <- l$d
 
 
