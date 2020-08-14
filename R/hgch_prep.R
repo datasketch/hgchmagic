@@ -249,6 +249,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     orientation = opts$chart$orientation,
     percentage = opts$postprocess$percentage,
     theme = c(opts$theme,
+              isNullCaption = is.null(opts$title$caption),
               bar_pointWidth = opts$theme$bar_pointWidth,
               credits = show_caption,
               y_credits = y_caption,

@@ -27,7 +27,7 @@ hgch_bar_CatNum(sample_data("Cat-Num"),
                 title = "Esto es un titulo <br/> muito lindo muito agradavel",
                 subtitle = "esto es un subititulo",
                 caption = "esto es un caption <br/> lalal lala saldk alskdmf<br/>sdlaksnla kamslkasnd",
-                branding_include = TRUE)
+                branding_include = TRUE, legend_show = F)
 
 d <- data.frame(cosas = c("Piedra", "Papel", "Tijera"), total = c(23, 45, -10))
 hgch_bar_CatNum(d, tooltip = "<b>{cosas}</b>", caption = "esto es un caption")
@@ -60,7 +60,7 @@ hgch_pie_CatNum(d)
 hgch_donut_CatNum(d, color_by = "cosas")
 
 hgch_donut_CatNum(d)
-hgch_donut_CatNum(d, color_by = "cosas", legend_show = TRUE)
+hgch_donut_CatNum(d, color_by = "cosas", legend_show = TRUE, branding_include = T)
 
 
 
@@ -108,6 +108,15 @@ hgch_bar_CatCatNum(data, order = c("Gigante"), order_legend = c("Piedra", "Hoja"
 hgch_bar_CatCatNum(data, graph_type = "stacked", percentage = TRUE, dataLabels_show = TRUE)
 
 
+data <- data.frame(Cosas = c("Una historia epica", "Dramas de la antiguedad", "Dramas de la antiguedad", "Poema epico", NA, "Alquimia, magues, brujes, poder y dragones", "Alquimia, magues, brujes, poder y dragones", "La historia más triste del mundo", "Poema epico"),
+                   Libro = c("El señor de los anillos", "la biblia catolica", "Torah de los judios", "la Eda de los nordicos", "El señor de los anillos", "la Eda de los nordicos", "La odisea de Homero", "La odisea de Homero", "La odisea de Homero"),
+                   Poder = runif(9, 1, 1000))
+hgch_bar_CatCatNum(data, caption = "Un brave descripción de los libros que la humanidad <br/>
+                   obligatoriamente debería conocer para ser más feliz")
+hgch_bar_CatCatNum(data, caption = "Un brave descripción de los libros que la humanidad <br/>
+                   obligatoriamente debería conocer para ser más feliz", branding_include = TRUE)
+
+hgch_bar_CatCatNum(data, legend_show = F)
 # Bubble cat cat num examples ---------------------------------------------
 hgch_bubbles_CatNum(sample_data("Cat-Num"),
                        plot_border_color = 'red',
@@ -159,4 +168,7 @@ hgch_bar_YeaNum(data)
 data <- data.frame(date = c("2020-05-03","2020-05-04","2020-05-05","2020-05-06", "2020-05-07"),
                    vlor = c(50, 20, 30, 14, 55))
 hgch_line_DatNum(data)
+
+
+
 
