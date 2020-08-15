@@ -55,7 +55,7 @@ hgch_line_CatDatNum <- function(data, ...){
     ) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled = l$theme$legend_show) %>%
-    hc_add_theme(theme(opts =  c(l$theme)))
+    hc_add_theme(hgch_theme(opts =  c(l$theme)))
 
   h
 }

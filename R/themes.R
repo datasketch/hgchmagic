@@ -35,7 +35,7 @@ add_branding <- function(opts) {
 }
 
 #' @export
-theme <- function(opts = NULL){
+hgch_theme <- function(opts = NULL){
   message("in theme_datasketch")
 
   labels_style <- list (

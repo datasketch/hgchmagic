@@ -1,6 +1,6 @@
 test_that("hgch bar CatNum", {
 
-
+  library(homodatum)
   data <- sample_data("Cat-Num", n = 30, rep = FALSE)
 
   opts <- dsvizopts::dsviz_defaults()

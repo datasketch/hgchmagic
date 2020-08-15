@@ -57,7 +57,7 @@ hgch_bubbles_CatNum <- function(data, ...){
     hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled = FALSE) %>%
-    hc_add_theme(theme(opts =  c(l$theme,
+    hc_add_theme(hgch_theme(opts =  c(l$theme,
                                  cats = "{point.name} <br/>",
                                  bubble_opacity = l$extra$bubble_opacity,
                                  bubble_min = paste0(l$extra$bubble_min, "%"),

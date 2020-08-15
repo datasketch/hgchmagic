@@ -55,7 +55,7 @@ hgch_scatter_CatDatNum <- function(data, ...){
                formatter = l$formatter_date_tooltip
     ) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
-    hc_add_theme(theme(opts =  c(l$theme)))
+    hc_add_theme(hgch_theme(opts =  c(l$theme)))
 
   h
 }
