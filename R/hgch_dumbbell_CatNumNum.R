@@ -17,8 +17,8 @@ hgch_dumbbell_CatNumNum <- function(data, ...){
   l$theme$legend_show <- FALSE
   title_x = l$titles$x
   title_y = l$titles$y
-  if(opts$title$hor_title == ""){title_x <- opts$title$hor_title}
-  if(opts$title$ver_title == ""){title_y <- opts$title$ver_title}
+  if(!is.null(opts$title$hor_title) & opts$title$hor_title == ""){title_x <- opts$title$hor_title}
+  if(!is.null(opts$title$ver_title) & opts$title$ver_title == ""){title_y <- opts$title$ver_title}
 
   dat <- data
   names(dat) <- c("category", "low", "high")
