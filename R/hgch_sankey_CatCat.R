@@ -1,11 +1,11 @@
-#' Dumbbell Cat Num Num
+#' Sankey Cat Cat
 #'
 #'
 #' @param data A data.frame
 #' @section
 #'
 #' @examples
-#' hgch_dumbbell_CatNumNum(sample_data("Cat-Num-Num", nrow = 1000) %>% group_by_at(1) %>% summarise_all(mean))
+#' hgch_sankey_CatCat(sample_data("Cat-Cat"))
 #' @export
 hgch_sankey_CatCat <- function(data, ...){
 
@@ -17,44 +17,47 @@ hgch_sankey_CatCat <- function(data, ...){
   l$theme$legend_show <- FALSE
   l$theme$dataLabels_show <- TRUE
   l$theme$format_dataLabels <- ""
-  l$theme$border_color <- NULL
-  title_x = l$titles$x
-  title_y = l$titles$y
-  if(!is.null(opts$title$hor_title)){
-    if(opts$title$hor_title == ""){
-      title_x <- opts$title$hor_title}}
-  if(!is.null(opts$title$ver_title)){
-    if(opts$title$ver_title == ""){
-      title_y <- opts$title$ver_title}}
 
   color_by <- "from"
   if(!is.null(opts$style$color_by)){
     if(!opts$style$color_by %in% names(data)){
       stop("Group by parameter is not a valid column name of the data input.")
     }
-    col_idx_group_by <- c(1,2)[names(data) == "color"]
+    col_idx_group_by <- c(1,2)[names(data) == opts$style$color_by]
     if(col_idx_group_by == 2){
       color_by <- "to"
     }
   }
 
-  dat <- data_to_sankey(data)
+  data_sankey_format <- data_to_sankey(data) %>%
+    mutate(name = if(color_by == "to") to else from)
 
-  nodes <- dat %>%
-    mutate(name = if(color_by == "to") to else from,
-           color = paletero::paletero(name, opts$theme$palette_colors),
-           from = ifelse(from == to, paste0(from, "_from"), from),
-           to = ifelse(from == to, paste0(to, "_to"), to)) %>%
-    distinct(from, name, color)
+  nodes_unique <- unique(c(unique(data_sankey_format$from), unique(data_sankey_format$to)))
 
-  names(nodes) <- c("id", "name", "color")
+  colors <- data.frame(name = nodes_unique) %>%
+    mutate(color = paletero::paletero(name, opts$theme$palette_colors))
 
-  nodes <- nodes %>% purrr::transpose()
+  if(!is.null(names(opts$theme$palette_colors))){
+    colors <- data.frame(name = nodes_unique) %>%
+      left_join(
+        data.frame(name = names(opts$theme$palette_colors),
+                   color = opts$theme$palette_colors, row.names = NULL),
+        by = "name") %>%
+      mutate(color = ifelse(is.na(color), "#cbcdcf", color))
+  }
 
-  dat <- dat %>%
-    mutate(name = if(color_by == "to") to else from,
-           color = paletero::paletero(name, opts$theme$palette_colors),
-           from = ifelse(from %in% unique(dat$to), paste0(from, "_from"), from))
+  dat <- data_sankey_format %>%
+    left_join(colors,
+              by.x = color_by, by.y = "name") %>%
+    mutate(from_label = from,
+           to_label = to,
+           from = paste0(from, "_from"),
+           to = paste0(to, "_to"))
+
+  nodes_from <- dat %>% distinct(from, from_label) %>% rename(id = from, name = from_label)
+  nodes_to <- dat %>% distinct(to, to_label) %>% rename(id = to, name = to_label)
+  nodes <- bind_rows(nodes_from, nodes_to) %>%
+    left_join(colors, by = "name") %>% purrr::transpose()
 
   global_options(opts$style$format_sample_num)
 
@@ -71,6 +74,7 @@ hgch_sankey_CatCat <- function(data, ...){
     ) %>%
     hc_add_series(
       dat,
+      name = "",
       nodes = nodes,
       dataLabels= list(
         nodeFormat = '{point.name}'
@@ -78,8 +82,8 @@ hgch_sankey_CatCat <- function(data, ...){
       colorByPoint = TRUE,
       showInLegend = FALSE
     ) %>%
-    hc_xAxis(title = list(text = title_x)) %>%
-    hc_yAxis(title = list(text = title_y),
+    hc_xAxis(title = list(text = l$titles$x)) %>%
+    hc_yAxis(title = list(text = l$titles$y),
              visible = TRUE,
              labels = list(
                formatter = l$formats)
