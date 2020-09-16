@@ -12,27 +12,29 @@ hgch_sankey_CatCat <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts)
+  l <- hgchmagic_prep(data[,1:2], opts = opts)
   d <- l$d
   l$theme$legend_show <- FALSE
   l$theme$dataLabels_show <- TRUE
   l$theme$format_dataLabels <- ""
 
   color_by <- "from"
-  if(!is.null(opts$style$color_by)){
-    if(!opts$style$color_by %in% names(data)){
-      stop("Group by parameter is not a valid column name of the data input.")
-    }
-    col_idx_group_by <- c(1,2)[names(data) == opts$style$color_by]
-    if(col_idx_group_by == 2){
-      color_by <- "to"
+  if(!is.null(opts$style$color_by)) {
+    color_by <- opts$style$color_by
+    if(!color_by %in% c("from", "to")){
+      stop("Group by parameter must be 'from' or 'to'.")
     }
   }
 
+  for(i in seq(length(names(data)))){
+    data[,i] <- data %>% select_at(i) %>% mutate_all(funs(paste0(., i)))
+  }
   data_sankey_format <- data_to_sankey(data) %>%
-    mutate(name = if(color_by == "to") to else from)
+    mutate(from_label = substr(from,1,nchar(from)-1),
+           to_label = substr(to,1,nchar(to)-1),
+           name = if(color_by == "to") to_label else from_label)
 
-  nodes_unique <- unique(c(unique(data_sankey_format$from), unique(data_sankey_format$to)))
+  nodes_unique <- unique(c(unique(data_sankey_format$from_label), unique(data_sankey_format$to_label)))
 
   colors <- data.frame(name = nodes_unique) %>%
     mutate(color = paletero::paletero(name, opts$theme$palette_colors))
@@ -48,15 +50,11 @@ hgch_sankey_CatCat <- function(data, ...){
 
   dat <- data_sankey_format %>%
     left_join(colors,
-              by.x = color_by, by.y = "name") %>%
-    mutate(from_label = from,
-           to_label = to,
-           from = paste0(from, "_from"),
-           to = paste0(to, "_to"))
+              by.x = color_by, by.y = "name")
 
   nodes_from <- dat %>% distinct(from, from_label) %>% rename(id = from, name = from_label)
   nodes_to <- dat %>% distinct(to, to_label) %>% rename(id = to, name = to_label)
-  nodes <- bind_rows(nodes_from, nodes_to) %>%
+  nodes <- bind_rows(nodes_from, nodes_to) %>% distinct(id, name) %>%
     left_join(colors, by = "name") %>% purrr::transpose()
 
   global_options(opts$style$format_sample_num)
@@ -109,10 +107,21 @@ hgch_sankey_CatCat <- function(data, ...){
           click = l$clickFunction
         )
       )) %>%
-      hc_tooltip(outside = TRUE) %>%
+    hc_tooltip(outside = TRUE) %>%
     hc_credits(enabled = TRUE, text = l$title$caption) %>%
     hc_legend(enabled = FALSE) %>%
     hc_add_theme(hgch_theme(opts = l$theme))
 
   hc
 }
+
+#' Sankey Cat Cat Cat
+#'
+#'
+#' @param data A data.frame
+#' @section
+#'
+#' @examples
+#' hgch_sankey_CatCatCat(sample_data("Cat-Cat-Cat"))
+#' @export
+hgch_sankey_CatCatCat <- hgch_sankey_CatCat
