@@ -41,7 +41,7 @@ hgch_choropleth_GnmNum <-  function(data = NULL, ...) {
               layout= opts$theme$legend_layout,
               align= 'left',
               verticalAlign = opts$theme$legend_verticalAlign) %>%
-  hc_add_theme(theme(opts = l$theme)) %>%
+  hc_add_theme(hgch_theme(opts = l$theme)) %>%
     hc_plotOptions(
       series = list(
         states = list(

@@ -73,7 +73,7 @@ hgch_bar_CatCatNum <- function(data, ...){
     }
   }
 
-  hc <- hc %>%  hc_add_theme(theme(opts = l$theme))
+  hc <- hc %>%  hc_add_theme(hgch_theme(opts = l$theme))
 
 
   hc
