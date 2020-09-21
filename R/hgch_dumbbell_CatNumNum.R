@@ -94,3 +94,54 @@ hgch_dumbbell_CatNumNum <- function(data, ...){
 
   hc
 }
+
+
+#' Dumbbell Cat Cat
+#'
+#'
+#' @param data A data.frame
+#' @section
+#'
+#' @examples
+#' hgch_dumbbell_CatCat(sample_data("Cat-Cat", nrow = 1000))
+#' @export
+hgch_dumbbell_CatCat <- function(data, ...){
+
+  if (is.null(data)) stop(" dataset to visualize")
+  if (length(data[,2] %>% distinct() %>% pull()) != 2) stop("The second column should contain two unique categories.")
+
+  opts <- dsvizopts::merge_dsviz_options(...)
+  data <- data[c(1,2)] %>% group_by_all() %>% summarise(n = n()) %>% tidyr::spread(key = 2, value = 3)
+
+  hgch_dumbbell_CatNumNum(data, opts = opts)
+
+}
+
+
+#' Dumbbell Cat Cat Num
+#'
+#'
+#' @param data A data.frame
+#' @section
+#'
+#' @examples
+#' hgch_dumbbell_CatCatNum(sample_data("Cat-Cat-Num", nrow = 1000))
+#' @export
+hgch_dumbbell_CatCatNum <- function(data, ...){
+
+  if (is.null(data)) stop(" dataset to visualize")
+  if (length(data[,2] %>% distinct() %>% pull()) != 2) stop("The second column should contain two unique categories.")
+
+  opts <- dsvizopts::merge_dsviz_options(...)
+
+  data <- data[c(1:3)]
+  names(data)[3] <- "c"
+
+  agg <- opts$summarize$agg
+  data <- data %>% group_by_at(c(1,2)) %>% dplyr::summarise(c := agg(agg, c)) %>%
+    mutate(c=as.numeric(c)) %>%
+    tidyr::spread(key = 2, value = 3)
+
+  hgch_dumbbell_CatNumNum(data, opts = opts)
+
+}
