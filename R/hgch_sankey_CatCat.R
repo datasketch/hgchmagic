@@ -50,7 +50,9 @@ hgch_sankey_CatCat <- function(data, ...){
 
   dat <- data_sankey_format %>%
     left_join(colors,
-              by.x = color_by, by.y = "name")
+              by.x = color_by, by.y = "name") %>%
+    group_by_at(color_by) %>%
+    mutate(pct = paste0(round(100*weight / sum(weight), 0), "%"))
 
   nodes_from <- dat %>% distinct(from, from_label) %>% rename(id = from, name = from_label)
   nodes_to <- dat %>% distinct(to, to_label) %>% rename(id = to, name = to_label)
@@ -107,7 +109,14 @@ hgch_sankey_CatCat <- function(data, ...){
           click = l$clickFunction
         )
       )) %>%
-    hc_tooltip(outside = TRUE) %>%
+    hc_tooltip(pointFormatter = JS("
+    function() {
+      var result = this.from + ' -> ' + this.to +
+                   '<br>Total: <b>' + this.weight + '</b>' +
+                   '<br>Percentage: <b>' + this.pct + '</b>';
+      return result;
+    }")
+               ) %>%
     hc_credits(enabled = TRUE, text = l$title$caption) %>%
     hc_legend(enabled = FALSE) %>%
     hc_add_theme(hgch_theme(opts = l$theme))

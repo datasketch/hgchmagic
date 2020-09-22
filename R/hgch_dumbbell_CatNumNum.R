@@ -24,14 +24,16 @@ hgch_dumbbell_CatNumNum <- function(data, ...){
     if(opts$title$ver_title == ""){
       title_y <- opts$title$ver_title}}
 
+  palette <- paletero::paletero(c("high", "low"), opts$theme$palette_colors)
+
   dat <- data
   names(dat) <- c("category", "low", "high")
 
   dat <- dat %>%
     ungroup() %>%
     filter(complete.cases(.)) %>%
-    mutate(color_low = opts$theme$palette_colors[2],
-           color_high = opts$theme$palette_colors[1],
+    mutate(color_low = palette[2],
+           color_high = palette[1],
            label_low = names(data)[2],
            label_high = names(data)[3])
 
@@ -50,8 +52,8 @@ hgch_dumbbell_CatNumNum <- function(data, ...){
     hc_add_series(
       dat,
       showInLegend = FALSE,
-      marker = list(fillColor = opts$theme$palette_colors[1]),
-      lowColor= opts$theme$palette_colors[2],
+      marker = list(fillColor = palette[1]),
+      lowColor= palette[2],
       connectorColor = "#8a8a8a"
     ) %>%
     hc_xAxis(title = list(text = title_x),
@@ -81,14 +83,65 @@ hgch_dumbbell_CatNumNum <- function(data, ...){
           click = l$clickFunction
         )
       )) %>%
-      hc_tooltip(shared= TRUE,
-                 useHTML= TRUE,
-                 pointFormat= '<b style="color:{point.color_low};">{point.label_low}: </b>{point.low}</br>
+    hc_tooltip(shared= TRUE,
+               useHTML= TRUE,
+               pointFormat= '<b style="color:{point.color_low};">{point.label_low}: </b>{point.low}</br>
                                  <b style="color:{point.color_high};">{point.label_high}: </b>{point.high}',
-                 valueDecimals= 0) %>%
+               valueDecimals= 0) %>%
     hc_credits(enabled = TRUE, text = l$title$caption) %>%
     hc_legend(enabled = FALSE) %>%
     hc_add_theme(hgch_theme(opts = l$theme))
 
   hc
+}
+
+
+#' Dumbbell Cat Cat
+#'
+#'
+#' @param data A data.frame
+#' @section
+#'
+#' @examples
+#' hgch_dumbbell_CatCat(sample_data("Cat-Cat", nrow = 1000))
+#' @export
+hgch_dumbbell_CatCat <- function(data, ...){
+
+  if (is.null(data)) stop(" dataset to visualize")
+  if (length(data[,2] %>% distinct() %>% pull()) != 2) stop("The second column should contain two unique categories.")
+
+  opts <- dsvizopts::merge_dsviz_options(...)
+  data <- data[c(1,2)] %>% group_by_all() %>% summarise(n = n()) %>% tidyr::spread(key = 2, value = 3)
+
+  hgch_dumbbell_CatNumNum(data, opts = opts)
+
+}
+
+
+#' Dumbbell Cat Cat Num
+#'
+#'
+#' @param data A data.frame
+#' @section
+#'
+#' @examples
+#' hgch_dumbbell_CatCatNum(sample_data("Cat-Cat-Num", nrow = 1000))
+#' @export
+hgch_dumbbell_CatCatNum <- function(data, ...){
+
+  if (is.null(data)) stop(" dataset to visualize")
+  if (length(data[,2] %>% distinct() %>% pull()) != 2) stop("The second column should contain two unique categories.")
+
+  opts <- dsvizopts::merge_dsviz_options(...)
+
+  data <- data[c(1:3)]
+  names(data)[3] <- "c"
+
+  agg <- opts$summarize$agg
+  data <- data %>% group_by_at(c(1,2)) %>% dplyr::summarise(c := agg(agg, c)) %>%
+    mutate(c=as.numeric(c)) %>%
+    tidyr::spread(key = 2, value = 3)
+
+  hgch_dumbbell_CatNumNum(data, opts = opts)
+
 }
