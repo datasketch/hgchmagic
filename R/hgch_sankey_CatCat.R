@@ -52,14 +52,37 @@ hgch_sankey_CatCat <- function(data, ...){
     left_join(colors,
               by.x = color_by, by.y = "name") %>%
     group_by_at(color_by) %>%
-    mutate(pct = paste0(round(100*weight / sum(weight), 0), "%"))
+    mutate(pct = paste0(round(100*weight / sum(weight), 0), "%")) %>%
+    group_by(from) %>% mutate(total_from = sum(weight)) %>%
+    group_by(to) %>% mutate(total_to = sum(weight)) %>%
+    ungroup()
 
-  nodes_from <- dat %>% distinct(from, from_label) %>% rename(id = from, name = from_label)
-  nodes_to <- dat %>% distinct(to, to_label) %>% rename(id = to, name = to_label)
-  nodes <- bind_rows(nodes_from, nodes_to) %>% distinct(id, name) %>%
+  nodes_from <- dat %>% distinct(from, from_label, total_from) %>%
+    rename(id = from, name = from_label, total = total_from) %>%
+    mutate(pct = paste0(round(100 * total / sum(total), 9), "%"))
+
+  nodes_to <- dat %>% distinct(to, to_label, total_to) %>%
+    rename(id = to, name = to_label, total = total_to) %>%
+    mutate(pct = paste0(round(100 * total / sum(total), 9), "%"))
+
+  nodes <- bind_rows(nodes_from, nodes_to) %>% distinct(id, name, total, pct) %>%
     left_join(colors, by = "name") %>% purrr::transpose()
 
   global_options(opts$style$format_sample_num)
+
+  dataLabel <- '{point.name}'
+  if(is.null(opts$dataLabels$dataLabels_type)){
+    dataLabel <- '{point.name}'
+  } else if(opts$dataLabels$dataLabels_type == "percentage"){
+    dataLabel <- '{point.name}: {point.pct}'
+  } else if(opts$dataLabels$dataLabels_type == "total"){
+    dataLabel <- '{point.name}: {point.total}'
+  }
+
+  if(!is.null(opts$dataLabels$dataLabels_type)){
+    if(!opts$dataLabels$dataLabels_type %in% c("percentage", "total"))
+      warning("Datalabel type must be 'total' or 'percentage'.")
+  }
 
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%
@@ -77,7 +100,7 @@ hgch_sankey_CatCat <- function(data, ...){
       name = "",
       nodes = nodes,
       dataLabels= list(
-        nodeFormat = '{point.name}'
+        nodeFormat = dataLabel
       ),
       colorByPoint = TRUE,
       showInLegend = FALSE
@@ -111,7 +134,7 @@ hgch_sankey_CatCat <- function(data, ...){
       )) %>%
     hc_tooltip(pointFormatter = JS("
     function() {
-      var result = this.from + ' -> ' + this.to +
+      var result = this.from + ' \u2192 ' + this.to +
                    '<br>Total: <b>' + this.weight + '</b>' +
                    '<br>Percentage: <b>' + this.pct + '</b>';
       return result;
