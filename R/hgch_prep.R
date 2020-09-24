@@ -256,6 +256,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
               y_credits = y_caption,
               animation_duration = opts$extra$animation_duration,
               dataLabels_show = opts$dataLabels$dataLabels_show,
+              dataLabels_type = opts$dataLabels$dataLabels_type,
               dataLabels_color = opts$dataLabels$dataLabels_color %||% "constrast",
               dataLabels_size = opts$dataLabels$dataLabels_size %||% "11",
               dataLabels_text_outline = opts$dataLabels$dataLabels_text_outline,
