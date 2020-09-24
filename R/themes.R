@@ -11,9 +11,9 @@ url_logo <- function(logo, background_color) {
   isUrl <- grepl("http", logo)
   if (isUrl) logo_url <- logo
   if (grepl("/", logo) & !isUrl) {
-  logo_path <- logo
+    logo_path <- logo
   } else {
-  logo_path <- local_logo_path(logo, background_color)
+    logo_path <- local_logo_path(logo, background_color)
   }
   logo_url <- knitr::image_uri(f = logo_path)
   logo_url
@@ -49,7 +49,7 @@ hgch_theme <- function(opts = NULL){
   y_legend <- opts$legend_y_position
 
   if (is.null(opts$plot_margin_bottom)) {
-  if(opts$branding_include || opts$credits) opts$plot_margin_bottom <- 130
+    if(opts$branding_include || opts$credits) opts$plot_margin_bottom <- 130
   }
 
   if (opts$text_size == "") opts$text_size <- 13
@@ -106,12 +106,12 @@ hgch_theme <- function(opts = NULL){
     xAxis = list(
       visible = opts$grid_x_enabled,
       gridLineWidth = opts$grid_x_width,
-      lineColor = opts$axis_line_color, #color del eje x
+      lineColor = opts$axis_line_x_color %||% opts$axis_line_color, #color del eje x
       tickColor = opts$axis_ticks_color,#color de las divisiones del eje x
-      gridLineColor = opts$grid_x_color,
-      gridLineDashStyle = opts$grid_line_type,
+      gridLineColor = opts$grid_x_color %||% opts$grid_color,
+      gridLineDashStyle = opts$grid_x_line_type %||% opts$grid_line_type,
       tickLength = opts$axis_tick_length,
-      lineWidth= opts$axis_line_size,
+      lineWidth = opts$axis_line_x_size %||% opts$axis_line_size,
       labels = list(
         style = list(
           color = opts$axis_title_color %||% opts$text_color, #opts$font_color, #color nombre de las etiquetas
@@ -128,11 +128,11 @@ hgch_theme <- function(opts = NULL){
     yAxis = list(
       visible = opts$grid_y_enabled,
       gridLineWidth = opts$grid_y_width,
-      lineWidth = opts$axis_line_size,
-      lineColor = opts$axis_line_color,
+      lineWidth = opts$axis_line_y_size %||% opts$axis_line_size,
+      lineColor = opts$axis_line_y_color %||% opts$axis_line_color,
       tickColor = opts$axis_ticks_color,
       gridLineColor = opts$grid_y_color %||% opts$grid_color,
-      gridLineDashStyle = opts$grid_line_type,
+      gridLineDashStyle = opts$grid_y_line_type %||% opts$grid_line_type,
       tickLength = opts$axis_tick_length,
       labels = list(
         style = list(
@@ -172,45 +172,40 @@ hgch_theme <- function(opts = NULL){
           enabled = opts$dataLabels_show,
           style = labels_style,
           format = paste0(opts$cats, opts$format_dataLabels)
-          )
-        ),
+        )
+      ),
       pie = list(
         animation = list(
           duration = opts$animation_duration
         ),
         dataLabels = list(distance = ifelse(opts$inner_dataLabels,-100, 30)),
         showInLegend = opts$legend_show
-        )
+      )
     ),
-      legend = list(
-        #backgroundColor = custom$legend_background,
-        #borderColor = custom$legend_backgroundBorderColor,
-        #borderWidth = custom$legend$backgroundWidth,
-        layout = opts$legend_layout,
-        align = opts$legend_align,
-        y = y_legend,
-        verticalAlign = opts$legend_verticalAlign,
-        itemMarginTop = opts$legend_itemMarginTop,
-        itemMarginBottom = opts$legend_itemMarginBottom,
-        reversed = opts$legend_reversed,
-        itemStyle = list(
-          fontFamily = opts$legend_family,
-          fontSize = paste0(opts$legend_size %||% opts$text_size, 'px'),
-          color = opts$legend_color %||% opts$text_color
-        )
+    legend = list(
+      #backgroundColor = custom$legend_background,
+      #borderColor = custom$legend_backgroundBorderColor,
+      #borderWidth = custom$legend$backgroundWidth,
+      layout = opts$legend_layout,
+      align = opts$legend_align,
+      y = y_legend,
+      verticalAlign = opts$legend_verticalAlign,
+      itemMarginTop = opts$legend_itemMarginTop,
+      itemMarginBottom = opts$legend_itemMarginBottom,
+      reversed = opts$legend_reversed,
+      itemStyle = list(
+        fontFamily = opts$legend_family,
+        fontSize = paste0(opts$legend_size %||% opts$text_size, 'px'),
+        color = opts$legend_color %||% opts$text_color
+      )
     ),
-tooltip = list(
-  style = list(
-    width = '350px',
-    whiteSpace = 'normal',
-    fontFamily = opts$tooltip_family %||% opts$text_family,
-    fontSize = paste0(opts$text_size, 'px')
-  )
-)
+    tooltip = list(
+      style = list(
+        width = '350px',
+        whiteSpace = 'normal',
+        fontFamily = opts$tooltip_family %||% opts$text_family,
+        fontSize = paste0(opts$text_size, 'px')
+      )
+    )
   )
 }
-
-
-
-
-
