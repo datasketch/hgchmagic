@@ -10,8 +10,10 @@
 hgch_sankey_CatCat <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
-
   opts <- dsvizopts::merge_dsviz_options(...)
+  palette <- opts$theme$palette_colors
+  opts$theme$palette_colors <- dsvizopts::default_theme_opts()$palette_colors
+
   l <- hgchmagic_prep(data[,1:2], opts = opts)
   d <- l$d
   l$theme$legend_show <- FALSE
@@ -37,13 +39,13 @@ hgch_sankey_CatCat <- function(data, ...){
   nodes_unique <- unique(c(unique(data_sankey_format$from_label), unique(data_sankey_format$to_label)))
 
   colors <- data.frame(name = nodes_unique) %>%
-    mutate(color = paletero::paletero(name, opts$theme$palette_colors))
+    mutate(color = paletero::paletero(name, as.character(palette)))
 
-  if(!is.null(names(opts$theme$palette_colors))){
+  if(!is.null(names(palette))){
     colors <- data.frame(name = nodes_unique) %>%
       left_join(
-        data.frame(name = names(opts$theme$palette_colors),
-                   color = opts$theme$palette_colors, row.names = NULL),
+        data.frame(name = names(palette),
+                   color = palette, row.names = NULL),
         by = "name") %>%
       mutate(color = ifelse(is.na(color), "#cbcdcf", color))
   }
@@ -59,11 +61,11 @@ hgch_sankey_CatCat <- function(data, ...){
 
   nodes_from <- dat %>% distinct(from, from_label, total_from) %>%
     rename(id = from, name = from_label, total = total_from) %>%
-    mutate(pct = paste0(round(100 * total / sum(total), 9), "%"))
+    mutate(pct = paste0(round(100 * total / sum(total), 0), "%"))
 
   nodes_to <- dat %>% distinct(to, to_label, total_to) %>%
     rename(id = to, name = to_label, total = total_to) %>%
-    mutate(pct = paste0(round(100 * total / sum(total), 9), "%"))
+    mutate(pct = paste0(round(100 * total / sum(total), 0), "%"))
 
   nodes <- bind_rows(nodes_from, nodes_to) %>% distinct(id, name, total, pct) %>%
     left_join(colors, by = "name") %>% purrr::transpose()
