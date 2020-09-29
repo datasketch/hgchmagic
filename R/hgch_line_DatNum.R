@@ -38,6 +38,8 @@ hgch_line_DatNum <- function(data, ...){
                load = add_branding(l$theme)
              )
              ) %>%
+    hc_title(text = l$title$title) %>%
+    hc_subtitle(text = l$title$subtitle) %>%
     hc_xAxis(
       type = 'datetime',
       title = list(text = l$title$x),
