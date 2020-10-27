@@ -47,7 +47,7 @@ hgch_sankey_CatCat <- function(data, ...){
         data.frame(name = names(palette),
                    color = palette, row.names = NULL),
         by = "name") %>%
-      mutate(color = ifelse(is.na(color), "#cbcdcf", color))
+      mutate(color = ifelse(is.na(color), "#cbcdcf", as.character(color)))
   }
 
   dat <- data_sankey_format %>%
