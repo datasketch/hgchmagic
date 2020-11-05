@@ -126,6 +126,11 @@ tooltip_codes <- function(sample, prefix, suffix) {
       `Num-Num` = list(
         a = "{point.x}",
         b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Num-Num` = list(
+        a = "{series.name}",
+        b = paste0( "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}"),
+        c = paste0( "{point.x",':', thousandsSep, decimalPoint, n_decimal, "f}")
       )
     ),
     map = list(

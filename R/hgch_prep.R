@@ -11,6 +11,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   dic$id <- names(d)
   var_date <- grep("Dat", dic$hdType)
   var_cats <- grep("Cat", dic$hdType)
+  var_nums <- grep("Num", dic$hdType)
   min_date <- NULL
   formatter_tooltip <- NULL
   formatter <- NULL
@@ -45,9 +46,13 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
                           na_label = opts$preprocess$na_label, na_label_cols = "a")
     }
+
+    if (length(var_nums)>1) {
+    d <- d
+    } else {
     d <- summarizeData(d, opts$summarize$agg, to_agg = b, a)
     d <- postprocess(d, "b", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
-
+    }
     labelsXY <- labelsXY(hor_title = opts$title$hor_title %||% nms[1],
                          ver_title = opts$title$ver_title %||% nms[2],
                          nms = nms, orientation = opts$chart$orientation)
@@ -63,6 +68,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       palette <- opts$theme$palette_colors
       d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
     }
+
 
     if (!is.null(opts$chart$highlight_value)) {
       w <- grep(paste0(opts$chart$highlight_value, collapse = '|'), d$a)
