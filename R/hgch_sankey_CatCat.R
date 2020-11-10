@@ -14,7 +14,8 @@ hgch_sankey_CatCat <- function(data, ...){
   palette <- opts$theme$palette_colors
   opts$theme$palette_colors <- dsvizopts::default_theme_opts()$palette_colors
 
-  l <- hgchmagic_prep(data[,1:2], opts = opts)
+  data_dummy <- data[,1:2] %>% mutate_all(~paste0(., "_dummy"))
+  l <- hgchmagic_prep(data_dummy, opts = opts)
   d <- l$d
   l$theme$legend_show <- FALSE
   l$theme$dataLabels_show <- TRUE
@@ -29,7 +30,7 @@ hgch_sankey_CatCat <- function(data, ...){
   }
 
   for(i in seq(length(names(data)))){
-    data[,i] <- data %>% select_at(i) %>% mutate_all(funs(paste0(., i)))
+    data[,i] <- data %>% select_at(i) %>% mutate_all(~paste0(., i))
   }
   data_sankey_format <- data_to_sankey(data) %>%
     mutate(from_label = substr(from,1,nchar(from)-1),
