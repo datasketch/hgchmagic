@@ -3,6 +3,11 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   if (is.null(data)) return()
 
+  palette <- opts$theme$palette_colors
+  if(is.null(palette)){
+    palette <- opts$theme$palette_colors_categorical
+  }
+
   f <- homodatum::fringe(data)
   nms <- homodatum::fringe_labels(f)
   d <- fringe_d(f)
@@ -60,12 +65,11 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     ver_title <- as.character(labelsXY[2])
 
     if (grepl("Dat", frtype)) {
-      d$..colors <- opts$theme$palette_colors[1]
+      d$..colors <- palette[1]
       min_date <- min(d$a)
       d$group <- nms[[2]]
     } else {
       color_by <- names(nms[match(opts$style$color_by, nms)])
-      palette <- opts$theme$palette_colors
       d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
     }
 
@@ -119,7 +123,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d <- completevalues(d)
     }
 
-    palette <- opts$theme$palette_colors
     d$..colors <- paletero::map_colors(d, 'a', palette, colors_df = NULL)
 
     if (!is.null(opts$chart$highlight_value)) {
