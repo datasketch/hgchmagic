@@ -52,6 +52,7 @@ hgch_treemap_CatCatNum <- function(data, ...){
     hc_series(
       list(
         type = "treemap",
+        layoutAlgorithm = l$extra$treemap_layout,
         levels = list(list(
           level = 1
         )),

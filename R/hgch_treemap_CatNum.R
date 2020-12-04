@@ -29,9 +29,9 @@ hgch_treemap_CatNum <- function(data, ...){
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%
     hc_chart(
-             events = list(
-               load = add_branding(l$theme)
-             )) %>%
+      events = list(
+        load = add_branding(l$theme)
+      )) %>%
     hc_plotOptions(
       series = list(
         states = list(
@@ -52,12 +52,13 @@ hgch_treemap_CatNum <- function(data, ...){
     hc_series(
       list(
         type = 'treemap',
+        layoutAlgorithm = l$extra$treemap_layout,
         data = data)) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = opts$title$caption %||% "") %>%
     hc_legend(enabled = F) %>%
     hc_add_theme(hgch_theme(opts = c(l$theme,
-                                cats = "{point.name} <br/>")))
+                                     cats = "{point.name} <br/>")))
 
   hc
 }
