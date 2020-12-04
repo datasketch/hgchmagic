@@ -6,7 +6,10 @@ test_that("hgch bar CatNum", {
   opts <- dsvizopts::dsviz_defaults()
 
   hgch_treemap_CatNum(data, treemap_layout = "squarified")
+
   hgch_treemap_CatNum(data, treemap_layout = "stripes")
+  hgch_treemap_CatNum(data, treemap_layout = "stripes", treemap_direction = "horizontal")
+
   hgch_treemap_CatNum(data, treemap_layout = "strip")
   hgch_treemap_CatNum(data, treemap_layout = "sliceAndDice")
 

@@ -53,6 +53,7 @@ hgch_treemap_CatNum <- function(data, ...){
       list(
         type = 'treemap',
         layoutAlgorithm = l$extra$treemap_layout,
+        layoutStartingDirection = l$extra$treemap_direction,
         data = data)) %>%
     hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
     hc_credits(enabled = TRUE, text = opts$title$caption %||% "") %>%
