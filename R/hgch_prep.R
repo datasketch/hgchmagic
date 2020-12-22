@@ -3,10 +3,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   if (is.null(data)) return()
 
-  palette <- opts$theme$palette_colors
-  if(is.null(palette)){
-    palette <- opts$theme$palette_colors_categorical
+  if(is.null(opts$theme$palette_colors)){
+    opts$theme$palette_colors <- opts$theme$palette_colors_categorical
   }
+  palette <- opts$theme$palette_colors
 
   f <- homodatum::fringe(data)
   nms <- homodatum::fringe_labels(f)

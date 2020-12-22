@@ -11,8 +11,11 @@ hgch_sankey_CatCat <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
   opts <- dsvizopts::merge_dsviz_options(...)
+
   palette <- opts$theme$palette_colors
-  opts$theme$palette_colors <- dsvizopts::default_theme_opts()$palette_colors
+  if(is.null(palette)){
+    palette <- opts$theme$palette_colors_categorical
+  }
 
   data_dummy <- data[,1:2] %>% mutate_all(~paste0(., "_dummy"))
   l <- hgchmagic_prep(data_dummy, opts = opts)
