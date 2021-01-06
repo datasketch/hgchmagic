@@ -5,9 +5,9 @@ test_that("tooltip", {
   opts <- dsvizopts::dsviz_defaults()
 
   #tooltip without variables
-  opts$chart$tooltip <- "This test tooltip is dedicated to JP"
+  opts$chart$tooltip <- "This is a test"
   l <- hgchmagic_prep(data, opts)
-  expect_equal(l$tooltip, "This test tooltip is dedicated to JP")
+  expect_equal(l$tooltip, "This is a test")
 
   #tooltip with variables
   opts$chart$tooltip <- "Pepite have {total} {thinks}"
