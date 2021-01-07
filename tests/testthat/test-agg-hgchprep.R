@@ -10,6 +10,7 @@ test_that("Aggregations", {
 
   data <- sample_data("Cat-Num-Num-Num-Cat-Dat")
   opts <- dsvizopts::dsviz_defaults()
+  opts$preprocess$drop_na <- TRUE
 
   l <- hgchmagic_prep(data, opts, ftype = "Cat")
   data_test <- l$d
@@ -61,5 +62,20 @@ test_that("Aggregations", {
   l <- hgchmagic_prep(data, opts, ftype = "Cat-Cat")
   data_test <- l$d
   expect_equal(names(data_test) , c(c("a", "b", "..count"), names(data_test)[-1:-3]))
+
+  # data Dat
+  data <- sample_data("Dat")
+  opts <- dsvizopts::dsviz_defaults()
+
+  l <- hgchmagic_prep(data, opts, ftype = "Dat")
+  data_test <- l$d
+  expect_equal(names(data_test), c("a", "..count"))
+
+  data <- sample_data("Dat-Cat-Num-Num-Num-Cat-Dat")
+  opts <- dsvizopts::dsviz_defaults()
+
+  l <- hgchmagic_prep(data, opts, ftype = "Dat")
+  data_test <- l$d
+  expect_equal(names(data_test) , c(c("a", "..count"), names(data_test)[-1:-2]))
 
 })

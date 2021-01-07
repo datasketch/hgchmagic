@@ -55,11 +55,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   has_num_var <- "Num" %in% dic_p$hdType
 
 
-# Prepare only one non-numerical variable ---------------------------------
 
+# data preparation keeping all the information entered --------------------
 
-
-  if (!has_num_var) {
+  if (!has_num_var) { # if there is no numerical variable a count is necessary
     d_p <- d_p %>%
       dplyr::group_by_all() %>%
       dplyr::summarise(..count = n())
@@ -79,15 +78,23 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d_p <- dsvizopts:::summarizeData(d_p, opts$summarize$agg, to_agg = c, a, b)
     }
   }
-print(has_num_var)
+
+  agg_var <- "..count"
+
   if (!is.null(var_g)) {
     if (length(grep("Dat|Cat|Yea", ftype_vec)) == 1) {
-      if (has_num_var)  d <- d[,-2]
+      if (has_num_var)  {
+        d <- d[,-2]
+        agg_var <- "b"
+      }
       d <- d %>%
         group_by(a) %>%
         summarise_each(funs(func_paste))
     } else {
-      if (has_num_var)  d <- d[,-3]
+      if (has_num_var) {
+        d <- d[,-3]
+        agg_var <- "c"
+      }
       d <- d %>%
         group_by(a, b) %>%
         summarise_each(funs(func_paste))
@@ -95,7 +102,44 @@ print(has_num_var)
     d <- d_p %>% left_join(d, by = var_g)
   }
 
+
+
+# processing of data ------------------------------------------------------
+
+
+  if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 1) {  #just an aggregation variable
+
+    if (grepl("Dat", ftype)) {
+      d <- d %>% drop_na()
+    } else {
+      d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
+                          na_label = opts$preprocess$na_label, na_label_cols = "a")
+    }
+    d <- postprocess(d, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+  } else if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2) {
+    if (grepl("Dat", ftype)) {
+      d <- d %>% drop_na(b)
+    } else {
+      d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
+                          na_label = opts$preprocess$na_label, na_label_cols = "b")
+    }
+
+    d <- preprocessData(d, drop_na = opts$preprocess$drop_na_legend,
+                        na_label = opts$preprocess$na_label, na_label_cols = "a")
+    d <- postprocess(d, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+  } else {
+    d <- d
+  }
+
+
  print(d)
+
+
+
+
+ # d <- postprocess(d, "b", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+ # d <- order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
+ # print(d)
   # if (length(ftype_length == 2)) { #opts$summarize$agg
   #
   # } else {
