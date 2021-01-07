@@ -4,7 +4,6 @@ test_that("Axes names", {
   # data Cat
   data <- sample_data("Cat", 50)
   opts <- dsvizopts::dsviz_defaults()
-  opts$postprocess$slice_n <- 3
 
   l <- hgchmagic_prep(data, opts, ftype = "Cat")
   axis_x <- l$titles$x
@@ -42,7 +41,7 @@ test_that("Axes names", {
   axis_x <- l$titles$x
   axis_y <- l$titles$y
   expect_equal(axis_x, names(data)[3])
-  expect_equal(axis_y, names(data)[1])
+  expect_equal(axis_y, names(data)[2])
 
 
 })
