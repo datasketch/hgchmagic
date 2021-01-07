@@ -131,26 +131,26 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     d <- d
   }
 
+  nms_dic <- setNames(dic_p$label, dic_p$id)
+  labelsXY <- labelsXY(hor_title = opts$title$hor_title %||% nms_dic[[1]],
+                       ver_title = opts$title$ver_title %||% nms_dic[[length(nms_dic)]],
+                       nms = nms_dic, orientation = opts$chart$orientation)
 
- print(d)
-
-
-
-
- # d <- postprocess(d, "b", sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
- # d <- order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
- # print(d)
-  # if (length(ftype_length == 2)) { #opts$summarize$agg
-  #
-  # } else {
-  #
-  # }
+  hor_title <- as.character(labelsXY[1])
+  ver_title <- as.character(labelsXY[2])
 
 
 
 
   list(
-   d = d
+   d = d,
+   titles = list(
+     title = opts$title$title,
+     subtitle = opts$title$subtitle,
+     caption = opts$title$caption %||% "",
+     x = hor_title,
+     y = ver_title
+   )
   )
 
 }

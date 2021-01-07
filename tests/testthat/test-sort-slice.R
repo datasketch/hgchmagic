@@ -47,3 +47,42 @@ test_that("Sort by numeric var", {
 
 
 })
+
+
+
+test_that("Slice by numeric var", {
+
+  # data Cat
+  data <- sample_data("Cat", 50)
+  opts <- dsvizopts::dsviz_defaults()
+  opts$postprocess$slice_n <- 3
+
+  l <- hgchmagic_prep(data, opts, ftype = "Cat")
+  expect_equal(nrow(l$d), 3)
+
+  # data Cat-Num
+  data <- sample_data("Cat-Num-Dat-Cat", 50)
+  opts <- dsvizopts::dsviz_defaults()
+  opts$postprocess$slice_n <- 3
+
+  l <- hgchmagic_prep(data, opts, ftype = "Cat-Num")
+  expect_equal(nrow(l$d), 3)
+
+
+  # data Dat
+  data <- sample_data("Dat-Num-Dat-Cat", 50)
+  opts <- dsvizopts::dsviz_defaults()
+  opts$postprocess$slice_n <- 3
+
+  l <- hgchmagic_prep(data, opts, ftype = "Dat-Num")
+  expect_equal(nrow(l$d), 3)
+
+  # data Cat-Cat-Num
+  data <- sample_data("Cat-Cat-Num", 50)
+  opts <- dsvizopts::dsviz_defaults()
+  opts$postprocess$slice_n <- 5
+
+  l <- hgchmagic_prep(data, opts, ftype = "Cat-Cat-Num")
+  expect_equal(nrow(l$d), 5)
+
+})
