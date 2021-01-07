@@ -12,14 +12,14 @@ hgch_bar_CatCatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts)
+  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Cat-Num")
   d <- l$d
-
+ print(d)
   series <- purrr::map(unique(d[[1]]), function(i) {
     d0 <- d %>%
       dplyr::filter(a %in% i)
     l0 <- list("name" = i,
-               "color" = unique(d0$..colors),
+               #"color" = unique(d0$..colors),
                "data" = d0$c)
   })
 
@@ -27,53 +27,53 @@ hgch_bar_CatCatNum <- function(data, ...){
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%
-    hc_chart(type =  ifelse(l$orientation == "hor","bar","column"),
-             events = list(
-               load = add_branding(l$theme)
-             )
+    hc_chart(type =  "column"#ifelse(l$orientation == "hor","bar","column")#,
+             # events = list(
+             #   load = add_branding(l$theme)
+             # )
              ) %>%
     hc_add_series_list(series) %>%
     hc_xAxis(title = list(text = l$title$x),
              categories = purrr::map(as.character(unique(d$b)), function(z) z),
              type = "category") %>%
-    hc_yAxis(title = list(text = l$title$y),
-             labels = list(
-               formatter = l$formats)
-    ) %>%
-    hc_plotOptions(
-      series = list(
-        borderWidth = 0,
-        pointPadding = l$theme$bar_padding,
-        groupPadding = l$theme$bar_groupWidth,
-        pointWidth = l$theme$bar_pointWidth,
-        states = list(
-          hover = list(
-            #//brightness: -0.5,
-            color = l$color_hover
-          ),
-          select = list(
-            color = l$color_click
-          )
-        ),
-        allowPointSelect= l$allow_point,
-        cursor =  l$cursor,
-        events = list(
-          click = l$clickFunction
-        )
-      )) %>%
-     hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
-     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
-    hc_legend(enabled = l$theme$legend_show)
+    hc_yAxis(title = list(text = l$title$y)#,
+             # labels = list(
+             #   formatter = l$formats)
+    ) #%>%
+  #   hc_plotOptions(
+  #     series = list(
+  #       borderWidth = 0,
+  #       pointPadding = l$theme$bar_padding,
+  #       groupPadding = l$theme$bar_groupWidth,
+  #       pointWidth = l$theme$bar_pointWidth,
+  #       states = list(
+  #         hover = list(
+  #           #//brightness: -0.5,
+  #           color = l$color_hover
+  #         ),
+  #         select = list(
+  #           color = l$color_click
+  #         )
+  #       ),
+  #       allowPointSelect= l$allow_point,
+  #       cursor =  l$cursor,
+  #       events = list(
+  #         click = l$clickFunction
+  #       )
+  #     )) %>%
+  #    hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
+  #    hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
+  #   hc_legend(enabled = l$theme$legend_show)
+  #
+  # if (l$graph_type == "stacked"){
+  #   hc <- hc %>% hc_plotOptions(bar = list(stacking = "normal"), column = list(stacking = "normal"))
+  #   if (l$percentage) {
+  #     hc <- hc %>% hc_yAxis(maxRange = 100,
+  #                           max = 100)
+  #   }
+  # }
 
-  if (l$graph_type == "stacked"){
-    hc <- hc %>% hc_plotOptions(bar = list(stacking = "normal"), column = list(stacking = "normal"))
-    if (l$percentage) {
-      hc <- hc %>% hc_yAxis(maxRange = 100,
-                            max = 100)
-    }
-  }
-
-  hc <- hc %>%  hc_add_theme(hgch_theme(opts = l$theme))
+  #hc <- hc %>%  hc_add_theme(hgch_theme(opts = l$theme))
 
 
   hc

@@ -134,7 +134,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   }
 
   nms_dic <- setNames(dic_p$label, dic_p$id)
-  labelsXY <- labelsXY(hor_title = opts$title$hor_title %||% nms_dic[[1]],
+  #print()
+  labelsXY <- labelsXY(hor_title = opts$title$hor_title %||% nms_dic[[(1 + (length(nms_dic) - 2))]], #
                        ver_title = opts$title$ver_title %||% nms_dic[[length(nms_dic)]],
                        nms = nms_dic, orientation = opts$chart$orientation)
 
