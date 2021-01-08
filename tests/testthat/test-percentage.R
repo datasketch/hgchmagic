@@ -1,11 +1,11 @@
-test_that("percentage", {
+test_that("Percentage", {
 
   # percentage Cat-Num
   data <- sample_data("Cat-Num", n = 30, rep = FALSE)
   opts <- dsvizopts::dsviz_defaults()
   opts$postprocess$percentage <- TRUE
   l <- hgchmagic_prep(data, opts)
-  expect_equal(sum(l$d$b), 100)
+  expect_equal(sum(l$d$..percentage), 100)
 
 
   # percentage Cat-Cat-Num by first column
@@ -16,9 +16,9 @@ test_that("percentage", {
   opts <- dsvizopts::dsviz_defaults()
   opts$postprocess$percentage <- TRUE
   opts$postprocess$percentage_col <- "Cosas" # columna a
-  l <- hgchmagic_prep(data, opts)
+  l <- hgchmagic_prep(data, opts, ftype = "Cat-Cat-Num")
   d <- l$d
-  per_a <- d %>% group_by(a) %>% summarise(Total = sum(c, na.rm = T))
+  per_a <- d %>% group_by(a) %>% summarise(Total = sum(..percentage, na.rm = T))
   expect_equal(unique(per_a$Total), 100)
 
 
@@ -26,9 +26,29 @@ test_that("percentage", {
   opts <- dsvizopts::dsviz_defaults()
   opts$postprocess$percentage <- TRUE
   opts$postprocess$percentage_col <- "Seres" # columna a
-  l <- hgchmagic_prep(data, opts)
+  l <- hgchmagic_prep(data, opts, ftype = "Cat-Cat-Num")
   d <- l$d
-  per_b <- d %>% group_by(b) %>% summarise(Total = sum(c, na.rm = T))
+  per_b <- d %>% group_by(b) %>% summarise(Total = sum(..percentage, na.rm = T))
   expect_equal(unique(per_b$Total), 100)
+
+
+
+  data <- sample_data("Dat-Num", n = 30, rep = FALSE)
+  opts <- dsvizopts::dsviz_defaults()
+  opts$postprocess$percentage <- TRUE
+  l <- hgchmagic_prep(data, opts, ftype = "Dat-Num")
+  expect_equal(sum(l$d$..percentage), 100)
+
+
+
+  # Percentage Cat-Dat-Num
+  data <- sample_data("Cat-Dat-Num")
+  opts <- dsvizopts::dsviz_defaults()
+  opts$postprocess$percentage <- TRUE
+  opts$postprocess$percentage_col <- names(data)[1] # columna a
+  l <- hgchmagic_prep(data, opts, ftype = "Cat-Dat-Num")
+  d <- l$d
+  per_a <- d %>% group_by(a) %>% summarise(Total = sum(..percentage, na.rm = T))
+  expect_equal(unique(per_a$Total), 100)
 
 })
