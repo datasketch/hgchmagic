@@ -74,7 +74,9 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     dic <- bind_rows(dic, dic_count)
     dic_p <- bind_rows(dic_p, dic_count)
   } else {
-    if (length(grep("Dat|Cat|Yea", ftype_vec)) == 1) {
+    if (length(grep("Num", ftype_vec)) > 1) { # only numerical variables or more than one numerical variable and a single category
+      d_p <- d
+    } else if (length(grep("Dat|Cat|Yea", ftype_vec)) == 1) {
       d_p <- dsvizopts:::summarizeData(d_p, opts$summarize$agg, to_agg = b, a)
     } else {
       d_p <- dsvizopts:::summarizeData(d_p, opts$summarize$agg, to_agg = c, a, b)
@@ -113,6 +115,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
     if (grepl("Dat", ftype)) {
       d <- d %>% drop_na()
+      min_date <- min(d$a)
+      d$group <- nms[[2]]
     } else {
       d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
                           na_label = opts$preprocess$na_label, na_label_cols = "a")
@@ -124,6 +128,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     } else {
       d <- preprocessData(d, drop_na = opts$preprocess$drop_na,
                           na_label = opts$preprocess$na_label, na_label_cols = "b")
+      d <- completevalues(d)
     }
 
     d <- preprocessData(d, drop_na = opts$preprocess$drop_na_legend,
@@ -133,8 +138,11 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     d <- d
   }
 
+
+# axis labels -------------------------------------------------------------
+
   nms_dic <- setNames(dic_p$label, dic_p$id)
-  #print()
+
   labelsXY <- labelsXY(hor_title = opts$title$hor_title %||% nms_dic[[(1 + (length(nms_dic) - 2))]], #
                        ver_title = opts$title$ver_title %||% nms_dic[[length(nms_dic)]],
                        nms = nms_dic, orientation = opts$chart$orientation)
@@ -144,6 +152,40 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
 
 
+# color -------------------------------------------------------------------
+
+  palette <- opts$theme$palette_colors
+  palette_type <- opts$theme$palette_type %||% "categorical"
+  print(opts$style$color_by)
+  color_by <- NULL
+  if (!is.null(opts$style$color_by)) color_by <- names(nms[match(opts$style$color_by, nms)])
+  print(sum(grepl("Dat|Cat|Yea", ftype_vec)))
+  if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2) color_by <- "a"
+
+  if(is.null(palette)){
+    palette <- opts$theme[[paste0("palette_colors_", palette_type)]]
+  }
+
+  if ("color" %in% dic$hdType) {
+    d$..colors <- d[[dic$id[dic$hdType == "color"][1]]]
+  } else {
+    if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 1 && sum(grepl("Dat", ftype_vec)) == 1) {
+      d$..colors <- palette[1]
+    } else {
+      d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
+    }
+  }
+
+  if (!is.null(opts$chart$highlight_value)) {
+    if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2) d$..colors <- palette[1]
+    w <- grep(paste0(opts$chart$highlight_value, collapse = '|'), d[[color_by %||% "a"]])
+    d$..colors[w] <- opts$chart$highlight_value_color
+  }
+
+
+
+
+# end options -------------------------------------------------------------
 
   list(
    d = d,
