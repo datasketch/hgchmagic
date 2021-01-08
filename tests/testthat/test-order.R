@@ -8,11 +8,11 @@ test_that("Order in categorical variables", {
                      nature = c("Cat", "Fox", "Spider", "BLU"))
   opts <- dsvizopts::dsviz_defaults()
   opts$postprocess$order <- c("Scissors", "Papers", "Rocks")
-  opts$preprocess$drop_na <- F
+  opts$preprocess$drop_na <- T
 
   l <- hgchmagic_prep(data, opts, ftype = "Cat-Num")
   data_test <- l$d
-  expect_equal(names(data_test), c("a", "..count"))
+  expect_equal(unique(data_test$a), c("Scissors", "Papers", "Rocks"))
 
 
 })
