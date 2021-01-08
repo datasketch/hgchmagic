@@ -3,10 +3,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   if (is.null(data)) return()
 
-  #ftype <- "Cat-Num"
-  #data <- sample_data("Cat-Num-Dat-Num-Cat-Num-Num")
-
-
 # data prep ---------------------------------------------------------------
 
   f <- homodatum::fringe(data)
@@ -44,6 +40,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 # detect grouping variables -----------------------------------------------
 # by default the first categorical variables of the dataframe
 
+  min_date <- NULL
   var_g <- NULL
   dic_agg <- NULL
   if (any(c("Cat", "Dat", "Yea") %in% dic_p$hdType)) dic_agg <- dic_p %>% filter(hdType %in% c("Cat", "Dat", "Yea"))
@@ -75,8 +72,18 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     if (length(grep("Num", ftype_vec)) > 1) { # only numerical variables or more than one numerical variable and a single category
       d_p <- d
     } else if (length(grep("Dat|Cat|Yea", ftype_vec)) == 1) {
+      if (grepl("Dat", ftype)) {
+        d_p <- d_p %>% drop_na()
+        d <- d %>% drop_na(a)
+        min_date <- min(d_p$a)
+      }
       d_p <- dsvizopts:::summarizeData(d_p, opts$summarize$agg, to_agg = b, a)
     } else {
+      if (grepl("Dat", ftype)) {
+        d_p <- d_p %>% drop_na(b)
+        d <- d %>% drop_na(b)
+        min_date <- min(d_p$b)
+      }
       d_p <- dsvizopts:::summarizeData(d_p, opts$summarize$agg, to_agg = c, a, b)
     }
   }
@@ -91,26 +98,33 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 1) {  #just an aggregation variable
 
     if (grepl("Dat", ftype)) {
-      d_p <- d_p %>% drop_na()
-      min_date <- min(d_p$a)
-      d_p$group <- nms[[2]]
+      d$group <- nms[[2]]
     } else {
       d_p <- preprocessData(d_p, drop_na = opts$preprocess$drop_na,
                           na_label = opts$preprocess$na_label, na_label_cols = "a")
     }
     d_p <- postprocess(d_p, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+    d_p$..percentage <- (d_p$b/sum(d_p$b,na.rm = TRUE)) * 100
+    if (grepl("Dat", ftype))  d_p$a <- as.numeric(as.POSIXct(as.Date(d_p$a, origin = min_date)))*1000
   } else if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2) {
-    if (grepl("Dat", ftype)) {
-      d_p <- d_p %>% drop_na(b)
-    } else {
+    if (!grepl("Dat", ftype)) {
       d_p <- preprocessData(d_p, drop_na = opts$preprocess$drop_na,
                           na_label = opts$preprocess$na_label, na_label_cols = "b")
     }
-
     d_p <- preprocessData(d_p, drop_na = opts$preprocess$drop_na_legend,
                         na_label = opts$preprocess$na_label, na_label_cols = "a")
     d_p <- postprocess(d_p, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
     d_p <- completevalues(d_p)
+    by_col <- opts$postprocess$percentage_col
+    if (is.null(by_col)) {
+      by_col <- "a"
+    } else {
+      by_col <- names(nms[match(by_col, nms)])
+    }
+    d_p <- d_p %>%
+            group_by_(by_col) %>%
+             dplyr::mutate(..percentage = (c / sum(c, na.rm = TRUE)) * 100)
+    if (grepl("Dat", ftype))  d_p$b <- as.numeric(as.POSIXct(as.Date(d_p$b, origin = min_date)))*1000
   } else {
     d_p <- d_p
   }
@@ -128,7 +142,12 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
        d <- d %>%
          group_by(a) %>%
          summarise_each(funs(func_paste))
-       d$a[is.na(d$a)] <- opts$preprocess$na_label
+       if (!grepl("Dat", ftype)){
+         d$a[is.na(d$a)] <- opts$preprocess$na_label
+       } else {
+         d$..date <- d$a
+         d$a <- as.numeric(as.POSIXct(as.Date(d$a, origin = min_date)))*1000
+         }
      } else {
        if (has_num_var) {
          d <- d[,-3]
@@ -138,7 +157,12 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
          group_by(a, b) %>%
          summarise_each(funs(func_paste))
        d$a[is.na(d$a)] <- opts$preprocess$na_label
-       d$b[is.na(d$b)] <- opts$preprocess$na_label
+       if (!grepl("Dat", ftype)) {
+         d$b[is.na(d$b)] <- opts$preprocess$na_label
+       } else {
+         d$..date <- d$b
+         d$b <- as.numeric(as.POSIXct(as.Date(d$b, origin = min_date)))*1000
+       }
      }
      d <- d_p %>% left_join(d, by = var_g)
    }
@@ -160,10 +184,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   palette <- opts$theme$palette_colors
   palette_type <- opts$theme$palette_type %||% "categorical"
-  print(opts$style$color_by)
+
   color_by <- NULL
   if (!is.null(opts$style$color_by)) color_by <- names(nms[match(opts$style$color_by, nms)])
-  print(sum(grepl("Dat|Cat|Yea", ftype_vec)))
+
   if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2) color_by <- "a"
 
   if(is.null(palette)){
