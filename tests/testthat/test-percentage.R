@@ -1,5 +1,13 @@
 test_that("Percentage", {
 
+
+  # percentage Cat
+  data <- sample_data("Cat", n = 30, rep = FALSE)
+  opts <- dsvizopts::dsviz_defaults()
+  opts$postprocess$percentage <- TRUE
+  l <- hgchmagic_prep(data, opts, ftype = "Cat")
+  expect_equal(sum(l$d$..percentage), 100)
+
   # percentage Cat-Num
   data <- sample_data("Cat-Num", n = 30, rep = FALSE)
   opts <- dsvizopts::dsviz_defaults()

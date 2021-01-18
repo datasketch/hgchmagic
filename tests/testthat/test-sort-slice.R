@@ -31,19 +31,19 @@ test_that("Sort by numeric var", {
     summarise(..count = n()) %>%
     arrange(-..count) %>% .$..count
   l <- hgchmagic_prep(data, opts, ftype = "Cat-Cat")
-  expect_equal(l$d$..count, data_order)
+  expect_equal(l$d %>% drop_na(..count) %>% .$..count, data_order)
 
 
   # data Dat-Cat
-  data <- sample_data("Dat-Cat", 100)
+  data <- sample_data("Cat-Dat", 1000, rep = T)
   opts <- dsvizopts::dsviz_defaults()
   opts$postprocess$sort <- "desc"
   data_order <- data %>%
     group_by_all() %>%
-    summarise(..count = n()) %>%
+    summarise(..count = n()) %>% drop_na_(names(data)[2]) %>%
     arrange(-..count) %>% .$..count
-  l <- hgchmagic_prep(data, opts, ftype = "Cat-Cat")
-  expect_equal(l$d$..count, data_order)
+  l <- hgchmagic_prep(data, opts, ftype = "Cat-Dat")
+  expect_equal(l$d %>% drop_na(..count) %>% .$..count, data_order)
 
 
 })
