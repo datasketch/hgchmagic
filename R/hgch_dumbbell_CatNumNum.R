@@ -12,7 +12,7 @@ hgch_dumbbell_CatNumNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts)
+  l <- hgchmagic_prep(data, opts = opts,  ftype = "Cat-Num-Num")
   d <- l$d
   l$theme$legend_show <- FALSE
   title_x = l$titles$x

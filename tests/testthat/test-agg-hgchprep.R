@@ -6,7 +6,7 @@ test_that("Aggregations", {
 
   l <- hgchmagic_prep(data, opts, ftype = "Cat")
   data_test <- l$d
-  expect_equal(names(data_test), c("a", "..count"))
+  expect_equal(names(data_test), c("a", "..count", "..percentage", "..colors"))
 
   data <- sample_data("Cat-Num-Num-Num-Cat-Dat")
   opts <- dsvizopts::dsviz_defaults()
@@ -14,7 +14,7 @@ test_that("Aggregations", {
 
   l <- hgchmagic_prep(data, opts, ftype = "Cat")
   data_test <- l$d
-  expect_equal(names(data_test) , c(c("a", "..count"), names(data_test)[-1:-2]))
+  expect_equal(names(data_test) , c(c("a", "..count", "..percentage"), names(data_test)[-1:-2]), "..colors")
 
   # data Cat-Num
   data <- sample_data("Cat-Num")
@@ -22,7 +22,7 @@ test_that("Aggregations", {
 
   l <- hgchmagic_prep(data, opts, ftype = "Cat-Num")
   data_test <- l$d
-  expect_equal(names(data_test), c("a", "b"))
+  expect_equal(names(data_test), c("a", "b", "..percentage", "..colors"))
   expect_equal(nrow(data_test), length(unique(data[[1]])))
 
   data <- sample_data("Cat-Num-Num-Num-Cat-Dat")
@@ -30,7 +30,7 @@ test_that("Aggregations", {
 
   l <- hgchmagic_prep(data, opts, ftype = "Cat-Num")
   data_test <- l$d
-  expect_equal(names(data_test) , c("a", "b", "c", "d", "e", "f"))
+  expect_equal(names(data_test) , c("a", "b", "..percentage", "c", "d", "e", "f", "..colors"))
   expect_equal(nrow(data_test), length(unique(data[[1]])))
 
   # data Cat-Cat
@@ -39,7 +39,7 @@ test_that("Aggregations", {
 
   l <- hgchmagic_prep(data, opts, ftype = "Cat-Cat")
   data_test <- l$d
-  expect_equal(names(data_test), c("a", "b", "..count"))
+  expect_equal(names(data_test), c("a", "b", "..count", "..percentage", "..colors"))
 
   data <- sample_data("Cat-Cat-Num-Num-Num-Cat-Dat")
   opts <- dsvizopts::dsviz_defaults()
@@ -54,7 +54,7 @@ test_that("Aggregations", {
 
   l <- hgchmagic_prep(data, opts, ftype = "Cat-Cat-Num")
   data_test <- l$d
-  expect_equal(names(data_test), c("a", "b", "c"))
+  expect_equal(names(data_test), c("a", "b", "c",  "..percentage", "..colors"))
 
   data <- sample_data("Cat-Cat-Num-Num-Num-Cat-Dat")
   opts <- dsvizopts::dsviz_defaults()
@@ -69,7 +69,7 @@ test_that("Aggregations", {
 
   l <- hgchmagic_prep(data, opts, ftype = "Dat")
   data_test <- l$d
-  expect_equal(names(data_test), c("a", "..count"))
+  expect_equal(names(data_test), c("a", "..count", "..percentage", "group", "..date", "..colors", "..date_label"))
 
   data <- sample_data("Dat-Cat-Num-Num-Num-Cat-Dat")
   opts <- dsvizopts::dsviz_defaults()

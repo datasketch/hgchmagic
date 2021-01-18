@@ -12,7 +12,7 @@ hgch_area_CatYeaNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts)
+  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Yea-Num")
 
   d <- l$d
 
