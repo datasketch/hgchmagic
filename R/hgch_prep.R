@@ -255,7 +255,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   d <- d %>%
     mutate(labels = glue::glue(hgch_tooltip(nms = nms, label_ftype = dic_p$label, tooltip = opts$chart$tooltip)) %>% lapply(htmltools::HTML))
 
-  #print(dic_alt)
+
   d <- d[, c(dic_p$id,  "labels")]
 
   # axis labels -------------------------------------------------------------
@@ -352,10 +352,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   }
 
 
-  #print(hgch_tooltip(nms, opts$chart$tooltip))
+
   # end options -------------------------------------------------------------
 
-print(dic_p)
+
   list(
     d = d,
     titles = list(

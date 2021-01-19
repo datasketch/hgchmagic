@@ -26,7 +26,8 @@ hgch_bubbles_CatCatNum <- function(data, ...){
           list(
             name = df$b[z],
             value = df$c[z],
-            color = df$..colors[z]
+            color = df$..colors[z],
+            label = df$labels[z]
           )
         })
     )
@@ -42,7 +43,9 @@ hgch_bubbles_CatCatNum <- function(data, ...){
                load = add_branding(l$theme)
              )) %>%
     hc_add_series_list(series) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
+    hc_tooltip(useHTML = TRUE,
+               formatter = JS(paste0("function () {return this.point.label;}")),
+               style = list(width = "300px", whiteSpace = "normal")) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled = l$theme$legend_show) %>%
     hc_add_theme(hgch_theme(opts =  c(l$theme,

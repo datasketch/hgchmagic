@@ -36,7 +36,9 @@ hgch_donut_CatNum <- function(data, ...){
     ) %>%
     hc_plotOptions(
       series = list(innerSize = "60%")) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
+    hc_tooltip(useHTML = TRUE,
+               formatter = JS(paste0("function () {return this.point.label;}")),
+               style = list(width = "300px", whiteSpace = "normal")) %>%
     hc_credits(enabled = TRUE, text = l$title$caption) %>%
     hc_add_theme(hgch_theme(opts =  c(l$theme,
                                  cats = "{point.name} <br/>")))

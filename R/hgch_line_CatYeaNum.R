@@ -12,7 +12,7 @@ hgch_line_CatYeaNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts)
+  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Yea-Num")
 
   d <- l$d
 
@@ -21,7 +21,8 @@ hgch_line_CatYeaNum <- function(data, ...){
       dplyr::filter(a %in% i)
     l0 <- list("name" = i,
                "color" = unique(d0$..colors),
-               "data" = d0$c)
+               "data" = d0[[3]],
+               "label" = d0$labels)
   })
 
   global_options(opts$style$format_sample_num)
@@ -40,7 +41,9 @@ hgch_line_CatYeaNum <- function(data, ...){
              labels = list(
                formatter = l$formats)
     ) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
+    hc_tooltip(useHTML = TRUE,
+               formatter = JS(paste0("function () {return this.point.label;}")),
+               style = list(width = "300px", whiteSpace = "normal")) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled =  l$theme$legend_show) %>%
     hc_add_theme(hgch_theme(opts = l$theme))
