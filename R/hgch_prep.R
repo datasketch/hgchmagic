@@ -65,20 +65,36 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   agg_var <- "..count"
   has_num_var <- "Num" %in% dic_p$hdType
+
+  if (has_num_var &  sum(grepl("Num",  ftype_vec)) > 1) {
+    agg_var <- opts$postprocess$percentage_col %||% "b"
+  }
+
   if (!is.null(var_g)) {
     if (length(grep("Dat|Cat|Yea", ftype_vec)) == 1) {
       if (has_num_var & sum(grepl("Num",  ftype_vec)) == 1)  {
         agg_var <- "b"
-      } else {
-        agg_var <- opts$postprocess$percentage_col %||% "b"
-      }
+        }
     } else {
       if (has_num_var) {
         agg_var <- "c"
       }
     }
   }
-  dic_alt <- dic_p
+  dic_alt <- dic
+
+  if (agg_var == "..count") {
+    dic_p <- dic_p %>% bind_rows(  bind_rows(data.frame(id = "..count", label = "Count", hdType = "Num")))
+  } else {
+    dic_p <- dic_p
+  }
+
+  if (opts$postprocess$percentage) {
+    dic_p <- dic_p %>% filter(id != agg_var)
+    dic_p <- dic_p %>% bind_rows(  bind_rows(data.frame(id = "..percentage", label = "%", hdType = "Num")))
+  }
+
+
   if (!is.null(var_g)) {
     dn <- d
     if (!is.null(agg_num))  dn <- d[,-var_nums]
@@ -149,10 +165,15 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       }
 
       d_c <- dd[,dic_p$id]
+      if (opts$postprocess$percentage) {
+        agg_var <- "..percentage"
+      } else {
+        dd <- dd[,-3]
+      }
       d_c <- completevalues(d_c, agg_var)
       d_c$b <- as.character(d_c$b)
       dd$b <- as.character(dd$b)
-      dd <- d_c %>% left_join(dd[,-3])
+      dd <- d_c %>% left_join(dd)
       dd <- preprocessData(dd, drop_na = opts$preprocess$drop_na_legend,
                             na_label = opts$preprocess$na_label, na_label_cols = "a")
       dd <- postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
@@ -181,8 +202,11 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     d <- dd %>% left_join(dn, by = var_g)
   }
 
+
   # format in original data -------------------------------------------------
   # general format to numerical data to prepare information from tooltip
+
+
   var_nums <- grep("Num", dic_alt$hdType)
   if (!identical(var_nums, integer())) {
     var_nums <- dic_alt$id[var_nums]
@@ -223,16 +247,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
         ))
   }
 
-  if (agg_var == "..count") {
-    dic_p <- dic_p %>% bind_rows(  bind_rows(data.frame(id = "..count", label = "Count", hdType = "Num")))
-  } else {
-    dic_p <- dic_p
-  }
-
-  if (opts$postprocess$percentage) {
-    dic_p <- dic_p %>% filter(id != agg_var)
-    dic_p <- dic_p %>% bind_rows(  bind_rows(data.frame(id = "..percentage", label = "%", hdType = "Num")))
-  }
 
 
 
@@ -242,7 +256,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     mutate(labels = glue::glue(hgch_tooltip(nms = nms, label_ftype = dic_p$label, tooltip = opts$chart$tooltip)) %>% lapply(htmltools::HTML))
 
   #print(dic_alt)
-  #d <- d[, c(dic_p$id, names(d)[grepl("_label", names(d))])]
+  d <- d[, c(dic_p$id,  "labels")]
 
   # axis labels -------------------------------------------------------------
 
@@ -341,7 +355,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   #print(hgch_tooltip(nms, opts$chart$tooltip))
   # end options -------------------------------------------------------------
 
-
+print(dic_p)
   list(
     d = d,
     titles = list(
