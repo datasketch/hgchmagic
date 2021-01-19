@@ -24,7 +24,7 @@ hgch_dumbbell_CatNumNum <- function(data, ...){
     if(opts$title$ver_title == ""){
       title_y <- opts$title$ver_title}}
 
-  palette <- paletero::paletero(c("high", "low"), opts$theme$palette_colors)
+  palette <- paletero::paletero(c("high", "low"), l$theme$palette_colors)
 
   dat <- data
   names(dat) <- c("category", "low", "high")
