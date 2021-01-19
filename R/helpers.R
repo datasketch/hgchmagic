@@ -63,7 +63,134 @@ completevalues <- function(d, var_num) {
 
 
 
+tooltip_codes <- function(sample, prefix, suffix) {
 
+  params <- makeup::which_num_format(sample)$separators
+  thousandsSep <- params$thousands
+  decimalPoint <- params$decimal
+  n_decimal <- params$n_decimal
+
+  l <- list(
+    line = list(
+      `Cat-Num` = list(
+        a = "{point.category}",
+        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Cat-Num` = list(
+        a = "{series.name}",
+        b = "{point.category}",
+        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Yea-Num` = list(
+        a = "{point.category}",
+        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Yea-Num` = list(
+        a = "{series.name}",
+        b = "{point.category}",
+        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      )
+    ),
+    bar = list(
+      `Cat-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Cat-Num` = list(
+        a = "{series.name}",
+        b = "{point.category}",
+        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Yea-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Yea-Num` = list(
+        a = "{series.name}",
+        b = "{point.category}",
+        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      )
+    ),
+    pie = list(
+      `Cat-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Yea-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      )
+    ),
+    donut = list(
+      `Cat-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Yea-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      )
+    ),
+    bubbles = list(
+      `Cat-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Cat-Num` = list(
+        a = "{series.name}",
+        b = "{point.name}",
+        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Yea-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Yea-Num` = list(
+        a = "{series.name}",
+        b = "{point.name}",
+        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      )
+    ),
+    treemap = list(
+      `Cat-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Cat-Num` = list(
+        a = "{point.parent}",
+        b = "{point.node.name}",
+        c = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Yea-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Yea-Num` = list(
+        a = "{point.parent}",
+        b = "{point.node.name}",
+        c = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      )
+    ),
+    scatter = list(
+      `Num-Num` = list(
+        a = "{point.x}",
+        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      ),
+      `Cat-Num-Num` = list(
+        a = "{series.name}",
+        b = paste0( "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}"),
+        c = paste0( "{point.x",':', thousandsSep, decimalPoint, n_decimal, "f}")
+      )
+    ),
+    map = list(
+      `Cat-Num` = list(
+        a = "{point.name}",
+        b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
+      )
+    )
+  )
+  l
+}
 
 
 # esta toca completarla para lo casos en los que el formato numerico es para mas de una
@@ -84,6 +211,7 @@ format_hgch <- function(plot, frtype, sample, suffix, prefix) {
   l_tool[[plot]][[frtype]][[num_var]]
 
 }
+
 
 
 
