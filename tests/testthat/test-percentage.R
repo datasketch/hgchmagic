@@ -27,7 +27,7 @@ test_that("Percentage", {
   l <- hgchmagic_prep(data, opts, ftype = "Cat-Cat-Num")
   d <- l$d
   per_a <- d %>% group_by(a) %>% summarise(Total = sum(..percentage, na.rm = T))
-  expect_equal(unique(per_a$Total), 100)
+  expect_equal(unique(per_a$Total)[1], 100)
 
 
   # percentage Cat-Cat-Num by second column
