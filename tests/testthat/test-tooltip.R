@@ -29,4 +29,16 @@ test_that("tooltip", {
   d_expe$label <- paste0("letters: ", d_expe$count, " (",d_expe$pc, "%)")
   expect_equal(d_test, unique(d_expe$label))
 
+  # default tooltip
+  opts <- dsvizopts::dsviz_defaults()
+  opts$style$format_sample_num <- "1234.1"
+  data <- sample_data("Cat-Num")
+  d_expe <- data %>%
+    group_by(!!sym(names(data)[1])) %>%
+    summarise(across(where(is.numeric), ~ sum(.x, na.rm = TRUE)))
+  d_expe$label <- paste0(names(data)[1], ": ", d_expe[[names(data)[1]]], "<br/>", names(data)[2], ": ", d_expe[[names(data)[2]]])
+  l <- hgchmagic_prep(data, opts)
+  d_test <- unique(l$d$labels) %>% unlist()
+  expect_equal(d_test, unique(d_expe$label))
+
 })
