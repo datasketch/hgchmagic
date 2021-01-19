@@ -20,7 +20,8 @@ hgch_treemap_CatNum <- function(data, ...){
 
   data <- purrr::map(1:nrow(d), function(z){
     list("name" = d$a[z],
-         "value" = d$b[z],
+         "value" = d[[2]][z],
+         "label" = d$labels[z],
          "color" = as.character(d$..colors[z]))
   })
 
@@ -55,7 +56,9 @@ hgch_treemap_CatNum <- function(data, ...){
         layoutAlgorithm = l$extra$treemap_layout,
         layoutStartingDirection = l$extra$treemap_direction,
         data = data)) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
+    hc_tooltip(useHTML = TRUE,
+               formatter = JS(paste0("function () {return this.point.label;}")),
+               style = list(width = "300px", whiteSpace = "normal")) %>%
     hc_credits(enabled = TRUE, text = opts$title$caption %||% "") %>%
     hc_legend(enabled = F) %>%
     hc_add_theme(hgch_theme(opts = c(l$theme,

@@ -34,8 +34,9 @@ hgch_treemap_CatCatNum <- function(data, ...){
     list(
       name = nm,
       parent = d$a[z],
-      value = d$c[z],
-      colorValue = d$c[z]
+      value = d[[3]][z],
+      label = d$labels[z],
+      colorValue = d[[3]][z]
     )
 
   })
@@ -58,7 +59,9 @@ hgch_treemap_CatCatNum <- function(data, ...){
         )),
         data = data
       )) %>%
-     hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
+     hc_tooltip(useHTML = TRUE,
+                formatter = JS(paste0("function () {return this.point.label;}")),
+                style = list(width = "300px", whiteSpace = "normal")) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
   hc_add_theme(hgch_theme(opts =  c(l$theme,
                                cats = "{point.name} <br/>")))

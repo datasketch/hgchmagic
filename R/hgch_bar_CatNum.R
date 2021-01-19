@@ -20,7 +20,7 @@ hgch_bar_CatNum <- function(data, ...){
   h <- purrr::map(1:nrow(d), function(z){
     data$data[[z]] <<- list("name" = d$a[z],
                             "y" = as.numeric(d$b[z]),
-                            "label" = d$d[z],
+                            "label" = d$labels[z],
                             "color" = as.character(d$..colors[z]))
   })
 

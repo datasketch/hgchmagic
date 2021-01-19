@@ -11,7 +11,7 @@ hgch_line_CatDatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts)
+  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Dat-Num")
 
   d <- l$d
   ds <- NULL

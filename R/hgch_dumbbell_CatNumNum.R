@@ -84,7 +84,9 @@ hgch_dumbbell_CatNumNum <- function(data, ...){
         )
       )) %>%
     hc_tooltip(shared= TRUE,
-               useHTML= TRUE,
+               useHTML = TRUE,
+               formatter = JS(paste0("function () {return this.point.label;}")),
+               style = list(width = "300px", whiteSpace = "normal"),
                pointFormat= '<b style="color:{point.color_low};">{point.label_low}: </b>{point.low}</br>
                                  <b style="color:{point.color_high};">{point.label_high}: </b>{point.high}',
                valueDecimals= 0) %>%
