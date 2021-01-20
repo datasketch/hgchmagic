@@ -57,8 +57,7 @@ hgch_treemap_CatNum <- function(data, ...){
         layoutStartingDirection = l$extra$treemap_direction,
         data = data)) %>%
     hc_tooltip(useHTML = TRUE,
-               formatter = JS(paste0("function () {return this.point.label;}")),
-               style = list(width = "300px", whiteSpace = "normal")) %>%
+               formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_credits(enabled = TRUE, text = opts$title$caption %||% "") %>%
     hc_legend(enabled = F) %>%
     hc_add_theme(hgch_theme(opts = c(l$theme,

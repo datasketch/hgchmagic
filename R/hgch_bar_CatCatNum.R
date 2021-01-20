@@ -50,8 +50,7 @@ hgch_bar_CatCatNum <- function(data, ...){
     ) %>%
     hc_tooltip(useHTML = TRUE,
                headerFormat = NULL,
-               formatter = JS(paste0("function () {return this.point.label;}")),
-               style = list(width = "300px", whiteSpace = "normal")) %>%
+               formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_plotOptions(
       series = list(
         borderWidth = 0,

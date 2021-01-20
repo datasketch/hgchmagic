@@ -259,7 +259,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
 
   d <- d[, c(dic_p$id,  "labels")]
-
+  print(d)
   # axis labels -------------------------------------------------------------
 
 
