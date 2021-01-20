@@ -21,22 +21,25 @@ function_agg <- function (df, agg, to_agg, ...) {
 hgch_tooltip <- function(df, nms, label_ftype = NULL, tooltip) {
   if (is.null(nms)) stop("Enter names")
   nms <- nms
-  nms <- gsub("[][!#$()*,.:;<=>@^_`|~.{}]", "",nms)
-  label_ftype_clean <- gsub("[][!#$()*,.:;<=>@^_`|~.{}]", "", label_ftype)
+  nms <- gsub("[][!()*`|]", "",nms)
+  label_ftype_clean <- gsub("[][!()*`|{}]", "", label_ftype)
   nms_names <- names(nms)
 
   if (is.null(tooltip)) {
     tooltip  <- paste0(map(seq_along(label_ftype), function(i) {
       paste0(label_ftype[i], ": {", label_ftype_clean[i], "}")
     }) %>% unlist(), collapse = "<br/>")
+  } else {
+    tooltip <- gsub("[][()*`|]", "", tooltip)#gsub("[][!#$()*,.:;<=>@^`|~.", "", tooltip)
   }
-
+print(tooltip)
     points <- gsub("\\{|\\}", "",
                    stringr::str_extract_all(tooltip, "\\{.*?\\}")[[1]])
     if (identical(points, character())) {
       tooltip <- tooltip
     } else {
       l <- purrr::map(seq_along(points), function(i){
+        print(points[i])
         true_points <-  paste0("{",names(nms[match(points[i], nms)]),"_label}")
         tooltip <<- gsub(paste0("\\{",points[i], "\\}"), true_points, tooltip)
       })[[length(points)]]}

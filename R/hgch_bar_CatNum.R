@@ -19,7 +19,7 @@ hgch_bar_CatNum <- function(data, ...){
 
   h <- purrr::map(1:nrow(d), function(z){
     data$data[[z]] <<- list("name" = d$a[z],
-                            "y" = as.numeric(d$b[z]),
+                            "y" = as.numeric(d[[2]][z]),
                             "label" = d$labels[z],
                             "color" = as.character(d$..colors[z]))
   })
@@ -37,8 +37,7 @@ hgch_bar_CatNum <- function(data, ...){
       data
     ) %>%
     hc_tooltip(useHTML = TRUE,
-               formatter = JS(paste0("function () {return this.point.label;}")),
-               style = list(width = "300px", whiteSpace = "normal")) %>%
+               formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_xAxis(title = list(text = l$titles$x),
              type = "category") %>%
     hc_yAxis(title = list(text = l$titles$y),
