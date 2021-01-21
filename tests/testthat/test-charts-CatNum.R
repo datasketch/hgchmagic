@@ -77,4 +77,13 @@ test_that("hgch treemap CatNum", {
                       color_by = names(data)[2],
                       palette_type = "sequential")
 
+  data <- sample_data("Cat-Num", n = 30, nlevels = 20, rep = FALSE)
+  hgch_treemap_CatNum(data, treemap_layout = "squarified")
+
+  hgch_treemap_CatNum(data, treemap_layout = "stripes")
+  hgch_treemap_CatNum(data, treemap_layout = "stripes", treemap_direction = "horizontal")
+
+  hgch_treemap_CatNum(data, treemap_layout = "strip")
+  hgch_treemap_CatNum(data, treemap_layout = "sliceAndDice")
+
 })

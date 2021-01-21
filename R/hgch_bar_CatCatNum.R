@@ -12,7 +12,7 @@ hgch_bar_CatCatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Cat-Num")
+  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Cat-Num", plot = "bar")
   d <- l$d
 
 
