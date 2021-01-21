@@ -1,8 +1,6 @@
 test_that("hgch bar DatNum", {
 
 
-  data <- sample_data("Dat-Num", n = 30, rep = FALSE)
-
   data <- data.frame(fecha = c("2020/10/03","2020/10/04"),
                    vals = 1:2)
 
@@ -14,12 +12,17 @@ test_that("hgch bar DatNum", {
 
   hgch_line_DatNum(data)
   hgch_line_DatNum(data, format_dat = "%b %d %Y")
-
-  hgch_line_DatNum(data, locale = "ru-RU", format_dat = "%b %d %Y")
+  hgch_line_DatNum(data, locale = "ru-RU")
+ # hgch_line_DatNum(data, locale = "ru-RU", format_dat = "%b %d %Y")
   hgch_line_DatNum(data, locale = "es-CO")
   hgch_line_DatNum(data, locale = "es-CO", format_dat = "%B %d %Y")
   hgch_line_DatNum(data, locale = "de-DE")
-  hgch_line_DatNum(data, locale = "de-DE", format_dat = "%B %d %Y")
+  #hgch_line_DatNum(data, locale = "de-DE", format_dat = "%B %d %Y")
 
+
+  data <- sample_data("Dat-Num-Cat-Dat", n = 30, rep = FALSE)
+  hgch_line_DatNum(data)
+  hgch_line_DatNum(data, tooltip = paste0("{", names(data)[4],"}"))
+  hgch_line_DatNum(data, palette_colors = "#FEAFEA")
 
 })

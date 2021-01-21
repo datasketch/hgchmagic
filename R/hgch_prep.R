@@ -37,13 +37,13 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   dic_p <- dic %>% filter(id %in% names(dd))
 
 
-  # detect grouping variables -----------------------------------------------
+  # detect ..grouping variables -----------------------------------------------
   # by default the first categorical variables of the dataframe
 
   min_date <- NULL
-  var_g <- NULL ## categorical groups
+  var_g <- NULL ## categorical ..groups
   dic_agg <- NULL
-  formatter_tooltip <- NULL
+  #formatter_tooltip <- NULL
   formatter <- NULL
 
 
@@ -104,7 +104,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       if (grepl("Dat", ftype)) {
         dd <- dd %>% drop_na()
         dn <- dn %>% drop_na(a)
-        dn$group <- nms[[2]]
+        dn$..group <- nms[[2]]
       }
 
       if (!grepl("Dat", ftype)) {
@@ -125,10 +125,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
         summarise_each(funs(func_paste))
 
       if (grepl("Dat", ftype)) {
-        dic_alt <- dic_p %>%
-          bind_rows(data.frame(id = "group", label = "Group", hdType = "Cat"))
-        nms[length(nms)+1] <- c("Group")
-        names(nms) <- c(names(nms)[-length(nms)], "group")
+        dic_p <- dic_p %>%
+          bind_rows(data.frame(id = "..group", label = "..group", hdType = "Cat"))
+        nms[length(nms)+1] <- c("..group")
+        names(nms) <- c(names(nms)[-length(nms)], "..group")
       }
     } else {
       dd <- function_agg(df = d, agg = opts$summarize$agg, to_agg = agg_num, a, b)
@@ -225,7 +225,11 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
                                  locale = opts$style$locale,
                                  format = opts$style$format_dat
     )
-    d$..date_label <- makeup_chr(d$..date_label,  opts$style$format_sample_cat)
+
+    if (grep("Dat", ftype_vec) == 1) d$a_label <- d$..date_label
+    if (grep("Dat", ftype_vec) == 2) d$b_label <- d$..date_label
+
+    #d$..date_label <- makeup_chr(d$..date_label,  opts$style$format_sample_cat)
     labs <- as.list(d$..date_label)
     options(scipen = 9999)
     if(sum(grepl("Dat|Cat|Yea", ftype_vec)) == 1) {
@@ -241,26 +245,29 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
        return labels[this.value]}"
     formatter <- glue::glue(formatter, .open = "<<", .close = ">>")
 
-    formatter_tooltip <-
-      JS(
-        paste0("function () {return '<i>' + this.point.label +'</i><br/><b>' + this.series.name + ':</b> ' + this.point.y;}"
-        ))
+    # formatter_tooltip <-
+    #   JS(
+    #     paste0("function () {return '<i>' + this.point.label +'</i><br/><b>' + this.series.name + ':</b> ' + this.point.y;}"
+    #     ))
   }
 
 
+ # add label from tooltip info ---------------------------------------------
 
+  default_tooltip <- dic_p$label
+  default_tooltip <- setdiff(default_tooltip, "..group")
 
-  # add label from tooltip info ---------------------------------------------
   if (opts$chart$tooltip == "") opts$chart$tooltip <- NULL
   d <- d %>%
-    mutate(labels = glue::glue(hgch_tooltip(nms = nms, label_ftype = dic_p$label, tooltip = opts$chart$tooltip)) %>% lapply(htmltools::HTML))
+    mutate(labels = glue::glue(hgch_tooltip(nms = nms, label_ftype = default_tooltip, tooltip = opts$chart$tooltip)) %>% lapply(htmltools::HTML))
+ #print(hgch_tooltip(nms = nms, label_ftype = dic_p$label, tooltip = opts$chart$tooltip))
 
 
   d <- d[, c(dic_p$id,  "labels")]
 
   # axis labels -------------------------------------------------------------
 
-
+  if (!identical(grep("Dat", ftype_vec), integer())) dic_p <- dic_p %>% filter(id != "..group")
 
   nms_dic <- setNames(dic_p$label, dic_p$id)
 
@@ -369,7 +376,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     ),
     min_date = min_date,
     formatter_date = formatter,
-    formatter_date_tooltip = formatter_tooltip,
+    #formatter_date_tooltip = formatter_tooltip,
     formats = f_nums,
     date_intervals = date_intervals(opts$extra$date_intervals),
     orientation = opts$chart$orientation,

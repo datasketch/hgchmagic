@@ -12,18 +12,18 @@ hgch_line_DatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts)
+  l <- hgchmagic_prep(data, opts = opts, plot = "line", ftype = "Dat-Num")
 
   d <- l$d
   ds <- NULL
-  series <- lapply(unique(d$group), function(s){
-    ds <<- d %>% filter(group == s)
-    dss <- ds %>% select(a, b, ..a_label)
+  series <- lapply(unique(d$..group), function(s){
+    ds <<- d %>% filter(..group == s)
+    dss <- ds[,c(1, 2, 4)]
     dss <- ds %>%
-      mutate(x = as.numeric(as.POSIXct(as.Date(ds$a, origin = l$min_date)))*1000,
-             y = ds$b,
+      mutate(x = ds$a,
+             y = ds[[2]],
              color = ds$..colors,
-             label = ..a_label)
+             label = labels)
     list(
       name = s,
       color = ds$..colors[1],
@@ -53,8 +53,9 @@ hgch_line_DatNum <- function(data, ...){
                formatter = l$formats)
     ) %>%
     hc_add_series_list(series) %>%
-    hc_tooltip(useHTML=TRUE,
-               formatter = l$formatter_date_tooltip
+    hc_tooltip(useHTML = TRUE,
+               headerFormat = NULL,
+               formatter = JS(paste0("function () {return this.point.label;}"))
     ) %>%
     hc_legend(enabled = FALSE) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
