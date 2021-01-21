@@ -259,7 +259,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
 
   d <- d[, c(dic_p$id,  "labels")]
-  print(d)
+
   # axis labels -------------------------------------------------------------
 
 
@@ -332,10 +332,12 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
                                      prefix = opts$style$prefix,
                                      suffix = opts$style$suffix)
 
+
   if (plot != "scatter") {
+
     sample_labels <- opts$dataLabels$dataLabels_format_sample %||% opts$style$format_sample_num
     format_dataLabels <- format_hgch(plot = plot,
-                                     frtype = frtype,
+                                     frtype = ftype,
                                      sample = sample_labels,
                                      prefix = opts$style$prefix,
                                      suffix = opts$style$suffix)
