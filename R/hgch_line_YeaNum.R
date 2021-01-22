@@ -18,11 +18,11 @@ hgch_line_YeaNum <- function(data, ...){
   d <- l$d
 
   series <- list(list(
+    color = d$..colors[1],
     data = purrr::map(1:nrow(d), function(x) {
       list(y = d[[2]][x],
            name = d$a[x],
-           label = d$labels[x]#,
-           #color = d$..colors[x]
+           label = d$labels[x]
            )
     })
   ))
@@ -43,8 +43,7 @@ hgch_line_YeaNum <- function(data, ...){
                formatter = l$formats)
     ) %>%
     hc_tooltip(useHTML = TRUE,
-               formatter = JS(paste0("function () {return this.point.label;}")),
-               style = list(width = "300px", whiteSpace = "normal")) %>%
+               formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_credits(enabled = TRUE, text = l$titles$caption) %>%
     hc_legend(enabled = FALSE) %>%
     hc_add_theme(hgch_theme(opts = l$theme))
