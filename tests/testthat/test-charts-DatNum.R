@@ -1,4 +1,4 @@
-test_that("hgch bar DatNum", {
+test_that("hgch line DatNum", {
 
 
   data <- data.frame(fecha = c("2020/10/03","2020/10/04"),

@@ -163,6 +163,7 @@ hgch_theme <- function(opts = NULL){
         marker= list(
           fillOpacity = opts$bubble_opacity)
       ),
+
       series = list(
         colorByPoint = FALSE,
         animation = list(
@@ -172,6 +173,9 @@ hgch_theme <- function(opts = NULL){
           enabled = opts$dataLabels_show,
           style = labels_style,
           format = paste0(opts$cats, opts$format_dataLabels)
+        ),
+        marker = list(
+          enabled = opts$marker_enabled
         )
       ),
       pie = list(
