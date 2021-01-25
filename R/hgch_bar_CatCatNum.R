@@ -78,8 +78,17 @@ hgch_bar_CatCatNum <- function(data, ...){
   if (l$graph_type == "stacked"){
     hc <- hc %>% hc_plotOptions(bar = list(stacking = "normal"), column = list(stacking = "normal"))
     if (l$percentage) {
-      hc <- hc %>% hc_yAxis(maxRange = 100,
-                            max = 100)
+      hc <- hc %>%
+        hc_plotOptions(
+          bar = list(
+            stacking = 'percent'
+          ),
+          column = list(
+            stacking = 'percent'
+          )
+        ) %>%
+        hc_yAxis(maxRange = 100,
+                 max = 100)
     }
   }
 

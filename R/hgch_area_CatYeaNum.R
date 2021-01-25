@@ -18,10 +18,16 @@ hgch_area_CatYeaNum <- function(data, ...){
 
   series <- purrr::map(unique(d[[1]]), function(i) {
     d0 <- d %>%
-      dplyr::filter(a %in% i)
+      dplyr::filter(a %in% i) #%>% drop_na()
+    label_info <- d0 %>% .$labels %>% unlist()
     l0 <- list("name" = i,
                "color" = unique(d0$..colors),
-               "data" = d0$c)
+               "data" = map(seq_along(d0[[3]]), function(i){
+                 list("label" =  label_info[i],
+                      "y" = d0[[3]][i]
+                 )
+               })
+    )
   })
 
   global_options(opts$style$format_sample_num)
@@ -36,13 +42,12 @@ hgch_area_CatYeaNum <- function(data, ...){
     hc_xAxis(title = list(text = l$title$x),
              categories = purrr::map(as.character(unique(d$b)), function(z) z),
              type = "category") %>%
-    hc_yAxis(title = list(text = l$title$y),
-             labels = list(
-               formatter = l$formats)
-    ) %>%
+    # hc_yAxis(title = list(text = l$title$y),
+    #          labels = list(
+    #            formatter = l$formats)
+    # ) %>%
     hc_tooltip(useHTML = TRUE,
-               formatter = JS(paste0("function () {return this.point.label;}")),
-               style = list(width = "300px", whiteSpace = "normal")) %>%
+               formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled = l$theme$legend_show) %>%
     hc_add_theme(hgch_theme(opts = l$theme)) %>%
@@ -56,7 +61,7 @@ hgch_area_CatYeaNum <- function(data, ...){
           lineColor = '#ffffff'
         )
       )
-)
+    )
 
   hc
 }
