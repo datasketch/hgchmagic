@@ -4,6 +4,8 @@ test_that("hgch area Cat-Dat-Num", {
   data <- sample_data("Cat-Dat-Num", n = 30, rep = FALSE)
 
   hgch_area_CatDatNum(data, format_sample_num = "1,231.1")
+  hgch_area_CatDatNum(data, format_sample_num = "1,231.",
+                      connect_lines_nulls = TRUE)
   hgch_area_CatDatNum(data, format_sample_num = "1,231.1", dataLabels_show = T)
   hgch_area_CatDatNum(data, percentage = T, dataLabels_show = T, suffix = "%")
   hgch_area_CatDatNum(data, percentage = T, dataLabels_show = T,
@@ -31,6 +33,7 @@ test_that("hgch line CatDatNum", {
   hgch_line_CatDatNum(data, format_sample_num = "1,231.1",
                       dataLabels_show = T)
   hgch_line_CatDatNum(data, connect_lines_nulls = TRUE)
+  hgch_line_CatDatNum(data, connect_lines_nulls = TRUE, dataLabels_show = T)
   data <- data.frame(
     cat = c("one", "two", "one", "two"),
     fecha = c("2020/10/03","2020/10/04", "2020/10/04", "2020/10/03"),
@@ -57,8 +60,8 @@ test_that("hgch scatter CatDatNum", {
                          color_by = names(data)[2],
                          palette_type = "sequential")
 
-  data <- sample_data("Cat-Dat-Num-Cat-Cat", n = 30, nlevels = 20, rep = FALSE)
-  hgch_scatter_CatDatNum(data, scatter_layout = "squarified", dataLabels_show = T)
+  data <- sample_data("Cat-Dat-Num-Cat-Cat", n = 30, rep = FALSE)
+  hgch_scatter_CatDatNum(data, tooltip = paste0(names(data)[4], ": {", names(data)[4], "}"))
 
 
 })
