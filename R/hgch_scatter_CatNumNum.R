@@ -11,19 +11,20 @@ hgch_scatter_CatNumNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data = data, opts = opts, plot = "scatter")
+  l <- hgchmagic_prep(data = data, opts = opts, plot = "scatter", ftype = "Cat-Num-Num")
 
   d <- l$d
-print(d)
+
   ds <- NULL
   series <- lapply(unique(d$a), function(s){
     ds <<- d %>% filter(a == s)
-    dss <- ds %>% select(a,b)
+    dss <- ds %>% select(a,b, labels)
     dss <- dss %>%
-      mutate(x = ds$b,
-             y = ds$c)
+      mutate(x = as.numeric(ds$b),
+             y = ds[[3]],
+             label = labels)
     list(
-      name = s,#"First",
+      name = s,
       color = unique(ds$..colors),
       data = transpose(dss)
     )
@@ -55,8 +56,8 @@ print(d)
                                              suffix = opts$scatter$suffix_y))
     ) %>%
     hc_add_series_list(series) %>%
-      hc_tooltip(useHTML=TRUE,
-                 pointFormat = l$tooltip, headerFormat = NULL) %>%
+    hc_tooltip(useHTML=TRUE,
+               formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_add_theme(hgch_theme(opts =  c(l$theme)))
 
