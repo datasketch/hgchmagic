@@ -1,19 +1,18 @@
-#' Pie Chart Cat Numeric
+#' donut Chart Cat
 #'
 #' This chart does not allow for chaning orientation
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Cat-Num, Yea-Num
+#' Cat, Yea-Num
 #' @examples
-#' hgch_pie_CatNum(sample_data("Cat-Num", nrow = 10))
+#' hgch_donut_Cat(sample_data("Cat", nrow = 10))
 #' @export
-hgch_pie_CatNum <- function(data, ...) {
-
+hgch_donut_Cat <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, plot = "pie")
+  l <- hgchmagic_prep(data, opts = opts, plot = "donut", ftype = "Cat")
 
   d <- l$d
 
@@ -36,23 +35,26 @@ hgch_pie_CatNum <- function(data, ...) {
     hc_series(
       data
     ) %>%
+    hc_plotOptions(
+      series = list(innerSize = "60%")) %>%
     hc_tooltip(useHTML = TRUE,
                formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_credits(enabled = TRUE, text = l$title$caption) %>%
     hc_add_theme(hgch_theme(opts =  c(l$theme,
-                                 cats = "{point.name} <br/>")))
+                                      cats = "{point.name} <br/>")))
 
   hc
+
 }
 
 
-#' pie Chart Yea Num
+#' donut Chart Yea
 #'
 #'
 #' @param data A data.frame
 #' @section ctypes:
 #' Yea, Yea
 #' @examples
-#' hgch_pie_YeaNum(sample_data("Yea-Num", nrow = 10))
+#' hgch_donut_Yea(sample_data("Yea", nrow = 10))
 #' @export
-hgch_pie_YeaNum <- hgch_pie_CatNum
+hgch_donut_Yea <- hgch_donut_Cat

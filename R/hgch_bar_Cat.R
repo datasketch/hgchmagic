@@ -1,19 +1,19 @@
-#' Bar Chart Cat Numeric
+#' Bar Chart Cat
 #'
 #' This chart does not allow for chaning orientation
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Cat-Num, Yea-Num
+#' Cat, Yea-Num
 #' @examples
-#' hgch_bar_CatNum(sample_data("Cat-Num", nrow = 10))
+#' hgch_bar_Cat(sample_data("Cat", nrow = 10))
 #' @export
-hgch_bar_CatNum <- function(data, ...){
+hgch_bar_Cat <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Num")
+  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat")
   d <- l$d
   l$theme$legend_show <- FALSE
 
@@ -32,7 +32,7 @@ hgch_bar_CatNum <- function(data, ...){
              events = list(
                load = add_branding(opts$theme)
              )
-             ) %>%
+    ) %>%
     hc_series(
       data
     ) %>%
@@ -74,10 +74,7 @@ hgch_bar_CatNum <- function(data, ...){
 }
 
 
-
-
-
-#' Bar Chart Yea Num
+#' Bar Chart Yea
 #'
 #' This chart does not allow for chaning orientation
 #'
@@ -85,6 +82,6 @@ hgch_bar_CatNum <- function(data, ...){
 #' @section ctypes:
 #' Yea
 #' @examples
-#' hgch_bar_YeaNum(sample_data("Yea-Num", nrow = 10))
+#' hgch_bar_Yea(sample_data("Yea", nrow = 10))
 #' @export
-hgch_bar_YeaNum <- hgch_bar_CatNum
+hgch_bar_Yea <- hgch_bar_Cat

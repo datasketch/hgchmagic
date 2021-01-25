@@ -4,16 +4,16 @@
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Cat-Num, Yea-Num
+#' Cat
 #' @examples
-#' hgch_treemap_CatNum(sample_data("Cat-Num", nrow = 10))
+#' hgch_treemap_Cat(sample_data("Cat", nrow = 10))
 #' @export
-hgch_treemap_CatNum <- function(data, ...){
+hgch_treemap_Cat <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, plot = "treemap")
+  l <- hgchmagic_prep(data, opts = opts, plot = "treemap", ftype = "Cat")
   l$theme$legend_show <- FALSE
   d <- l$d
 
@@ -67,13 +67,14 @@ hgch_treemap_CatNum <- function(data, ...){
 }
 
 
-#' treemap Chart Yea Num
+
+#' treemap Chart Yea
 #'
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Yea, Yea
+#' Yea
 #' @examples
-#' hgch_treemap_YeaNum(sample_data("Yea-Num", nrow = 10))
+#' hgch_treemap_Yea(sample_data("Yea", nrow = 10))
 #' @export
-hgch_treemap_YeaNum <- hgch_treemap_CatNum
+hgch_treemap_Yea <- hgch_treemap_Cat
