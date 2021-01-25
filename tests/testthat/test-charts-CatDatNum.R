@@ -8,7 +8,7 @@ test_that("hgch area Cat-Dat-Num", {
                       connect_lines_nulls = TRUE)
   hgch_area_CatDatNum(data, format_sample_num = "1,231.1", dataLabels_show = T)
   hgch_area_CatDatNum(data, percentage = T, dataLabels_show = T, suffix = "%")
-  hgch_area_CatDatNum(data, percentage = T, dataLabels_show = T,
+  hgch_area_CatDatNum(data, percentage = T, dataLabels_show = T, format_sample_num = "1,231.1",
                       tooltip = paste0("<p style='color:red;'>", names(data)[1],"</p>Percentage: {%}% <br/> Sum: {", names(data)[2],"}"))
 
 

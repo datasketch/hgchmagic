@@ -26,10 +26,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     frtype <- gsub("Pct", "Num", frtype)
   }
 
-  if (grepl("Yea", frtype)) {
-    has_year <- dic$id[dic$hdType == "Yea"]
-    d[[has_year]] <- as.character(d[[has_year]])
-  }
+  # if (grepl("Yea", frtype)) {
+  #   has_year <- dic$id[dic$hdType == "Yea"]
+  #   d[[has_year]] <- as.character(d[[has_year]])
+  # }
 
   # only data plot ----------------------------------------------------------
 
