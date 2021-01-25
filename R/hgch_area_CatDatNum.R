@@ -1,17 +1,17 @@
-#' scatter Chart Cat Dat Numeric
+#' area Chart Cat Dat Numeric
 #'
 #'
 #' @param data A data.frame
 #' @section ctypes:
 #' Cat-Dat-Num
 #' @examples
-#' hgch_scatter_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
+#' hgch_area_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
 #' @export
-hgch_scatter_CatDatNum <- function(data, ...){
+hgch_area_CatDatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, plot = "scatter", ftype = "Cat-Dat-Num")
+  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Dat-Num", plot = "area")
 
   d <- l$d
 
@@ -30,15 +30,16 @@ hgch_scatter_CatDatNum <- function(data, ...){
     )
   })
 
-
   h <- highchart() %>%
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%
-    hc_chart(type = "scatter",
+    hc_chart(type = "area",
+             renderTo = 'container',
              events = list(
                load = add_branding(l$theme)
              )
     ) %>%
+    hc_add_series_list(series) %>%
     hc_xAxis(
       type = 'datetime',
       title = list(text = l$title$x),
@@ -51,25 +52,25 @@ hgch_scatter_CatDatNum <- function(data, ...){
              labels = list(
                formatter = l$formats)
     ) %>%
-    hc_add_series_list(series) %>%
     hc_tooltip(useHTML=TRUE,
                formatter = JS(paste0("function () {return this.point.label;}"))
     ) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
-    hc_add_theme(hgch_theme(opts =  c(l$theme)))
+    hc_legend(enabled = l$theme$legend_show) %>%
+    hc_add_theme(hgch_theme(opts =  c(l$theme,
+                                      cats = "{point.y} <br/>")))
 
   h
 }
 
 
-
-#' scatter Chart Cat Dat
+#' area Chart Cat Dat
 #'
 #'
 #' @param data A data.frame
 #' @section ctypes:
 #' Cat-Dat
 #' @examples
-#' hgch_scatter_CatDat(sampleData("Cat-Dat", nrow = 10))
+#' hgch_area_CatDat(sampleData("Cat-Dat", nrow = 10))
 #' @export
-hgch_scatter_CatDat <- hgch_scatter_CatDatNum
+hgch_area_CatDat <- hgch_area_CatDatNum
