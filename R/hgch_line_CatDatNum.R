@@ -11,19 +11,20 @@ hgch_line_CatDatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Dat-Num")
+  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Dat-Num", plot = "line")
 
   d <- l$d
+
   ds <- NULL
   series <- lapply(unique(d$a), function(s){
     ds <<- d %>% filter(a == s)
-    dss <- ds %>% select(a,b, ..b_label)
+    dss <- ds %>% select(a,b, labels)
     dss <- dss %>%
-      mutate(x = as.numeric(as.POSIXct(as.Date(ds$b, origin = "2000-01-01")))*1000,
-             y = ds$c,
-             label = ..b_label)
+      mutate(x = as.numeric(ds$b),
+             y = ds[[3]],
+             label = labels)
     list(
-      name = s,#"First",
+      name = s,
       color = unique(ds$..colors),
       data = transpose(dss)
     )
@@ -33,10 +34,13 @@ hgch_line_CatDatNum <- function(data, ...){
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%
     hc_chart(type = "line",
+             defaultSeriesType = 'line',
+             renderTo = 'container',
              events = list(
                load = add_branding(l$theme)
              )
     ) %>%
+    hc_add_series_list(series) %>%
     hc_xAxis(
       type = 'datetime',
       title = list(text = l$title$x),
@@ -49,9 +53,8 @@ hgch_line_CatDatNum <- function(data, ...){
              labels = list(
                formatter = l$formats)
     ) %>%
-    hc_add_series_list(series) %>%
     hc_tooltip(useHTML=TRUE,
-               formatter = l$formatter_date_tooltip
+               formatter = JS(paste0("function () {return this.point.label;}"))
     ) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled = l$theme$legend_show) %>%

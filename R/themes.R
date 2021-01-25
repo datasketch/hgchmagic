@@ -165,6 +165,7 @@ hgch_theme <- function(opts = NULL){
       ),
 
       series = list(
+        connectNulls = opts$connect_lines_nulls,
         colorByPoint = FALSE,
         animation = list(
           duration = opts$animation_duration
@@ -175,7 +176,9 @@ hgch_theme <- function(opts = NULL){
           format = paste0(opts$cats, opts$format_dataLabels)
         ),
         marker = list(
-          enabled = opts$marker_enabled
+          enabled = opts$marker_enabled,
+          symbol = "circle",
+          radius = opts$marker_radius
         )
       ),
       pie = list(

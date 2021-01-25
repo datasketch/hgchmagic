@@ -230,8 +230,7 @@ date_intervals <- function(date_intervals) {
     t_d <- 30 * 24 * 3600 * 1000
   } else if (date_intervals == "year") {
     t_d <- 1000 * 60 * 60 * 24 * 365
-  }
-  else {
+  } else {
     t_d <-  7 * 24 * 3600 * 1000
   }
   t_d
