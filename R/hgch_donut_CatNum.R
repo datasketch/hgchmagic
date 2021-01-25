@@ -49,29 +49,6 @@ hgch_donut_CatNum <- function(data, ...){
 
 
 
-#' donut Chart Cat
-#'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat, Yea
-#' @examples
-#' hgch_donut_Cat(sample_data("Cat", nrow = 10))
-#' @export
-hgch_donut_Cat <- hgch_donut_CatNum
-
-
-
-#' donut Chart Yea
-#'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Yea, Yea
-#' @examples
-#' hgch_donut_Yea(sample_data("Yea", nrow = 10))
-#' @export
-hgch_donut_Yea <- hgch_donut_CatNum
 
 #' donut Chart Yea Num
 #'

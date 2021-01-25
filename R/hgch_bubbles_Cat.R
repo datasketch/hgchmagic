@@ -4,17 +4,17 @@
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Cat-Num, Yea-Num
+#' Cat
 #' @examples
-#' hgch_bubbles_CatNum(sample_data("Cat-Num", nrow = 10))
+#' hgch_bubbles_Cat(sample_data("Cat", nrow = 10))
 #' @export
-hgch_bubbles_CatNum <- function(data, ...){
+hgch_bubbles_Cat <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
 
-  l <- hgchmagic_prep(data, opts = opts, plot = "bubbles")
+  l <- hgchmagic_prep(data, opts = opts, plot = "bubbles", ftype = "Cat")
 
   d <- l$d
 
@@ -60,23 +60,26 @@ hgch_bubbles_CatNum <- function(data, ...){
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled = FALSE) %>%
     hc_add_theme(hgch_theme(opts =  c(l$theme,
-                                 cats = "{point.name} <br/>",
-                                 bubble_opacity = l$extra$bubble_opacity,
-                                 bubble_min = paste0(l$extra$bubble_min, "%"),
-                                 bubble_max = paste0(l$extra$bubble_max, "%")))
+                                      cats = "{point.name} <br/>",
+                                      bubble_opacity = l$extra$bubble_opacity,
+                                      bubble_min = paste0(l$extra$bubble_min, "%"),
+                                      bubble_max = paste0(l$extra$bubble_max, "%")))
     )
 
 
   hc
 }
 
-#' bubbles Chart Yea Num
+
+
+#' bubbles Chart Yea
 #'
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Yea, Yea
+#' Yea
 #' @examples
-#' hgch_bubbles_YeaNum(sample_data("Yea-Num", nrow = 10))
+#' hgch_bubbles_Yea(sample_data("Yea", nrow = 10))
 #' @export
-hgch_bubbles_YeaNum <- hgch_bubbles_CatNum
+hgch_bubbles_Yea <- hgch_bubbles_Cat
+
