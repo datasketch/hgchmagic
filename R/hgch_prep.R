@@ -124,7 +124,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
       dn <- dn %>%
         group_by(a) %>%
-        summarise_each(funs(func_paste))
+        summarise(across(.cols = everything(), .fns = func_paste))
 
       if (grepl("Dat", ftype)) {
         dic_p <- dic_p %>%
@@ -133,6 +133,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
         names(nms) <- c(names(nms)[-length(nms)], "..group")
       }
     } else {
+
       dd <- function_agg(df = d, agg = opts$summarize$agg, to_agg = agg_num, a, b)
 
       if (grepl("Dat", ftype)) {
@@ -146,8 +147,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
         dd$b <- as.numeric(as.POSIXct(as.Date(dd$b, origin = min_date)))*1000
       }
 
-
-
       by_col <- opts$postprocess$percentage_col
       if (is.null(by_col)) {
         by_col <- "a"
@@ -158,7 +157,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       dd <- dd %>%
         group_by_(by_col) %>%
         dplyr::mutate(..percentage = (!!agg_var_t/sum(!!agg_var_t, na.rm = TRUE))*100)
-
 
 
       if (!grepl("Dat", ftype)) {
@@ -188,9 +186,13 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       dn <- dn %>%
         group_by(a, b) %>%
         summarise_each(funs(func_paste))
+      if (!grepl("Dat", ftype)){
       dd$b <- as.character(dd$b)
       dn$b <- as.character(dn$b)
-
+      } else {
+        dd$b <- as.numeric(dd$b)
+        dn$b <- as.numeric(dn$b)
+      }
 
     }
 
@@ -203,7 +205,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
     d <- dd %>% left_join(dn, by = var_g)
   }
-
 
   # format in original data -------------------------------------------------
   # general format to numerical data to prepare information from tooltip
@@ -223,16 +224,16 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     labs <- NULL
 
     d$..date_label <- makeup_dat(d[["..date"]],
-                                 #sample = opts$style$format_sample_dat,
-                                 locale = opts$style$locale,
-                                 format = opts$style$format_dat
+                                 sample = opts$style$format_sample_dat,
+                                 locale = opts$style$locale#,
+                                 #format = opts$style$format_dat
     )
 
     if (grep("Dat", ftype_vec) == 1) d$a_label <- d$..date_label
     if (grep("Dat", ftype_vec) == 2) d$b_label <- d$..date_label
 
-    #d$..date_label <- makeup_chr(d$..date_label,  opts$style$format_sample_cat)
     labs <- as.list(d$..date_label)
+
     options(scipen = 9999)
     if(sum(grepl("Dat|Cat|Yea", ftype_vec)) == 1) {
       names(labs) <- d$a
@@ -253,7 +254,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     #     ))
   }
 
-
  # add label from tooltip info ---------------------------------------------
 
   default_tooltip <- dic_p$label
@@ -262,8 +262,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   if (opts$chart$tooltip == "") opts$chart$tooltip <- NULL
   d <- d %>%
     mutate(labels = glue::glue(hgch_tooltip(nms = nms, label_ftype = default_tooltip, tooltip = opts$chart$tooltip)) %>% lapply(htmltools::HTML))
- #print(hgch_tooltip(nms = nms, label_ftype = dic_p$label, tooltip = opts$chart$tooltip))
-
 
   d <- d[, c(dic_p$id,  "labels")]
 
