@@ -200,8 +200,10 @@ tooltip_codes <- function(sample, prefix, suffix) {
 # varible, como en scatter
 #' @export
 format_hgch <- function(plot, frtype, sample, suffix, prefix) {
+
+  if (!grepl("Num", frtype)) frtype <- paste0(frtype, "-Num")
   d_frtype <- strsplit(frtype, split = "-") %>% unlist()
-  if (sum(grepl("Num", d_frtype)) == 0) return()
+
 
   num_var <- grep("Num", d_frtype)
 

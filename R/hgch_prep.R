@@ -166,8 +166,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       if (opts$postprocess$percentage) {
         agg_var <- "..percentage"
       } else {
-        dd <- dd[,-3]
+        if (grepl("Num", ftype)) dd <- dd[,-3]
+        dd <- dd
       }
+
       d_c <- completevalues(d_c, agg_var)
       d_c$b <- as.character(d_c$b)
       dd$b <- as.character(dd$b)
@@ -209,6 +211,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
 
   var_nums <- grep("Num", dic_alt$hdType)
+
   if (!identical(var_nums, integer())) {
     var_nums <- dic_alt$id[var_nums]
 

@@ -4,15 +4,15 @@
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Cat-Cat-Num, Cat-Yea-Num
+#' Cat-Cat, Cat-Yea-Num
 #' @examples
-#' hgch_bar_CatCatNum(sample_data("Cat-Cat-Num", nrow = 10))
+#' hgch_bar_CatCat(sample_data("Cat-Cat", nrow = 10))
 #' @export
-hgch_bar_CatCatNum <- function(data, ...){
+hgch_bar_CatCat <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Cat-Num", plot = "bar")
+  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Cat", plot = "bar")
   d <- l$d
 
 
@@ -92,36 +92,30 @@ hgch_bar_CatCatNum <- function(data, ...){
     }
   }
 
-  hc <- hc %>%  hc_add_theme(hgch_theme(opts = l$theme))
+  hc <- hc %>%  hc_add_theme(hgch_theme(opts = c(l$theme)))
 
 
   hc
 }
 
-
-
-
-
-#' bar Chart Cat Yea Num
+#' bar Chart Yea Cat
 #'
 #'
 #' @param data A data.frame
 #' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
-#' hgch_bar_CatYeaNum(sample_data("Cat-Yea-Num", nrow = 10))
+#' hgch_bar_YeaCat(sample_data("Yea-Cat", nrow = 10))
 #' @export
-hgch_bar_CatYeaNum <- hgch_bar_CatCatNum
+hgch_bar_YeaCat <- hgch_bar_CatCat
 
-
-#' bar Chart Yea Cat Num
+#' bar Chart Cat Yea
 #'
 #'
 #' @param data A data.frame
 #' @section ctypes:
 #' Cat-Cat-Num
 #' @examples
-#' hgch_bar_YeaCatNum(sample_data("Yea-Cat-Num", nrow = 10))
+#' hgch_bar_CatYea(sample_data("Cat-Yea", nrow = 10))
 #' @export
-hgch_bar_YeaCatNum <- hgch_bar_CatCatNum
-
+hgch_bar_CatYea <- hgch_bar_CatCat
