@@ -4,16 +4,16 @@
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Cat-Cat-Num, Cat-Yea-Num
+#' Cat-Cat, Cat-Yea-Num
 #' @examples
-#' hgch_bubbles_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
+#' hgch_bubbles_CatCat(sampleData("Cat-Cat", nrow = 10))
 #' @export
-hgch_bubbles_CatCatNum <- function(data, ...){
+hgch_bubbles_CatCat <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, plot = "bubbles", ftype = "Cat-Cat-Num")
+  l <- hgchmagic_prep(data, opts = opts, plot = "bubbles", ftype = "Cat-Cat")
 
   d <- l$d
 
@@ -46,37 +46,36 @@ hgch_bubbles_CatCatNum <- function(data, ...){
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled = l$theme$legend_show) %>%
     hc_add_theme(hgch_theme(opts =  c(l$theme,
-                                 cats = "{point.name} <br/>",
-                                 bubble_opacity = l$extra$bubble_opacity,
-                                 bubble_min = paste0(l$extra$bubble_min, "%"),
-                                 bubble_max = paste0(l$extra$bubble_max, "%"))))
+                                      cats = "{point.name} <br/>",
+                                      bubble_opacity = l$extra$bubble_opacity,
+                                      bubble_min = paste0(l$extra$bubble_min, "%"),
+                                      bubble_max = paste0(l$extra$bubble_max, "%"))))
 
   hc
 
 }
 
 
-
-#' bubbles Chart Cat Yea Num
+#' bubbles Chart Yea Cat
 #'
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Cat-Cat-Num
+#' Yea-Cat
 #' @examples
-#' hgch_bubbles_CatYeaNum(sample_data("Cat-Yea-Num", nrow = 10))
+#' hgch_bubbles_YeaCat(sample_data("Yea-Cat", nrow = 10))
 #' @export
-hgch_bubbles_CatYeaNum <- hgch_bubbles_CatCatNum
+hgch_bubbles_YeaCat <- hgch_bubbles_CatCat
 
 
-#' bubbles Chart Yea Cat Num
+#' bubbles Chart Cat Yea
 #'
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Cat-Cat-Num
+#' Cat-Yea
 #' @examples
-#' hgch_bubbles_YeaCatNum(sample_data("Yea-Cat-Num", nrow = 10))
+#' hgch_bubbles_CatYea(sample_data("Cat-Yea", nrow = 10))
 #' @export
-hgch_bubbles_YeaCatNum <- hgch_bubbles_CatCatNum
+hgch_bubbles_CatYea <- hgch_bubbles_CatCat
 
