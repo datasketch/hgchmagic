@@ -64,14 +64,3 @@ hgch_line_DatNum <- function(data, ...){
 }
 
 
-#' line Chart Dat Numeric
-#'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Dat
-#' @examples
-#' hgch_line_Dat(sampleData("Dat", nrow = 10))
-#' @export
-hgch_line_Dat <- hgch_line_DatNum

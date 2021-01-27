@@ -1,18 +1,18 @@
-#' area Chart Dat Numeric
+#' line Chart Dat Numeric
 #'
 #' This chart does not allow for chaning orientation
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Dat-Num
+#' Dat
 #' @examples
-#' hgch_area_DatNum(sampleData("Dat-Num", nrow = 10))
+#' hgch_line_Dat(sampleData("Dat", nrow = 10))
 #' @export
-hgch_area_DatNum <- function(data, ...){
+hgch_line_Dat <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, plot = "area", ftype = "Dat-Num")
+  l <- hgchmagic_prep(data, opts = opts, plot = "line", ftype = "Dat")
 
   d <- l$d
   ds <- NULL
@@ -33,7 +33,7 @@ hgch_area_DatNum <- function(data, ...){
 
 
   h <- highchart() %>%
-    hc_chart(type = "area",
+    hc_chart(type = "line",
              events = list(
                load = add_branding(l$theme)
              )
@@ -62,4 +62,5 @@ hgch_area_DatNum <- function(data, ...){
     hc_add_theme(hgch_theme(opts =  c(l$theme)))
   h
 }
+
 
