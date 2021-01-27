@@ -361,7 +361,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   }
 
 
-
   # end options -------------------------------------------------------------
 
 

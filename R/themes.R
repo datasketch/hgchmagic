@@ -123,7 +123,20 @@ hgch_theme <- function(opts = NULL){
           color = opts$axis_title_color %||% opts$text_color,# color del titulo del eje
           fontSize = paste0(opts$axis_title_size, 'px')
         )
-      )
+      ),
+      plotLines = list(
+        list(value = opts$plotLine_value_x,
+             color = 'black',
+             dashStyle = 'shortdash'#,
+             #width = 2,
+             #zIndex = 5,
+             # label = list(
+             #   text = lineLabelsXY[2],
+             #   style = list(
+             #     color = 'black'
+             #   )
+             # )
+             ))
     ),
     yAxis = list(
       visible = opts$grid_y_enabled,
@@ -145,7 +158,20 @@ hgch_theme <- function(opts = NULL){
           color = opts$axis_title_color %||% opts$text_color,# color del titulo del eje
           fontSize = paste0(opts$axis_title_size, 'px')
         )
-      )
+      ),
+      plotLines = list(
+        list(value = opts$plotLine_value_y,
+             color = 'black',
+             dashStyle = 'shortdash'#,
+             #width = 2,
+             #zIndex = 5,
+             # label = list(
+             #   text = lineLabelsXY[2],
+             #   style = list(
+             #     color = 'black'
+             #   )
+             # )
+        ))
     ),
     plotOptions = list (
       packedbubble = list(
