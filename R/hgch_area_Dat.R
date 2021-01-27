@@ -4,15 +4,15 @@
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Dat-Num
+#' Dat
 #' @examples
-#' hgch_area_DatNum(sampleData("Dat-Num", nrow = 10))
+#' hgch_area_Dat(sampleData("Dat", nrow = 10))
 #' @export
-hgch_area_DatNum <- function(data, ...){
+hgch_area_Dat <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, plot = "area", ftype = "Dat-Num")
+  l <- hgchmagic_prep(data, opts = opts, plot = "area", ftype = "Dat")
 
   d <- l$d
   ds <- NULL

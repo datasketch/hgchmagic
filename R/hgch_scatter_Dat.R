@@ -1,18 +1,18 @@
-#' area Chart Dat Numeric
+#' scatter Chart Dat Numeric
 #'
 #' This chart does not allow for chaning orientation
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Dat-Num
+#' Dat
 #' @examples
-#' hgch_area_DatNum(sampleData("Dat-Num", nrow = 10))
+#' hgch_scatter_Dat(sampleData("Dat", nrow = 10))
 #' @export
-hgch_area_DatNum <- function(data, ...){
+hgch_scatter_Dat <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, plot = "area", ftype = "Dat-Num")
+  l <- hgchmagic_prep(data, opts = opts, plot = "scatter", ftype = "Dat")
 
   d <- l$d
   ds <- NULL
@@ -32,14 +32,10 @@ hgch_area_DatNum <- function(data, ...){
   })
 
 
+
   h <- highchart() %>%
-    hc_chart(type = "area",
-             events = list(
-               load = add_branding(l$theme)
-             )
-             ) %>%
-    hc_title(text = l$title$title) %>%
-    hc_subtitle(text = l$title$subtitle) %>%
+    hc_chart(type = "scatter"
+    ) %>%
     hc_xAxis(
       type = 'datetime',
       title = list(text = l$title$x),
@@ -53,8 +49,7 @@ hgch_area_DatNum <- function(data, ...){
                formatter = l$formats)
     ) %>%
     hc_add_series_list(series) %>%
-    hc_tooltip(useHTML = TRUE,
-               headerFormat = NULL,
+    hc_tooltip(useHTML=TRUE,
                formatter = JS(paste0("function () {return this.point.label;}"))
     ) %>%
     hc_legend(enabled = FALSE) %>%
@@ -62,4 +57,3 @@ hgch_area_DatNum <- function(data, ...){
     hc_add_theme(hgch_theme(opts =  c(l$theme)))
   h
 }
-
