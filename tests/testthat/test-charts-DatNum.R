@@ -19,8 +19,7 @@ test_that("hgch line DatNum", {
   hgch_line_DatNum(data, locale = "de-DE")
   #hgch_line_DatNum(data, locale = "de-DE", format_dat = "%B %d %Y")
 
-
-  data <- sample_data("Dat-Num-Cat-Dat", n = 30, rep = FALSE)
+  data <- sample_data("Dat-Num", 300, rep = TRUE)
   hgch_line_DatNum(data)
   hgch_line_DatNum(data, tooltip = paste0("{", names(data)[4],"}"))
   hgch_line_DatNum(data, palette_colors = "#FEAFEA")
