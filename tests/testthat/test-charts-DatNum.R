@@ -31,3 +31,8 @@ test_that("hgch scatter DatNum", {
   data <- sample_data("Dat-Num")
   hgch_scatter_DatNum(data)
   })
+
+test_that("hgch area DatNum", {
+  data <- sample_data("Dat-Num")
+  hgch_area_DatNum(data, palette_colors = "#0FC333", format_dat = "%Y %B %d")
+})

@@ -220,14 +220,13 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     })}
 
 
-
   if (!identical(grep("Dat", ftype_vec), integer())) {
     labs <- NULL
 
     d$..date_label <- makeup_dat(d[["..date"]],
                                  sample = opts$style$format_sample_dat,
-                                 locale = opts$style$locale#,
-                                 #format = opts$style$format_dat
+                                 #locale = opts$style$locale,
+                                 format = opts$style$format_dat
     )
 
     if (grep("Dat", ftype_vec) == 1) d$a_label <- d$..date_label
