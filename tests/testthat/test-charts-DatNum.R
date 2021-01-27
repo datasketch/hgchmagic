@@ -26,3 +26,8 @@ test_that("hgch line DatNum", {
   hgch_line_DatNum(data, palette_colors = "#FEAFEA")
 
 })
+
+test_that("hgch scatter DatNum", {
+  data <- sample_data("Dat-Num")
+  hgch_scatter_DatNum(data)
+  })
