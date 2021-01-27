@@ -14,25 +14,19 @@ hgch_scatter_NumNum <- function(data, ...){
 
   opts <- dsvizopts::merge_dsviz_options(...)
 
-  l <- hgchmagic_prep(data, opts = opts, plot = "scatter")
-print(l)
+  l <- hgchmagic_prep(data, opts = opts, plot = "scatter", ftype = "Num-Num")
+
   d <- l$d
 
-  # opts$theme$text_show <- FALSE
-  #
+
   data_list <- map(1:nrow(d), function(z) {
-    list(d$a[z], d$b[z])
+    list(x = d$a[z],
+         y = d$b[z],
+         color = d$..colors[z],
+         label = d$labels[z])
   })
-  #
-  # format_num <- format_hgch(opts$style$format_num_sample, "")
-  # if (is.null(opts$tooltip)) {
-  #   opts$tooltip <- paste0('<b>', nms[1], ':</b> ',
-  #                          paste0(opts$scatter$prefix_x,'{point.x',format_num, '}', opts$scatter$suffix_x), '<br/>',
-  #                          '<b>', nms[2], ':</b> ',
-  #                          paste0(opts$scatter$prefix_y,'{point.y', format_num, '}', opts$scatter$suffix_y))
-  # }
-  #
-  # global_options(opts$style$format_num_sample)
+
+  global_options(opts$style$format_sample_num)
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%
@@ -45,31 +39,30 @@ print(l)
     ) %>%
     hc_add_dependency("plugins/highcharts-regression.js")  %>%
     hc_add_series(
-      regression = opts$scatter$regression,
+      regression = opts$extra$scatter_regression,
       regressionSettings = list(
-        color = opts$scatter$regression_color,
-        hideInLegend = ifelse(opts$scatter$regression_equation, FALSE, TRUE)
+        color = opts$extra$scatter_regression_color,
+        hideInLegend = ifelse(opts$extra$scatter_regression_equation, FALSE, TRUE)
       ),
       data = data_list,
       showInLegend = F
     ) %>%
-  #   hc_tooltip(useHTML=TRUE,
-  #              pointFormat = opts$tooltip, headerFormat = NULL) %>%
+    hc_tooltip(useHTML=TRUE, formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_xAxis(
       title = list(text = l$titles$x),
       labels = list(
-        formatter = makeup::makeup_format_js(sample = opts$style$format_num_sample,
+        formatter = makeup::makeup_format_js(sample = opts$extra$scatter_format_num_sample_x,
                                              locale = opts$style$locale,
-                                             prefix = opts$scatter$prefix_x,
-                                             suffix = opts$scatter$suffix_x))
+                                             prefix = opts$extra$scatter_prefix_x,
+                                             suffix = opts$extra$scatter_suffix_x))
     ) %>%
     hc_yAxis(
       title = list(text = l$titles$y),
       labels = list(
-        formatter = makeup::makeup_format_js(sample = opts$style$format_num_sample,
+        formatter = makeup::makeup_format_js(sample = opts$extra$scatter_format_num_sample_y,
                                              locale = opts$style$locale,
-                                             prefix = opts$scatter$prefix_y,
-                                             suffix = opts$scatter$suffix_y))
+                                             prefix = opts$extra$scatter_prefix_y,
+                                             suffix = opts$extra$scatter_suffix_y))
     ) %>%
   hc_credits(enabled = TRUE, text = l$title$caption) %>%
      hc_add_theme(hgch_theme(opts = c(l$theme)))
