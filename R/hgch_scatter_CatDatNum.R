@@ -62,14 +62,3 @@ hgch_scatter_CatDatNum <- function(data, ...){
 }
 
 
-
-#' scatter Chart Cat Dat
-#'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Dat
-#' @examples
-#' hgch_scatter_CatDat(sampleData("Cat-Dat", nrow = 10))
-#' @export
-hgch_scatter_CatDat <- hgch_scatter_CatDatNum
