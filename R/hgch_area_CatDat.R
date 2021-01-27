@@ -3,18 +3,18 @@
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Cat-Dat-Num
+#' Cat-Dat
 #' @examples
-#' hgch_area_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
+#' hgch_area_CatDat(sampleData("Cat-Dat", nrow = 10))
 #' @export
-hgch_area_CatDatNum <- function(data, ...){
+hgch_area_CatDat <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Dat-Num", plot = "area")
+  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Dat", plot = "area")
 
   d <- l$d
-
+ print(d)
   ds <- NULL
   series <- lapply(unique(d$a), function(s){
     ds <<- d %>% filter(a == s)

@@ -56,3 +56,8 @@ test_that("hgch treemap CatCat", {
   hgch_treemap_CatCat(data, treemap_layout = "sliceAndDice")
 
 })
+
+test_that("hgch sankey CatCat", {
+  data <- sample_data("Cat-Cat")
+  hgch_sankey_CatCat(data)
+})

@@ -64,14 +64,3 @@ hgch_line_CatDatNum <- function(data, ...){
   h
 }
 
-
-#' line Chart Cat Dat
-#'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Dat
-#' @examples
-#' hgch_line_CatDat(sampleData("Cat-Dat", nrow = 10))
-#' @export
-hgch_line_CatDat <- hgch_line_CatDatNum

@@ -1,17 +1,17 @@
-#' area Chart Cat Dat Numeric
+#' line Chart Cat Dat Numeric
 #'
 #'
 #' @param data A data.frame
 #' @section ctypes:
-#' Cat-Dat-Num
+#' Cat-Dat
 #' @examples
-#' hgch_area_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
+#' hgch_line_CatDat(sampleData("Cat-Dat", nrow = 10))
 #' @export
-hgch_area_CatDatNum <- function(data, ...){
+hgch_line_CatDat <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Dat-Num", plot = "area")
+  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Dat", plot = "line")
 
   d <- l$d
 
@@ -33,7 +33,8 @@ hgch_area_CatDatNum <- function(data, ...){
   h <- highchart() %>%
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%
-    hc_chart(type = "area",
+    hc_chart(type = "line",
+             defaultSeriesType = 'line',
              renderTo = 'container',
              events = list(
                load = add_branding(l$theme)
@@ -43,7 +44,7 @@ hgch_area_CatDatNum <- function(data, ...){
     hc_xAxis(
       type = 'datetime',
       title = list(text = l$title$x),
-      tickInterval= l$date_intervals,
+      #tickInterval= l$date_intervals,
       labels = list(
         formatter= JS(l$formatter_date)
       )

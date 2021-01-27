@@ -15,7 +15,7 @@ hgch_sankey_CatCat <- function(data, ...){
   opts$theme$palette_colors <- dsvizopts::default_theme_opts()$palette_colors
 
   data_dummy <- data[,1:2] %>% mutate_all(~paste0(., "_dummy"))
-  l <- hgchmagic_prep(data_dummy, opts = opts)
+  l <- hgchmagic_prep(data_dummy, opts = opts, plot = "sankey", ftype = "Cat-Cat")
   d <- l$d
   l$theme$legend_show <- FALSE
   l$theme$dataLabels_show <- TRUE
