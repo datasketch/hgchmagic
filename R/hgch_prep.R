@@ -211,8 +211,11 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   # format in original data -------------------------------------------------
   # general format to numerical data to prepare information from tooltip
 
+  var_nums <- grep("Num", dic_alt$hdType)
+
 
   var_nums <- grep("Num", dic_alt$hdType)
+
 
   if (!identical(var_nums, integer())) {
     var_nums <- dic_alt$id[var_nums]
@@ -269,6 +272,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   # axis labels -------------------------------------------------------------
 
+
   if (!identical(grep("Dat", ftype_vec), integer())) dic_p <- dic_p %>% filter(id != "..group")
 
   nms_dic <- setNames(dic_p$label, dic_p$id)
@@ -292,6 +296,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2) color_by <- "a"
 
+
   if(is.null(palette)){
     palette <- opts$theme[[paste0("palette_colors_", palette_type)]]
   }
@@ -303,6 +308,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d$..colors <- palette[1]
     } else {
       d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
+
     }
   }
 
@@ -329,6 +335,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d <- order_category(d, col = "b", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
     }
   }
+
 
 
 
