@@ -292,7 +292,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   # color -------------------------------------------------------------------
 
-  palette <- opts$theme$palette_colors
   palette_type <- opts$theme$palette_type %||% "categorical"
 
   color_by <- NULL
@@ -301,9 +300,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2) color_by <- "a"
 
 
-  if(is.null(palette)){
-    palette <- opts$theme[[paste0("palette_colors_", palette_type)]]
+  if(is.null(opts$theme$palette_colors)){
+    opts$theme$palette_colors <- opts$theme[[paste0("palette_colors_", palette_type)]]
   }
+  palette <- opts$theme$palette_colors
 
   if ("color" %in% dic$hdType) {
     d$..colors <- d[[dic$id[dic$hdType == "color"][1]]]
