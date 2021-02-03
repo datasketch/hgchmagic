@@ -42,8 +42,7 @@ hgch_sankey_CatCat <- function(data, ...){
 
   nodes_unique <- unique(c(unique(data_sankey_format$from_label), unique(data_sankey_format$to_label)))
 
-  colors <- data.frame(name = nodes_unique) %>%
-    mutate(color = paletero::paletero(name, as.character(palette)))
+  colors <- data.frame(name = nodes_unique, color = paletero::paletero(nodes_unique, as.character(palette)))
 
   if(!is.null(names(palette))){
     colors <- data.frame(name = nodes_unique) %>%

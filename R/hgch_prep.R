@@ -86,14 +86,16 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   dic_alt <- dic
 
   if (agg_var == "..count") {
-    dic_p <- dic_p %>% bind_rows(  bind_rows(data.frame(id = "..count", label = "Count", hdType = "Num")))
+    dic_p <- dic_p %>% bind_rows(  bind_rows(data.frame(id = "..count", label = "Count", hdType = "Num") %>%
+                                               mutate_all(as.character)))
   } else {
     dic_p <- dic_p
   }
 
   if (opts$postprocess$percentage) {
     dic_p <- dic_p %>% filter(id != agg_var)
-    dic_p <- dic_p %>% bind_rows(  bind_rows(data.frame(id = "..percentage", label = "%", hdType = "Num")))
+    dic_p <- dic_p %>% bind_rows(  bind_rows(data.frame(id = "..percentage", label = "%", hdType = "Num") %>%
+                                               mutate_all(as.character)))
   }
 
 
@@ -128,7 +130,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
       if (grepl("Dat", ftype)) {
         dic_p <- dic_p %>%
-          bind_rows(data.frame(id = "..group", label = "..group", hdType = "Cat"))
+          bind_rows(data.frame(id = "..group", label = "..group", hdType = "Cat") %>%
+                      mutate_all(as.character))
         nms[length(nms)+1] <- c("..group")
         names(nms) <- c(names(nms)[-length(nms)], "..group")
       }
@@ -203,7 +206,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       dn[[f_cats]]
     })
     dic_alt <- dic_alt %>%
-              bind_rows(data.frame(id = c("..count", "..percentage"), label = c("Count", "%"), hdType = c("Num", "Num")))
+              bind_rows(data.frame(id = c("..count", "..percentage"), label = c("Count", "%"), hdType = c("Num", "Num")) %>%
+                          mutate_all(as.character))
 
     d <- dd %>% left_join(dn, by = var_g)
   }
