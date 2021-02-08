@@ -1,45 +1,42 @@
-#' Area chart Yea Num
+#' Area chart Yea
 #'
 #' @description
-#' `hgch_area_YeaNum()` Create a highcharter area plot based on a particular data type.
-#' In this case, you can load data with only two columns, where the firts column is a
-#' **Year column** and the second must be  a **numeric class column**, or be sure that
-#' two firts columns they meet this condition
+#' `hgch_area_Yea()` Create a highcharter area plot based on a particular data type.
+#' In this case, you can load data with only one column, where this is a
+#' **Year column**, or be sure that two firts columns they meet this condition.
 #' @export
-#' @param data A data frame, data frame extension (e.g. a tibble), a
-#'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
-#' @param ... <[`chart-options`][hgch_viz_options]> Options to configure your hgchmagic plots
-#' @family Yea-Num plots
+#' @inheritParams hgch_area_YeaNum
+#' @family Yea plots
 #' @section Ftype:
-#' Yea-Num
+#' Yea
 #' @examples
-#' data <- sample_data("Yea-Num", n = 30)
-#' hgch_area_YeaNum(data)
+#' data <- sample_data("Yea", n = 30)
+#' hgch_area_Yea(data)
 #'
 #' # if you want to calculate the average instead of the sum, you can use agg inside a function
-#' hgch_area_YeaNum(data, agg = "mean")
+#' hgch_area_Yea(data, agg = "mean")
 #'
 #' # data with more of one column
-#' data <- sample_data("Yea-Num-Dat-Yea-Yea", n = 30)
-#' hgch_area_YeaNum(data)
+#' data <- sample_data("Yea-Dat-Yea-Yea", n = 30)
+#' hgch_area_Yea(data)
 #'
 #' # calculate percentage
-#' hgch_area_YeaNum(data, percentage = TRUE)
+#' hgch_area_Yea(data, percentage = TRUE)
 #'
 #' # numeric format
-#' hgch_area_YeaNum(data, percentage = TRUE, format_sample_num = "1.234,")
+#' hgch_area_Yea(data, percentage = TRUE, format_sample_num = "1.234,")
 #'
 #' # You can call the mean and percentage in the tooltip plot
 #' num_name <- names(data)[2]
 #' data %>%
-#' hgch_area_YeaNum(agg = "mean",
+#' hgch_area_Yea(agg = "mean",
 #'              tooltip = paste0("Average: {", num_name ,"} <br/> Percentage: {%}%"))
 #'
-hgch_area_YeaNum <- function(data, ...){
+hgch_area_Yea <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts,  ftype = "Yea-Num")
+  l <- hgchmagic_prep(data, opts = opts,  ftype = "Yea")
 
   d <- l$d
 

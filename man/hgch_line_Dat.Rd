@@ -2,21 +2,44 @@
 % Please edit documentation in R/hgch_line_Dat.R
 \name{hgch_line_Dat}
 \alias{hgch_line_Dat}
-\title{line Chart Dat Numeric}
+\title{line chart Dat}
 \usage{
 hgch_line_Dat(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{<\code{\link[=hgch_viz_options]{chart-options}}> Options to configure your hgchmagic plots}
 }
 \description{
-This chart does not allow for chaning orientation
+\code{hgch_line_Cat()} Create a highcharter line plot based on a particular data type.
+In this case, you can load data with only one \strong{date column} or be sure of
+the first column of the dataframe its categorical since it will be done a
+counting the categories of this column
 }
-\section{ctypes}{
+\section{Ftype}{
 
 Dat
 }
 
 \examples{
-hgch_line_Dat(sampleData("Dat", nrow = 10))
+data <- sample_data("Dat", n = 30)
+hgch_line_Cat(data)
+
+# data with more of one column
+data <- sample_data("Dat-Num-Dat-Dat-Dat", n = 30)
+hgch_line_Cat(data)
+
+# calculate percentage
+hgch_line_Cat(data, percentage = TRUE)
+
+# You can call the count and percentage in the tooltip plot
+data \%>\%
+hgch_line_Cat(tooltip = "Count: {Count} <br/> Percentage: {\%}\%")
 }
+\seealso{
+Other Dat plots: 
+\code{\link{hgch_scatter_Dat}()}
+}
+\concept{Dat plots}

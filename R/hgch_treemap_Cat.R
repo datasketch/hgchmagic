@@ -1,13 +1,34 @@
-#' Treemap Chart Cat Numeric
+#' Treemap chart Cat
 #'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
+#' @description
+#' `hgch_treemap_Cat()` Create a highcharter treemap plot based on a particular data type.
+#' In this case, you can load data with only one **categorical column** or be sure of
+#' the first column of the dataframe its categorical, since it will be done a
+#' counting the categories of this column.
+#' @export
+#' @param data A data frame, data frame extension (e.g. a tibble), a
+#'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
+#' @param ... Read <[`chart-options`][hgch_viz_options]> a general options summary to configure your hgchmagic plots
+#'   and <[`treemap-options`][hgch_treemap_options]> which specifically contains the additional arguments
+#'   that work only for this type of chart.
+#' @family Cat plots
+#' @section Ftype:
 #' Cat
 #' @examples
-#' hgch_treemap_Cat(sample_data("Cat", nrow = 10))
-#' @export
+#' data <- sample_data("Cat", n = 30)
+#' hgch_treemap_Cat(data)
+#'
+#' # data with more of one column
+#' data <- sample_data("Cat-Num-Dat-Cat-Cat", n = 30)
+#' hgch_treemap_Cat(data)
+#'
+#' # calculate percentage
+#' hgch_treemap_Cat(data, percentage = TRUE)
+#'
+#' # You can call the count and percentage in the tooltip plot
+#' data %>%
+#' hgch_treemap_Cat(tooltip = "Count: {Count} <br/> Percentage: {%}%")
+#'
 hgch_treemap_Cat <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
@@ -68,13 +89,30 @@ hgch_treemap_Cat <- function(data, ...){
 
 
 
-#' treemap Chart Yea
+#' treemap chart Yea
 #'
-#'
-#' @param data A data.frame
-#' @section ctypes:
+#' @description
+#' `hgch_treemap_Yea()` Create a highcharter treemap plot based on a particular data type.
+#' In this case, you can load data with only one **Year column** or be sure of
+#' the first column of the dataframe its a year column since it will be done a
+#' counting the years of this column
+#' @export
+#' @inheritParams hgch_treemap_Cat
+#' @family Yea plots
+#' @section Ftype:
 #' Yea
 #' @examples
-#' hgch_treemap_Yea(sample_data("Yea", nrow = 10))
-#' @export
+#' data <- sample_data("Yea", n = 30)
+#' hgch_treemap_Yea(data)
+#'
+#' # data with more of one column
+#' data <- sample_data("Yea-Num-Dat-Yea-Yea", n = 30)
+#' hgch_treemap_Yea(data)
+#'
+#' # calculate percentage
+#' hgch_treemap_Yea(data, percentage = TRUE)
+#'
+#' # You can call the count and percentage in the tooltip plot
+#' data %>%
+#' hgch_treemap_Yea(tooltip = "Count: {Count} <br/> Percentage: {%}%")
 hgch_treemap_Yea <- hgch_treemap_Cat

@@ -2,21 +2,58 @@
 % Please edit documentation in R/hgch_bar_CatNum.R
 \name{hgch_bar_YeaNum}
 \alias{hgch_bar_YeaNum}
-\title{Bar Chart Yea Num}
+\title{Bar chart Yea Num}
 \usage{
 hgch_bar_YeaNum(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{<\code{\link[=hgch_viz_options]{chart-options}}> Options to configure your hgchmagic plots}
 }
 \description{
-This chart does not allow for chaning orientation
+\code{hgch_bar_YeaNum()} Create a highcharter bar plot based on a particular data type.
+In this case, you can load data with only two columns, where the firts column is a
+\strong{Year column} and the second must be  a \strong{numeric class column}, or be sure that
+two firts columns they meet this condition
 }
-\section{ctypes}{
+\section{Ftype}{
 
-Yea
+Yea-Num
 }
 
 \examples{
-hgch_bar_YeaNum(sample_data("Yea-Num", nrow = 10))
+data <- sample_data("Yea-Num", n = 30)
+hgch_bar_YeaNum(data)
+
+example with iris data
+data <- iris \%>\% select(Species, Petal.Width)
+# this plot show the sum of petal width by species
+hgch_bar_YeaNum(data)
+# if you want to calculate the average instead of the sum, you can use agg inside a function
+hgch_bar_YeaNum(data, agg = "mean")
+
+# data with more of one column
+data <- sample_data("Yea-Num-Dat-Yea-Yea", n = 30)
+hgch_bar_YeaNum(data)
+
+# calculate percentage
+hgch_bar_YeaNum(data, percentage = TRUE)
+
+# numeric format
+hgch_bar_YeaNum(data, percentage = TRUE, format_sample_num = "1.234,")
+
+# You can call the mean and percentage in the tooltip plot
+num_name <- names(data)[2]
+data \%>\%
+hgch_bar_YeaNum(agg = "mean",
+             tooltip = paste0("Average: {", num_name ,"} <br/> Percentage: {\%}\%"))
 }
+\seealso{
+Other Yea-Num plots: 
+\code{\link{hgch_line_YeaNum}()},
+\code{\link{hgch_pie_YeaNum}()},
+\code{\link{hgch_treemap_YeaNum}()}
+}
+\concept{Yea-Num plots}

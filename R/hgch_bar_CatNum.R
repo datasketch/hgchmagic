@@ -1,13 +1,44 @@
-#' Bar Chart Cat Numeric
+#' Bar chart Cat Num
 #'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Num, Yea-Num
-#' @examples
-#' hgch_bar_CatNum(sample_data("Cat-Num", nrow = 10))
+#' @description
+#' `hgch_bar_CatNum()` Create a highcharter bar plot based on a particular data type.
+#' In this case, you can load data with only two columns, where the firts column is a
+#' **categorical column** and the second must be  a **numeric class column**, or be sure that
+#' two firts columns they meet this condition
 #' @export
+#' @param data A data frame, data frame extension (e.g. a tibble), a
+#'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
+#' @param ... <[`chart-options`][hgch_viz_options]> Options to configure your hgchmagic plots
+#' @family Cat-Num plots
+#' @section Ftype:
+#' Cat-Num
+#' @examples
+#' data <- sample_data("Cat-Num", n = 30)
+#' hgch_bar_CatNum(data)
+#'
+#' example with iris data
+#' data <- iris %>% select(Species, Petal.Width)
+#' # this plot show the sum of petal width by species
+#' hgch_bar_CatNum(data)
+#' # if you want to calculate the average instead of the sum,
+#' # you can use "agg" param inside a function
+#' hgch_bar_CatNum(data, agg = "mean")
+#'
+#' # data with more of one column
+#' data <- sample_data("Cat-Num-Dat-Cat-Cat", n = 30)
+#' hgch_bar_CatNum(data)
+#'
+#' # calculate percentage
+#' hgch_bar_CatNum(data, percentage = TRUE)
+#'
+#' # numeric format
+#' hgch_bar_CatNum(data, percentage = TRUE, format_sample_num = "1.234,")
+#'
+#' # You can call the mean and percentage in the tooltip plot
+#' num_name <- names(data)[2]
+#' data %>%
+#' hgch_bar_CatNum(agg = "mean",
+#'                 tooltip = paste0("Average: {", num_name ,"} <br/> Percentage: {%}%"))
 hgch_bar_CatNum <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
@@ -76,14 +107,42 @@ hgch_bar_CatNum <- function(data, ...){
 
 
 
-#' Bar Chart Yea Num
+#' Bar chart Yea Num
 #'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Yea
-#' @examples
-#' hgch_bar_YeaNum(sample_data("Yea-Num", nrow = 10))
+#' @description
+#' `hgch_bar_YeaNum()` Create a highcharter bar plot based on a particular data type.
+#' In this case, you can load data with only two columns, where the firts column is a
+#' **Year column** and the second must be  a **numeric class column**, or be sure that
+#' two firts columns they meet this condition
 #' @export
+#' @inheritParams hgch_bar_CatNum
+#' @family Yea-Num plots
+#' @section Ftype:
+#' Yea-Num
+#' @examples
+#' data <- sample_data("Yea-Num", n = 30)
+#' hgch_bar_YeaNum(data)
+#'
+#' example with iris data
+#' data <- iris %>% select(Species, Petal.Width)
+#' # this plot show the sum of petal width by species
+#' hgch_bar_YeaNum(data)
+#' # if you want to calculate the average instead of the sum, you can use agg inside a function
+#' hgch_bar_YeaNum(data, agg = "mean")
+#'
+#' # data with more of one column
+#' data <- sample_data("Yea-Num-Dat-Yea-Yea", n = 30)
+#' hgch_bar_YeaNum(data)
+#'
+#' # calculate percentage
+#' hgch_bar_YeaNum(data, percentage = TRUE)
+#'
+#' # numeric format
+#' hgch_bar_YeaNum(data, percentage = TRUE, format_sample_num = "1.234,")
+#'
+#' # You can call the mean and percentage in the tooltip plot
+#' num_name <- names(data)[2]
+#' data %>%
+#' hgch_bar_YeaNum(agg = "mean",
+#'              tooltip = paste0("Average: {", num_name ,"} <br/> Percentage: {%}%"))
 hgch_bar_YeaNum <- hgch_bar_CatNum

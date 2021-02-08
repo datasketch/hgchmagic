@@ -1,12 +1,32 @@
-#' Sankey Cat Cat
+#' Sankey chart Cat Cat
 #'
-#'
-#' @param data A data.frame
-#' @section
-#'
-#' @examples
-#' hgch_sankey_CatCat(sample_data("Cat-Cat"))
+#' @description
+#' `hgch_sankey_CatCat()` Create a highcharter sankey plot based on a particular data type.
+#' In this case, you can load data with only two columns, where the firts and second columns are
+#' **categoricals columns**, or be sure that firts two columns they meet this condition, since it
+#' will be done a counting the categories of this columns.
 #' @export
+#' @param data A data frame, data frame extension (e.g. a tibble), a
+#'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
+#' @param ... Read <[`chart-options`][hgch_viz_options]> a general options summary to configure your hgchmagic plots
+#'   and <[`sankey-options`][hgch_sankey_options]> which specifically contains the additional arguments
+#'   that work only for this type of chart
+#' @family Cat-Cat plots
+#' @section Ftype:
+#' Cat-Cat
+#' @examples
+#' data <- sample_data("Cat-Cat", n = 30)
+#' hgch_sankey_CatCat(data)
+#'
+#' # Activate data labels
+#' hgch_sankey_CatCat(data,
+#'                        dataLabels_show = TRUE)
+#'
+#' # data with more of one column
+#' data <- sample_data("Cat-Cat-Num-Yea-Cat", n = 30)
+#' hgch_sankey_CatCat(data)
+#'
+
 hgch_sankey_CatCat <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")

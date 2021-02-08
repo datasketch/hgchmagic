@@ -2,21 +2,40 @@
 % Please edit documentation in R/hgch_scatter_Dat.R
 \name{hgch_scatter_Dat}
 \alias{hgch_scatter_Dat}
-\title{scatter Chart Dat Numeric}
+\title{Scatter chart Dat Num}
 \usage{
 hgch_scatter_Dat(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{Read <\code{\link[=hgch_viz_options]{chart-options}}> a general options summary to configure your hgchmagic plots
+and <\code{\link[=hgch_scatter_options]{scatter-options}}> which specifically contains the additional arguments
+that work only for this type of chart}
 }
 \description{
-This chart does not allow for chaning orientation
+\code{hgch_scatter_Dat()}  Create a highcharter treemap plot based on a particular data type.
+In this case, you can load data with only one \strong{date column} or be sure of
+the first column of the dataframe its in date class, since it will be done a
+counting the categories of this column.
 }
-\section{ctypes}{
+\section{Ftype}{
 
 Dat
 }
 
 \examples{
-hgch_scatter_Dat(sampleData("Dat", nrow = 10))
+data <- sample_data("Dat", n = 30)
+hgch_scatter_Dat(data)
+
+# data with more of one column
+data <- sample_data("Dat-Num-Dat-Cat-Cat", n = 30)
+hgch_scatter_Dat(data)
+
 }
+\seealso{
+Other Dat plots: 
+\code{\link{hgch_line_Dat}()}
+}
+\concept{Dat plots}

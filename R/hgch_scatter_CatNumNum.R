@@ -1,12 +1,29 @@
-#' scatter Chart Cat Num Numeric
+#' Scatter chart Num Num
 #'
+#' @description
+#' `hgch_scatter_CatNumNum()` Create a highcharter scatter plot based on a particular data type.
+#' In this case, you can load data with only three columns,  where the first is
+#' a **categorical column**, and second and third columns are
+#' **numeric class**, or be sure that two firts columns they meet this condition
 #'
-#' @param data A data.frame
-#' @section ctypes:
+#' @export
+#' @inheritParams hgch_scatter_NumNum
+#' @family Cat-Num-Num plots
+#' @section Ftype:
 #' Cat-Num-Num
 #' @examples
-#' hgch_scatter_CatNumNum(sample_data("Cat-Num-Num", nrow = 10))
-#' @export
+#' data <- sample_data("Cat-Num-Num", n = 30)
+#' hgch_scatter_CatNumNum(data)
+#'
+#' example with iris data
+#' data <- iris %>% select(Species, Petal.Width, Petal.Length)
+#' hgch_scatter_CatNumNum(data)
+#'
+
+#' # data with more of one column
+#' data <- sample_data("Cat-Num-Num-Dat-Cat-Cat", n = 30)
+#' hgch_scatter_CatNumNum(data)
+#'
 hgch_scatter_CatNumNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 

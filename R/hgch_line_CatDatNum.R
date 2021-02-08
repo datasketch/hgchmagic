@@ -1,12 +1,38 @@
-#' line Chart Cat Dat Numeric
+#' Line chart Cat Dat Num
 #'
-#'
-#' @param data A data.frame
-#' @section ctypes:
+#' @description
+#' `hgch_line_CatDatNum()` Create a highcharter line plot based on a particular data type.
+#' In this case, you can load data with only three columns, where the firts column is a
+#' **categorical column**, second is a **date column** and the third must be a **numeric class column**,
+#'  or be sure that three firts columns they meet this condition.
+#' @export
+#' @inheritParams hgch_line_YeaNum
+#' @family Cat-Dat-Num plots
+#' @section Ftype:
 #' Cat-Dat-Num
 #' @examples
-#' hgch_line_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
-#' @export
+#' data <- sample_data("Cat-Dat-Num", n = 30)
+#' hgch_line_CatDatNum(data)
+#'
+#' # Activate data labels
+#' hgch_line_CatDatNum(data,
+#'                     dataLabels_show = TRUE)
+#'
+#' # data with more of one column
+#' data <- sample_data("Cat-Dat-Num-Num-Num-Cat", n = 30)
+#' hgch_line_CatDatNum(data)
+#'
+#' # Change variable to color and pallete type
+#' hgch_line_CatDatNum(data,
+#'                        color_by = names(data)[2],
+#'                        palette_type = "sequential")
+#'
+#' # Change tooltip info and add additional information contained in your data
+#' names_data <- names(data)
+#' info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
+#' data %>%
+#'  hgch_line_CatDatNum(tooltip = info_tool)
+#'
 hgch_line_CatDatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 

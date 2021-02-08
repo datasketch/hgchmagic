@@ -2,21 +2,40 @@
 % Please edit documentation in R/hgch_scatter_CatNumNum.R
 \name{hgch_scatter_CatNumNum}
 \alias{hgch_scatter_CatNumNum}
-\title{scatter Chart Cat Num Numeric}
+\title{Scatter chart Num Num}
 \usage{
 hgch_scatter_CatNumNum(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{Read <\code{\link[=hgch_viz_options]{chart-options}}> a general options summary to configure your hgchmagic plots
+and <\code{\link[=hgch_scatter_options]{scatter-options}}> which specifically contains the additional arguments
+that work only for this type of chart}
 }
 \description{
-scatter Chart Cat Num Numeric
+\code{hgch_scatter_CatNumNum()} Create a highcharter scatter plot based on a particular data type.
+In this case, you can load data with only three columns,  where the first is
+a \strong{categorical column}, and second and third columns are
+\strong{numeric class}, or be sure that two firts columns they meet this condition
 }
-\section{ctypes}{
+\section{Ftype}{
 
 Cat-Num-Num
 }
 
 \examples{
-hgch_scatter_CatNumNum(sample_data("Cat-Num-Num", nrow = 10))
+data <- sample_data("Cat-Num-Num", n = 30)
+hgch_scatter_CatNumNum(data)
+
+example with iris data
+data <- iris \%>\% select(Species, Petal.Width, Petal.Length)
+hgch_scatter_CatNumNum(data)
+
+# data with more of one column
+data <- sample_data("Cat-Num-Num-Dat-Cat-Cat", n = 30)
+hgch_scatter_CatNumNum(data)
+
 }
+\concept{Cat-Num-Num plots}

@@ -2,21 +2,55 @@
 % Please edit documentation in R/hgch_treemap_CatCat.R
 \name{hgch_treemap_CatYea}
 \alias{hgch_treemap_CatYea}
-\title{treemap Chart Cat Yea}
+\title{Treemap chart Cat Yea}
 \usage{
 hgch_treemap_CatYea(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{Read <\code{\link[=hgch_viz_options]{chart-options}}> a general options summary to configure your hgchmagic plots
+and <\code{\link[=hgch_treemap_options]{treemap-options}}> which specifically contains the additional arguments
+that work only for this type of chart}
 }
 \description{
-treemap Chart Cat Yea
+\code{hgch_treemap_CatYea()} Create a highcharter treemap plot based on a particular data type.
+In this case, you can load data with only two columns, where the firts is a
+\strong{categorical column} and the second must be a \strong{year column}, or be sure that firts two columns
+they meet this condition, since it will be done a counting the categories of this columns.
 }
-\section{ctypes}{
+\section{Ftype}{
 
-Cat-Cat
+Cat-Yea
 }
 
 \examples{
-hgch_treemap_CatYea(sample_data("Cat-Yea", nrow = 10))
+data <- sample_data("Cat-Yea", n = 30)
+hgch_treemap_CatYea(data)
+
+# Activate data labels
+hgch_treemap_CatYea(data,
+                       dataLabels_show = TRUE)
+
+# data with more of one column
+data <- sample_data("Cat-Yea-Cat-Dat-Num-Cat", n = 30)
+hgch_treemap_CatYea(data)
+
+# Change variable to color and pallete type
+hgch_treemap_CatYea(data,
+                       color_by = names(data)[2],
+                       palette_type = "sequential")
+
+# Change tooltip info and add additional information contained in your data
+names_data <- names(data)
+info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[3],":</b> {", names_data[3],"}<br/>")
+data \%>\%
+ hgch_treemap_CatYea(tooltip = info_tool)
+
 }
+\seealso{
+Other Cat-Yea plots: 
+\code{\link{hgch_line_CatYea}()}
+}
+\concept{Cat-Yea plots}

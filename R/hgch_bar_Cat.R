@@ -1,13 +1,31 @@
-#' Bar Chart Cat
+#' Bar chart Cat
 #'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat, Yea-Num
-#' @examples
-#' hgch_bar_Cat(sample_data("Cat", nrow = 10))
+#' @description
+#' `hgch_bar_Cat()` Create a highcharter bar plot based on a particular data type.
+#' In this case, you can load data with only one **categorical column** or be sure of
+#' the first column of the dataframe its categorical since it will be done a
+#' counting the categories of this column
 #' @export
+#' @param data A data frame, data frame extension (e.g. a tibble), a
+#'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
+#' @param ... <[`chart-options`][hgch_viz_options]> Options to configure your hgchmagic plots
+#' @family Cat plots
+#' @section Ftype:
+#' Cat
+#' @examples
+#' data <- sample_data("Cat", n = 30)
+#' hgch_bar_Cat(data)
+#'
+#' # data with more of one column
+#' data <- sample_data("Cat-Num-Dat-Cat-Cat", n = 30)
+#' hgch_bar_Cat(data)
+#'
+#' # calculate percentage
+#' hgch_bar_Cat(data, percentage = TRUE)
+#'
+#' # You can call the count and percentage in the tooltip plot
+#' data %>%
+#' hgch_bar_Cat(tooltip = "Count: {Count} <br/> Percentage: {%}%")
 hgch_bar_Cat <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
@@ -73,14 +91,30 @@ hgch_bar_Cat <- function(data, ...){
 }
 
 
-#' Bar Chart Yea
+#' Bar chart Yea
 #'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
+#' @description
+#' `hgch_bar_Yea()` Create a highcharter bar plot based on a particular data type.
+#' In this case, you can load data with only one **Year column** or be sure of
+#' the first column of the dataframe its a year column since it will be done a
+#' counting the years of this column
+#' @export
+#' @inheritParams hgch_bar_Cat
+#' @family Yea plots
+#' @section Ftype:
 #' Yea
 #' @examples
-#' hgch_bar_Yea(sample_data("Yea", nrow = 10))
-#' @export
+#' data <- sample_data("Yea", n = 30)
+#' hgch_bar_Yea(data)
+#'
+#' # data with more of one column
+#' data <- sample_data("Yea-Num-Dat-Yea-Yea", n = 30)
+#' hgch_bar_Yea(data)
+#'
+#' # calculate percentage
+#' hgch_bar_Yea(data, percentage = TRUE)
+#'
+#' # You can call the count and percentage in the tooltip plot
+#' data %>%
+#' hgch_bar_Yea(tooltip = "Count: {Count} <br/> Percentage: {%}%")
 hgch_bar_Yea <- hgch_bar_Cat

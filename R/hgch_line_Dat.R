@@ -1,13 +1,29 @@
-#' line Chart Dat Numeric
+#' Line chart Dat
 #'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
+#' @description
+#' `hgch_line_Dat()` Create a highcharter line plot based on a particular data type.
+#' In this case, you can load data with only one **date column** or be sure of
+#' the first column of the dataframe its categorical since it will be done a
+#' counting the categories of this column
+#' @export
+#' @inheritParams hgch_line_YeaNum
+#' @family Dat plots
+#' @section Ftype:
 #' Dat
 #' @examples
-#' hgch_line_Dat(sampleData("Dat", nrow = 10))
-#' @export
+#' data <- sample_data("Dat", n = 30)
+#' hgch_line_Dat(data)
+#'
+#' # data with more of one column
+#' data <- sample_data("Dat-Num-Dat-Dat-Dat", n = 30)
+#' hgch_line_Dat(data)
+#'
+#' # calculate percentage
+#' hgch_line_Dat(data, percentage = TRUE)
+#'
+#' # You can call the count and percentage in the tooltip plot
+#' data %>%
+#' hgch_line_Dat(tooltip = "Count: {Count} <br/> Percentage: {%}%")
 hgch_line_Dat <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 

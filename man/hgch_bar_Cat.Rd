@@ -2,21 +2,45 @@
 % Please edit documentation in R/hgch_bar_Cat.R
 \name{hgch_bar_Cat}
 \alias{hgch_bar_Cat}
-\title{Bar Chart Cat}
+\title{Bar chart Cat}
 \usage{
 hgch_bar_Cat(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{<\code{\link[=hgch_viz_options]{chart-options}}> Options to configure your hgchmagic plots}
 }
 \description{
-This chart does not allow for chaning orientation
+\code{hgch_bar_Cat()} Create a highcharter bar plot based on a particular data type.
+In this case, you can load data with only one \strong{categorical column} or be sure of
+the first column of the dataframe its categorical since it will be done a
+counting the categories of this column
 }
-\section{ctypes}{
+\section{Ftype}{
 
-Cat, Yea-Num
+Cat
 }
 
 \examples{
-hgch_bar_Cat(sample_data("Cat", nrow = 10))
+data <- sample_data("Cat", n = 30)
+hgch_bar_Cat(data)
+
+# data with more of one column
+data <- sample_data("Cat-Num-Dat-Cat-Cat", n = 30)
+hgch_bar_Cat(data)
+
+# calculate percentage
+hgch_bar_Cat(data, percentage = TRUE)
+
+# You can call the count and percentage in the tooltip plot
+data \%>\%
+hgch_bar_Cat(tooltip = "Count: {Count} <br/> Percentage: {\%}\%")
 }
+\seealso{
+Other Cat plots: 
+\code{\link{hgch_pie_Cat}()},
+\code{\link{hgch_treemap_Cat}()}
+}
+\concept{Cat plots}

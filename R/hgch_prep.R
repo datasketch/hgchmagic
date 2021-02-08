@@ -212,6 +212,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     d <- dd %>% left_join(dn, by = var_g)
   }
 
+
   # format in original data -------------------------------------------------
   # general format to numerical data to prepare information from tooltip
 
@@ -340,15 +341,15 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     }
   }
 
-
-
+  suffix_enter <- opts$style$suffix
+  if (opts$postprocess$percentage) suffix_enter <- suffix_enter %||% "%"
 
 
 
   f_nums <- makeup::makeup_format_js(sample = opts$style$format_sample_num,
                                      locale = opts$style$locale,
                                      prefix = opts$style$prefix,
-                                     suffix = opts$style$suffix)
+                                     suffix = suffix_enter)
 
 
   if (plot != "scatter") {
@@ -358,7 +359,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
                                      frtype = ftype,
                                      sample = sample_labels,
                                      prefix = opts$style$prefix,
-                                     suffix = opts$style$suffix)
+                                     suffix = suffix_enter)
   } else {
     format_dataLabels <- NULL
   }
@@ -405,7 +406,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
               dataLabels_size = opts$dataLabels$dataLabels_size %||% "11",
               dataLabels_text_outline = opts$dataLabels$dataLabels_text_outline,
               format_dataLabels = format_dataLabels,
-              suffix = opts$style$suffix,
+              suffix = suffix_enter,
               prefix = opts$style$prefix),
     color_hover = opts$shiny$color_hover,
     color_click = opts$shiny$color_click,

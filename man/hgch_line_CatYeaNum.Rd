@@ -2,21 +2,49 @@
 % Please edit documentation in R/hgch_line_CatYeaNum.R
 \name{hgch_line_CatYeaNum}
 \alias{hgch_line_CatYeaNum}
-\title{line Chart Cat Cat Numeric}
+\title{line chart Cat Yea Num}
 \usage{
 hgch_line_CatYeaNum(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{<\code{\link[=hgch_viz_options]{chart-options}}> Options to configure your hgchmagic plots}
 }
 \description{
-This chart does not allow for chaning orientation
+\code{hgch_line_CatYeaNum()} Create a highcharter line plot based on a particular data type.
+In this case, you can load data with only three columns, where the firts column is a
+\strong{categorical column}, second is a \strong{year column} and the third must be  a \strong{numeric class column},
+or be sure that three firts columns they meet this condition
 }
-\section{ctypes}{
+\section{Ftype}{
 
-Cat-Cat-Num, Cat-Yea-Num
+Cat-Yea-Num
 }
 
 \examples{
-hgch_line_CatYeaNum(sample_data("Cat-Yea-Num", nrow = 100))
+data <- sample_data("Cat-Yea-Num", n = 30)
+hgch_line_CatYeaNum(data)
+
+# Activate data labels
+hgch_line_CatYeaNum(data,
+                       dataLabels_show = TRUE)
+
+# data with more of one column
+data <- sample_data("Cat-Yea-Num-Dat-Yea-Cat", n = 30)
+hgch_line_CatYeaNum(data)
+
+# Change variable to color and pallete type
+hgch_line_CatYeaNum(data,
+                       color_by = names(data)[2],
+                       palette_type = "sequential")
+
+# Change tooltip info and add additional information contained in your data
+names_data <- names(data)
+info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
+data \%>\%
+ hgch_line_CatYeaNum(tooltip = info_tool)
+
 }
+\concept{Cat-Yea-Num plots}

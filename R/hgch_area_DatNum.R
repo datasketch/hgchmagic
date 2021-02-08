@@ -1,13 +1,39 @@
-#' area Chart Dat Numeric
+#' Area chart Dat Num
 #'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
+#' @description
+#' `hgch_area_DatNum()` Create a highcharter area plot based on a particular data type.
+#' In this case, you can load data with only two columns, where the firts column is a
+#' **date column** and the second must be  a **numeric class column**, or be sure that
+#' two firts columns they meet this condition
+#' @export
+#' @inheritParams hgch_area_YeaNum
+#' @family Dat-Num plots
+#' @section Ftype:
 #' Dat-Num
 #' @examples
-#' hgch_area_DatNum(sampleData("Dat-Num", nrow = 10))
-#' @export
+#' data <- sample_data("Dat-Num", n = 30)
+#' hgch_area_DatNum(data)
+#'
+#' hgch_area_DatNum(data)
+#' # if you want to calculate the average instead of the sum, you can use agg inside a function
+#' hgch_area_DatNum(data, agg = "mean")
+#'
+#' # data with more of one column
+#' data <- sample_data("Dat-Num-Cat-Cat-Cat-Num", n = 30)
+#' hgch_area_DatNum(data)
+#'
+#' # calculate percentage
+#' hgch_area_DatNum(data, percentage = TRUE)
+#'
+#' # numeric format
+#' hgch_area_DatNum(data, percentage = TRUE, format_sample_num = "1.234,")
+#'
+#' # You can call the mean and percentage in the tooltip plot
+#' num_name <- names(data)[2]
+#' data %>%
+#' hgch_area_DatNum(agg = "mean",
+#'              tooltip = paste0("Average: {", num_name ,"} <br/> Percentage: {%}%"))
+#'
 hgch_area_DatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 

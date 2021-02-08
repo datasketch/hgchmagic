@@ -1,29 +1,29 @@
-#' Area chart Cat Yea Num
+#' Area chart Cat Yea
 #'
 #' @description
-#' `hgch_area_CatYeaNum()` Create a highcharter area plot based on a particular data type.
+#' `hgch_area_CatYea()` Create a highcharter area plot based on a particular data type.
 #' In this case, you can load data with only three columns, where the firts column is a
-#' **categorical column**, second is a **year column** and the third must be  a **numeric class column**,
+#' **categorical column**, and second is a **year column**,
 #'  or be sure that three firts columns they meet this condition
 #' @export
 #' @inheritParams hgch_area_YeaNum
-#' @family Cat-Yea-Num plots
+#' @family Cat-Yea plots
 #' @section Ftype:
-#' Cat-Yea-Num
+#' Cat-Yea
 #' @examples
-#' data <- sample_data("Cat-Yea-Num", n = 30)
-#' hgch_area_CatYeaNum(data)
+#' data <- sample_data("Cat-Yea", n = 30)
+#' hgch_area_CatYea(data)
 #'
 #' # Activate data labels
-#' hgch_area_CatYeaNum(data,
+#' hgch_area_CatYea(data,
 #'                        dataLabels_show = TRUE)
 #'
 #' # data with more of one column
-#' data <- sample_data("Cat-Yea-Num-Dat-Yea-Cat", n = 30)
-#' hgch_area_CatYeaNum(data)
+#' data <- sample_data("Cat-Yea-Dat-Yea-Cat", n = 30)
+#' hgch_area_CatYea(data)
 #'
 #' # Change variable to color and pallete type
-#' hgch_area_CatYeaNum(data,
+#' hgch_area_CatYea(data,
 #'                        color_by = names(data)[2],
 #'                        palette_type = "sequential")
 #'
@@ -31,13 +31,13 @@
 #' names_data <- names(data)
 #' info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
 #' data %>%
-#'  hgch_area_CatYeaNum(tooltip = info_tool)
+#'  hgch_area_CatYea(tooltip = info_tool)
 #'
-hgch_area_CatYeaNum <- function(data, ...){
+hgch_area_CatYea <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Yea-Num")
+  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Yea")
 
   d <- l$d
 
@@ -90,44 +90,3 @@ hgch_area_CatYeaNum <- function(data, ...){
 
   hc
 }
-
-
-
-
-#' Area chart Yea Cat Num
-#'
-#' @description
-#' `hgch_area_YeaCatNum()` Create a highcharter area plot based on a particular data type.
-#' In this case, you can load data with only three columns, where the firts column is a
-#' **year column**, second is a **categorical column** and the third must be  a **numeric class column**,
-#'  or be sure that three firts columns they meet this condition
-#' @export
-#' @inheritParams hgch_area_YeaNum
-#' @family Yea-Cat-Num plots
-#' @section Ftype:
-#' Yea-Cat-Num
-#' @examples
-#' data <- sample_data("Yea-Cat-Num", n = 30)
-#' hgch_area_CatYeaNum(data)
-#'
-#' # Activate data labels
-#' hgch_area_CatYeaNum(data,
-#'                        dataLabels_show = TRUE)
-#'
-#' # data with more of one column
-#' data <- sample_data("Yea-Cat-Num-Dat-Yea-Cat", n = 30)
-#' hgch_area_CatYeaNum(data)
-#'
-#' # Change variable to color and pallete type
-#' hgch_area_CatYeaNum(data,
-#'                        color_by = names(data)[2],
-#'                        palette_type = "sequential")
-#'
-#' # Change tooltip info and add additional information contained in your data
-#' names_data <- names(data)
-#' info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
-#' data %>%
-#'  hgch_area_CatYeaNum(tooltip = info_tool)
-#'
-hgch_area_YeaCatNum <- hgch_area_CatYeaNum
-

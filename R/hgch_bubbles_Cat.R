@@ -1,13 +1,29 @@
-#' Bubbles Chart Cat Numeric
+#' Bubbles chart Cat
 #'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
+#' @description
+#' `hgch_bubbles_Cat()` Create a highcharter bubbles plot based on a particular data type.
+#' In this case, you can load data with only one **categorical column** or be sure of
+#' the first column of the dataframe its categorical since it will be done a
+#' counting the categories of this column
+#' @inheritParams hgch_bubbles_CatNum
+#' @family Cat plots
+#' @section Ftype:
 #' Cat
 #' @examples
-#' hgch_bubbles_Cat(sample_data("Cat", nrow = 10))
-#' @export
+#' data <- sample_data("Cat", n = 30)
+#' hgch_bubbles_Cat(data)
+#'
+#' # data with more of one column
+#' data <- sample_data("Cat-Num-Dat-Cat-Cat", n = 30)
+#' hgch_bubbles_Cat(data)
+#'
+#' # calculate percentage
+#' hgch_bubbles_Cat(data, percentage = TRUE)
+#'
+#' # You can call the count and percentage in the tooltip plot
+#' data %>%
+#' hgch_bubbles_Cat(tooltip = "Count: {Count} <br/> Percentage: {%}%")
+#'
 hgch_bubbles_Cat <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
@@ -72,14 +88,32 @@ hgch_bubbles_Cat <- function(data, ...){
 
 
 
-#' bubbles Chart Yea
+#' Bubbles chart Yea
 #'
-#'
-#' @param data A data.frame
-#' @section ctypes:
+#' @description
+#' `hgch_bubbles_Yea()` Create a highcharter bubbles plot based on a particular data type.
+#' In this case, you can load data with only one **Year column** or be sure of
+#' the first column of the dataframe its a year column since it will be done a
+#' counting the years of this column
+#' @export
+#' @inheritParams hgch_bubbles_CatNum
+#' @family Yea plots
+#' @section Ftype:
 #' Yea
 #' @examples
-#' hgch_bubbles_Yea(sample_data("Yea", nrow = 10))
-#' @export
+#' data <- sample_data("Yea", n = 30)
+#' hgch_bubbles_Yea(data)
+#'
+#' # data with more of one column
+#' data <- sample_data("Yea-Num-Dat-Yea-Yea", n = 30)
+#' hgch_bubbles_Yea(data)
+#'
+#' # calculate percentage
+#' hgch_bubbles_Yea(data, percentage = TRUE)
+#'
+#' # You can call the count and percentage in the tooltip plot
+#' data %>%
+#' hgch_bubbles_Yea(tooltip = "Count: {Count} <br/> Percentage: {%}%")
+#'
 hgch_bubbles_Yea <- hgch_bubbles_Cat
 

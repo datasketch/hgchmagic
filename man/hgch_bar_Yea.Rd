@@ -2,21 +2,46 @@
 % Please edit documentation in R/hgch_bar_Cat.R
 \name{hgch_bar_Yea}
 \alias{hgch_bar_Yea}
-\title{Bar Chart Yea}
+\title{Bar chart Yea}
 \usage{
 hgch_bar_Yea(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{<\code{\link[=hgch_viz_options]{chart-options}}> Options to configure your hgchmagic plots}
 }
 \description{
-This chart does not allow for chaning orientation
+\code{hgch_bar_Yea()} Create a highcharter bar plot based on a particular data type.
+In this case, you can load data with only one \strong{Year column} or be sure of
+the first column of the dataframe its a year column since it will be done a
+counting the years of this column
 }
-\section{ctypes}{
+\section{Ftype}{
 
 Yea
 }
 
 \examples{
-hgch_bar_Yea(sample_data("Yea", nrow = 10))
+data <- sample_data("Yea", n = 30)
+hgch_bar_Yea(data)
+
+# data with more of one column
+data <- sample_data("Yea-Num-Dat-Yea-Yea", n = 30)
+hgch_bar_Yea(data)
+
+# calculate percentage
+hgch_bar_Yea(data, percentage = TRUE)
+
+# You can call the count and percentage in the tooltip plot
+data \%>\%
+hgch_bar_Yea(tooltip = "Count: {Count} <br/> Percentage: {\%}\%")
 }
+\seealso{
+Other Yea plots: 
+\code{\link{hgch_line_Yea}()},
+\code{\link{hgch_pie_Yea}()},
+\code{\link{hgch_treemap_Yea}()}
+}
+\concept{Yea plots}

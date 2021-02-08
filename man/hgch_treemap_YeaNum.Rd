@@ -2,21 +2,63 @@
 % Please edit documentation in R/hgch_treemap_CatNum.R
 \name{hgch_treemap_YeaNum}
 \alias{hgch_treemap_YeaNum}
-\title{treemap Chart Yea Num}
+\title{Treemap chart Yea Num}
 \usage{
 hgch_treemap_YeaNum(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{<\code{\link[=hgch_viz_options]{chart-options}}> Options to configure your hgchmagic plots}
 }
 \description{
-treemap Chart Yea Num
+\code{hgch_treemap_YeaNum()} Create a highcharter treemap plot based on a particular data type.
+In this case, you can load data with only two columns, where the firts column is a
+\strong{Year column} and the second must be  a \strong{numeric class column}, or be sure that
+two firts columns they meet this condition
 }
-\section{ctypes}{
+\section{Ftype}{
 
-Yea, Yea
+Yea-Num
 }
 
 \examples{
-hgch_treemap_YeaNum(sample_data("Yea-Num", nrow = 10))
+data <- sample_data("Yea-Num", n = 30)
+hgch_treemap_YeaNum(data)
+
+example with iris data
+data <- iris \%>\% select(Species, Petal.Width)
+# this plot show the sum of petal width by species
+hgch_treemap_YeaNum(data)
+# if you want to calculate the average instead of the sum,
+# you can use "agg" param inside a function
+hgch_treemap_YeaNum(data, agg = "mean")
+
+# data with more of one column
+data <- sample_data("Yea-Num-Dat-Yea-Yea", n = 30)
+hgch_treemap_YeaNum(data)
+# Activate data labels
+hgch_treemap_YeaNum(data,
+                    dataLabels_show = TRUE)
+# position and dimensions to points
+hgch_treemap_YeaNum(data, treemap_layout = "stripes")
+
+# calculate percentage and change numeric format
+hgch_treemap_YeaNum(data,
+                    percentage = TRUE,
+                    format_sample_num = "1.234,")
+
+# You can call the mean and percentage in the tooltip plot
+num_name <- names(data)[2]
+data \%>\%
+hgch_treemap_YeaNum(agg = "mean",
+                    tooltip = paste0("Average: {", num_name ,"} <br/> Percentage: {\%}\%"))
 }
+\seealso{
+Other Yea-Num plots: 
+\code{\link{hgch_bar_YeaNum}()},
+\code{\link{hgch_line_YeaNum}()},
+\code{\link{hgch_pie_YeaNum}()}
+}
+\concept{Yea-Num plots}

@@ -1,13 +1,24 @@
-#' scatter Chart Dat Numeric
+#' Scatter chart Dat Num
 #'
-#' This chart does not allow for chaning orientation
+#' @description
+#' `hgch_scatter_Dat()`  Create a highcharter treemap plot based on a particular data type.
+#' In this case, you can load data with only one **date column** or be sure of
+#' the first column of the dataframe its in date class, since it will be done a
+#' counting the categories of this column.
 #'
-#' @param data A data.frame
-#' @section ctypes:
+#' @export
+#' @inheritParams hgch_scatter_NumNum
+#' @family Dat plots
+#' @section Ftype:
 #' Dat
 #' @examples
-#' hgch_scatter_Dat(sampleData("Dat", nrow = 10))
-#' @export
+#' data <- sample_data("Dat", n = 30)
+#' hgch_scatter_Dat(data)
+#'
+#' # data with more of one column
+#' data <- sample_data("Dat-Num-Dat-Cat-Cat", n = 30)
+#' hgch_scatter_Dat(data)
+#'
 hgch_scatter_Dat <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 

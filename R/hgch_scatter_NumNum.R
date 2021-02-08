@@ -1,13 +1,35 @@
-#' Scatter Chart Cat Cat Numeric
+#' Scatter chart Num Num
 #'
-#' This chart does not allow for chaning orientation
+#' @description
+#' `hgch_scatter_NumNum()` Create a highcharter scatter plot based on a particular data type.
+#' In this case, you can load data with only two columns,  where the firts and second columns are
+#' **numeric class**, or be sure that two firts columns they meet this condition
 #'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num, Cat-Yea-Num
-#' @examples
-#' hgch_scatter_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
 #' @export
+#' @param data A data frame, data frame extension (e.g. a tibble), a
+#'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
+#' @param ... Read <[`chart-options`][hgch_viz_options]> a general options summary to configure your hgchmagic plots
+#'   and <[`scatter-options`][hgch_scatter_options]> which specifically contains the additional arguments
+#'   that work only for this type of chart
+#' @family Num-Num plots
+#' @section Ftype:
+#' Num-Num
+#' @examples
+#' data <- sample_data("Num-Num", n = 30)
+#' hgch_scatter_NumNum(data)
+#'
+#' example with iris data
+#' data <- iris %>% select(Petal.Width, Petal.Length)
+#' hgch_scatter_NumNum(data)
+#'
+#' # linear regression
+#' hgch_scatter_NumNum(data, scatter_regression = TRUE)
+#'
+#' # data with more of one column
+#' data <- sample_data("Num-Num-Dat-Cat-Cat", n = 30)
+#' hgch_scatter_NumNum(data)
+#'
+
 hgch_scatter_NumNum <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")

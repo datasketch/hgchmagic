@@ -1,13 +1,38 @@
-#' Bar Chart Cat Cat Numeric
+#' Bar chart Cat Cat
 #'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat, Cat-Yea-Num
-#' @examples
-#' hgch_bar_CatCat(sample_data("Cat-Cat", nrow = 10))
+#' @description
+#' `hgch_bar_CatCat()` Create a highcharter bar plot based on a particular data type.
+#' In this case, you can load data with only two columns, where the firts and second columns are
+#' **categoricals columns**, or be sure that firts two columns they meet this condition, since it
+#' will be done a counting the categories of this columns.
 #' @export
+#' @inheritParams hgch_bar_CatNum
+#' @family Cat-Cat plots
+#' @section Ftype:
+#' Cat-Cat
+#' @examples
+#' data <- sample_data("Cat-Cat", n = 30)
+#' hgch_bar_CatCat(data)
+#'
+#' # Activate data labels
+#' hgch_bar_CatCat(data,
+#'                        dataLabels_show = TRUE)
+#'
+#' # data with more of one column
+#' data <- sample_data("Cat-Cat-Num-Yea-Cat", n = 30)
+#' hgch_bar_CatCat(data)
+#'
+#' # Change variable to color and pallete type
+#' hgch_bar_CatCat(data,
+#'                        color_by = names(data)[2],
+#'                        palette_type = "sequential")
+#'
+#' # Change tooltip info and add additional information contained in your data
+#' names_data <- names(data)
+#' info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
+#' data %>%
+#'  hgch_bar_CatCat(tooltip = info_tool)
+#'
 hgch_bar_CatCat <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
@@ -98,24 +123,76 @@ hgch_bar_CatCat <- function(data, ...){
   hc
 }
 
-#' bar Chart Yea Cat
+#' Bar chart Yea Cat
 #'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
-#' @examples
-#' hgch_bar_YeaCat(sample_data("Yea-Cat", nrow = 10))
+#' @description
+#' `hgch_bar_YeaCat()` Create a highcharter bar plot based on a particular data type.
+#' In this case, you can load data with only two columns, where the firts is a
+#' **year column** and the second must be a **categorical column**, or be sure that firts two columns
+#' they meet this condition, since it will be done a counting the categories of this columns.
 #' @export
+#' @inheritParams hgch_bar_CatNum
+#' @family Yea-Cat plots
+#' @section Ftype:
+#' Yea-Cat
+#' @examples
+#' data <- sample_data("Yea-Cat", n = 30)
+#' hgch_bar_CatCat(data)
+#'
+#' # Activate data labels
+#' hgch_bar_YeaCat(data,
+#'                        dataLabels_show = TRUE)
+#'
+#' # data with more of one column
+#' data <- sample_data("Yea-Cat-Dat-Yea-Cat", n = 30)
+#' hgch_bar_YeaCat(data)
+#'
+#' # Change variable to color and pallete type
+#' hgch_bar_YeaCat(data,
+#'                        color_by = names(data)[2],
+#'                        palette_type = "sequential")
+#'
+#' # Change tooltip info and add additional information contained in your data
+#' names_data <- names(data)
+#' info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
+#' data %>%
+#'  hgch_bar_YeaCat(tooltip = info_tool)
+#'
 hgch_bar_YeaCat <- hgch_bar_CatCat
 
-#' bar Chart Cat Yea
+#' Bar chart Cat Yea
 #'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
-#' @examples
-#' hgch_bar_CatYea(sample_data("Cat-Yea", nrow = 10))
+#' @description
+#' `hgch_bar_CatYea()` Create a highcharter bar plot based on a particular data type.
+#' In this case, you can load data with only two columns, where the firts is a
+#' **categorical column** and the second must be a **year column**, or be sure that firts two columns
+#' they meet this condition, since it will be done a counting the categories of this columns.
 #' @export
+#' @inheritParams hgch_bar_CatNum
+#' @family Cat-Yea plots
+#' @section Ftype:
+#' Cat-Yea
+#' @examples
+#' data <- sample_data("Cat-Yea", n = 30)
+#' hgch_bar_CatYea(data)
+#'
+#' # Activate data labels
+#' hgch_bar_CatYea(data,
+#'                        dataLabels_show = TRUE)
+#'
+#' # data with more of one column
+#' data <- sample_data("Cat-Yea-Cat-Dat-Num-Cat", n = 30)
+#' hgch_bar_CatYea(data)
+#'
+#' # Change variable to color and pallete type
+#' hgch_bar_CatYea(data,
+#'                        color_by = names(data)[2],
+#'                        palette_type = "sequential")
+#'
+#' # Change tooltip info and add additional information contained in your data
+#' names_data <- names(data)
+#' info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[3],":</b> {", names_data[3],"}<br/>")
+#' data %>%
+#'  hgch_bar_CatYea(tooltip = info_tool)
+#'
 hgch_bar_CatYea <- hgch_bar_CatCat

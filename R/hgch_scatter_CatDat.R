@@ -1,12 +1,23 @@
-#' scatter Chart Cat Dat Numeric
+#' Scatter chart Cat Dat
 #'
+#' @description
+#' `hgch_scatter_CatDat()` Create a highcharter scatter plot based on a particular data type.
+#' In this case, you can load data with only two columns,  where the firts is a **categorical column**, and
+#' second is a **date column**, or be sure that two firts columns they meet this condition.
 #'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Dat
-#' @examples
-#' hgch_scatter_CatDat(sampleData("Cat-Dat", nrow = 10))
 #' @export
+#' @inheritParams hgch_scatter_NumNum
+#' @family Cat-Dat plots
+#' @section Ftype:
+#' Dat-Num
+#' @examples
+#' data <- sample_data("Cat-Dat-Num", n = 30)
+#' hgch_scatter_CatDatNum(data)
+#'
+#' # data with more of one column
+#' data <- sample_data("Cat-Dat-Num-Dat-Cat-Cat", n = 30)
+#' hgch_scatter_CatDatNum(data)
+#'
 hgch_scatter_CatDat <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 

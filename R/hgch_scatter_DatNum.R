@@ -1,13 +1,23 @@
-#' scatter Chart Dat Numeric
+#' Scatter chart Dat Num
 #'
-#' This chart does not allow for chaning orientation
+#' @description
+#' `hgch_scatter_DatNum()` Create a highcharter scatter plot based on a particular data type.
+#' In this case, you can load data with only two columns,  where the firts is a
+#' **date column**, and second is a **numeric column**, or be sure that two firts columns they meet this condition
 #'
-#' @param data A data.frame
-#' @section ctypes:
+#' @export
+#' @inheritParams hgch_scatter_NumNum
+#' @family Dat-Num plots
+#' @section Ftype:
 #' Dat-Num
 #' @examples
-#' hgch_scatter_DatNum(sampleData("Dat-Num", nrow = 10))
-#' @export
+#' data <- sample_data("Dat-Num", n = 30)
+#' hgch_scatter_DatNum(data)
+#'
+#' # data with more of one column
+#' data <- sample_data("Dat-Num-Dat-Cat-Cat", n = 30)
+#' hgch_scatter_DatNum(data)
+#'
 hgch_scatter_DatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 

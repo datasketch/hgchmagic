@@ -2,21 +2,48 @@
 % Please edit documentation in R/hgch_treemap_Cat.R
 \name{hgch_treemap_Yea}
 \alias{hgch_treemap_Yea}
-\title{treemap Chart Yea}
+\title{treemap chart Yea}
 \usage{
 hgch_treemap_Yea(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{Read <\code{\link[=hgch_viz_options]{chart-options}}> a general options summary to configure your hgchmagic plots
+and <\code{\link[=hgch_treemap_options]{treemap-options}}> which specifically contains the additional arguments
+that work only for this type of chart.}
 }
 \description{
-treemap Chart Yea
+\code{hgch_treemap_Yea()} Create a highcharter treemap plot based on a particular data type.
+In this case, you can load data with only one \strong{Year column} or be sure of
+the first column of the dataframe its a year column since it will be done a
+counting the years of this column
 }
-\section{ctypes}{
+\section{Ftype}{
 
 Yea
 }
 
 \examples{
-hgch_treemap_Yea(sample_data("Yea", nrow = 10))
+data <- sample_data("Yea", n = 30)
+hgch_treemap_Yea(data)
+
+# data with more of one column
+data <- sample_data("Yea-Num-Dat-Yea-Yea", n = 30)
+hgch_treemap_Yea(data)
+
+# calculate percentage
+hgch_treemap_Yea(data, percentage = TRUE)
+
+# You can call the count and percentage in the tooltip plot
+data \%>\%
+hgch_treemap_Yea(tooltip = "Count: {Count} <br/> Percentage: {\%}\%")
 }
+\seealso{
+Other Yea plots: 
+\code{\link{hgch_bar_Yea}()},
+\code{\link{hgch_line_Yea}()},
+\code{\link{hgch_pie_Yea}()}
+}
+\concept{Yea plots}

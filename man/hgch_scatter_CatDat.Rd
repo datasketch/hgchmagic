@@ -2,21 +2,39 @@
 % Please edit documentation in R/hgch_scatter_CatDat.R
 \name{hgch_scatter_CatDat}
 \alias{hgch_scatter_CatDat}
-\title{scatter Chart Cat Dat Numeric}
+\title{Scatter chart Cat Dat}
 \usage{
 hgch_scatter_CatDat(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{Read <\code{\link[=hgch_viz_options]{chart-options}}> a general options summary to configure your hgchmagic plots
+and <\code{\link[=hgch_scatter_options]{scatter-options}}> which specifically contains the additional arguments
+that work only for this type of chart}
 }
 \description{
-scatter Chart Cat Dat Numeric
+\code{hgch_scatter_CatDat()} Create a highcharter scatter plot based on a particular data type.
+In this case, you can load data with only two columns,  where the firts is a \strong{categorical column}, and
+second is a \strong{date column}, or be sure that two firts columns they meet this condition.
 }
-\section{ctypes}{
+\section{Ftype}{
 
-Cat-Dat
+Dat-Num
 }
 
 \examples{
-hgch_scatter_CatDat(sampleData("Cat-Dat", nrow = 10))
+data <- sample_data("Cat-Dat-Num", n = 30)
+hgch_scatter_CatDatNum(data)
+
+# data with more of one column
+data <- sample_data("Cat-Dat-Num-Dat-Cat-Cat", n = 30)
+hgch_scatter_CatDatNum(data)
+
 }
+\seealso{
+Other Cat-Dat plots: 
+\code{\link{hgch_line_CatDat}()}
+}
+\concept{Cat-Dat plots}
