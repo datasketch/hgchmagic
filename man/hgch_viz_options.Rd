@@ -3,6 +3,19 @@
 \name{hgch_viz_options}
 \alias{hgch_viz_options}
 \title{Chart Options}
+\arguments{
+\item{title}{String with the main title (on top). Default is NULL}
+
+\item{subtitle}{String for subtitle (below the title). Default is NULL}
+
+\item{caption}{String for caption (bottom). Default is NULL}
+
+\item{hor_title}{String. The main title (on top). Default is NULL}
+
+\item{ver_title}{String. The main title (on top). Default is NULL}
+
+\item{legend_title}{String. The main title (on top). Default is NULL}
+}
 \description{
 This page describes the \verb{<chart-options>} arguments
 }
