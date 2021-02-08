@@ -51,6 +51,9 @@ data \%>\%
 }
 \seealso{
 Other Cat-Yea plots: 
+\code{\link{hgch_area_CatYea}()},
+\code{\link{hgch_bar_CatYea}()},
+\code{\link{hgch_bubbles_CatYea}()},
 \code{\link{hgch_line_CatYea}()}
 }
 \concept{Cat-Yea plots}

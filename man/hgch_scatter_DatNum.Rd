@@ -35,6 +35,7 @@ hgch_scatter_DatNum(data)
 }
 \seealso{
 Other Dat-Num plots: 
+\code{\link{hgch_area_DatNum}()},
 \code{\link{hgch_line_DatNum}()}
 }
 \concept{Dat-Num plots}

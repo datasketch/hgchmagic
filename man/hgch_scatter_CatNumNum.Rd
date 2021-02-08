@@ -38,4 +38,8 @@ data <- sample_data("Cat-Num-Num-Dat-Cat-Cat", n = 30)
 hgch_scatter_CatNumNum(data)
 
 }
+\seealso{
+Other Cat-Num-Num plots: 
+\code{\link{hgch_dumbbell_CatNumNum}()}
+}
 \concept{Cat-Num-Num plots}

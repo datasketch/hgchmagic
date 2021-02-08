@@ -2,7 +2,7 @@
 % Please edit documentation in R/hgch_line_CatYeaNum.R
 \name{hgch_line_CatYeaNum}
 \alias{hgch_line_CatYeaNum}
-\title{line chart Cat Yea Num}
+\title{Line chart Cat Yea Num}
 \usage{
 hgch_line_CatYeaNum(data, ...)
 }
@@ -46,5 +46,9 @@ info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", na
 data \%>\%
  hgch_line_CatYeaNum(tooltip = info_tool)
 
+}
+\seealso{
+Other Cat-Yea-Num plots: 
+\code{\link{hgch_area_CatYeaNum}()}
 }
 \concept{Cat-Yea-Num plots}

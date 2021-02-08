@@ -54,4 +54,10 @@ data \%>\%
  hgch_treemap_CatCatNum(tooltip = info_tool)
 
 }
+\seealso{
+Other Cat-Cat-Num plots: 
+\code{\link{hgch_bar_CatCatNum}()},
+\code{\link{hgch_bubbles_CatCatNum}()},
+\code{\link{hgch_dumbbell_CatCatNum}()}
+}
 \concept{Cat-Cat-Num plots}

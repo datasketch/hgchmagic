@@ -49,4 +49,9 @@ data \%>\%
  hgch_treemap_YeaCat(tooltip = info_tool)
 
 }
+\seealso{
+Other Yea-Cat plots: 
+\code{\link{hgch_bar_YeaCat}()},
+\code{\link{hgch_bubbles_YeaCat}()}
+}
 \concept{Yea-Cat plots}

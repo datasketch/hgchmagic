@@ -35,6 +35,7 @@ hgch_scatter_CatDatNum(data)
 }
 \seealso{
 Other Cat-Dat plots: 
+\code{\link{hgch_area_CatDat}()},
 \code{\link{hgch_line_CatDat}()}
 }
 \concept{Cat-Dat plots}

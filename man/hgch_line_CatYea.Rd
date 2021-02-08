@@ -2,7 +2,7 @@
 % Please edit documentation in R/hgch_line_CatYea.R
 \name{hgch_line_CatYea}
 \alias{hgch_line_CatYea}
-\title{line chart Cat Yea}
+\title{Line chart Cat Yea}
 \usage{
 hgch_line_CatYea(data, ...)
 }
@@ -49,6 +49,9 @@ data \%>\%
 }
 \seealso{
 Other Cat-Yea plots: 
+\code{\link{hgch_area_CatYea}()},
+\code{\link{hgch_bar_CatYea}()},
+\code{\link{hgch_bubbles_CatYea}()},
 \code{\link{hgch_treemap_CatYea}()}
 }
 \concept{Cat-Yea plots}

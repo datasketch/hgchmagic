@@ -48,7 +48,10 @@ hgch_line_YeaNum(agg = "mean",
 }
 \seealso{
 Other Yea-Num plots: 
+\code{\link{hgch_area_YeaNum}()},
 \code{\link{hgch_bar_YeaNum}()},
+\code{\link{hgch_bubbles_YeaNum}()},
+\code{\link{hgch_donut_YeaNum}()},
 \code{\link{hgch_pie_YeaNum}()},
 \code{\link{hgch_treemap_YeaNum}()}
 }

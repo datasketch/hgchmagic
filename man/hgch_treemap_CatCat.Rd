@@ -51,6 +51,9 @@ data \%>\%
 }
 \seealso{
 Other Cat-Cat plots: 
+\code{\link{hgch_bar_CatCat}()},
+\code{\link{hgch_bubbles_CatCat}()},
+\code{\link{hgch_dumbbell_CatCat}()},
 \code{\link{hgch_sankey_CatCat}()}
 }
 \concept{Cat-Cat plots}

@@ -45,7 +45,9 @@ hgch_line_Yea(tooltip = paste0("Average: {", num_name ,"} <br/> Percentage: {\%}
 }
 \seealso{
 Other Yea plots: 
+\code{\link{hgch_area_Yea}()},
 \code{\link{hgch_bar_Yea}()},
+\code{\link{hgch_bubbles_Yea}()},
 \code{\link{hgch_pie_Yea}()},
 \code{\link{hgch_treemap_Yea}()}
 }

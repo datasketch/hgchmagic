@@ -58,6 +58,8 @@ hgch_treemap_CatNum(agg = "mean",
 \seealso{
 Other Cat-Num plots: 
 \code{\link{hgch_bar_CatNum}()},
+\code{\link{hgch_bubbles_CatNum}()},
+\code{\link{hgch_donut_CatNum}()},
 \code{\link{hgch_pie_CatNum}()}
 }
 \concept{Cat-Num plots}

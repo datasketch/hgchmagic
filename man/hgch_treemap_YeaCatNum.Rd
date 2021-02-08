@@ -51,6 +51,9 @@ data \%>\%
 }
 \seealso{
 Other Yea-Cat-Num plots: 
+\code{\link{hgch_area_YeaCatNum}()},
+\code{\link{hgch_bar_YeaCatNum}()},
+\code{\link{hgch_bubbles_YeaCatNum}()},
 \code{\link{hgch_line_YeaCatNum}()}
 }
 \concept{Yea-Cat-Num plots}

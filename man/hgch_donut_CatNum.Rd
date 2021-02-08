@@ -2,21 +2,60 @@
 % Please edit documentation in R/hgch_donut_CatNum.R
 \name{hgch_donut_CatNum}
 \alias{hgch_donut_CatNum}
-\title{donut Chart Cat Numeric}
+\title{Donut chart Cat Num}
 \usage{
 hgch_donut_CatNum(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{<\code{\link[=hgch_viz_options]{chart-options}}> Options to configure your hgchmagic plots}
 }
 \description{
-This chart does not allow for chaning orientation
+\code{hgch_donut_CatNum()} Create a highcharter donut plot based on a particular data type.
+In this case, you can load data with only two columns, where the firts column is a
+\strong{categorical column} and the second must be  a \strong{numeric class column}, or be sure that
+two firts columns they meet this condition
 }
-\section{ctypes}{
+\section{Ftype}{
 
-Cat-Num, Yea-Num
+Cat-Num
 }
 
 \examples{
-hgch_donut_CatNum(sample_data("Cat-Num", nrow = 10))
+data <- sample_data("Cat-Num", n = 30)
+hgch_donut_CatNum(data)
+
+example with iris data
+data <- iris \%>\% select(Species, Petal.Width)
+# this plot show the sum of petal width by species
+hgch_donut_CatNum(data, color_by = "Species")
+# if you want to calculate the average instead of the sum,
+# you can use "agg" param inside a function
+hgch_donut_CatNum(data, agg = "mean")
+
+# data with more of one column
+data <- sample_data("Cat-Num-Dat-Cat-Cat", n = 30)
+hgch_donut_CatNum(data)
+
+# calculate percentage
+hgch_donut_CatNum(data, percentage = TRUE)
+
+# numeric format
+hgch_donut_CatNum(data, percentage = TRUE, format_sample_num = "1.234,")
+
+# You can call the mean and percentage in the tooltip plot
+num_name <- names(data)[2]
+data \%>\%
+hgch_donut_CatNum(agg = "mean",
+                tooltip = paste0("Average: {", num_name ,"} <br/> Percentage: {\%}\%"))
 }
+\seealso{
+Other Cat-Num plots: 
+\code{\link{hgch_bar_CatNum}()},
+\code{\link{hgch_bubbles_CatNum}()},
+\code{\link{hgch_pie_CatNum}()},
+\code{\link{hgch_treemap_CatNum}()}
+}
+\concept{Cat-Num plots}

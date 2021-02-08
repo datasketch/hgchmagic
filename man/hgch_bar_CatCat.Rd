@@ -2,21 +2,56 @@
 % Please edit documentation in R/hgch_bar_CatCat.R
 \name{hgch_bar_CatCat}
 \alias{hgch_bar_CatCat}
-\title{Bar Chart Cat Cat Numeric}
+\title{Bar chart Cat Cat}
 \usage{
 hgch_bar_CatCat(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{<\code{\link[=hgch_viz_options]{chart-options}}> Options to configure your hgchmagic plots}
 }
 \description{
-This chart does not allow for chaning orientation
+\code{hgch_bar_CatCat()} Create a highcharter bar plot based on a particular data type.
+In this case, you can load data with only two columns, where the firts and second columns are
+\strong{categoricals columns}, or be sure that firts two columns they meet this condition, since it
+will be done a counting the categories of this columns.
 }
-\section{ctypes}{
+\section{Ftype}{
 
-Cat-Cat, Cat-Yea-Num
+Cat-Cat
 }
 
 \examples{
-hgch_bar_CatCat(sample_data("Cat-Cat", nrow = 10))
+data <- sample_data("Cat-Cat", n = 30)
+hgch_bar_CatCat(data)
+
+# Activate data labels
+hgch_bar_CatCat(data,
+                       dataLabels_show = TRUE)
+
+# data with more of one column
+data <- sample_data("Cat-Cat-Num-Yea-Cat", n = 30)
+hgch_bar_CatCat(data)
+
+# Change variable to color and pallete type
+hgch_bar_CatCat(data,
+                       color_by = names(data)[2],
+                       palette_type = "sequential")
+
+# Change tooltip info and add additional information contained in your data
+names_data <- names(data)
+info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
+data \%>\%
+ hgch_bar_CatCat(tooltip = info_tool)
+
 }
+\seealso{
+Other Cat-Cat plots: 
+\code{\link{hgch_bubbles_CatCat}()},
+\code{\link{hgch_dumbbell_CatCat}()},
+\code{\link{hgch_sankey_CatCat}()},
+\code{\link{hgch_treemap_CatCat}()}
+}
+\concept{Cat-Cat plots}

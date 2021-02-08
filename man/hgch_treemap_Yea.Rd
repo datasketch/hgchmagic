@@ -42,7 +42,9 @@ hgch_treemap_Yea(tooltip = "Count: {Count} <br/> Percentage: {\%}\%")
 }
 \seealso{
 Other Yea plots: 
+\code{\link{hgch_area_Yea}()},
 \code{\link{hgch_bar_Yea}()},
+\code{\link{hgch_bubbles_Yea}()},
 \code{\link{hgch_line_Yea}()},
 \code{\link{hgch_pie_Yea}()}
 }

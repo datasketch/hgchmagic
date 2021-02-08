@@ -36,6 +36,7 @@ hgch_scatter_Dat(data)
 }
 \seealso{
 Other Dat plots: 
+\code{\link{hgch_area_Dat}()},
 \code{\link{hgch_line_Dat}()}
 }
 \concept{Dat plots}

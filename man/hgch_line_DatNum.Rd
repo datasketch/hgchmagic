@@ -2,7 +2,7 @@
 % Please edit documentation in R/hgch_line_DatNum.R
 \name{hgch_line_DatNum}
 \alias{hgch_line_DatNum}
-\title{line chart Dat Num}
+\title{Line chart Dat Num}
 \usage{
 hgch_line_DatNum(data, ...)
 }
@@ -15,7 +15,7 @@ lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum
 \description{
 \code{hgch_line_DatNum()} Create a highcharter line plot based on a particular data type.
 In this case, you can load data with only two columns, where the firts column is a
-\strong{date column} and the second must be  a \strong{numeric class column}, or be sure that
+\strong{date column} and the second must be a \strong{numeric class column}, or be sure that
 two firts columns they meet this condition
 }
 \section{Ftype}{
@@ -46,9 +46,11 @@ num_name <- names(data)[2]
 data \%>\%
 hgch_line_DatNum(agg = "mean",
              tooltip = paste0("Average: {", num_name ,"} <br/> Percentage: {\%}\%"))
+
 }
 \seealso{
 Other Dat-Num plots: 
+\code{\link{hgch_area_DatNum}()},
 \code{\link{hgch_scatter_DatNum}()}
 }
 \concept{Dat-Num plots}

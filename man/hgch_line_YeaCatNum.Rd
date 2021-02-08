@@ -2,7 +2,7 @@
 % Please edit documentation in R/hgch_line_CatYeaNum.R
 \name{hgch_line_YeaCatNum}
 \alias{hgch_line_YeaCatNum}
-\title{line chart Yea Cat Num}
+\title{Line chart Yea Cat Num}
 \usage{
 hgch_line_YeaCatNum(data, ...)
 }
@@ -49,6 +49,9 @@ data \%>\%
 }
 \seealso{
 Other Yea-Cat-Num plots: 
+\code{\link{hgch_area_YeaCatNum}()},
+\code{\link{hgch_bar_YeaCatNum}()},
+\code{\link{hgch_bubbles_YeaCatNum}()},
 \code{\link{hgch_treemap_YeaCatNum}()}
 }
 \concept{Yea-Cat-Num plots}

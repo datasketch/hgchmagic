@@ -2,7 +2,7 @@
 % Please edit documentation in R/hgch_line_CatDat.R
 \name{hgch_line_CatDat}
 \alias{hgch_line_CatDat}
-\title{line chart Cat Dat}
+\title{Line chart Cat Dat}
 \usage{
 hgch_line_CatDat(data, ...)
 }
@@ -49,6 +49,7 @@ data \%>\%
 }
 \seealso{
 Other Cat-Dat plots: 
+\code{\link{hgch_area_CatDat}()},
 \code{\link{hgch_scatter_CatDat}()}
 }
 \concept{Cat-Dat plots}
