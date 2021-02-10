@@ -44,6 +44,7 @@ Other Yea plots:
 \code{\link{hgch_area_Yea}()},
 \code{\link{hgch_bar_Yea}()},
 \code{\link{hgch_bubbles_Yea}()},
+\code{\link{hgch_donut_Yea}()},
 \code{\link{hgch_line_Yea}()},
 \code{\link{hgch_treemap_Yea}()}
 }

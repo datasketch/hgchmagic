@@ -8,7 +8,7 @@
 #' @export
 #' @param data A data frame, data frame extension (e.g. a tibble), a
 #'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
-#' @param ... <[`chart-options`][hgch_viz_options]> Options to configure your hgchmagic plots
+#' @param ... Read \code{\link[dsvizopts]{chart_viz_options}} a general options summary to configure your hgchmagic plots.
 #' @family Yea-Num plots
 #' @section Ftype:
 #' Yea-Num

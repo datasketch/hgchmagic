@@ -6,11 +6,7 @@
 #' **categoricals columns** and the third must be  a **numeric class column**, or be sure that
 #' three firts columns they meet this condition
 #' @export
-#' @param data A data frame, data frame extension (e.g. a tibble), a
-#'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
-#' @param ... Read <[`chart-options`][hgch_viz_options]> a general options summary to configure your hgchmagic plots
-#'   and <[`treemap-options`][hgch_treemap_options]> which specifically contains the additional arguments
-#'   that work only for this type of chart
+#' @inheritParams hgch_treemap_CatNum
 #' @family Cat-Cat-Num plots
 #' @section Ftype:
 #' Cat-Cat-Num
@@ -150,7 +146,7 @@ hgch_treemap_CatYeaNum <- hgch_treemap_CatCatNum
 #' **year column**, second is a **categorical column** and the third must be  a **numeric class column**,
 #'  or be sure that three firts columns they meet this condition
 #' @export
-#' @inheritParams hgch_treemap_CatCatNum
+#' @inheritParams hgch_treemap_CatNum
 #' @family Yea-Cat-Num plots
 #' @section Ftype:
 #' Yea-Cat-Num

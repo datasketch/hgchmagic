@@ -6,11 +6,7 @@
 #' the first column of the dataframe its categorical, since it will be done a
 #' counting the categories of this column.
 #' @export
-#' @param data A data frame, data frame extension (e.g. a tibble), a
-#'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
-#' @param ... Read <[`chart-options`][hgch_viz_options]> a general options summary to configure your hgchmagic plots
-#'   and <[`treemap-options`][hgch_treemap_options]> which specifically contains the additional arguments
-#'   that work only for this type of chart.
+#' @inheritParams hgch_treemap_CatNum
 #' @family Cat plots
 #' @section Ftype:
 #' Cat
@@ -97,7 +93,7 @@ hgch_treemap_Cat <- function(data, ...){
 #' the first column of the dataframe its a year column since it will be done a
 #' counting the years of this column
 #' @export
-#' @inheritParams hgch_treemap_Cat
+#' @inheritParams hgch_treemap_CatNum
 #' @family Yea plots
 #' @section Ftype:
 #' Yea

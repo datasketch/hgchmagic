@@ -10,7 +10,7 @@ hgch_area_Yea(data, ...)
 \item{data}{A data frame, data frame extension (e.g. a tibble), a
 lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
 
-\item{...}{<\code{\link[=hgch_viz_options]{chart-options}}> Options to configure your hgchmagic plots}
+\item{...}{Read \code{\link[dsvizopts]{chart_viz_options}} a general options summary to configure your hgchmagic plots.}
 }
 \description{
 \code{hgch_area_Yea()} Create a highcharter area plot based on a particular data type.
@@ -50,6 +50,7 @@ hgch_area_Yea(agg = "mean",
 Other Yea plots: 
 \code{\link{hgch_bar_Yea}()},
 \code{\link{hgch_bubbles_Yea}()},
+\code{\link{hgch_donut_Yea}()},
 \code{\link{hgch_line_Yea}()},
 \code{\link{hgch_pie_Yea}()},
 \code{\link{hgch_treemap_Yea}()}

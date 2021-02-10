@@ -43,6 +43,7 @@ hgch_pie_Cat(tooltip = "Count: {Count} <br/> Percentage: {\%}\%")
 Other Cat plots: 
 \code{\link{hgch_bar_Cat}()},
 \code{\link{hgch_bubbles_Cat}()},
+\code{\link{hgch_donut_Cat}()},
 \code{\link{hgch_treemap_Cat}()}
 }
 \concept{Cat plots}

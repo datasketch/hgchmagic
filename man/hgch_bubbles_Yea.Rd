@@ -10,9 +10,9 @@ hgch_bubbles_Yea(data, ...)
 \item{data}{A data frame, data frame extension (e.g. a tibble), a
 lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
 
-\item{...}{Read <\code{\link[=hgch_viz_options]{chart-options}}> a general options summary to configure your hgchmagic plots
+\item{...}{Read \code{\link[dsvizopts]{chart_viz_options}} a general options summary to configure your hgchmagic plots
 and <\code{\link[=hgch_bubbles_options]{bubbles-options}}> which specifically contains the additional arguments
-that work only for this type of chart}
+that work only for this type of chart.}
 }
 \description{
 \code{hgch_bubbles_Yea()} Create a highcharter bubbles plot based on a particular data type.
@@ -45,6 +45,7 @@ hgch_bubbles_Yea(tooltip = "Count: {Count} <br/> Percentage: {\%}\%")
 Other Yea plots: 
 \code{\link{hgch_area_Yea}()},
 \code{\link{hgch_bar_Yea}()},
+\code{\link{hgch_donut_Yea}()},
 \code{\link{hgch_line_Yea}()},
 \code{\link{hgch_pie_Yea}()},
 \code{\link{hgch_treemap_Yea}()}

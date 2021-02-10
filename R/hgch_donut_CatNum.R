@@ -6,9 +6,7 @@
 #' **categorical column** and the second must be  a **numeric class column**, or be sure that
 #' two firts columns they meet this condition
 #' @export
-#' @param data A data frame, data frame extension (e.g. a tibble), a
-#'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
-#' @param ... <[`chart-options`][hgch_viz_options]> Options to configure your hgchmagic plots
+#' @inheritParams hgch_pie_CatNum
 #' @family Cat-Num plots
 #' @section Ftype:
 #' Cat-Num
@@ -89,7 +87,7 @@ hgch_donut_CatNum <- function(data, ...){
 #' **Year column** and the second must be  a **numeric class column**, or be sure that
 #' two firts columns they meet this condition
 #' @export
-#' @inheritParams hgch_donut_CatNum
+#' @inheritParams hgch_pie_CatNum
 #' @family Yea-Num plots
 #' @section Ftype:
 #' Yea-Num

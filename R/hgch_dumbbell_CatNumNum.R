@@ -9,7 +9,7 @@
 #' @export
 #' @param data A data frame, data frame extension (e.g. a tibble), a
 #'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
-#' @param ... <[`chart-options`][hgch_viz_options]> Options to configure your hgchmagic plots
+#' @param ... Read \code{\link[dsvizopts]{chart_viz_options}} a general options summary to configure your hgchmagic plots.
 #' @family Cat-Num-Num plots
 #' @section Ftype:
 #' Cat-Num-Num
@@ -127,9 +127,7 @@ hgch_dumbbell_CatNumNum <- function(data, ...){
 #' **categoricals columns**, or be sure that firts two columns they meet this condition, since it
 #' will be done a counting the categories of this columns.
 #' @export
-#' @param data A data frame, data frame extension (e.g. a tibble), a
-#'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
-#' @param ... Read <[`chart-options`][hgch_viz_options]> a general options summary to configure your hgchmagic plots.
+#' @inheritParams hgch_dumbbell_CatNumNum
 #' @family Cat-Cat plots
 #' @section Ftype:
 #' Cat-Cat
@@ -177,9 +175,7 @@ hgch_dumbbell_CatCat <- function(data, ...){
 #' **categoricals columns** and the third must be  a **numeric class column**, or be sure that
 #' three firts columns they meet this condition
 #' @export
-#' @param data A data frame, data frame extension (e.g. a tibble), a
-#'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
-#' @param ... Read <[`chart-options`][hgch_viz_options]> a general options summary to configure your hgchmagic plots.
+#' @inheritParams hgch_dumbbell_CatNumNum
 #' @family Cat-Cat-Num plots
 #' @section Ftype:
 #' Cat-Cat-Num

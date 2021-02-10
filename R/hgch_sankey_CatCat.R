@@ -8,9 +8,9 @@
 #' @export
 #' @param data A data frame, data frame extension (e.g. a tibble), a
 #'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
-#' @param ... Read <[`chart-options`][hgch_viz_options]> a general options summary to configure your hgchmagic plots
+#' @param ... Read \code{\link[dsvizopts]{chart_viz_options}} a general options summary to configure your hgchmagic plots
 #'   and <[`sankey-options`][hgch_sankey_options]> which specifically contains the additional arguments
-#'   that work only for this type of chart
+#'   that work only for this type of chart.
 #' @family Cat-Cat plots
 #' @section Ftype:
 #' Cat-Cat
