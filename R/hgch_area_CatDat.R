@@ -40,7 +40,7 @@ hgch_area_CatDat <- function(data, ...){
   l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Dat", plot = "area")
 
   d <- l$d
- print(d)
+
   ds <- NULL
   series <- lapply(unique(d$a), function(s){
     ds <<- d %>% filter(a == s)
