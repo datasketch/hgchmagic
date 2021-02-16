@@ -17,17 +17,17 @@ hgch_line_DatNum <- function(data, ...){
   d <- l$d
   ds <- NULL
   series <- lapply(unique(d$group), function(s){
-    ds <<- d %>% filter(group == s)
-    dss <- ds %>% select(a, b, ..a_label)
+    ds <<- d %>% dplyr::filter(group == s)
+    dss <- ds %>% dplyr::select(a, b, ..a_label)
     dss <- ds %>%
-      mutate(x = as.numeric(as.POSIXct(as.Date(ds$a, origin = l$min_date)))*1000,
-             y = ds$b,
-             color = ds$..colors,
-             label = ..a_label)
+      dplyr::mutate(x = as.numeric(as.POSIXct(as.Date(ds$a, origin = l$min_date)))*1000,
+                    y = ds$b,
+                    color = ds$..colors,
+                    label = ..a_label)
     list(
       name = s,
       color = ds$..colors[1],
-      data = transpose(dss)
+      data = purrr::transpose(dss)
     )
   })
 

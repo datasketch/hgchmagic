@@ -30,12 +30,12 @@ hgch_dumbbell_CatNumNum <- function(data, ...){
   names(dat) <- c("category", "low", "high")
 
   dat <- dat %>%
-    ungroup() %>%
-    filter(complete.cases(.)) %>%
-    mutate(color_low = palette[2],
-           color_high = palette[1],
-           label_low = names(data)[2],
-           label_high = names(data)[3])
+    dplyr::ungroup() %>%
+    dplyr::filter(stats::complete.cases(.)) %>%
+    dplyr::mutate(color_low = palette[2],
+                  color_high = palette[1],
+                  label_low = names(data)[2],
+                  label_high = names(data)[3])
 
   global_options(opts$style$format_sample_num)
   hc <- highchart() %>%
@@ -108,10 +108,13 @@ hgch_dumbbell_CatNumNum <- function(data, ...){
 hgch_dumbbell_CatCat <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
-  if (length(data[,2] %>% distinct() %>% pull()) != 2) stop("The second column should contain two unique categories.")
+  if (length(data[,2] %>% dplyr::distinct() %>% dplyr::pull()) != 2) stop("The second column should contain two unique categories.")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  data <- data[c(1,2)] %>% group_by_all() %>% summarise(n = n()) %>% tidyr::spread(key = 2, value = 3)
+  data <- data[c(1,2)] %>%
+    dplyr::group_by_all() %>%
+    dplyr::summarise(n = dplyr::n()) %>%
+    tidyr::spread(key = 2, value = 3)
 
   hgch_dumbbell_CatNumNum(data, opts = opts)
 
@@ -130,7 +133,7 @@ hgch_dumbbell_CatCat <- function(data, ...){
 hgch_dumbbell_CatCatNum <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
-  if (length(data[,2] %>% distinct() %>% pull()) != 2) stop("The second column should contain two unique categories.")
+  if (length(data[,2] %>% dplyr::distinct() %>% dplyr::pull()) != 2) stop("The second column should contain two unique categories.")
 
   opts <- dsvizopts::merge_dsviz_options(...)
 
@@ -138,8 +141,10 @@ hgch_dumbbell_CatCatNum <- function(data, ...){
   names(data)[3] <- "c"
 
   agg <- opts$summarize$agg
-  data <- data %>% group_by_at(c(1,2)) %>% dplyr::summarise(c := agg(agg, c)) %>%
-    mutate(c=as.numeric(c)) %>%
+  data <- data %>%
+    dplyr::group_by_at(c(1,2)) %>%
+    dplyr::summarise(c := agg(agg, c)) %>%
+    dplyr::mutate(c=as.numeric(c)) %>%
     tidyr::spread(key = 2, value = 3)
 
   hgch_dumbbell_CatNumNum(data, opts = opts)

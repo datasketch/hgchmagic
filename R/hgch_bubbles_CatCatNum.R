@@ -17,12 +17,12 @@ hgch_bubbles_CatCatNum <- function(data, ...){
 
   d <- l$d
 
-  series <- map(unique(d$a), function(x) {
-    df <- d %>% filter(a %in% x)
+  series <- purrr::map(unique(d$a), function(x) {
+    df <- d %>% dplyr::filter(a %in% x)
     list(
       name = x,
       data =
-        map(1:nrow(df), function (z) {
+        purrr::map(1:nrow(df), function (z) {
           list(
             name = df$b[z],
             value = df$c[z],

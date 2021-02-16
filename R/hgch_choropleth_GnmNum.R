@@ -6,8 +6,8 @@ hgch_choropleth_GnmNum <-  function(data = NULL, ...) {
   opts <- dsvizopts::merge_dsviz_options(...)
   map_name <- "countries/co/co-all" #opts$extra$map_name_hgch
   if (is.null(data)) {
-    hc <-  hcmap(map_name,
-                 showInLegend = F)
+    hc <- hcmap(map_name,
+                showInLegend = F)
   }
 
   l <- hgchmagic_prep(data, opts = opts, plot = "map")
@@ -15,11 +15,11 @@ hgch_choropleth_GnmNum <-  function(data = NULL, ...) {
 
 
   d$name_alt <- iconv(tolower(gsub("<br/>", " ",d$a)), to = "ASCII//TRANSLIT")
-  mapV <- get_data_from_map(download_map_data(map_name)) %>% drop_na(name)
+  mapV <- highcharter::get_data_from_map(highcharter::download_map_data(map_name)) %>% tidyr::drop_na(name)
 
   mapV$name_alt <- iconv(tolower(mapV$name), to = "ASCII//TRANSLIT")
 
-  d <- left_join(d, mapV, by = 'name_alt')
+  d <- dplyr::left_join(d, mapV, by = 'name_alt')
 
   colors <- opts$theme$palette_colors
 
