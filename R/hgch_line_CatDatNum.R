@@ -16,16 +16,16 @@ hgch_line_CatDatNum <- function(data, ...){
   d <- l$d
   ds <- NULL
   series <- lapply(unique(d$a), function(s){
-    ds <<- d %>% filter(a == s)
-    dss <- ds %>% select(a,b, ..b_label)
+    ds <<- d %>% dplyr::filter(a == s)
+    dss <- ds %>% dplyr::select(a,b, ..b_label)
     dss <- dss %>%
-      mutate(x = as.numeric(as.POSIXct(as.Date(ds$b, origin = "2000-01-01")))*1000,
-             y = ds$c,
-             label = ..b_label)
+      dplyr::mutate(x = as.numeric(as.POSIXct(as.Date(ds$b, origin = "2000-01-01")))*1000,
+                    y = ds$c,
+                    label = ..b_label)
     list(
       name = s,#"First",
       color = unique(ds$..colors),
-      data = transpose(dss)
+      data = purrr::transpose(dss)
     )
   })
 

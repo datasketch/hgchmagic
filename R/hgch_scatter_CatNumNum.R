@@ -14,18 +14,18 @@ hgch_scatter_CatNumNum <- function(data, ...){
   l <- hgchmagic_prep(data = data, opts = opts, plot = "scatter")
 
   d <- l$d
-print(d)
+
   ds <- NULL
   series <- lapply(unique(d$a), function(s){
-    ds <<- d %>% filter(a == s)
-    dss <- ds %>% select(a,b)
+    ds <<- d %>% dplyr::filter(a == s)
+    dss <- ds %>% dplyr::select(a,b)
     dss <- dss %>%
-      mutate(x = ds$b,
-             y = ds$c)
+      dplyr::mutate(x = ds$b,
+                    y = ds$c)
     list(
       name = s,#"First",
       color = unique(ds$..colors),
-      data = transpose(dss)
+      data = purrr::transpose(dss)
     )
   })
 

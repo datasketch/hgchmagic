@@ -15,12 +15,12 @@ hgch_scatter_NumNum <- function(data, ...){
   opts <- dsvizopts::merge_dsviz_options(...)
 
   l <- hgchmagic_prep(data, opts = opts, plot = "scatter")
-print(l)
+
   d <- l$d
 
   # opts$theme$text_show <- FALSE
   #
-  data_list <- map(1:nrow(d), function(z) {
+  data_list <- purrr::map(1:nrow(d), function(z) {
     list(d$a[z], d$b[z])
   })
   #
