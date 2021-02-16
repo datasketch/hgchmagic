@@ -40,7 +40,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     if (length(dic$hdType) == 1) {
       d <- d %>%
         dplyr::group_by_all() %>%
-        dplyr::summarise(b = n())
+        dplyr::summarise(b = dplyr::n())
       frtype <- paste0(frtype, "-Num")
       nms[2] <- opts$summarize$agg_text %||% "Count"
       names(nms) <- c("a", "b") }
@@ -97,7 +97,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d$a <- as.character(d$a)
       d <- d %>%
         dplyr::group_by_all() %>%
-        dplyr::summarise(c = n())
+        dplyr::summarise(c = dplyr::n())
       frtype <- paste0(frtype, "-Num")
       nms[3] <-  opts$summarize$agg_text %||% "Count"
       names(nms) <- c("a", "b", "c") }
