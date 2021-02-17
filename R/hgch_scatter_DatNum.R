@@ -34,7 +34,8 @@ hgch_scatter_DatNum <- function(data, ...){
       mutate(x = ds$a,
              y = ds[[2]],
              color = ds$..colors,
-             label = labels)    list(
+             label = labels)
+    list(
       name = s,
       color = ds$..colors[1],
       data = purrr::transpose(dss)
