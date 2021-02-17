@@ -47,6 +47,7 @@ hgch_bubbles_CatCatNum <- function(data, ...){
 
   d <- l$d
 
+<<<<<<< HEAD
 
   series <- purrr::map(unique(d[[1]]), function(i) {
     d0 <- d %>%
@@ -59,6 +60,20 @@ hgch_bubbles_CatCatNum <- function(data, ...){
                       "value" = d0[[3]][i]
                  )
                })
+=======
+  series <- purrr::map(unique(d$a), function(x) {
+    df <- d %>% dplyr::filter(a %in% x)
+    list(
+      name = x,
+      data =
+        purrr::map(1:nrow(df), function (z) {
+          list(
+            name = df$b[z],
+            value = df$c[z],
+            color = df$..colors[z]
+          )
+        })
+>>>>>>> origin/master
     )
   })
 

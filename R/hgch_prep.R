@@ -12,7 +12,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   names(nms) <- c(names(nms)[-length(nms)], "..percentage")
   nms[length(nms)+1] <- c("Count")
   names(nms) <- c(names(nms)[-length(nms)], "..count")
-  d <- fringe_d(f)
+  d <- homodatum::fringe_d(f)
   frtype <- f$frtype
   dic <- f$dic
   dic$id <- names(d)
@@ -26,11 +26,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     frtype <- gsub("Pct", "Num", frtype)
   }
 
-  # if (grepl("Yea", frtype)) {
-  #   has_year <- dic$id[dic$hdType == "Yea"]
-  #   d[[has_year]] <- as.character(d[[has_year]])
-  # }
-
   # only data plot ----------------------------------------------------------
 
   ftype_vec <- str_split(ftype,pattern = "-") %>% unlist()
@@ -39,8 +34,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   dic_p <- dic %>% filter(id %in% names(dd))
 
 
-  # detect ..grouping variables -----------------------------------------------
-  # by default the first categorical variables of the dataframe
+
 
   min_date <- NULL
   var_g <- NULL ## categorical ..groups
@@ -72,6 +66,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     agg_var <- opts$postprocess$percentage_col %||% "b"
   }
 
+
   if (!is.null(var_g)) {
     if (length(grep("Dat|Cat|Yea", ftype_vec)) == 1) {
       if (has_num_var & sum(grepl("Num",  ftype_vec)) == 1)  {
@@ -102,6 +97,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   if (!is.null(var_g)) {
     dn <- d
     if (!is.null(agg_num))  dn <- d[,-var_nums]
+
 
     if (length(var_g) == 1) {
       dd <- function_agg(df = d, agg = opts$summarize$agg, to_agg = agg_num, a)
@@ -232,7 +228,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   if (!identical(grep("Dat", ftype_vec), integer())) {
     labs <- NULL
-
     d$..date_label <- makeup_dat(d[["..date"]],
                                  sample = opts$style$format_sample_dat,
                                  #locale = opts$style$locale,
@@ -252,11 +247,13 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     }
 
     labs <- jsonlite::toJSON(labs, auto_unbox = TRUE)
+
     formatter <- "
        function() {
        var labels = <<labs>>;
        return labels[this.value]}"
     formatter <- glue::glue(formatter, .open = "<<", .close = ">>")
+
 
     # formatter_tooltip <-
     #   JS(

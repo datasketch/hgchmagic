@@ -42,6 +42,7 @@ hgch_line_DatNum <- function(data, ...){
 
   d <- l$d
   ds <- NULL
+
   series <- lapply(unique(d$..group), function(s){
     ds <<- d %>% filter(..group == s)
     dss <- ds[,c(1, 2, 4)]
@@ -50,10 +51,11 @@ hgch_line_DatNum <- function(data, ...){
              y = ds[[2]],
              color = ds$..colors,
              label = labels)
+
     list(
       name = s,
       color = ds$..colors[1],
-      data = transpose(dss)
+      data = purrr::transpose(dss)
     )
   })
 

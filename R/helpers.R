@@ -219,6 +219,32 @@ format_hgch <- function(plot, frtype, sample, suffix, prefix) {
 
 
 
+<<<<<<< HEAD
+=======
+  if (is.empty(tooltip)) {
+    points <- l_tool[[plot]][[frtype]]
+    l <- purrr::map(seq_along(nms), function(i) {
+      paste0('<b>', nms[i], ': </b>', points[names(points) == nms_names[i]][[nms_names[i]]])
+    }) %>% unlist()
+    tooltip <- paste0(l, collapse = "</br>")
+  } else {
+    points <- gsub("\\{|\\}", "",
+                   stringr::str_extract_all(tooltip, "\\{.*?\\}")[[1]])
+    if (identical(points, character())) {
+      tooltip <- tooltip
+    } else {
+      l <- purrr::map(1:length(points), function(i){
+        true_points <-  names(nms[match(points[i], nms)])
+        replace <- l_tool[[plot]][[frtype]][[true_points]]
+        tooltip <<- gsub(paste0("\\{",points[i], "\\}"), replace, tooltip)
+      })[[length(points)]]
+    }
+  }
+
+  tooltip
+
+}
+>>>>>>> origin/master
 
 
 # date intervals

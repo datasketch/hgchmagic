@@ -29,16 +29,18 @@ hgch_scatter_CatDatNum <- function(data, ...){
 
   ds <- NULL
   series <- lapply(unique(d$a), function(s){
+
     ds <<- d %>% filter(a == s)
     dss <- ds %>% select(a,b, labels)
     dss <- dss %>%
       mutate(x = as.numeric(ds$b),
              y = ds[[3]],
              label = labels)
+
     list(
       name = s,
       color = unique(ds$..colors),
-      data = transpose(dss)
+      data = purrr::transpose(dss)
     )
   })
 

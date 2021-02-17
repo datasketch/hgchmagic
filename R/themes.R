@@ -13,7 +13,7 @@ url_logo <- function(logo, background_color) {
   if (grepl("/", logo) & !isUrl) {
     logo_path <- logo
   } else {
-    logo_path <- local_logo_path(logo, background_color)
+    logo_path <- dsvizopts::local_logo_path(logo, background_color)
   }
   logo_url <- knitr::image_uri(f = logo_path)
   logo_url
@@ -28,7 +28,7 @@ add_branding <- function(opts) {
   chartWidth <-  logo_width + 10
   if (opts$logo_position == "left") chartWidth <- 550 #logo_width + opts$logo_x_position
   chartHeight <- logo_height + 10
-  JS(
+  highcharter::JS(
     paste0(
       "function() {this.renderer.image('",logo_path,"', this.chartWidth - ", chartWidth, ", this.chartHeight - ", chartHeight, ",", logo_width, ", ", logo_height,").addClass('logo').add()}"
     ))
@@ -53,7 +53,7 @@ hgch_theme <- function(opts = NULL){
   }
 
   if (opts$text_size == "") opts$text_size <- 13
-  hc_theme(
+  highcharter::hc_theme(
     colors = opts$palette_colors,
     chart = list(
       reflow = TRUE,

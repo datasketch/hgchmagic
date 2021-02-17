@@ -74,6 +74,14 @@ hgch_line_CatYeaNum <- function(data, ...){
     ) %>%
     hc_tooltip(useHTML = TRUE,
                formatter = JS(paste0("function () {return this.point.label;}"))) %>%
+    hc_plotOptions(
+      series = list(
+        allowPointSelect= l$allow_point,
+        cursor =  l$cursor,
+        events = list(
+          click = l$clickFunction
+        )
+      )) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled =  l$theme$legend_show) %>%
     hc_add_theme(hgch_theme(opts = l$theme))

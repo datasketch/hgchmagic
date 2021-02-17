@@ -34,6 +34,7 @@ hgch_scatter_CatNumNum <- function(data, ...){
 
   ds <- NULL
   series <- lapply(unique(d$a), function(s){
+
     ds <<- d %>% filter(a == s)
     dss <- ds %>% select(a,b, labels)
     dss <- dss %>%
@@ -43,7 +44,7 @@ hgch_scatter_CatNumNum <- function(data, ...){
     list(
       name = s,
       color = unique(ds$..colors),
-      data = transpose(dss)
+      data = purrr::transpose(dss)
     )
   })
 

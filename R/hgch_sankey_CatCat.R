@@ -37,8 +37,10 @@ hgch_sankey_CatCat <- function(data, ...){
     palette <- opts$theme$palette_colors_categorical
   }
 
+
   data_dummy <- data[,1:2] %>% mutate_all(~paste0(., "_dummy"))
   l <- hgchmagic_prep(data_dummy, opts = opts, plot = "sankey", ftype = "Cat-Cat")
+
   d <- l$d
   l$theme$legend_show <- FALSE
   l$theme$dataLabels_show <- TRUE
@@ -53,46 +55,53 @@ hgch_sankey_CatCat <- function(data, ...){
   }
 
   for(i in seq(length(names(data)))){
-    data[,i] <- data %>% select_at(i) %>% mutate_all(~paste0(., i))
+    data[,i] <- data %>% dplyr::select_at(i) %>% dplyr::mutate_all(~paste0(., i))
   }
-  data_sankey_format <- data_to_sankey(data) %>%
-    mutate(from_label = substr(from,1,nchar(from)-1),
-           to_label = substr(to,1,nchar(to)-1),
-           name = if(color_by == "to") to_label else from_label)
+  data_sankey_format <- highcharter::data_to_sankey(data) %>%
+    dplyr::mutate(from_label = substr(from,1,nchar(from)-1),
+                  to_label = substr(to,1,nchar(to)-1),
+                  name = if(color_by == "to") to_label else from_label)
 
   nodes_unique <- unique(c(unique(data_sankey_format$from_label), unique(data_sankey_format$to_label)))
 
-  colors <- data.frame(name = nodes_unique, color = paletero::paletero(nodes_unique, as.character(palette))) %>%
-    mutate_all(as.character)
+
+  colors <- data.frame(name = nodes_unique) %>%
+    dplyr::mutate(color = paletero::paletero(name, as.character(palette)))
 
   if(!is.null(names(palette))){
     colors <- data.frame(name = nodes_unique) %>%
-      left_join(
+      dplyr::left_join(
         data.frame(name = names(palette),
                    color = palette, row.names = NULL),
         by = "name") %>%
-      mutate(color = ifelse(is.na(color), "#cbcdcf", as.character(color)))
+      dplyr::mutate(color = ifelse(is.na(color), "#cbcdcf", as.character(color)))
   }
 
   dat <- data_sankey_format %>%
-    left_join(colors,
+    dplyr::left_join(colors,
               by.x = color_by, by.y = "name") %>%
-    group_by_at(color_by) %>%
-    mutate(pct = paste0(round(100*weight / sum(weight), 0), "%")) %>%
-    group_by(from) %>% mutate(total_from = sum(weight)) %>%
-    group_by(to) %>% mutate(total_to = sum(weight)) %>%
-    ungroup()
+    dplyr::group_by_at(color_by) %>%
+    dplyr::mutate(pct = paste0(round(100*weight / sum(weight), 0), "%")) %>%
+    dplyr::group_by(from) %>%
+    dplyr::mutate(total_from = sum(weight)) %>%
+    dplyr::group_by(to) %>%
+    dplyr::mutate(total_to = sum(weight)) %>%
+    dplyr::ungroup()
 
-  nodes_from <- dat %>% distinct(from, from_label, total_from) %>%
-    rename(id = from, name = from_label, total = total_from) %>%
-    mutate(pct = paste0(round(100 * total / sum(total), 0), "%"))
+  nodes_from <- dat %>%
+    dplyr::distinct(from, from_label, total_from) %>%
+    dplyr::rename(id = from, name = from_label, total = total_from) %>%
+    dplyr::mutate(pct = paste0(round(100 * total / sum(total), 0), "%"))
 
-  nodes_to <- dat %>% distinct(to, to_label, total_to) %>%
-    rename(id = to, name = to_label, total = total_to) %>%
-    mutate(pct = paste0(round(100 * total / sum(total), 0), "%"))
+  nodes_to <- dat %>%
+    dplyr::distinct(to, to_label, total_to) %>%
+    dplyr::rename(id = to, name = to_label, total = total_to) %>%
+    dplyr::mutate(pct = paste0(round(100 * total / sum(total), 0), "%"))
 
-  nodes <- bind_rows(nodes_from, nodes_to) %>% distinct(id, name, total, pct) %>%
-    left_join(colors, by = "name") %>% purrr::transpose()
+  nodes <- dplyr::bind_rows(nodes_from, nodes_to) %>%
+    dplyr::distinct(id, name, total, pct) %>%
+    dplyr::left_join(colors, by = "name") %>%
+    purrr::transpose()
 
   global_options(opts$style$format_sample_num)
 
