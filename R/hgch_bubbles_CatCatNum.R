@@ -1,37 +1,66 @@
-#' Bubbles Chart Cat Cat Numeric
+#' Bubbles chart Cat Cat Num
 #'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num, Cat-Yea-Num
-#' @examples
-#' hgch_bubbles_CatCatNum(sampleData("Cat-Cat-Num", nrow = 10))
+#' @description
+#' `hgch_bubbles_CatCatNum()` Create a highcharter bubbles plot based on a particular data type.
+#' In this case, you can load data with only three columns, where the firts and second columns are
+#' **categoricals columns** and the third must be  a **numeric class column**, or be sure that
+#' three firts columns they meet this condition
 #' @export
+#' @inheritParams hgch_bubbles_CatNum
+#' @family Cat-Cat-Num plots
+#' @section Ftype:
+#' Cat-Cat-Num
+#' @examples
+#' data <- sample_data("Cat-Cat-Num", n = 30)
+#' hgch_bubbles_CatCatNum(data)
+#'
+#' # Activate data labels
+#' hgch_bubbles_CatCatNum(data,
+#'                        dataLabels_show = TRUE)
+#'
+#' # if you want to calculate the average instead of the sum, you can use agg inside a function
+#' hgch_bubbles_CatCatNum(data,
+#'                        agg = "mean",
+#'                        dataLabels_show = TRUE)
+#'
+#' # data with more of one column
+#' data <- sample_data("Cat-Cat-Num-Dat-Yea-Cat", n = 30)
+#' hgch_bubbles_CatCatNum(data)
+#'
+#' # Change variable to color and pallete type
+#' hgch_bubbles_CatCatNum(data,
+#'                        color_by = names(data)[2],
+#'                        palette_type = "sequential")
+#'
+#' # Change tooltip info and add additional information contained in your data
+#' names_data <- names(data)
+#' info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
+#' data %>%
+#'  hgch_bubbles_CatCatNum(tooltip = info_tool)
+#'
 hgch_bubbles_CatCatNum <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts, plot = "bubbles")
+  l <- hgchmagic_prep(data, opts = opts, plot = "bubbles", ftype = "Cat-Cat-Num")
 
   d <- l$d
 
-  series <- purrr::map(unique(d$a), function(x) {
-    df <- d %>% dplyr::filter(a %in% x)
-    list(
-      name = x,
-      data =
-        purrr::map(1:nrow(df), function (z) {
-          list(
-            name = df$b[z],
-            value = df$c[z],
-            color = df$..colors[z]
-          )
-        })
+
+  series <- purrr::map(unique(d[[1]]), function(i) {
+    d0 <- d %>%
+      dplyr::filter(a %in% i) #%>% drop_na()
+    label_info <- d0 %>% .$labels %>% unlist()
+    l0 <- list("name" = i,
+               "color" = unique(d0$..colors),
+               "data" = map(seq_along(d0[[3]]), function(i){
+                 list("label" =  label_info[i],
+                      "value" = d0[[3]][i]
+                 )
+               })
     )
   })
-
 
   global_options(opts$style$format_sample_num)
   hc <- highchart() %>%
@@ -42,7 +71,8 @@ hgch_bubbles_CatCatNum <- function(data, ...){
                load = add_branding(l$theme)
              )) %>%
     hc_add_series_list(series) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
+    hc_tooltip(useHTML = TRUE,
+               formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled = l$theme$legend_show) %>%
     hc_add_theme(hgch_theme(opts =  c(l$theme,
@@ -56,62 +86,78 @@ hgch_bubbles_CatCatNum <- function(data, ...){
 }
 
 
-#' bubbles Chart Cat Cat Num
+
+#' Bubbles chart Cat Yea Num
 #'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
-#' @examples
-#' hgch_bubbles_CatCat(sample_data("Cat-Cat", nrow = 10))
+#' @description
+#' `hgch_bubbles_CatYeaNum()` Create a highcharter bubbles plot based on a particular data type.
+#' In this case, you can load data with only three columns, where the firts column is a
+#' **categorical column**, second is a **year column** and the third must be  a **numeric class column**,
+#'  or be sure that three firts columns they meet this condition
 #' @export
-hgch_bubbles_CatCat <- hgch_bubbles_CatCatNum
-
-
-#' bubbles Chart Yea Cat
-#'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
+#' @inheritParams hgch_bubbles_CatNum
+#' @section Ftype:
+#' Cat-Yea-Num
 #' @examples
-#' hgch_bubbles_YeaCat(sample_data("Yea-Cat", nrow = 10))
-#' @export
-hgch_bubbles_YeaCat <- hgch_bubbles_CatCatNum
-
-
-#' bubbles Chart Cat Yea
+#' data <- sample_data("Cat-Yea-Num", n = 30)
+#' hgch_bubbles_CatYeaNum(data)
 #'
+#' # Activate data labels
+#' hgch_bubbles_CatYeaNum(data,
+#'                        dataLabels_show = TRUE)
 #'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
-#' @examples
-#' hgch_bubbles_CatYea(sample_data("Cat-Yea", nrow = 10))
-#' @export
-hgch_bubbles_CatYea <- hgch_bubbles_CatCatNum
-
-
-#' bubbles Chart Cat Yea Num
+#' # data with more of one column
+#' data <- sample_data("Cat-Yea-Num-Dat-Yea-Cat", n = 30)
+#' hgch_bubbles_CatYeaNum(data)
 #'
+#' # Change variable to color and pallete type
+#' hgch_bubbles_CatYeaNum(data,
+#'                        color_by = names(data)[2],
+#'                        palette_type = "sequential")
 #'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
-#' @examples
-#' hgch_bubbles_CatYeaNum(sample_data("Cat-Yea-Num", nrow = 10))
-#' @export
+#' # Change tooltip info and add additional information contained in your data
+#' names_data <- names(data)
+#' info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
+#' data %>%
+#'  hgch_bubbles_CatYeaNum(tooltip = info_tool)
+#'
 hgch_bubbles_CatYeaNum <- hgch_bubbles_CatCatNum
 
 
-#' bubbles Chart Yea Cat Num
+#' Bubbles chart Yea Cat Num
 #'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
-#' @examples
-#' hgch_bubbles_YeaCatNum(sample_data("Yea-Cat-Num", nrow = 10))
+#' @description
+#' `hgch_bubbles_YeaCatNum()` Create a highcharter bubbles plot based on a particular data type.
+#' In this case, you can load data with only three columns, where the firts column is a
+#' **year column**, second is a **categorical column** and the third must be  a **numeric class column**,
+#'  or be sure that three firts columns they meet this condition
 #' @export
+#' @inheritParams hgch_bubbles_CatNum
+#' @family Yea-Cat-Num plots
+#' @section Ftype:
+#' Yea-Cat-Num
+#' @examples
+#' data <- sample_data("Yea-Cat-Num", n = 30)
+#' hgch_bubbles_YeaCatNum(data)
+#'
+#' # Activate data labels
+#' hgch_bubbles_YeaCatNum(data,
+#'                        dataLabels_show = TRUE)
+#'
+#' # data with more of one column
+#' data <- sample_data("Yea-Cat-Num-Dat-Yea-Cat", n = 30)
+#' hgch_bubbles_YeaCatNum(data)
+#'
+#' # Change variable to color and pallete type
+#' hgch_bubbles_YeaCatNum(data,
+#'                        color_by = names(data)[2],
+#'                        palette_type = "sequential")
+#'
+#' # Change tooltip info and add additional information contained in your data
+#' names_data <- names(data)
+#' info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
+#' data %>%
+#'  hgch_bubbles_YeaCatNum(tooltip = info_tool)
+#'
 hgch_bubbles_YeaCatNum <- hgch_bubbles_CatCatNum
 

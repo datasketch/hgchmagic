@@ -1,29 +1,57 @@
-#' line Chart Cat Dat Numeric
+#' Line chart Cat Dat Num
 #'
-#'
-#' @param data A data.frame
-#' @section ctypes:
+#' @description
+#' `hgch_line_CatDatNum()` Create a highcharter line plot based on a particular data type.
+#' In this case, you can load data with only three columns, where the firts column is a
+#' **categorical column**, second is a **date column** and the third must be a **numeric class column**,
+#'  or be sure that three firts columns they meet this condition.
+#' @export
+#' @inheritParams hgch_line_YeaNum
+#' @family Cat-Dat-Num plots
+#' @section Ftype:
 #' Cat-Dat-Num
 #' @examples
-#' hgch_line_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
-#' @export
+#' data <- sample_data("Cat-Dat-Num", n = 30)
+#' hgch_line_CatDatNum(data)
+#'
+#' # Activate data labels
+#' hgch_line_CatDatNum(data,
+#'                     dataLabels_show = TRUE)
+#'
+#' # data with more of one column
+#' data <- sample_data("Cat-Dat-Num-Num-Num-Cat", n = 30)
+#' hgch_line_CatDatNum(data)
+#'
+#' # Change variable to color and pallete type
+#' hgch_line_CatDatNum(data,
+#'                        color_by = names(data)[2],
+#'                        palette_type = "sequential")
+#'
+#' # Change tooltip info and add additional information contained in your data
+#' names_data <- names(data)
+#' info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
+#' data %>%
+#'  hgch_line_CatDatNum(tooltip = info_tool)
+#'
 hgch_line_CatDatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts)
+  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Dat-Num", plot = "line")
 
   d <- l$d
+
   ds <- NULL
   series <- lapply(unique(d$a), function(s){
-    ds <<- d %>% dplyr::filter(a == s)
-    dss <- ds %>% dplyr::select(a,b, ..b_label)
+
+    ds <<- d %>% filter(a == s)
+    dss <- ds %>% select(a,b, labels)
     dss <- dss %>%
-      dplyr::mutate(x = as.numeric(as.POSIXct(as.Date(ds$b, origin = "2000-01-01")))*1000,
-                    y = ds$c,
-                    label = ..b_label)
+      mutate(x = as.numeric(ds$b),
+             y = ds[[3]],
+             label = labels)
     list(
-      name = s,#"First",
+      name = s,
       color = unique(ds$..colors),
       data = purrr::transpose(dss)
     )
@@ -33,10 +61,13 @@ hgch_line_CatDatNum <- function(data, ...){
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%
     hc_chart(type = "line",
+             defaultSeriesType = 'line',
+             renderTo = 'container',
              events = list(
                load = add_branding(l$theme)
              )
     ) %>%
+    hc_add_series_list(series) %>%
     hc_xAxis(
       type = 'datetime',
       title = list(text = l$title$x),
@@ -49,25 +80,14 @@ hgch_line_CatDatNum <- function(data, ...){
              labels = list(
                formatter = l$formats)
     ) %>%
-    hc_add_series_list(series) %>%
     hc_tooltip(useHTML=TRUE,
-               formatter = l$formatter_date_tooltip
+               formatter = JS(paste0("function () {return this.point.label;}"))
     ) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled = l$theme$legend_show) %>%
-    hc_add_theme(hgch_theme(opts =  c(l$theme)))
+    hc_add_theme(hgch_theme(opts =  c(l$theme,
+                                      cats = "{point.y} <br/>")))
 
   h
 }
 
-
-#' line Chart Cat Dat
-#'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Dat
-#' @examples
-#' hgch_line_CatDat(sampleData("Cat-Dat", nrow = 10))
-#' @export
-hgch_line_CatDat <- hgch_line_CatDatNum

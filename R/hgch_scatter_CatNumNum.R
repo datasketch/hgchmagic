@@ -1,29 +1,48 @@
-#' scatter Chart Cat Num Numeric
+#' Scatter chart Num Num
 #'
+#' @description
+#' `hgch_scatter_CatNumNum()` Create a highcharter scatter plot based on a particular data type.
+#' In this case, you can load data with only three columns,  where the first is
+#' a **categorical column**, and second and third columns are
+#' **numeric class**, or be sure that two firts columns they meet this condition
 #'
-#' @param data A data.frame
-#' @section ctypes:
+#' @export
+#' @inheritParams hgch_scatter_NumNum
+#' @family Cat-Num-Num plots
+#' @section Ftype:
 #' Cat-Num-Num
 #' @examples
-#' hgch_scatter_CatNumNum(sample_data("Cat-Num-Num", nrow = 10))
-#' @export
+#' data <- sample_data("Cat-Num-Num", n = 30)
+#' hgch_scatter_CatNumNum(data)
+#'
+#' example with iris data
+#' data <- iris %>% select(Species, Petal.Width, Petal.Length)
+#' hgch_scatter_CatNumNum(data)
+#'
+
+#' # data with more of one column
+#' data <- sample_data("Cat-Num-Num-Dat-Cat-Cat", n = 30)
+#' hgch_scatter_CatNumNum(data)
+#'
 hgch_scatter_CatNumNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data = data, opts = opts, plot = "scatter")
+  l <- hgchmagic_prep(data = data, opts = opts, plot = "scatter", ftype = "Cat-Num-Num")
 
   d <- l$d
 
   ds <- NULL
   series <- lapply(unique(d$a), function(s){
-    ds <<- d %>% dplyr::filter(a == s)
-    dss <- ds %>% dplyr::select(a,b)
+
+    ds <<- d %>% filter(a == s)
+    dss <- ds %>% select(a,b, labels)
     dss <- dss %>%
-      dplyr::mutate(x = ds$b,
-                    y = ds$c)
+      mutate(x = as.numeric(ds$b),
+             y = ds[[3]],
+             label = labels)
     list(
-      name = s,#"First",
+      name = s,
       color = unique(ds$..colors),
       data = purrr::transpose(dss)
     )
@@ -55,8 +74,8 @@ hgch_scatter_CatNumNum <- function(data, ...){
                                              suffix = opts$scatter$suffix_y))
     ) %>%
     hc_add_series_list(series) %>%
-      hc_tooltip(useHTML=TRUE,
-                 pointFormat = l$tooltip, headerFormat = NULL) %>%
+    hc_tooltip(useHTML=TRUE,
+               formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_add_theme(hgch_theme(opts =  c(l$theme)))
 

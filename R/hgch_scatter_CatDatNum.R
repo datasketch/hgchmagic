@@ -1,29 +1,44 @@
-#' scatter Chart Cat Dat Numeric
+#' Scatter chart Cat Dat Num
 #'
+#' @description
+#' `hgch_scatter_CatDatNum()` Create a highcharter scatter plot based on a particular data type.
+#' In this case, you can load data with only three columns,  where the firts is a **categorical column**,
+#' second is a **date column**, and the three is a **numeric column**, or be sure that three firts columns
+#' they meet this condition.
 #'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Dat-Num
-#' @examples
-#' hgch_scatter_CatDatNum(sampleData("Cat-Dat-Num", nrow = 10))
 #' @export
+#' @inheritParams hgch_scatter_NumNum
+#' @family Cat-Dat-Num plots
+#' @section Ftype:
+#' Dat-Num
+#' @examples
+#' data <- sample_data("Cat-Dat-Num", n = 30)
+#' hgch_scatter_CatDatNum(data)
+#'
+#' # data with more of one column
+#' data <- sample_data("Cat-Dat-Num-Dat-Cat-Cat", n = 30)
+#' hgch_scatter_CatDatNum(data)
+#'
 hgch_scatter_CatDatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts)
+  l <- hgchmagic_prep(data, opts = opts, plot = "scatter", ftype = "Cat-Dat-Num")
 
   d <- l$d
+
   ds <- NULL
   series <- lapply(unique(d$a), function(s){
-    ds <<- d %>% dplyr::filter(a == s)
-    dss <- ds %>% dplyr::select(a,b, ..b_label)
+
+    ds <<- d %>% filter(a == s)
+    dss <- ds %>% select(a,b, labels)
     dss <- dss %>%
-      dplyr::mutate(x = as.numeric(as.POSIXct(as.Date(ds$b, origin = l$min_date)))*1000,
-                    y = ds$c,
-                    label = ..b_label)
+      mutate(x = as.numeric(ds$b),
+             y = ds[[3]],
+             label = labels)
+
     list(
-      name = s,#"First",
+      name = s,
       color = unique(ds$..colors),
       data = purrr::transpose(dss)
     )
@@ -52,7 +67,7 @@ hgch_scatter_CatDatNum <- function(data, ...){
     ) %>%
     hc_add_series_list(series) %>%
     hc_tooltip(useHTML=TRUE,
-               formatter = l$formatter_date_tooltip
+               formatter = JS(paste0("function () {return this.point.label;}"))
     ) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_add_theme(hgch_theme(opts =  c(l$theme)))
@@ -61,14 +76,3 @@ hgch_scatter_CatDatNum <- function(data, ...){
 }
 
 
-
-#' scatter Chart Cat Dat
-#'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Dat
-#' @examples
-#' hgch_scatter_CatDat(sampleData("Cat-Dat", nrow = 10))
-#' @export
-hgch_scatter_CatDat <- hgch_scatter_CatDatNum

@@ -2,21 +2,63 @@
 % Please edit documentation in R/hgch_donut_CatNum.R
 \name{hgch_donut_YeaNum}
 \alias{hgch_donut_YeaNum}
-\title{donut Chart Yea Num}
+\title{Donut chart Yea Num}
 \usage{
 hgch_donut_YeaNum(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{Read \code{\link[dsvizopts]{chart_viz_options}} a general options summary to configure your hgchmagic plots
+and <\code{\link[=hgch_pie_options]{pie-options}}> which specifically contains the additional arguments
+that work only for this type of chart.}
 }
 \description{
-donut Chart Yea Num
+\code{hgch_donut_YeaNum()} Create a highcharter donut plot based on a particular data type.
+In this case, you can load data with only two columns, where the firts column is a
+\strong{Year column} and the second must be  a \strong{numeric class column}, or be sure that
+two firts columns they meet this condition
 }
-\section{ctypes}{
+\section{Ftype}{
 
-Yea, Yea
+Yea-Num
 }
 
 \examples{
-hgch_donut_YeaNum(sample_data("Yea-Num", nrow = 10))
+data <- sample_data("Yea-Num", n = 30)
+hgch_donut_YeaNum(data)
+
+example with iris data
+data <- iris \%>\% select(Species, Petal.Width)
+# this plot show the sum of petal width by species
+hgch_donut_YeaNum(data)
+# if you want to calculate the average instead of the sum, you can use agg inside a function
+hgch_donut_YeaNum(data, agg = "mean")
+
+# data with more of one column
+data <- sample_data("Yea-Num-Dat-Yea-Yea", n = 30)
+hgch_donut_YeaNum(data)
+
+# calculate percentage
+hgch_donut_YeaNum(data, percentage = TRUE)
+
+# numeric format
+hgch_donut_YeaNum(data, percentage = TRUE, format_sample_num = "1.234,")
+
+# You can call the mean and percentage in the tooltip plot
+num_name <- names(data)[2]
+data \%>\%
+hgch_donut_YeaNum(agg = "mean",
+             tooltip = paste0("Average: {", num_name ,"} <br/> Percentage: {\%}\%"))
 }
+\seealso{
+Other Yea-Num plots: 
+\code{\link{hgch_area_YeaNum}()},
+\code{\link{hgch_bar_YeaNum}()},
+\code{\link{hgch_bubbles_YeaNum}()},
+\code{\link{hgch_line_YeaNum}()},
+\code{\link{hgch_pie_YeaNum}()},
+\code{\link{hgch_treemap_YeaNum}()}
+}
+\concept{Yea-Num plots}

@@ -2,20 +2,56 @@
 % Please edit documentation in R/hgch_dumbbell_CatNumNum.R
 \name{hgch_dumbbell_CatCat}
 \alias{hgch_dumbbell_CatCat}
-\title{Dumbbell Cat Cat}
+\title{Dumbbell chart Cat Cat}
 \usage{
 hgch_dumbbell_CatCat(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{Read \code{\link[dsvizopts]{chart_viz_options}} a general options summary to configure your hgchmagic plots.}
 }
 \description{
-Dumbbell Cat Cat
+\code{hgch_dumbbell_CatCat()} Create a highcharter dumbbell plot based on a particular data type.
+In this case, you can load data with only two columns, where the firts and second columns are
+\strong{categoricals columns}, or be sure that firts two columns they meet this condition, since it
+will be done a counting the categories of this columns.
 }
-\section{}{
-NA
+\section{Ftype}{
+
+Cat-Cat
 }
 
 \examples{
-hgch_dumbbell_CatCat(sample_data("Cat-Cat", nrow = 1000))
+data <- sample_data("Cat-Cat", n = 30)
+hgch_dumbbell_CatCat(data)
+
+# Activate data labels
+hgch_dumbbell_CatCat(data,
+                       dataLabels_show = TRUE)
+
+# data with more of one column
+data <- sample_data("Cat-Cat-Num-Yea-Cat", n = 30)
+hgch_dumbbell_CatCat(data)
+
+# Change variable to color and pallete type
+hgch_dumbbell_CatCat(data,
+                       color_by = names(data)[2],
+                       palette_type = "sequential")
+
+# Change tooltip info and add additional information contained in your data
+names_data <- names(data)
+info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
+data \%>\%
+ hgch_dumbbell_CatCat(tooltip = info_tool)
+
 }
+\seealso{
+Other Cat-Cat plots: 
+\code{\link{hgch_bar_CatCat}()},
+\code{\link{hgch_bubbles_CatCat}()},
+\code{\link{hgch_sankey_CatCat}()},
+\code{\link{hgch_treemap_CatCat}()}
+}
+\concept{Cat-Cat plots}

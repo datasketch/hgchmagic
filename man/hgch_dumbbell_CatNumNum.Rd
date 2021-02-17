@@ -2,20 +2,42 @@
 % Please edit documentation in R/hgch_dumbbell_CatNumNum.R
 \name{hgch_dumbbell_CatNumNum}
 \alias{hgch_dumbbell_CatNumNum}
-\title{Dumbbell Cat Num Num}
+\title{dumbbell chart Num Num}
 \usage{
 hgch_dumbbell_CatNumNum(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{Read \code{\link[dsvizopts]{chart_viz_options}} a general options summary to configure your hgchmagic plots.}
 }
 \description{
-Dumbbell Cat Num Num
+\code{hgch_dumbbell_CatNumNum()} Create a highcharter dumbbell plot based on a particular data type.
+In this case, you can load data with only three columns,  where the first is
+a \strong{categorical column}, and second and third columns are
+\strong{numeric class}, or be sure that two firts columns they meet this condition
 }
-\section{}{
-NA
+\section{Ftype}{
+
+Cat-Num-Num
 }
 
 \examples{
-hgch_dumbbell_CatNumNum(sample_data("Cat-Num-Num", nrow = 1000) \%>\% group_by_at(1) \%>\% summarise_all(mean))
+data <- sample_data("Cat-Num-Num", n = 30)
+hgch_dumbbell_CatNumNum(data)
+
+example with iris data
+data <- iris \%>\% select(Species, Petal.Width, Petal.Length)
+hgch_dumbbell_CatNumNum(data)
+
+# data with more of one column
+data <- sample_data("Cat-Num-Num-Dat-Cat-Cat", n = 30)
+hgch_dumbbell_CatNumNum(data)
+
 }
+\seealso{
+Other Cat-Num-Num plots: 
+\code{\link{hgch_scatter_CatNumNum}()}
+}
+\concept{Cat-Num-Num plots}

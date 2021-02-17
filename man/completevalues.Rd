@@ -4,7 +4,7 @@
 \alias{completevalues}
 \title{Complete values in groups without numeric information}
 \usage{
-completevalues(d)
+completevalues(d, var_num)
 }
 \description{
 Complete values in groups without numeric information

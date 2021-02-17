@@ -1,14 +1,66 @@
+#'
+#' @export
+function_agg <- function (df, agg, to_agg, ...) {
+  group_var <- rlang::enquos(...)
+
+  if (is.null(to_agg)) {
+    dd <- df %>%
+      dplyr::group_by(!!!group_var) %>%
+      summarise(..count = n())
+  } else {
+    dd <- df %>%
+      dplyr::group_by(!!!group_var) %>%
+      summarise(dplyr::across(to_agg, ~ agg(agg, .x)), ..count = n())
+  }
+  dd
+
+}
+
+
+#' @export
+hgch_tooltip <- function(df, nms, label_ftype = NULL, tooltip) {
+  if (is.null(nms)) stop("Enter names")
+  nms <- nms
+  nms <- gsub("[][!()*`|]", "",nms)
+  label_ftype_clean <- gsub("[][!()*`|{}]", "", label_ftype)
+  nms_names <- names(nms)
+
+  if (is.null(tooltip)) {
+    tooltip  <- paste0(map(seq_along(label_ftype), function(i) {
+      paste0(label_ftype[i], ": {", label_ftype_clean[i], "}")
+    }) %>% unlist(), collapse = "<br/>")
+  } else {
+    tooltip <- gsub("[][()*`|]", "", tooltip)#gsub("[][!#$()*,.:;<=>@^`|~.", "", tooltip)
+  }
+
+    points <- gsub("\\{|\\}", "",
+                   stringr::str_extract_all(tooltip, "\\{.*?\\}")[[1]])
+    if (identical(points, character())) {
+      tooltip <- tooltip
+    } else {
+      l <- purrr::map(seq_along(points), function(i){
+
+        true_points <-  paste0("{",names(nms[match(points[i], nms)]),"_label}")
+        tooltip <<- gsub(paste0("\\{",points[i], "\\}"), true_points, tooltip)
+      })[[length(points)]]}
+
+  tooltip
+}
+
+
 #' Complete values in groups without numeric information
 #' @export
-completevalues <- function(d) {
+completevalues <- function(d, var_num) {
+  var_num <- sym(var_num)
   d <- d %>%
     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
-                           b = ifelse(is.character(d$b), "NA", NA),
-                           c = NA)) %>%
-    tidyr::spread(b, c) %>%
-    tidyr::gather(b, c, -a)
-  d$a[is.na(d$a)] <- "NA"
-  d$b[is.na(d$b)] <- "NA"
+                           b = ifelse(is.character(d$b), "NA", NA))) %>%
+    tidyr::spread(b, !!var_num) %>%
+    tidyr::gather(b, !!var_num, -a)
+  d$a[d$a == "NA"] <- NA
+  d$b[d$b == "NA"] <- NA
+  # d$a[is.na(d$a)] <- "NA"
+  # d$b[is.na(d$b)] <- "NA"
   d
 }
 
@@ -148,8 +200,10 @@ tooltip_codes <- function(sample, prefix, suffix) {
 # varible, como en scatter
 #' @export
 format_hgch <- function(plot, frtype, sample, suffix, prefix) {
+
+  if (!grepl("Num", frtype)) frtype <- paste0(frtype, "-Num")
   d_frtype <- strsplit(frtype, split = "-") %>% unlist()
-  if (sum(grepl("Num", d_frtype)) == 0) return()
+
 
   num_var <- grep("Num", d_frtype)
 
@@ -163,37 +217,7 @@ format_hgch <- function(plot, frtype, sample, suffix, prefix) {
 
 }
 
-#' @export
-tooltip_hgch <- function(plot, tooltip, nms, frtype, prefix,  suffix, sample) {
 
-  l_tool <- tooltip_codes(sample, prefix, suffix)
-  frtype <- gsub("Yea", "Cat", frtype)
-  d_frtype <- strsplit(frtype, split = "-") %>% unlist()
-  nms_names <- names(nms)
-
-  if (is.empty(tooltip)) {
-    points <- l_tool[[plot]][[frtype]]
-    l <- purrr::map(seq_along(nms), function(i) {
-      paste0('<b>', nms[i], ': </b>', points[names(points) == nms_names[i]][[nms_names[i]]])
-    }) %>% unlist()
-    tooltip <- paste0(l, collapse = "</br>")
-  } else {
-    points <- gsub("\\{|\\}", "",
-                   stringr::str_extract_all(tooltip, "\\{.*?\\}")[[1]])
-    if (identical(points, character())) {
-      tooltip <- tooltip
-    } else {
-      l <- purrr::map(1:length(points), function(i){
-        true_points <-  names(nms[match(points[i], nms)])
-        replace <- l_tool[[plot]][[frtype]][[true_points]]
-        tooltip <<- gsub(paste0("\\{",points[i], "\\}"), replace, tooltip)
-      })[[length(points)]]
-    }
-  }
-
-  tooltip
-
-}
 
 
 # date intervals
@@ -207,10 +231,12 @@ date_intervals <- function(date_intervals) {
     t_d <- 30 * 24 * 3600 * 1000
   } else if (date_intervals == "year") {
     t_d <- 1000 * 60 * 60 * 24 * 365
-  }
-  else {
+  } else {
     t_d <-  7 * 24 * 3600 * 1000
   }
   t_d
 }
+
+
+
 

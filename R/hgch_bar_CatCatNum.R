@@ -1,27 +1,65 @@
-#' Bar Chart Cat Cat Numeric
+#' Bar chart Cat Cat Num
 #'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num, Cat-Yea-Num
-#' @examples
-#' hgch_bar_CatCatNum(sample_data("Cat-Cat-Num", nrow = 10))
+#' @description
+#' `hgch_bar_CatCatNum()` Create a highcharter bar plot based on a particular data type.
+#' In this case, you can load data with only three columns, where the firts and second columns are
+#' **categoricals columns** and the third must be  a **numeric class column**, or be sure that
+#' three firts columns they meet this condition
 #' @export
+#' @inheritParams hgch_bar_CatNum
+#' @family Cat-Cat-Num plots
+#' @section Ftype:
+#' Cat-Cat-Num
+#' @examples
+#' data <- sample_data("Cat-Cat-Num", n = 30)
+#' hgch_bar_CatCatNum(data)
+#'
+#' # Activate data labels
+#' hgch_bar_CatCatNum(data,
+#'                        dataLabels_show = TRUE)
+#'
+#' # if you want to calculate the average instead of the sum, you can use agg inside a function
+#' hgch_bar_CatCatNum(data,
+#'                        agg = "mean",
+#'                        dataLabels_show = TRUE)
+#'
+#' # data with more of one column
+#' data <- sample_data("Cat-Cat-Num-Dat-Yea-Cat", n = 30)
+#' hgch_bar_CatCatNum(data)
+#'
+#' # Change variable to color and pallete type
+#' hgch_bar_CatCatNum(data,
+#'                        color_by = names(data)[2],
+#'                        palette_type = "sequential")
+#'
+#' # Change tooltip info and add additional information contained in your data
+#' names_data <- names(data)
+#' info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
+#' data %>%
+#'  hgch_bar_CatCatNum(tooltip = info_tool)
+#'
 hgch_bar_CatCatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts)
+  l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Cat-Num", plot = "bar")
   d <- l$d
+
 
   series <- purrr::map(unique(d[[1]]), function(i) {
     d0 <- d %>%
-      dplyr::filter(a %in% i)
+      dplyr::filter(a %in% i) #%>% drop_na()
+    label_info <- d0 %>% .$labels %>% unlist()
     l0 <- list("name" = i,
                "color" = unique(d0$..colors),
-               "data" = d0$c)
+               "data" = map(seq_along(d0[[3]]), function(i){
+                 list("label" =  label_info[i],
+                      "y" = d0[[3]][i]
+                 )
+               })
+    )
   })
+
 
   global_options(opts$style$format_sample_num)
   hc <- highchart() %>%
@@ -31,7 +69,7 @@ hgch_bar_CatCatNum <- function(data, ...){
              events = list(
                load = add_branding(l$theme)
              )
-             ) %>%
+    ) %>%
     hc_add_series_list(series) %>%
     hc_xAxis(title = list(text = l$title$x),
              categories = purrr::map(as.character(unique(d$b)), function(z) z),
@@ -40,6 +78,9 @@ hgch_bar_CatCatNum <- function(data, ...){
              labels = list(
                formatter = l$formats)
     ) %>%
+    hc_tooltip(useHTML = TRUE,
+               headerFormat = NULL,
+               formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_plotOptions(
       series = list(
         borderWidth = 0,
@@ -61,15 +102,23 @@ hgch_bar_CatCatNum <- function(data, ...){
           click = l$clickFunction
         )
       )) %>%
-     hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
-     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
+    hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
     hc_legend(enabled = l$theme$legend_show)
 
   if (l$graph_type == "stacked"){
     hc <- hc %>% hc_plotOptions(bar = list(stacking = "normal"), column = list(stacking = "normal"))
     if (l$percentage) {
-      hc <- hc %>% hc_yAxis(maxRange = 100,
-                            max = 100)
+      hc <- hc %>%
+        hc_plotOptions(
+          bar = list(
+            stacking = 'percent'
+          ),
+          column = list(
+            stacking = 'percent'
+          )
+        ) %>%
+        hc_yAxis(maxRange = 100,
+                 max = 100)
     }
   }
 
@@ -81,62 +130,79 @@ hgch_bar_CatCatNum <- function(data, ...){
 
 
 
-#' bar Chart Cat Cat Num
+
+
+#' Bar chart Cat Yea Num
 #'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
-#' @examples
-#' hgch_bar_CatCat(sample_data("Cat-Cat", nrow = 10))
+#' @description
+#' `hgch_bar_CatYeaNum()` Create a highcharter bar plot based on a particular data type.
+#' In this case, you can load data with only three columns, where the firts column is a
+#' **categorical column**, second is a **year column** and the third must be  a **numeric class column**,
+#'  or be sure that three firts columns they meet this condition
 #' @export
-hgch_bar_CatCat <- hgch_bar_CatCatNum
-
-
-#' bar Chart Yea Cat
-#'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
+#' @inheritParams hgch_bar_CatNum
+#' @section Ftype:
+#' Cat-Yea-Num
 #' @examples
-#' hgch_bar_YeaCat(sample_data("Yea-Cat", nrow = 10))
-#' @export
-hgch_bar_YeaCat <- hgch_bar_CatCatNum
-
-
-#' bar Chart Cat Yea
+#' data <- sample_data("Cat-Yea-Num", n = 30)
+#' hgch_bar_CatYeaNum(data)
 #'
+#' # Activate data labels
+#' hgch_bar_CatYeaNum(data,
+#'                        dataLabels_show = TRUE)
 #'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
-#' @examples
-#' hgch_bar_CatYea(sample_data("Cat-Yea", nrow = 10))
-#' @export
-hgch_bar_CatYea <- hgch_bar_CatCatNum
-
-
-#' bar Chart Cat Yea Num
+#' # data with more of one column
+#' data <- sample_data("Cat-Yea-Num-Dat-Yea-Cat", n = 30)
+#' hgch_bar_CatYeaNum(data)
 #'
+#' # Change variable to color and pallete type
+#' hgch_bar_CatYeaNum(data,
+#'                        color_by = names(data)[2],
+#'                        palette_type = "sequential")
 #'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
-#' @examples
-#' hgch_bar_CatYeaNum(sample_data("Cat-Yea-Num", nrow = 10))
-#' @export
+#' # Change tooltip info and add additional information contained in your data
+#' names_data <- names(data)
+#' info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
+#' data %>%
+#'  hgch_bar_CatYeaNum(tooltip = info_tool)
+#'
 hgch_bar_CatYeaNum <- hgch_bar_CatCatNum
 
 
-#' bar Chart Yea Cat Num
+#' Bar chart Yea Cat Num
 #'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Cat-Num
-#' @examples
-#' hgch_bar_YeaCatNum(sample_data("Yea-Cat-Num", nrow = 10))
+#' @description
+#' `hgch_bar_YeaCatNum()` Create a highcharter bar plot based on a particular data type.
+#' In this case, you can load data with only three columns, where the firts column is a
+#' **year column**, second is a **categorical column** and the third must be  a **numeric class column**,
+#'  or be sure that three firts columns they meet this condition
 #' @export
+#' @inheritParams hgch_bar_CatNum
+#' @family Yea-Cat-Num plots
+#' @section Ftype:
+#' Yea-Cat-Num
+#' @examples
+#' data <- sample_data("Yea-Cat-Num", n = 30)
+#' hgch_bar_YeaCatNum(data)
+#'
+#' # Activate data labels
+#' hgch_bar_YeaCatNum(data,
+#'                        dataLabels_show = TRUE)
+#'
+#' # data with more of one column
+#' data <- sample_data("Yea-Cat-Num-Dat-Yea-Cat", n = 30)
+#' hgch_bar_YeaCatNum(data)
+#'
+#' # Change variable to color and pallete type
+#' hgch_bar_YeaCatNum(data,
+#'                        color_by = names(data)[2],
+#'                        palette_type = "sequential")
+#'
+#' # Change tooltip info and add additional information contained in your data
+#' names_data <- names(data)
+#' info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
+#' data %>%
+#'  hgch_bar_YeaCatNum(tooltip = info_tool)
+#'
 hgch_bar_YeaCatNum <- hgch_bar_CatCatNum
 

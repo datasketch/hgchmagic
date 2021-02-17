@@ -2,21 +2,62 @@
 % Please edit documentation in R/hgch_bar_CatCatNum.R
 \name{hgch_bar_CatCatNum}
 \alias{hgch_bar_CatCatNum}
-\title{Bar Chart Cat Cat Numeric}
+\title{Bar chart Cat Cat Num}
 \usage{
 hgch_bar_CatCatNum(data, ...)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data frame, data frame extension (e.g. a tibble), a
+lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).}
+
+\item{...}{Read \code{\link[dsvizopts]{chart_viz_options}} a general options summary to configure your hgchmagic plots
+and <\code{\link[=hgch_bar_options]{bar-options}}> which specifically contains the additional arguments
+that work only for this type of chart.}
 }
 \description{
-This chart does not allow for chaning orientation
+\code{hgch_bar_CatCatNum()} Create a highcharter bar plot based on a particular data type.
+In this case, you can load data with only three columns, where the firts and second columns are
+\strong{categoricals columns} and the third must be  a \strong{numeric class column}, or be sure that
+three firts columns they meet this condition
 }
-\section{ctypes}{
+\section{Ftype}{
 
-Cat-Cat-Num, Cat-Yea-Num
+Cat-Cat-Num
 }
 
 \examples{
-hgch_bar_CatCatNum(sample_data("Cat-Cat-Num", nrow = 10))
+data <- sample_data("Cat-Cat-Num", n = 30)
+hgch_bar_CatCatNum(data)
+
+# Activate data labels
+hgch_bar_CatCatNum(data,
+                       dataLabels_show = TRUE)
+
+# if you want to calculate the average instead of the sum, you can use agg inside a function
+hgch_bar_CatCatNum(data,
+                       agg = "mean",
+                       dataLabels_show = TRUE)
+
+# data with more of one column
+data <- sample_data("Cat-Cat-Num-Dat-Yea-Cat", n = 30)
+hgch_bar_CatCatNum(data)
+
+# Change variable to color and pallete type
+hgch_bar_CatCatNum(data,
+                       color_by = names(data)[2],
+                       palette_type = "sequential")
+
+# Change tooltip info and add additional information contained in your data
+names_data <- names(data)
+info_tool <- paste0("<b>",names_data[1],":</b> {", names_data[1],"}<br/><b>", names_data[4],":</b> {", names_data[4],"}<br/>")
+data \%>\%
+ hgch_bar_CatCatNum(tooltip = info_tool)
+
 }
+\seealso{
+Other Cat-Cat-Num plots: 
+\code{\link{hgch_bubbles_CatCatNum}()},
+\code{\link{hgch_dumbbell_CatCatNum}()},
+\code{\link{hgch_treemap_CatCatNum}()}
+}
+\concept{Cat-Cat-Num plots}

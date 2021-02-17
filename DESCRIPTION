@@ -4,6 +4,7 @@ Version: 0.0.0.1
 Author: Juan Pablo Marin Diaz
 Maintainer: Juan Pablo Marin Diaz <jpmarindiaz@gmail.com>
 Description: A wrapper for highcharter
+BugReports: https://github.com/datasketch/hgchmagic/issues
 Depends:
     R (>= 3.0.0),
     highcharter (>= 0.4.0.9999),
@@ -16,7 +17,10 @@ Imports:
     d3.format
 Suggests:
     testthat (>= 2.1.0)
+VignetteBuilder: 
+    knitr
 License: MIT + file LICENSE
 LazyData: no
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Encoding: UTF-8

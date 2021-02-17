@@ -1,29 +1,57 @@
-#' line Chart Dat Numeric
+#' Line chart Dat Num
 #'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
+#' @description
+#' `hgch_line_DatNum()` Create a highcharter line plot based on a particular data type.
+#' In this case, you can load data with only two columns, where the firts column is a
+#' **date column** and the second must be a **numeric class column**, or be sure that
+#' two firts columns they meet this condition
+#' @export
+#' @inheritParams hgch_line_YeaNum
+#' @family Dat-Num plots
+#' @section Ftype:
 #' Dat-Num
 #' @examples
-#' hgch_line_DatNum(sampleData("Dat-Num", nrow = 10))
-#' @export
+#' data <- sample_data("Dat-Num", n = 30)
+#' hgch_line_DatNum(data)
+#'
+#' hgch_line_DatNum(data)
+#' # if you want to calculate the average instead of the sum, you can use agg inside a function
+#' hgch_line_DatNum(data, agg = "mean")
+#'
+#' # data with more of one column
+#' data <- sample_data("Dat-Num-Cat-Cat-Cat-Num", n = 30)
+#' hgch_line_DatNum(data)
+#'
+#' # calculate percentage
+#' hgch_line_DatNum(data, percentage = TRUE)
+#'
+#' # numeric format
+#' hgch_line_DatNum(data, percentage = TRUE, format_sample_num = "1.234,")
+#'
+#' # You can call the mean and percentage in the tooltip plot
+#' num_name <- names(data)[2]
+#' data %>%
+#' hgch_line_DatNum(agg = "mean",
+#'              tooltip = paste0("Average: {", num_name ,"} <br/> Percentage: {%}%"))
+#'
 hgch_line_DatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
-  l <- hgchmagic_prep(data, opts = opts)
+  l <- hgchmagic_prep(data, opts = opts, plot = "line", ftype = "Dat-Num")
 
   d <- l$d
   ds <- NULL
-  series <- lapply(unique(d$group), function(s){
-    ds <<- d %>% dplyr::filter(group == s)
-    dss <- ds %>% dplyr::select(a, b, ..a_label)
+
+  series <- lapply(unique(d$..group), function(s){
+    ds <<- d %>% filter(..group == s)
+    dss <- ds[,c(1, 2, 4)]
     dss <- ds %>%
-      dplyr::mutate(x = as.numeric(as.POSIXct(as.Date(ds$a, origin = l$min_date)))*1000,
-                    y = ds$b,
-                    color = ds$..colors,
-                    label = ..a_label)
+      mutate(x = ds$a,
+             y = ds[[2]],
+             color = ds$..colors,
+             label = labels)
+
     list(
       name = s,
       color = ds$..colors[1],
@@ -53,8 +81,9 @@ hgch_line_DatNum <- function(data, ...){
                formatter = l$formats)
     ) %>%
     hc_add_series_list(series) %>%
-    hc_tooltip(useHTML=TRUE,
-               formatter = l$formatter_date_tooltip
+    hc_tooltip(useHTML = TRUE,
+               headerFormat = NULL,
+               formatter = JS(paste0("function () {return this.point.label;}"))
     ) %>%
     hc_legend(enabled = FALSE) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
@@ -63,14 +92,3 @@ hgch_line_DatNum <- function(data, ...){
 }
 
 
-#' line Chart Dat Numeric
-#'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Dat
-#' @examples
-#' hgch_line_Dat(sampleData("Dat", nrow = 10))
-#' @export
-hgch_line_Dat <- hgch_line_DatNum

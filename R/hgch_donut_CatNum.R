@@ -1,13 +1,42 @@
-#' donut Chart Cat Numeric
+#' Donut chart Cat Num
 #'
-#' This chart does not allow for chaning orientation
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat-Num, Yea-Num
-#' @examples
-#' hgch_donut_CatNum(sample_data("Cat-Num", nrow = 10))
+#' @description
+#' `hgch_donut_CatNum()` Create a highcharter donut plot based on a particular data type.
+#' In this case, you can load data with only two columns, where the firts column is a
+#' **categorical column** and the second must be  a **numeric class column**, or be sure that
+#' two firts columns they meet this condition
 #' @export
+#' @inheritParams hgch_pie_CatNum
+#' @family Cat-Num plots
+#' @section Ftype:
+#' Cat-Num
+#' @examples
+#' data <- sample_data("Cat-Num", n = 30)
+#' hgch_donut_CatNum(data)
+#'
+#' example with iris data
+#' data <- iris %>% select(Species, Petal.Width)
+#' # this plot show the sum of petal width by species
+#' hgch_donut_CatNum(data, color_by = "Species")
+#' # if you want to calculate the average instead of the sum,
+#' # you can use "agg" param inside a function
+#' hgch_donut_CatNum(data, agg = "mean")
+#'
+#' # data with more of one column
+#' data <- sample_data("Cat-Num-Dat-Cat-Cat", n = 30)
+#' hgch_donut_CatNum(data)
+#'
+#' # calculate percentage
+#' hgch_donut_CatNum(data, percentage = TRUE)
+#'
+#' # numeric format
+#' hgch_donut_CatNum(data, percentage = TRUE, format_sample_num = "1.234,")
+#'
+#' # You can call the mean and percentage in the tooltip plot
+#' num_name <- names(data)[2]
+#' data %>%
+#' hgch_donut_CatNum(agg = "mean",
+#'                 tooltip = paste0("Average: {", num_name ,"} <br/> Percentage: {%}%"))
 hgch_donut_CatNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
@@ -19,7 +48,8 @@ hgch_donut_CatNum <- function(data, ...){
   data <- list()
   h <- purrr::map(1:nrow(d), function(z){
     data$data[[z]] <<- list("name" = d$a[z],
-                            "y" = d$b[z],
+                            "y" = d[[2]][z],
+                            "label" = d$labels[z],
                             "color" = as.character(d$..colors[z]))
   })
 
@@ -36,7 +66,8 @@ hgch_donut_CatNum <- function(data, ...){
     ) %>%
     hc_plotOptions(
       series = list(innerSize = "60%")) %>%
-    hc_tooltip(useHTML=TRUE, pointFormat = l$tooltip, headerFormat = NULL) %>%
+    hc_tooltip(useHTML = TRUE,
+               formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_credits(enabled = TRUE, text = l$title$caption) %>%
     hc_add_theme(hgch_theme(opts =  c(l$theme,
                                  cats = "{point.name} <br/>")))
@@ -47,37 +78,43 @@ hgch_donut_CatNum <- function(data, ...){
 
 
 
-#' donut Chart Cat
+
+#' Donut chart Yea Num
 #'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Cat, Yea
-#' @examples
-#' hgch_donut_Cat(sample_data("Cat", nrow = 10))
+#' @description
+#' `hgch_donut_YeaNum()` Create a highcharter donut plot based on a particular data type.
+#' In this case, you can load data with only two columns, where the firts column is a
+#' **Year column** and the second must be  a **numeric class column**, or be sure that
+#' two firts columns they meet this condition
 #' @export
-hgch_donut_Cat <- hgch_donut_CatNum
-
-
-
-#' donut Chart Yea
-#'
-#'
-#' @param data A data.frame
-#' @section ctypes:
-#' Yea, Yea
+#' @inheritParams hgch_pie_CatNum
+#' @family Yea-Num plots
+#' @section Ftype:
+#' Yea-Num
 #' @examples
-#' hgch_donut_Yea(sample_data("Yea", nrow = 10))
-#' @export
-hgch_donut_Yea <- hgch_donut_CatNum
-
-#' donut Chart Yea Num
+#' data <- sample_data("Yea-Num", n = 30)
+#' hgch_donut_YeaNum(data)
 #'
+#' example with iris data
+#' data <- iris %>% select(Species, Petal.Width)
+#' # this plot show the sum of petal width by species
+#' hgch_donut_YeaNum(data)
+#' # if you want to calculate the average instead of the sum, you can use agg inside a function
+#' hgch_donut_YeaNum(data, agg = "mean")
 #'
-#' @param data A data.frame
-#' @section ctypes:
-#' Yea, Yea
-#' @examples
-#' hgch_donut_YeaNum(sample_data("Yea-Num", nrow = 10))
-#' @export
+#' # data with more of one column
+#' data <- sample_data("Yea-Num-Dat-Yea-Yea", n = 30)
+#' hgch_donut_YeaNum(data)
+#'
+#' # calculate percentage
+#' hgch_donut_YeaNum(data, percentage = TRUE)
+#'
+#' # numeric format
+#' hgch_donut_YeaNum(data, percentage = TRUE, format_sample_num = "1.234,")
+#'
+#' # You can call the mean and percentage in the tooltip plot
+#' num_name <- names(data)[2]
+#' data %>%
+#' hgch_donut_YeaNum(agg = "mean",
+#'              tooltip = paste0("Average: {", num_name ,"} <br/> Percentage: {%}%"))
 hgch_donut_YeaNum <- hgch_donut_CatNum
