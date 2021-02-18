@@ -26,6 +26,11 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     frtype <- gsub("Pct", "Num", frtype)
   }
 
+  if (grepl("Yea", frtype)) {
+    has_year <- dic$id[dic$hdType == "Yea"]
+    #if (any(is.na(d[has_year]))) {
+    d[[has_year]] <- as.character(d[[has_year]])
+  }
   # only data plot ----------------------------------------------------------
 
   ftype_vec <- str_split(ftype,pattern = "-") %>% unlist()
