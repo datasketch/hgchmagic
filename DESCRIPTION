@@ -20,10 +20,10 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes:
-    datasketch/homodatum
-    datasketch/makeup
-    datasketch/paletero
-    datasketch/dsvizopts
+    datasketch/homodatum,
+    datasketch/makeup,
+    datasketch/paletero,
+    datasketch/dsvizopts,
     dreamRs/d3.format
 License: MIT + file LICENSE
 LazyData: no
