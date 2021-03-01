@@ -41,7 +41,7 @@ hgch_scatter_NumNum <- function(data, ...){
   d <- l$d
 
 
-  data_list <- map(1:nrow(d), function(z) {
+  data_list <- purrr::map(1:nrow(d), function(z) {
     list(x = d$a[z],
          y = d$b[z],
          color = d$..colors[z],
