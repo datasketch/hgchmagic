@@ -35,12 +35,12 @@ hgch_scatter_CatNumNum <- function(data, ...){
   ds <- NULL
   series <- lapply(unique(d$a), function(s){
 
-    ds <<- d %>% filter(a == s)
-    dss <- ds %>% select(a,b, labels)
+    ds <<- d %>% dplyr::filter(a == s)
+    dss <- ds %>% dplyr::select(a,b, labels)
     dss <- dss %>%
-      mutate(x = as.numeric(ds$b),
-             y = ds[[3]],
-             label = labels)
+      dplyr::mutate(x = as.numeric(ds$b),
+                    y = ds[[3]],
+                    label = labels)
     list(
       name = s,
       color = unique(ds$..colors),

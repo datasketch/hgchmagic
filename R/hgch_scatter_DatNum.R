@@ -28,13 +28,13 @@ hgch_scatter_DatNum <- function(data, ...){
   ds <- NULL
 
   series <- lapply(unique(d$..group), function(s){
-    ds <<- d %>% filter(..group == s)
+    ds <<- d %>% dplyr::filter(..group == s)
     dss <- ds[,c(1, 2, 4)]
     dss <- ds %>%
-      mutate(x = ds$a,
-             y = ds[[2]],
-             color = ds$..colors,
-             label = labels)
+      dplyr::mutate(x = ds$a,
+                    y = ds[[2]],
+                    color = ds$..colors,
+                    label = labels)
     list(
       name = s,
       color = ds$..colors[1],
