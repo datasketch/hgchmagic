@@ -33,7 +33,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   }
   # only data plot ----------------------------------------------------------
 
-  ftype_vec <- str_split(ftype,pattern = "-") %>% unlist()
+  ftype_vec <- stringr::str_split(ftype,pattern = "-") %>% unlist()
   ftype_length <- length(ftype_vec)
   dd <- d[,1:ftype_length]
   dic_p <- dic %>% dplyr::filter(id %in% names(dd))
