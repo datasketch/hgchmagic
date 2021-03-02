@@ -36,7 +36,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   ftype_vec <- str_split(ftype,pattern = "-") %>% unlist()
   ftype_length <- length(ftype_vec)
   dd <- d[,1:ftype_length]
-  dic_p <- dic %>% filter(id %in% names(dd))
+  dic_p <- dic %>% dplyr::filter(id %in% names(dd))
 
 
 
@@ -48,7 +48,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   formatter <- NULL
 
 
-  if (any(c("Cat", "Dat", "Yea") %in% dic_p$hdType)) dic_agg <- dic_p %>% filter(hdType %in% c("Cat", "Dat", "Yea"))
+  if (any(c("Cat", "Dat", "Yea") %in% dic_p$hdType)) dic_agg <- dic_p %>% dplyr::filter(hdType %in% c("Cat", "Dat", "Yea"))
   if (any(c("Cat", "Dat", "Yea") %in% dic_p$hdType)) var_g <- unique(dic_agg$id)
 
 
@@ -86,16 +86,16 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   dic_alt <- dic
 
   if (agg_var == "..count") {
-    dic_p <- dic_p %>% bind_rows(  bind_rows(data.frame(id = "..count", label = "Count", hdType = "Num") %>%
-                                               mutate_all(as.character)))
+    dic_p <- dic_p %>% dplyr::bind_rows(dplyr::bind_rows(data.frame(id = "..count", label = "Count", hdType = "Num") %>%
+                                                           dplyr::mutate_all(as.character)))
   } else {
     dic_p <- dic_p
   }
 
   if (opts$postprocess$percentage) {
-    dic_p <- dic_p %>% filter(id != agg_var)
-    dic_p <- dic_p %>% bind_rows(  bind_rows(data.frame(id = "..percentage", label = "%", hdType = "Num") %>%
-                                               mutate_all(as.character)))
+    dic_p <- dic_p %>% dplyr::filter(id != agg_var)
+    dic_p <- dic_p %>% dplyr::bind_rows(dplyr::bind_rows(data.frame(id = "..percentage", label = "%", hdType = "Num") %>%
+                                                           dplyr::mutate_all(as.character)))
   }
 
 
@@ -107,32 +107,32 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     if (length(var_g) == 1) {
       dd <- function_agg(df = d, agg = opts$summarize$agg, to_agg = agg_num, a)
       if (grepl("Dat", ftype)) {
-        dd <- dd %>% drop_na()
-        dn <- dn %>% drop_na(a)
+        dd <- dd %>% tidyr::drop_na()
+        dn <- dn %>% tidyr::drop_na(a)
         dn$..group <- nms[[2]]
       }
 
       if (!grepl("Dat", ftype)) {
-        dd <- preprocessData(dd, drop_na = opts$preprocess$drop_na,
-                              na_label = opts$preprocess$na_label, na_label_cols = "a")
+        dd <- dsvizopts::preprocessData(dd, drop_na = opts$preprocess$drop_na,
+                                        na_label = opts$preprocess$na_label, na_label_cols = "a")
       } else {
           min_date <- min(dd$a)
           dd$a <- as.numeric(as.POSIXct(as.Date(dd$a, origin = min_date)))*1000
           dn$..date <- dn$a
           dn$a <- as.numeric(as.POSIXct(as.Date(dn$a, origin = min_date)))*1000
       }
-      dd <- postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+      dd <- dsvizopts::postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
 
       dd$..percentage <- (dd[[agg_var]]/sum(dd[[agg_var]], na.rm = TRUE)) * 100
 
       dn <- dn %>%
-        group_by(a) %>%
-        summarise(across(.cols = everything(), .fns = func_paste))
+        dplyr::group_by(a) %>%
+        dplyr::summarise(dplyr::across(.cols = dplyr::everything(), .fns = func_paste))
 
       if (grepl("Dat", ftype)) {
         dic_p <- dic_p %>%
-          bind_rows(data.frame(id = "..group", label = "..group", hdType = "Cat") %>%
-                      mutate_all(as.character))
+          dplyr::bind_rows(data.frame(id = "..group", label = "..group", hdType = "Cat") %>%
+                             dplyr::mutate_all(as.character))
         nms[length(nms)+1] <- c("..group")
         names(nms) <- c(names(nms)[-length(nms)], "..group")
       }
@@ -141,8 +141,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       dd <- function_agg(df = d, agg = opts$summarize$agg, to_agg = agg_num, a, b)
 
       if (grepl("Dat", ftype)) {
-        dd <- dd %>% drop_na(b)
-        dn <- dn %>% drop_na(b)}
+        dd <- dd %>% tidyr::drop_na(b)
+        dn <- dn %>% tidyr::drop_na(b)}
 
       if (grepl("Dat", ftype))  {
         dn$..date <- dn$b
@@ -157,15 +157,15 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       } else {
         by_col <- names(nms[match(by_col, nms)])
       }
-      agg_var_t <- sym(agg_var)
+      agg_var_t <- rlang::sym(agg_var)
       dd <- dd %>%
-        group_by_(by_col) %>%
+        dplyr::group_by_(by_col) %>%
         dplyr::mutate(..percentage = (!!agg_var_t/sum(!!agg_var_t, na.rm = TRUE))*100)
 
 
       if (!grepl("Dat", ftype)) {
-        dd <- preprocessData(dd, drop_na = opts$preprocess$drop_na,
-                              na_label = opts$preprocess$na_label, na_label_cols = "b")
+        dd <- dsvizopts::preprocessData(dd, drop_na = opts$preprocess$drop_na,
+                                        na_label = opts$preprocess$na_label, na_label_cols = "b")
       }
 
       d_c <- dd[,dic_p$id]
@@ -180,9 +180,9 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d_c$b <- as.character(d_c$b)
       dd$b <- as.character(dd$b)
       dd <- d_c %>% left_join(dd)
-      dd <- preprocessData(dd, drop_na = opts$preprocess$drop_na_legend,
-                            na_label = opts$preprocess$na_label, na_label_cols = "a")
-      dd <- postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+      dd <- dsvizopts::preprocessData(dd, drop_na = opts$preprocess$drop_na_legend,
+                                      na_label = opts$preprocess$na_label, na_label_cols = "a")
+      dd <- dsvizopts::postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
 
       dn$a[is.na(dn$a)] <- opts$preprocess$na_label
       if (!grepl("Dat", ftype)){
@@ -190,8 +190,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       }
 
       dn <- dn %>%
-        group_by(a, b) %>%
-        summarise_each(funs(func_paste))
+        dplyr::group_by(a, b) %>%
+        dplyr::summarise_each(dplyr::funs(func_paste))
       if (!grepl("Dat", ftype)){
       dd$b <- as.character(dd$b)
       dn$b <- as.character(dn$b)
@@ -202,15 +202,15 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
     }
 
-    l_cats <- map(names(dn), function(f_cats){
-      dn[[paste0(f_cats, "_label")]] <<- makeup_chr(dn[[f_cats]], opts$style$format_sample_cat)
+    l_cats <- purrr::map(names(dn), function(f_cats){
+      dn[[paste0(f_cats, "_label")]] <<- makeup::makeup_chr(dn[[f_cats]], opts$style$format_sample_cat)
       dn[[f_cats]]
     })
     dic_alt <- dic_alt %>%
-              bind_rows(data.frame(id = c("..count", "..percentage"), label = c("Count", "%"), hdType = c("Num", "Num")) %>%
-                          mutate_all(as.character))
+      dplyr::bind_rows(data.frame(id = c("..count", "..percentage"), label = c("Count", "%"), hdType = c("Num", "Num")) %>%
+                         dplyr::mutate_all(as.character))
 
-    d <- dd %>% left_join(dn, by = var_g)
+    d <- dd %>% dplyr::left_join(dn, by = var_g)
   }
 
 
@@ -226,17 +226,17 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   if (!identical(var_nums, integer())) {
     var_nums <- dic_alt$id[var_nums]
 
-    l_nums <- map(var_nums, function(f_nums){
-      d[[paste0(f_nums, "_label")]] <<- makeup_num(d[[f_nums]], sample = opts$style$format_sample_num)
+    l_nums <- purrr::map(var_nums, function(f_nums){
+      d[[paste0(f_nums, "_label")]] <<- makeup::makeup_num(d[[f_nums]], sample = opts$style$format_sample_num)
     })}
 
 
   if (!identical(grep("Dat", ftype_vec), integer())) {
     labs <- NULL
-    d$..date_label <- makeup_dat(d[["..date"]],
-                                 sample = opts$style$format_sample_dat,
-                                 #locale = opts$style$locale,
-                                 format = opts$style$format_dat
+    d$..date_label <- makeup::makeup_dat(d[["..date"]],
+                                         sample = opts$style$format_sample_dat,
+                                         #locale = opts$style$locale,
+                                         format = opts$style$format_dat
     )
 
     if (grep("Dat", ftype_vec) == 1) d$a_label <- d$..date_label
@@ -273,20 +273,21 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   if (opts$chart$tooltip == "") opts$chart$tooltip <- NULL
   d <- d %>%
-    mutate(labels = glue::glue(hgch_tooltip(nms = nms, label_ftype = default_tooltip, tooltip = opts$chart$tooltip)) %>% lapply(htmltools::HTML))
+    dplyr::mutate(labels = glue::glue(hgch_tooltip(nms = nms, label_ftype = default_tooltip, tooltip = opts$chart$tooltip)) %>%
+                    lapply(htmltools::HTML))
 
   d <- d[, c(dic_p$id,  "labels")]
 
   # axis labels -------------------------------------------------------------
 
 
-  if (!identical(grep("Dat", ftype_vec), integer())) dic_p <- dic_p %>% filter(id != "..group")
+  if (!identical(grep("Dat", ftype_vec), integer())) dic_p <- dic_p %>% dplyr::filter(id != "..group")
 
-  nms_dic <- setNames(dic_p$label, dic_p$id)
+  nms_dic <- stats::setNames(dic_p$label, dic_p$id)
 
-  labelsXY <- labelsXY(hor_title = opts$title$hor_title %||% nms_dic[[(1 + (length(nms_dic) - 2))]], #
-                       ver_title = opts$title$ver_title %||% nms_dic[[length(nms_dic)]],
-                       nms = nms_dic, orientation = opts$chart$orientation)
+  labelsXY <- dsvizopts::labelsXY(hor_title = opts$title$hor_title %||% nms_dic[[(1 + (length(nms_dic) - 2))]], #
+                                  ver_title = opts$title$ver_title %||% nms_dic[[length(nms_dic)]],
+                                  nms = nms_dic, orientation = opts$chart$orientation)
 
   hor_title <- as.character(labelsXY[1])
   ver_title <- as.character(labelsXY[2])
@@ -331,15 +332,15 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 1) {
     if (!grepl("Dat", ftype)) {
-      d <- order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
+      d <- dsvizopts::order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
     }
   }
 
   if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2) {
-    d <- order_category(d, col = "a", order = opts$postprocess$order_legend, label_wrap = opts$style$label_wrap_legend)
+    d <- dsvizopts::order_category(d, col = "a", order = opts$postprocess$order_legend, label_wrap = opts$style$label_wrap_legend)
 
     if (!grepl("Dat", frtype)) {
-      d <- order_category(d, col = "b", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
+      d <- dsvizopts::order_category(d, col = "b", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
     }
   }
 
@@ -416,7 +417,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     cursor = opts$shiny$cursor,
     clickFunction = opts$shiny$clickFunction,
     graph_type = opts$chart$graph_type,
-    extra = get_extra_opts(opts, extra_pattern)
+    extra = dsvizopts::get_extra_opts(opts, extra_pattern)
   )
 
 }

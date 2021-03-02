@@ -38,7 +38,7 @@ hgch_sankey_CatCat <- function(data, ...){
   }
 
 
-  data_dummy <- data[,1:2] %>% mutate_all(~paste0(., "_dummy"))
+  data_dummy <- data[,1:2] %>% dplyr::mutate_all(~paste0(., "_dummy"))
   l <- hgchmagic_prep(data_dummy, opts = opts, plot = "sankey", ftype = "Cat-Cat")
 
   d <- l$d
