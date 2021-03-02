@@ -51,7 +51,7 @@ hgch_tooltip <- function(df, nms, label_ftype = NULL, tooltip) {
 #' Complete values in groups without numeric information
 #' @export
 completevalues <- function(d, var_num) {
-  var_num <- sym(var_num)
+  var_num <- rlang::sym(var_num)
   d <- d %>%
     tidyr::replace_na(list(a = ifelse(is.character(d$a), "NA", NA),
                            b = ifelse(is.character(d$b), "NA", NA))) %>%
