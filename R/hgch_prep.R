@@ -179,7 +179,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d_c <- completevalues(d_c, agg_var)
       d_c$b <- as.character(d_c$b)
       dd$b <- as.character(dd$b)
-      dd <- d_c %>% left_join(dd)
+      dd <- d_c %>% dplyr::left_join(dd)
       dd <- dsvizopts::preprocessData(dd, drop_na = opts$preprocess$drop_na_legend,
                                       na_label = opts$preprocess$na_label, na_label_cols = "a")
       dd <- dsvizopts::postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
