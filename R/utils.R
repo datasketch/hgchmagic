@@ -42,6 +42,8 @@ is.empty <- function (x){
 #' @importFrom highcharter hcmap
 #' @importFrom highcharter JS
 
+#' @importFrom dplyr %>%
+
 #' @import dsvizopts
 #' @importFrom dsvizopts agg
 NULL

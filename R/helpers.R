@@ -6,11 +6,11 @@ function_agg <- function (df, agg, to_agg, ...) {
   if (is.null(to_agg)) {
     dd <- df %>%
       dplyr::group_by(!!!group_var) %>%
-      summarise(..count = n())
+      dplyr::summarise(..count = dplyr::n())
   } else {
     dd <- df %>%
       dplyr::group_by(!!!group_var) %>%
-      summarise(dplyr::across(to_agg, ~ agg(agg, .x)), ..count = n())
+      dplyr::summarise(dplyr::across(to_agg, ~ dsvizopts::agg(agg, .x)), ..count = dplyr::n())
   }
   dd
 
@@ -26,7 +26,7 @@ hgch_tooltip <- function(df, nms, label_ftype = NULL, tooltip) {
   nms_names <- names(nms)
 
   if (is.null(tooltip)) {
-    tooltip  <- paste0(map(seq_along(label_ftype), function(i) {
+    tooltip  <- paste0(purrr::map(seq_along(label_ftype), function(i) {
       paste0(label_ftype[i], ": {", label_ftype_clean[i], "}")
     }) %>% unlist(), collapse = "<br/>")
   } else {
