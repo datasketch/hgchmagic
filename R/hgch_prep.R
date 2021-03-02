@@ -127,7 +127,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
       dn <- dn %>%
         dplyr::group_by(a) %>%
-        dplyr::summarise(dplyr::across(.cols = dplyr::everything(), .fns = func_paste))
+        dplyr::summarise_all(.funs = func_paste)
 
       if (grepl("Dat", ftype)) {
         dic_p <- dic_p %>%
