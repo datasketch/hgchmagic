@@ -1,6 +1,6 @@
 Package: hgchmagic
 Title: A wrapper for highcharter
-Version: 0.0.0.1
+Version: 1.0.0
 Author: Juan Pablo Marin Diaz
 Maintainer: Juan Pablo Marin Diaz <jpmarindiaz@gmail.com>
 Description: A wrapper for highcharter
