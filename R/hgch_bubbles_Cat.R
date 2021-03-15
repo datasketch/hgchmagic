@@ -5,6 +5,7 @@
 #' In this case, you can load data with only one **categorical column** or be sure of
 #' the first column of the dataframe its categorical since it will be done a
 #' counting the categories of this column
+#' @export
 #' @inheritParams hgch_bubbles_CatNum
 #' @family Cat plots
 #' @section Ftype:
