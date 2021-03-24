@@ -83,6 +83,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       }
     }
   }
+
+
   dic_alt <- dic
 
   if (agg_var == "..count") {
@@ -218,16 +220,12 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   # general format to numerical data to prepare information from tooltip
 
   var_nums <- grep("Num", dic_alt$hdType)
-
-
-  var_nums <- grep("Num", dic_alt$hdType)
-
-
+  print(d)
   if (!identical(var_nums, integer())) {
     var_nums <- dic_alt$id[var_nums]
 
     l_nums <- purrr::map(var_nums, function(f_nums){
-      d[[paste0(f_nums, "_label")]] <<- makeup::makeup_num(d[[f_nums]], sample = opts$style$format_sample_num)
+      d[[paste0(f_nums, "_label")]] <<- makeup::makeup_num(as.numeric(d[[f_nums]]), sample = opts$style$format_sample_num)
     })}
 
 

@@ -18,11 +18,13 @@ function_agg <- function (df, agg, to_agg, ...) {
 
 
 #' @export
-hgch_tooltip <- function(df, nms, label_ftype = NULL, tooltip) {
+hgch_tooltip <- function(nms, label_ftype = NULL, tooltip) {
   if (is.null(nms)) stop("Enter names")
   nms <- nms
   nms <- gsub("[][!()*`|]", "",nms)
+  nms <- gsub("[\r\n]", " ", nms)
   label_ftype_clean <- gsub("[][!()*`|{}]", "", label_ftype)
+  label_ftype_clean <- gsub("[\r\n]", " ", label_ftype_clean)
   nms_names <- names(nms)
 
   if (is.null(tooltip)) {

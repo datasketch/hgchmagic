@@ -41,4 +41,18 @@ test_that("tooltip", {
   d_test <- unique(l$d$labels) %>% unlist()
   expect_equal(d_test, unique(d_expe$label))
 
+
+
+  # with numbers and special characters in data's names
+  data <- data.frame(Zona = c("Océanos", "Desierto", "Selva") , Animal = c("Salmón", "Tigre", "Tortuga"), `Variación 1990-2929`= runif(3, 0, 30))
+  hgch_bar_CatCatNum(data)
+
+  data <- data.frame(`País` = c("Brasil", "Chile", "Colombia", "Ecuador", "Perú"),
+                     `Período` = c("Enero – junio","Enero – setiembre","Enero – setiembre", "Enero – setiembre", "Enero – junio"),
+                     "Variación 2019-2020" = c(7.2, 39., -12.1, 21.6, 12))
+  plot =  "bar"
+  ftype = "Cat-Cat-Num"
+  hgch_bar_CatCatNum(data)
+
+
 })
