@@ -49,7 +49,7 @@ hgch_bubbles_CatCat <- function(data, ...){
     label_info <- d0 %>% .$labels %>% unlist()
     l0 <- list("name" = i,
                "color" = unique(d0$..colors),
-               "data" = map(seq_along(d0[[3]]), function(i){
+               "data" = purrr::map(seq_along(d0[[3]]), function(i){
                  list("label" =  label_info[i],
                       "value" = d0[[3]][i]
                  )

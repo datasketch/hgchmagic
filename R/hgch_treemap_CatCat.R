@@ -46,7 +46,7 @@ hgch_treemap_CatCat <- function(data, ...){
   paleta <- d[,c(color_by, "..colors")]
   paleta <- paleta %>% distinct(..colors, .keep_all = TRUE)
 
-  listaId <- map(1:length(paleta[[color_by]]), function(i) {
+  listaId <- purrr::map(1:length(paleta[[color_by]]), function(i) {
     list(
       id = as.character(paleta[[color_by]][i]),
       name = as.character(paleta[[color_by]][i]),
@@ -54,7 +54,7 @@ hgch_treemap_CatCat <- function(data, ...){
     )
   })
 
-  listaMg <- map(1:nrow(d), function(z) {
+  listaMg <- purrr::map(1:nrow(d), function(z) {
     nm <- ifelse(is.na(d$b[z]), "NA", d$b[z])
     list(
       name = nm,
