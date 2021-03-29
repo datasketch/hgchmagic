@@ -220,7 +220,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   # general format to numerical data to prepare information from tooltip
 
   var_nums <- grep("Num", dic_alt$hdType)
-  print(d)
+  #print(d)
   if (!identical(var_nums, integer())) {
     var_nums <- dic_alt$id[var_nums]
 
