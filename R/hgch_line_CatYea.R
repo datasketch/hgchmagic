@@ -48,7 +48,7 @@ hgch_line_CatYea <- function(data, ...){
     label_info <- d0 %>% .$labels %>% unlist()
     l0 <- list("name" = i,
                "color" = unique(d0$..colors),
-               "data" = map(seq_along(d0[[3]]), function(i){
+               "data" = purrr::map(seq_along(d0[[3]]), function(i){
                  list("label" =  label_info[i],
                       "y" = d0[[3]][i]
                  )
