@@ -115,7 +115,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       }
 
       if (!grepl("Dat", ftype)) {
-        dd <- dsvizopts::preprocessData(dd, drop_na = opts$preprocess$drop_na,
+        dd <- dsvizprep::preprocessData(dd, drop_na = opts$preprocess$drop_na,
                                         na_label = opts$preprocess$na_label, na_label_cols = "a")
       } else {
           min_date <- min(dd$a)
@@ -123,7 +123,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
           dn$..date <- dn$a
           dn$a <- as.numeric(as.POSIXct(as.Date(dn$a, origin = min_date)))*1000
       }
-      dd <- dsvizopts::postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+      dd <- dsvizprep::postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
 
       dd$..percentage <- (dd[[agg_var]]/sum(dd[[agg_var]], na.rm = TRUE)) * 100
 
@@ -166,7 +166,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
 
       if (!grepl("Dat", ftype)) {
-        dd <- dsvizopts::preprocessData(dd, drop_na = opts$preprocess$drop_na,
+        dd <- dsvizprep::preprocessData(dd, drop_na = opts$preprocess$drop_na,
                                         na_label = opts$preprocess$na_label, na_label_cols = "b")
       }
 
@@ -182,9 +182,9 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d_c$b <- as.character(d_c$b)
       dd$b <- as.character(dd$b)
       dd <- d_c %>% dplyr::left_join(dd)
-      dd <- dsvizopts::preprocessData(dd, drop_na = opts$preprocess$drop_na_legend,
+      dd <- dsvizprep::preprocessData(dd, drop_na = opts$preprocess$drop_na_legend,
                                       na_label = opts$preprocess$na_label, na_label_cols = "a")
-      dd <- dsvizopts::postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+      dd <- dsvizprep::postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
 
       dn$a[is.na(dn$a)] <- opts$preprocess$na_label
       if (!grepl("Dat", ftype)){
@@ -283,7 +283,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   nms_dic <- stats::setNames(dic_p$label, dic_p$id)
 
-  labelsXY <- dsvizopts::labelsXY(hor_title = opts$title$hor_title %||% nms_dic[[(1 + (length(nms_dic) - 2))]], #
+  labelsXY <- dsvizprep::labelsXY(hor_title = opts$title$hor_title %||% nms_dic[[(1 + (length(nms_dic) - 2))]], #
                                   ver_title = opts$title$ver_title %||% nms_dic[[length(nms_dic)]],
                                   nms = nms_dic, orientation = opts$chart$orientation)
 
@@ -330,15 +330,15 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 1) {
     if (!grepl("Dat", ftype)) {
-      d <- dsvizopts::order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
+      d <- dsvizprep::order_category(d, col = "a", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
     }
   }
 
   if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2) {
-    d <- dsvizopts::order_category(d, col = "a", order = opts$postprocess$order_legend, label_wrap = opts$style$label_wrap_legend)
+    d <- dsvizprep::order_category(d, col = "a", order = opts$postprocess$order_legend, label_wrap = opts$style$label_wrap_legend)
 
     if (!grepl("Dat", frtype)) {
-      d <- dsvizopts::order_category(d, col = "b", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
+      d <- dsvizprep::order_category(d, col = "b", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
     }
   }
 

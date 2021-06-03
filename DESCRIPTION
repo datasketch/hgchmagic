@@ -10,11 +10,12 @@ Depends:
     highcharter (>= 0.4.0.9999),
     tidyverse,
     homodatum,
+    dsvizopts,
     makeup
 Imports:
     paletero,
-    dsvizopts,
-    d3.format
+    d3.format,
+    dsvizprep
 Suggests:
     testthat (>= 2.1.0)
 VignetteBuilder: 
@@ -23,6 +24,7 @@ Remotes:
     datasketch/homodatum,
     datasketch/makeup,
     datasketch/paletero,
+    datasketch/dsvizprep,
     datasketch/dsvizopts,
     dreamRs/d3.format
 License: MIT + file LICENSE

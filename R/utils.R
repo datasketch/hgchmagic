@@ -44,8 +44,8 @@ is.empty <- function (x){
 
 #' @importFrom dplyr %>%
 
-#' @import dsvizopts
-#' @importFrom dsvizopts agg
+#' @import dsvizprep
+#' @importFrom dsvizprep agg
 NULL
 
 
