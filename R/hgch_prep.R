@@ -413,6 +413,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     color_click = opts$shiny$color_click,
     allow_point = opts$shiny$allow_point,
     cursor = opts$shiny$cursor,
+    spline = opts$style$spline,
     clickFunction = opts$shiny$clickFunction,
     graph_type = opts$chart$graph_type,
     extra = dsvizopts::get_extra_opts(opts, extra_pattern)

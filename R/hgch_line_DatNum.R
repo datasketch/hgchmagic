@@ -61,7 +61,7 @@ hgch_line_DatNum <- function(data, ...){
 
 
   h <- highchart() %>%
-    hc_chart(type = "line",
+    hc_chart(type = ifelse(l$spline, "spline", "line"),
              events = list(
                load = add_branding(l$theme)
              )
