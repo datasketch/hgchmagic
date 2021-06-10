@@ -147,6 +147,7 @@ hgch_theme <- function(opts = NULL){
       gridLineColor = opts$grid_y_color %||% opts$grid_color,
       gridLineDashStyle = opts$grid_y_line_type %||% opts$grid_line_type,
       tickLength = opts$axis_tick_length,
+      max = opts$y_max,
       labels = list(
         style = list(
           color = opts$axis_title_color %||% opts$text_color, #opts$font_color, #color nombre de las etiquetas
