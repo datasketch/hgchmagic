@@ -17,38 +17,6 @@ function_agg <- function (df, agg, to_agg, ...) {
 }
 
 
-#' @export
-hgch_tooltip <- function(nms, label_ftype = NULL, tooltip) {
-  if (is.null(nms)) stop("Enter names")
-  nms <- nms
-  nms <- gsub("[][!()*`|]", "",nms)
-  nms <- gsub("[\r\n]", " ", nms)
-  label_ftype_clean <- gsub("[][!()*`|{}]", "", label_ftype)
-  label_ftype_clean <- gsub("[\r\n]", " ", label_ftype_clean)
-  nms_names <- names(nms)
-
-  if (is.null(tooltip)) {
-    tooltip  <- paste0(purrr::map(seq_along(label_ftype), function(i) {
-      paste0(label_ftype[i], ": {", label_ftype_clean[i], "}")
-    }) %>% unlist(), collapse = "<br/>")
-  } else {
-    tooltip <- gsub("[][()*`|]", "", tooltip)#gsub("[][!#$()*,.:;<=>@^`|~.", "", tooltip)
-  }
-
-    points <- gsub("\\{|\\}", "",
-                   stringr::str_extract_all(tooltip, "\\{.*?\\}")[[1]])
-    if (identical(points, character())) {
-      tooltip <- tooltip
-    } else {
-      l <- purrr::map(seq_along(points), function(i){
-
-        true_points <-  paste0("{",names(nms[match(points[i], nms)]),"_label}")
-        tooltip <<- gsub(paste0("\\{",points[i], "\\}"), true_points, tooltip)
-      })[[length(points)]]}
-
-  tooltip
-}
-
 
 #' Complete values in groups without numeric information
 #' @export
@@ -68,134 +36,6 @@ completevalues <- function(d, var_num) {
 
 
 
-tooltip_codes <- function(sample, prefix, suffix) {
-
-  params <- makeup::which_num_format(sample)$separators
-  thousandsSep <- params$thousands
-  decimalPoint <- params$decimal
-  n_decimal <- params$n_decimal
-
-  l <- list(
-    line = list(
-      `Cat-Num` = list(
-        a = "{point.category}",
-        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Cat-Cat-Num` = list(
-        a = "{series.name}",
-        b = "{point.category}",
-        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Yea-Num` = list(
-        a = "{point.category}",
-        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Cat-Yea-Num` = list(
-        a = "{series.name}",
-        b = "{point.category}",
-        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      )
-    ),
-    bar = list(
-      `Cat-Num` = list(
-        a = "{point.name}",
-        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Cat-Cat-Num` = list(
-        a = "{series.name}",
-        b = "{point.category}",
-        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Yea-Num` = list(
-        a = "{point.name}",
-        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Cat-Yea-Num` = list(
-        a = "{series.name}",
-        b = "{point.category}",
-        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      )
-    ),
-    pie = list(
-      `Cat-Num` = list(
-        a = "{point.name}",
-        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Yea-Num` = list(
-        a = "{point.name}",
-        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      )
-    ),
-    donut = list(
-      `Cat-Num` = list(
-        a = "{point.name}",
-        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Yea-Num` = list(
-        a = "{point.name}",
-        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      )
-    ),
-    bubbles = list(
-      `Cat-Num` = list(
-        a = "{point.name}",
-        b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Cat-Cat-Num` = list(
-        a = "{series.name}",
-        b = "{point.name}",
-        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Yea-Num` = list(
-        a = "{point.name}",
-        b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Cat-Yea-Num` = list(
-        a = "{series.name}",
-        b = "{point.name}",
-        c = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      )
-    ),
-    treemap = list(
-      `Cat-Num` = list(
-        a = "{point.name}",
-        b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Cat-Cat-Num` = list(
-        a = "{point.parent}",
-        b = "{point.node.name}",
-        c = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Yea-Num` = list(
-        a = "{point.name}",
-        b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Cat-Yea-Num` = list(
-        a = "{point.parent}",
-        b = "{point.node.name}",
-        c = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      )
-    ),
-    scatter = list(
-      `Num-Num` = list(
-        a = "{point.x}",
-        b = paste0(prefix, "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      ),
-      `Cat-Num-Num` = list(
-        a = "{series.name}",
-        b = paste0( "{point.y",':', thousandsSep, decimalPoint, n_decimal, "f}"),
-        c = paste0( "{point.x",':', thousandsSep, decimalPoint, n_decimal, "f}")
-      )
-    ),
-    map = list(
-      `Cat-Num` = list(
-        a = "{point.name}",
-        b = paste0(prefix, "{point.value",':', thousandsSep, decimalPoint, n_decimal, "f}", suffix)
-      )
-    )
-  )
-  l
-}
 
 
 # esta toca completarla para lo casos en los que el formato numerico es para mas de una
@@ -239,6 +79,17 @@ date_intervals <- function(date_intervals) {
   t_d
 }
 
+#' @export
+agg_tooltip <- function(data, nms, label_ftype, tooltip) {
 
-
+  if (is.null(data)) stop("There is not a data")
+  data_format <- data %>%
+    dplyr::mutate(labels = glue::glue(
+      dsvizprep::tooltip_map(nms = nms,
+                             label_ftype = label_ftype,
+                             tooltip = tooltip)) %>%
+        lapply(htmltools::HTML)
+    )
+  data_format
+}
 
