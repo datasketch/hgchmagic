@@ -125,6 +125,7 @@ hgch_sankey_CatCat <- function(data, ...){
     hc_chart(
       type = "sankey",
       polar = FALSE,
+      showAxes = l$theme$show_axes,
       inverted = FALSE,
       events = list(
         load = add_branding(opts$theme)
@@ -140,10 +141,15 @@ hgch_sankey_CatCat <- function(data, ...){
       colorByPoint = TRUE,
       showInLegend = FALSE
     ) %>%
-    hc_xAxis(title = list(text = l$titles$x)) %>%
+    hc_xAxis(title = list(text = l$titles$x),
+             gridLineColor = 'transparent',
+             labels = list(
+               enabled = FALSE)
+             )%>%
     hc_yAxis(title = list(text = l$titles$y),
              visible = TRUE,
              labels = list(
+               enabled = FALSE,
                formatter = l$formats)
     ) %>%
     hc_plotOptions(
@@ -178,6 +184,7 @@ hgch_sankey_CatCat <- function(data, ...){
     hc_credits(enabled = TRUE, text = l$title$caption) %>%
     hc_legend(enabled = FALSE) %>%
     hc_add_theme(hgch_theme(opts = l$theme))
+
 
   hc
 }
