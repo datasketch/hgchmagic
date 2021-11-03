@@ -76,7 +76,8 @@ hgch_bar_CatCatNum <- function(data, ...){
              type = "category") %>%
     hc_yAxis(title = list(text = l$title$y),
              labels = list(
-               formatter = l$formats)
+               align= l$y_axis_align,
+               formatter = l$formatter_js %||% l$formats)
     ) %>%
     hc_tooltip(useHTML = TRUE,
                headerFormat = NULL,

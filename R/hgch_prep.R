@@ -395,6 +395,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     date_intervals = date_intervals(opts$extra$date_intervals),
     orientation = opts$chart$orientation,
     percentage = opts$postprocess$percentage,
+    formatter_js = opts$extra$formatter_js,
+    y_axis_align = opts$theme$y_axis_align,
     theme = c(opts$theme,
               isNullCaption = is.null(opts$title$caption),
               bar_pointWidth = opts$theme$bar_pointWidth,
