@@ -73,7 +73,10 @@ hgch_bar_CatCatNum <- function(data, ...){
     hc_add_series_list(series) %>%
     hc_xAxis(title = list(text = l$title$x),
              categories = purrr::map(as.character(unique(d$b)), function(z) z),
-             type = "category") %>%
+             type = "category",
+             labels = list(
+               formatter = l$formatter_x_js
+             )) %>%
     hc_yAxis(title = list(text = l$title$y),
              labels = list(
                align= l$y_axis_align,

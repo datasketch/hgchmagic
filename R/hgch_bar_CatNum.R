@@ -74,7 +74,10 @@ hgch_bar_CatNum <- function(data, ...){
     hc_tooltip(useHTML = TRUE,
                formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_xAxis(title = list(text = l$titles$x),
-             type = "category") %>%
+             type = "category",
+             labels = list(
+               formatter = l$formatter_x_js
+             )) %>%
     hc_yAxis(title = list(text = l$titles$y),
              labels = list(
                formatter = l$formats)
