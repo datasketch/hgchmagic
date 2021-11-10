@@ -91,6 +91,7 @@ hgch_theme <- function(opts = NULL){
       )
     ),
     credits = list(
+      href = opts$caption_link,
       position = list(
         align = opts$caption_align,
         x = ifelse(opts$caption_align == "right",-20, 20),
