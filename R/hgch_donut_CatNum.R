@@ -65,7 +65,12 @@ hgch_donut_CatNum <- function(data, ...){
       data
     ) %>%
     hc_plotOptions(
-      series = list(innerSize = "60%")) %>%
+      series = list(innerSize = "60%",
+                    allowPointSelect= l$allow_point,
+                    cursor =  l$cursor,
+                    events = list(
+                      click = l$clickFunction
+                    ))) %>%
     hc_tooltip(useHTML = TRUE,
                formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_credits(enabled = TRUE, text = l$title$caption) %>%

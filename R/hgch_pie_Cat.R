@@ -55,6 +55,14 @@ hgch_pie_Cat <- function(data, ...) {
     hc_series(
       data
     ) %>%
+    hc_plotOptions(
+      series = list(
+        allowPointSelect= l$allow_point,
+        cursor =  l$cursor,
+        events = list(
+          click = l$clickFunction
+        )
+      )) %>%
     hc_tooltip(useHTML = TRUE,
                formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_credits(enabled = TRUE, text = l$title$caption) %>%
