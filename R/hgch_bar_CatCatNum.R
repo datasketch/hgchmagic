@@ -78,6 +78,7 @@ hgch_bar_CatCatNum <- function(data, ...){
                formatter = l$formatter_x_js
              )) %>%
     hc_yAxis(title = list(text = l$title$y),
+             reversed = l$extra$reversedYaxis,
              labels = list(
                align= l$y_axis_align,
                formatter = l$formatter_js %||% l$formats)

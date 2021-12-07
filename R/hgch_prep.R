@@ -318,12 +318,14 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     }
   }
 
+  d$..colors[d$a == "(NA)"] <- opts$theme$na_color
+
   if (!is.null(opts$chart$highlight_value)) {
     if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2) d$..colors <- palette[1]
     w <- grep(paste0(opts$chart$highlight_value, collapse = '|'), d[[color_by %||% "a"]])
     d$..colors[w] <- opts$chart$highlight_value_color
   }
-
+ #print(d)
 
   # order -------------------------------------------------------------------
 
@@ -336,15 +338,14 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2) {
     d <- dsvizprep::order_category(d, col = "a", order = opts$postprocess$order_legend, label_wrap = opts$style$label_wrap_legend)
-
     if (!grepl("Dat", frtype)) {
       d <- dsvizprep::order_category(d, col = "b", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
     }
+
   }
 
   suffix_enter <- opts$style$suffix
   if (opts$postprocess$percentage) suffix_enter <- suffix_enter %||% "%"
-
 
 
   f_nums <- makeup::makeup_format_js(sample = opts$style$format_sample_num,
