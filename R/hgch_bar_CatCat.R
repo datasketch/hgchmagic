@@ -68,6 +68,9 @@ hgch_bar_CatCat <- function(data, ...){
     hc_add_series_list(series) %>%
     hc_xAxis(title = list(text = l$title$x),
              categories = purrr::map(as.character(unique(d$b)), function(z) z),
+             # labels = list(
+             #     step = l$extra$labelsStepX
+             # ),
              type = "category") %>%
     hc_yAxis(title = list(text = l$title$y),
              labels = list(

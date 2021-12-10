@@ -97,7 +97,8 @@ hgch_treemap_CatCat <- function(data, ...){
                 style = list(width = "300px", whiteSpace = "normal")) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
   hc_add_theme(hgch_theme(opts =  c(l$theme,
-                               cats = "{point.name} <br/>")))
+                               cats = "{point.name} <br/>"))) #%>%
+    #hc_legend(enabled = TRUE)
 
   hc
 
