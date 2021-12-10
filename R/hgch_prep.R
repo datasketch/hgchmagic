@@ -405,6 +405,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
               credits = show_caption,
               y_credits = y_caption,
               animation_duration = opts$extra$animation_duration,
+              templatedataLabels = opts$dataLabels$dataLabels_template,
               dataLabels_show = opts$dataLabels$dataLabels_show,
               dataLabels_type = opts$dataLabels$dataLabels_type,
               dataLabels_color = opts$dataLabels$dataLabels_color %||% "constrast",

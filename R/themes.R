@@ -203,7 +203,7 @@ hgch_theme <- function(opts = NULL){
         dataLabels = list (
           enabled = opts$dataLabels_show,
           style = labels_style,
-          format = paste0(opts$cats, opts$format_dataLabels)
+          format = opts$templatedataLabels %||% paste0(opts$cats, opts$format_dataLabels)
         ),
         marker = list(
           enabled = opts$marker_enabled,
