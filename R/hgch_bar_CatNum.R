@@ -80,7 +80,7 @@ hgch_bar_CatNum <- function(data, ...){
              )) %>%
     hc_yAxis(title = list(text = l$titles$y),
              labels = list(
-               formatter = l$formats)
+               formatter = l$formatter_js %||% l$formats)
     ) %>%
     hc_plotOptions(
       series = list(

@@ -80,9 +80,15 @@ hgch_treemap_CatCatNum <- function(data, ...){
     hc_chart(events = list(
                load = add_branding(l$theme)
              )) %>%
+   #hc_add_event_series(JS("H.addEvent(H.Legend, 'afterGetAllItems', function(e) {e.allItems.splice(1, 1) });")) %>%
     hc_series(
+
       list(
         type = "treemap",
+        # showInLegend =TRUE,
+        # legendType = 'point',
+        # layoutAlgorithm = 'stripes',
+        # alternateStartingDirection = TRUE,
         layoutAlgorithm = l$extra$treemap_layout,
         levels = list(list(
           level = 1
