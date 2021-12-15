@@ -72,7 +72,7 @@ hgch_treemap_CatCatNum <- function(data, ...){
   })
 
   data <- c(listaId, listaMg)
-
+#print(data)
   global_options(opts$style$format_sample_num)
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%
@@ -85,6 +85,7 @@ hgch_treemap_CatCatNum <- function(data, ...){
 
       list(
         type = "treemap",
+        # point = purrr::map(as.character(unique(d$a)), function(z) z),
         # showInLegend =TRUE,
         # legendType = 'point',
         # layoutAlgorithm = 'stripes',

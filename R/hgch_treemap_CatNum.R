@@ -52,7 +52,7 @@ hgch_treemap_CatNum <- function(data, ...){
 
   opts <- dsvizopts::merge_dsviz_options(...)
   l <- hgchmagic_prep(data, opts = opts, plot = "treemap")
-  l$theme$legend_show <- FALSE
+  #l$theme$legend_show <- FALSE
   d <- l$d
 
 
@@ -91,13 +91,14 @@ hgch_treemap_CatNum <- function(data, ...){
     hc_series(
       list(
         type = 'treemap',
+        showInLegend = l$theme$legend_show,
+        legendType = 'point',
         layoutAlgorithm = l$extra$treemap_layout,
         layoutStartingDirection = l$extra$treemap_direction,
         data = data)) %>%
     hc_tooltip(useHTML = TRUE,
                formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_credits(enabled = TRUE, text = opts$title$caption %||% "") %>%
-    hc_legend(enabled = F) %>%
     hc_add_theme(hgch_theme(opts = c(l$theme,
                                      cats = "{point.name} <br/>")))
 
