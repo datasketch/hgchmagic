@@ -68,13 +68,16 @@ hgch_bar_CatCat <- function(data, ...){
     hc_add_series_list(series) %>%
     hc_xAxis(title = list(text = l$title$x),
              categories = purrr::map(as.character(unique(d$b)), function(z) z),
-             # labels = list(
-             #     step = l$extra$labelsStepX
-             # ),
-             type = "category") %>%
-    hc_yAxis(title = list(text = l$title$y),
+             type = "category",
              labels = list(
-               formatter = l$formats)
+               formatter = l$formatter_x_js#,
+               #step = l$extra$labelsStepX,
+             )) %>%
+    hc_yAxis(title = list(text = l$title$y),
+             reversed = l$extra$reversedYaxis,
+             labels = list(
+               align= l$y_axis_align,
+               formatter = l$formatter_js %||% l$formats)
     ) %>%
     hc_tooltip(useHTML = TRUE,
                headerFormat = NULL,
