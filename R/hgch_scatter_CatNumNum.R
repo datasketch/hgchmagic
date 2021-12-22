@@ -60,7 +60,7 @@ hgch_scatter_CatNumNum <- function(data, ...){
     hc_xAxis(
       title = list(text = l$titles$x),
       labels = list(
-        formatter = makeup::makeup_format_js(sample = opts$style$format_num_sample,
+        formatter = makeup::makeup_format_js(sample = opts$style$format_sample_num,
                                              locale = opts$style$locale,
                                              prefix = opts$scatter$prefix_x,
                                              suffix = opts$scatter$suffix_x))
