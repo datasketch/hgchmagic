@@ -52,6 +52,7 @@ hgch_bar_CatCatNum <- function(data, ...){
     label_info <- d0 %>% .$labels %>% unlist()
     l0 <- list("name" = i,
                "color" = unique(d0$..colors),
+               "index" = d0$..index,
                "data" = purrr::map(seq_along(d0[[3]]), function(i){
                  list("label" =  label_info[i],
                       "y" = d0[[3]][i]
@@ -59,8 +60,7 @@ hgch_bar_CatCatNum <- function(data, ...){
                })
     )
   })
-
-
+ #print(series)
   global_options(opts$style$format_sample_num)
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%

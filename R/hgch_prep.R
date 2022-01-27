@@ -299,8 +299,15 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   color_by <- NULL
   if (!is.null(opts$style$color_by)) color_by <- names(nms[match(opts$style$color_by, nms)])
 
-  if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2) color_by <- "a"
-
+  if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2) {
+    color_by <- "a"
+    #if (!is.null(opts$postprocess$order_legend)) {
+    orderStacked <- c(opts$postprocess$order_stacked,setdiff(unique(d$a),opts$postprocess$order_stacked))
+    cat_index <- data.frame(a = orderStacked, ..index = 0:(length(unique(d$a))-1))
+    d <- d %>% left_join(cat_index)
+    #}
+    #print(d)
+}
 
   if(is.null(opts$theme$palette_colors)){
     opts$theme$palette_colors <- opts$theme[[paste0("palette_colors_", palette_type)]]
@@ -375,6 +382,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     lines <- length(strsplit(opts$title$caption, split = "<br/>")%>% unlist())
     y_caption <- ifelse(lines == 0, y_caption, (lines+2) * -10)
   }
+
 
 
   # end options -------------------------------------------------------------
