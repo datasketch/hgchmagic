@@ -349,10 +349,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       d <- dsvizprep::order_category(d, col = "b", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
     }
 
-
-
-
-    print(d)
   }
 
   suffix_enter <- opts$style$suffix
