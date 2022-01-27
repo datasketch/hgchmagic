@@ -52,7 +52,8 @@ hgch_bar_CatCatNum <- function(data, ...){
     label_info <- d0 %>% .$labels %>% unlist()
     l0 <- list("name" = i,
                "color" = unique(d0$..colors),
-               #"index" = d0$..index,
+               "index" = d0$..index,
+               "legendIndex" = d0$..legendIndex,
                "data" = purrr::map(seq_along(d0[[3]]), function(i){
                  list("label" =  label_info[i],
                       "y" = d0[[3]][i]
