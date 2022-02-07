@@ -50,7 +50,7 @@ hgch_item_CatNum <- function(data, ...){
   opts <- dsvizopts::merge_dsviz_options(...)
   l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Num")
   d <- l$d
-  d[[2]] <- scales::rescale(as.numeric(d[[2]]), c(1, 700))
+  d[[2]] <- scales::rescale(as.numeric(d[[2]]), c(1, opts$extra$itemRscale))
 
   h <- purrr::map(unique(d[[1]]), function(z){
     d0 <- d %>% filter(a %in% z)
