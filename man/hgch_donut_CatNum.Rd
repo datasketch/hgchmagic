@@ -56,6 +56,7 @@ hgch_donut_CatNum(agg = "mean",
 \seealso{
 Other Cat-Num plots: 
 \code{\link{hgch_bar_CatNum}()},
+\code{\link{hgch_item_CatNum}()},
 \code{\link{hgch_pie_CatNum}()},
 \code{\link{hgch_treemap_CatNum}()}
 }
