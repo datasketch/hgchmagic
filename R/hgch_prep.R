@@ -3,6 +3,11 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   if (is.null(data)) return()
 
+  # Clean text
+  if (plot == "wordCloud") {
+    data <- dsvizprep::data_word_prep(data, ftype = ftype, lang = opts$shiny$lang, stopwords = opts$theme$stopwords)
+    data[[1]] <- makeup::makeup_chr(data[[1]], opts$style$format_sample_cat)
+  }
 
   # data prep ---------------------------------------------------------------
 
@@ -297,6 +302,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   palette_type <- opts$theme$palette_type %||% "categorical"
 
   color_by <- NULL
+
   if (!is.null(opts$style$color_by)) color_by <- names(nms[match(opts$style$color_by, nms)])
 
   if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2)  color_by <- "a"
@@ -382,7 +388,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     lines <- length(strsplit(opts$title$caption, split = "<br/>")%>% unlist())
     y_caption <- ifelse(lines == 0, y_caption, (lines+2) * -10)
   }
-
+  color_by_point <- FALSE
+  if (plot == "wordCloud") color_by_point <- TRUE
 
 
   # end options -------------------------------------------------------------
@@ -408,6 +415,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     formatter_x_js = opts$extra$formatter_x_js,
     y_axis_align = opts$theme$y_axis_align,
     theme = c(opts$theme,
+              color_by_point =  color_by_point,
               isNullCaption = is.null(opts$title$caption),
               bar_pointWidth = opts$theme$bar_pointWidth,
               credits = show_caption,

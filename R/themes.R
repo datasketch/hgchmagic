@@ -196,7 +196,7 @@ hgch_theme <- function(opts = NULL){
 
       series = list(
         connectNulls = opts$connect_lines_nulls,
-        colorByPoint = FALSE,
+        colorByPoint = opts$color_by_point,
         animation = list(
           duration = opts$animation_duration
         ),
