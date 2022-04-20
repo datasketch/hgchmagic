@@ -1,3 +1,15 @@
+#' WordCloud chart Cat
+#'
+#' @description
+#' `hgch_pie_Cat()` Create a highcharter wordCloud based on a particular data type.
+#' In this case, you can load data with only one **categorical column** or **text**
+#' @export
+#' @param data A data frame, data frame extension (e.g. a tibble), a
+#'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).
+#' @param ... <[`chart-options`][hgch_viz_options]> Options to configure your hgchmagic plots
+#' @family Cat plots
+#' @section Ftype:
+#' Cat
 hgch_wordCloud_Cat <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
