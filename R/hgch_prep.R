@@ -349,7 +349,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     d <- d %>% dplyr::left_join(legend_index)
     orderStacked <- c(opts$postprocess$order_stacked,setdiff(unique(d$a),opts$postprocess$order_stacked))
     cat_index <- data.frame(a = orderStacked, ..index = 0:(length(unique(d$a))-1))
-    d <- d %>% dplyr::left_join(cat_index) %>% arrange(..index)
+    d <- d %>% dplyr::left_join(cat_index) %>% dplyr::arrange(..index)
 
     if (!grepl("Dat", frtype)) {
       d <- dsvizprep::order_category(d, col = "b", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
