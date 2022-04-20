@@ -346,10 +346,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 2) {
     d <- dsvizprep::order_category(d, col = "a", order = opts$postprocess$order_legend, label_wrap = opts$style$label_wrap_legend)
     legend_index <- data.frame(a = unique(d$a), ..legendIndex = 0:(length(unique(d$a))-1))
-    d <- d %>% left_join(legend_index)
+    d <- d %>% dplyr::left_join(legend_index)
     orderStacked <- c(opts$postprocess$order_stacked,setdiff(unique(d$a),opts$postprocess$order_stacked))
     cat_index <- data.frame(a = orderStacked, ..index = 0:(length(unique(d$a))-1))
-    d <- d %>% left_join(cat_index) %>% arrange(..index)
+    d <- d %>% dplyr::left_join(cat_index) %>% arrange(..index)
 
     if (!grepl("Dat", frtype)) {
       d <- dsvizprep::order_category(d, col = "b", order = opts$postprocess$order, label_wrap = opts$style$label_wrap)
