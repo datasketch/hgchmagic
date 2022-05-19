@@ -93,9 +93,19 @@ hgch_treemap_CatCatNum <- function(data, ...){
         layoutAlgorithm = l$extra$treemap_layout,
         levels = list(list(
           level = 1,
+          dataLabels = list(
+            enabled = l$extra$treemap_dataLabels_levelOne,
+            align = 'left',
+            verticalAlign = 'top'
+          ),
           borderWidth = l$extra$treemap_borderWidth_levelOne,
           borderColor = l$extra$treemap_borderColor_levelOne
-        )),
+        ),
+        list(
+        level = 2,
+        dataLabels = list(
+          enabled = l$extra$treemap_dataLabels_levelTwo
+        ))),
         data = data
       )) %>%
     hc_plotOptions(
