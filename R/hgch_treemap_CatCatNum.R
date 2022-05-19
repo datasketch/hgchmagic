@@ -72,7 +72,7 @@ hgch_treemap_CatCatNum <- function(data, ...){
   })
 
   data <- c(listaId, listaMg)
-#print(data)
+ print(l$extra$treemap_borderWidth_levelOne)
   global_options(opts$style$format_sample_num)
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%
@@ -92,7 +92,9 @@ hgch_treemap_CatCatNum <- function(data, ...){
         # alternateStartingDirection = TRUE,
         layoutAlgorithm = l$extra$treemap_layout,
         levels = list(list(
-          level = 1
+          level = 1,
+          borderWidth = l$extra$treemap_borderWidth_levelOne,
+          borderColor = l$extra$treemap_borderColor_levelOne
         )),
         data = data
       )) %>%
