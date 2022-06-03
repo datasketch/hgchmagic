@@ -41,6 +41,9 @@
 hgch_bubbles_CatCatNum <- function(data, ...){
 
   if (is.null(data)) stop(" dataset to visualize")
+  data[[1]] <- homodatum::as_Cat(data[[1]])
+  data[[2]] <- homodatum::as_Cat(data[[2]])
+  data[[3]] <- homodatum::as_Num(data[[3]])
 
   opts <- dsvizopts::merge_dsviz_options(...)
   l <- hgchmagic_prep(data, opts = opts, plot = "bubbles", ftype = "Cat-Cat-Num")

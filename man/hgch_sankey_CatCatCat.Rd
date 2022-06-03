@@ -12,10 +12,6 @@ hgch_sankey_CatCatCat(data, ...)
 \description{
 Sankey Cat Cat Cat
 }
-\section{}{
-NA
-}
-
 \examples{
 hgch_sankey_CatCatCat(sample_data("Cat-Cat-Cat"))
 }
