@@ -420,6 +420,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
               bar_pointWidth = opts$theme$bar_pointWidth,
               credits = show_caption,
               y_credits = y_caption,
+              legend_title = opts$title$legend_title,
               animation_duration = opts$extra$animation_duration,
               templatedataLabels = opts$dataLabels$dataLabels_template,
               dataLabels_show = opts$dataLabels$dataLabels_show,
