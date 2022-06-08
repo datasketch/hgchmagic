@@ -220,9 +220,9 @@ hgch_theme <- function(opts = NULL){
       )
     ),
     legend = list(
-      #backgroundColor = custom$legend_background,
-      #borderColor = custom$legend_backgroundBorderColor,
-      #borderWidth = custom$legend$backgroundWidth,
+      backgroundColor = opts$legend_background,
+      borderColor = opts$legend_backgroundBorderColor,
+      borderWidth = opts$legend_backgroundWidth,
       title = list(
         text = opts$legend_title),
       layout = opts$legend_layout,
