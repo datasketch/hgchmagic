@@ -390,7 +390,9 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   }
   color_by_point <- FALSE
   if (plot == "wordCloud") color_by_point <- TRUE
-
+  if (".percentage" %in% names(d)) {
+    d[[".percentage"]] <- format(d[[".percentage"]], digits = opts$style$format_sample_num, nsmall = opts$style$format_sample_num)
+  }
 
   # end options -------------------------------------------------------------
 
