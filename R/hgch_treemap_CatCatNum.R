@@ -100,7 +100,8 @@ hgch_treemap_CatCatNum <- function(data, ...){
           dataLabels = list(
             enabled = l$extra$treemap_dataLabels_levelOne,
             align = 'left',
-            verticalAlign = 'top'
+            verticalAlign = 'top',
+            format = "{point.name}"
           ),
           borderWidth = l$extra$treemap_borderWidth_levelOne,
           borderColor = l$extra$treemap_borderColor_levelOne
