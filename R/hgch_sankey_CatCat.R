@@ -37,8 +37,13 @@ hgch_sankey_CatCat <- function(data, ...){
     palette <- opts$theme$palette_colors_categorical
   }
 
-
+  data[,1][is.na(data[,1])] <- opts$preprocess$na_label
+  data[,2][is.na(data[,2])] <- opts$preprocess$na_label
+  if (ncol(data) == 3) {
+    data[,3][is.na(data[,3])] <- opts$preprocess$na_label
+  }
   data_dummy <- data[,1:2] %>% dplyr::mutate_all(~paste0(., "_dummy"))
+
   l <- hgchmagic_prep(data_dummy, opts = opts, plot = "sankey", ftype = "Cat-Cat")
 
   d <- l$d
