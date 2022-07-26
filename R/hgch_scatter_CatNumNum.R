@@ -31,7 +31,6 @@ hgch_scatter_CatNumNum <- function(data, ...){
   l <- hgchmagic_prep(data = data, opts = opts, plot = "scatter", ftype = "Cat-Num-Num")
 
   d <- l$d
-
   ds <- NULL
   series <- lapply(unique(d$a), function(s){
 

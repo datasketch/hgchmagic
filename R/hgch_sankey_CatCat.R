@@ -5,6 +5,7 @@
 #' In this case, you can load data with only two columns, where the firts and second columns are
 #' **categoricals columns**, or be sure that firts two columns they meet this condition, since it
 #' will be done a counting the categories of this columns.
+#'
 #' @export
 #' @param data A data frame, data frame extension (e.g. a tibble), a
 #'   lazy data frame (e.g. from dbplyr or dtplyr), or fringe data (e.g from homodatum).

@@ -112,7 +112,16 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
 
     if (length(var_g) == 1) {
+      agg_data <- TRUE
+      if (plot == "scatter")  agg_data <- opts$extra$scatter_agg
+
+      if (agg_data) {
       dd <- function_agg(df = d, agg = opts$summarize$agg, to_agg = agg_num, a)
+      } else {
+        dd <- d
+        dd$..count <- 1
+      }
+
       if (grepl("Dat", ftype)) {
         dd <- dd %>% tidyr::drop_na()
         dn <- dn %>% tidyr::drop_na(a)
@@ -143,6 +152,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
         nms[length(nms)+1] <- c("..group")
         names(nms) <- c(names(nms)[-length(nms)], "..group")
       }
+
     } else {
 
       dd <- function_agg(df = d, agg = opts$summarize$agg, to_agg = agg_num, a, b)
