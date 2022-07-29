@@ -35,7 +35,8 @@
 #'
 hgch_line_CatYeaNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
-
+  data[[1]] <- homodatum::as_Cat(data[[1]])
+  data[[2]] <- homodatum::as_Cat(data[[2]])
   opts <- dsvizopts::merge_dsviz_options(...)
   l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Yea-Num")
 
