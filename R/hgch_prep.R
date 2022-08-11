@@ -81,7 +81,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     if (length(grep("Dat|Cat|Yea", ftype_vec)) == 1) {
       if (has_num_var & sum(grepl("Num",  ftype_vec)) == 1)  {
         agg_var <- "b"
-        }
+      }
     } else {
       if (has_num_var) {
         agg_var <- "c"
@@ -116,7 +116,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       if (plot == "scatter")  agg_data <- opts$extra$scatter_agg
 
       if (agg_data) {
-      dd <- function_agg(df = d, agg = opts$summarize$agg, to_agg = agg_num, a)
+        dd <- function_agg(df = d, agg = opts$summarize$agg, to_agg = agg_num, a)
       } else {
         dd <- d
         dd$..count <- 1
@@ -132,10 +132,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
         dd <- dsvizprep::preprocessData(dd, drop_na = opts$preprocess$drop_na,
                                         na_label = opts$preprocess$na_label, na_label_cols = "a")
       } else {
-          min_date <- min(dd$a)
-          dd$a <- as.numeric(as.POSIXct(as.Date(dd$a, origin = min_date)))*1000
-          dn$..date <- dn$a
-          dn$a <- as.numeric(as.POSIXct(as.Date(dn$a, origin = min_date)))*1000
+        min_date <- min(dd$a)
+        dd$a <- as.numeric(as.POSIXct(as.Date(dd$a, origin = min_date)))*1000
+        dn$..date <- dn$a
+        dn$a <- as.numeric(as.POSIXct(as.Date(dn$a, origin = min_date)))*1000
       }
       dd <- dsvizprep::postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
 
@@ -174,11 +174,16 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       } else {
         by_col <- names(nms[match(by_col, nms)])
       }
-      agg_var_t <- rlang::sym(agg_var)
-      dd <- dd %>%
-        dplyr::group_by_(by_col) %>%
-        dplyr::mutate(..percentage = (!!agg_var_t/sum(!!agg_var_t, na.rm = TRUE))*100)
 
+      agg_var_t <- rlang::sym(agg_var)
+      if (opts$postprocess$percentage_intra) {
+        dd <- dd %>% dplyr::ungroup() %>% dplyr::group_by_(by_col) %>% mutate(..total = sum(!!agg_var_t, na.rm = TRUE))
+        dd <- dd %>% dplyr::group_by_all() %>% mutate(..percentage = !!agg_var_t/sum(..total))
+      } else {
+        dd <- dd %>%
+          dplyr::group_by_(by_col) %>%
+          dplyr::mutate(..percentage = (!!agg_var_t/sum(!!agg_var_t, na.rm = TRUE))*100)
+      }
 
       if (!grepl("Dat", ftype)) {
         dd <- dsvizprep::preprocessData(dd, drop_na = opts$preprocess$drop_na,
@@ -210,8 +215,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
         dplyr::group_by(a, b) %>%
         dplyr::summarise_each(dplyr::funs(func_paste))
       if (!grepl("Dat", ftype)){
-      dd$b <- as.character(dd$b)
-      dn$b <- as.character(dn$b)
+        dd$b <- as.character(dd$b)
+        dn$b <- as.character(dn$b)
       } else {
         dd$b <- as.numeric(dd$b)
         dn$b <- as.numeric(dn$b)
@@ -279,7 +284,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     #     ))
   }
 
- # add label from tooltip info ---------------------------------------------
+  # add label from tooltip info ---------------------------------------------
 
   default_tooltip <- dic_p$label
   default_tooltip <- setdiff(default_tooltip, "..group")
@@ -342,7 +347,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     w <- grep(paste0(opts$chart$highlight_value, collapse = '|'), d[[color_by %||% "a"]])
     d$..colors[w] <- opts$chart$highlight_value_color
   }
- #print(d)
+  #print(d)
 
   # order -------------------------------------------------------------------
 
