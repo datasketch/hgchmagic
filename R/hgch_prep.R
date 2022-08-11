@@ -178,7 +178,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       agg_var_t <- rlang::sym(agg_var)
       if (opts$postprocess$percentage_intra) {
         dd <- dd %>% dplyr::ungroup() %>% dplyr::group_by_(by_col) %>% mutate(..total = sum(!!agg_var_t, na.rm = TRUE))
-        dd <- dd %>% dplyr::group_by_all() %>% mutate(..percentage = !!agg_var_t/sum(..total))
+        dd <- dd %>% dplyr::group_by_all() %>% mutate(..percentage = (!!agg_var_t/sum(..total))*100)
       } else {
         dd <- dd %>%
           dplyr::group_by_(by_col) %>%
