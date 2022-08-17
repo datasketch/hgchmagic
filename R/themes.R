@@ -54,12 +54,13 @@ hgch_theme <- function(opts = NULL){
 
   if (opts$text_size == "") opts$text_size <- 13
   highcharter::hc_theme(
+    useHTML = TRUE,
     colors = opts$palette_colors,
     chart = list(
       reflow = TRUE,
       renderTo = 'container',
       backgroundColor = opts$background_color,
-
+      styledMode = TRUE,
       marginBottom = opts$plot_margin_bottom,
       marginLeft = opts$plot_margin_left,
       marginRight = opts$plot_margin_right,
@@ -73,6 +74,7 @@ hgch_theme <- function(opts = NULL){
         fontSize = paste0(opts$text_size, 'px')
       )),
     title = list(
+      useHTML = TRUE,
       align = opts$title_align,
       style = list(
         fontFamily = opts$title_family,
@@ -82,6 +84,7 @@ hgch_theme <- function(opts = NULL){
       )
     ),
     subtitle = list(
+      useHTML = TRUE,
       align = opts$subtitle_align,
       style = list(
         fontFamily = opts$title_family,
@@ -91,7 +94,9 @@ hgch_theme <- function(opts = NULL){
       )
     ),
     credits = list(
+      useHTML = TRUE,
       href = opts$caption_link,
+      margin = opts$caption_margin,
       position = list(
         align = opts$caption_align,
         x = ifelse(opts$caption_align == "right",-20, 20),
