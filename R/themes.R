@@ -56,11 +56,12 @@ hgch_theme <- function(opts = NULL){
   highcharter::hc_theme(
     useHTML = TRUE,
     colors = opts$palette_colors,
+    styledMode = TRUE,
     chart = list(
       reflow = TRUE,
       renderTo = 'container',
       backgroundColor = opts$background_color,
-      styledMode = TRUE,
+
       marginBottom = opts$plot_margin_bottom,
       marginLeft = opts$plot_margin_left,
       marginRight = opts$plot_margin_right,
