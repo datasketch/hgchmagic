@@ -156,6 +156,7 @@ hgch_theme <- function(opts = NULL){
       gridLineDashStyle = opts$grid_y_line_type %||% opts$grid_line_type,
       tickLength = opts$axis_tick_length,
       max = opts$y_max,
+      min = opts$y_min,
       labels = list(
         rotation = opts$labelsRotationY,
         style = list(
