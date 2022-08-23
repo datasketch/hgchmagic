@@ -204,7 +204,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       dd <- d_c %>% dplyr::left_join(dd)
       dd <- dsvizprep::preprocessData(dd, drop_na = opts$preprocess$drop_na_legend,
                                       na_label = opts$preprocess$na_label, na_label_cols = "a")
-      dd <- dsvizprep::postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+     # dd <- dsvizprep::postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+
 
       dn$a[is.na(dn$a)] <- opts$preprocess$na_label
       if (!grepl("Dat", ftype)){
@@ -362,7 +363,11 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     d <- dsvizprep::order_category(d, col = "a", order = opts$postprocess$order_legend, label_wrap = opts$style$label_wrap_legend)
     legend_index <- data.frame(a = unique(d$a), ..legendIndex = 0:(length(unique(d$a))-1))
     d <- d %>% dplyr::left_join(legend_index)
+    orderStacked <- unique(dsvizprep::postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n) %>% .$a)
+    if (!is.null(opts$postprocess$order_stacked)) {
     orderStacked <- c(opts$postprocess$order_stacked,setdiff(unique(d$a),opts$postprocess$order_stacked))
+    }
+    #print( orderStacked)
     cat_index <- data.frame(a = orderStacked, ..index = 0:(length(unique(d$a))-1))
     d <- d %>% dplyr::left_join(cat_index) %>% dplyr::arrange(..index)
 

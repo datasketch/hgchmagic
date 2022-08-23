@@ -39,7 +39,7 @@ hgch_bar_CatCat <- function(data, ...){
   opts <- dsvizopts::merge_dsviz_options(...)
   l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Cat", plot = "bar")
   d <- l$d
-
+print(d)
 
   series <- purrr::map(unique(d[[1]]), function(i) {
     d0 <- d %>%

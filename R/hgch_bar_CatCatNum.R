@@ -48,7 +48,6 @@ hgch_bar_CatCatNum <- function(data, ...){
   l <- hgchmagic_prep(data, opts = opts, ftype = "Cat-Cat-Num", plot = "bar")
   d <- l$d
 
-
   series <- purrr::map(unique(d[[1]]), function(i) {
     d0 <- d %>%
       dplyr::filter(a %in% i) #%>% drop_na()
@@ -215,4 +214,6 @@ hgch_bar_CatYeaNum <- hgch_bar_CatCatNum
 #'  hgch_bar_YeaCatNum(tooltip = info_tool)
 #'
 hgch_bar_YeaCatNum <- hgch_bar_CatCatNum
+
+
 
