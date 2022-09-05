@@ -380,11 +380,33 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   suffix_enter <- opts$style$suffix
   if (opts$postprocess$percentage) suffix_enter <- suffix_enter %||% "%"
 
+  f_nums <- NULL
 
-  f_nums <- makeup::makeup_format_js(sample = opts$style$format_sample_num,
-                                     locale = opts$style$locale,
-                                     prefix = opts$style$prefix,
-                                     suffix = suffix_enter)
+  print(opts$style$format_numericSymbols)
+  if (opts$style$format_numericSymbols) {
+    f_nums <- JS(paste0("function() {
+                    var ret,
+                        numericSymbols = ['k', 'M', 'G', 'T', 'P', 'E'],
+                        i = 6;
+                    if(this.value >=1000) {
+                        while (i-- && ret === undefined) {
+                            multi = Math.pow(1000, i + 1);
+                            if (this.value >= multi && numericSymbols[i] !== null) {
+                                ret = (this.value / multi) + numericSymbols[i];
+                            }
+                        }
+                    }
+                    return '", opts$style$prefix,"' + (ret ? ret : this.value) + '", suffix_enter,"';
+                }")
+    )
+  } else {
+    f_nums <- makeup::makeup_format_js(sample = opts$style$format_sample_num,
+                                       locale = opts$style$locale,
+                                       prefix = opts$style$prefix,
+                                       suffix = suffix_enter)
+  }
+
+
 
 
   if (plot != "scatter") {
