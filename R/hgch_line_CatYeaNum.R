@@ -48,7 +48,7 @@ hgch_line_CatYeaNum <- function(data, ...){
       dplyr::filter(a %in% i) #%>% drop_na()
     label_info <- d0 %>% .$labels %>% unlist()
     l0 <- list("name" = i,
-               "color" = unique(d0$..colors),
+               "color" = setdiff(unique(d0$..colors), NA),
                "data" = purrr::map(seq_along(d0[[3]]), function(i){
                  list("label" =  label_info[i],
                       "y" = d0[[3]][i]

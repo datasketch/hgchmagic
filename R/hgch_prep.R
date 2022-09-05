@@ -295,7 +295,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
                     lapply(htmltools::HTML))
 
   var_p <- dic_p$id
-  if ("..colors" %in% dic$label) var_p <- c(var_p, dic$id[dic$label == "..colors"])
+  if ("...colors" %in% dic$label) var_p <- c(var_p, dic$id[dic$label == "...colors"])
   d <- d[, c(var_p,  "labels")]
 
   # axis labels -------------------------------------------------------------
@@ -330,9 +330,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     opts$theme$palette_colors <- opts$theme[[paste0("palette_colors_", palette_type)]]
   }
   palette <- opts$theme$palette_colors
-
-    if ("..colors" %in% dic$label) {
-      d$..colors <- d[[dic$id[dic$label == "..colors"]]]
+    if ("...colors" %in% dic$label) {
+      d$..colors <- d[[dic$id[dic$label == "...colors"]]]
     } else {
       if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 1 && sum(grepl("Dat", ftype_vec)) == 1) {
         d$..colors <- palette[1]
@@ -340,7 +339,8 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
         d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
 
       }
-  }
+    }
+
   d$..colors[d$a == "(NA)"] <- opts$theme$na_color
 
   if (!is.null(opts$chart$highlight_value)) {
@@ -437,7 +437,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   # end options -------------------------------------------------------------
 
-
+  print(names(d))
   list(
     d = d,
     titles = list(

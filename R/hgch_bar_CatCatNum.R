@@ -53,7 +53,7 @@ hgch_bar_CatCatNum <- function(data, ...){
       dplyr::filter(a %in% i) #%>% drop_na()
     label_info <- d0 %>% .$labels %>% unlist()
     l0 <- list("name" = i,
-               "color" = unique(d0$..colors),
+               "color" = setdiff(unique(d0$..colors), NA),
                "index" = d0$..index,
                "legendIndex" = d0$..legendIndex,
                "data" = purrr::map(seq_along(d0[[3]]), function(i){
