@@ -23,7 +23,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   dic$id <- names(d)
 
 
-
   # dictionary and data preparation when variable is yea or pct -------------
 
   if (grepl("Pct", frtype)) {
@@ -204,7 +203,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       dd <- d_c %>% dplyr::left_join(dd)
       dd <- dsvizprep::preprocessData(dd, drop_na = opts$preprocess$drop_na_legend,
                                       na_label = opts$preprocess$na_label, na_label_cols = "a")
-     # dd <- dsvizprep::postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
+      # dd <- dsvizprep::postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n)
 
 
       dn$a[is.na(dn$a)] <- opts$preprocess$na_label
@@ -295,7 +294,9 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     dplyr::mutate(labels = glue::glue(hgch_tooltip(nms = nms, label_ftype = default_tooltip, tooltip = opts$chart$tooltip)) %>%
                     lapply(htmltools::HTML))
 
-  d <- d[, c(dic_p$id,  "labels")]
+  var_p <- dic_p$id
+  if ("..colors" %in% dic$label) var_p <- c(var_p, "c")
+  d <- d[, c(var_p,  "labels")]
 
   # axis labels -------------------------------------------------------------
 
@@ -330,17 +331,16 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
   }
   palette <- opts$theme$palette_colors
 
-  if ("color" %in% dic$hdType) {
-    d$..colors <- d[[dic$id[dic$hdType == "color"][1]]]
-  } else {
-    if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 1 && sum(grepl("Dat", ftype_vec)) == 1) {
-      d$..colors <- palette[1]
+    if ("..colors" %in% dic$label) {
+      d$..colors <- d[[dic$id[dic$label == "..colors"]]]
     } else {
-      d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
+      if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 1 && sum(grepl("Dat", ftype_vec)) == 1) {
+        d$..colors <- palette[1]
+      } else {
+        d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
 
-    }
+      }
   }
-
   d$..colors[d$a == "(NA)"] <- opts$theme$na_color
 
   if (!is.null(opts$chart$highlight_value)) {
@@ -365,7 +365,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     d <- d %>% dplyr::left_join(legend_index)
     orderStacked <- unique(dsvizprep::postprocess(dd, agg_var, sort = opts$postprocess$sort, slice_n = opts$postprocess$slice_n) %>% .$a)
     if (!is.null(opts$postprocess$order_stacked)) {
-    orderStacked <- c(opts$postprocess$order_stacked,setdiff(unique(d$a),opts$postprocess$order_stacked))
+      orderStacked <- c(opts$postprocess$order_stacked,setdiff(unique(d$a),opts$postprocess$order_stacked))
     }
     #print( orderStacked)
     cat_index <- data.frame(a = orderStacked, ..index = 0:(length(unique(d$a))-1))
@@ -382,7 +382,6 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   f_nums <- NULL
 
-  print(opts$style$format_numericSymbols)
   if (opts$style$format_numericSymbols) {
     f_nums <- JS(paste0("function() {
                     var ret,
