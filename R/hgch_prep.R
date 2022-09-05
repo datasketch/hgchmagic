@@ -295,7 +295,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
                     lapply(htmltools::HTML))
 
   var_p <- dic_p$id
-  if ("..colors" %in% dic$label) var_p <- c(var_p, "c")
+  if ("..colors" %in% dic$label) var_p <- c(var_p, dic$id[dic$label == "..colors"])
   d <- d[, c(var_p,  "labels")]
 
   # axis labels -------------------------------------------------------------
