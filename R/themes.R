@@ -210,6 +210,7 @@ hgch_theme <- function(opts = NULL){
         dataLabels = list (
           enabled = opts$dataLabels_show,
           style = labels_style,
+          inside = opts$dataLabels_inside,
           format = opts$templatedataLabels %||% paste0(opts$cats, opts$format_dataLabels),
           verticalAlign = opts$dataLabels_align#'middle'
         ),

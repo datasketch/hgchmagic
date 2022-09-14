@@ -471,6 +471,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
               dataLabels_color = opts$dataLabels$dataLabels_color %||% "constrast",
               dataLabels_size = opts$dataLabels$dataLabels_size %||% "11",
               dataLabels_align = opts$dataLabels$dataLabels_align,
+              dataLabels_inside = opts$dataLabels$dataLabels_inside,
               dataLabels_text_outline = opts$dataLabels$dataLabels_text_outline,
               format_dataLabels = format_dataLabels,
               suffix = suffix_enter,
