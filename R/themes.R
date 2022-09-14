@@ -211,8 +211,8 @@ hgch_theme <- function(opts = NULL){
           enabled = opts$dataLabels_show,
           style = labels_style,
           inside = opts$dataLabels_inside,
-          format = opts$templatedataLabels %||% paste0(opts$cats, opts$format_dataLabels),
-          verticalAlign = opts$dataLabels_align#'middle'
+          format = opts$templatedataLabels %||% paste0(opts$cats, opts$format_dataLabels)#,
+          #verticalAlign = opts$dataLabels_align#'middle'
         ),
         marker = list(
           enabled = opts$marker_enabled,
