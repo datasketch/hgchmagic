@@ -61,7 +61,7 @@ hgch_line_CatYeaNum <- function(data, ...){
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%
     hc_subtitle(text = l$title$subtitle) %>%
-    hc_chart(type = 'line',
+    hc_chart(type = ifelse(l$spline, "spline", "line"),
              events = list(
                load = add_branding(l$theme)
              )) %>%
