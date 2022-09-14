@@ -109,7 +109,8 @@ hgch_treemap_CatCatNum <- function(data, ...){
         list(
         level = 2,
         dataLabels = list(
-          enabled = l$extra$treemap_dataLabels_levelTwo
+          enabled = l$extra$treemap_dataLabels_levelTwo,
+          verticalAlign = 'top'
         ))),
         data = data
       )) %>%
