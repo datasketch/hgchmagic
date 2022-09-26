@@ -29,7 +29,9 @@ hgch_tooltip <- function(nms, label_ftype = NULL, tooltip) {
 
   if (is.null(tooltip)) {
     tooltip  <- paste0(purrr::map(seq_along(label_ftype), function(i) {
-      paste0(label_ftype[i], ": {", label_ftype_clean[i], "}")
+      class_lab <- paste0("tooltip-label-", i)
+      print(class_lab)
+      paste0(paste0("<span class:'",class_lab,";>"),label_ftype[i], ":</span> {", label_ftype_clean[i], "}")
     }) %>% unlist(), collapse = "<br/>")
   } else {
     tooltip <- gsub("[][()*`|]", "", tooltip)#gsub("[][!#$()*,.:;<=>@^`|~.", "", tooltip)

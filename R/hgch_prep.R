@@ -437,7 +437,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   # end options -------------------------------------------------------------
 
-  print(names(d))
+
   list(
     d = d,
     titles = list(
