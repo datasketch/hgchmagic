@@ -127,6 +127,7 @@ hgch_theme <- function(opts = NULL){
           fontSize = paste0(opts$text_size, 'px')
         )),
       title = list(
+        margin = opts$axis_margin_x,
         style = list(
           color = opts$axis_title_color %||% opts$text_color,# color del titulo del eje
           fontSize = paste0(opts$axis_title_size, 'px')
@@ -165,6 +166,7 @@ hgch_theme <- function(opts = NULL){
           fontSize = paste0(opts$text_size, 'px')
         )),
       title = list(
+        margin = opts$axis_margin_y,
         style = list(
           color = opts$axis_title_color %||% opts$text_color,# color del titulo del eje
           fontSize = paste0(opts$axis_title_size, 'px')
@@ -249,6 +251,7 @@ hgch_theme <- function(opts = NULL){
       )
     ),
     tooltip = list(
+      useHTML = TRUE,
       style = list(
         width = '350px',
         whiteSpace = 'normal',
