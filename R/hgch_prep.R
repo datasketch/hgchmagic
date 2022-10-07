@@ -286,6 +286,17 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   # add label from tooltip info ---------------------------------------------
 
+
+  if (plot == "scatter") {
+    if (all(dic_p$hdType == "Num")) {
+    l_cats <- purrr::map(setdiff(dic$id, dic_p$id), function(f_cats){
+      d[[paste0(f_cats, "_label")]] <<- makeup::makeup_chr(d[[f_cats]], opts$style$format_sample_cat)
+      d[[f_cats]]
+    })
+    }
+  }
+
+
   default_tooltip <- dic_p$label
   default_tooltip <- setdiff(default_tooltip, "..group")
 

@@ -35,12 +35,12 @@ hgch_scatter_NumNum <- function(data, ...){
   if (is.null(data)) stop(" dataset to visualize")
 
   opts <- dsvizopts::merge_dsviz_options(...)
+  data[[1]] <- homodatum::as_Num(data[[1]])
+  data[[2]] <- homodatum::as_Num(data[[2]])
 
   l <- hgchmagic_prep(data, opts = opts, plot = "scatter", ftype = "Num-Num")
 
   d <- l$d
-
-
   data_list <- purrr::map(1:nrow(d), function(z) {
     list(x = d$a[z],
          y = d$b[z],
