@@ -94,7 +94,7 @@ hgch_theme <- function(opts = NULL){
         fontWeight = opts$subtitle_weight
       )
     ),
-    credits = list(
+    caption = list(
       useHTML = TRUE,
       href = opts$caption_link,
       margin = opts$caption_margin,
