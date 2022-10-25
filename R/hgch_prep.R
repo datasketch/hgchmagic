@@ -141,7 +141,7 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
       dd$..percentage <- (dd[[agg_var]]/sum(dd[[agg_var]], na.rm = TRUE)) * 100
 
       if (plot == "scatter") {
-        if (agg_data) {
+        if (!agg_data) {
           dn <- dn
         }
       } else {
