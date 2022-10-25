@@ -140,9 +140,15 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
       dd$..percentage <- (dd[[agg_var]]/sum(dd[[agg_var]], na.rm = TRUE)) * 100
 
-      dn <- dn %>%
-        dplyr::group_by(a) %>%
-        dplyr::summarise_all(.funs = func_paste)
+      if (plot == "scatter") {
+        if (agg_data) {
+          dn <- dn
+        }
+      } else {
+        dn <- dn %>%
+          dplyr::group_by(a) %>%
+          dplyr::summarise_all(.funs = func_paste)
+      }
 
       if (grepl("Dat", ftype)) {
         dic_p <- dic_p %>%
@@ -289,10 +295,10 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
 
   if (plot == "scatter") {
     if (all(dic_p$hdType == "Num")) {
-    l_cats <- purrr::map(setdiff(dic$id, dic_p$id), function(f_cats){
-      d[[paste0(f_cats, "_label")]] <<- makeup::makeup_chr(d[[f_cats]], opts$style$format_sample_cat)
-      d[[f_cats]]
-    })
+      l_cats <- purrr::map(setdiff(dic$id, dic_p$id), function(f_cats){
+        d[[paste0(f_cats, "_label")]] <<- makeup::makeup_chr(d[[f_cats]], opts$style$format_sample_cat)
+        d[[f_cats]]
+      })
     }
   }
 
@@ -341,16 +347,16 @@ hgchmagic_prep <- function(data, opts = NULL, extra_pattern = ".", plot =  "bar"
     opts$theme$palette_colors <- opts$theme[[paste0("palette_colors_", palette_type)]]
   }
   palette <- opts$theme$palette_colors
-    if ("...colors" %in% dic$label) {
-      d$..colors <- d[[dic$id[dic$label == "...colors"]]]
+  if ("...colors" %in% dic$label) {
+    d$..colors <- d[[dic$id[dic$label == "...colors"]]]
+  } else {
+    if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 1 && sum(grepl("Dat", ftype_vec)) == 1) {
+      d$..colors <- palette[1]
     } else {
-      if (sum(grepl("Dat|Cat|Yea", ftype_vec)) == 1 && sum(grepl("Dat", ftype_vec)) == 1) {
-        d$..colors <- palette[1]
-      } else {
-        d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
+      d$..colors <- paletero::map_colors(d, color_by, palette, colors_df = NULL)
 
-      }
     }
+  }
 
   d$..colors[d$a == "(NA)"] <- opts$theme$na_color
 
