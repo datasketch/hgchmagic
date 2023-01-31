@@ -13,6 +13,7 @@
 
 # RData
 .RData
+.DS_Store
 
 # produced vignettes
 vignettes/*.html
