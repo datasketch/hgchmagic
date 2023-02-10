@@ -60,7 +60,7 @@ hgch_theme <- function(opts = NULL,...){
   #except treemapcatcat, functions that make use of hgch_theme do not send this parameter, TODO; a try cath has been added
 
    tryCatch({
-     if (opts$format_treemap_catcatnum  == TRUE) {
+     if (opts$datalabel_formmater_js  == TRUE) {
 
       dl_list0 <- list (
                     enabled = opts$dataLabels_show,

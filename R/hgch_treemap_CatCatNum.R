@@ -86,7 +86,7 @@ hgch_treemap_CatCatNum <- function(data, ...){
    dl_list4 <-list()
    # format_treemap_catcatnum  = FALSE
 
-    if (opts$style$format_treemap_catcatnum  == TRUE) {
+    if (opts$style$datalabel_formmater_js  == TRUE) {
      dl_list1 <- list(
        enabled = l$extra$treemap_dataLabels_levelOne,
        align = 'left',
@@ -207,7 +207,7 @@ hgch_treemap_CatCatNum <- function(data, ...){
                 formatter = JS(paste0("function () {return this.point.label;}")),
                 style = list(width = "300px", whiteSpace = "normal")) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
-    hc_add_theme(hgch_theme(opts =  c(l$theme, format_treemap_catcatnum =  opts$style$format_treemap_catcatnum,
+    hc_add_theme(hgch_theme(opts =  c(l$theme, datalabel_formmater_js =  opts$style$datalabel_formmater_js,
                                cats = "{point.name} <br/>")))
 
   hc
