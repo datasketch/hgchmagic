@@ -35,8 +35,7 @@ add_branding <- function(opts) {
 }
 
 #' @export
-hgch_theme <- function(opts = NULL){
-  message("in theme_datasketch")
+hgch_theme <- function(opts = NULL,...){
 
   labels_style <- list (
     color = opts$dataLabels_color,
@@ -53,6 +52,49 @@ hgch_theme <- function(opts = NULL){
   }
 
   if (opts$text_size == "") opts$text_size <- 13
+
+
+  dl_list0 <- list()
+  # format_treemap_catcatnum  = FALSE
+
+  #except treemapcatcat, functions that make use of hgch_theme do not send this parameter, TODO; a try cath has been added
+
+   tryCatch({
+     if (opts$datalabel_formmater_js  == TRUE) {
+
+      dl_list0 <- list (
+                    enabled = opts$dataLabels_show,
+                    style = labels_style,
+                    inside = opts$dataLabels_inside,
+                    # format = opts$templatedataLabels %||% paste0(opts$cats, opts$format_dataLabels),
+                    verticalAlign = opts$dataLabels_align#'middle'
+                  )
+     } else{
+
+       dl_list0 <- list (
+         enabled = opts$dataLabels_show,
+         style = labels_style,
+         inside = opts$dataLabels_inside,
+         format = opts$templatedataLabels %||% paste0(opts$cats, opts$format_dataLabels),
+         verticalAlign = opts$dataLabels_align#'middle'
+       )
+
+     }
+   },
+   error = function(cond) {
+     dl_list0 <- list (
+       enabled = opts$dataLabels_show,
+       style = labels_style,
+       inside = opts$dataLabels_inside,
+       format = opts$templatedataLabels %||% paste0(opts$cats, opts$format_dataLabels),
+       verticalAlign = opts$dataLabels_align#'middle'
+     )
+   })
+
+
+
+
+
   highcharter::hc_theme(
     useHTML = TRUE,
     colors = opts$palette_colors,
@@ -209,13 +251,7 @@ hgch_theme <- function(opts = NULL){
         animation = list(
           duration = opts$animation_duration
         ),
-        dataLabels = list (
-          enabled = opts$dataLabels_show,
-          style = labels_style,
-          inside = opts$dataLabels_inside,
-          format = opts$templatedataLabels %||% paste0(opts$cats, opts$format_dataLabels),
-          verticalAlign = opts$dataLabels_align#'middle'
-        ),
+        dataLabels = dl_list0,
         marker = list(
           enabled = opts$marker_enabled,
           symbol = "circle",
