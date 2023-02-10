@@ -76,7 +76,102 @@ hgch_treemap_CatCatNum <- function(data, ...){
   })
 
   data <- c(listaId, listaMg)
- print(l$extra$treemap_borderWidth_levelOne)
+
+
+
+   fml1 <- JS('function () {return  this.point.name +  "<br/>"  }')#
+   dl_list1 <-list()
+   dl_list2 <-list()
+   dl_list3 <-list()
+   dl_list4 <-list()
+   # format_treemap_catcatnum  = FALSE
+
+    if (opts$style$format_treemap_catcatnum  == TRUE) {
+     dl_list1 <- list(
+       enabled = l$extra$treemap_dataLabels_levelOne,
+       align = 'left',
+       verticalAlign = 'top',
+       formatter =fml1
+     )
+
+     dl_list2  <- list(
+       enabled = l$extra$treemap_dataLabels_levelTwo,
+       align = 'left',
+       verticalAlign = 'bottom',
+       # formatter = JS('function () { return this.point.name }')
+       formatter = JS('function () {
+                                              if (this.point.value > 1000000) {
+                                                return   "<br/>" + this.point.name +   "<br/>" +  "Average: " + Math.floor(this.point.value / 1000000,2) + "M";
+                                              } else if (this.point.value > 1000 &&  this.point.value < 1000000) {
+                                                return    "<br/>" + this.point.name +  "<br/>" + "Average: " + Math.floor(this.point.value/ 1000,2) + "K";
+                                              } else {
+                                                return  "<br/>" + this.point.name + "<br/>" + "Average: " +  this.point.value;
+                                              }
+                                       }'
+       )
+     )
+
+     dl_list3 <-  list(enabled = TRUE,
+          align = 'left',
+          verticalAlign = 'bottom',
+          # format='{point.name} - {point.value}',
+          formatter = JS('function () {
+                                              if (this.point.value > 1000000) {
+                                                return    "<br/>"  + "Average: " + Math.floor(this.point.value / 1000000,2) + "M";
+                                              } else if (this.point.value > 1000 &&  this.point.value < 1000000) {
+                                                return   "<br/>"  + this.point.name + "Average: " + Math.floor(this.point.value/ 1000,2) + "K";
+                                              } else {
+                                                return   "<br/>"  + this.point.name + "Average: " +  this.point.value;
+                                              }
+                                       }'
+          )
+     )
+
+     dl_list4  <- list(
+       allowPointSelect= l$allow_point,
+       cursor =  l$cursor,
+       dataLabels = dl_list3,
+       events = list(
+         click = l$clickFunction
+       )
+     )
+   }
+   else {
+     dl_list1 <- list(
+                       enabled = l$extra$treemap_dataLabels_levelOne,
+                       align = 'left',
+                       verticalAlign = 'top',
+                       format = "{point.name}"
+                  )
+
+     dl_list2  <- list(
+                       enabled = l$extra$treemap_dataLabels_levelTwo,
+                       verticalAlign = 'top'
+                   )
+
+     dl_list3 <- list(allowPointSelect= l$allow_point,
+                      cursor =  l$cursor,
+                      events = list(
+                        click = l$clickFunction
+                      )
+                    )
+
+     dl_list4  <- list(
+       allowPointSelect= l$allow_point,
+       cursor =  l$cursor,
+       events = list(
+         click = l$clickFunction
+       )
+     )
+
+
+   }
+
+
+
+ #  print(class(data))
+ #  print(colnames(data))
+ # print(l$extra$treemap_borderWidth_levelOne)
   global_options(opts$style$format_sample_num)
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%
@@ -97,36 +192,22 @@ hgch_treemap_CatCatNum <- function(data, ...){
         layoutAlgorithm = l$extra$treemap_layout,
         levels = list(list(
           level = 1,
-          dataLabels = list(
-            enabled = l$extra$treemap_dataLabels_levelOne,
-            align = 'left',
-            verticalAlign = 'top',
-            format = "{point.name}"
-          ),
+          dataLabels =  dl_list1,
           borderWidth = l$extra$treemap_borderWidth_levelOne,
           borderColor = l$extra$treemap_borderColor_levelOne
         ),
         list(
         level = 2,
-        dataLabels = list(
-          enabled = l$extra$treemap_dataLabels_levelTwo,
-          verticalAlign = 'top'
-        ))),
+        dataLabels = dl_list2)),
         data = data
       )) %>%
     hc_plotOptions(
-      series = list(
-        allowPointSelect= l$allow_point,
-        cursor =  l$cursor,
-        events = list(
-          click = l$clickFunction
-        )
-      )) %>%
+      series =dl_list4) %>%
      hc_tooltip(useHTML = TRUE,
                 formatter = JS(paste0("function () {return this.point.label;}")),
                 style = list(width = "300px", whiteSpace = "normal")) %>%
     hc_credits(enabled = TRUE, text = l$title$caption %||% "") %>%
-  hc_add_theme(hgch_theme(opts =  c(l$theme,
+    hc_add_theme(hgch_theme(opts =  c(l$theme, format_treemap_catcatnum =  opts$style$format_treemap_catcatnum,
                                cats = "{point.name} <br/>")))
 
   hc
