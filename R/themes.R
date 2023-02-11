@@ -60,6 +60,7 @@ hgch_theme <- function(opts = NULL,...){
   #except treemapcatcat, functions that make use of hgch_theme do not send this parameter, TODO; a try cath has been added
 
    tryCatch({
+     if(!is.null(opts$datalabel_formmater_js)){
      if (opts$datalabel_formmater_js  == TRUE) {
 
       dl_list0 <- list (
@@ -80,6 +81,14 @@ hgch_theme <- function(opts = NULL,...){
        )
 
      }
+     }else{ dl_list0 <- list (
+       enabled = opts$dataLabels_show,
+       style = labels_style,
+       inside = opts$dataLabels_inside,
+       format = opts$templatedataLabels %||% paste0(opts$cats, opts$format_dataLabels),
+       verticalAlign = opts$dataLabels_align#'middle'
+     )}
+
    },
    error = function(cond) {
      dl_list0 <- list (
@@ -90,7 +99,6 @@ hgch_theme <- function(opts = NULL,...){
        verticalAlign = opts$dataLabels_align#'middle'
      )
    })
-
 
 
 
