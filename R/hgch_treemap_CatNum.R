@@ -63,6 +63,62 @@ hgch_treemap_CatNum <- function(data, ...){
          "color" = as.character(d$..colors[z]))
   })
 
+  dl_list0 <-list()
+  dl_list1 <-list()
+  if (opts$style$datalabel_formmater_js  == TRUE) {
+    dl_list1 <-  list(enabled = TRUE,
+                    align = 'left',
+                    verticalAlign = 'top',
+                    # format='{point.name} - {point.value}',
+                    formatter = JS('function () {
+                                              if (this.point.value > 1000000) {
+                                                return   "<br/>" + this.point.name +   "<br/>" +  "Average: " + Math.floor(this.point.value / 1000000,2) + "M";
+                                              } else if (this.point.value > 1000 &&  this.point.value < 1000000) {
+                                                return    "<br/>" + this.point.name +  "<br/>" + "Average: " + Math.floor(this.point.value/ 1000,2) + "K";
+                                              } else {
+                                                return  "<br/>" + this.point.name + "<br/>" + "Average: " +  this.point.value;
+                                              }
+                                       }'
+                    ))
+
+    dl_list1 <- list(
+            dataLabels = dl_list1,
+            states = list(
+              hover = list(
+                brightness= 0.1,
+                color = l$color_hover
+              ),
+              select = list(
+                color = l$color_click
+              )
+            ),
+            allowPointSelect= l$allow_point,
+            cursor =  l$cursor,
+            events = list(
+              click = l$clickFunction
+            )
+     )
+  }
+  else {
+
+    dl_list1 <- list(
+
+      states = list(
+        hover = list(
+          brightness= 0.1,
+          color = l$color_hover
+        ),
+        select = list(
+          color = l$color_click
+        )
+      ),
+      allowPointSelect= l$allow_point,
+      cursor =  l$cursor,
+      events = list(
+        click = l$clickFunction
+      )
+    )
+  }
   global_options(opts$style$format_sample_num)
   hc <- highchart() %>%
     hc_title(text = l$title$title) %>%
@@ -72,22 +128,7 @@ hgch_treemap_CatNum <- function(data, ...){
         load = add_branding(l$theme)
       )) %>%
     hc_plotOptions(
-      series = list(
-        states = list(
-          hover = list(
-            brightness= 0.1,
-            color = l$color_hover
-          ),
-          select = list(
-            color = l$color_click
-          )
-        ),
-        allowPointSelect= l$allow_point,
-        cursor =  l$cursor,
-        events = list(
-          click = l$clickFunction
-        )
-      )) %>%
+      series = dl_list1) %>%
     hc_series(
       list(
         type = 'treemap',
@@ -99,8 +140,11 @@ hgch_treemap_CatNum <- function(data, ...){
     hc_tooltip(useHTML = TRUE,
                formatter = JS(paste0("function () {return this.point.label;}"))) %>%
     hc_credits(enabled = TRUE, text = opts$title$caption %||% "") %>%
-    hc_add_theme(hgch_theme(opts = c(l$theme,
+    hc_add_theme(hgch_theme(opts = c(l$theme,datalabel_formmater_js = opts$style$datalabel_formmater_js,
                                      cats = "{point.name} <br/>")))
+
+
+
 
   hc
 }
