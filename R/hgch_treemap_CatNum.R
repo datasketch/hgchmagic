@@ -72,11 +72,11 @@ hgch_treemap_CatNum <- function(data, ...){
                     # format='{point.name} - {point.value}',
                     formatter = JS('function () {
                                               if (this.point.value > 1000000) {
-                                                return   "<br/>" + this.point.name +   "<br/>" +  "Average: " + Math.floor(this.point.value / 1000000,2) + "M";
+                                                return   "<br/>" + this.point.name +   "<br/>" +  "Average: " + Math.floor(this.point.value / 1000000,2) + "M" + " " +  "usd";
                                               } else if (this.point.value > 1000 &&  this.point.value < 1000000) {
-                                                return    "<br/>" + this.point.name +  "<br/>" + "Average: " + Math.floor(this.point.value/ 1000,2) + "K";
+                                                return    "<br/>" + this.point.name +  "<br/>" + "Average: " + Math.floor(this.point.value/ 1000,2) + "K" + " " + "usd";
                                               } else {
-                                                return  "<br/>" + this.point.name + "<br/>" + "Average: " +  this.point.value;
+                                                return  "<br/>" + this.point.name + "<br/>" + "Average: " +  this.point.value  + " " +  "usd";
                                               }
                                        }'
                     ))
