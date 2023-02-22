@@ -64,7 +64,7 @@ hgch_bar_Cat <- function(data, ...) {
   data <- dsdataprep::aggregation_data(data = data,
                                agg = "count",
                                group_var = var_cat,
-                               name = opts_prep$agg_text %||% "count",
+                               agg_name = opts_prep$agg_text %||% "count",
                                percentage = opts_prep$percentage,
                                percentage_name = opts_prep$percentage_name,
                                extra_col = opts_prep$extra_col,
@@ -79,10 +79,10 @@ hgch_bar_CatNum <- function(data, ...) {
   var_num <- names(data)[2]
   opts_prep <- dataprep_opts(...)
   var_num_name <- opts_prep$agg_text %||% var_num
-  print(var_num_name)
+
   data <- dsdataprep::aggregation_data(data = data,
                                        agg = opts_prep$agg,
-                                       name = var_num_name,
+                                       agg_name = var_num_name,
                                        group_var = var_cat,
                                        to_agg = var_num,
                                        percentage = opts_prep$percentage,
@@ -100,7 +100,7 @@ hgch_bar_CatCat <- function(data, ...) {
   data <- dsdataprep::aggregation_data(data = data,
                                        agg = "count",
                                        group_var = var_cat,
-                                       name = "Conteo",
+                                       agg_name = "Conteo",
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
@@ -119,7 +119,7 @@ hgch_bar_CatCatNum <- function(data, ...) {
                                        agg = "mean",
                                        group_var = var_cat,
                                        to_agg = var_num,
-                                       name = var_num_name,
+                                       agg_name = var_num_name,
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,

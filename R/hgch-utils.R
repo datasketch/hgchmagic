@@ -8,7 +8,9 @@ hc_titles <- function (hc, opts) {
 
 hc_body <- function(hc, data, frType, opts = NULL) {
 
-  hc <-   hc |>
+  #global_options(opts$style$format_sample_num)
+
+   hc <-   hc |>
     hc_chart(type = opts$plot_type#,
              # events = list(
              #   load = add_branding(opts$theme)

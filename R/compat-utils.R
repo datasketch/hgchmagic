@@ -57,8 +57,7 @@ data_draw <- function(data,
     index_names <- c("..index", "..legendIndex")
     var <- c(var_cat, var_num, "..labels", "..colors", "..index", "..legendIndex")
   }
- print(data)
- print(var_num)
+
   data <- dsdataprep::wrap_sort_data(data = data,
                                      col_cat = var_cat,
                                      col_num = var_num,

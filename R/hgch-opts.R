@@ -1,3 +1,23 @@
+#' Prepare data for visualization
+#'
+#' This function prepares data for visualization by performing operations such as aggregation and data formatting.
+#'
+#' @param data a data.frame containing the data to be prepared
+#' @param tooltip a character vector containing the tooltip labels for each column of data
+#' @param new_labels a named character vector containing the labels to replace column names of data
+#' @param engine the rendering engine for the tooltip labels, either "html" or "markdown"
+#' @param as_df if TRUE, returns the data.frame with a new column for the tooltip, otherwise returns a character vector of the tooltip labels
+#' @param na_row_default_column the name of the column in \code{data} containing default values for rows with NAs
+#' @param na_row_default_value the default value for rows with NAs, if \code{na_row_default_column} is not provided
+#' @param na_label the text label for missing values
+#' @param format_num the sample format for numerical data
+#' @param opts_format_num a list of formatting options for numerical data
+#' @param format_cat the sample format for categorical data
+#' @param format_date the sample format for date data
+#'
+#' @return list with options to change properties of plot
+#'
+#'
 #' @keywords internal
 plot_opts <- function(viz = NULL, ...) {
   if (is.null(viz)) return()
