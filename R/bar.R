@@ -1,3 +1,23 @@
+#' Highcharter Bar Chart
+#'
+#' Creates a bar chart using Highcharter library.
+#'
+#' @param data a data frame containing the variables to be plotted.
+#' @param dic a named list, each element corresponding to a column name in \code{data} and defining a set of labels for that column.
+#' @param var_cat a character vector with the names of categorical variables.
+#' @param var_num a character vector with the names of numerical variables.
+#' @param ... additional arguments to be passed to \code{\link{plot_opts}}.
+#'
+#' @return a Highcharter bar chart.
+#'
+#' @examples
+#' data(mtcars)
+#' mtcars$cyl <- as.character(mtcars$cyl)
+#' mtcars <- mtcars |> group_by(cyl) |> summarize(mpg = mean(mpg))
+#' hgch_bar(mtcars, var_cat = "cyl", var_num = "mpg")
+#'
+#' @importFrom dplyr mutate group_by summarise
+#'
 #' @export
 hgch_bar <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
 
@@ -23,7 +43,20 @@ hgch_bar <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
 
 }
 
-
+#' Bar chart for a categorical variable
+#'
+#' This function creates a horizontal or vertical bar chart for a categorical variable.
+#'
+#' @param data a data frame.
+#' @param ... additional arguments to pass to the `hgch_bar` function.
+#'
+#' @return A highchart object.
+#' @export
+#'
+#' @examples
+#' data(iris)
+#' iris <- iris |> select(Species)
+#' hgch_bar_Cat(iris, percentage = TRUE)
 #' @export
 hgch_bar_Cat <- function(data, ...) {
   var_cat <- names(data)[1]
