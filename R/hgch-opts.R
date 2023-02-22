@@ -32,7 +32,13 @@ plot_opts <- function(viz = NULL, ...) {
     color_by = opts$prep$color_by,
     palette_colors = opts$theme$palette_colors %||% opts$theme$palette_colors_categorical,
     palette_type = NULL,
-    palette = NULL
+    palette = NULL,
+    order = opts$prep$order,
+    order_legend = opts$prep$order_legend,
+    label_wrap = opts$prep$label_wrap,
+    new_line = "<br/>",
+    sort = opts$prep$sort,
+    slice_n = opts$prep$slice_n
   )
 
   general_opts <- list(

@@ -22,7 +22,7 @@ data_draw <- function(data,
 
 
   var <- NULL
-
+  index_names <- NULL
 
   if (!"..labels" %in% names(data)) {
     data$..labels <- dsdataprep::prep_tooltip(data = data,
@@ -54,19 +54,22 @@ data_draw <- function(data,
   }
 
   if (frType == "CatCatNum") {
-    data <- dsdataprep::wrap_sort_data(data = data,
-                                       col_cat = var_cat,
-                                       col_num = var_num,
-                                       order = NULL,
-                                       label_wrap = NULL,
-                                       new_line = NULL,
-                                       sort = NULL,
-                                       slice_n = NULL,
-                                       intra_cat = TRUE,
-                                       index_names = c("..index", "..legendIndex"))
+    index_names <- c("..index", "..legendIndex")
     var <- c(var_cat, var_num, "..labels", "..colors", "..index", "..legendIndex")
   }
-
+ print(data)
+ print(var_num)
+  data <- dsdataprep::wrap_sort_data(data = data,
+                                     col_cat = var_cat,
+                                     col_num = var_num,
+                                     order = opts$order,
+                                     order_legend = opts$order_legend,
+                                     label_wrap = opts$label_wrap,
+                                     new_line = opts$new_line,
+                                     sort = opts$sort,
+                                     slice_n = opts$slice_n,
+                                     #intra_cat = opts$intra_cat,
+                                     index_names = index_names)
 
   data <- data |> select({{ var }}, everything())
   list_bar(data, frType)
