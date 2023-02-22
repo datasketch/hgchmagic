@@ -17,6 +17,7 @@ data_draw <- function(data,
                       var_cat = NULL,
                       var_num = NULL,
                       var_date = NULL,
+                      viz = NULL,
                       frType = NULL,
                       opts = NULL) {
 
@@ -71,7 +72,12 @@ data_draw <- function(data,
                                      index_names = index_names)
 
   data <- data |> select({{ var }}, everything())
-  list_bar(data, frType)
+
+  if (viz == "treemap") {
+    list_treemap(data, frType)
+  } else {
+    list_bar(data, frType)
+  }
 
 }
 

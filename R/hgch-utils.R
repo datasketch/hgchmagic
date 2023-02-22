@@ -1,3 +1,5 @@
+#' @import dplyr
+#' @import highcharter
 
 hc_titles <- function (hc, opts) {
   hc |>
@@ -57,6 +59,44 @@ hc_body <- function(hc, data, frType, opts = NULL) {
 
   hc |>
    hc_tooltip(useHTML = TRUE,
-              formatter = JS(paste0("function () {return this.point.label;}")))
+              formatter = JS(paste0("function () {return this.point.label;}"))) |>
+    hc_plotOptions(
+      series = list(innerSize = opts$inner_size)
+    )
 
 }
+
+
+
+hc_body_treemap <- function(hc, data, frType, opts = NULL) {
+
+  #global_options(opts$style$format_sample_num)
+
+  hc <- hc
+
+print(data)
+  if (frType == "CatNum") {
+    hc <- hc |>
+      hc_series(
+        list(
+          type = 'treemap',
+          # showInLegend = l$theme$legend_show,
+          # legendType = 'point',
+          # layoutAlgorithm = l$extra$treemap_layout,
+          # layoutStartingDirection = l$extra$treemap_direction,
+          data = data)
+      )
+  }
+
+  if (frType == "CatCatNum") {
+    hc <- hc
+  }
+
+  hc |>
+    hc_tooltip(useHTML = TRUE,
+               formatter = JS(paste0("function () {return this.point.label;}")))
+
+}
+
+
+

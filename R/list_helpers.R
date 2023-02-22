@@ -48,3 +48,21 @@ list_bar <- function(data, frtype) {
 
   data
 }
+
+
+list_treemap <- function(data, frtype) {
+  d <- data
+  if (frtype %in% c("Cat", "CatNum")) {
+    data <- purrr::pmap(
+      list(d[[1]], d[[2]], d$..labels, d$..colors),
+      function(name, value, label, color) {
+        list(
+          "name" = name,
+          "value" = value,
+          "label" = label,
+          "color" = as.character(color)
+        )
+      }
+    )
+  }
+}

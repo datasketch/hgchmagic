@@ -15,4 +15,24 @@ test_that("Pie", {
   hgch_pie_CatNum(data2)
   hgch_pie(data3, var_cat = "name", var_num = "y" )
 
+
+  data <- ggplot2::diamonds
+  data <- dsdataprep::aggregation_data(data = data,
+                                       agg = "sum",
+                                       group_var = "cut",
+                                       to_agg = "price")
+
+  ops <- list(title = "title",
+              subtitle = "subtitle",
+              caption = "caption",
+              hor_title = "Categorias",
+              ver_title = "Numeros",
+              bar_orientation = "hor")
+  hgch_pie(data, var_cat = "cut", var_num = "price", opts =  ops)
+  hgch_pie(data,
+           var_cat = "cut",
+           var_num = "price",
+           palette_colors = c("#ffa92a"))
+
+
 })

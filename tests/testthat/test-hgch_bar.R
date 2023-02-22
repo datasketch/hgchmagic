@@ -20,7 +20,7 @@ test_that("Bar", {
   hgch_bar_Cat(data, opts = ops)
 
   data <- ggplot2::diamonds |> select(cut, price, everything())
-  hgch_bar_CatNum(data, opts = ops)
+   hgch_bar_CatNum(data, opts = ops)
   hgch_bar_CatNum(data, opts = ops, collapse_rows = TRUE)
 
 

@@ -1,6 +1,6 @@
-#' Generate a Highcharts pie chart.
+#' Generate a Highcharts donut chart.
 #'
-#' This function generates a Highcharts pie chart based on the given data.
+#' This function generates a Highcharts donut chart based on the given data.
 #'
 #' @param data A data frame containing the data to be plotted.
 #' @param dic A named list of character vectors that replaces column names in data. The names of the list should match column names in data, and each vector should contain the replacement names.
@@ -8,20 +8,20 @@
 #' @param var_num A character vector of numeric variable(s) to use in the chart.
 #' @param ... Additional arguments to be passed to \code{\link{plot_opts}}.
 #'
-#' @return A Highcharts pie chart object.
+#' @return A Highcharts donut chart object.
 #'
 #' @seealso \code{\link{plot_opts}}, \code{\link{data_draw}}
 #'
 #'
 #' @examples
 #' data1 <- data.frame(name = c("A", "B", "C"), y = c(10, 20, 30))
-#' hgch_pie(data1, var_cat = "name", var_num = "y")
+#' hgch_donut(data1, var_cat = "name", var_num = "y")
 #'
 #' @export
-hgch_pie <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
+hgch_donut <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
 
   if (is.null(var_cat)) stop("You must enter at least one categorical variable")
-  opts <- plot_opts(viz = "pie", ...)
+  opts <- plot_opts(viz = "donut", ...)
   opts$data_opts$color_by <- var_cat[1]
   frType <- frtype_viz(var_cat, var_num)
 
@@ -31,20 +31,19 @@ hgch_pie <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
                          var_num = var_num,
                          frType = frType,
                          opts = opts$data_opts,
-                         viz = "pie")
+                         viz = "donut")
 
-
-  pie <- highchart() |>
+  donut <- highchart() |>
     hc_titles(opts = opts$titles)  |>
     hc_body(data = data_draw, frType = frType, opts = opts$general_opts)#|>
   # |>
 
-  pie
+  donut
 
 }
 
 #' @export
-hgch_pie_Cat <- function(data, ...) {
+hgch_donut_Cat <- function(data, ...) {
   var_cat <- names(data)[1]
   opts_prep <- dataprep_opts(...)
   data <- dsdataprep::aggregation_data(data = data,
@@ -55,12 +54,12 @@ hgch_pie_Cat <- function(data, ...) {
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
-  hgch_pie(data = data, var_cat = var_cat, var_num = "count", ...)
+  hgch_donut(data = data, var_cat = var_cat, var_num = "count", ...)
 }
 
 
 #' @export
-hgch_pie_CatNum <- function(data, ...) {
+hgch_donut_CatNum <- function(data, ...) {
   var_cat <- names(data)[1]
   var_num <- names(data)[2]
   opts_prep <- dataprep_opts(...)
@@ -76,7 +75,7 @@ hgch_pie_CatNum <- function(data, ...) {
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
 
-  hgch_pie(data = data, var_cat = var_cat, var_num = var_num_name, ...)
+  hgch_donut(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
 
 

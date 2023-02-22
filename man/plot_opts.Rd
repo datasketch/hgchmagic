@@ -7,29 +7,7 @@
 plot_opts(viz = NULL, ...)
 }
 \arguments{
-\item{data}{a data.frame containing the data to be prepared}
-
-\item{tooltip}{a character vector containing the tooltip labels for each column of data}
-
-\item{new_labels}{a named character vector containing the labels to replace column names of data}
-
-\item{engine}{the rendering engine for the tooltip labels, either "html" or "markdown"}
-
-\item{as_df}{if TRUE, returns the data.frame with a new column for the tooltip, otherwise returns a character vector of the tooltip labels}
-
-\item{na_row_default_column}{the name of the column in \code{data} containing default values for rows with NAs}
-
-\item{na_row_default_value}{the default value for rows with NAs, if \code{na_row_default_column} is not provided}
-
-\item{na_label}{the text label for missing values}
-
-\item{format_num}{the sample format for numerical data}
-
-\item{opts_format_num}{a list of formatting options for numerical data}
-
-\item{format_cat}{the sample format for categorical data}
-
-\item{format_date}{the sample format for date data}
+\item{...}{additional arguments to be passed to \code{\link[dsvizopts]{dsviz_default_opts}}}
 }
 \value{
 list with options to change properties of plot
