@@ -1,0 +1,15 @@
+test_that("Line", {
+  dates <- seq(as.POSIXct("2022-01-01"), as.POSIXct("2022-01-10"), by = "day")
+  values <- rnorm(length(dates))
+  df <- data.frame(date = dates, value = values)
+  hgch_line(df, var_dat = "date", var_num = "value")
+
+  data <- lubridate::lakers
+  data$date <- lubridate::ymd(data$date)
+  data <- data |>
+    tidyr::drop_na(x) |>
+    group_by(date) |>
+    summarise(x = sum(x)) |> dplyr::arrange(date)
+  hgch_line(data, var_dat = "date", var_num = "x")
+
+})

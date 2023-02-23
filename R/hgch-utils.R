@@ -74,7 +74,6 @@ hc_body_treemap <- function(hc, data, frType, opts = NULL) {
 
   hc <- hc
 
-print(data)
   if (frType == "CatNum") {
     hc <- hc |>
       hc_series(
@@ -98,5 +97,31 @@ print(data)
 
 }
 
+
+hc_body_line <- function(hc, data, frType, opts = NULL) {
+
+  #global_options(opts$style$format_sample_num)
+
+  hc <- hc
+
+  if (frType == "DatNum") {
+    hc <- hc |>
+        hc_chart(type = opts$plot_type
+        ) %>%
+        hc_xAxis(
+          type = 'datetime',
+          categories = data$categories
+        ) |>
+        hc_series(
+          data$data
+        ) |>
+      hc_legend(enabled = FALSE)
+  }
+
+  hc |>
+    hc_tooltip(useHTML = TRUE,
+               formatter = JS(paste0("function () {return this.point.label;}")))
+
+}
 
 

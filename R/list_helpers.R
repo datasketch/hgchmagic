@@ -66,3 +66,20 @@ list_treemap <- function(data, frtype) {
     )
   }
 }
+
+
+list_line <- function(data, frtype) {
+
+  d <- data
+  if (frtype %in% c("Dat", "DatNum")) {
+    dl <- d %>%
+      mutate(y = .[[2]], label = ..labels) |>
+      select(y, label)
+    data <- list(
+      categories = unique(d[[1]]),
+      data = list(data = purrr::transpose(dl), color = d$..colors[1])
+    )
+  }
+
+}
+

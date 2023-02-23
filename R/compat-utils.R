@@ -46,12 +46,16 @@ data_draw <- function(data,
     data <- dsdataprep::add_data_colors(data = data,
                                         color_by = opts$color_by,
                                         palette_colors = opts$palette_colors,
-                                        palette_type = opts$palette_type,
-                                        palette = opts$palette)
+                                        #palette_type = opts$palette_type,
+                                        palette = opts$palette
+                                        )
   }
 
   if (frType == "CatNum") {
     var <- c(var_cat, var_num, "..labels", "..colors")
+  }
+  if (frType == "DatNum") {
+    var <- c(var_date, var_num, "..labels", "..colors")
   }
 
   if (frType == "CatCatNum") {
@@ -73,11 +77,11 @@ data_draw <- function(data,
 
   data <- data |> select({{ var }}, everything())
 
-  if (viz == "treemap") {
-    list_treemap(data, frType)
-  } else {
-    list_bar(data, frType)
-  }
+  l <- NULL
+  if (viz == "treemap") ld <- list_treemap(data, frType)
+  if (viz == "line") ld <- list_line(data, frType)
+  if (viz %in% c("bar", "pie", "donut")) ld <- list_bar(data, frType)
+  ld
 
 }
 
