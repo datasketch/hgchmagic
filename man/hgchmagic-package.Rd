@@ -4,15 +4,12 @@
 \name{hgchmagic-package}
 \alias{hgchmagic}
 \alias{hgchmagic-package}
-\title{hgchmagic: A wrapper for highcharter}
+\title{hgchmagic: What the Package Does (One Line, Title Case)}
 \description{
-A wrapper for highcharter
+What the package does (one paragraph).
 }
-\seealso{
-Useful links:
-\itemize{
-  \item Report bugs at \url{https://github.com/datasketch/hgchmagic/issues}
-}
+\author{
+\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
 
 }
 \keyword{internal}
