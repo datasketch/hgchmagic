@@ -36,4 +36,5 @@ test_that("Line", {
   data <- data |> select(game_type, date, x, everything())
   hgch_line_CatDatNum(data, agg = "mean")
 
+
 })

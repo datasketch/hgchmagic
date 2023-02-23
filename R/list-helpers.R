@@ -4,6 +4,7 @@
 #' It returns a list of data that can be used for visualizations.
 #'
 #' @param data A data frame.
+#' @param frType a string indicating the format of the data frame (e.g., "CatNum", "DatNum", "CatCatNum")
 #'
 #' @return A list containing a data frame that has the following columns: "name", "y", "..label", and "..color".
 #'

@@ -4,6 +4,7 @@
 #'
 #' @param data a data frame containing the variables to be plotted.
 #' @param dic a named list, each element corresponding to a column name in \code{data} and defining a set of labels for that column.
+#' @param var_cat the name of the categorical variable in the data frame
 #' @param var_dat a character vector with the names of date variable.
 #' @param var_num a character vector with the names of numerical variables.
 #' @param ... additional arguments to be passed to \code{\link[dsvizopts]{dsviz_default_opts}}

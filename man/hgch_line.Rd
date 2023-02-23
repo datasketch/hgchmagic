@@ -18,6 +18,8 @@ hgch_line(
 
 \item{dic}{a named list, each element corresponding to a column name in \code{data} and defining a set of labels for that column.}
 
+\item{var_cat}{the name of the categorical variable in the data frame}
+
 \item{var_dat}{a character vector with the names of date variable.}
 
 \item{var_num}{a character vector with the names of numerical variables.}

@@ -8,6 +8,8 @@ list_bar(data, frtype)
 }
 \arguments{
 \item{data}{A data frame.}
+
+\item{frType}{a string indicating the format of the data frame (e.g., "CatNum", "DatNum", "CatCatNum")}
 }
 \value{
 A list containing a data frame that has the following columns: "name", "y", "..label", and "..color".
