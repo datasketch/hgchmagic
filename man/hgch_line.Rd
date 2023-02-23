@@ -23,3 +23,6 @@ a Highcharter line chart.
 \description{
 Creates a line chart using Highcharter library.
 }
+\seealso{
+\code{\link{data_draw}}
+}

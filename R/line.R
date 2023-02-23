@@ -10,6 +10,7 @@
 #'
 #' @return a Highcharter line chart.
 #'
+#' @seealso \code{\link{data_draw}}
 #'
 #' @export
 hgch_line <- function (data, dic = NULL, var_dat = NULL, var_num = NULL, ...) {
@@ -43,15 +44,16 @@ hgch_line <- function (data, dic = NULL, var_dat = NULL, var_num = NULL, ...) {
 hgch_line_Dat <- function(data, ...) {
   var_dat <- names(data)[1]
   opts_prep <- dataprep_opts(...)
+  var_num_name <- opts_prep$agg_text %||% "Count"
   data <- dsdataprep::aggregation_data(data = data,
                                        agg = "count",
                                        group_var = var_dat,
-                                       agg_name = opts_prep$agg_text %||% "count",
+                                       agg_name = opts_prep$agg_text %||% var_num_name,
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
-  hgch_line(data = data, var_dat = var_dat, var_num = "count", ...)
+  hgch_line(data = data, var_dat = var_dat, var_num = var_num_name, ...)
 }
 
 

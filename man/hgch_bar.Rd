@@ -26,7 +26,11 @@ Creates a bar chart using Highcharter library.
 \examples{
 data(mtcars)
 mtcars$cyl <- as.character(mtcars$cyl)
-mtcars <- mtcars |> group_by(cyl) |> summarize(mpg = mean(mpg))
+mtcars <- mtcars |> dplyr::group_by(cyl) |> dplyr::summarise(mpg = mean(mpg))
 hgch_bar(mtcars, var_cat = "cyl", var_num = "mpg")
 
+
+}
+\seealso{
+\code{\link{data_draw}}
 }

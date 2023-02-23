@@ -19,6 +19,6 @@ This function creates a horizontal or vertical treemap chart for a categorical v
 }
 \examples{
 data(iris)
-iris <- iris |> select(Species)
+iris <- iris |> dplyr::select(Species)
 hgch_treemap_Cat(iris, percentage = TRUE)
 }

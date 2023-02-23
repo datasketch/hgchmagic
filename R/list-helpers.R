@@ -7,13 +7,9 @@
 #'
 #' @return A list containing a data frame that has the following columns: "name", "y", "..label", and "..color".
 #'
-#' @examples
-#' data(mtcars)
-#' list_cat_num(mtcars)
+#' @importFrom purrr map pmap pluck
 #'
-#' @import purrr
-#'
-#' @export
+#' @keywords internal
 list_bar <- function(data, frtype) {
   d <- data
   if (frtype %in% c("Cat", "CatNum")) {
@@ -49,7 +45,7 @@ list_bar <- function(data, frtype) {
   data
 }
 
-
+#' @keywords internal
 list_treemap <- function(data, frtype) {
   d <- data
   if (frtype %in% c("Cat", "CatNum")) {
@@ -67,7 +63,7 @@ list_treemap <- function(data, frtype) {
   }
 }
 
-
+#' @keywords internal
 list_line <- function(data, frtype) {
 
   d <- data

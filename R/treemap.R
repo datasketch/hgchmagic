@@ -10,13 +10,14 @@
 #'
 #' @return a Highcharter treemap chart.
 #'
+#' @seealso \code{\link{data_draw}}
+#'
 #' @examples
 #' data(mtcars)
 #' mtcars$cyl <- as.character(mtcars$cyl)
-#' mtcars <- mtcars |> group_by(cyl) |> summarize(mpg = mean(mpg))
+#' mtcars <- mtcars |> dplyr::group_by(cyl) |> dplyr::summarise(mpg = mean(mpg))
 #' hgch_treemap(mtcars, var_cat = "cyl", var_num = "mpg")
 #'
-#' @importFrom dplyr mutate group_by summarise
 #'
 #' @export
 hgch_treemap <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
@@ -56,21 +57,22 @@ hgch_treemap <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...)
 #'
 #' @examples
 #' data(iris)
-#' iris <- iris |> select(Species)
+#' iris <- iris |> dplyr::select(Species)
 #' hgch_treemap_Cat(iris, percentage = TRUE)
 #' @export
 hgch_treemap_Cat <- function(data, ...) {
   var_cat <- names(data)[1]
   opts_prep <- dataprep_opts(...)
+  var_num_name <- opts_prep$agg_text %||% "Count"
   data <- dsdataprep::aggregation_data(data = data,
                                        agg = "count",
                                        group_var = var_cat,
-                                       agg_name = opts_prep$agg_text %||% "count",
+                                       agg_name = opts_prep$agg_text %||% var_num_name,
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
-  hgch_treemap(data = data, var_cat = var_cat, var_num = "count", ...)
+  hgch_treemap(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
 
 
@@ -94,36 +96,3 @@ hgch_treemap_CatNum <- function(data, ...) {
 }
 
 
-#' @export
-hgch_treemap_CatCat <- function(data, ...) {
-  var_cat <- c(names(data)[1], names(data)[2])
-  opts_prep <- dataprep_opts(...)
-  data <- dsdataprep::aggregation_data(data = data,
-                                       agg = "count",
-                                       group_var = var_cat,
-                                       agg_name = "Conteo",
-                                       percentage = opts_prep$percentage,
-                                       percentage_name = opts_prep$percentage_name,
-                                       extra_col = opts_prep$extra_col,
-                                       agg_extra = opts_prep$agg_extra)
-  hgch_treemap(data = data, var_cat = var_cat, var_num = "Conteo", ...)
-}
-
-
-#' @export
-hgch_treemap_CatCatNum <- function(data, ...) {
-  var_cat <- c(names(data)[1], names(data)[2])
-  var_num <- names(data)[3]
-  opts_prep <- dataprep_opts(...)
-  var_num_name <- opts_prep$agg_text %||% var_num
-  data <- dsdataprep::aggregation_data(data = data,
-                                       agg = "mean",
-                                       group_var = var_cat,
-                                       to_agg = var_num,
-                                       agg_name = var_num_name,
-                                       percentage = opts_prep$percentage,
-                                       percentage_name = opts_prep$percentage_name,
-                                       extra_col = opts_prep$extra_col,
-                                       agg_extra = opts_prep$agg_extra)
-  hgch_treemap(data = data, var_cat = var_cat, var_num = var_num_name, ...)
-}

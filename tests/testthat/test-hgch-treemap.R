@@ -12,4 +12,10 @@ test_that("Treemap", {
               ver_title = "Numeros",
               bar_orientation = "hor")
   hgch_treemap(data, var_cat = "cut", var_num = "price", opts =  ops)
+
+  data <- ggplot2::diamonds |> select(cut, everything())
+  hgch_treemap_Cat(data)
+
+  hgch_treemap_CatNum(data)
+
 })

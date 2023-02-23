@@ -10,7 +10,7 @@
 #'
 #' @return A Highcharts donut chart object.
 #'
-#' @seealso \code{\link{plot_opts}}, \code{\link{data_draw}}
+#' @seealso \code{\link{data_draw}}
 #'
 #'
 #' @examples
@@ -46,10 +46,11 @@ hgch_donut <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
 hgch_donut_Cat <- function(data, ...) {
   var_cat <- names(data)[1]
   opts_prep <- dataprep_opts(...)
+  var_num_name <- opts_prep$agg_text %||% "count"
   data <- dsdataprep::aggregation_data(data = data,
                                        agg = "count",
                                        group_var = var_cat,
-                                       agg_name = opts_prep$agg_text %||% "count",
+                                       agg_name = var_num_name,
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,

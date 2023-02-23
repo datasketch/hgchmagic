@@ -11,6 +11,7 @@ Depends:
 Imports:
     dplyr,
     dsdataprep,
+    dstools,
     dsvizopts,
     highcharter,
     makeup,
@@ -20,8 +21,6 @@ Suggests:
     lubridate,
     testthat (>= 2.1.0),
     tidyr
-VignetteBuilder: 
-    knitr
 Remotes:
     datasketch/dsvizopts,
     datasketch/makeup

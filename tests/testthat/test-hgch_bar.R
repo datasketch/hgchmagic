@@ -12,15 +12,15 @@ test_that("Bar", {
               ver_title = "Numeros",
               bar_orientation = "hor")
   hgch_bar(data, var_cat = "cut", var_num = "price", opts =  ops)
-  hgch_bar(data, var_cat = "cut", var_num = "price", palette_colors = "#ffa92a",
+  hgch_bar(data, var_cat = "cut", var_num = "price", palette_colors = c("#ffa92a"),
            order = c("Very Good"))
 
 
   data <- ggplot2::diamonds |> select(cut, everything())
-  hgch_bar_Cat(data, opts = ops)
+  hgch_bar_Cat(data, opts = ops, palette_colors = "#ffa92a")
 
   data <- ggplot2::diamonds |> select(cut, price, everything())
-   hgch_bar_CatNum(data, opts = ops)
+  hgch_bar_CatNum(data, opts = ops)
   hgch_bar_CatNum(data, opts = ops, collapse_rows = TRUE)
 
 

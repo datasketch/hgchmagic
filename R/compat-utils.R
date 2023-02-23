@@ -11,6 +11,21 @@ frtype_viz <- function(var_cat = NULL,
   frtype
 }
 
+#' Create data for a Highcharts plot
+#'
+#' This function creates data for a Highcharts plot, given input data and options.
+#'
+#' @param data a data frame containing the data to be plotted
+#' @param dic a named vector specifying the categories and colors for the data
+#' @param var_cat the name of the categorical variable in the data frame
+#' @param var_num the name of the numeric variable in the data frame
+#' @param var_date the name of the date variable in the data frame
+#' @param viz the type of visualization to be created ("treemap", "line", "bar", "pie", or "donut")
+#' @param frType a string indicating the format of the data frame (e.g., "CatNum", "DatNum", "CatCatNum")
+#' @param opts a list containing options for the plot (e.g., tooltip_template, na_label, format_sample_num)
+#'
+#' @return a list of data for use in creating a Highcharts plot
+#'
 #' @keywords internal
 data_draw <- function(data,
                       dic = NULL,

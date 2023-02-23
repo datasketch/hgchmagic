@@ -29,5 +29,5 @@ hgch_donut(data1, var_cat = "name", var_num = "y")
 
 }
 \seealso{
-\code{\link{plot_opts}}, \code{\link{data_draw}}
+\code{\link{data_draw}}
 }

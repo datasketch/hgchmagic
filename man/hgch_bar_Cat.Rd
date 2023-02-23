@@ -19,6 +19,6 @@ This function creates a horizontal or vertical bar chart for a categorical varia
 }
 \examples{
 data(iris)
-iris <- iris |> select(Species)
+iris <- iris |> dplyr::select(Species)
 hgch_bar_Cat(iris, percentage = TRUE)
 }
