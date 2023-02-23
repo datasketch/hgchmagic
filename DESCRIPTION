@@ -17,7 +17,9 @@ Imports:
     purrr
 Suggests:
     ggplot2,
-    testthat (>= 2.1.0)
+    lubridate,
+    testthat (>= 2.1.0),
+    tidyr
 VignetteBuilder: 
     knitr
 Remotes:

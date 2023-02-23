@@ -12,4 +12,11 @@ test_that("Line", {
     summarise(x = sum(x)) |> dplyr::arrange(date)
   hgch_line(data, var_dat = "date", var_num = "x")
 
+  data <- lubridate::lakers
+  data$date <- lubridate::ymd(data$date)
+  hgch_line_Dat(data)
+  data <- data |> select(date, x, everything())
+  hgch_line_DatNum(data)
+
+
 })

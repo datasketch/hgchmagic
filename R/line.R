@@ -8,15 +8,8 @@
 #' @param var_num a character vector with the names of numerical variables.
 #' @param ... additional arguments to be passed to \code{\link[dsvizopts]{dsviz_default_opts}}
 #'
-#' @return a Highcharter bar chart.
+#' @return a Highcharter line chart.
 #'
-#' @examples
-#' data(mtcars)
-#' mtcars$cyl <- as.character(mtcars$cyl)
-#' mtcars <- mtcars |> group_by(cyl) |> summarize(mpg = mean(mpg))
-#' hgch_line(mtcars, var_cat = "cyl", var_num = "mpg")
-#'
-#' @importFrom dplyr mutate group_by summarise
 #'
 #' @export
 hgch_line <- function (data, dic = NULL, var_dat = NULL, var_num = NULL, ...) {
@@ -43,3 +36,41 @@ hgch_line <- function (data, dic = NULL, var_dat = NULL, var_num = NULL, ...) {
   line
 
 }
+
+
+
+#' @export
+hgch_line_Dat <- function(data, ...) {
+  var_dat <- names(data)[1]
+  opts_prep <- dataprep_opts(...)
+  data <- dsdataprep::aggregation_data(data = data,
+                                       agg = "count",
+                                       group_var = var_dat,
+                                       agg_name = opts_prep$agg_text %||% "count",
+                                       percentage = opts_prep$percentage,
+                                       percentage_name = opts_prep$percentage_name,
+                                       extra_col = opts_prep$extra_col,
+                                       agg_extra = opts_prep$agg_extra)
+  hgch_line(data = data, var_dat = var_dat, var_num = "count", ...)
+}
+
+
+#' @export
+hgch_line_DatNum <- function(data, ...) {
+  var_dat <- names(data)[1]
+  var_num <- names(data)[2]
+  opts_prep <- dataprep_opts(...)
+  var_num_name <- opts_prep$agg_text %||% var_num
+
+  data <- dsdataprep::aggregation_data(data = data,
+                                       agg = opts_prep$agg,
+                                       agg_name = var_num_name,
+                                       group_var = var_dat,
+                                       to_agg = var_num,
+                                       percentage = opts_prep$percentage,
+                                       percentage_name = opts_prep$percentage_name,
+                                       extra_col = opts_prep$extra_col,
+                                       agg_extra = opts_prep$agg_extra)
+  hgch_line(data = data, var_dat = var_dat, var_num = var_num_name, ...)
+}
+
