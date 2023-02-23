@@ -18,5 +18,22 @@ test_that("Line", {
   data <- data |> select(date, x, everything())
   hgch_line_DatNum(data)
 
+  data <- lubridate::lakers
+  data$date <- lubridate::ymd(data$date)
+  data <- data |> group_by(game_type, date) |> summarise(x = sum(x, na.rm = T))
+  hgch_line(data, var_cat = "game_type", var_dat = "date", var_num = "x",
+            palette_colors = c("#ffa92a"))
+  hgch_line(data, var_cat = "game_type", var_dat = "date", var_num = "x",
+            palette_colors = c("#ffa92a", "#f06142"))
+
+  data <- lubridate::lakers
+  data$date <- lubridate::ymd(data$date)
+  data <- data |> select(game_type, date, everything())
+  hgch_line_CatDat(data)
+
+  data <- lubridate::lakers
+  data$date <- lubridate::ymd(data$date)
+  data <- data |> select(game_type, date, x, everything())
+  hgch_line_CatDatNum(data, agg = "mean")
 
 })

@@ -4,7 +4,14 @@
 \alias{hgch_line}
 \title{Highcharter line Chart}
 \usage{
-hgch_line(data, dic = NULL, var_dat = NULL, var_num = NULL, ...)
+hgch_line(
+  data,
+  dic = NULL,
+  var_cat = NULL,
+  var_dat = NULL,
+  var_num = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{a data frame containing the variables to be plotted.}

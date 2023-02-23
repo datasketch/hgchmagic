@@ -77,5 +77,22 @@ list_line <- function(data, frtype) {
     )
   }
 
+  if (frtype %in% c("CatDat", "CatDatNum")) {
+    data_groups <- list(unique(d[[1]]),
+                        split(d[complete.cases(
+                          d[,c(setdiff(names(d), names(d)[1]))]),], d[[1]]))
+
+    series <- purrr::pmap(.l = data_groups, function(name, d0) {
+      dl <- d0 %>% transmute(y = .[[3]], label = ..labels, color = ..colors)
+      list(data = purrr::transpose(dl), name = name, color = unique(dl$color))
+    })
+    data <- list(
+      categories = unique(d[[2]]),
+      data = series
+    )
+  }
+
+  data
+
 }
 
