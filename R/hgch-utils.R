@@ -139,3 +139,32 @@ hc_body_line <- function(hc, data, frType, opts = NULL) {
 }
 
 
+hc_body_scatter <- function(hc, data, frType, opts = NULL) {
+
+  #global_options(opts$style$format_sample_num)
+
+  hc <- hc
+
+
+  if (frType == "CatDatNum") {
+    hc <- hc |>
+      hc_chart(type = "scatter"
+      ) %>%
+      hc_xAxis(
+        type = 'datetime'#,
+        # labels = list(
+        #   formatter = JS("function() {return Highcharts.dateFormat('%d-%b-%y', (this.value));}")
+        # )
+      ) |>
+      hc_add_series_list(
+        data
+      ) |>
+      hc_legend(enabled = opts$legend_show)
+  }
+
+  hc |>
+    hc_tooltip(useHTML = TRUE,
+               formatter = JS(paste0("function () {return this.point.label;}")))
+
+}
+

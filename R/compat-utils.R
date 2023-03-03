@@ -92,9 +92,10 @@ data_draw <- function(data,
 
   data <- data |> select({{ var }}, everything())
 
-  l <- NULL
+  ld <- NULL
   if (viz == "treemap") ld <- list_treemap(data, frType)
   if (viz == "line") ld <- list_line(data, frType)
+  if (viz == "scatter") ld <- list_scatter(data, frType)
   if (viz %in% c("bar", "pie", "donut")) ld <- list_bar(data, frType)
   ld
 

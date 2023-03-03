@@ -28,16 +28,16 @@ list_bar <- function(data, frtype) {
                         split(d[complete.cases(
                           d[,c(setdiff(names(d), names(d)[1]))]),], d[[1]]))
     data <- list(
-    categories = purrr::map(as.character(unique(d[[2]])), function(z) z),
-    data = purrr::pmap(.l = data_groups, function(name, d0) {
-      label_info <- pluck(d0, "..labels") %>% unlist()
-      list("name" = as.character(name),
-           "color" = unique(d0$..colors),
-           "index" = unique(d0$..index),
-           "legendIndex" = d0$..legendIndex,
-           "data" = purrr::map2(label_info, as.numeric(d0[[3]]),
-                                ~ list("label" = .x, "y" = .y)))
-    })
+      categories = purrr::map(as.character(unique(d[[2]])), function(z) z),
+      data = purrr::pmap(.l = data_groups, function(name, d0) {
+        label_info <- pluck(d0, "..labels") %>% unlist()
+        list("name" = as.character(name),
+             "color" = unique(d0$..colors),
+             "index" = unique(d0$..index),
+             "legendIndex" = d0$..legendIndex,
+             "data" = purrr::map2(label_info, as.numeric(d0[[3]]),
+                                  ~ list("label" = .x, "y" = .y)))
+      })
     )
 
 
@@ -97,3 +97,33 @@ list_line <- function(data, frtype) {
 
 }
 
+#' @keywords internal
+list_scatter <- function(data, frtype) {
+
+  d <- data
+
+  if (frtype %in% c("CatDat", "CatDatNum")) {
+    data <- purrr::map(unique(d[[1]]), function(i) {
+      var_cat <- names(d)[1]
+
+      d0 <- d %>%
+        dplyr::filter(!!sym(var_cat) %in% i)
+
+      d0 <- d0 %>%
+        mutate(
+          x = as.numeric(as.POSIXct(d0[[2]], format="%Y-%m-%d"))*1000,
+          date = as.character(d0[[2]]),
+          y = as.numeric(d0[[3]]),
+          color = ..colors,
+          label = ..labels
+        )
+      l <-list(name = i,
+               color = unique(d0$..colors),
+               marker = list(symbol = "circle", radius = 4),
+               data = purrr::transpose(d0)
+      )
+    })
+  }
+
+  data
+}
