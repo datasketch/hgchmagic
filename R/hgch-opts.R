@@ -58,7 +58,8 @@ plot_opts <- function(viz = NULL, ...) {
   general_opts <- list(
     hor_title = opts$titles$hor_title %||% " ",
     ver_title = opts$titles$ver_title %||% " ",
-    plot_type = plot_type
+    plot_type = plot_type,
+    legend_show = opts$theme$legend_show
   )
 
   general_opts <- modifyList(general_opts, extra_opts)

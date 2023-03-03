@@ -129,7 +129,7 @@ hc_body_line <- function(hc, data, frType, opts = NULL) {
       hc_add_series_list(
         data$data
       ) |>
-      hc_legend(enabled = FALSE)
+      hc_legend(enabled = opts$legend_show)
   }
 
   hc |>
