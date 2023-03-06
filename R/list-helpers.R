@@ -102,6 +102,23 @@ list_scatter <- function(data, frtype) {
 
   d <- data
 
+
+  if (frtype %in% "NumNum") {
+    d <- d %>%
+      mutate(x = `[[`(., 1),
+             y = `[[`(., 2),
+             color = ..colors,
+             label = ..labels) %>%
+      select(x, y, color, label) %>%
+      as.list()
+    data <- purrr::pmap(d, function(x, y, color, label) {
+      list(x = x,
+           y = y,
+           color = color,
+           label = label)
+    })
+  }
+
   if (frtype %in% c("CatDat", "CatDatNum")) {
     data <- purrr::map(unique(d[[1]]), function(i) {
       var_cat <- names(d)[1]

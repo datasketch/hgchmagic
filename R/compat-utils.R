@@ -37,7 +37,7 @@ data_draw <- function(data,
                       opts = NULL) {
 
 
-  var <- NULL
+  var <- c(var_cat, var_date, var_num, "..labels", "..colors")
   index_names <- NULL
 
   if (!"..labels" %in% names(data)) {
@@ -90,8 +90,8 @@ data_draw <- function(data,
                                      #intra_cat = opts$intra_cat,
                                      index_names = index_names)
 
-  data <- data |> select({{ var }}, everything())
 
+  data <- data |> select({{ var }}, everything())
   ld <- NULL
   if (viz == "treemap") ld <- list_treemap(data, frType)
   if (viz == "line") ld <- list_line(data, frType)

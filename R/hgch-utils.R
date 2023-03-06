@@ -145,16 +145,36 @@ hc_body_scatter <- function(hc, data, frType, opts = NULL) {
 
   hc <- hc
 
-
+  if (frType == "NumNum") {
+    hc <- hc |>
+      hc_chart(
+        type = "scatter",
+        zoomType = 'xy'
+      ) |>
+      hc_xAxis(
+        title = list(text = opts$hor_title)
+      ) |>
+      hc_yAxis(
+        title = list(text = opts$ver_title)
+      ) |>
+      hc_add_series(
+        data = data
+      ) |>
+      hc_legend(enabled = opts$legend_show)
+  }
   if (frType == "CatDatNum") {
     hc <- hc |>
       hc_chart(type = "scatter"
-      ) %>%
+      ) |>
       hc_xAxis(
+        title = list(text = opts$hor_title),
         type = 'datetime'#,
         # labels = list(
         #   formatter = JS("function() {return Highcharts.dateFormat('%d-%b-%y', (this.value));}")
         # )
+      ) |>
+      hc_yAxis(
+        title = list(text = opts$ver_title)
       ) |>
       hc_add_series_list(
         data
