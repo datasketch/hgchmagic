@@ -36,7 +36,6 @@ hc_body <- function(hc, data, frType, opts = NULL) {
   }
 
   if (frType == "CatCatNum") {
-    #print(data)
     hc <- hc |>
       hc_add_series_list(
         data$data
@@ -148,8 +147,13 @@ hc_body_scatter <- function(hc, data, frType, opts = NULL) {
   if (frType == "NumNum") {
     hc <- hc |>
       hc_chart(
-        type = "scatter",
+        #type = "scatter",
         zoomType = 'xy'
+      ) |>
+      hc_boost(
+        enabled = TRUE,
+        useGPUTranslations = TRUE,
+        usePreAllocated = TRUE
       ) |>
       hc_xAxis(
         title = list(text = opts$hor_title)
@@ -158,13 +162,40 @@ hc_body_scatter <- function(hc, data, frType, opts = NULL) {
         title = list(text = opts$ver_title)
       ) |>
       hc_add_series(
-        data = data
+        type = 'scatter',
+        data = data,
+        marker = list(
+          radius = 0.5
+        )
+      ) |>
+      hc_legend(enabled = FALSE)
+  }
+  if (frType == "CatNumNum") {
+    hc <- hc |>
+      hc_chart(
+        type = "scatter",
+        zoomType = 'xy'
+      ) |>
+      hc_boost(
+        enabled = TRUE,
+        useGPUTranslations = TRUE,
+        usePreAllocated = TRUE
+      ) |>
+      hc_xAxis(
+        title = list(text = opts$hor_title)
+      ) |>
+      hc_yAxis(
+        title = list(text = opts$ver_title)
+      ) |>
+      hc_add_series_list(
+        data
       ) |>
       hc_legend(enabled = opts$legend_show)
   }
   if (frType == "CatDatNum") {
     hc <- hc |>
-      hc_chart(type = "scatter"
+      hc_chart(
+        type = "scatter"
       ) |>
       hc_xAxis(
         title = list(text = opts$hor_title),

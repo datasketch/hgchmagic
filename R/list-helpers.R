@@ -119,6 +119,29 @@ list_scatter <- function(data, frtype) {
     })
   }
 
+  if (frtype %in% c("CatNumNum")) {
+    data <- purrr::map(unique(d[[1]]), function(i) {
+      var_cat <- names(d)[1]
+
+      d0 <- d %>%
+        dplyr::filter(!!sym(var_cat) %in% i)
+
+      d0 <- d0 %>%
+        mutate(
+          x = as.numeric(d0[[2]]),
+          y = as.numeric(d0[[3]]),
+          color = ..colors,
+          label = ..labels
+        ) |>
+        select(x, y, color, label)
+      l <- list(name = i,
+                color = unique(d0$color),
+                marker = list(symbol = "circle", radius = 4),
+                data = purrr::transpose(d0)
+      )
+    })
+  }
+
   if (frtype %in% c("CatDat", "CatDatNum")) {
     data <- purrr::map(unique(d[[1]]), function(i) {
       var_cat <- names(d)[1]
@@ -134,10 +157,10 @@ list_scatter <- function(data, frtype) {
           color = ..colors,
           label = ..labels
         )
-      l <-list(name = i,
-               color = unique(d0$..colors),
-               marker = list(symbol = "circle", radius = 4),
-               data = purrr::transpose(d0)
+      l <- list(name = i,
+                color = unique(d0$..colors),
+                marker = list(symbol = "circle", radius = 4),
+                data = purrr::transpose(d0)
       )
     })
   }

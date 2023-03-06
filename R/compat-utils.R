@@ -92,6 +92,7 @@ data_draw <- function(data,
 
 
   data <- data |> select({{ var }}, everything())
+
   ld <- NULL
   if (viz == "treemap") ld <- list_treemap(data, frType)
   if (viz == "line") ld <- list_line(data, frType)
