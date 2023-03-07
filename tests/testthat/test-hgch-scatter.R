@@ -11,6 +11,7 @@ test_that("multiplication works", {
   data <- ggplot2::diamonds
   data <- data |> select(carat, x, everything())
   hgch_scatter(data, var_num = c("x", "carat"))
+  hgch_scatter_NumNum(data)
 
   data <- ggplot2::diamonds
   data <- data |>

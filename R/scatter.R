@@ -64,4 +64,13 @@ hgch_scatter_CatDatNum <- function(data, ...) {
   hgch_scatter(data = data, var_cat = var_cat, var_dat = var_dat, var_num = var_num_name, ...)
 }
 
+#' @export
+hgch_scatter_NumNum <- function(data, ...) {
+
+  var_num <- c(names(data)[1:2])
+  opts_prep <- dataprep_opts(...)
+  var_num_name <- opts_prep$agg_text %||% var_num
+
+  hgch_scatter(data = data, var_num = var_num, ...)
+}
 
