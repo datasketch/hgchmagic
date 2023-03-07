@@ -40,6 +40,17 @@ data_draw <- function(data,
   var <- c(var_cat, var_date, var_num, "..labels", "..colors")
   index_names <- NULL
 
+
+  if (viz == "sankey") {
+    if (!any(grepl("Num", frType))) {
+      data <- data |> select({{ var_cat }}) #|> tidyr::drop_na()
+      data <- data_to_sankey(data)
+      var_cat <- c("from", "to")
+      opts$color_by <- "from"
+      var <- c("from", "to", "weight", "..colors", "..labels")
+    }
+  }
+
   if (!"..labels" %in% names(data)) {
     data$..labels <- dsdataprep::prep_tooltip(data = data,
                                               tooltip = opts$tooltip_template,
@@ -97,6 +108,7 @@ data_draw <- function(data,
   if (viz == "treemap") ld <- list_treemap(data, frType)
   if (viz == "line") ld <- list_line(data, frType)
   if (viz == "scatter") ld <- list_scatter(data, frType)
+  if (viz == "sankey") ld <- list_sankey(data, frType)
   if (viz %in% c("bar", "pie", "donut")) ld <- list_bar(data, frType)
   ld
 
@@ -111,3 +123,5 @@ global_options <- function(sample){
   hcoptslang$decimalPoint <- params$separators$decimal
   options(highcharter.lang = hcoptslang)
 }
+
+

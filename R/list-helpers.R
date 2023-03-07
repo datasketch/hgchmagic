@@ -167,3 +167,25 @@ list_scatter <- function(data, frtype) {
 
   data
 }
+
+
+
+#' @keywords internal
+list_sankey <- function(data, frtype) {
+
+  d <- data
+
+  if (!any(grepl("Num", frtype))) {
+    d <- d |> select(from, to, weight, ..colors, ..labels)
+    data <- purrr::pmap(d, function(from, to, weight, ..colors, ..labels) {
+      list(from = from,
+           to = to,
+           weight = weight,
+           color = ..colors,
+           label = ..labels)
+    })
+  }
+
+  data
+
+}

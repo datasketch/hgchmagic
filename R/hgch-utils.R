@@ -219,3 +219,20 @@ hc_body_scatter <- function(hc, data, frType, opts = NULL) {
 
 }
 
+
+hc_body_sankey <- function(hc, data, frType, opts = NULL) {
+
+
+  if (!any(grepl("Num", frType))) {
+  hc <- hc |>
+    hc_chart(type = 'sankey') |>
+    hc_add_series(
+      keys = list('from', 'to', 'weight', 'color', 'label'),
+      data = data
+    )
+  }
+  hc #|>
+    #hc_tooltip(useHTML = TRUE,
+    #           formatter = JS(paste0("function () {return this.point.label;}")))
+
+}
