@@ -27,6 +27,10 @@ plot_opts <- function(viz = NULL, ...) {
     extra_opts$inner_size = "60%"
   }
 
+  if (viz == "scatter") {
+    extra_opts$marker_size = opts$theme$marker_radius
+  }
+
   titles <- list(
     title = opts$titles$title,
     subtitle = opts$titles$subtitle,

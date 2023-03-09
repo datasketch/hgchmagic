@@ -165,7 +165,7 @@ hc_body_scatter <- function(hc, data, frType, opts = NULL) {
         type = 'scatter',
         data = data,
         marker = list(
-          radius = 0.5
+          radius = opts$marker_size
         )
       ) |>
       hc_legend(enabled = FALSE)
