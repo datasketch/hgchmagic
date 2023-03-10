@@ -77,12 +77,6 @@ data_draw <- function(data,
                                         )
   }
 
-  if (frType == "CatNum") {
-    var <- c(var_cat, var_num, "..labels", "..colors")
-  }
-  if (frType == "DatNum") {
-    var <- c(var_date, var_num, "..labels", "..colors")
-  }
 
   if (frType == "CatCatNum") {
     index_names <- c("..index", "..legendIndex")
@@ -110,6 +104,7 @@ data_draw <- function(data,
   if (viz == "scatter") ld <- list_scatter(data, frType)
   if (viz == "sankey") ld <- list_sankey(data, frType)
   if (viz %in% c("bar", "pie", "donut")) ld <- list_bar(data, frType)
+
   ld
 
 }

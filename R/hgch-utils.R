@@ -131,6 +131,24 @@ hc_body_line <- function(hc, data, frType, opts = NULL) {
       hc_legend(enabled = opts$legend_show)
   }
 
+  if (frType == "DatNumNum") {
+   hc <- hc |>
+      hc_chart(
+        zoomType = 'xy'
+      ) |>
+      hc_xAxis(
+        type = 'datetime',
+        categories = data$categories
+      ) |>
+      hc_yAxis_multiples(
+        list(),
+        list(opposite = TRUE)
+        ) |>
+      hc_add_series_list(
+        data$data
+      )
+  }
+
   hc |>
     hc_tooltip(useHTML = TRUE,
                formatter = JS(paste0("function () {return this.point.label;}")))

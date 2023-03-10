@@ -19,7 +19,7 @@ hgch_line <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num
   if (is.null(var_dat)) stop("You must enter at least one categorical variable")
   opts <- plot_opts(viz = "line", ...)
 
-  opts$data_opts$color_by <- c(var_cat, var_dat)[1]
+  opts$data_opts$color_by <- var_cat
   frType <- frtype_viz(var_date = var_dat, var_num = var_num, var_cat = var_cat)
 
   data_draw <- data_draw(data = data,

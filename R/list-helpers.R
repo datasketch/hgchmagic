@@ -69,12 +69,11 @@ list_line <- function(data, frtype) {
 
   d <- data
   if (frtype %in% c("Dat", "DatNum")) {
-    dl <- d |>
-      mutate(y = .[[2]], label = ..labels) |>
-      select(y, label)
+    dl <- d |> select(y = 2, label = ..labels)
     data <- list(
       categories = unique(d[[1]]),
-      data = list(data = purrr::transpose(dl), color = d$..colors[1])
+      data = list(data = purrr::transpose(dl),
+                  color = d$..colors |> unique())
     )
   }
 
@@ -84,13 +83,26 @@ list_line <- function(data, frtype) {
                           d[,c(setdiff(names(d), names(d)[1]))]),], d[[1]]))
 
     series <- purrr::pmap(.l = data_groups, function(name, d0) {
-      dl <- d0 |> transmute(y = .[[3]], label = ..labels, color = ..colors)
+      names(d0)[3] <- "y"
+      dl <- d0 |> transmute(y, label = ..labels, color = ..colors)
       list(data = purrr::transpose(dl), name = name, color = unique(dl$color))
     })
     data <- list(
       categories = unique(d[[2]]),
       data = series
     )
+  }
+
+  if (frtype %in% c("DatNumNum")) {
+    data <- map(2:ncol(d), function(col) {
+      list(
+        name = names(d)[col],
+        #color = color[col-1],
+        type = "line",
+        yAxis = col - 2,
+        data = d[[col]]
+      )
+    })
   }
 
   data
