@@ -30,7 +30,7 @@ list_bar <- function(data, frtype) {
     data <- list(
       categories = purrr::map(as.character(unique(d[[2]])), function(z) z),
       data = purrr::pmap(.l = data_groups, function(name, d0) {
-        label_info <- pluck(d0, "..labels") %>% unlist()
+        label_info <- pluck(d0, "..labels") |> unlist()
         list("name" = as.character(name),
              "color" = unique(d0$..colors),
              "index" = unique(d0$..index),
@@ -69,7 +69,7 @@ list_line <- function(data, frtype) {
 
   d <- data
   if (frtype %in% c("Dat", "DatNum")) {
-    dl <- d %>%
+    dl <- d |>
       mutate(y = .[[2]], label = ..labels) |>
       select(y, label)
     data <- list(
@@ -84,7 +84,7 @@ list_line <- function(data, frtype) {
                           d[,c(setdiff(names(d), names(d)[1]))]),], d[[1]]))
 
     series <- purrr::pmap(.l = data_groups, function(name, d0) {
-      dl <- d0 %>% transmute(y = .[[3]], label = ..labels, color = ..colors)
+      dl <- d0 |> transmute(y = .[[3]], label = ..labels, color = ..colors)
       list(data = purrr::transpose(dl), name = name, color = unique(dl$color))
     })
     data <- list(
@@ -104,12 +104,12 @@ list_scatter <- function(data, frtype) {
 
 
   if (frtype %in% "NumNum") {
-    d <- d %>%
+    d <- d |>
       mutate(x = `[[`(., 1),
              y = `[[`(., 2),
              color = ..colors,
-             label = ..labels) %>%
-      select(x, y, color, label) %>%
+             label = ..labels) |>
+      select(x, y, color, label) |>
       as.list()
     data <- purrr::pmap(d, function(x, y, color, label) {
       list(x = x,
@@ -123,10 +123,10 @@ list_scatter <- function(data, frtype) {
     data <- purrr::map(unique(d[[1]]), function(i) {
       var_cat <- names(d)[1]
 
-      d0 <- d %>%
+      d0 <- d |>
         dplyr::filter(!!sym(var_cat) %in% i)
 
-      d0 <- d0 %>%
+      d0 <- d0 |>
         mutate(
           x = as.numeric(d0[[2]]),
           y = as.numeric(d0[[3]]),
@@ -146,10 +146,10 @@ list_scatter <- function(data, frtype) {
     data <- purrr::map(unique(d[[1]]), function(i) {
       var_cat <- names(d)[1]
 
-      d0 <- d %>%
+      d0 <- d |>
         dplyr::filter(!!sym(var_cat) %in% i)
 
-      d0 <- d0 %>%
+      d0 <- d0 |>
         mutate(
           x = as.numeric(as.POSIXct(d0[[2]], format="%Y-%m-%d"))*1000,
           date = as.character(d0[[2]]),

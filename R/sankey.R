@@ -37,3 +37,26 @@ hgch_sankey <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) 
   sankey
 
 }
+
+
+
+#' @export
+hgch_sankey_CatCat <- function(data, ...) {
+  var_cat <- c(names(data)[1:2])
+  hgch_sankey(data = data, var_cat = var_cat,  ...)
+}
+
+
+#' @export
+hgch_sankey_CatCatCat <- function(data, ...) {
+  var_cat <- c(names(data)[1:3])
+  hgch_sankey(data = data, var_cat = var_cat,  ...)
+}
+
+
+#' @export
+hgch_sankey_CatCatCatCat <- function(data, ...) {
+  var_cat <- c(names(data)[1:4])
+  hgch_sankey(data = data, var_cat = var_cat,  ...)
+}
+

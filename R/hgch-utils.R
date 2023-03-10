@@ -106,7 +106,7 @@ hc_body_line <- function(hc, data, frType, opts = NULL) {
   if (frType == "DatNum") {
     hc <- hc |>
         hc_chart(type = opts$plot_type
-        ) %>%
+        ) |>
         hc_xAxis(
           type = 'datetime',
           categories = data$categories
@@ -120,7 +120,7 @@ hc_body_line <- function(hc, data, frType, opts = NULL) {
   if (frType == "CatDatNum") {
     hc <- hc |>
       hc_chart(type = opts$plot_type
-      ) %>%
+      ) |>
       hc_xAxis(
         type = 'datetime',
         categories = data$categories
