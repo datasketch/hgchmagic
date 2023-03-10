@@ -132,6 +132,7 @@ hc_body_line <- function(hc, data, frType, opts = NULL) {
   }
 
   if (frType == "DatNumNum") {
+
    hc <- hc |>
       hc_chart(
         zoomType = 'xy'

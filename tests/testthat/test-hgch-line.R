@@ -41,7 +41,7 @@ test_that("Line", {
   data$date <- lubridate::ymd(data$date)
   data$valor <- runif(nrow(data), 0, 1)
   data$indicador <- runif(nrow(data), 1000, 5000)
-  d <- data |> select(date, valor, indicador)
+  data <- data |> select(date, valor, indicador)
   hgch_line(data, var_dat = "date", var_num = c("valor", "indicador"))
 
 })

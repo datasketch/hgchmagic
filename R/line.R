@@ -21,6 +21,13 @@ hgch_line <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num
 
   opts$data_opts$color_by <- var_cat
   frType <- frtype_viz(var_date = var_dat, var_num = var_num, var_cat = var_cat)
+  count_var_num <- stringr::str_count(frType, "Num")
+
+  if (count_var_num > 1) {
+    if (!"..colors" %in% names(data)) {
+      data$..colors <- opts$data_opts$palette_colors[1:count_var_num]
+    }
+  }
 
   data_draw <- data_draw(data = data,
                          dic = dic,
