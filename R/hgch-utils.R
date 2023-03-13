@@ -142,17 +142,24 @@ hc_body_line <- function(hc, data, frType, opts = NULL) {
         categories = data$categories
       ) |>
       hc_yAxis_multiples(
-        list(),
-        list(opposite = TRUE)
+        list(title = list(text = opts$axis_left_title %||% data$title_axis[1])),
+        list(title = list(text = opts$axis_rigth_title %||% data$title_axis[2]),
+          opposite = TRUE)
         ) |>
       hc_add_series_list(
         data$data
       )
   }
 
-  hc |>
+  if (frType == "DatNumNum") {
+    hc <- hc
+  } else {
+    hc <- hc |>
     hc_tooltip(useHTML = TRUE,
                formatter = JS(paste0("function () {return this.point.label;}")))
+  }
+
+  hc
 
 }
 

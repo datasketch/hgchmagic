@@ -94,7 +94,7 @@ list_line <- function(data, frtype) {
   }
 
   if (frtype %in% c("DatNumNum")) {
-     color <- unique(d$..colors)
+    color <- unique(d$..colors)
     series <- map(c(2,3), function(col) {
       list(
         name = names(d)[col],
@@ -104,7 +104,9 @@ list_line <- function(data, frtype) {
         data = d[[col]]
       )
     })
+
     data <- list(
+      title_axis = names(d)[2:3],
       categories = unique(d[[1]]),
       data = series
     )

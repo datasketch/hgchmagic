@@ -11,7 +11,6 @@ plot_opts <- function(viz = NULL, ...) {
   if (is.null(viz)) return()
   opts <- dsvizopts::merge_dsviz_options(...)
   plot_type <- viz
-
   extra_opts <- list()
 
   if (viz == "bar") {
@@ -29,6 +28,11 @@ plot_opts <- function(viz = NULL, ...) {
 
   if (viz == "scatter") {
     extra_opts$marker_size = opts$theme$marker_radius
+  }
+
+  if (viz == "line") {
+    extra_opts$axis_left_title <- opts$line$line_double_title_axis_left
+    extra_opts$axis_right_title <- opts$line$line_double_title_axis_right
   }
 
   titles <- list(
