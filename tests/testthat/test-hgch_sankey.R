@@ -15,5 +15,18 @@ test_that("Sankey", {
   data_cat4 <- data |> select(hair_color, sex, gender, species)
   hgch_sankey_CatCatCatCat(data_cat4)
 
+  test_theme <- list(
+    theme = list(
+      palette_colors = "#ffa92a",
+      caption_align = "right",
+      caption_family = "Roboto",
+      caption_size = 15,
+      caption_color = "#3b83b8",
+      caption_weight = 700
+    )
+  )
+  data <- dplyr::starwars
+  data <- data |> select(hair_color, sex) |> tidyr::drop_na()
+  hgch_sankey_CatCat(data, opts = test_theme, caption = "theme caption")
 
 })

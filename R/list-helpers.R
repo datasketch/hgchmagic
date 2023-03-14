@@ -123,12 +123,14 @@ list_scatter <- function(data, frtype) {
 
 
   if (frtype %in% "NumNum") {
+    if ("x" %in% names(d)) d <- d |> rename(x1 = x)
+    if ("y" %in% names(d)) d <- d |> rename(y1 = y)
+    names(d)[1:2] <- c("x", "y")
     d <- d |>
-      mutate(x = `[[`(., 1),
-             y = `[[`(., 2),
+      select(x,
+             y,
              color = ..colors,
              label = ..labels) |>
-      select(x, y, color, label) |>
       as.list()
     data <- purrr::pmap(d, function(x, y, color, label) {
       list(x = x,

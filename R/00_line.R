@@ -41,8 +41,8 @@ hgch_line <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num
 
   line <- highchart() |>
     hc_titles(opts = opts$titles)  |>
-    hc_body_line(data = data_draw, frType = frType, opts = opts$general_opts)#|>
-  # |>
+    hc_body_line(data = data_draw, frType = frType, opts = opts$general_opts) |>
+    hc_add_theme(hgch_theme(opts = opts$theme))
 
   line
 

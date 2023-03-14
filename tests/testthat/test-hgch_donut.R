@@ -15,5 +15,24 @@ test_that("Donut", {
   hgch_donut_CatNum(data2)
   hgch_donut(data3, var_cat = "name", var_num = "y" )
 
+  # test theme (titles)
+
+  test_theme <- list(
+    theme = list(
+      title_align = "center",
+      title_family = "Roboto",
+      title_size = 15,
+      title_color = "#3b83b8",
+      title_weight = 700
+    )
+  )
+
+  data <- data.frame(name = c("G", "H", "I"), y = c(18, 22, 28))
+  hgch_donut(data, var_cat = "name", var_num = "y",
+             title = "Theme test",
+             opts = test_theme )
+
+   hgch_donut_CatNum(data)
+
 
 })

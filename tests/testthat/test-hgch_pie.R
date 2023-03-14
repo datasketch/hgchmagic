@@ -29,10 +29,26 @@ test_that("Pie", {
               ver_title = "Numeros",
               bar_orientation = "hor")
   hgch_pie(data, var_cat = "cut", var_num = "price", opts =  ops)
+
+  # test theme (subtitles)
+
+  test_theme <- list(
+    theme = list(
+      palette_colors = "#ffa92a",
+      subtitle_align = "center",
+      subtitle_family = "Roboto",
+      subtitle_size = 15,
+      subtitle_color = "#3b83b8",
+      subtitle_weight = 700
+    )
+  )
+
   hgch_pie(data,
            var_cat = "cut",
            var_num = "price",
-           palette_colors = c("#ffa92a"))
+           opts = test_theme,
+           subtitle = "test subtitle",
+           title = "test title")
 
 
 })

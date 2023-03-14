@@ -36,8 +36,8 @@ hgch_scatter <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_
 
   scatter <- highchart() |>
     hc_titles(opts = opts$titles)  |>
-    hc_body_scatter(data = data_draw, frType = frType, opts = opts$general_opts)#|>
-  # |>
+    hc_body_scatter(data = data_draw, frType = frType, opts = opts$general_opts) |>
+    hc_add_theme(hgch_theme(opts = opts$theme))
 
   scatter
 

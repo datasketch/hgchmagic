@@ -36,8 +36,8 @@ hgch_pie <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
 
   pie <- highchart() |>
     hc_titles(opts = opts$titles)  |>
-    hc_body(data = data_draw, frType = frType, opts = opts$general_opts)#|>
-  # |>
+    hc_body(data = data_draw, frType = frType, opts = opts$general_opts) |>
+    hc_add_theme(hgch_theme(opts = opts$theme))
 
   pie
 

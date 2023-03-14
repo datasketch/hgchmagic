@@ -42,4 +42,25 @@ test_that("Bar", {
   hgch_bar_CatCatNum(data, opts = ops)
 
 
+  # opts from theme (canvas)
+  test_theme <- list(
+    theme = list(
+    background_color = "#2f2f2f",
+    plot_margin_bottom = 30,
+    plot_margin_left = 30,
+    plot_margin_right = 30,
+    plot_margin_top = 30,
+    plot_background_color = "#f2f2f2",
+    plot_border_color = "#ff2c2f",
+    plot_border_size = 3,
+    text_family = "ubuntu",
+    text_size = 15
+    )
+  )
+  data <- ggplot2::diamonds |> select(cut, everything())
+  hgch_bar_Cat(data, opts = test_theme)
+
+
+
+
 })

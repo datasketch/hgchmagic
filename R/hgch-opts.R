@@ -71,10 +71,12 @@ plot_opts <- function(viz = NULL, ...) {
   )
 
   general_opts <- modifyList(general_opts, extra_opts)
+  opts$theme$palette_colors <- opts$theme$palette_colors %||% opts$theme$palette_colors_categorical
 
   list(titles = titles,
        data_opts = data_opts,
-       general_opts = general_opts)
+       general_opts = general_opts,
+       theme = opts$theme)
 
 }
 

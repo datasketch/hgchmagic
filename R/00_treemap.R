@@ -38,8 +38,8 @@ hgch_treemap <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...)
   #global_options(opts$style$format_sample_num)
   treemap <- highchart() |>
     hc_titles(opts = opts$titles)  |>
-    hc_body_treemap(data = data_draw, frType = frType, opts = opts$general_opts)#|>
-  # |>
+    hc_body_treemap(data = data_draw, frType = frType, opts = opts$general_opts) |>
+    hc_add_theme(hgch_theme(opts = opts$theme))
 
   treemap
 
