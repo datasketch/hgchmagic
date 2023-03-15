@@ -17,10 +17,10 @@
 hgch_line <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num = NULL, ...) {
 
   if (is.null(var_dat)) stop("You must enter at least one categorical variable")
-  opts <- plot_opts(viz = "line", ...)
 
-  opts$data_opts$color_by <- var_cat
   frType <- frtype_viz(var_date = var_dat, var_num = var_num, var_cat = var_cat)
+  opts <- plot_opts(viz = "line", frType = frType, ...)
+  opts$data_opts$color_by <- var_cat
   count_var_num <- stringr::str_count(frType, "Num")
 
   if (count_var_num > 1) {

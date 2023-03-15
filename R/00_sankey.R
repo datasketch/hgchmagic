@@ -15,11 +15,12 @@
 #' @export
 hgch_sankey <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
 
-  opts <- plot_opts(viz = "sankey", ...)
 
-  opts$data_opts$color_by <- var_cat[1]
 
   frType <- frtype_viz(var_num = var_num, var_cat = var_cat)
+  opts <- plot_opts(viz = "sankey", frType = frType, ...)
+  opts$data_opts$color_by <- var_cat[1]
+
   data_draw <- data_draw(data = data,
                          dic = dic,
                          var_cat = var_cat,
