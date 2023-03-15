@@ -15,7 +15,8 @@ server <- function(input, output) {
     data <- ggplot2::diamonds |> select(cut, color, everything())
     hgch_line_CatDat(data,
                  palette_colors = "#ffa92a",
-                 shiny_cursor = "pointer"
+                 shiny_cursor = "pointer",
+                 shiny_clickable = TRUE
                  )
   })
 

@@ -13,15 +13,15 @@ plot_opts <- function(viz = NULL, frType = NULL, ...) {
   plot_type <- viz
   extra_opts <- list()
 
-  input_name <- opts$shiny$shiny_input_name
-  if (!is.null(frType)) {
-    opts$theme$click_function <- click_functions(viz = viz,
-                                                 frtype = frType,
-                                                 id_click = input_name)
+  if (opts$shiny$shiny_clickable) {
+    input_name <- opts$shiny$shiny_input_name
+    if (!is.null(frType)) {
+      opts$theme$click_function <- click_functions(viz = viz,
+                                                   frtype = frType,
+                                                   id_click = input_name)
+    }
+    opts$theme$cursor <- opts$shiny$shiny_cursor
   }
-
-  opts$theme$cursor <- opts$shiny$shiny_cursor
-
   if (viz == "bar") {
     bar_orientation <- opts$bar$bar_orientation
     if (bar_orientation == "hor") {
