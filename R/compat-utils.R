@@ -48,6 +48,15 @@ data_draw <- function(data,
       var_cat <- c("from", "to")
       opts$color_by <- "from"
       var <- c("from", "to", "weight", "..colors", "..labels")
+    } else {
+      if (frType %in% "CatCatNum") {
+        var_sel <- c(var_cat, var_num)
+        data <- data |> select({{ var_sel }}) #|> tidyr::drop_na()
+        names(data) <- c("from", "to", "weight")
+        var_cat <- c("from", "to")
+        opts$color_by <- "from"
+        var <- c("from", "to", "weight", "..colors", "..labels")
+      }
     }
   }
 
@@ -80,7 +89,9 @@ data_draw <- function(data,
 
   if (frType == "CatCatNum") {
     index_names <- c("..index", "..legendIndex")
-    var <- c(var_cat, var_num, "..labels", "..colors", "..index", "..legendIndex")
+    var_sel <- c(var_cat, var_num)
+    if (viz == "sankey") var_sel <-  var <- c("from", "to", "weight")
+    var <- c(var_sel, "..labels", "..colors", "..index", "..legendIndex")
   }
 
   data <- dsdataprep::wrap_sort_data(data = data,

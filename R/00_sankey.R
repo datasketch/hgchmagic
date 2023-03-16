@@ -16,7 +16,6 @@
 hgch_sankey <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
 
 
-
   frType <- frtype_viz(var_num = var_num, var_cat = var_cat)
   opts <- plot_opts(viz = "sankey", frType = frType, ...)
   opts$data_opts$color_by <- var_cat[1]
@@ -59,5 +58,12 @@ hgch_sankey_CatCatCat <- function(data, ...) {
 hgch_sankey_CatCatCatCat <- function(data, ...) {
   var_cat <- c(names(data)[1:4])
   hgch_sankey(data = data, var_cat = var_cat,  ...)
+}
+
+#' @export
+hgch_sankey_CatCatNum <- function(data, ...) {
+  var_cat <- c(names(data)[1:2])
+  var_num <- c(names(data)[3])
+  hgch_sankey(data = data, var_cat = var_cat, var_num = var_num,  ...)
 }
 
