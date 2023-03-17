@@ -29,4 +29,8 @@ test_that("Sankey", {
   data <- data |> select(hair_color, sex) |> tidyr::drop_na()
   hgch_sankey_CatCat(data, opts = test_theme, caption = "theme caption")
 
+  data <- ggplot2::diamonds
+  data <- data |> group_by(cut, clarity) |> summarise(total = sum(z, na.rm = T))
+  hgch_sankey(data, var_cat = c("cut", "clarity"), var_num = "total")
+  hgch_sankey_CatCatNum(data)
 })

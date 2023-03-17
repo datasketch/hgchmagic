@@ -1,0 +1,159 @@
+{
+  "themes": {
+    "light": {
+      "logo": "datasketch",
+      "palette_colors": {
+        "default": [
+          "#3a3766",
+          "#5b5fde",
+          "#ec58c9",
+          "#ffa92a",
+          "#fcd381",
+          "#78e1b4",
+          "#2d7567"
+        ],
+        "sequential_1": [
+          "#ff71e4",
+          "#d36bdf",
+          "#a963d3",
+          "#835ac1",
+          "#6350a8",
+          "#4a448a",
+          "#3a3766"
+        ],
+        "sequential_2": [
+          "#95ecc9",
+          "#8ec8ce",
+          "#82a6cc",
+          "#7285c2",
+          "#5f67b0",
+          "#4c4d93",
+          "#3a3766"
+        ],
+        "divergent_1": [
+          "#6f56fa",
+          "#ad87fc",
+          "#d6bdfb",
+          "#f7f5f7",
+          "#ffc9aa",
+          "#ff9791",
+          "#fc4eb9"
+        ],
+        "divergent2": [
+          "#8055d2",
+          "#ce78e0",
+          "#f3b1ec",
+          "#f7f5f7",
+          "#81dbcd",
+          "#45b2ab",
+          "#0b8a81"
+        ]
+      },
+      "branding_include": true,
+      "background_color": "#fafafa",
+      "na_color": "#d4d3d6",
+      "branding_background_color": "",
+      "text_size": 13,
+      "text_family": "IBM Plex Sans",
+      "text_color": "#222526",
+      "title_color": "#222526",
+      "title_align": "left",
+      "title_family": "IBM Plex Sans",
+      "title_size": 21,
+      "title_weight": 700,
+      "subtitle_color": "#222526",
+      "subtitle_align": "left",
+      "subtitle_family": "IBM Plex Sans",
+      "subtitle_size": 21,
+      "subtitle_weight": 400,
+      "caption_color": "#222526",
+      "caption_align": "left",
+      "caption_family": "IBM Plex Sans",
+      "caption_size": 11,
+      "caption_weight": 400,
+      "line_color": "#929298",
+      "line_size": 1,
+      "grid_color": "#d4d3d6",
+      "grid_line_type": "ShortDot",
+      "legend_color": "#222526",
+      "legend_family": "IBM Plex Sans"
+    },
+    "dark": {
+      "logo": "datasketch",
+      "palette_colors": {
+        "default": [
+          "#4f63db",
+          "#d760e8",
+          "#ff5ba6",
+          "#ffa92a",
+          "#f8deac",
+          "#9de2c5",
+          "#0b8a81"
+        ],
+        "sequential_1": [
+          "#ff91ff",
+          "#f082f8",
+          "#dd77f1",
+          "#c66eeb",
+          "#a968e5",
+          "#8465e0",
+          "#4f63db"
+        ],
+        "sequential_2": [
+          "#9ffbdb",
+          "#9ae0dc",
+          "#92c6dd",
+          "#87acde",
+          "#7b93de",
+          "#6a7add",
+          "#4f63db"
+        ],
+        "divergent_1": [
+          "#6f56fa",
+          "#ad87fc",
+          "#d6bdfb",
+          "#f7f5f7",
+          "#ffc9aa",
+          "#ff9791",
+          "#fc4eb9"
+        ],
+        "divergent_2": [
+          "#8055d2",
+          "#ce78e0",
+          "#f3b1ec",
+          "#f7f5f7",
+          "#81dbcd",
+          "#45b2ab",
+          "#0b8a81"
+        ]
+      },
+      "background_color": "#222526",
+      "na_color": "#979797",
+      "branding_background_color": "",
+      "text_size": 13,
+      "text_family": "IBM Plex Sans",
+      "text_color": "#ffffff",
+      "title_color": "#ffffff",
+      "title_align": "left",
+      "title_family": "IBM Plex Sans",
+      "title_size": 21,
+      "title_weight": 700,
+      "subtitle_color": "#ffffff",
+      "subtitle_align": "left",
+      "subtitle_family": "IBM Plex Sans",
+      "subtitle_size": 21,
+      "subtitle_weight": 400,
+      "caption_color": "#ffffff",
+      "caption_align": "left",
+      "caption_family": "IBM Plex Sans",
+      "caption_size": 17,
+      "caption_weight": 400,
+      "line_color": "#d4d3d6",
+      "line_size": 1,
+      "legend_color": "#ffffff",
+      "legend_family": "IBM Plex Sans",
+      "grid_color": "#929298",
+      "grid_line_type": "Solid"
+    }
+  }
+}

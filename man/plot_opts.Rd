@@ -4,7 +4,7 @@
 \alias{plot_opts}
 \title{Prepare data for visualization}
 \usage{
-plot_opts(viz = NULL, ...)
+plot_opts(viz = NULL, frType = NULL, ...)
 }
 \arguments{
 \item{...}{additional arguments to be passed to \code{\link[dsvizopts]{dsviz_default_opts}}}

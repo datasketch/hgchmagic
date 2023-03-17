@@ -16,14 +16,14 @@
 #' @export
 hgch_scatter <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num = NULL, ...) {
 
-  opts <- plot_opts(viz = "scatter", ...)
+
+  frType <- frtype_viz(var_date = var_dat, var_num = var_num, var_cat = var_cat)
+  opts <- plot_opts(viz = "scatter", frType = frType, ...)
 
   grouped_var <- c(var_cat, var_dat)
   if (!is.null(grouped_var)) {
-  opts$data_opts$color_by <- grouped_var[1]
+    opts$data_opts$color_by <- grouped_var[1]
   }
-  frType <- frtype_viz(var_date = var_dat, var_num = var_num, var_cat = var_cat)
-
   data_draw <- data_draw(data = data,
                          dic = dic,
                          var_cat = var_cat,

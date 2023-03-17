@@ -196,7 +196,7 @@ list_sankey <- function(data, frtype) {
 
   d <- data
 
-  if (!any(grepl("Num", frtype))) {
+  #if (!any(grepl("Num", frtype))) {
     d <- d |> select(from, to, weight, ..colors, ..labels)
     data <- purrr::pmap(d, function(from, to, weight, ..colors, ..labels) {
       list(from = from,
@@ -205,7 +205,7 @@ list_sankey <- function(data, frtype) {
            color = ..colors,
            label = ..labels)
     })
-  }
+  #}
 
   data
 

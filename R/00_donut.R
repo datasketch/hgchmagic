@@ -21,9 +21,10 @@
 hgch_donut <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
 
   if (is.null(var_cat)) stop("You must enter at least one categorical variable")
-  opts <- plot_opts(viz = "donut", ...)
-  opts$data_opts$color_by <- var_cat[1]
+
   frType <- frtype_viz(var_cat, var_num)
+  opts <- plot_opts(viz = "donut", frType = frType, ...)
+  opts$data_opts$color_by <- var_cat[1]
 
   data_draw <- data_draw(data = data,
                          dic = dic,

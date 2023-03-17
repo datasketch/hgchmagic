@@ -165,6 +165,10 @@ hgch_theme <- function(opts = NULL) {
         #   format = opts$templatedataLabels %||% paste0(opts$cats, opts$format_dataLabels),
         #   verticalAlign = opts$dataLabels_align#'middle'
         # ),
+        cursor =  opts$cursor,
+        events = list(
+          click = JS(opts$click_function)
+        ),
         marker = list(
           enabled = opts$marker_enabled,
           symbol = "circle",
