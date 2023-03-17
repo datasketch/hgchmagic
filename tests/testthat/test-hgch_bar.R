@@ -1,26 +1,50 @@
 test_that("Bar", {
+
+
+  ### hgch_bar()
   data <- ggplot2::diamonds
   data <- dsdataprep::aggregation_data(data = data,
                                        agg = "sum",
                                        group_var = "cut",
                                        to_agg = "price")
+  h <- hgch_bar(data, var_cat = "cut", var_num = "price")
 
-  ops <- list(title = "title",
-              subtitle = "subtitle",
-              caption = "caption",
-              hor_title = "Categorias",
-              ver_title = "Numeros",
+  expect_equal(length(h$x$hc_opts$series[[1]]$data), 5)
+
+  for (i in 1:length(h$x$hc_opts$series[[1]]$data)) {
+    expect_equal(h$x$hc_opts$series[[1]]$data[[i]]$name, as.character(data$cut[i]))
+  }
+
+  ## Ops list
+  ops <- list(title = "This is a title",
+              subtitle = "This is a subtitle",
+              caption = "A caption? Yes, this is a caption",
+              hor_title = "Categories",
+              ver_title = "Numbers",
               bar_orientation = "hor")
-  hgch_bar(data, var_cat = "cut", var_num = "price", opts =  ops)
-  hgch_bar(data, var_cat = "cut", var_num = "price", palette_colors = c("#ffa92a"),
-           order = c("Very Good"))
+
+  h <- hgch_bar(data, var_cat = "cut", var_num = "price", opts =  ops)
+  expect_equal(h$x$hc_opts$subtitle$text, ops$subtitle)
+
+  # Color setting
+  h <- hgch_bar(data, var_cat = "cut", var_num = "price", palette_colors = c("#ffa92a"),
+                order = c("Very Good"))
+  expect_equal(h$x$theme$colors, "#ffa92a")
+  expect_error(hgch_bar(data, opts = ops, palette_colors = "#ffa92a"))
 
 
+  ### hgch_bar_Cat()
   data <- ggplot2::diamonds |> select(cut, everything())
-  hgch_bar_Cat(data, opts = ops, palette_colors = "#ffa92a")
+
+  h_bar <- hgch_bar(data, var_cat = "cut", opts = ops, palette_colors = "#ffa92a")
+  h_bar_Cat <- hgch_bar_Cat(data, opts = ops, palette_colors = "#ffa92a")
+
+  expect_null(h_bar$x$hc_opts$xAxis$type)
+  expect_equal(h_bar_Cat$x$hc_opts$xAxis$type, "category")
+
 
   data <- ggplot2::diamonds |> select(cut, price, everything())
-  hgch_bar_CatNum(data, opts = ops)
+  h_bar_CatNum <- hgch_bar_CatNum(data, opts = ops)
   hgch_bar_CatNum(data, opts = ops, collapse_rows = TRUE)
 
 
