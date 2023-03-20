@@ -24,10 +24,13 @@ hgch_line <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num
   count_var_num <- stringr::str_count(frType, "Num")
 
   if (count_var_num > 1) {
+    opts$data_opts$color_by <- NULL
     if (!"..colors" %in% names(data)) {
-      data$..colors <- opts$data_opts$palette_colors[1:count_var_num]
+      colors <- opts$data_opts$palette_colors[1:count_var_num]
+      data$..colors <- rep_len(colors, nrow(data))
     }
   }
+
 
   data_draw <- data_draw(data = data,
                          dic = dic,
@@ -37,7 +40,6 @@ hgch_line <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num
                          frType = frType,
                          opts = opts$data_opts,
                          viz = "line")
-
 
   line <- highchart() |>
     hc_titles(opts = opts$titles)  |>
