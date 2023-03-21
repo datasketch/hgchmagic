@@ -127,8 +127,10 @@ hc_body_line <- function(hc, data, frType, opts = NULL) {
         ) |>
         hc_xAxis(
           type = 'datetime',
-          categories = data$categories
+          categories = data$categories,
+          title = list(text = opts$hor_title)
         ) |>
+      hc_yAxis(title = list(text = opts$ver_title)) |>
         hc_series(
           data$data
         ) |>
@@ -141,8 +143,10 @@ hc_body_line <- function(hc, data, frType, opts = NULL) {
       ) |>
       hc_xAxis(
         type = 'datetime',
-        categories = data$categories
+        categories = data$categories,
+        title = list(text = opts$hor_title)
       ) |>
+      hc_yAxis(title = list(text = opts$ver_title)) |>
       hc_add_series_list(
         data$data
       ) |>
@@ -157,7 +161,8 @@ hc_body_line <- function(hc, data, frType, opts = NULL) {
       ) |>
       hc_xAxis(
         type = 'datetime',
-        categories = data$categories
+        categories = data$categories,
+        title = list(text = opts$hor_title)
       ) |>
       hc_yAxis_multiples(
         list(title = list(text = opts$axis_left_title %||% data$title_axis[1])),
