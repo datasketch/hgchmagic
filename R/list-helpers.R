@@ -87,6 +87,8 @@ list_treemap <- function(data, frtype) {
    data <- c(list_id, list_cats)
   }
 
+  data
+
 }
 
 #' @keywords internal
