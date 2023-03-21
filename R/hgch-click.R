@@ -3,7 +3,7 @@ click_functions <- function(viz, frtype = NULL, id_click = NULL) {
   if (is.null(id_click)) return()
   click_func <- paste0("function(event) {Shiny.onInputChange('", id_click, "', {id:event.point.name, timestamp: new Date().getTime()});}")
 
-  if (frtype %in% c("CatCatNum", "CatCat", "CatDat", "CatDatNum")) {
+  if (frtype %in% c("CatCatNum", "CatCat", "CatDat", "CatDatNum", "DatNumNum")) {
     click_func <- paste0("function(event) {Shiny.onInputChange('", id_click, "', {cat:this.name, id:event.point.category, timestamp: new Date().getTime()});}")
   }
 
