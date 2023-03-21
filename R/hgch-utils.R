@@ -87,7 +87,25 @@ hc_body_treemap <- function(hc, data, frType, opts = NULL) {
   }
 
   if (frType == "CatCatNum") {
-    hc <- hc
+    hc <- hc |>
+      hc_series(
+        list(
+          type = "treemap",
+          layoutAlgorithm = 'stripes',
+          alternateStartingDirection = TRUE,
+          levels = list(
+            level = 1,
+            layoutAlgorithm = 'sliceAndDice',
+            dataLabels = list(
+              enabled = TRUE,
+              align = 'left',
+              verticalAlign = 'top',
+              style = list(
+                fontSize = '15px',
+                fontWeight = 'bold'
+          ))),
+          data = data
+        ))
   }
 
   hc |>

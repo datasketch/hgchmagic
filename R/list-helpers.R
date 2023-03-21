@@ -62,6 +62,31 @@ list_treemap <- function(data, frtype) {
       }
     )
   }
+
+  if (frtype %in% c("CatCat", "CatCatNum")) {
+    var_cat <- names(d)[1]
+    list_id <- purrr::map(unique(d[[1]]), function(i) {
+      d0 <- d |> filter(!!sym(var_cat) %in% i)
+      list(
+        id = i,
+        name = i,
+        color = unique(d0$..colors)
+      )
+    })
+
+    list_cats <- purrr::map(1:nrow(d), function(z) {
+      nm <- ifelse(is.na(d[[2]][z]), "NA", d[[2]][z])
+      list(
+        name = nm,
+        parent = d[[1]][z],
+        value = d[[3]][z],
+        label = d$..labels[z]#,
+        #colorValue = d[[3]][z]
+      )
+    })
+   data <- c(list_id, list_cats)
+  }
+
 }
 
 #' @keywords internal

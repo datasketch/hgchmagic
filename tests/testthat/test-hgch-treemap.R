@@ -18,4 +18,16 @@ test_that("Treemap", {
 
   hgch_treemap_CatNum(data)
 
+  data <- ggplot2::diamonds
+  data <- dsdataprep::aggregation_data(data = data,
+                                       agg = "sum",
+                                       group_var = c("cut", "clarity"),
+                                       to_agg = "price")
+
+  hgch_treemap(data, var_cat = c("cut", "clarity"), var_num = "price")
+  hgch_treemap_CatCatNum(data)
+
+  data <- ggplot2::diamonds |> select(cut, clarity)
+  hgch_treemap_CatCat(data)
+
 })
