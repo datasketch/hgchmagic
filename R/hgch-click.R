@@ -14,5 +14,9 @@ click_functions <- function(viz, frtype = NULL, id_click = NULL) {
     }
   }
 
+  if (viz %in% "sankey") {
+      click_func <- paste0("function(event) {Shiny.onInputChange('", id_click, "', {node:event.point.name, cat:event.point.to, id:event.point.from, timestamp: new Date().getTime()});}")
+  }
+
   click_func
 }

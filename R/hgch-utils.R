@@ -272,10 +272,25 @@ hc_body_scatter <- function(hc, data, frType, opts = NULL) {
 hc_body_sankey <- function(hc, data, frType, opts = NULL) {
 
   hc <- hc |>
-    hc_chart(type = 'sankey') |>
+    hc_chart(type = 'sankey',
+             polar = FALSE) |>
     hc_add_series(
+      #name = "",
       keys = list('from', 'to', 'weight', 'color', 'label'),
-      data = data
+      data = data$data,
+      nodes = data$nodes,
+      linkOpacity = 0.7,
+      opacity = 1,
+      minLinkWidth = 5,
+      nodeWidth = 15,
+      name = opts$legend_title,
+      clip = F,
+      dataLabels = list(
+        align= 'left',
+        verticalAlign= 'middle',
+        crop=FALSE,
+        overflow=T
+      )
     )
 
   hc #|>

@@ -84,7 +84,7 @@ list_treemap <- function(data, frtype) {
         #colorValue = d[[3]][z]
       )
     })
-   data <- c(list_id, list_cats)
+    data <- c(list_id, list_cats)
   }
 
   data
@@ -223,17 +223,24 @@ list_sankey <- function(data, frtype) {
 
   d <- data
 
-  #if (!any(grepl("Num", frtype))) {
-    d <- d |> select(from, to, weight, ..colors, ..labels)
-    data <- purrr::pmap(d, function(from, to, weight, ..colors, ..labels) {
-      list(from = from,
-           to = to,
-           weight = weight,
-           color = ..colors,
-           label = ..labels)
-    })
-  #}
+  d <- d |> select(from, to, weight, ..colors, ..labels)
+  data <- purrr::pmap(d, function(from, to, weight, ..colors, ..labels) {
+    list(from = from,
+         to = to,
+         weight = weight,
+         color = ..colors,
+         label = ..labels)
+  })
+  nodes <- purrr::map(1:nrow(d), function(r){
+    list(
+      id = d$from[r],
+      color = d$..colors[r]
+    )
+  })
 
-  data
+  data <- list(
+    data = data,
+    nodes = nodes
+  )
 
 }
