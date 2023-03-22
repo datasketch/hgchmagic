@@ -2,7 +2,11 @@ test_that("Line", {
   dates <- seq(as.POSIXct("2022-01-01"), as.POSIXct("2022-01-10"), by = "day")
   values <- rnorm(length(dates))
   df <- data.frame(date = dates, value = values)
-  hgch_line(df, var_dat = "date", var_num = "value")
+
+  h_line <- hgch_line(df, var_dat = "date", var_num = "value")
+
+  expect_equal(h_line$x$hc_opts$chart$type, "line")
+  expect_equal(h_line$x$hc_opts$xAxis$type, "datetime")
 
   data <- lubridate::lakers
   data$date <- lubridate::ymd(data$date)
