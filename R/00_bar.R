@@ -36,9 +36,14 @@ hgch_bar <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
     opts$data_opts$color_by <- NULL
     if (!"..colors" %in% names(data)) {
       colors <- opts$data_opts$palette_colors[1:count_var_num]
+      if (nrow(data) > 1) {
       data$..colors <- rep_len(colors, nrow(data))
+      } else {
+      data$..colors <- paste0(colors, collapse = "-")
+      }
     }
   }
+
   data_draw <- data_draw(data = data,
                          dic = dic,
                          var_cat = var_cat,
