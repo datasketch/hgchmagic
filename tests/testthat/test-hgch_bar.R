@@ -61,6 +61,9 @@ test_that("Bar", {
   hgch_bar_Cat(data, opts = test_theme)
 
 
-
-
+  data <- data.frame(var_cat = c("a",  "b", "d"),
+                     var_num_one = runif(3),
+                     var_num_two = runif(3, 100, 1000))
+  hgch_bar(data, var_cat = "var_cat", var_num = c("var_num_one", "var_num_two"))
+  hgch_bar_CatNumNum(data)
 })

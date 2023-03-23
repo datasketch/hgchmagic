@@ -12,7 +12,7 @@ hc_body <- function(hc, data, frType, opts = NULL) {
 
   #global_options(opts$style$format_sample_num)
 
-   hc <-   hc |>
+  hc <-   hc |>
     hc_chart(type = opts$plot_type#,
              # events = list(
              #   load = add_branding(opts$theme)
@@ -47,7 +47,7 @@ hc_body <- function(hc, data, frType, opts = NULL) {
                #   formatter = l$formatter_x_js#,
                #   #step = l$extra$labelsStepX,
                # )
-               ) |>
+      ) |>
       hc_yAxis(title = list(text = opts$ver_title)#,
                #reversed = opts$reversed_yaxis#,
                # labels = list(
@@ -56,12 +56,37 @@ hc_body <- function(hc, data, frType, opts = NULL) {
       )
   }
 
-  hc |>
-   hc_tooltip(useHTML = TRUE,
-              formatter = JS(paste0("function () {return this.point.label;}"))) |>
-    hc_plotOptions(
-      series = list(innerSize = opts$inner_size)
-    )
+  #
+  if (frType == "CatNumNum") {
+    hc <- hc |>
+      hc_chart(
+        zoomType = 'xy'
+      ) |>
+      hc_xAxis(
+        type = "category",
+        categories = data$categories,
+        title = list(text = opts$hor_title)
+      ) |>
+      hc_yAxis_multiples(
+        list(title = list(text = opts$axis_left_title %||% data$title_axis[1])),
+        list(title = list(text = opts$axis_rigth_title %||% data$title_axis[2]),
+             opposite = TRUE)
+      ) |>
+      hc_add_series_list(
+        data$data
+      )
+  }
+  if (frType == "DatNumNum") {
+    hc <- hc
+  } else {
+    hc <- hc |>
+      hc_tooltip(useHTML = TRUE,
+                 formatter = JS(paste0("function () {return this.point.label;}"))) |>
+      hc_plotOptions(
+        series = list(innerSize = opts$inner_size)
+      )
+  }
+  hc
 
 }
 
@@ -103,7 +128,7 @@ hc_body_treemap <- function(hc, data, frType, opts = NULL) {
               style = list(
                 fontSize = '15px',
                 fontWeight = 'bold'
-          ))),
+              ))),
           data = data
         ))
   }
@@ -123,17 +148,17 @@ hc_body_line <- function(hc, data, frType, opts = NULL) {
 
   if (frType == "DatNum") {
     hc <- hc |>
-        hc_chart(type = opts$plot_type
-        ) |>
-        hc_xAxis(
-          type = 'datetime',
-          categories = data$categories,
-          title = list(text = opts$hor_title)
-        ) |>
+      hc_chart(type = opts$plot_type
+      ) |>
+      hc_xAxis(
+        type = 'datetime',
+        categories = data$categories,
+        title = list(text = opts$hor_title)
+      ) |>
       hc_yAxis(title = list(text = opts$ver_title)) |>
-        hc_series(
-          data$data
-        ) |>
+      hc_series(
+        data$data
+      ) |>
       hc_legend(enabled = FALSE)
   }
 
@@ -155,7 +180,7 @@ hc_body_line <- function(hc, data, frType, opts = NULL) {
 
   if (frType == "DatNumNum") {
 
-   hc <- hc |>
+    hc <- hc |>
       hc_chart(
         zoomType = 'xy'
       ) |>
@@ -167,8 +192,8 @@ hc_body_line <- function(hc, data, frType, opts = NULL) {
       hc_yAxis_multiples(
         list(title = list(text = opts$axis_left_title %||% data$title_axis[1])),
         list(title = list(text = opts$axis_rigth_title %||% data$title_axis[2]),
-          opposite = TRUE)
-        ) |>
+             opposite = TRUE)
+      ) |>
       hc_add_series_list(
         data$data
       )
@@ -178,8 +203,8 @@ hc_body_line <- function(hc, data, frType, opts = NULL) {
     hc <- hc
   } else {
     hc <- hc |>
-    hc_tooltip(useHTML = TRUE,
-               formatter = JS(paste0("function () {return this.point.label;}")))
+      hc_tooltip(useHTML = TRUE,
+                 formatter = JS(paste0("function () {return this.point.label;}")))
   }
 
   hc
@@ -294,7 +319,7 @@ hc_body_sankey <- function(hc, data, frType, opts = NULL) {
     )
 
   hc #|>
-    #hc_tooltip(useHTML = TRUE,
-    #           formatter = JS(paste0("function () {return this.point.label;}")))
+  #hc_tooltip(useHTML = TRUE,
+  #           formatter = JS(paste0("function () {return this.point.label;}")))
 
 }

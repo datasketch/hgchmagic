@@ -43,6 +43,24 @@ list_bar <- function(data, frtype) {
 
   }
 
+  if (frtype %in% c("CatNumNum")) {
+    color <- unique(d$..colors)
+    series <- map(c(2,3), function(col) {
+      list(
+        name = names(d)[col],
+        color = color[col-1],
+        type = "bar",
+        yAxis = col - 2,
+        data = d[[col]]
+      )
+    })
+    data <- list(
+      title_axis = names(d)[2:3],
+      categories = unique(d[[1]]),
+      data = series
+    )
+  }
+
   data
 }
 

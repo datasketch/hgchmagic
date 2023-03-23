@@ -43,5 +43,8 @@ test_that("Line", {
   data$indicador <- runif(nrow(data), 1000, 5000)
   data <- data |> select(date, valor, indicador)
   hgch_line(data, var_dat = "date", var_num = c("valor", "indicador"))
+  data <- lubridate::lakers
+  data <- data |> select(date, x, y)
+  hgch_line_DatNumNum(data)
 
 })
