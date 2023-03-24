@@ -31,6 +31,11 @@ hgch_line <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num
     }
   }
 
+  if (grepl("Cat", frType)) {
+    df_dates <- data.frame(dates = unique(data[[2]]))
+    names(df_dates) <- names(data)[2]
+    data <- data |> full_join(df_dates)
+  }
 
   data_draw <- data_draw(data = data,
                          dic = dic,
