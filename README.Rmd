@@ -20,6 +20,24 @@ knitr::opts_chunk$set(
 
 hgchmagic is a wrapper for highcharter R package. With hgchmagic you can provide more info in form of list and improve your visualizations.
 
+The type of charts supported by hgchmagic are:
+
+  - `hgch_bar()`
+  - `hgch_line()`
+  - `hgch_scatter()`
+  - `hgch_treemap()`
+  - `hgch_donut()`
+  - `hgch_pie()`
+  - `hgch_sankey()`
+
+Everyone of them assist user with different treatment regarding data variable types. For example, for charts where categorical variables are involved, you can use:
+
+  - `hgch_bar_Cat()`
+  - `hgch_line_CatCat()`
+  - `hgch_scatter_CatDatNum()`
+  
+
+
 ## Installation
 
 You can install the development version of hgchmagic like so:
@@ -29,42 +47,9 @@ You can install the development version of hgchmagic like so:
 remotes::install_github("datasketch/hgchmagic")
 ```
 
-## Example
 
-This is a basic example which shows you how this packages work:
 
-Let´s load `makeup` package
 
-```{r example}
-library(hgchmagic)
-## basic example code
-```
 
-Create a bar char 
 
-```{r}
-# data <- ggplot2::diamonds
-# 
-# data <- data |> 
-#   dplyr::group_by(cut) |> 
-#   dplyr::summarise(price = sum(price))
-# # data <- dsdataprep::aggregation_data(data = data,
-# #                                      agg = "sum",
-# #                                      group_var = "cut",
-# #                                      to_agg = "price")
-# 
-# # Define custom properties for the bar chart
-# ops <- list(title = "This is a title",
-#             subtitle = "This is a subtitle",
-#             caption = "A caption? Yes, this is a caption",
-#             hor_title = "Categories",
-#             ver_title = "Numbers",
-#             bar_orientation = "hor")
-# 
-# hgch_bar(data, 
-#          var_cat = "cut", 
-#          var_num = "price", 
-#          palette_colors = c("#ffa92a"),
-#          order = c("Very Good"))
-```
 
