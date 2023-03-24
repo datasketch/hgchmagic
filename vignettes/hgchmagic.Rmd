@@ -1,0 +1,39 @@
+---
+title: "hgchmagic"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{hgchmagic}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(hgchmagic)
+```
+
+## Introduction
+
+hgchmagic has a set of functions to assists users when plotting data. Here you´ll see how to use it.
+
+
+### Bar plots
+
+The core function to plot a bar plot with hgchmagic is `hgch_bar()`
+
+```{r}
+data <- ggplot2::diamonds
+data <- dsdataprep::aggregation_data(data = data,
+                                       agg = "sum",
+                                       group_var = "cut",
+                                       to_agg = "price")
+
+hgch_bar(data, var_cat = "cut", var_num = "price")
+```
+
