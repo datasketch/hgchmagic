@@ -11,6 +11,7 @@ provide more info in form of list and improve your visualizations.
 
 The type of charts supported by hgchmagic are:
 
+
 - `hgch_bar()`
 - `hgch_line()`
 - `hgch_scatter()`
