@@ -25,7 +25,7 @@ hgch_treemap <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...)
   if (is.null(var_cat)) stop("You must enter at least one categorical variable")
 
   frType <- frtype_viz(var_cat, var_num)
-  opts <- plot_opts(viz = "treemap", frType = frtype, ...)
+  opts <- plot_opts(viz = "treemap", frType = frType, ...)
   opts$data_opts$color_by <- var_cat[1]
 
   data_draw <- data_draw(data = data,
@@ -96,4 +96,38 @@ hgch_treemap_CatNum <- function(data, ...) {
   hgch_treemap(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
 
+#' @export
+hgch_treemap_CatCat <- function(data, ...) {
+  var_cat <- names(data)[1:2]
+  opts_prep <- dataprep_opts(...)
+  var_num_name <- opts_prep$agg_text %||% "Count"
+  data <- dsdataprep::aggregation_data(data = data,
+                                       agg = "count",
+                                       group_var = var_cat,
+                                       agg_name = opts_prep$agg_text %||% var_num_name,
+                                       percentage = opts_prep$percentage,
+                                       percentage_name = opts_prep$percentage_name,
+                                       extra_col = opts_prep$extra_col,
+                                       agg_extra = opts_prep$agg_extra)
+  hgch_treemap(data = data, var_cat = var_cat, var_num = var_num_name, ...)
+}
 
+#' @export
+hgch_treemap_CatCatNum <- function(data, ...) {
+  var_cat <- names(data)[1:2]
+  var_num <- names(data)[3]
+  opts_prep <- dataprep_opts(...)
+  var_num_name <- opts_prep$agg_text %||% var_num
+
+  data <- dsdataprep::aggregation_data(data = data,
+                                       agg = opts_prep$agg,
+                                       agg_name = var_num_name,
+                                       group_var = var_cat,
+                                       to_agg = var_num,
+                                       percentage = opts_prep$percentage,
+                                       percentage_name = opts_prep$percentage_name,
+                                       extra_col = opts_prep$extra_col,
+                                       agg_extra = opts_prep$agg_extra)
+
+  hgch_treemap(data = data, var_cat = var_cat, var_num = var_num_name, ...)
+}

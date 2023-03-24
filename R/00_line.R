@@ -24,10 +24,13 @@ hgch_line <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num
   count_var_num <- stringr::str_count(frType, "Num")
 
   if (count_var_num > 1) {
+    opts$data_opts$color_by <- NULL
     if (!"..colors" %in% names(data)) {
-      data$..colors <- opts$data_opts$palette_colors[1:count_var_num]
+      colors <- opts$data_opts$palette_colors[1:count_var_num]
+      data$..colors <- rep_len(colors, nrow(data))
     }
   }
+
 
   data_draw <- data_draw(data = data,
                          dic = dic,
@@ -37,7 +40,6 @@ hgch_line <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num
                          frType = frType,
                          opts = opts$data_opts,
                          viz = "line")
-
 
   line <- highchart() |>
     hc_titles(opts = opts$titles)  |>
@@ -124,3 +126,25 @@ hgch_line_CatDatNum <- function(data, ...) {
                                        agg_extra = opts_prep$agg_extra)
   hgch_line(data = data, var_cat = var_cat, var_dat = var_dat, var_num = var_num_name, ...)
 }
+
+
+#' @export
+hgch_line_DatNumNum <- function(data, ...) {
+  var_dat <- names(data)[1]
+  var_num <- names(data)[2:3]
+  opts_prep <- dataprep_opts(...)
+  var_num_name <- opts_prep$agg_text %||% var_num
+
+  data <- dsdataprep::aggregation_data(data = data,
+                                       agg = opts_prep$agg,
+                                       agg_name = var_num_name,
+                                       group_var = var_dat,
+                                       to_agg = var_num,
+                                       percentage = opts_prep$percentage,
+                                       percentage_name = opts_prep$percentage_name,
+                                       extra_col = opts_prep$extra_col,
+                                       agg_extra = opts_prep$agg_extra)
+
+  hgch_line(data = data, var_dat = var_dat, var_num = var_num_name, ...)
+}
+

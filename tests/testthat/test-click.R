@@ -12,9 +12,14 @@ ui <- fluidPage(
 server <- function(input, output) {
 
   output$hgch_viz <- renderHighchart({
-    data <- ggplot2::diamonds |> select(cut, color, everything())
-    hgch_line_CatDat(data,
-                     palette_colors = "#ffa92a",
+    #data <- ggplot2::diamonds |> select(cut, color, everything())
+    # hgch_line_CatDat(data,
+    #                  palette_colors = "#ffa92a",
+    #                  shiny_cursor = "pointer",
+    #                  shiny_clickable = TRUE
+    # )
+    data <- ggplot2::diamonds |> select(cut, color)
+    hgch_sankey(data, var_cat = c("cut", "color"),
                      shiny_cursor = "pointer",
                      shiny_clickable = TRUE
     )

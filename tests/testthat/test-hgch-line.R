@@ -14,7 +14,7 @@ test_that("Line", {
     tidyr::drop_na(x) |>
     group_by(date) |>
     summarise(x = sum(x)) |> dplyr::arrange(date)
-  hgch_line(data, var_dat = "date", var_num = "x")
+  hgch_line(data, var_dat = "date", var_num = "x", hor_title = "fecha", ver_title = "valor")
 
   data <- lubridate::lakers
   data$date <- lubridate::ymd(data$date)
@@ -28,12 +28,12 @@ test_that("Line", {
   hgch_line(data, var_cat = "game_type", var_dat = "date", var_num = "x",
             palette_colors = c("#ffa92a"))
   hgch_line(data, var_cat = "game_type", var_dat = "date", var_num = "x",
-            palette_colors = c("#ffa92a", "#f06142"))
+            palette_colors = c("#ffa92a", "#f06142"),  hor_title = "fecha", ver_title = "valor")
 
   data <- lubridate::lakers
   data$date <- lubridate::ymd(data$date)
   data <- data |> select(game_type, date, everything())
-  hgch_line_CatDat(data)
+  hgch_line_CatDat(data, hor_title = "fecha", ver_title = "valor")
 
   data <- lubridate::lakers
   data$date <- lubridate::ymd(data$date)
@@ -47,5 +47,8 @@ test_that("Line", {
   data$indicador <- runif(nrow(data), 1000, 5000)
   data <- data |> select(date, valor, indicador)
   hgch_line(data, var_dat = "date", var_num = c("valor", "indicador"))
+  data <- lubridate::lakers
+  data <- data |> select(date, x, y)
+  hgch_line_DatNumNum(data)
 
 })

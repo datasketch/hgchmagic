@@ -43,6 +43,43 @@ list_bar <- function(data, frtype) {
 
   }
 
+  if (frtype %in% c("CatNumNum")) {
+    color <- unique(d$..colors)
+    if (length(color) != 2) {
+      color <- strsplit(color, split = "-") |> unlist()
+    }
+    if (length(unique(d[[1]])) > 1) {
+      series <- map(c(2,3), function(col) {
+        list(
+          name = names(d)[col],
+          color = color[col-1],
+          type = "bar",
+          yAxis = col - 2,
+          data = d[[col]]
+        )
+      })
+    } else {
+      series <- map(c(2,3), function(col) {
+        list(
+          name = names(d)[col],
+          color = color[col-1],
+          type = "bar",
+          yAxis = col - 2,
+          data = list(d[[col]])
+        )
+      })
+    }
+
+    # if (length(unique(d[[1]])) == 1) {
+    #   series$data <-
+    # }
+    data <- list(
+      title_axis = names(d)[2:3],
+      categories = unique(d[[1]]),
+      data = series
+    )
+  }
+
   data
 }
 
@@ -62,6 +99,33 @@ list_treemap <- function(data, frtype) {
       }
     )
   }
+
+  if (frtype %in% c("CatCat", "CatCatNum")) {
+    var_cat <- names(d)[1]
+    list_id <- purrr::map(unique(d[[1]]), function(i) {
+      d0 <- d |> filter(!!sym(var_cat) %in% i)
+      list(
+        id = i,
+        name = i,
+        color = unique(d0$..colors)
+      )
+    })
+
+    list_cats <- purrr::map(1:nrow(d), function(z) {
+      nm <- ifelse(is.na(d[[2]][z]), "NA", d[[2]][z])
+      list(
+        name = nm,
+        parent = d[[1]][z],
+        value = d[[3]][z],
+        label = d$..labels[z]#,
+        #colorValue = d[[3]][z]
+      )
+    })
+    data <- c(list_id, list_cats)
+  }
+
+  data
+
 }
 
 #' @keywords internal
@@ -196,17 +260,24 @@ list_sankey <- function(data, frtype) {
 
   d <- data
 
-  #if (!any(grepl("Num", frtype))) {
-    d <- d |> select(from, to, weight, ..colors, ..labels)
-    data <- purrr::pmap(d, function(from, to, weight, ..colors, ..labels) {
-      list(from = from,
-           to = to,
-           weight = weight,
-           color = ..colors,
-           label = ..labels)
-    })
-  #}
+  d <- d |> select(from, to, weight, ..colors, ..labels)
+  data <- purrr::pmap(d, function(from, to, weight, ..colors, ..labels) {
+    list(from = from,
+         to = to,
+         weight = weight,
+         color = ..colors,
+         label = ..labels)
+  })
+  nodes <- purrr::map(1:nrow(d), function(r){
+    list(
+      id = d$from[r],
+      color = d$..colors[r]
+    )
+  })
 
-  data
+  data <- list(
+    data = data,
+    nodes = nodes
+  )
 
 }
