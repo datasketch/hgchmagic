@@ -142,10 +142,10 @@ list_line <- function(data, frtype) {
   }
 
   if (frtype %in% c("CatDat", "CatDatNum")) {
-    data_groups <- list(unique(d[[1]]),
-                        split(d[complete.cases(
-                          d[,c(setdiff(names(d), names(d)[1]))]),], d[[1]]))
-
+    var_cat <- names(data)[1]
+    data_groups <- purrr::map(unique(d[[1]]), ~ d |> filter(!!sym(var_cat) %in% .x))
+    names(data_groups) <- unique(d[[1]])
+    data_groups <- list(unique(d[[1]]), data_groups)
     series <- purrr::pmap(.l = data_groups, function(name, d0) {
       names(d0)[3] <- "y"
       dl <- d0 |> transmute(y, label = ..labels, color = ..colors)
