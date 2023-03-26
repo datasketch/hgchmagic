@@ -64,7 +64,7 @@ hc_body <- function(hc, data, frType, opts = NULL) {
       ) |>
       hc_xAxis(
         type = "category",
-        categories = data$categories,
+        categories = list(data$categories),
         title = list(text = opts$hor_title)
       ) |>
       hc_yAxis_multiples(

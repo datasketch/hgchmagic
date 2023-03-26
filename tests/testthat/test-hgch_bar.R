@@ -92,8 +92,11 @@ test_that("Bar", {
                      var_num_two = runif(3, 100, 1000))
   hgch_bar(data, var_cat = "var_cat", var_num = c("var_num_one", "var_num_two"))
   hgch_bar_CatNumNum(data)
-  data <- data.frame(var_cat = c("a"),
+  data <- data.frame(var_cat = c("arroz"),
                      var_num_one = runif(1),
                      var_num_two = runif(1, 100, 1000))
   hgch_bar(data, var_cat = "var_cat", var_num = c("var_num_one", "var_num_two"))
+
+
+
 })

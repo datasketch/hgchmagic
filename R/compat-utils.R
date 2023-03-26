@@ -11,6 +11,25 @@ frtype_viz <- function(var_cat = NULL,
   frtype
 }
 
+#' @keywords internal
+completevalues <- function(d, var_num) {
+  d <- d[,1:3]
+  var_num <- rlang::sym(var_num)
+  var_one <- names(d)[1]
+  var_two <- names(d)[2]
+  d[[1]] <- as.character(d[[1]])
+  d[[2]] <- as.character(d[[2]])
+  d[[1]][d[[2]] == "NA"] <- NA
+  d[[2]][d[[2]] == "NA"] <- NA
+  d <- d |>
+    tidyr::spread({{var_two}}, !!var_num) %>%
+    tidyr::gather({{var_two}}, !!var_num, -{{var_one}})
+  d[[1]][d[[2]] == "NA"] <- NA
+  d[[2]][d[[2]] == "NA"] <- NA
+  d
+}
+
+
 #' Create data for a Highcharts plot
 #'
 #' This function creates data for a Highcharts plot, given input data and options.
@@ -38,6 +57,8 @@ data_draw <- function(data,
 
 
   var <- c(var_cat, var_date, var_num, "..labels", "..colors")
+  var_order <- c(var_cat, var_date, var_num)
+  data <- data |> select({{ var_order }}, everything())
   index_names <- NULL
 
 
@@ -59,6 +80,16 @@ data_draw <- function(data,
       }
     }
   }
+
+
+  if (viz %in% c("line", "bar")) {
+    if (grepl("CatDat|CatCat", frType)) {
+      data_all <- completevalues(data, var_num = var_num)
+      data[[2]] <- as.character(data[[2]])
+      data <- data_all |> left_join(data[,-3])
+    }
+  }
+
 
   if (!"..labels" %in% names(data)) {
     data$..labels <- dsdataprep::prep_tooltip(data = data,
