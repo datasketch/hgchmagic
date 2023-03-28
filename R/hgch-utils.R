@@ -64,7 +64,7 @@ hc_body <- function(hc, data, frType, opts = NULL) {
       ) |>
       hc_xAxis(
         type = "category",
-        categories = list(data$categories),
+        categories = data$categories,
         title = list(text = opts$hor_title)
       ) |>
       hc_yAxis_multiples(
@@ -72,12 +72,16 @@ hc_body <- function(hc, data, frType, opts = NULL) {
         list(title = list(text = opts$axis_rigth_title %||% data$title_axis[2]),
              opposite = TRUE)
       ) |>
+      hc_tooltip(useHTML = TRUE,
+                 shared = TRUE) |>
       hc_add_series_list(
         data$data
       )
   }
   if (frType == "DatNumNum") {
+
     hc <- hc
+
   } else {
     hc <- hc |>
       hc_tooltip(useHTML = TRUE,
