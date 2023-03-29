@@ -68,14 +68,12 @@ list_bar <- function(data, frtype) {
           data = list(d[[col]])
         )
       })
+
     }
 
-    # if (length(unique(d[[1]])) == 1) {
-    #   series$data <-
-    # }
     data <- list(
       title_axis = names(d)[2:3],
-      categories = unique(d[[1]]),
+      categories = purrr::map(unique(d[[1]]), ~.x),
       data = series
     )
   }
