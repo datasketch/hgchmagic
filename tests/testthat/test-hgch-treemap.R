@@ -11,12 +11,17 @@ test_that("Treemap", {
               hor_title = "Categorias",
               ver_title = "Numeros",
               bar_orientation = "hor")
-  hgch_treemap(data, var_cat = "cut", var_num = "price", opts =  ops)
+  h_treemap <- hgch_treemap(data, var_cat = "cut", var_num = "price", opts =  ops)
+
+  expect_equal(h_treemap$x$hc_opts$series[[1]]$type, "treemap")
+
 
   data <- ggplot2::diamonds |> select(cut, everything())
-  hgch_treemap_Cat(data)
+  h_treemap_cat <- hgch_treemap_Cat(data)
+  expect_equal(h_treemap_cat$x$hc_opts$series[[1]]$type, "treemap")
 
-  hgch_treemap_CatNum(data)
+  h_treemap_cat_num <- hgch_treemap_CatNum(data)
+  expect_equal(h_treemap_cat_num$x$hc_opts$series[[1]]$type, "treemap")
 
   data <- ggplot2::diamonds
   data <- dsdataprep::aggregation_data(data = data,

@@ -23,3 +23,6 @@ vignettes/*.pdf
 .Rproj.user
 
 
+inst/doc
+/doc/
+/Meta/
