@@ -48,39 +48,9 @@ You can install the development version of hgchmagic like so:
 remotes::install_github("datasketch/hgchmagic")
 ```
 
-## Usage
+## How to start
 
-hgchmagic offers a several number of functions for interactive visualization. Here there are a couple of examples to show their most general usage.
-
-```{r eval=FALSE}
-library(hgchmagic)
-
-data <- data.frame(var_cat = c("a",  "b", "d"),
-                   var_num_one = runif(3),
-                   var_num_two = runif(3, 100, 1000))
-
-hgch_bar(data, 
-         var_cat = "var_cat", 
-         var_num = c("var_num_one", "var_num_two"))
-```
-
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-library(hgchmagic)
-data <- data.frame(var_cat = c("a",  "b", "d"),
-                   var_num_one = runif(3),
-                   var_num_two = runif(3, 100, 1000))
-
-viz <- hgch_bar(data, 
-         var_cat = "var_cat", 
-         var_num = c("var_num_one", "var_num_two"))
-
-htmlwidgets::saveWidget(widget = viz, file = "man/figures/readme_usage.html")
-```
-
-```{r echo=FALSE}
-htmltools::includeHTML("man/figures/readme_usage.html")
-```
-
+hgchmagic offers a several number of functions for interactive visualization. Check [this article](https://datasketch.github.io/hgchmagic/articles/hgchmagic.html) or run `vignette("hgchmagic)` to see how hgchmagic works.
 
 
 ## Licence
