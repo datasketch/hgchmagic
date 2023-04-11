@@ -44,6 +44,12 @@ plot_opts <- function(viz = NULL, frType = NULL, ...) {
     extra_opts$axis_right_title <- opts$line$line_double_title_axis_right
   }
 
+  if (viz == "sankey") {
+    extra_opts$sankey_series = opts$sankey$sankey_serie_name
+  }
+
+
+
   titles <- list(
     title = opts$titles$title,
     subtitle = opts$titles$subtitle,
