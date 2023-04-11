@@ -4,9 +4,9 @@
 \name{hgchmagic-package}
 \alias{hgchmagic}
 \alias{hgchmagic-package}
-\title{hgchmagic: What the Package Does (One Line, Title Case)}
+\title{hgchmagic: hgchmagic is a wrapper for hichcharter R package.}
 \description{
-What the package does (one paragraph).
+With hgchmagic you can provide more info in form of list and improve your visualizations.
 }
 \author{
 \strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
