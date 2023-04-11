@@ -78,10 +78,8 @@ hc_body <- function(hc, data, frType, opts = NULL) {
         data$data
       )
   }
-  if (frType == "DatNumNum") {
-
+  if (frType == "CatNumNum") {
     hc <- hc
-
   } else {
     hc <- hc |>
       hc_tooltip(useHTML = TRUE,

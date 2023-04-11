@@ -93,9 +93,14 @@ test_that("Bar", {
   hgch_bar(data, var_cat = "var_cat", var_num = c("var_num_one", "var_num_two"))
   hgch_bar_CatNumNum(data)
   data <- tibble(var_cat = c("arroz", "SAL", "agua"),
-                     `var num one` = runif(3),
+                     `var num one` = c(runif(2), NA),
                      `var num two` = runif(3, 100, 1000))
   hgch_bar(data, var_cat = "var_cat", var_num = c("var num one", "var num two"))
+  data <- tibble(var_cat = c("arroz"),
+                 `var num one` = 10,
+                 `var num two` = 3)
+  hgch_bar(data, var_cat = "var_cat",
+           var_num = c("var num one", "var num two"), bar_orientation = "ver")
 
 
 
