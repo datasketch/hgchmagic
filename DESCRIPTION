@@ -6,6 +6,9 @@ Authors@R:
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: With hgchmagic you can provide more info in form of list and improve your visualizations.
 License: MIT + file LICENSE
+Depends:
+    highcharter (>= 0.4.0.9999),
+    R (>= 3.0.0)
 Imports: 
     dplyr,
     dsdataprep,
