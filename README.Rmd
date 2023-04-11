@@ -48,8 +48,46 @@ You can install the development version of hgchmagic like so:
 remotes::install_github("datasketch/hgchmagic")
 ```
 
+## Usage
+
+hgchmagic offers a several number of functions for interactive visualization. Here there are a couple of examples to show their most general usage.
+
+```{r eval=FALSE}
+library(hgchmagic)
+
+data <- data.frame(var_cat = c("a",  "b", "d"),
+                   var_num_one = runif(3),
+                   var_num_two = runif(3, 100, 1000))
+
+hgch_bar(data, 
+         var_cat = "var_cat", 
+         var_num = c("var_num_one", "var_num_two"))
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+library(hgchmagic)
+data <- data.frame(var_cat = c("a",  "b", "d"),
+                   var_num_one = runif(3),
+                   var_num_two = runif(3, 100, 1000))
+
+viz <- hgch_bar(data, 
+         var_cat = "var_cat", 
+         var_num = c("var_num_one", "var_num_two"))
+
+htmlwidgets::saveWidget(widget = viz, file = "man/figures/readme_usage.html")
+```
+
+```{r echo=FALSE}
+htmltools::includeHTML("man/figures/readme_usage.html")
+```
 
 
+
+## Licence
+
+hgchmagic depends on highcharter which is a wrapper for highcharts, a commercial JavaScript charting library. Highcharts offers both a commercial license as well as a free non-commercial license. Please review the licensing options and terms before using this software, as the highcharter license neither provides nor implies a license for Highcharts.
+
+Highcharts (https://highcharts.com) is a Highsoft product which is not free for commercial and Governmental use.
 
 
 

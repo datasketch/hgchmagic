@@ -1,59 +1,3 @@
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-# hgchmagic
-
-<!-- badges: start -->
-<!-- badges: end -->
-
-hgchmagic is a wrapper for highcharter R package. With hgchmagic you can
-provide more info in form of list and improve your visualizations.
-
-The type of charts supported by hgchmagic are:
-
-- `hgch_bar()`
-- `hgch_line()`
-- `hgch_scatter()`
-- `hgch_treemap()`
-- `hgch_donut()`
-- `hgch_pie()`
-- `hgch_sankey()`
-
-Everyone of them assist user with different treatment regarding data
-variable types. For example, for charts where categorical variables are
-involved, you can use:
-
-- `hgch_bar_Cat()`
-- `hgch_line_CatCat()`
-- `hgch_scatter_CatDatNum()`
-
-## Installation
-
-You can install the development version of hgchmagic like so:
-
-``` r
-# install.packages("devtools")
-remotes::install_github("datasketch/hgchmagic")
-```
-
-## Usage
-
-hgchmagic offers a several number of functions for interactive
-visualization. Here there are a couple of examples to show their most
-general usage.
-
-``` r
-library(hgchmagic)
-
-data <- data.frame(var_cat = c("a",  "b", "d"),
-                   var_num_one = runif(3),
-                   var_num_two = runif(3, 100, 1000))
-
-hgch_bar(data, 
-         var_cat = "var_cat", 
-         var_num = c("var_num_one", "var_num_two"))
-```
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -3416,6 +3360,7 @@ t),a.options.kdNow=!0,a.buildKDTree(),a=a.searchPoint({chartX:q.x,chartY:q.y},!0
         return Object.prototype.toString.call(obj) === '[object Array]';
     }
 
+
     // Sets up motion ready to use
     function Motion(chart) {
         var motion = this;
@@ -4031,15 +3976,3 @@ if (HTMLWidgets.shinyMode) {
 <script type="application/htmlwidget-sizing" data-for="htmlwidget-bf15ce1cf64086c3b2a2">{"viewer":{"width":"100%","height":350,"padding":0,"fill":true},"browser":{"width":"100%","height":500,"padding":0,"fill":true}}</script>
 </body>
 </html>
-
-## Licence
-
-hgchmagic depends on highcharter which is a wrapper for highcharts, a
-commercial JavaScript charting library. Highcharts offers both a
-commercial license as well as a free non-commercial license. Please
-review the licensing options and terms before using this software, as
-the highcharter license neither provides nor implies a license for
-Highcharts.
-
-Highcharts (<https://highcharts.com>) is a Highsoft product which is not
-free for commercial and Governmental use.
