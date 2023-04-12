@@ -13,10 +13,14 @@ test_that("Pie", {
   data3 <- data.frame(name = c("G", "H", "I"), y = c(18, 22, 28))
 
   # Create Highcharts pie charts
-  hgch_pie_Cat(data1 )
-  hgch_pie_CatNum(data2)
-  hgch_pie(data3, var_cat = "name", var_num = "y" )
+  h <- hgch_pie_Cat(data1 )
+  expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
 
+  h <- hgch_pie_CatNum(data2)
+  expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
+
+  h <- hgch_pie(data3, var_cat = "name", var_num = "y" )
+  expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
 
   data <- ggplot2::diamonds
   data <- dsdataprep::aggregation_data(data = data,
@@ -30,7 +34,9 @@ test_that("Pie", {
               hor_title = "Categorias",
               ver_title = "Numeros",
               bar_orientation = "hor")
-  hgch_pie(data, var_cat = "cut", var_num = "price", opts =  ops)
+  h <- hgch_pie(data, var_cat = "cut", var_num = "price", opts =  ops)
+  expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
+
 
   # test theme (subtitles)
 
@@ -45,12 +51,12 @@ test_that("Pie", {
     )
   )
 
-  hgch_pie(data,
+  h <- hgch_pie(data,
            var_cat = "cut",
            var_num = "price",
            opts = test_theme,
            subtitle = "test subtitle",
            title = "test title")
-
+  expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
 
 })

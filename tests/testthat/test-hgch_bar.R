@@ -9,8 +9,9 @@ test_that("Bar", {
                                        to_agg = "price")
   h <- hgch_bar(data, var_cat = "cut", var_num = "price")
 
-  expect_equal(h_bar_Cat$x$hc_opts$chart$type, "column")
+  expect_equal(h$x$hc_opts$chart$type, "bar")
   expect_equal(length(h$x$hc_opts$series[[1]]$data), 5)
+
   for (i in 1:length(h$x$hc_opts$series[[1]]$data)) {
     expect_equal(h$x$hc_opts$series[[1]]$data[[i]]$name, as.character(data$cut[i]))
   }
@@ -90,12 +91,16 @@ test_that("Bar", {
   data <- data.frame(var_cat = c("a",  "b", "d"),
                      var_num_one = runif(3),
                      var_num_two = runif(3, 100, 1000))
-  hgch_bar(data, var_cat = "var_cat", var_num = c("var_num_one", "var_num_two"))
-  hgch_bar_CatNumNum(data)
+  h <- hgch_bar(data, var_cat = "var_cat", var_num = c("var_num_one", "var_num_two"))
+  expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
+
+  h <- hgch_bar_CatNumNum(data)
+  expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
+
   data <- tibble(var_cat = c("arroz", "SAL", "agua"),
-                     `var num one` = runif(3),
-                     `var num two` = runif(3, 100, 1000))
-  hgch_bar(data, var_cat = "var_cat", var_num = c("var num one", "var num two"))
+                     "var num one" = runif(3),
+                     "var num two" = runif(3, 100, 1000))
+  h <- hgch_bar(data, var_cat = "var_cat", var_num = c("var num one", "var num two"))
 
 
 
