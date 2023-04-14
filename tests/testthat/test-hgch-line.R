@@ -52,5 +52,15 @@ test_that("Line", {
   data <- data |> select(date, `nume 1` = x,  `nume 2` = y) |> tidyr::drop_na()
   #data$..labels <- " "
   hgch_line_DatNumNum(data)
+  data <- lubridate::lakers
+  data$date <- lubridate::ymd(data$date)
+  data$date <- format(data$date, "%Y")
+  data <- data |> select(date, `nume 1` = x,  `nume 2` = y) |> tidyr::drop_na()
+  #data$..labels <- " "
+  hgch_line_DatNumNum(data)
+  data <- data |>
+    group_by(date) |>
+    summarise(`nume 1` = sum(`nume 1`, na.rm = T), `nume 2` = sum(`nume 2`, na.rm = T))
+  hgch_line(data, var_dat = "date", var_num = c("nume 1", "nume 2"))
 
 })
