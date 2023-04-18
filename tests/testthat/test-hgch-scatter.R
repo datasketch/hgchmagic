@@ -2,7 +2,7 @@ test_that("multiplication works", {
 
   data <- lubridate::lakers
   data$date <- lubridate::ymd(data$date)
-  data <- data |> select(game_type, date, x)
+  data <- data |> dplyr::select(game_type, date, x)
   h_scatter <- hgch_scatter(data, var_cat = "game_type", var_dat = "date",var_num = "x")
 
   expect_equal(h_scatter$x$hc_opts$chart$type, "scatter")

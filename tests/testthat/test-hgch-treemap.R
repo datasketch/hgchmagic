@@ -17,7 +17,9 @@ test_that("Treemap", {
   expect_equal(h_treemap$x$hc_opts$series[[1]]$type, "treemap")
 
 
-  data <- ggplot2::diamonds |> select(cut, everything())
+  data <- ggplot2::diamonds |>
+    dplyr::select(cut, dplyr::everything())
+
   h_treemap_cat <- hgch_treemap_Cat(data)
   expect_equal(h_treemap_cat$x$hc_opts$series[[1]]$type, "treemap")
 
@@ -40,7 +42,8 @@ test_that("Treemap", {
   expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
 
 
-  data <- ggplot2::diamonds |> select(cut, clarity)
+  data <- ggplot2::diamonds |>
+    dplyr::select(cut, clarity)
   h <- hgch_treemap_CatCat(data)
 
   expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
