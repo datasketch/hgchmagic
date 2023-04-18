@@ -37,12 +37,17 @@ test_that("Bar", {
 
   ### hgch_bar_Cat()
   data <- ggplot2::diamonds |> dplyr::select(cut, dplyr::everything())
+  hgch_bar_Cat(data, collapse_rows = TRUE, tooltip_template = "Color: {color}")
+
+
 
   h_bar <- hgch_bar(data, var_cat = "cut", opts = ops, palette_colors = "#ffa92a")
   expect_null(h_bar$x$hc_opts$xAxis$type)
 
   h_bar_Cat <- hgch_bar_Cat(data, opts = ops, palette_colors = "#ffa92a")
   expect_equal(h_bar_Cat$x$hc_opts$xAxis$type, "category")
+
+
 
 
   # data <- ggplot2::diamonds |> dplyr::select(cut, price, dplyr::everything())
