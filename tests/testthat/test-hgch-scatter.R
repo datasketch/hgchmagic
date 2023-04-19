@@ -24,6 +24,7 @@ test_that("multiplication works", {
     group_by(clarity) |>
     summarise(x = sum(x, na.rm = T), y = sum(carat, na.rm = T))
   hgch_scatter(data, var_num = c("x", "y"), var_cat = "clarity")
+  hgch_scatter_CatNumNum(data)
 
   data <- ggplot2::diamonds
   data <- data |> select(clarity, x, y)

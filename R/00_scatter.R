@@ -65,6 +65,25 @@ hgch_scatter_CatDatNum <- function(data, ...) {
 }
 
 #' @export
+hgch_scatter_CatNumNum <- function(data, ...) {
+  var_cat <- names(data)[1]
+  var_num <- names(data)[2:3]
+  opts_prep <- dataprep_opts(...)
+  var_num_name <- opts_prep$agg_text %||% var_num
+
+  data <- dsdataprep::aggregation_data(data = data,
+                                       agg = opts_prep$agg,
+                                       agg_name = var_num_name,
+                                       group_var = var_cat,
+                                       to_agg = var_num,
+                                       percentage = opts_prep$percentage,
+                                       percentage_name = opts_prep$percentage_name,
+                                       extra_col = opts_prep$extra_col,
+                                       agg_extra = opts_prep$agg_extra)
+  hgch_scatter(data = data, var_cat = var_cat, var_num = var_num_name, ...)
+}
+
+#' @export
 hgch_scatter_NumNum <- function(data, ...) {
 
   var_num <- c(names(data)[1:2])
