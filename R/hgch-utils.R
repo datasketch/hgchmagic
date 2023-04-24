@@ -78,10 +78,8 @@ hc_body <- function(hc, data, frType, opts = NULL) {
         data$data
       )
   }
-  if (frType == "DatNumNum") {
-
+  if (frType == "CatNumNum") {
     hc <- hc
-
   } else {
     hc <- hc |>
       hc_tooltip(useHTML = TRUE,
@@ -304,7 +302,6 @@ hc_body_sankey <- function(hc, data, frType, opts = NULL) {
     hc_chart(type = 'sankey',
              polar = FALSE) |>
     hc_add_series(
-      #name = "",
       keys = list('from', 'to', 'weight', 'color', 'label'),
       data = data$data,
       nodes = data$nodes,
@@ -320,6 +317,9 @@ hc_body_sankey <- function(hc, data, frType, opts = NULL) {
         crop=FALSE,
         overflow=T
       )
+    ) |>
+    hc_tooltip(
+      headerFormat = opts$sankey_series %||% ""
     )
 
   hc #|>

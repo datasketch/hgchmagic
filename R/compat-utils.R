@@ -82,7 +82,7 @@ data_draw <- function(data,
   }
 
 
-  if (viz %in% c("line", "bar")) {
+  if (viz %in% c("line")) {
     if (grepl("CatDat|CatCat", frType)) {
       data_all <- completevalues(data, var_num = var_num)
       data[[2]] <- as.character(data[[2]])

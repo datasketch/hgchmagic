@@ -38,12 +38,17 @@ test_that("Bar", {
 
   ### hgch_bar_Cat()
   data <- ggplot2::diamonds |> dplyr::select(cut, dplyr::everything())
+  hgch_bar_Cat(data, collapse_rows = TRUE, tooltip_template = "Color: {color}")
+
+
 
   h_bar <- hgch_bar(data, var_cat = "cut", opts = ops, palette_colors = "#ffa92a")
   expect_null(h_bar$x$hc_opts$xAxis$type)
 
   h_bar_Cat <- hgch_bar_Cat(data, opts = ops, palette_colors = "#ffa92a")
   expect_equal(h_bar_Cat$x$hc_opts$xAxis$type, "category")
+
+
 
 
   # data <- ggplot2::diamonds |> dplyr::select(cut, price, dplyr::everything())
@@ -98,9 +103,14 @@ test_that("Bar", {
   expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
 
   data <- tibble(var_cat = c("arroz", "SAL", "agua"),
-                     "var num one" = runif(3),
-                     "var num two" = runif(3, 100, 1000))
-  h <- hgch_bar(data, var_cat = "var_cat", var_num = c("var num one", "var num two"))
+                     `var num one` = c(runif(2), NA),
+                     `var num two` = runif(3, 100, 1000))
+  hgch_bar(data, var_cat = "var_cat", var_num = c("var num one", "var num two"))
+  data <- tibble(var_cat = c("arroz"),
+                 `var num one` = 10,
+                 `var num two` = 3)
+  hgch_bar(data, var_cat = "var_cat",
+           var_num = c("var num one", "var num two"), bar_orientation = "ver")
 
 
 
