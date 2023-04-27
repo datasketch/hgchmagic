@@ -39,9 +39,9 @@ remotes::install_github("datasketch/hgchmagic")
 ## How to start
 
 hgchmagic offers a several number of functions for interactive
-visualization. Check [this
-article](https://datasketch.github.io/hgchmagic/articles/hgchmagic.html)
-or run `vignette("hgchmagic)` to see how hgchmagic works.
+visualization. Check
+<a href="https://datasketch.github.io/hgchmagic/articles/hgchmagic.html" target="_blank">this
+article</a> or run `vignette("hgchmagic)` to see how hgchmagic works.
 
 ## Licence
 
