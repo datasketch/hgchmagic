@@ -12,6 +12,35 @@
 #'
 #' @seealso \code{\link{data_draw}}
 #'
+#' @examples
+#' data <- ggplot2::diamonds
+#' data <- data |>
+#'   dplyr::group_by(cut, clarity) |>
+#'   dplyr::summarise(total = sum(z, na.rm = T))
+#'
+#' hgch_sankey(data, var_cat = c("cut", "clarity"), var_num = "total")
+#'
+#' ### Adding style to plot
+#' test_theme <- list(
+#'   theme = list(
+#'     palette_colors = "#ffa92a",
+#'     caption_align = "right",
+#'     caption_family = "Roboto",
+#'     caption_size = 15,
+#'     caption_color = "#3b83b8",
+#'     caption_weight = 700
+#'   )
+#' )
+#'
+#' data <- dplyr::starwars
+#' data <- data |>
+#'   dplyr::select(hair_color, sex) |>
+#'   tidyr::drop_na()
+#'
+#' hgch_sankey_CatCat(data,
+#'                    opts = test_theme,
+#'                    caption = "theme caption")
+#'
 #' @export
 hgch_sankey <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
 
