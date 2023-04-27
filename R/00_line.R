@@ -13,6 +13,15 @@
 #'
 #' @seealso \code{\link{data_draw}}
 #'
+#' @examples
+#' dates <- seq(as.POSIXct("2022-01-01"),
+#'              as.POSIXct("2022-01-10"),
+#'              by = "day")
+#' values <- rnorm(length(dates))
+#' df <- data.frame(date = dates, value = values)
+#'
+#' hgch_line(df, var_dat = "date", var_num = "value")
+#'
 #' @export
 hgch_line <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num = NULL, ...) {
 
