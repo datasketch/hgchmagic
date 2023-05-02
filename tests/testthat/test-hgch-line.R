@@ -63,4 +63,12 @@ test_that("Line", {
     summarise(`nume 1` = sum(`nume 1`, na.rm = T), `nume 2` = sum(`nume 2`, na.rm = T))
   hgch_line(data, var_dat = "date", var_num = c("nume 1", "nume 2"))
 
+
+  data <- homodatum::sample_data("Dat-Num", 100)
+  names(data) <- c("a", "b")
+  hgch_line_DatNum(data)
+
+
+
+
 })

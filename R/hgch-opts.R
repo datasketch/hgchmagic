@@ -105,7 +105,8 @@ dataprep_opts <- function(...) {
     percentage = opts$prep$percentage,
     percentage_name = opts$prep$percentage_col,
     extra_col = opts$prep$collapse_rows,
-    agg_extra = opts$prep$agg_collapse_rows
+    agg_extra = opts$prep$agg_collapse_rows,
+    agg_add = opts$prep$agg_data
   )
 }
 
