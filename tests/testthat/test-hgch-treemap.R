@@ -1,4 +1,5 @@
 test_that("Treemap", {
+
   data <- ggplot2::diamonds
   data <- dsdataprep::aggregation_data(data = data,
                                        agg = "sum",
@@ -16,7 +17,9 @@ test_that("Treemap", {
   expect_equal(h_treemap$x$hc_opts$series[[1]]$type, "treemap")
 
 
-  data <- ggplot2::diamonds |> select(cut, everything())
+  data <- ggplot2::diamonds |>
+    dplyr::select(cut, dplyr::everything())
+
   h_treemap_cat <- hgch_treemap_Cat(data)
   expect_equal(h_treemap_cat$x$hc_opts$series[[1]]$type, "treemap")
 
@@ -29,10 +32,20 @@ test_that("Treemap", {
                                        group_var = c("cut", "clarity"),
                                        to_agg = "price")
 
-  hgch_treemap(data, var_cat = c("cut", "clarity"), var_num = "price")
-  hgch_treemap_CatCatNum(data)
+  h <- hgch_treemap(data, var_cat = c("cut", "clarity"), var_num = "price")
 
-  data <- ggplot2::diamonds |> select(cut, clarity)
-  hgch_treemap_CatCat(data)
+  expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
+
+
+  h <- hgch_treemap_CatCatNum(data)
+
+  expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
+
+
+  data <- ggplot2::diamonds |>
+    dplyr::select(cut, clarity)
+  h <- hgch_treemap_CatCat(data)
+
+  expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
 
 })

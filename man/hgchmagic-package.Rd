@@ -8,8 +8,4 @@
 \description{
 With hgchmagic you can provide more info in form of list and improve your visualizations.
 }
-\author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
-
-}
 \keyword{internal}

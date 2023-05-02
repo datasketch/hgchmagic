@@ -11,7 +11,6 @@ provide more info in form of list and improve your visualizations.
 
 The type of charts supported by hgchmagic are:
 
-
 - `hgch_bar()`
 - `hgch_line()`
 - `hgch_scatter()`
@@ -36,3 +35,22 @@ You can install the development version of hgchmagic like so:
 # install.packages("devtools")
 remotes::install_github("datasketch/hgchmagic")
 ```
+
+## How to start
+
+hgchmagic offers a several number of functions for interactive
+visualization. Check [this
+article](https://datasketch.github.io/hgchmagic/articles/hgchmagic.html)
+or run `vignette("hgchmagic)` to see how hgchmagic works.
+
+## Licence
+
+hgchmagic depends on highcharter which is a wrapper for highcharts, a
+commercial JavaScript charting library. Highcharts offers both a
+commercial license as well as a free non-commercial license. Please
+review the licensing options and terms before using this software, as
+the highcharter license neither provides nor implies a license for
+Highcharts.
+
+Highcharts (<https://highcharts.com>) is a Highsoft product which is not
+free for commercial and Governmental use.
