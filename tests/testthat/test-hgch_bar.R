@@ -62,16 +62,16 @@ test_that("Bar", {
   #                                      group_var = c("cut", "color"),
   #                                      to_agg = "price")
   #
-  # ops <- list(titles = list(title = "title", subtitle = "subtitle", caption = "caption"))
+   ops <- list(titles = list(title = "title", subtitle = "subtitle", caption = "caption"))
   # hgch_bar(data, var_cat = c("cut", "color"), var_num = "price", opts =  ops)
   # hgch_bar(data, var_cat = c("cut", "color"), var_num = "price", order = c("H", "F"))
   # hgch_bar(data, var_cat = c("cut", "color"), var_num = "price", order_legend = c("Ideal", "Premium"))
   # hgch_bar(data, var_cat = c("cut", "color"), var_num = "price",
   #          order_legend = c("Ideal", "Premium"), order = c("H", "F"))
   #
-  # data <- ggplot2::diamonds |> select(cut, color, price, everything())
-  # hgch_bar_CatCat(data, opts = ops)
-  # hgch_bar_CatCatNum(data, opts = ops)
+  data <- ggplot2::diamonds |> select(cut, color, price, everything())
+  hgch_bar_CatCat(data, opts = ops)
+  hgch_bar_CatCatNum(data, opts = ops)
   #
   #
   # # opts from theme (canvas)

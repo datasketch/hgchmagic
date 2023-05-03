@@ -24,6 +24,8 @@ plot_opts <- function(viz = NULL, frType = NULL, ...) {
   }
   if (viz == "bar") {
     bar_orientation <- opts$bar$bar_orientation
+    extra_opts$graph_type <- opts$bar$bar_graph_type
+    extra_opts$percentage <- opts$prep$percentage
     if (bar_orientation == "hor") {
       plot_type <- "column"
     }
