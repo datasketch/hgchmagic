@@ -56,9 +56,10 @@ hc_body <- function(hc, data, frType, opts = NULL) {
       )
 
     if (opts$graph_type == "stacked"){
-      hc <- hc %>% hc_plotOptions(bar = list(stacking = "normal"), column = list(stacking = "normal"))
+      hc <- hc |>
+        hc_plotOptions(bar = list(stacking = "normal"), column = list(stacking = "normal"))
       if (opts$percentage) {
-        hc <- hc %>%
+        hc <- hc |>
           hc_plotOptions(
             bar = list(
               stacking = 'percent'
@@ -66,7 +67,7 @@ hc_body <- function(hc, data, frType, opts = NULL) {
             column = list(
               stacking = 'percent'
             )
-          ) %>%
+          ) |>
           hc_yAxis(maxRange = 100,
                    max = 100)
       }
