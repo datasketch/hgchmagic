@@ -22,6 +22,20 @@
 #'
 #' hgch_line(df, var_dat = "date", var_num = "value")
 #'
+#'### Custom colors
+#' data <- lubridate::lakers
+#' data$date <- lubridate::ymd(data$date)
+#' data <- data |>
+#'   dplyr::group_by(game_type, date) |>
+#'   dplyr::summarise(x = sum(x, na.rm = T))
+#'
+#' hgch_line(data,
+#'           var_cat = "game_type",
+#'           var_dat = "date",
+#'           var_num = "x",
+#'           palette_colors = c("#ffa92a", "#f06142"),
+#'           hor_title = "fecha",
+#'           ver_title = "valor")
 #' @export
 hgch_line <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num = NULL, ...) {
 
