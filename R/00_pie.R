@@ -15,8 +15,28 @@
 #'
 #' @examples
 #' data1 <- data.frame(name = c("A", "B", "C"), y = c(10, 20, 30))
-#' hgch_pie(data1, var_cat = "name", var_num = "y")
+#' hgch_pie(data1,
+#'          var_cat = "name",
+#'          var_num = "y")
 #'
+#' # Custom theme
+#' test_theme <- list(
+#'   theme = list(
+#'     palette_colors = c("#ffa92a", "black", "lightgreen"),
+#'     subtitle_align = "center",
+#'     subtitle_family = "Roboto",
+#'     subtitle_size = 15,
+#'     subtitle_color = "#3b83b8",
+#'     subtitle_weight = 700
+#'   )
+#' )
+#'
+#' hgch_pie(data1,
+#'          var_cat = "name",
+#'          var_num = "y",
+#'          opts = test_theme,
+#'          subtitle = "test subtitle",
+#'          title = "test title")
 #' @export
 hgch_pie <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
 

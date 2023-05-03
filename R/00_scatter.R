@@ -13,6 +13,37 @@
 #'
 #' @seealso \code{\link{data_draw}}
 #'
+#' @examples
+#'
+#' data <- ggplot2::diamonds
+#' data <- data |>
+#'   dplyr::group_by(clarity) |>
+#'   dplyr::summarise(x = sum(x, na.rm = T),
+#'                    y = sum(carat, na.rm = T))
+#'
+#' hgch_scatter(data,
+#'              var_num = c("x", "y"),
+#'              var_cat = "clarity")
+#'
+#'  # Custom theme
+#'   test_theme <- list(
+#'     theme = list(
+#'       palette_colors = c("#ffa92a", "lightgreen"),
+#'       subtitle_align = "center",
+#'       subtitle_family = "Roboto",
+#'       subtitle_size = 15,
+#'       subtitle_color = "#3b83b8",
+#'       subtitle_weight = 700
+#'     )
+#'   )
+#'
+#'   hgch_scatter(data,
+#'                var_num = c("x", "y"),
+#'                var_cat = "clarity",
+#'                opts = test_theme,
+#'                title = "test title",
+#'                subtitle = "test subtitle")
+#'
 #' @export
 hgch_scatter <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num = NULL, ...) {
 

@@ -36,6 +36,28 @@
 #'           palette_colors = c("#ffa92a", "#f06142"),
 #'           hor_title = "fecha",
 #'           ver_title = "valor")
+#'
+#' # Custom theme
+#'  test_theme <- list(
+#'    theme = list(
+#'      palette_colors = c("#ffa92a", "lightgreen"),
+#'      subtitle_align = "center",
+#'      subtitle_family = "Roboto",
+#'      subtitle_size = 15,
+#'      subtitle_color = "#3b83b8",
+#'      subtitle_weight = 700
+#'    )
+#'  )
+#'
+#' # plot
+#'  hgch_line(data,
+#'            var_cat = "game_type",
+#'            var_dat = "date",
+#'            var_num = "x",
+#'            hor_title = "fecha",
+#'            ver_title = "valor",
+#'            opts = test_theme)
+#'
 #' @export
 hgch_line <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num = NULL, ...) {
 
