@@ -15,10 +15,35 @@
 #' @examples
 #' data(mtcars)
 #' mtcars$cyl <- as.character(mtcars$cyl)
-#' mtcars <- mtcars |> dplyr::group_by(cyl) |> dplyr::summarise(mpg = mean(mpg))
-#' hgch_treemap(mtcars, var_cat = "cyl", var_num = "mpg")
+#' mtcars <- mtcars |>
+#'   dplyr::group_by(cyl) |>
+#'   dplyr::summarise(mpg = mean(mpg))
 #'
+#' hgch_treemap(mtcars,
+#'              var_cat = "cyl",
+#'              var_num = "mpg")
 #'
+#' ### Custom labels
+#' data <- ggplot2::diamonds
+#' data <- data |>
+#'   dplyr::group_by(cut) |>
+#'   dplyr::summarise(price_sum = sum(price)),
+#'                                      agg = "sum",
+#'                                      group_var = "cut",
+#'                                      to_agg = "price")
+#'
+#' # Define custom layers
+#' ops <- list(title = "title",
+#'             subtitle = "subtitle",
+#'             caption = "caption",
+#'             hor_title = "Categorias",
+#'             ver_title = "Numeros",
+#'             bar_orientation = "hor")
+#'
+#' hgch_treemap(data,
+#'              var_cat = "cut",
+#'              var_num = "price_sum",
+#'              opts =  ops)
 #' @export
 hgch_treemap <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
 
