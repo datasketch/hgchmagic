@@ -134,7 +134,7 @@ data_draw <- function(data,
                                      new_line = opts$new_line,
                                      sort = opts$sort,
                                      slice_n = opts$slice_n,
-                                     #intra_cat = opts$intra_cat,
+                                     intra_cat = opts$intra_cat,
                                      index_names = index_names)
 
 

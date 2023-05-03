@@ -99,7 +99,7 @@ hgch_bar_CatNum <- function(data, ...) {
   var_num <- names(data)[2]
   opts_prep <- dataprep_opts(...)
   var_num_name <- opts_prep$agg_text %||% var_num
-
+  if (opts_prep$agg_add) {
   data <- dsdataprep::aggregation_data(data = data,
                                        agg = opts_prep$agg,
                                        agg_name = var_num_name,
@@ -109,6 +109,7 @@ hgch_bar_CatNum <- function(data, ...) {
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
+  }
   hgch_bar(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
 
@@ -136,6 +137,7 @@ hgch_bar_CatCatNum <- function(data, ...) {
   var_num <- names(data)[3]
   opts_prep <- dataprep_opts(...)
   var_num_name <- opts_prep$agg_text %||% var_num
+  if (opts_prep$agg_add) {
   data <- dsdataprep::aggregation_data(data = data,
                                        agg = "mean",
                                        group_var = var_cat,
@@ -145,6 +147,7 @@ hgch_bar_CatCatNum <- function(data, ...) {
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
+  }
   hgch_bar(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
 
