@@ -26,9 +26,49 @@ Creates a bar chart using Highcharter library.
 \examples{
 data(mtcars)
 mtcars$cyl <- as.character(mtcars$cyl)
-mtcars <- mtcars |> dplyr::group_by(cyl) |> dplyr::summarise(mpg = mean(mpg))
+
+mtcars <- mtcars |>
+  dplyr::group_by(cyl) |>
+  dplyr::summarise(mpg = mean(mpg))
+
 hgch_bar(mtcars, var_cat = "cyl", var_num = "mpg")
 
+
+### Adding style to plots
+ops <- list(titles = list(title = "title",
+                          subtitle = "subtitle",
+                          caption = "caption"))
+
+ data <- ggplot2::diamonds |>
+   dplyr::select(cut, color, price, everything())
+
+ # plot 1
+ hgch_bar_CatCat(data, opts = ops)
+
+ # plot 2
+ hgch_bar_CatCatNum(data, opts = ops)
+
+
+ # opts from theme (canvas)
+ test_theme <- list(
+   theme = list(
+   background_color = "#2f2f2f",
+   plot_margin_bottom = 30,
+   plot_margin_left = 30,
+   plot_margin_right = 30,
+   plot_margin_top = 30,
+   plot_background_color = "#f2f2f2",
+   plot_border_color = "#ff2c2f",
+   plot_border_size = 3,
+   text_family = "ubuntu",
+   text_size = 15
+   )
+ )
+
+ data <- ggplot2::diamonds |>
+  dplyr::select(cut, everything())
+
+hgch_bar_Cat(data, opts = test_theme)
 
 }
 \seealso{

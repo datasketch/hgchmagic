@@ -75,8 +75,10 @@ plot_opts <- function(viz = NULL, frType = NULL, ...) {
     order = opts$prep$order,
     order_legend = opts$prep$order_legend,
     label_wrap = opts$prep$label_wrap,
+    label_wrap_legend = opts$prep$label_wrap_legend,
     new_line = "<br/>",
     sort = opts$prep$sort,
+    sort_by_cat = opts$prep$sort_by_cat %||% FALSE,
     slice_n = opts$prep$slice_n
   )
 
@@ -105,6 +107,7 @@ dataprep_opts <- function(...) {
     agg = opts$prep$agg,
     agg_text = opts$prep$agg_text,
     percentage = opts$prep$percentage,
+    percentage_name = opts$prep$percentage_name,
     percentage_name = opts$prep$percentage_col,
     extra_col = opts$prep$collapse_rows,
     agg_extra = opts$prep$agg_collapse_rows,

@@ -129,6 +129,9 @@ hgch_bar_Cat <- function(data, ...) {
                                percentage_name = opts_prep$percentage_name,
                                extra_col = opts_prep$extra_col,
                                agg_extra = opts_prep$agg_extra)
+  if (opts_prep$percentage) {
+    var_num_name <- opts_prep$percentage_name %||% "..percentage"
+  }
   hgch_bar(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
 
@@ -150,6 +153,11 @@ hgch_bar_CatNum <- function(data, ...) {
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
   }
+
+
+  if (opts_prep$percentage) {
+    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage", var_num)
+  }
   hgch_bar(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
 
@@ -167,6 +175,9 @@ hgch_bar_CatCat <- function(data, ...) {
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
+  if (opts_prep$percentage) {
+    var_num_name <- opts_prep$percentage_name %||% "..percentage"
+  }
   hgch_bar(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
 
@@ -188,6 +199,9 @@ hgch_bar_CatCatNum <- function(data, ...) {
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
   }
+  if (opts_prep$percentage) {
+    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage", var_num)
+  }
   hgch_bar(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
 
@@ -207,6 +221,8 @@ hgch_bar_CatNumNum <- function(data, ...) {
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
-
+  if (opts_prep$percentage) {
+    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage", var_num)
+  }
   hgch_bar(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }

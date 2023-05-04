@@ -39,6 +39,7 @@ test_that("Bar", {
   ### hgch_bar_Cat()
   data <- ggplot2::diamonds |> dplyr::select(cut, dplyr::everything())
   hgch_bar_Cat(data, collapse_rows = TRUE, tooltip_template = "Color: {color}")
+  hgch_bar_Cat(data, percentage = TRUE)
 
 
 
@@ -51,9 +52,9 @@ test_that("Bar", {
 
 
 
-  # data <- ggplot2::diamonds |> dplyr::select(cut, price, dplyr::everything())
-  # h_bar_CatNum <- hgch_bar_CatNum(data, opts = ops)
-  # hgch_bar_CatNum(data, opts = ops, collapse_rows = TRUE)
+  data <- ggplot2::diamonds |> dplyr::select(cut, price, dplyr::everything())
+  hgch_bar_CatNum(data, percentage = TRUE, percentage_name = "Porcentaje")
+  hgch_bar_CatNum(data, opts = ops, percentage = TRUE)
   #
   #
   # data <- ggplot2::diamonds
@@ -70,7 +71,7 @@ test_that("Bar", {
   #          order_legend = c("Ideal", "Premium"), order = c("H", "F"))
   #
   data <- ggplot2::diamonds |> select(cut, color, price, everything())
-  hgch_bar_CatCat(data, opts = ops)
+  hgch_bar_CatCat(data, opts = ops, percentage = TRUE)
   hgch_bar_CatCatNum(data, opts = ops)
   #
   #
