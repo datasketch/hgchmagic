@@ -14,9 +14,31 @@
 #'
 #'
 #' @examples
-#' data1 <- data.frame(name = c("A", "B", "C"), y = c(10, 20, 30))
-#' hgch_donut(data1, var_cat = "name", var_num = "y")
+#' data1 <- data.frame(name = c("A", "B", "C"),
+#'                     y = c(10, 20, 30))
+#' hgch_donut(data1,
+#'            var_cat = "name",
+#'            var_num = "y")
 #'
+#' # Custom theme
+#'  test_theme <- list(
+#'    theme = list(
+#'      palette_colors = c("#ffa92a", "lightgreen", "salmon"),
+#'      subtitle_align = "center",
+#'      subtitle_family = "Roboto",
+#'      subtitle_size = 15,
+#'      subtitle_color = "#3b83b8",
+#'      subtitle_weight = 700
+#'    )
+#'  )
+#'
+#'  hgch_donut(data1,
+#'               var_num = "y",
+#'               var_cat = "name",
+#'               opts = test_theme,
+#'               title = "test title",
+#'               subtitle = "test subtitle")
+
 #' @export
 hgch_donut <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
 

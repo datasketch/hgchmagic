@@ -7,15 +7,15 @@ test_that("Sankey", {
   h <- hgch_sankey(data, var_cat = c( "sex", "gender", "hair_color", "skin_color"))
   expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
 
-  data_catcat <- data |> select(sex, gender)
+  data_catcat <- data |> dplyr::select(sex, gender)
   h <- hgch_sankey_CatCat(data_catcat)
   expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
 
-  data_catcatcat <- data |> select(sex, gender, species)
+  data_catcatcat <- data |> dplyr::select(sex, gender, species)
   h <- hgch_sankey_CatCatCat(data_catcatcat)
   expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
 
-  data_cat4 <- data |> select(hair_color, sex, gender, species)
+  data_cat4 <- data |> dplyr::select(hair_color, sex, gender, species)
   h <- hgch_sankey_CatCatCatCat(data_cat4)
 
   test_theme <- list(
@@ -29,12 +29,12 @@ test_that("Sankey", {
     )
   )
   data <- dplyr::starwars
-  data <- data |> select(hair_color, sex) |> tidyr::drop_na()
+  data <- data |> dplyr::select(hair_color, sex) |> tidyr::drop_na()
   h <- hgch_sankey_CatCat(data, opts = test_theme, caption = "theme caption")
   expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
 
   data <- ggplot2::diamonds
-  data <- data |> group_by(cut, clarity) |> summarise(total = sum(z, na.rm = T))
+  data <- data |> dplyr::group_by(cut, clarity) |> dplyr::summarise(total = sum(z, na.rm = T))
   h <- hgch_sankey(data, var_cat = c("cut", "clarity"), var_num = "total")
   expect_true(all(class(h) %in% c("highchart", "htmlwidget")))
 
