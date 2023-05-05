@@ -123,12 +123,14 @@ hgch_line_DatNum <- function(data, ...) {
   var_num <- names(data)[2]
   opts_prep <- dataprep_opts(...)
   var_num_name <- opts_prep$agg_text %||% var_num
+
   if (opts_prep$agg_add) {
   data <- dsdataprep::aggregation_data(data = data,
                                        agg = opts_prep$agg,
                                        agg_name = var_num_name,
                                        group_var = var_dat,
                                        to_agg = var_num,
+                                       na_rm = opts_prep$na_rm,
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
@@ -136,7 +138,7 @@ hgch_line_DatNum <- function(data, ...) {
   }
 
   if (opts_prep$percentage) {
-    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage", var_num)
+    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage ", var_num)
   }
   hgch_line(data = data, var_dat = var_dat, var_num = var_num_name, ...)
 }
@@ -152,8 +154,10 @@ hgch_line_CatDat <- function(data, ...) {
                                        agg = "count",
                                        group_var = c(var_cat, var_dat),
                                        agg_name = opts_prep$agg_text %||% var_num_name,
+                                       na_rm = opts_prep$na_rm,
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,
+                                       percentage_col = opts_prep$percentage_col,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
   if (opts_prep$percentage) {
@@ -170,19 +174,23 @@ hgch_line_CatDatNum <- function(data, ...) {
   var_num <- names(data)[3]
   opts_prep <- dataprep_opts(...)
   var_num_name <- opts_prep$agg_text %||% var_num
+
+
   if (opts_prep$agg_add) {
   data <- dsdataprep::aggregation_data(data = data,
                                        agg = opts_prep$agg,
                                        agg_name = var_num_name,
                                        group_var = c(var_cat, var_dat),
                                        to_agg = var_num,
+                                       na_rm = opts_prep$na_rm,
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,
+                                       percentage_col = opts_prep$percentage_col,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
   }
   if (opts_prep$percentage) {
-    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage", var_num)
+    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage ", var_num)
   }
   hgch_line(data = data, var_cat = var_cat, var_dat = var_dat, var_num = var_num_name, ...)
 }
@@ -205,7 +213,7 @@ hgch_line_DatNumNum <- function(data, ...) {
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
   if (opts_prep$percentage) {
-    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage", var_num)
+    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage ", var_num)
   }
   hgch_line(data = data, var_dat = var_dat, var_num = var_num_name, ...)
 }

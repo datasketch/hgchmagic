@@ -122,7 +122,7 @@ hgch_treemap_CatNum <- function(data, ...) {
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
   if (opts_prep$percentage) {
-    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage", var_num)
+    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage ", var_num)
   }
   hgch_treemap(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
@@ -163,7 +163,7 @@ hgch_treemap_CatCatNum <- function(data, ...) {
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
   if (opts_prep$percentage) {
-    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage", var_num)
+    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage ", var_num)
   }
   hgch_treemap(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }

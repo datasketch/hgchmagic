@@ -156,7 +156,7 @@ hgch_bar_CatNum <- function(data, ...) {
 
 
   if (opts_prep$percentage) {
-    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage", var_num)
+    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage ", var_num)
   }
   hgch_bar(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
@@ -200,7 +200,7 @@ hgch_bar_CatCatNum <- function(data, ...) {
                                        agg_extra = opts_prep$agg_extra)
   }
   if (opts_prep$percentage) {
-    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage", var_num)
+    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage ", var_num)
   }
   hgch_bar(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
@@ -222,7 +222,7 @@ hgch_bar_CatNumNum <- function(data, ...) {
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
   if (opts_prep$percentage) {
-    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage", var_num)
+    var_num_name <- opts_prep$percentage_name %||% paste0("..percentage ", var_num)
   }
   hgch_bar(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
