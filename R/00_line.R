@@ -86,6 +86,7 @@ hgch_line <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num
                          opts = opts$data_opts,
                          viz = "line")
 
+  global_options(opts$general_opts$format_sample_num)
   line <- highchart() |>
     hc_titles(opts = opts$titles)  |>
     hc_body_line(data = data_draw, frType = frType, opts = opts$general_opts) |>

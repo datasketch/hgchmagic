@@ -64,7 +64,7 @@ hgch_scatter <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_
                          opts = opts$data_opts,
                          viz = "scatter")
 
-
+  global_options(opts$general_opts$format_sample_num)
   scatter <- highchart() |>
     hc_titles(opts = opts$titles)  |>
     hc_body_scatter(data = data_draw, frType = frType, opts = opts$general_opts) |>

@@ -55,7 +55,7 @@ hgch_donut <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
                          frType = frType,
                          opts = opts$data_opts,
                          viz = "donut")
-
+  global_options(opts$general_opts$format_sample_num)
   donut <- highchart() |>
     hc_titles(opts = opts$titles)  |>
     hc_body(data = data_draw, frType = frType, opts = opts$general_opts) |>

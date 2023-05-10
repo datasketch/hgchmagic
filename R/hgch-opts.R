@@ -12,7 +12,7 @@ plot_opts <- function(viz = NULL, frType = NULL, ...) {
   opts <- dsvizopts::merge_dsviz_options(...)
   plot_type <- viz
   extra_opts <- list()
-
+  ndig <- makeup::which_num_format(opts$prep$format_sample_num)$separators$n_decimal
   if (opts$shiny$shiny_clickable) {
     input_name <- opts$shiny$shiny_input_name
     if (!is.null(frType)) {
@@ -79,19 +79,22 @@ plot_opts <- function(viz = NULL, frType = NULL, ...) {
     new_line = "<br/>",
     sort = opts$prep$sort,
     sort_by_cat = opts$prep$sort_by_cat %||% FALSE,
-    slice_n = opts$prep$slice_n
+    slice_n = opts$prep$slice_n,
+    n_digits = ndig
   )
 
   general_opts <- list(
     hor_title = opts$titles$hor_title %||% " ",
     ver_title = opts$titles$ver_title %||% " ",
     plot_type = plot_type,
+    format_sample_num = opts$prep$format_sample_num,
     legend_show = opts$theme$legend_show,
     legend_title = opts$titles$legend_title
   )
 
   general_opts <- modifyList(general_opts, extra_opts)
   opts$theme$palette_colors <- opts$theme$palette_colors %||% opts$theme$palette_colors_categorical
+  opts$theme <- c(opts$theme, opts$data_labels)
 
   list(titles = titles,
        data_opts = data_opts,

@@ -1,7 +1,6 @@
 #' @keywords internal
 hgch_theme <- function(opts = NULL) {
   message("in theme_datasketch")
-
   highcharter::hc_theme(
     useHTML = TRUE,
     colors = opts$palette_colors,
@@ -158,13 +157,21 @@ hgch_theme <- function(opts = NULL) {
         animation = list(
           duration = opts$animation_duration
         ),
-        # dataLabels = list (
-        #   enabled = opts$dataLabels_show,
-        #   style = labels_style,
-        #   inside = opts$dataLabels_inside,
-        #   format = opts$templatedataLabels %||% paste0(opts$cats, opts$format_dataLabels),
-        #   verticalAlign = opts$dataLabels_align#'middle'
-        # ),
+        dataLabels = list (
+          enabled = opts$data_labels_show,
+          #format = paste0("",opts$format_sample_num)
+          style = list(
+            color = opts$data_labels_color %||% opts$text_color,
+            fontFamily = opts$text_family,
+            fontSize = paste0(opts$data_labels_size %||% 11, "px"),
+            textDecoration= "none",
+            textShadow = "none",
+            textOutline = ifelse(opts$data_labels_text_outline, "1px contrast", "none")
+          ),
+          inside = opts$data_labels_inside,
+          #format = opts$templatedataLabels %||% paste0(opts$cats, opts$format_dataLabels),
+          verticalAlign = opts$data_labels_align#'middle'
+        ),
         cursor =  opts$cursor,
         events = list(
           click = JS(opts$click_function)

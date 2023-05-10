@@ -62,6 +62,10 @@ data_draw <- function(data,
   index_names <- NULL
 
 
+  if (!is.null(var_num)) {
+    data[,var_num] <- round(data[,var_num], opts$n_digits)
+  }
+
   if (viz == "sankey") {
     if (!any(grepl("Num", frType))) {
       data <- data |> select({{ var_cat }}) #|> tidyr::drop_na()

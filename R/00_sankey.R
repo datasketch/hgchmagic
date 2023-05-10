@@ -57,7 +57,7 @@ hgch_sankey <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) 
                          opts = opts$data_opts,
                          viz = "sankey")
 
-
+  global_options(opts$general_opts$format_sample_num)
   sankey <- highchart() |>
     hc_titles(opts = opts$titles)  |>
     hc_body_sankey(data = data_draw, frType = frType, opts = opts$general_opts) |>

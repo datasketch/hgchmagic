@@ -10,7 +10,6 @@ hc_titles <- function (hc, opts) {
 
 hc_body <- function(hc, data, frType, opts = NULL) {
 
-  #global_options(opts$style$format_sample_num)
 
   hc <-   hc |>
     hc_chart(type = opts$plot_type#,

@@ -54,7 +54,7 @@ hgch_pie <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
                          opts = opts$data_opts,
                          viz = "pie")
 
-
+  global_options(opts$general_opts$format_sample_num)
   pie <- highchart() |>
     hc_titles(opts = opts$titles)  |>
     hc_body(data = data_draw, frType = frType, opts = opts$general_opts) |>

@@ -92,7 +92,7 @@ hgch_bar <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
                          opts = opts$data_opts,
                          viz = "bar")
 
-  #global_options(opts$style$format_sample_num)
+  global_options(opts$general_opts$format_sample_num)
   bar <- highchart() |>
     hc_titles(opts = opts$titles)  |>
     hc_body(data = data_draw, frType = frType, opts = opts$general_opts) |>
