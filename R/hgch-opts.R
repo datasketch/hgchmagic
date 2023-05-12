@@ -78,8 +78,10 @@ plot_opts <- function(viz = NULL, frType = NULL, ...) {
     label_wrap_legend = opts$prep$label_wrap_legend,
     new_line = "<br/>",
     sort = opts$prep$sort,
+    sort_by = opts$prep$sort_by,
     sort_by_cat = opts$prep$sort_by_cat %||% FALSE,
     slice_n = opts$prep$slice_n,
+    intra_cat = opts$prep$intra_cat %||% FALSE,
     n_digits = ndig
   )
 
