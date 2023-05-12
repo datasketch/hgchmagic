@@ -10,7 +10,6 @@ hc_titles <- function (hc, opts) {
 
 hc_body <- function(hc, data, frType, opts = NULL) {
 
-
   hc <-   hc |>
     hc_chart(type = opts$plot_type#,
              # events = list(

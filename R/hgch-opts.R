@@ -22,12 +22,14 @@ plot_opts <- function(viz = NULL, frType = NULL, ...) {
     }
     opts$theme$cursor <- opts$shiny$shiny_cursor
   }
+
   if (viz == "bar") {
     bar_orientation <- opts$bar$bar_orientation
     extra_opts$graph_type <- opts$bar$bar_graph_type
     extra_opts$percentage <- opts$prep$percentage
-    if (bar_orientation == "hor") {
-      plot_type <- "column"
+    extra_opts$plot_type <- "bar"
+    if (opts$bar$bar_orientation == "ver") {
+      extra_opts$plot_type <- "column"
     }
   }
 

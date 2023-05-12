@@ -111,7 +111,7 @@ test_that("Bar", {
                  `var num one` = 10,
                  `var num two` = 3)
   hgch_bar(data, var_cat = "var_cat",
-           var_num = c("var num one", "var num two"), bar_orientation = "ver")
+           var_num = c("var_num_one", "var_num_two"), bar_orientation = "ver")
 
 
 

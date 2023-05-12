@@ -130,7 +130,7 @@ data_draw <- function(data,
   }
 
   data <- dsdataprep::wrap_sort_data(data = data,
-                                     col_cat = opts$sort_by,
+                                     col_cat = var_cat,#opts$sort_by,
                                      col_num = var_num,
                                      order = opts$order,
                                      order_legend = opts$order_legend,
