@@ -209,6 +209,7 @@ hgch_line_DatNumNum <- function(data, ...) {
                                        agg_name = var_num_name,
                                        group_var = var_dat,
                                        to_agg = var_num,
+                                       na_rm = opts_prep$na_rm,
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
