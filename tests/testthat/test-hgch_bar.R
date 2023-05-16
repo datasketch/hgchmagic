@@ -7,7 +7,7 @@ test_that("Bar", {
                                        agg = "sum",
                                        group_var = "cut",
                                        to_agg = "price")
-  h <- hgch_bar(data, var_cat = "cut", var_num = "price")
+  h <- hgch_bar(data, var_cat = "cut", var_num = "price", bar_orientation = "hor")
 
   expect_equal(h$x$hc_opts$chart$type, "bar")
   expect_equal(length(h$x$hc_opts$series[[1]]$data), 5)
@@ -111,7 +111,7 @@ test_that("Bar", {
                  `var num one` = 10,
                  `var num two` = 3)
   hgch_bar(data, var_cat = "var_cat",
-           var_num = c("var_num_one", "var_num_two"), bar_orientation = "ver")
+           var_num = c("var num one", "var num two"), bar_orientation = "ver")
 
 
 

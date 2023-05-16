@@ -100,7 +100,7 @@ hgch_line <- function (data, dic = NULL, var_cat = NULL, var_dat = NULL, var_num
 
 #' @export
 hgch_line_Dat <- function(data, ...) {
-  var_dat <- names(data)[1]
+   var_dat <- names(data)[1]
   opts_prep <- dataprep_opts(...)
   var_num_name <- opts_prep$agg_text %||% "Count"
   data <- dsdataprep::aggregation_data(data = data,
@@ -111,6 +111,7 @@ hgch_line_Dat <- function(data, ...) {
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
+
   if (opts_prep$percentage) {
     var_num_name <- opts_prep$percentage_name %||% "..percentage"
   }
