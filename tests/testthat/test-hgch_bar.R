@@ -71,7 +71,7 @@ test_that("Bar", {
   #          order_legend = c("Ideal", "Premium"), order = c("H", "F"))
   #
   data <- ggplot2::diamonds |> select(cut, color, price, everything())
-  hgch_bar_CatCat(data, opts = ops, percentage = TRUE)
+  hgch_bar_CatCat(data, opts = ops, percentage = TRUE,)
   hgch_bar_CatCatNum(data, opts = ops)
   #
   #

@@ -174,6 +174,7 @@ hgch_bar_CatCat <- function(data, ...) {
                                        group_var = var_cat,
                                        na_label = opts_prep$na_label,
                                        agg_name = var_num_name,
+                                       percentage_col = opts_prep$percentage_col,
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
@@ -199,6 +200,7 @@ hgch_bar_CatCatNum <- function(data, ...) {
                                        na_label = opts_prep$na_label,
                                        agg_name = var_num_name,
                                        percentage = opts_prep$percentage,
+                                       percentage_col = opts_prep$percentage_col,
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)

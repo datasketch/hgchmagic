@@ -140,6 +140,7 @@ hgch_treemap_CatCat <- function(data, ...) {
                                        na_label = opts_prep$na_label,
                                        agg_name = opts_prep$agg_text %||% var_num_name,
                                        percentage = opts_prep$percentage,
+                                       percentage_col = opts_prep$percentage_col,
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
@@ -163,6 +164,7 @@ hgch_treemap_CatCatNum <- function(data, ...) {
                                        group_var = var_cat,
                                        to_agg = var_num,
                                        percentage = opts_prep$percentage,
+                                       percentage_col = opts_prep$percentage_col,
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
