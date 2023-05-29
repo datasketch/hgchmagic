@@ -95,6 +95,7 @@ hgch_pie_CatNum <- function(data, ...) {
                                        agg = opts_prep$agg,
                                        agg_name = var_num_name,
                                        group_var = var_cat,
+                                       na_label = opts_prep$na_label,
                                        to_agg = var_num,
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,

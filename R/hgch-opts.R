@@ -64,6 +64,7 @@ plot_opts <- function(viz = NULL, frType = NULL, ...) {
   data_opts <- list(
     tooltip_template = opts$chart$tooltip_template,
     na_label = opts$prep$na_label,
+    na_color = opts$theme$na_color,
     format_sample_num = opts$prep$format_sample_num,
     prefix_num = opts$prep$prefix_num,
     suffix_num = opts$prep$suffix_num,
@@ -114,6 +115,7 @@ dataprep_opts <- function(...) {
     agg = opts$prep$agg,
     agg_text = opts$prep$agg_text,
     na_rm = opts$prep$na_rm,
+    na_label = opts$prep$na_label,
     percentage = opts$prep$percentage,
     percentage_name = opts$prep$percentage_name,
     percentage_col = opts$prep$percentage_col,

@@ -112,12 +112,15 @@ data_draw <- function(data,
                                               format_date = opts$format_sample_dat)
   }
 
+  print(opts$color_by)
   if (!"..colors" %in% names(data)) {
     data <- dsdataprep::add_data_colors(data = data,
                                         color_by = opts$color_by,
                                         palette_colors = opts$palette_colors,
                                         #palette_type = opts$palette_type,
-                                        palette = opts$palette
+                                        palette = opts$palette,
+                                        na_color = opts$na_color,
+                                        na_label = opts$na_label
                                         )
   }
 

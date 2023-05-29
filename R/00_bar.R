@@ -123,6 +123,7 @@ hgch_bar_Cat <- function(data, ...) {
   var_num_name <- opts_prep$agg_text %||% "Count"
   data <- dsdataprep::aggregation_data(data = data,
                                agg = "count",
+                               na_label = opts_prep$na_label,
                                group_var = var_cat,
                                agg_name = var_num_name,
                                percentage = opts_prep$percentage,
@@ -142,18 +143,19 @@ hgch_bar_CatNum <- function(data, ...) {
   var_num <- names(data)[2]
   opts_prep <- dataprep_opts(...)
   var_num_name <- opts_prep$agg_text %||% var_num
+
   if (opts_prep$agg_add) {
   data <- dsdataprep::aggregation_data(data = data,
                                        agg = opts_prep$agg,
                                        agg_name = var_num_name,
                                        group_var = var_cat,
+                                       na_label = opts_prep$na_label,
                                        to_agg = var_num,
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
   }
-
 
   if (opts_prep$percentage) {
     var_num_name <- opts_prep$percentage_name %||% paste0("..percentage ", var_num)
@@ -170,6 +172,7 @@ hgch_bar_CatCat <- function(data, ...) {
   data <- dsdataprep::aggregation_data(data = data,
                                        agg = "count",
                                        group_var = var_cat,
+                                       na_label = opts_prep$na_label,
                                        agg_name = var_num_name,
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,
@@ -193,6 +196,7 @@ hgch_bar_CatCatNum <- function(data, ...) {
                                        agg = "mean",
                                        group_var = var_cat,
                                        to_agg = var_num,
+                                       na_label = opts_prep$na_label,
                                        agg_name = var_num_name,
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,
@@ -216,6 +220,7 @@ hgch_bar_CatNumNum <- function(data, ...) {
                                        agg = opts_prep$agg,
                                        agg_name = var_num_name,
                                        group_var = var_cat,
+                                       na_label = opts_prep$na_label,
                                        to_agg = var_num,
                                        percentage = opts_prep$percentage,
                                        percentage_name = opts_prep$percentage_name,

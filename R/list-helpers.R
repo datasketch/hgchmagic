@@ -72,7 +72,7 @@ list_bar <- function(data, frtype) {
     }
     data <- list(
       title_axis = names(d)[2:3],
-      categories = purrr::map(unique(d[[1]]), ~.x),
+      categories = purrr::map(unique(d[[1]]), ~as.character(.x)),
       data = series
     )
   }
