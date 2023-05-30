@@ -87,6 +87,7 @@ data_draw <- function(data,
 
 
   if (viz %in% c("line")) {
+    opts$na_label <- NA
     if (grepl("CatDat|CatCat", frType)) {
       data_all <- completevalues(data, var_num = var_num)
       data[[2]] <- as.character(data[[2]])
@@ -112,7 +113,6 @@ data_draw <- function(data,
                                               format_date = opts$format_sample_dat)
   }
 
-  print(opts$color_by)
   if (!"..colors" %in% names(data)) {
     data <- dsdataprep::add_data_colors(data = data,
                                         color_by = opts$color_by,
