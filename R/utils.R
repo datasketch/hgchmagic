@@ -141,10 +141,12 @@ data_draw <- function(data,
                                      label_wrap_legend = opts$label_wrap_legend,
                                      new_line = opts$new_line,
                                      sort = opts$sort,
-                                     sort_by_cat = opts$sort_by_cat,
+                                     #sort_by_cat = opts$sort_by_cat,
                                      slice_n = opts$slice_n,
                                      intra_cat = opts$intra_cat,
                                      index_names = index_names)
+
+
 
 
   data <- data |> select({{ var }}, everything())

@@ -91,7 +91,7 @@ hgch_bar <- function (data, dic = NULL, var_cat = NULL, var_num = NULL, ...) {
                          frType = frType,
                          opts = opts$data_opts,
                          viz = "bar")
-
+ #print(data_draw)
   global_options(opts$general_opts$format_sample_num)
   bar <- highchart() |>
     hc_titles(opts = opts$titles)  |>
@@ -130,8 +130,9 @@ hgch_bar_Cat <- function(data, ...) {
                                percentage_name = opts_prep$percentage_name,
                                extra_col = opts_prep$extra_col,
                                agg_extra = opts_prep$agg_extra)
+
   if (opts_prep$percentage) {
-    var_num_name <- opts_prep$percentage_name %||% "..percentage"
+    var_num_name <- opts_prep$percentage_name %||% "..percentage Count"
   }
   hgch_bar(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
@@ -179,8 +180,10 @@ hgch_bar_CatCat <- function(data, ...) {
                                        percentage_name = opts_prep$percentage_name,
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
+
+
   if (opts_prep$percentage) {
-    var_num_name <- opts_prep$percentage_name %||% "..percentage"
+    var_num_name <- opts_prep$percentage_name %||% "..percentage Count"
   }
   hgch_bar(data = data, var_cat = var_cat, var_num = var_num_name, ...)
 }
@@ -205,6 +208,7 @@ hgch_bar_CatCatNum <- function(data, ...) {
                                        extra_col = opts_prep$extra_col,
                                        agg_extra = opts_prep$agg_extra)
   }
+
   if (opts_prep$percentage) {
     var_num_name <- opts_prep$percentage_name %||% paste0("..percentage ", var_num)
   }

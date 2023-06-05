@@ -24,19 +24,27 @@ list_bar <- function(data, frtype) {
   }
   if (frtype %in% c("CatCat", "CatCatNum")) {
     d$..labels <- as.character(d$..labels)
+
     data_groups <- list(unique(d[[1]]),
                         split(d[complete.cases(
                           d[,c(setdiff(names(d), names(d)[1]))]),], d[[1]]))
+
     data <- list(
       categories = purrr::map(as.character(unique(d[[2]])), function(z) z),
-      data = purrr::pmap(.l = data_groups, function(name, d0) {
-        label_info <- pluck(d0, "..labels") |> unlist()
-        list("name" = as.character(name),
-             "color" = unique(d0$..colors),
-             "index" = unique(d0$..index),
-             "legendIndex" = d0$..legendIndex,
-             "data" = purrr::map2(label_info, as.numeric(d0[[3]]),
-                                  ~ list("label" = .x, "y" = .y)))
+      data = purrr::map(unique(d[[1]]), function(i) {
+        d0 <- d %>%
+          dplyr::filter(!!sym(names(d)[1]) %in% i) #%>% drop_na()
+        label_info <- d0 %>% .$..labels %>% unlist()
+        l0 <- list("name" = i,
+                   "color" = unique(d0$..colors),
+                   "index" = unique(d0$..index),
+                   "legendIndex" = d0$..legendIndex,
+                   "data" = purrr::map(seq_along(d0[[3]]), function(i){
+                     list("label" =  label_info[i],
+                          "y" = d0[[3]][i]
+                     )
+                   })
+        )
       })
     )
 
