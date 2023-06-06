@@ -86,14 +86,14 @@ data_draw <- function(data,
   }
 
 
-  if (viz %in% c("line")) {
-    opts$na_label <- NA
+  # if (viz %in% c("line")) {
+  #   opts$na_label <- NA
     if (grepl("CatDat|CatCat", frType)) {
       data_all <- completevalues(data, var_num = var_num)
       data[[2]] <- as.character(data[[2]])
       data <- data_all |> left_join(data[,-3])
     }
-  }
+  #}
 
 
   if (!"..labels" %in% names(data)) {

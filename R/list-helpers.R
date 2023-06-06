@@ -24,13 +24,17 @@ list_bar <- function(data, frtype) {
   }
   if (frtype %in% c("CatCat", "CatCatNum")) {
     d$..labels <- as.character(d$..labels)
+    axis_cat <- unique(d[[2]])
+    if (all(grepl("^[0-9]+$", d[[2]]))) {
+      axis_cat <- sort(unique(d[[2]]))
+    }
 
     data_groups <- list(unique(d[[1]]),
                         split(d[complete.cases(
                           d[,c(setdiff(names(d), names(d)[1]))]),], d[[1]]))
 
     data <- list(
-      categories = purrr::map(as.character(unique(d[[2]])), function(z) z),
+      categories = purrr::map(as.character(axis_cat), function(z) z),
       data = purrr::map(unique(d[[1]]), function(i) {
         d0 <- d %>%
           dplyr::filter(!!sym(names(d)[1]) %in% i) #%>% drop_na()
