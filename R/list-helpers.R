@@ -36,13 +36,13 @@ list_bar <- function(data, frtype) {
     data <- list(
       categories = purrr::map(as.character(axis_cat), function(z) z),
       data = purrr::map(unique(d[[1]]), function(i) {
-        d0 <- d %>%
-          dplyr::filter(!!sym(names(d)[1]) %in% i) #%>% drop_na()
+        d0 <- d |>
+          dplyr::filter(!!sym(names(d)[1]) %in% i) |>
+          dplyr::arrange(..index)
         label_info <- d0 %>% .$..labels %>% unlist()
         l0 <- list("name" = i,
                    "color" = unique(d0$..colors),
-                   "index" = unique(d0$..index),
-                   "legendIndex" = d0$..legendIndex,
+                   "legendIndex" = unique(d0$..legendIndex),
                    "data" = purrr::map(seq_along(d0[[3]]), function(i){
                      list("label" =  label_info[i],
                           "y" = d0[[3]][i]
