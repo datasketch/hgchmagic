@@ -123,7 +123,7 @@ hc_body_treemap <- function(hc, data, frType, opts = NULL) {
           type = 'treemap',
           # showInLegend = l$theme$legend_show,
           # legendType = 'point',
-          # layoutAlgorithm = l$extra$treemap_layout,
+          layoutAlgorithm = "squarified",
           # layoutStartingDirection = l$extra$treemap_direction,
           data = data)
       )
@@ -134,19 +134,31 @@ hc_body_treemap <- function(hc, data, frType, opts = NULL) {
       hc_series(
         list(
           type = "treemap",
-          layoutAlgorithm = 'stripes',
+          layoutAlgorithm = "squarified",
           alternateStartingDirection = TRUE,
           levels = list(
-            level = 1,
-            layoutAlgorithm = 'sliceAndDice',
-            dataLabels = list(
-              enabled = TRUE,
-              align = 'left',
-              verticalAlign = 'top',
-              style = list(
-                fontSize = '15px',
-                fontWeight = 'bold'
-              ))),
+            list(
+              level = 1,
+              layoutAlgorithm = 'sliceAndDice',
+              borderWidth = 2,
+              #borderColor = "black",
+              dataLabels = list(
+                enabled = TRUE,
+                align = 'left',
+                verticalAlign = 'top',
+                style = list(
+                  fontSize = '15px',
+                  fontWeight = 'bold'
+                )
+              )
+            ),
+            list(
+              level = 2,
+              dataLabels = list(
+                enabled = TRUE
+              )
+            )
+          ),
           data = data
         ))
   }
