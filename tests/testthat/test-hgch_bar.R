@@ -54,7 +54,7 @@ test_that("Bar", {
 
   data <- ggplot2::diamonds |> dplyr::select(cut, price, dplyr::everything())
   hgch_bar_CatNum(data, percentage = TRUE, percentage_name = "Porcentaje")
-  hgch_bar_CatNum(data, opts = ops, percentage = TRUE)
+  hgch_bar_CatNum(data, opts = ops, percentage = TRUE, data_labels_show = T, data_labels_template = "{y}%")
   #
   #
   # data <- ggplot2::diamonds

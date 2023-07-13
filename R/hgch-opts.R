@@ -33,6 +33,13 @@ plot_opts <- function(viz = NULL, frType = NULL, ...) {
     }
   }
 
+  if (viz == "treemap") {
+    extra_opts$treemap_layout <- opts$treemap$treemap_layout
+    extra_opts$treemap_direction <- opts$treemap$treemap_direction
+    extra_opts$treemap_borderWidth_levelOne <- opts$treemap$treemap_borderWidth_levelOne
+    extra_opts$treemap_borderColor_levelOne <- opts$treemap$treemap_borderColor_levelOne
+  }
+
   extra_opts$inner_size <- 0
   if (viz == "donut") {
     plot_type <- "pie"
@@ -100,6 +107,7 @@ plot_opts <- function(viz = NULL, frType = NULL, ...) {
   general_opts <- modifyList(general_opts, extra_opts)
   opts$theme$palette_colors <- opts$theme$palette_colors %||% opts$theme$palette_colors_categorical
   opts$theme$legend_title <- opts$titles$legend_title
+  opts$theme$data_labels_template <- opts$data_labels$data_labels_template
   opts$theme <- c(opts$theme, opts$data_labels)
 
   list(titles = titles,

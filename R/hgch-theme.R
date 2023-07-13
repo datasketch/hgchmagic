@@ -159,6 +159,7 @@ hgch_theme <- function(opts = NULL) {
         ),
         dataLabels = list (
           enabled = opts$data_labels_show,
+          format = opts$data_labels_template,#'{y} %',
           #format = paste0("",opts$format_sample_num)
           style = list(
             color = opts$data_labels_color %||% opts$text_color,
