@@ -23,7 +23,7 @@ VignetteBuilder:
 Remotes:
     datasketch/homodatum,
     datasketch/makeup,
-    datasketch/paletero,
+    datasketch/paletero@944b7957a8ae007e88b3444171a0843330bee54e,
     datasketch/dsvizprep,
     datasketch/dsvizopts,
     dreamRs/d3.format
